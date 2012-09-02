@@ -1,0 +1,23 @@
+<?php
+# idxCMS version 2.1
+# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# MODULE BANNERS - INITIALIZATION
+
+if (!defined('idxCMS')) die();
+
+define('BANNERS', CONTENT.'banners'.DS);
+
+switch (SYSTEM::get('locale')) {
+    case 'ru':
+        $LANG['def']['Banners'] = 'Банеры';
+        break;
+    case 'ua':
+        $LANG['def']['Banners'] = 'Банери';
+        break;
+    case 'by':
+        $LANG['def']['Banners'] = 'Банеры';
+        break;
+}
+
+SYSTEM::registerModule('banners', 'Banners', 'box');
+?>

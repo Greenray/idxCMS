@@ -1,0 +1,144 @@
+<?php
+# idxCMS version 2.1
+# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# ADMINISTRATION - POSTS
+
+if (!defined('idxADMIN')) die();
+
+$section  = FILTER::get('REQUEST', 'section');
+$category = FILTER::get('REQUEST', 'category');
+$post     = FILTER::get('REQUEST', 'edit');
+$sections   = CMS::call('POSTS')->getSections();
+$categories = CMS::call('POSTS')->getCategories($section);
+$content    = CMS::call('POSTS')->getContent($category);
+# Save new or edited post
+if (!empty($REQUEST['save'])) {
+    # Check if admin decided to move post
+    if (($section !== $REQUEST['new_section']) || ($category !== $REQUEST['new_category'])) {
+        if (!empty($REQUEST['item']))
+             # Post exists, so move it
+             $post = CMS::call('POSTS')->moveItem($REQUEST['item'], $REQUEST['new_section'], $REQUEST['new_category']);
+        else $post = '';     # Nothing to move, so add new
+        $section  = $REQUEST['new_section'];
+        $category = $REQUEST['new_category'];
+    } else $post = FILTER::get('REQUEST', 'item');
+
+    $categories = CMS::call('POSTS')->getCategories($section);
+    $content    = CMS::call('POSTS')->getContent($category);
+    try {
+        CMS::call('POSTS')->saveItem($post);
+        USER::changeProfileField(USER::getUser('username'), 'posts', '+');
+        unset($REQUEST['new']);
+    } catch (Exception $error) {
+        ShowMessage(__($error->getMessage()));
+    }
+    $post = '';
+} elseif (!empty($REQUEST['close']) || !empty($REQUEST['open'])) {
+    CMS::call('POSTS')->setValue(
+        empty($REQUEST['close']) ? $REQUEST['open'] : $REQUEST['close'],
+        'opened',
+        empty($REQUEST['close']) ? TRUE : FALSE
+    );
+} else {
+    if (!empty($REQUEST['delete'])) {
+        try {
+            CMS::call('POSTS')->removeItem($REQUEST['delete']);
+        } catch (Exception $error) {
+            ShowMessage(__($error->getMessage()));
+        }
+    }
+}
+
+if ((empty($section) && empty($category)) || !empty($REQUEST['new']) || !empty($post)) {
+    if (empty($section)) {
+        $section = 'drafts';
+        if (CMS::call('USER')->checkRoot())
+             $category = 1;
+        else $category = 2;
+    }
+    $output = array();
+    $choice = array();
+    $list_i = array();
+    $list_t = array();
+    foreach ($sections as $id => $data) {
+        $categories = CMS::call('POSTS')->getCategories($id);
+        if (!empty($categories)) {
+            # Don't include sections without categories
+            $choice[$id]['id']    = $data['id'];
+            $choice[$id]['title'] = $data['title'];
+            $ids    = array();
+            $titles = array();
+            foreach ($categories as $key => $cat) {
+                $ids[$id][]    = $key;
+                $titles[$id][] = $cat['title'];
+            }
+            if (!empty($ids) && !empty($titles)) {
+                $list_i[] = '"'.implode(',', $ids[$id]).'"';
+                $list_t[] = '"'.implode(',', $titles[$id]).'"';
+            }
+        }
+    }
+    $output['ids']      = implode(',', $list_i);
+    $output['titles']   = implode(',', $list_t);
+    $output['sections'] = $choice;
+    $output['section_id']     = $section;
+    $output['section_title']  = $sections[$section]['title'];
+    $categories = CMS::call('POSTS')->getCategories($section);
+    $output['categories']     = $categories;
+    $output['category_id']    = $category;
+    $output['category_title'] = $categories[$category]['title'];
+    if (!empty($post)) {
+        $post = CMS::call('POSTS')->getItem($post, 'full', FALSE);
+        $output['item']     = $post['id'];
+        $output['title']    = empty($REQUEST['title'])    ? $post['title']    : $REQUEST['title'];
+        $output['keywords'] = empty($REQUEST['keywords']) ? $post['keywords'] : $REQUEST['keywords'];
+        $output['desc']     = empty($REQUEST['des'])      ? $post['desc']     : $REQUEST['desc'];
+        $output['text']     = empty($REQUEST['text'])     ? $post['text']     : $REQUEST['text'];
+        $output['opened']   = empty($REQUEST['opened'])   ? $post['opened']   : $REQUEST['opened'];
+    } else {
+        $output['item']     = '';
+        $output['title']    = FILTER::get('REQUEST', 'title');
+        $output['keywords'] = FILTER::get('REQUEST', 'keywords');
+        $output['desc']     = FILTER::get('REQUEST', 'desc');
+        $output['text']     = FILTER::get('REQUEST', 'text');
+        $output['opened']   = empty($REQUEST['opened']) ? TRUE : $REQUEST['opened'];
+    }
+    $output['sections'][$output['section_id']]['selected']    = TRUE;
+    $output['categories'][$output['category_id']]['selected'] = TRUE;
+    $output['bbCodes_desc'] = ShowBbcodesPanel('post.desc');
+    $output['bbCodes_text'] = ShowBbcodesPanel('post.text');
+    $TPL = new TEMPLATE(dirname(__FILE__).DS.'post.tpl');
+    echo $TPL->parse($output);
+
+} elseif (!empty($sections[$section])) {
+    $categories = CMS::call('POSTS')->getCategories($section);
+    if (!empty($categories[$category])) {
+        $output = array();
+        $output['section_id']     = $section;
+        $output['section_title']  = $sections[$section]['title'];
+        $output['category_id']    = $category;
+        $output['category_title'] = $categories[$category]['title'];
+        $content = CMS::call('POSTS')->getContent($category);
+        foreach ($content as $key => $post) {
+            $post['date'] = FormatTime('d m Y', $post['time']);
+            if ($post['opened']) {
+                $post['command'] = __('Close');
+                $post['action']  = 'close';
+            } else {
+                $post['command'] = __('Open');
+                $post['action']  = 'open';
+            }
+            $output['items'][] = $post;
+        }
+        $TPL = new TEMPLATE(dirname(__FILE__).DS.'items.tpl');
+        echo $TPL->parse($output);
+
+    } else {
+        header('Location: '.MODULE.'admin&id=posts.categories');
+        die();
+    }
+} else {
+    header('Location: '.MODULE.'admin&id=posts.categories');
+    die();
+}
+?>

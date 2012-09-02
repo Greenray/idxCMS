@@ -1,0 +1,45 @@
+<?php
+# idxCMS version 2.1
+# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# MODULE POLLS - TEMPLATE
+
+die();?>
+<div class="poll">
+    [ifelse=voited]
+        <table>
+            <tr><th colspan="2">{question}</th></tr>
+            [each=answers]
+                <tr>
+                    <td>{answers[answer]}</td>
+                    <td style="width:35px;text-align:right">{answers[voices]}%</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <table cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="{answers[voices]}%" height="5" style="white-space:nowrap;background:{answers[color]};"></td>
+                                <td height="5"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            [endeach.answers]
+            <tr><td colspan="2" class="center">[__Total votes]: {total}</td></tr>
+        </table>
+    [else]
+        <form name="poll" method="post" action="">
+            <input type="hidden" name="poll" value="{id}" />
+            <table>
+                <tr><th colspan="2">{question}</th></tr>
+                [each=answers]
+                    <tr>
+                        <td><input type="radio" name="answer" value="{answers[id]}" /></td>
+                        <td>{answers[answer]}</td>
+                    </tr>
+                [endeach.answers]
+            </table>
+            <p class="center"><input type="submit" name="save" value="[__Submit]" /></p>
+        </form>
+    [endelse]
+    <div class="center"><a href="{MODULE}polls.archive">[__Polls archive]</a></div>
+</div>

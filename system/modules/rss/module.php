@@ -1,0 +1,334 @@
+<?php
+# idxCMS version 2.1
+# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# MODULE RSS - INITIALIZATION
+
+if (!defined('idxCMS')) die();
+
+# RSS_FEED class
+class RSS_FEED {
+
+    public $title       = '';
+    public $url         = '';
+    public $description = '';
+    public $language    = '';
+    public $copyright   = '';
+    public $generator   = '';
+    public $items       = array();
+
+    public function __construct($title, $description) {
+        $this->title       = $title;
+        $this->url         = SYSTEM::get('url');
+        $this->description = $description;
+        $this->language    = SYSTEM::get('locale');
+        $this->copyright   = CONFIG::getValue('main', 'copyright');
+        $this->generator   = 'idxCMS '.IDX_VERSION;
+    }
+
+    public function addItem($item) {
+        if (empty($item['desc'])) $item['desc'] = $item['text'];
+        $this->items[] = array($item['title'], $item['desc'], $item['link'], $item['time']);
+    }
+
+    public function addFeed() {
+        $result =
+        "\t<channel>".LF.
+        "\t\t".'<title>'.$this->title.'</title>'.LF.
+        "\t\t".'<link>'.$this->url.'</link>'.LF.
+        "\t\t".'<description>'.$this->description.'</description>'.LF.
+        "\t\t".'<language>'.$this->language.'</language>'.LF.
+        "\t\t".'<copyright>'.$this->copyright.'</copyright>'.LF.
+        "\t\t<lastBuildDate>".date('r')."</lastBuildDate>".LF.
+        "\t\t".'<generator>'.$this->generator.'</generator>'.LF;
+        foreach ($this->items as $item) {
+            $result .=
+            "\t\t<item>".LF;
+            "\t\t\t".'<title>'.$item[0].'</title>'.LF.
+            "\t\t\t".'<description>'.$item[1].'</description>'.LF.
+            "\t\t\t".'<link>'.$this->url.$item[2].'</link>'.LF.
+            "\t\t\t<pubDate>".date('r', $item[3])."</pubDate>".LF.
+            "\t\t</item>".LF;
+        }
+        $result .= "\t</channel>".LF;
+        return $result;
+    }
+
+    public function showFeed() {
+        $result =
+        '<?xml version="1.0" encoding="UTF-8"?>'.LF.
+        '<rss version="2.0">'.LF.
+        "\t<channel>".LF.
+        "\t\t".'<title>'.$this->title.'</title>'.LF.
+        "\t\t".'<link>'.$this->url.'</link>'.LF.
+        "\t\t".'<description>'.$this->description.'</description>'.LF.
+        "\t\t".'<language>'.$this->language.'</language>'.LF.
+        "\t\t".'<copyright>'.$this->copyright.'</copyright>'.LF.
+        "\t\t<lastBuildDate>".date('r')."</lastBuildDate>".LF.
+        "\t\t".'<generator>'.$this->generator.'</generator>'.LF;
+        foreach ($this->items as $item) {
+            $result .=
+            "\t\t<item>".LF.
+            "\t\t\t".'<title>'.$item[0].'</title>'.LF.
+            "\t\t\t".'<description>'.$item[1].'</description>'.LF.
+            "\t\t\t".'<link>'.$this->url.$item[2].'</link>'.LF.
+            "\t\t\t<pubDate>".date('r', $item[3])."</pubDate>".LF.
+            "\t\t</item>".LF;
+        }
+        $result .=
+        "\t</channel>".LF.
+        '</rss>'.LF;
+        return $result;
+    }
+
+    public function getFeed($feed) {
+        list($module, $section) = explode('@', $feed);
+        $module = strtoupper($module);
+        if (CMS::call($module)->getSection($section)) {
+            $categories = CMS::call($module)->getCategories($section);
+            foreach ($categories as $key => $category) {
+                $content = CMS::call($module)->getContent($key);
+                $limit = CONFIG::getValue('main', 'last');
+                $list = array_slice($content, -$limit, $limit, TRUE);
+                foreach ($list as $id => $post) {
+                    $this->addItem(CMS::call($module)->getItem($id, 'desc', TRUE));
+                }
+            }
+        }
+    }
+}
+
+/**
+ * LastRSS class
+ * API of the RSS aggregator
+ */
+class LastRSS {
+    /**
+     * Default encoding
+     * @var string $default_cp
+     */
+    public $default_cp = 'UTF-8';
+    public $CDATA = 'nochange';
+    public $cp = '';
+    /**
+     * Items limit
+     * @var integer $items_limit
+     */
+    public $items_limit = 0;
+    /**
+     * Strip HTML?
+     * @var boolean $stripHTML
+     */
+    public $stripHTML = FALSE;
+    /**
+     * Date format
+     * @var string $date_format
+     */
+    public $date_format = '';
+    /**
+     * Channel tags
+     * @var array $channeltags
+     */
+    private $channeltags = array ('title', 'link', 'desc', 'language', 'copyright', 'managingEditor', 'webMaster', 'lastBuildDate', 'rating', 'docs');
+    /**
+     * Item tags
+     * @var array $itemtags
+     */
+    private $itemtags = array('title', 'link', 'desc', 'author', 'category', 'comments', 'enclosure', 'guid', 'pubDate', 'source');
+    /**
+     * Image tags
+     * @var array $imagetags
+     */
+    private $imagetags = array('title', 'url', 'link', 'width', 'height');
+    /**
+     * Text input tags
+     * @var array $textinputtags
+     */
+    private $textinputtags = array('title', 'desc', 'name', 'link');
+
+    /**
+     * Parse RSS file and returns associative array
+     * @param string $rss_url RSS URL
+     * @return array RSS data
+     */
+    function Get ($rss_url) {
+        // If CACHE ENABLED
+        if ($this->cache_dir != '') {
+            $cache_file = $this->cache_dir.'/rsscache_'.md5($rss_url);
+            $timedif = @(time() - filemtime($cache_file));
+            if ($timedif < $this->cache_time) {
+                // Cached file is fresh enough, return cached array
+                $result = unserialize(join('', file($cache_file)));
+                // Set 'cached' to 1 only if cached file is correct
+                if ($result) $result['cached'] = 1;
+            } else {
+                // Cached file is too old, create new
+                $result = $this->Parse($rss_url);
+                $serialized = serialize($result);
+                if ($f = @fopen($cache_file, 'w')) {
+                    fwrite ($f, $serialized, strlen($serialized));
+                    fclose($f);
+                }
+                if ($result) $result['cached'] = 0;
+            }
+        }
+        // If CACHE DISABLED >> load and parse the file directly
+        else {
+            $result = $this->Parse($rss_url);
+            if ($result) $result['cached'] = 0;
+        }
+        return $result;
+    }
+
+    // -------------------------------------------------------------------
+    // Modification of preg_match(); return trimed field with index 1
+    // from 'classic' preg_match() array output
+    // -------------------------------------------------------------------
+    function my_preg_match ($pattern, $subject) {
+        preg_match($pattern, $subject, $out);        // Start regullar expression
+        // if there is some result... process it and return it
+        if (isset($out[1])) {
+            // Process CDATA (if present)
+            if ($this->CDATA == 'content') {     // Get CDATA content (without CDATA tag)
+                $out[1] = strtr($out[1], array('<![CDATA['=>'', ']]>'=>''));
+            } elseif ($this->CDATA == 'strip') { // Strip CDATA
+                $out[1] = strtr($out[1], array('<![CDATA['=>'', ']]>'=>''));
+            }
+            // If code page is set convert character encoding to required
+            if ($this->cp != '') {
+                $out[1] = iconv(@$this->rsscp, $this->cp.'//TRANSLIT', $out[1]);
+            }
+            return trim($out[1]);
+        } else return '';      // if there is NO result, return empty string
+    }
+
+    /**
+     * Replace HTML entities.
+     * @param  string $string String
+     * @return string
+     */
+    function unhtmlentities ($string) {
+        $trans_tbl = get_html_translation_table(HTML_ENTITIES, ENT_QUOTES);  // Get HTML entities table
+        $trans_tbl = array_flip($trans_tbl);                                 // Flip keys<==>values
+        $trans_tbl += array('&apos;' => "'");   // Add support for &apos; entity (missing in HTML_ENTITIES)
+        return strtr($string, $trans_tbl);      // Replace entities by values
+    }
+
+    // -------------------------------------------------------------------
+    // Parse() is private method used by Get() to load and parse RSS file.
+    // Don't use Parse() in your scripts - use Get($rss_file) instead.
+    // -------------------------------------------------------------------
+    function Parse ($rss_url) {
+        // Open and load RSS file
+        if ($f = @fopen($rss_url, 'r')) {
+            $rss_content = '';
+            while (!feof($f)) {
+                $rss_content .= fgets($f, 4096);
+            }
+            fclose($f);
+            // Parse document encoding
+            $result['encoding'] = $this->my_preg_match("'encoding=[\'\"](.*?)[\'\"]'si", $rss_content);
+            // If document codepage is specified, use it, otherwise use the default codepage
+            $this->rsscp = ($result['encoding'] != '') ? $result['encoding'] : 'UTF-8';
+            // Parse CHANNEL info
+            preg_match("'<channel.*?>(.*?)</channel>'si", $rss_content, $out_channel);
+            foreach($this->channeltags as $channeltag) {
+                $temp = $this->my_preg_match("'<$channeltag.*?>(.*?)</$channeltag>'si", $out_channel[1]);
+                if ($temp != '') {
+                    $result[$channeltag] = $temp; // Set only if not empty
+                }
+            }
+            // If date_format is specified and lastBuildDate is valid
+            if ($this->date_format != '' && ($timestamp = strtotime($result['lastBuildDate'])) !== -1) {
+                // Convert lastBuildDate to specified date format
+                $result['lastBuildDate'] = date($this->date_format, $timestamp);
+            }
+            // Parse TEXTINPUT info
+            preg_match("'<textinput(|[^>]*[^/])>(.*?)</textinput>'si", $rss_content, $out_textinfo);
+            // This a little strange regexp means:
+            // Look for tag <textinput> with or without any attributes, but skip truncated version <textinput /> (it's not beggining tag)
+            if (isset($out_textinfo[2])) {
+                foreach($this->textinputtags as $textinputtag) {
+                    $temp = $this->my_preg_match("'<$textinputtag.*?>(.*?)</$textinputtag>'si", $out_textinfo[2]);
+                    if ($temp != '') {
+                        $result['textinput_'.$textinputtag] = $temp; // Set only if not empty
+                    }
+                }
+            }
+            // Parse IMAGE info
+            preg_match("'<image.*?>(.*?)</image>'si", $rss_content, $out_imageinfo);
+            if (isset($out_imageinfo[1])) {
+                foreach($this->imagetags as $imagetag) {
+                    $temp = $this->my_preg_match("'<$imagetag.*?>(.*?)</$imagetag>'si", $out_imageinfo[1]);
+                    if ($temp != '') {
+                        $result['image_'.$imagetag] = $temp; // Set only if not empty
+                    }
+                }
+            }
+            // Parse ITEMS
+            preg_match_all("'<item(| .*?)>(.*?)</item>'si", $rss_content, $items);
+            $rss_items = $items[2];
+            $i = 0;
+            $result['items'] = array(); // Create array even if there are no items
+            foreach($rss_items as $rss_item) {
+                // If number of items is lower then limit: Parse one item
+                if ($i < $this->items_limit || $this->items_limit == 0) {
+                    foreach($this->itemtags as $itemtag) {
+                        $temp = $this->my_preg_match("'<$itemtag.*?>(.*?)</$itemtag>'si", $rss_item);
+                        if ($temp != '') {
+                            $result['items'][$i][$itemtag] = $temp; // Set only if not empty
+                        }
+                    }
+                    // Strip HTML tags and other bullshit from DESCRIPTION
+                    if ($this->stripHTML && !empty($result['items'][$i]['desc']))
+                        $result['items'][$i]['desc'] = strip_tags($this->unhtmlentities(strip_tags($result['items'][$i]['desc'])));
+                    // Strip HTML tags and other bullshit from TITLE
+                    if ($this->stripHTML && !empty($result['items'][$i]['title']))
+                        $result['items'][$i]['title'] = strip_tags($this->unhtmlentities(strip_tags($result['items'][$i]['title'])));
+                    // If date_format is specified and pubDate is valid
+                    if ($this->date_format != '' && ($timestamp = strtotime($result['items'][$i]['pubDate'])) !== -1) {
+                        // Convert pubDate to specified date format
+                        $result['items'][$i]['pubDate'] = date($this->date_format, $timestamp);
+                    }
+                    $i++;                     // Item counter
+                }
+            }
+            $result['items_count'] = $i;
+            return $result;
+        }
+        else return FALSE;
+    }
+}
+
+switch (SYSTEM::get('locale')) {
+    case 'ru':
+        $LANG['def']['RSS aggregator'] = 'RSS агрегатор';
+        $LANG['def']['RSS feeds'] = 'Ленты RSS';
+        $LANG['def']['RSS feeds are off'] = 'Ленты RSS отключены';
+        $LANG['def']['RSS feeds list'] = 'Список RSS лент';
+        $LANG['def']['Subscribe for all'] = 'Подписаться на все';
+        $LANG['def']['Subscribe to RSS feeds'] = 'Подписка на ленты RSS';
+        break;
+
+    case 'ua':
+        $LANG['def']['RSS aggregator'] = 'RSS агрегатор';
+        $LANG['def']['RSS feeds'] = 'Стрічки RSS';
+        $LANG['def']['RSS feeds are off'] = 'Стрічки RSS відключені';
+        $LANG['def']['RSS feeds list'] = 'Список RSS стрічок';
+        $LANG['def']['Subscribe for all'] = 'Підписатися на все';
+        $LANG['def']['Subscribe to RSS feeds'] = 'Підписка на стрічки RSS';
+        break;
+
+    case 'by':
+        $LANG['def']['RSS aggregator'] = 'RSS агрэгатар';
+        $LANG['def']['RSS feeds'] = 'Стужкі RSS';
+        $LANG['def']['RSS feeds are off'] = 'Стужкі RSS адключаныя';
+        $LANG['def']['RSS feeds list'] = 'Спіс RSS стужак';
+        $LANG['def']['Subscribe for all'] = 'Падпісацца на ўсе';
+        $LANG['def']['Subscribe to RSS feeds'] = 'Падпіска на стужкі RSS';
+        break;
+}
+
+SYSTEM::registerModule('rss', 'RSS feeds', 'box');
+SYSTEM::registerModule('rss.list', 'RSS feeds list', 'main');
+SYSTEM::registerModule('rss.aggregator', 'RSS aggregator', 'box');
+?>

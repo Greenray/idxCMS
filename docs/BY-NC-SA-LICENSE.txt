@@ -1,0 +1,86 @@
+«Content Management System INDEX CMS (idxCMS)»
+публикуется на условиях лицензии
+Creative Commons Attribution-NonCommercial-ShareAlike
+(С указанием авторства — Некоммерческая — С сохранением условий) 3.0 Непортированная.
+http://creativecommons.org/licenses/by-nc-sa/3.0/legalcode
+Разрешения, выходящие за рамки данной лицензии, могут быть получены при обращении к автору на сайте opensoft.110mb.com
+или по электронной почте greenray.spb@gmail.com.
+
+Вы можете свободно:
+    - делиться: копировать, распространять и передавать другим лицам данное произведение;
+    - изменять (создавать производные произведения): чтобы приспособить это произведение к своим задачам.
+
+При обязательном соблюдении следующих условий:
+    Атрибуция:
+            Вы должны атрибутировать произведение (указывать автора и источник) в порядке,
+            предусмотренном автором или лицензиаром (но только так, чтобы никоим образом не подразумевалось,
+            что они поддерживают вас или использование вами данного произведения).
+
+    Некоммерческое использование:
+        Вы не можете использовать это произведение в коммерческих целях.
+
+    Сохранение условий:
+        Если вы изменяете, преобразуете или берёте за основу это произведение,
+        вы можете распространять результат только по такой же или подобной лицензии, что и у данного произведения.
+
+И понимая, что:
+    Отказ:
+        Любое из перечисленных выше условий может быть отменено, если вы получили на это разрешение от правообладателя.
+    Общественное достояние:
+        Там, где в соответствии с применимым законодательством это произведение или любые его элементы находятся в общественном достоянии,
+        данная лицензия никоим образом не влияет на этот статус.
+
+Прочие права:
+    Данная лицензия ни в какой ситуации не затрагивает следующие права:
+        Ваши права на добросовестное поведение (fair dealing), или
+        добросовестное использование (fair use), или
+        другие применимые исключения и ограничения авторского права;
+    Личные неимущественные права авторов;
+    Права других лиц могут быть затронуты непосредственно данным произведением или тем, как оно используется,
+        например, права на публичность или конфиденциальность.
+
+Уведомление:
+    Для повторного использования или распространения вы должны чётко дать понять другим данные лицензионные условия этого произведения.
+    Лучший способ сделать это — предоставить им ссылку на http://creativecommons.org/licenses/by-nc-sa/3.0/deed.ru
+
+Эта лицензия позволяет другим перерабатывать, исправлять и развивать произведение на некоммерческой основе,
+до тех пор пока они упоминают оригинальное авторство и лицензируют производные работы на аналогичных лицензионных условиях.
+Пользователи могут не только получать и распространять произведение на условиях, идентичных данной лицензии («by-nc-sa»),
+но и переводить, создавать иные производные работы, основанные на этом произведении.
+Все новые произведения, основанные на этом, будут иметь одни и те же лицензии,
+поэтому все производные работы также будут носить некоммерческий характер.
+
+You are free:
+    - to Share: to copy, distribute and transmit the work;
+    - to Remix: to adapt the work.
+
+Under the following conditions:
+
+    Attribution:
+        You must attribute the work in the manner specified by the author or licensor
+        (but not in any way that suggests that they endorse you or your use of the work).
+
+    Noncommercial:
+        You may not use this work for commercial purposes.
+
+    Share Alike:
+        If you alter, transform, or build upon this work,
+        you may distribute the resulting work only under the same or similar license to this one.
+
+With the understanding that:
+    Waiver:
+        Any of the above conditions can be waived if you get permission from the copyright holder.
+    Public Domain:
+        Where the work or any of its elements is in the public domain under applicable law, that status is in no way affected by the license.
+
+Other Rights:
+    In no way are any of the following rights affected by the license:
+        Your fair dealing or fair use rights, or other applicable copyright exceptions and limitations;
+        The author's moral rights;
+        Rights other persons may have either in the work itself or in how the work is used, such as publicity or privacy rights.
+
+Notice:
+    For any reuse or distribution,
+    you must make clear to others the license terms of this work.
+    The best way to do this is with a link to http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en
+

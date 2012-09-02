@@ -263,15 +263,17 @@ class SYSTEM {
                 $point[$module]['name']   = SYSTEM::$modules[$module]['title'];
                 $point[$module]['desc']   = '';
                 $point[$module]['icon']   = ICONS.$module.'.png';
-                $point[$module]['sections'] = CMS::call($obj)->getSections();
-                if (!empty($point[$module]['sections']['drafts'])) unset($point[$module]['sections']['drafts']);
-                $point[$module]['width']  = mb_strlen($point[$module]['name'], 'UTF-8') * 7;
-                $width = mb_strlen($point[$module]['desc'], 'UTF-8') * 7;
-                $point[$module]['width'] = ($point[$module]['width'] > $width) ? $point[$module]['width'] : $width;
-                foreach ($point[$module]['sections'] as $id => $section) {
-                    $point[$module]['sections'][$id]['desc'] = ParseText($section['desc']);
-                    foreach ($section['categories'] as $key => $category) {
-                        $point[$module]['sections'][$id]['categories'][$key]['desc'] = ParseText($category['desc']);
+                if (class_exists($obj)) {
+                    $point[$module]['sections'] = CMS::call($obj)->getSections();
+                    if (!empty($point[$module]['sections']['drafts'])) unset($point[$module]['sections']['drafts']);
+                    $point[$module]['width']  = mb_strlen($point[$module]['name'], 'UTF-8') * 7;
+                    $width = mb_strlen($point[$module]['desc'], 'UTF-8') * 7;
+                    $point[$module]['width'] = ($point[$module]['width'] > $width) ? $point[$module]['width'] : $width;
+                    foreach ($point[$module]['sections'] as $id => $section) {
+                        $point[$module]['sections'][$id]['desc'] = ParseText($section['desc']);
+                        foreach ($section['categories'] as $key => $category) {
+                            $point[$module]['sections'][$id]['categories'][$key]['desc'] = ParseText($category['desc']);
+                        }
                     }
                 }
                 if (!empty($point)) {

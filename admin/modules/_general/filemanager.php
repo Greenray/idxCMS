@@ -148,7 +148,7 @@ foreach ($elements as $key => $file) {
                 $output['elements'][$key]['view'] = ROOT.str_replace(realpath('.').DS, '', $path).$file;
             else
                 $output['elements'][$key]['empty'] = TRUE;
-            
+
         }
         $output['elements'][$key]['alert'] = 'onClick="if(confirm(\''.__('Delete this file?').'\')) document.location.href = \''.$url.'&amp;path='.$path.'&amp;delete='.$file.'\'"';
         $output['elements'][$key]['style'] = 'row1';

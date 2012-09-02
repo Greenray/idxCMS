@@ -491,7 +491,7 @@ ul.tabs li a:focus { outline: 0 }
 .no        { color: #000; font-weight: bold }
 .positive  { color: green; font-weight: bold }
 
-/* Left Panel /*
+/* Left Panel */
 .win .title     { margin: 20px 5px; text-transform: uppercase }
 .calendar       { width: 100% }
 table .calendar { padding: 2px; vertical-align: middle; border: 1px solid #e0dfdf }
@@ -523,8 +523,7 @@ table .calendar { padding: 2px; vertical-align: middle; border: 1px solid #e0dfd
 .counter .odd  { background: inherit }
 .counter .even { background: inherit }
 
-/* footer
-----------*/
+/* Footer */
 #footer {
     background: #333; color: #fff;
     overflow: hidden;

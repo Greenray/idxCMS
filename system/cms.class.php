@@ -11,21 +11,19 @@ class CMS {
     private function __clone() {}
 
     # Creating and registering of object.
-    public static function register($id) {
-        $param = explode(':', $id);
-        $class = $param[0];
-        self::$obj[$id] = new $class();
-        return self::$obj[$id];
+    public static function register($class) {
+        self::$obj[$class] = new $class();
+        return self::$obj[$class];
     }
 
     # Calling of object, if object is not set it'll be created.
-    public static function call($id) {
-        return empty(self::$obj[$id]) ? self::register($id) : self::$obj[$id];
+    public static function call($class) {
+        return empty(self::$obj[$class]) ? self::register($class) : self::$obj[$class];
     }
 
-    public static function remove($id) {
-        if (!empty(self::$obj[$id])) {
-            unset(self::$obj[$id]);
+    public static function remove($class) {
+        if (isset(self::$obj[$class])) {
+            unset(self::$obj[$class]);
         }
     }
 }

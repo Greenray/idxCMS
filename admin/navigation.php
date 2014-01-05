@@ -12,16 +12,16 @@ if (!defined('idxADMIN') || !USER::loggedIn()) die();?>
     <meta http-equiv="content-language" content="<?php echo SYSTEM::get('locale');?>" />
     <style type="text/css">
         <!--
-        body { background: #006699; color: yellow; font: normal 10pt arial, helvetica, sans, sans-serif; text-shadow: 1px 1px 1px #000 }
+        body { background: #006699; color: yellow; font: normal 10pt arial, helvetica, sans, sans-serif; text-shadow: 1px 1px 1px black }
         #menu        { list-style-type: none; padding: 0; margin: 0; width: 190px; position: absolute; left: 0; border: 0; border-width: 0 1px 1px; z-index: 1 }
         #menu ul     { padding: 0; margin: 0 }
-        #menu li     { background: #d1d7dc; position: relative; float: left; border-top: 1px solid #fff }
+        #menu li     { background: #d1d7dc; position: relative; float: left; border-top: 1px solid white }
         #menu li.sub { background: #006699 url(./skins/images/icons/arrow.gif) no-repeat top right }
         #menu li.sub.click               { font-weight: bold }
-        #menu li.sub.click ul li a       { color: #000; text-shadow: none; font-weight: normal }
-        #menu li.sub.click ul li.hover a { color: #fff; font-weight: bold }
+        #menu li.sub.click ul li a       { color: black; text-shadow: none; font-weight: normal }
+        #menu li.sub.click ul li.hover a { color: white; font-weight: bold }
         #menu li,
-        #menu li a { display: block; color: #fff; line-height: 24px; width: 190px; text-decoration: none; text-indent: 5px; cursor: pointer }
+        #menu li a { display: block; color: white; line-height: 24px; width: 190px; text-decoration: none; text-indent: 5px; cursor: pointer }
         #menu ul,
         #menu li.click ul ul,
         #menu li.click ul li.hover ul ul { display: none }
@@ -29,14 +29,14 @@ if (!defined('idxADMIN') || !USER::loggedIn()) die();?>
         #menu li.click                   { color: #ff0; background: #0066dd; text-align: center }
         #menu li.click ul                { display: block; text-align: left }
         #menu li.click ul li.hover ul,
-        #menu li.click ul li.hover ul li.hover ul    { background: red; color: yellow; display: block; position: absolute; left: 60px; top: -1px; border: 1px solid #fff; border-width: 0 1px 1px }
+        #menu li.click ul li.hover ul li.hover ul    { background: red; color: yellow; display: block; position: absolute; left: 60px; top: -1px; border: 1px solid white; border-width: 0 1px 1px }
         #menu li.click ul li.popup                   { background: #999 url(./skins/images/icons/arrow.gif) no-repeat top right }
-        #menu li.click ul li.hover                   { background: red; color: $fff }
+        #menu li.click ul li.hover                   { background: red; color: white }
         #menu li.click ul li.hover ul li             { background: #356fcc }
         #menu li.click ul li.hover ul li.hover ul li { background: #780; z-index: 2 }
         #menu li.click ul li.hover ul li.popup       { background: #c60 url(./skins/images/icons/arrow.gif) no-repeat top right }
         #menu li.click ul li.hover ul li.hover       { background: yellow; z-index: 2 }
-        #menu li.click ul li.hover ul li.hover a     { color: #000 }
+        #menu li.click ul li.hover ul li.hover a     { color: black }
         .page-title { font-size: 14pt; font-weight: bold; padding: 10px; text-align: center }
     -->
     </style>

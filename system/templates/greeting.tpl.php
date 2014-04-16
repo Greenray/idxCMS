@@ -1,0 +1,1 @@
+<center>Приветствуем нового пользователя idxCMS!<br /><br /><font color="red"><b>Thanks for choosing idxCMS!</b></font></center>

@@ -1,5 +1,5 @@
 <?php
-# idxCMS version 2.1
+# idxCMS version 2.2
 # Copyright (c) 2012 Greenray greenray.spb@gmail.com
 # RUSSIAN LOCALIZATION
 
@@ -115,6 +115,7 @@ $LANG['def']['Error'] = 'Ошибка';
 $LANG['def']['File'] = 'Файл';
 $LANG['def']['Fill this field'] = 'Заполните это поле';
 $LANG['def']['Font'] = 'Шрифт';
+$LANG['def']['Greetings to you from you on your website'] = 'Привет Вам от Вас на Вашем сайте';
 $LANG['def']['Guest'] = 'Гость';
 $LANG['def']['Image'] = 'Изображение';
 $LANG['def']['Index'] = 'Главная';
@@ -156,6 +157,7 @@ $LANG['def']['Version for printer'] = 'Версия для печати';
 $LANG['def']['Views'] = 'Просмотры';
 $LANG['def']['Yes'] = 'Да';
 $LANG['def']['You are not logged in!'] = 'Вы не авторизованы!';
+$LANG['def']['You are welcome'] = 'Добро пожаловать';
 $LANG['def']['You have used an invalid symbols'] = 'Вы использовали запрещенные символы';
 #COUNTER
 $LANG['def']['Counter'] = 'Счетчик';
@@ -227,6 +229,7 @@ $LANG['def']['Registered user'] = 'Пользователь';
 $LANG['def']['Rights'] = 'Права';
 $LANG['def']['Registration'] = 'Регистрация';
 $LANG['def']['Skin'] = 'Шаблон';
+$LANG['def']['Thanks for choosing idxCMS'] = 'Спасибо за выбор idxCMS';
 $LANG['def']['Time zone'] = 'Часовой пояс';
 $LANG['def']['To change data you must enter your current password'] = 'Для изменения данных Вы должны ввести свой пароль';
 $LANG['def']['Visits'] = 'Визиты';
@@ -235,6 +238,7 @@ $LANG['def']['User panel'] = 'Панель пользователя';
 $LANG['def']['User profile'] = 'Профиль пользователя';
 $LANG['def']['Users'] = 'Пользователи';
 $LANG['def']['Username'] = 'Логин';
+$LANG['def']['We welcome the new user of idxCMS'] = 'Приветствуем нового пользователя idxCMS';
 $LANG['def']['Website'] = 'Домашняя страница';
 $LANG['def']['You are the registered user'] = 'Вы зарегистрированный пользователь';
 $LANG['def']['You cannot send message to yourself'] = 'Нельзя посылать сообщения самому себе';

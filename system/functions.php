@@ -1,5 +1,5 @@
 <?php
-# idxCMS version 2.1
+# idxCMS version 2.2
 # Copyright (c) 2012 Greenray greenray.spb@gmail.com
 # COMMON FUNCTONS
 
@@ -54,9 +54,9 @@ function CopyTree($source, $dest) {
     }
     $dir = dir($source);
     while (($element = $dir->read()) !== FALSE) {
-        if (($element == '.') || ($element == '..'))
+        if (($element == '.') || ($element == '..')) {
             continue;
-
+        }
         CopyTree($source.DS.$element, $dest.DS.$element);
     }
     $dir->close();
@@ -107,9 +107,9 @@ function GetUnserialized($file) {
                 $data = UnifyBr($content);
                 $data = preg_replace("!s:(\d+):\"(.*?)\";!se", "'s:'.strlen('$2').':\"$2\";'", $data);
                 $data = @unserialize($data);
-                if ($data === FALSE)
+                if ($data === FALSE) {
                      $data = array();
-                else file_put_contents($file, serialize($data), LOCK_EX);
+                } else file_put_contents($file, serialize($data), LOCK_EX);
             }
         }
     }
@@ -141,12 +141,12 @@ function ArraySortFunc($a, $b = NULL) {
     foreach ($keys as $key) {
         if (@$key[0] == '!') {
             $key = substr($key, 1);
-            if (@$a[$key] !== @$b[$key])
+            if (@$a[$key] !== @$b[$key]) {
                 return strcmp(@$b[$key], @$a[$key]);
-
-        } elseif (@$a[$key] !== @$b[$key])
+            }
+        } elseif (@$a[$key] !== @$b[$key]) {
             return strcmp(@$a[$key], @$b[$key]);
-
+        }
     }
     return FALSE;
 }
@@ -183,11 +183,12 @@ function __($string) {
 }
 
 function CutText($text, $length) {
-    if ((mb_strlen($text, 'UTF-8') - 1) < $length)
+    if ((mb_strlen($text, 'UTF-8') - 1) < $length) {
         return $text;
-
-    if (mb_strpos($text, '.', $length))
+    }
+    if (mb_strpos($text, '.', $length)) {
         return mb_substr($text, 0, $length, 'UTF-8').'...';
+    }
 }
 
 function UnifyBr($text) {
@@ -195,9 +196,9 @@ function UnifyBr($text) {
 }
 
 function OnlyLatin($string) {
-    if (empty($string) || preg_replace("/[\d\w]+/i", '', $string) != '')
+    if (empty($string) || preg_replace("/[\d\w]+/i", '', $string) != '') {
         return FALSE;
-
+    }
     return $string;
 }
 
@@ -257,13 +258,13 @@ function AdvancedPagination($total, $current, $last) {
     $show = 5;                        # Number of page links to show
     # At the beginning
     if ($current == 1) {
-        if ($pages['next'] == $current)
+        if ($pages['next'] == $current) {
             return $pages;   # if one page only
-
+        }
         for ($i = 0; $i < $show; $i++) {
-            if ($i == $last)
+            if ($i == $last) {
                 break;
-
+            }
             array_push($pages['pages'], $i + 1);
         }
         return $pages;
@@ -286,9 +287,9 @@ function AdvancedPagination($total, $current, $last) {
         array_push($pages['pages'], $i + 1);
     }
     for ($i = ($current + 1); $i < ($current + $show); $i++) {
-        if ($i == ($last + 1))
+        if ($i == ($last + 1)) {
             break;
-
+        }
         array_push($pages['pages'], $i);
     }
     return $pages;
@@ -359,8 +360,9 @@ function CheckCaptcha() {
     if (!empty($_SESSION['code-length'])) {
         $antispam = substr(md5(FILTER::get('REQUEST', 'antispam')), 0, $_SESSION['code-length']);
         unset($_SESSION['code-length']);
-        if ($antispam === FILTER::get('REQUEST', 'captcheckout'))
+        if ($antispam === FILTER::get('REQUEST', 'captcheckout')) {
             return TRUE;
+        }
     }
     throw new Exception('Invalid captcha code');
 }

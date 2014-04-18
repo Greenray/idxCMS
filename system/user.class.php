@@ -1,5 +1,5 @@
 <?php
-# idxCMS version 2.1
+# idxCMS version 2.2
 # Copyright (c) 2012 Greenray greenray.spb@gmail.com
 
 class USER {
@@ -10,7 +10,7 @@ class USER {
     );
     # Disallowed names for registration
     private static $disallowed_names = array(
-        'administrator', 'false', 'guest', 'idxcms', 'moderator', 'noavatar', 'null', 'superuser', 'supervisor',
+        'administrator', 'false', 'guest', 'idxcms', 'moderator', 'noavatar', 'null', 'root', 'superuser', 'supervisor',
         'sponsor', 'system', 'test', 'true', 'unknown', 'user'
     );
     private static $user = array();         # User's profile
@@ -42,9 +42,9 @@ class USER {
             self::$logged_in = FALSE;
             return TRUE;
         }
-        if ($cookie_user !== $_SESSION['user'])
+        if ($cookie_user !== $_SESSION['user']) {
             return self::clearCookie();
-
+        }
         # Now we must validate user's data
         if (!$this->checkUser($cookie_user, $_SESSION['pass'], TRUE, self::$user)) {
             self::$logged_in = FALSE;
@@ -69,9 +69,9 @@ class USER {
     # Check user's data and log in him
     function logInUser() {
         $user = basename(FILTER::get('REQUEST', 'username'));
-        if (($user === 'guest') || self::$logged_in)
+        if (($user === 'guest') || self::$logged_in) {
             return CMS::call('LOG')->logPut('Note', self::$user['username'], 'Attempted to log in as '.$user);
-
+        }
         $userdata = array();
         if ($this->checkUser($user, FILTER::get('REQUEST', 'password'), FALSE, $userdata)) {
             $_SESSION['user'] = $user;
@@ -85,7 +85,9 @@ class USER {
             self::saveUserData($user, $userdata);
             CMS::call('LOG')->logPut('Note', self::$user['username'], 'Logged in as '.$user);
             return TRUE;
-        } else return CMS::call('LOG')->logPut('Note', self::$user['username'], 'Attempt to log in as '.$user);
+        } else {
+            return CMS::call('LOG')->logPut('Note', self::$user['username'], 'Attempt to log in as '.$user);
+        }
     }
 
     public static function loggedIn() {
@@ -101,23 +103,23 @@ class USER {
     public function registerUser() {
         $username = basename(FILTER::get('REQUEST', 'user'));
         $nickname = basename(FILTER::get('REQUEST', 'nick'));
-        if (!$this->checkUserName($username, 'Name'))
+        if (!$this->checkUserName($username, 'Name')) {
             throw new Exception('Invalid username');
-
-        if (!$this->checkUserName($nickname, 'Nick'))
+        }
+        if (!$this->checkUserName($nickname, 'Nick')) {
             throw new Exception('Invalid usernick');
-
-        if (!$this->checkPassword(FILTER::get('REQUEST', 'password'), FILTER::get('REQUEST', 'confirm')))
+        }
+        if (!$this->checkPassword(FILTER::get('REQUEST', 'password'), FILTER::get('REQUEST', 'confirm'))) {
             throw new Exception('Invalid password');
-
+        }
         if (file_exists(USERS.$username)) {
             CMS::call('LOG')->logError('User with this username already exists');
             throw new Exception('User with this username already exists');
         }
         $email = FILTER::get('REQUEST', 'email');
-        if (!CMS::call('FILTER')->validEmail($email))
+        if (!CMS::call('FILTER')->validEmail($email)) {
             throw new Exception('Invalid e-mail address');
-
+        }
         global $LANG;
         $userdata = FILTER::get('REQUEST', 'fields');
         # Also we must set a md5 hash of user's password to userdata
@@ -157,26 +159,28 @@ class USER {
     public function updateUser($username, $nickname, $userdata) {
         $username = basename($username);
         $nickname = basename($nickname);
-        if (!file_exists(USERS.$username))
+        if (!file_exists(USERS.$username)) {
             throw new Exception('Invalid username');
-
-        if (!$this->checkUserName($nickname, 'Nick'))
+        }
+        if (!$this->checkUserName($nickname, 'Nick')) {
             throw new Exception('Invalid nickname');
-
+        }
         $email = FILTER::get('REQUEST', 'email');
-        if (!CMS::call('FILTER')->validEmail($email))
+        if (!CMS::call('FILTER')->validEmail($email)) {
             throw new Exception('Invalid e-mail address');
-
+        }
         $user = self::getUserData($username);
-        if ($user === FALSE)
+        if ($user === FALSE) {
             throw new Exception('Cannot get userdata');
-
+        }
         $password = FILTER::get('REQUEST', 'password');
         $confirm  = FILTER::get('REQUEST', 'confirm');
         if (!empty($password) && !empty($confirm)) {
-            if (!$this->checkPassword($password, $confirm))
-                 throw new Exception('Invalid password');
-            else $password = md5($password);
+            if (!$this->checkPassword($password, $confirm)) {
+                throw new Exception('Invalid password');
+            } else {
+                $password = md5($password);
+            }
         } else $password = $user['password'];
         # Also we must set a md5 hash of user's password to userdata
         $user = array_merge($user, $userdata);
@@ -198,9 +202,9 @@ class USER {
             $profile = self::$user;
         } else {
             $profile = self::getUserData($user);
-            if (empty($profile))
+            if (empty($profile)) {
                 throw new Exception('Cannot get userdata');
-
+            }
         }
         if ($value === '+')     $profile[$field]++;
         elseif ($value === '-') $profile[$field]--;
@@ -213,9 +217,9 @@ class USER {
     }
 
     public static function getUserData($name) {
-        if ($name === self::$user['username'])
+        if ($name === self::$user['username']) {
             return self::$user;
-
+        }
         $user = array();
         if (file_exists(USERS.$name)) {
             $data = file(USERS.$name, FILE_IGNORE_NEW_LINES);
@@ -229,9 +233,11 @@ class USER {
         $users  = AdvScanDir(USERS, $mask);
         foreach ($users as $user) {
             $data = self::getUserData($user);
-            if (!empty($field) && !empty($data[$field]))
-                 $return[$data[$field]] = $data;
-            else $return[] = $data;
+            if (!empty($field) && !empty($data[$field])) {
+                $return[$data[$field]] = $data;
+            } else {
+                $return[] = $data;
+            }
         }
         return $return;
     }
@@ -275,9 +281,9 @@ class USER {
             $userdata = self::$user;
         } else {
             $userdata = self::getUserData($user);
-            if (empty($userdata))
+            if (empty($userdata)) {
                 return FALSE;
-
+            }
         }
         if ($userdata['rights'] !== '*') {
             if (!empty($userdata['rights'])) {
@@ -295,9 +301,9 @@ class USER {
     }
 
     private function checkPassword($password, $confirm) {
-        if (empty($password) || empty($confirm) || $password !== $confirm)
+        if (empty($password) || empty($confirm) || $password !== $confirm) {
             return CMS::call('LOG')->logError('Passwords are not equal');
-
+        }
         return TRUE;
     }
 
@@ -318,24 +324,24 @@ class USER {
 
     # Check user's data and validate his data file
     public function checkUser($username, $password, $hash, &$userdata) {
-        if (!$this->checkUserName($username, 'Name'))
+        if (!$this->checkUserName($username, 'Name')) {
             return FALSE;
-
-        if (!file_exists(USERS.$username))
+        }
+        if (!file_exists(USERS.$username)) {
             return FALSE;
-
+        }
         $userdata = self::getUserData($username);
         # If userdata is invalid we must exit with error
-        if (empty($userdata))
+        if (empty($userdata)) {
             return CMS::call('LOG')->logError('Invalid login or password');
-
+        }
         # If password is invalid - exit with error
-        if ((!$hash && (md5($password) !== $userdata['password'])) || ($hash && ($password !== $userdata['password'])))
+        if ((!$hash && (md5($password) !== $userdata['password'])) || ($hash && ($password !== $userdata['password']))) {
             return CMS::call('LOG')->logError('Invalid login or password');
-
-        if (!empty($userdata['blocked']))
+        }
+        if (!empty($userdata['blocked'])) {
             return CMS::call('LOG')->logPut('Note', $username, 'Attempt to log in. This account has been blocked by administrator');
-
+        }
         return TRUE;
     }
 
@@ -343,13 +349,15 @@ class USER {
         if (!empty($name)) {
             if (!in_array(strtolower($name), self::$disallowed_names)) {
                 if ($type === 'Name') {
-                    if (OnlyLatin($name))
+                    if (OnlyLatin($name)) {
                         return TRUE;
-
-                } elseif ($type === 'Nick') {
-                    if (mb_strlen($name, 'UTF-8') <= CONFIG::getValue('user', 'nick-length'))
-                        return TRUE;
-
+                    }
+                } else {
+                    if ($type === 'Nick') {
+                        if (mb_strlen($name, 'UTF-8') <= CONFIG::getValue('user', 'nick-length')) {
+                            return TRUE;
+                        }
+                    }
                 }
             }
         }

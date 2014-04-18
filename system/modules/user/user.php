@@ -1,5 +1,5 @@
 <?php
-# idxCMS version 2.1
+# idxCMS version 2.2
 # Copyright (c) 2012 Greenray greenray.spb@gmail.com
 # MODULE USER
 
@@ -116,7 +116,7 @@ if (!USER::loggedIn()) {
             $user['confirm']  = '';
             $user['email']    = (empty($REQUEST['email']) || ($REQUEST['email'] == __('Enter your e-mail'))) ? '' : $REQUEST['email'];
             $tz = empty($REQUEST['fields']['tz']) ? (int) CONFIG::getValue('main', 'tz') : (int) $REQUEST['fields']['tz'];
-            $user['utz']     = SelectTimeZone('fields[tz]', $LANG['tz'] , $tz);
+            $user['utz']     = SelectTimeZone('fields[tz]', $LANG['tz'], $tz);
             $user['icq']     = empty($REQUEST['fields']['icq'])     ? '' : $REQUEST['fields']['icq'];
             $user['website'] = empty($REQUEST['fields']['website']) ? '' : $REQUEST['fields']['website'];
             $user['country'] = empty($REQUEST['fields']['country']) ? '' : $REQUEST['fields']['country'];
@@ -130,7 +130,8 @@ if (!USER::loggedIn()) {
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'restore-password.tpl');
             ShowWindow(__('Password recovery'), $TPL->parse(array('captcha' => ShowCaptcha())));
         } elseif ($just_reg) {
-            ShowWindow(__('Greeting'), file_get_contents(CONTENT.'greeting'));
+            $TPL = new TEMPLATE(dirname(__FILE__).DS.'greeting.tpl');
+            ShowWindow(__('Greeting'), $TPL->parse());
         } else Redirect('index');
     } else {
         if (!empty($REQUEST['user']))

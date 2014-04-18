@@ -1,5 +1,5 @@
 <?php
-# idxCMS version 2.1 - Flat Files Content Management System
+# idxCMS version 2.2 - Flat Files Content Management System
 # Copyright (c) 2012 Greenray greenray.spb@gmail.com
 
 # This project is based on the idea and experience of work in the ReloadCMS project
@@ -32,7 +32,6 @@ while (list($global) = each($GLOBALS)) {
 }
 unset($global);
 
-$start_time = microtime(TRUE);
 error_reporting(0);
 
 function idxErrorHandler ($errno, $errmsg, $filename, $linenum, $vars) {
@@ -99,9 +98,9 @@ $REQUEST = FILTER::getAll('REQUEST');
 global $LANG;
 $CMS = CMS::call('SYSTEM');
 
-define('IDX_VERSION',   '2.1');
+define('IDX_VERSION',   '2.2');
 define('IDX_COPYRIGHT', '&copy; 2012 '.__('Greenray'));
-define('IDX_POWERED',   'Powered by <a href="http://opensoft.110mb.com">idxCMS - '.IDX_VERSION.'</a>');
+define('IDX_POWERED',   'Powered by idxCMS - '.IDX_VERSION);
 
 # Send main headers
 header('Last-Modified: '.gmdate('r'));
@@ -192,9 +191,11 @@ switch($MODULE) {
         CMS::call('SYSTEM')->setCurrentPoint('__MAIN__');
         require_once(CURRENT_SKIN.'skin.php');       # Current skin definition
         $mod = explode('.', $MODULE, 2);
-        if (empty(SYSTEM::$modules[$MODULE]) || !file_exists(MODULES.$mod[0].DS.end($mod).'.php'))
-             include_once(MODULES.'index'.DS.'index.php');
-        else include_once(MODULES.$mod[0].DS.end($mod).'.php');       # Get active module
+        if (empty(SYSTEM::$modules[$MODULE]) || !file_exists(MODULES.$mod[0].DS.end($mod).'.php')) {
+            include_once(MODULES.'index'.DS.'index.php');
+        } else {
+        	include_once(MODULES.$mod[0].DS.end($mod).'.php');       # Get active module
+        }
         $_SESSION['request'] = $MODULE;
         # Load other modules
         $modules = array();
@@ -226,10 +227,6 @@ switch($MODULE) {
         $output['locale'] = SYSTEM::get('locale');
         $output['slogan'] = CONFIG::getValue('main', 'slogan');
         $output['module'] = $MODULE;
-
-          # Page gentime end
-          $output['time'] = round(microtime(TRUE) - $start_time, 2);
-          $output['mem']  = memory_get_usage();
 
         $TPL = new TEMPLATE('main.tpl');
         echo $TPL->parse($output);

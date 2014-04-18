@@ -1,5 +1,5 @@
 <?php
-# idxCMS version 2.1
+# idxCMS version 2.2
 # Copyright (c) 2012 Greenray greenray.spb@gmail.com
 
 # Cleans parameters of $_POST, $_GET, $_COOKIE, detect intrusions and ban unwanted visitors
@@ -89,8 +89,8 @@ final class FILTER {
         $_SERVER['REMOTE_ADDR']     = empty($_SERVER['REMOTE_ADDR'])          ? '0.0.0.0'               : htmlspecialchars($_SERVER['REMOTE_ADDR']);
         $_SERVER['REMOTE_ADDR']     = empty($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['REMOTE_ADDR'] : htmlspecialchars($_SERVER['HTTP_X_FORWARDED_FOR']);
         $_SERVER['REMOTE_HOST']     = empty($_SERVER['REMOTE_HOST'])          ? $_SERVER['REMOTE_ADDR'] : htmlspecialchars($_SERVER['REMOTE_HOST']);
-        $_SERVER['HTTP_REFERER']    = empty($_SERVER['HTTP_REFERER'])    ? ''       : htmlspecialchars($_SERVER['HTTP_REFERER']);
-        $_SERVER['HTTP_USER_AGENT'] = empty($_SERVER['HTTP_USER_AGENT']) ? 'Hidden' : htmlspecialchars($_SERVER['HTTP_USER_AGENT']);
+        $_SERVER['HTTP_REFERER']    = empty($_SERVER['HTTP_REFERER'])         ? ''       : htmlspecialchars($_SERVER['HTTP_REFERER']);
+        $_SERVER['HTTP_USER_AGENT'] = empty($_SERVER['HTTP_USER_AGENT'])      ? 'Hidden' : htmlspecialchars($_SERVER['HTTP_USER_AGENT']);
         if (isset($_COOKIE['UID'])) {
             CMS::call('LOG')->logPut('Note', '', 'Access from the forbidden IP: '.$_SERVER['REMOTE_ADDR']);
             session_destroy();
@@ -108,10 +108,10 @@ final class FILTER {
         }
         unset($bans);
         $url  = $_SERVER['REQUEST_URI'];
-        $info = 'Remote address: '.$_SERVER['REMOTE_ADDR'].LF.
-                'Suspected URI: '.$_SERVER['REQUEST_URI'].LF.
+        $info = 'Remote address: '   .$_SERVER['REMOTE_ADDR'].LF.
+                'Suspected URI: '    .$_SERVER['REQUEST_URI'].LF.
                 'Suspected referer: '.$_SERVER['HTTP_REFERER'].LF.
-                'User agent: '.$_SERVER['HTTP_USER_AGENT'].LF;
+                'User agent: '       .$_SERVER['HTTP_USER_AGENT'].LF;
         $result = '';
         foreach($this->types as $var) {
             $result .= $var.': ';

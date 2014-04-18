@@ -1,5 +1,5 @@
 /*
-* idxCMS version 2.1
+* idxCMS version 2.2
 * Copyright (c) 2012 Greenray greenray.spb@gmail.com
 * SKIN DEFAULT
 */
@@ -150,7 +150,7 @@ td.date     { padding: 0 10px; width: 140px }
 #menu a    { margin: 0; text-decoration: none }
 #menu span.icon { background-position: 0 50%; background-repeat: no-repeat }
 #menu ul.menu,
-#menu li.level1 { background: #4ea2cc; border-radius: 6px; float: left }
+#menu li.level1 { background: #4ea2cc; border-radius: 8px; float: left }
 #menu li.level1,
 #menu a.level1,
 #menu span.level1,

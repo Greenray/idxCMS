@@ -1,5 +1,5 @@
 <?php
-# idxCMS version 2.1
+# idxCMS version 2.2
 # Copyright (c) 2012 Greenray greenray.spb@gmail.com
 # SKIN DEFAULT
 
@@ -121,17 +121,12 @@ if (!defined('idxCMS')) die();?>
 [show=box,menu.simple@empty]
 <div id="footer">
     <div id="valid">
-        <a href="http://opensoft.110mb.com"><img src="{IMAGES}cms.gif" width="80" height="15" alt="idxCMS" /></a>
+        <a href="./"><img src="{IMAGES}cms.gif" width="80" height="15" alt="idxCMS" /></a>
         <a href="http://www.php.net"><img src="{IMAGES}php.gif" width="80" height="15" alt="PHP powered" /></a>
-        <a href="http://opensoft.110mb.com"><img src="{IMAGES}db.gif" width="80" height="15" alt="No SQL" /></a>
+        <a href="http://ru.wikipedia.org/wiki/NoSQ"><img src="{IMAGES}db.gif" width="80" height="15" alt="No SQL" /></a>
         <a href="http://validator.w3.org/check?uri=referer"><img src="{IMAGES}html.gif" width="80" height="15" alt="Valid HTML!" /></a>
         <a href="http://jigsaw.w3.org/css-validator/check/referer"><img src="{IMAGES}css.gif" width="80" height="15" alt="Valid CSS!" /></a>
         <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img src="{IMAGES}cc.png" width="80" height="15" alt="Creative Commons License" /></a>
-        <br />
-        <span style="font-size:10px">
-            Time: {time}<br />
-            Memory: {mem}
-        </span>
     </div>
     <div id="copyright">[show=copyright]</div>
 </div>

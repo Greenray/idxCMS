@@ -3,8 +3,8 @@
 Creative Commons Attribution-NonCommercial-ShareAlike
 (С указанием авторства — Некоммерческая — С сохранением условий) 3.0 Непортированная.
 http://creativecommons.org/licenses/by-nc-sa/3.0/legalcode
-Разрешения, выходящие за рамки данной лицензии, могут быть получены при обращении к автору на сайте opensoft.110mb.com
-или по электронной почте greenray.spb@gmail.com.
+Разрешения, выходящие за рамки данной лицензии, могут быть получены при обращении к автору
+по электронной почте greenray.spb@gmail.com.
 
 Вы можете свободно:
     - делиться: копировать, распространять и передавать другим лицам данное произведение;
@@ -84,3 +84,6 @@ Notice:
     you must make clear to others the license terms of this work.
     The best way to do this is with a link to http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en
 
+======================
+Greenray
+greenray.spb@gmail.com

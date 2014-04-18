@@ -1,5 +1,5 @@
 Огромное спасибо:
-============
+
 ReloadCMS Development Team (reloadcms.com) - за отличную систему.
 Released under GNU General Public License (GPL) Version 2, June 1991 (http://opensource.org/licenses/gpl-2.0.php).
 
@@ -10,52 +10,43 @@ Brandon Aaron - jQuery plugin Mousewheel (brandonaaron.net)
 Stu Nicholls - clickMenu (www.stunicholls.com)
 
 Plugin ColorBox:
-==========
 A customizable lightbox plugin for jQuery.
 Copyright (c) 2011 Jack Moore - jacklmoore.com
 Released under the MIT license (http://www.opensource.org/licenses/mit-license.php).
 
 Plugin Flip!:
-=======
 Flip! jQuery Plugin (http://lab.smashup.it/flip/)
 Author Luca Manno (luca@smashup.it) http://i.smashup.it
 Original idea by Nicola Rizzo (thanks!)
 Licenses: MIT/GPL
 
 Plugin jQuery.timers:
-=============
 Timer abstractions for jQuery
 Licensed under the WTFPL (http://sam.zoy.org/wtfpl/).
 Author Blair Mitchelmore
 
 Plugin REDIPS.drag:
-============
 JavaScript drag and drop library focused on dragging table content and table rows.
 Copyright (c) 2008-2011, www.redips.net All rights reserved.
 Code licensed under the BSD License: http://www.redips.net/license/
 
 Plugin wp-cumulus:
-============
 Roy Tanck - (с) Flash based Tag Cloud for WordPress (www.roytanck.com)
 Released under GNU General Public License (GPL) Version 3, 29 June 2007 (http://opensource.org/licenses/gpl-3.0.php).
 
 Plugin uniTip:
-========
 Nathan Ford - uniTip (labs.unitinteractive.com)
 uniTip is based on qTip:
 qTip - CSS Tool Tips - by Craig Erskine http://qrayg.com
 
 Plugin Textarea Decorator:
-================
 Author Colin Kuebler 2012
 Dual licensed under GPLv3 and MIT
 
 Tar archiver:
-========
 Author: Josh Barger <joshb@npt.com>
 License: The GNU General Public License (GPL) Version 2, June 1991 (http://opensource.org/licenses/gpl-2.0.php)
 
------------------------------------
+======================
 Greenray
-http://opensoft.110mb.com
 greenray.spb@gmail.com

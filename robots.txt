@@ -5,4 +5,4 @@ Disallow: /content/
 Disallow: /system/
 Disallow: /skins/
 Disallow: /tools/
-Sitemap: http://opensoft.110mb.com/sitemap.xml
+Sitemap: sitemap.xml

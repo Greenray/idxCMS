@@ -1,5 +1,5 @@
 <?php
-# idxCMS version 2.1setPageKeywords
+# idxCMS version 2.2setPageKeywords
 # Copyright (c) 2012 Greenray greenray.spb@gmail.com
 
 define('FOREVER_COOKIE', time() + 3600 * 24 * 365 * 5);
@@ -16,7 +16,6 @@ class SYSTEM {
     public static $current_point = '';
     public static $output = array();
     private static $feeds = array();
-    private static $navmodifiers = array();
     private static $navigation = array();
     private static $menu = array();
     private static $sitemap = array();
@@ -132,10 +131,9 @@ class SYSTEM {
     }
 
     public static function showWindow($title, $content, $align, $template) {
-        if (($title === '__NOWINDOW__') || ($template === 'empty'))
+        if (($title === '__NOWINDOW__') || ($template === 'empty')) {
             return $content;
-
-        elseif ($title === 'Error') {
+        } elseif ($title === 'Error') {
             $TPL = new TEMPLATE(SYSTEM::$skins['error']);
             return $TPL->parse(
                     array(
@@ -168,9 +166,9 @@ class SYSTEM {
 
     # Gets site navigation. If navigation is not exists creates it.
     public function getNavigation() {
-        if (empty(self::$navigation))
+        if (empty(self::$navigation)) {
             return self::createNavigation();
-
+        }
         return self::$navigation;
     }
 

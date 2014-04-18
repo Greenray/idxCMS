@@ -1,5 +1,5 @@
 <?php
-# idxCMS version 2.1 - Flat Files Content Management System
+# idxCMS version 2.2 - Flat Files Content Management System
 # Copyright (c) 2012 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - POSTS - SECTIONS
 

@@ -1,12 +1,13 @@
 <?php
-# idxCMS version 2.1
+# idxCMS version 2.2
 # Copyright (c) 2012 Greenray greenray.spb@gmail.com
 # MODULE INDEX
 
 if (!defined('idxCMS')) die();
 
 if (!USER::loggedIn() && CONFIG::getValue('main', 'welcome')) {
-    ShowWindow('', file_get_contents(CONTENT.'intro'));
+    $TPL = new TEMPLATE(dirname(__FILE__).DS.'intro.tpl');
+    ShowWindow(__('Greeting'), $TPL->parse());
 }
 $module = CONFIG::getValue('main', 'index-module');
 

@@ -3,7 +3,7 @@
 # Copyright (c) 2012 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - FUNCTIONS
 
-define('BACKUPS', ROOT.'backups'.DS);     # Backups
+define('BACKUPS', CONTENT.'backups'.DS);     # Backups
 
 function format_size($i) {
   if     (floor($i / 1073741824) > 0) return sprintf("%.2f Gb", $i / (1024 * 1024 * 1024));

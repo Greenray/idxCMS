@@ -43,9 +43,9 @@ function ExtractKeyword($url) {
         $query_items = array();
         parse_str($components['query'], $query_items);
         foreach ($search_queries as $engine => $param) {
-            if (strpos($components['host'], $engine) !== FALSE && !empty($query_items[$param]))
+            if (strpos($components['host'], $engine) !== FALSE && !empty($query_items[$param])) {
                 return $engine."|".urldecode($query_items[$param]);
-
+            }
         }
     }
     return FALSE;
@@ -137,11 +137,12 @@ if (DetectSpider($agent)) {
     $user  = USER::getUser();
     $stats = GetUnserialized(CONTENT.'stats');
     if (empty($stats)) {
-        $stats['total'] = 1;
-        $stats['today'] = 1;
+        $stats['total']   = 1;
+        $stats['today']   = 1;
         $stats['ip'][$ip] = 1;
-        $stats['hosts'] = array();
-        $stats['users'] = array();
+        $stats['hosts']   = array();
+        $stats['users']   = array();
+        $stats['online']  = array();
         if (!empty($config['user-ua'])) $stats['ua'][$agent] = 1;
         $stats['update'] = $time;
         file_put_contents(CONTENT.'stats', serialize($stats), LOCK_EX);

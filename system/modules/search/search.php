@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE SEARCH
 
 if (!defined('idxCMS')) die();
@@ -24,7 +24,9 @@ if (USER::loggedIn() || $config['allow-guest']) {
                 foreach($searchs as $module) {
                     $obj = strtoupper($module);
                     $sections = CMS::call($obj)->getSections();
-                    if (!empty($sections['drafts'])) unset($sections['drafts']);
+                    if (!empty($sections['drafts'])) {
+                        unset($sections['drafts']);
+                    }
                     $result = array();
                     foreach ($sections as $id => $section) {
                         $categories = CMS::call($obj)->getCategories($id);

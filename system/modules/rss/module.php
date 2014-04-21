@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE RSS - INITIALIZATION
 
 if (!defined('idxCMS')) die();
@@ -26,7 +26,9 @@ class RSS_FEED {
     }
 
     public function addItem($item) {
-        if (empty($item['desc'])) $item['desc'] = $item['text'];
+        if (empty($item['desc'])) {
+            $item['desc'] = $item['text'];
+        }
         $this->items[] = array($item['title'], $item['desc'], $item['link'], $item['time']);
     }
 
@@ -168,13 +170,17 @@ class LastRSS {
                     fwrite ($f, $serialized, strlen($serialized));
                     fclose($f);
                 }
-                if ($result) $result['cached'] = 0;
+                if ($result) {
+                    $result['cached'] = 0;
+                }
             }
         }
         // If CACHE DISABLED >> load and parse the file directly
         else {
             $result = $this->Parse($rss_url);
-            if ($result) $result['cached'] = 0;
+            if ($result) {
+                $result['cached'] = 0;
+            }
         }
         return $result;
     }
@@ -198,7 +204,9 @@ class LastRSS {
                 $out[1] = iconv(@$this->rsscp, $this->cp.'//TRANSLIT', $out[1]);
             }
             return trim($out[1]);
-        } else return '';      // if there is NO result, return empty string
+        } else {
+            return '';      // if there is NO result, return empty string
+        }
     }
 
     /**
@@ -294,8 +302,9 @@ class LastRSS {
             }
             $result['items_count'] = $i;
             return $result;
+        } else {
+            return FALSE;
         }
-        else return FALSE;
     }
 }
 

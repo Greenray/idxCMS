@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE POLLS - INITIALIZATION
 
 if (!defined('idxCMS')) die();
@@ -46,9 +46,9 @@ class POLLS {
     }
 
     public function startPoll($question, $answers) {
-        if (empty($question) || empty($answers))
+        if (empty($question) || empty($answers)) {
             throw new Exception('Empty question or no variants');
-
+        }
         $data = array();
         $data['question'] = $question;
         foreach (explode(LF, preg_replace("/[\n\r]+/", LF, $answers)) as $variant) {
@@ -91,16 +91,16 @@ class POLLS {
     }
 
     public function voteInPoll($poll, $answer) {
-        if (empty($this->active[$poll]))
+        if (empty($this->active[$poll])) {
             throw new Exception('Invalid ID');
-
-        if (!isset($this->active[$poll]['answers'][$answer]))
+        }
+        if (!isset($this->active[$poll]['answers'][$answer])) {
             throw new Exception('This answer does not exists in this poll');
-
+        }
         $user = USER::loggedIn() ? USER::getUser('username') : $_SERVER['REMOTE_ADDR'];
-        if ($this->isVotedInPoll($poll))
+        if ($this->isVotedInPoll($poll)) {
             throw new Exception('You already voted in this poll');
-
+        }
         $this->active[$poll]['count'][$answer]++;
         $this->active[$poll]['ips'][] = $user;
         setcookie($this->cookie.'_poll['.$poll.']', $poll, time() + 3600 * 24 * 365 * 5);
@@ -109,12 +109,12 @@ class POLLS {
 
     public function isVotedInPoll($poll) {
         $user = USER::loggedIn() ? USER::getUser('username') : $_SERVER['REMOTE_ADDR'];
-        if (in_array($user, $this->active[$poll]['ips']))
+        if (in_array($user, $this->active[$poll]['ips'])) {
             return TRUE;
-
-        if (!empty($_COOKIE[$this->cookie.'_poll']) && is_array($_COOKIE[$this->cookie.'_poll']) && in_array($poll, $_COOKIE[$this->cookie.'_poll']))
+        }
+        if (!empty($_COOKIE[$this->cookie.'_poll']) && is_array($_COOKIE[$this->cookie.'_poll']) && in_array($poll, $_COOKIE[$this->cookie.'_poll'])) {
             return TRUE;
-
+        }
         return FALSE;
     }
 
@@ -134,9 +134,11 @@ class POLLS {
                 $result['answers'][$i]['answer'] = $answer;
                 $result['answers'][$i]['count']  = $poll['count'][$i];
                 $result['answers'][$i]['voices'] = $poll['voices'][$i];
-                if ($poll['voices'][$i] === 0)
-                     $result['answers'][$i]['color'] = 'transparent';
-                else $result['answers'][$i]['color'] = $colors[$i];
+                if ($poll['voices'][$i] === 0) {
+                    $result['answers'][$i]['color'] = 'transparent';
+                } else {
+                    $result['answers'][$i]['color'] = $colors[$i];
+                }
             }
             $output .= $tpl->parse($result);
         }
@@ -144,8 +146,12 @@ class POLLS {
     }
 
     private function savePolls($active = TRUE, $old = TRUE) {
-        if ($active) $a = file_put_contents(CONTENT.'polls', serialize($this->active), LOCK_EX);
-        if ($old)    $b = file_put_contents(CONTENT.'polls-archive', serialize($this->old), LOCK_EX);
+        if ($active) {
+            $a = file_put_contents(CONTENT.'polls', serialize($this->active), LOCK_EX);
+        }
+        if ($old) {
+            $b = file_put_contents(CONTENT.'polls-archive', serialize($this->old), LOCK_EX);
+        }
         if ($active && $old) return $a && $b;
         elseif ($old)        return $b;
         elseif ($active)     return $a;

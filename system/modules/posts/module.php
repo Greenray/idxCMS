@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE POSTS - MODULE INITIALIZATION
 
 if (!defined('idxCMS')) die();
@@ -76,9 +76,11 @@ class CALENDAR {
             $inc = 0;
             for ($i = $showed; $i < ($showed + 7) && ($i <= $this->temp['num_of_days']) && ($position <= 7); $i++) {
                 $class = 'event';
-                if (empty($this->events[$i]))
-                     $class = 'usual';
-                else $calendar[$string]['dates'][$i]['events'] = $this->events[$i];
+                if (empty($this->events[$i])) {
+                    $class = 'usual';
+                } else {
+                    $calendar[$string]['dates'][$i]['events'] = $this->events[$i];
+                }
                 if (!empty($this->today[$i]) && ($current_year === $selected_year)) {
                     $class .= ' special';
                 }
@@ -94,14 +96,14 @@ class CALENDAR {
         return array(
                 'month'  => LocaliseDate(date('F Y', $this->temp['first_day'])),
                 'header' => LocaliseDate(
-                                '<th>Mon</th>
-                                 <th>Tue</th>
-                                 <th>Wed</th>
-                                 <th>Thu</th>
-                                 <th>Fri</th>
-                                 <th>Sat</th>
-                                 <th>Sun</th>'
-                            ),
+                    '<th>Mon</th>
+                     <th>Tue</th>
+                     <th>Wed</th>
+                     <th>Thu</th>
+                     <th>Fri</th>
+                     <th>Sat</th>
+                     <th>Sun</th>'
+                ),
                 'calendar'       => $calendar,
                 'months'         => $months,
                 'years'          => $years,
@@ -122,11 +124,16 @@ SYSTEM::registerMainMenu('posts');
 SYSTEM::registerSiteMap('posts');
 SYSTEM::registerSearch('posts');
 
-$sections =  CMS::call('POSTS')->getSections();;
+$sections =  CMS::call('POSTS')->getSections();
+
 if (!empty($sections)) {
     # Register RSS feeds for posts sections (ex. drafts)
-    if (!empty($sections['drafts']))  unset($sections['drafts']);
-    if (!empty($sections['archive'])) unset($sections['archive']);
+    if (!empty($sections['drafts'])) {
+        unset($sections['drafts']);
+    }
+    if (!empty($sections['archive'])) {
+        unset($sections['archive']);
+    }
     foreach ($sections as $id => $section) {
         if ($section['access'] === 0) {
             SYSTEM::registerFeed(

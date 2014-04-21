@@ -1,21 +1,22 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE USER - PRIVATE MESSAGES
 
 if (!defined('idxCMS')) die();
 
 SYSTEM::set('pagename', __('Private messages'));
 
-
 if (!USER::loggedIn()) {
     ShowError(__('You are not logged in!'));
 } elseif (!empty($REQUEST['save'])) {
     # Send message
     $PM = new MESSAGE(PM_DATA, USER::getUser('username'));
-    if ($PM->sendPrivateMessage($REQUEST['for']) !== FALSE) 
-         ShowWindow(__('Private messages'), __('Message sent'), 'center');
-    else ShowError('Cannot send message');
+    if ($PM->sendPrivateMessage($REQUEST['for']) !== FALSE) { 
+        ShowWindow(__('Private messages'), __('Message sent'), 'center');
+    } else {
+        ShowError('Cannot send message');
+    }
     unset($PM);
 } elseif (!empty($REQUEST['for'])) {
     # Post new message
@@ -123,7 +124,9 @@ if (!USER::loggedIn()) {
                         ShowWindow('', Pagination($count, $perpage, $page, MODULE.'user.pm&amp;mode=inbox'));
                     }
                 }
-            } else ShowWindow(__('Messages'), __('Database is empty'), 'center');
+            } else {
+                ShowWindow(__('Messages'), __('Database is empty'), 'center');
+            }
         }
     } else {
         ShowWindow(

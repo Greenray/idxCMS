@@ -8,7 +8,7 @@
 
 html { height: 100% }
 body {
-    color: #000;
+    color: black;
     font: normal 10pt arial, helvetica, verdana, sans-serif;
     height: auto !important; min-height: 100%;
     margin: 0; padding: 0;
@@ -29,7 +29,7 @@ button        { margin: 0 1px }
 button img    { vertical-align: middle }
 button.submit { margin: 0; padding: 2px 5px }
 
-input                  { color: #000 }
+input                  { color: black }
 input[type='button'],
 input[type='reset'],
 input[type='submit']   { margin: 0; padding: 0 5px }
@@ -41,10 +41,10 @@ input[type='password']:hover { border-color: #aaa }
 input[type='text']:focus,
 input[type='password']:focus { border-color: #8c8c8c; background: #ffffcc; outline: 1px solid red }
 
-fieldset { border: 1px solid #000; margin: 10px 0 0; padding: 10px }
+fieldset { border: 1px solid black; margin: 10px 0 0; padding: 10px }
 
 h1,
-h2 { text-transform: none; text-shadow: #fff 1px 1px 1px }
+h2 { text-transform: none; text-shadow: white 1px 1px 1px }
 h1 { font-size: 20px }
 h2 { font-size: 18px }
 hr { margin: 5px }
@@ -71,7 +71,7 @@ sup { top: -0.4em }
 select       { padding: 0 5px }
 select:focus { outline: 1px solid red }
 
-textarea       { background: #fff; color: #000; margin: 0 0 10px; width: 100% }
+textarea       { background: #fff; color: black; margin: 0 0 10px; width: 100% }
 textarea:hover { border-color: #aaa }
 textarea:focus { background: #ffffcc; border-color: #8c8c8c; outline: 2px solid red }
 
@@ -81,7 +81,7 @@ table,th,td { padding: 2px; vertical-align: middle }
 table#std    { border-collapse: separate; border-spacing: 0 }
 table#std tr { height: 35px }
 table#std td { border: 2px groove #fff; padding: 0 10px }
-table#std th { border: 2px groove #fff; background: #448aae; color: #fff; text-shadow: 0 1px 0 #000 }
+table#std th { border: 2px groove #fff; background: #448aae; color: white; text-shadow: 0 1px 0 #000 }
 table.std    { border: 2px groove #fff; padding: 10px; width: 100% }
 th.icon,
 td.icon     { width: 47px }
@@ -104,12 +104,13 @@ td.date     { padding: 0 10px; width: 140px }
 #shdesc  { display: none; width: 99% }
 .content { padding: 10px 5px }
 .title   { color: black; font-size: 1.17em; font-weight: bold; text-align: center }
-
-.error  { color: red }
-.clear  { clear: both; height: 0; overflow: hidden }
-.left   { text-align: left }
-.center { text-align: center }
-.right  { text-align: right }
+.clear   { clear: both; height: 0; overflow: hidden }
+.left    { text-align: left }
+.center  { text-align: center }
+.right   { text-align: right }
+.justify { text-align: justify }
+.block   { display:block }
+.none    { display:none }
 
 .special  { color: red }
 .required { color: red; background: #ffffcc }
@@ -124,7 +125,7 @@ td.date     { padding: 0 10px; width: 140px }
 #toolbar ul { margin: 0; padding: 0 }
 #toolbar li { border-left: 1px solid #000; display: inline; margin-left: 8px; padding-left: 12px }
 #toolbar li:first-child { border: none }
-#toolbar a       { color: #fff }
+#toolbar a       { color: white }
 #toolbar a:hover { color: red }
 
 #top-navigation    { background: #bfcfdf; border: 1px solid #808385; border-radius: 8px; margin: 0 10px; padding: 10px }
@@ -164,7 +165,7 @@ td.date     { padding: 0 10px; width: 140px }
 #menu span.level1.last    { background-position: 100% -165px; background-repeat: repeat-x }
 #menu a.level1 span.bg,
 #menu span.level1 span.bg {
-    background-position: 50% -220px; background-repeat: repeat-x; color: #fff;
+    background-position: 50% -220px; background-repeat: repeat-x; color: white;
     float: left;
     font-weight: bold;
     height: 42px; line-height: 40px;
@@ -247,7 +248,7 @@ ul.tabs      { margin: 0; padding: 0.2em 0 0; list-style: none }
 ul.tabs li   { border-bottom-width: 0 !important; display: inline }
 ul.tabs li a { background: #ddd; border: 1px solid #999; border-bottom: none; padding: 0 5px; text-decoration: none }
 ul.tabs li a.selected,
-ul.tabs li a.selected:hover { background: #fff; color: #000; border: 1px solid #999; border-bottom: 1px solid #fff }
+ul.tabs li a.selected:hover { background: #fff; color: black; border: 1px solid #999; border-bottom: 1px solid #fff }
 ul.tabs li a:hover { background: red; color: yellow }
 ul.tabs li a:focus { outline: 0 }
 
@@ -278,7 +279,7 @@ ul.tabs li a:focus { outline: 0 }
 #section li.level1 .title    { margin: 5px 5px 0 45px }
 #section li.level1 .subtitle { margin: 0 5px 0 45px }
 #section a.level1,
-#section span.level1       { color: #000; text-align: left }
+#section span.level1       { color: black; text-align: left }
 #section li a.level1:hover { background: #e8e8ea; color: red; text-shadow: 0 1px 0 #fff }
 #section a.level1 span.title,
 #section span.level1 span.title    { font-weight: bold; font-size: 10pt; line-height: 20px; padding: 0 5px; text-align: left }
@@ -294,7 +295,7 @@ ul.tabs li a:focus { outline: 0 }
 #section ul.level2 img,
 #section ul.level3 img { float: left }
 #section ul.level2 a,
-#section ul.level3 a   { color: #000; line-height: 18px }
+#section ul.level3 a   { color: black; line-height: 18px }
 #section li.level2 .title,
 #section li.level2 .subtitle,
 #section li.level3 .title,
@@ -304,7 +305,7 @@ ul.tabs li a:focus { outline: 0 }
 #section li.level2 .subtitle,
 #section li.level3 .subtitle { margin: 0 5px 5px 45px }
 #section li.level2 a.level2,
-#section li.level3 a.level3  { color: #000; text-shadow: 0 1px 0 #fff }
+#section li.level3 a.level3  { color: black; text-shadow: 0 1px 0 #fff }
 #section li.level2 a.level2:hover,
 #section li.level3 a.level3:hover               { background: #e8e8ea; color: blue; text-shadow: 0 1px 0 #fff }
 #section li.level3 a.level3:hover span.subtitle { background: #e8e8ea; color: red; text-shadow: 0 1px 0 #fff }
@@ -453,7 +454,7 @@ ul.tabs li a:focus { outline: 0 }
 .codehtml,
 .codephp,
 .codetext   {
-    background: #ffffc0; color: #000;
+    background: #ffffc0; color: black;
     border: #6da4da solid 1px;
     font: normal 8pt mono, "Courier New", Courier;
     margin: 5px 0; padding: 5px;
@@ -461,7 +462,7 @@ ul.tabs li a:focus { outline: 0 }
     white-space: nowrap;
 }
 .quotetitle {
-    background: #aabbcc; color: #000;
+    background: #aabbcc; color: black;
     border: #a9b8c2 solid 1px;
     font-size: 8pt; font-style: italic;
     margin: 5px 0 0; padding: 2px;
@@ -478,7 +479,7 @@ ul.tabs li a:focus { outline: 0 }
 .author { margin: 0 0 10px; width: 120px; float: left; text-align: center }
 .info a:hover { color: red }
 .text { text-align: justify; margin: 10px }
-.note { background: #ffffcc; border: red solid 2px; color: #000; margin: 20px; padding: 5px }
+.note { background: #ffffcc; border: red solid 2px; color: black; margin: 20px; padding: 5px }
 .help { padding: 0 50px 0 10px; color: red; font-style: italic; text-align: right }
 .rate,
 .menu, .more { float: right }
@@ -488,14 +489,14 @@ ul.tabs li a:focus { outline: 0 }
 
 .main_rate { margin:-20px 0 10px; padding:0 0 20px }
 .negative  { color: red; font-weight: bold }
-.no        { color: #000; font-weight: bold }
+.no        { color: black; font-weight: bold }
 .positive  { color: green; font-weight: bold }
 
 /* Left Panel */
 .win .title     { margin: 20px 5px; text-transform: uppercase }
 .calendar       { width: 100% }
 table .calendar { padding: 2px; vertical-align: middle; border: 1px solid #e0dfdf }
-.calendar th    { background: #448aae; color: #fff }
+.calendar th    { background: #448aae; color: white }
 .last-posts li  { margin: 5px 0 }
 
 .poll { margin: 0 0 10px }
@@ -506,26 +507,26 @@ table .calendar { padding: 2px; vertical-align: middle; border: 1px solid #e0dfd
 .user_panel   { margin: 10px; padding: 0 10px }
 
 /* Box */
-#boxes         { background: #829298 url(images/boxes-bg.png) 0 0 repeat-x; color: #fff }
+#boxes         { background: #829298 url(images/boxes-bg.png) 0 0 repeat-x; color: white }
 #boxes .left,
 #boxes .middle,
 #boxes .right  { float: left; padding: 0 10px; width: 310px }
 #boxes .box-container { background: #d4dee3; margin: 0 auto; min-width: 1000px; width: 1000px }
 #boxes .title { margin: 20px 5px }
 
-.box        { background: #bfcfdf; border: 1px solid #808385; border-radius: 8px; margin: 0; padding: 10px }
+.box        { background: #bfcfdf; border: 1px solid #808385; border-radius: 8px; margin: 3px 0px 5px 0; padding: 10px }
 .box ul     { list-style-type: none }
-.box .title { background: #448aae; color: #fff; font-weight: bold; padding: 10px 5px; text-align: center }
+.box .title { background: #448aae; color: white; font-weight: bold; padding: 10px 5px; text-align: center }
 
-.darkbox .title  { color: #fff; text-shadow: 0 1px 1px #000; text-transform: uppercase }
-.lightbox .title { background: #448aae; color: #fff; text-transform: uppercase }
+.darkbox .title  { color: white; text-shadow: 0 1px 1px black; text-transform: uppercase }
+.lightbox .title { background: #448aae; color: white; text-transform: uppercase }
 
 .counter .odd  { background: inherit }
 .counter .even { background: inherit }
 
 /* Footer */
 #footer {
-    background: #333; color: #fff;
+    background: #333; color: white;
     overflow: hidden;
     padding: 10px 30px; position: relative;
     text-shadow: 0 1px 1px #000;
@@ -537,7 +538,7 @@ table .calendar { padding: 2px; vertical-align: middle; border: 1px solid #e0dfd
 #simple-menu ul { margin: 0; padding: 0 }
 #simple-menu li            { border-left: 1px solid #000; margin-left: 8px; padding-left: 12px; display: inline }
 #simple-menu li:last-child { border-right: 1px solid #000; margin-right: 8px; padding-right: 12px }
-#simple-menu a       { color: #fff }
+#simple-menu a       { color: white }
 #simple-menu a:hover { color: red }
 
 /* Aphorisms */
@@ -549,7 +550,7 @@ table .calendar { padding: 2px; vertical-align: middle; border: 1px solid #e0dfd
 /* Banners */
 #banner,
 #banner li { padding: 10px 0; margin: 0 }
-#banner a  { color: #fff }
+#banner a  { color: white }
 
 .horinaja img   { padding: 0; margin: 0 }
 .horinaja ul    { position: relative; width: 220px; padding: 0; margin: 0 }
@@ -563,7 +564,7 @@ ol.horinaja_pagination {
 }
 ol.horinaja_pagination li   { float: left; height: 40px; display: block }
 ol.horinaja_pagination li a {
-    background: transparent; color: #fff;
+    background: transparent; color: white;
     height: 30px;
     display: block;
     float: left;
@@ -575,7 +576,7 @@ ol.horinaja_pagination li a {
 
 #err    { display: none; padding-left: 7px; position: absolute; z-index: 200 }
 #errmsg {
-    background: red; color: #fff;
+    background: red; color: white;
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
     display: block;
     font-weight: bold;
@@ -584,7 +585,7 @@ ol.horinaja_pagination li a {
 }
 
 #unitip {
-    color: #000;
+    color: black;
     display: none;
     font: normal 1.1em/15px arial, verdana, helvetica, sans-serif;
     position: absolute; top: -1000px; z-index: 1000;
@@ -595,4 +596,4 @@ ol.horinaja_pagination li a {
 #unitippoint { background: url(../images/tippoint.png) no-repeat; height: 19px; overflow: hidden }
 #unitipmid   { background: url(../images/tipmid.png) repeat; height: auto; padding: 5px 15px; width: 115px }
 #unitipcap   { background: url(../images/tipcap.png) no-repeat; height: 7px; overflow: hidden }
-.tip { color: #000; cursor: default }
+.tip { color: black; cursor: default }

@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2 - Flat Files Content Management System
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 
 # This project is based on the idea and experience of work in the ReloadCMS project
 # Copyright (c) 2004 ReloadCMS Development Team http://reloadcms.com
@@ -20,9 +20,11 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 ini_set('display_errors', 0);
+
 mb_internal_encoding("UTF-8");
-if (date_default_timezone_set(date_default_timezone_get()) === FALSE)
+if (date_default_timezone_set(date_default_timezone_get()) === FALSE) {
     date_default_timezone_set('UTC');
+}
 
 # Unset any globals created by register_globals being turned ON
 while (list($global) = each($GLOBALS)) {
@@ -32,7 +34,8 @@ while (list($global) = each($GLOBALS)) {
 }
 unset($global);
 
-error_reporting(0);
+#error_reporting(0);
+error_reporting(-1);
 
 function idxErrorHandler ($errno, $errmsg, $filename, $linenum, $vars) {
     $errortype = array (1 => "Error",
@@ -52,20 +55,20 @@ function idxErrorHandler ($errno, $errmsg, $filename, $linenum, $vars) {
 set_error_handler("idxErrorHandler", E_ALL | E_STRICT);
 
 # Constants
-define('idxCMS', TRUE);
-define('DS', DIRECTORY_SEPARATOR);
-define('LF', PHP_EOL);
-define('ROOT', '.'.DS);
+define('idxCMS',  TRUE);
+define('DS',      DIRECTORY_SEPARATOR);
+define('LF',      PHP_EOL);
+define('ROOT',   '.'.DS);
 define('CONTENT', ROOT.'content'.DS);
-define('SKINS', ROOT.'skins'.DS);
-define('SYS', ROOT.'system'.DS);
-define('TOOLS', ROOT.'tools'.DS);
+define('SKINS',   ROOT.'skins'.DS);
+define('SYS',     ROOT.'system'.DS);
+define('TOOLS',   ROOT.'tools'.DS);
 define('MODULES', SYS.'modules'.DS);
-define('TEMP', CONTENT.'temp'.DS);
-define('USERS', CONTENT.'users'.DS);
-define('IMAGES', SKINS.'images'.DS);
-define('ICONS', IMAGES.'icons'.DS);
-define('SMILES', IMAGES.'smiles'.DS);
+define('TEMP',    CONTENT.'temp'.DS);
+define('USERS',   CONTENT.'users'.DS);
+define('IMAGES',  SKINS.'images'.DS);
+define('ICONS',   IMAGES.'icons'.DS);
+define('SMILES',  IMAGES.'smiles'.DS);
 
 define('MODULE',    ROOT.'?module=');
 define('SECTION',  '&amp;section=');
@@ -99,7 +102,7 @@ global $LANG;
 $CMS = CMS::call('SYSTEM');
 
 define('IDX_VERSION',   '2.2');
-define('IDX_COPYRIGHT', '&copy; 2012 '.__('Greenray'));
+define('IDX_COPYRIGHT', '&copy; 2014 '.__('Greenray'));
 define('IDX_POWERED',   'Powered by idxCMS - '.IDX_VERSION);
 
 # Send main headers
@@ -115,6 +118,7 @@ CMS::call('SYSTEM')->initModules();
 if (!empty($REQUEST['login'])) {
     CMS::call('USER')->logInUser();
 }
+
 if (!empty($REQUEST['logout'])) {
     CMS::call('USER')->logOutUser();
     session_destroy();
@@ -189,12 +193,12 @@ switch($MODULE) {
         define('TEMPLATES', SYS.'templates'.DS);
         # Loading main module
         CMS::call('SYSTEM')->setCurrentPoint('__MAIN__');
-        require_once(CURRENT_SKIN.'skin.php');       # Current skin definition
+        require_once(CURRENT_SKIN.'skin.php');  # Current skin definition
         $mod = explode('.', $MODULE, 2);
         if (empty(SYSTEM::$modules[$MODULE]) || !file_exists(MODULES.$mod[0].DS.end($mod).'.php')) {
             include_once(MODULES.'index'.DS.'index.php');
         } else {
-        	include_once(MODULES.$mod[0].DS.end($mod).'.php');       # Get active module
+            include_once(MODULES.$mod[0].DS.end($mod).'.php');   # Get active module
         }
         $_SESSION['request'] = $MODULE;
         # Load other modules
@@ -205,7 +209,9 @@ switch($MODULE) {
         $modules['left']  = CONFIG::getValue('output', 'left');
         $modules['right'] = CONFIG::getValue('output', 'right');
         $modules['boxes'] = CONFIG::getValue('output', 'boxes');
-        if (!empty($modules[$MODULE])) unset($modules['left']);
+        if (!empty($modules[$MODULE])) {
+            unset($modules['left']);
+        }
         foreach ($modules as $point => $boxes) {
             CMS::call('SYSTEM')->setCurrentPoint($point);
             if (!empty($boxes)) {

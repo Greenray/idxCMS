@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # RUSSIAN LOCALIZATION
 
 $LANG['language'] = 'russian';
@@ -115,7 +115,6 @@ $LANG['def']['Error'] = 'Ошибка';
 $LANG['def']['File'] = 'Файл';
 $LANG['def']['Fill this field'] = 'Заполните это поле';
 $LANG['def']['Font'] = 'Шрифт';
-$LANG['def']['Greetings to you from you on your website'] = 'Привет Вам от Вас на Вашем сайте';
 $LANG['def']['Guest'] = 'Гость';
 $LANG['def']['Image'] = 'Изображение';
 $LANG['def']['Index'] = 'Главная';
@@ -157,7 +156,7 @@ $LANG['def']['Version for printer'] = 'Версия для печати';
 $LANG['def']['Views'] = 'Просмотры';
 $LANG['def']['Yes'] = 'Да';
 $LANG['def']['You are not logged in!'] = 'Вы не авторизованы!';
-$LANG['def']['You are welcome'] = 'Добро пожаловать';
+$LANG['def']['You are welcome!'] = 'Добро пожаловать!';
 $LANG['def']['You have used an invalid symbols'] = 'Вы использовали запрещенные символы';
 #COUNTER
 $LANG['def']['Counter'] = 'Счетчик';

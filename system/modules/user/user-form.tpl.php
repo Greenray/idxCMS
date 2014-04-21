@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE USER - PROFILE TEMPLATE
 
 die();?>
@@ -137,7 +137,7 @@ die();?>
                     [__Avatar]
                 </a>
             </p>
-            <div id="shdesc" style="display: none;"><div class="avatar"><input type="file" name="avatar" value="" /></div></div>
+            <div id="shdesc"  class="none"><div class="avatar"><input type="file" name="avatar" value="" /></div></div>
         </td>
     </tr>
     <tr class="even">
@@ -147,9 +147,9 @@ die();?>
        [else]
             <td class="left"><input type="text" name="user" id="user" onkeyup="checkUsername('{mode}');" value="{user}" class="required" /></td>
             <td class="center" style="width:380px;">
-                <div style="display:block" id="help" class="help">[__Only latin characters, digits and symbol "_"]</div>
-                <div style="display:none" id="good"><font color="#00cc00">[__Login is allowed]</font></div>
-                <div style="display:none" id="bad"><font color="#ff0000">[__Login is not allowed]</font></div>
+                <div id="help" class="help block">[__Only latin characters, digits and symbol "_"]</div>
+                <div id="good" class="none"><font color="#00cc00">[__Login is allowed]</font></div>
+                <div id="bad" class="none"><font color="#ff0000">[__Login is not allowed]</font></div>
             </td>
         [endelse]
     </tr>
@@ -193,8 +193,8 @@ die();?>
             <th>[__Confirm password]</th>
             <td class="left"><input type="password" name="confirm" onkeyup="check('{mode}');" value="" class="required"  /></td>
             <td class="center">
-                <div style="display: none" id="yes"><font color="#33cc00">[__Passwords are equal]</font></div>
-                <div style="display: none" id="no"><font color="#ff0000">[__Passwords are not equal]</font></div>
+                <div id="yes" class="none"><font color="#33cc00">[__Passwords are equal]</font></div>
+                <div id="no" class="none"><font color="#ff0000">[__Passwords are not equal]</font></div>
             </td>
         </tr>
         <tr class="even">

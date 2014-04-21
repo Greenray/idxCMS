@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - GENERAL INFORMATION
 
 if (!defined('idxADMIN')) die();
@@ -34,11 +34,21 @@ if (CMS::call('USER')->checkRoot()) {
     $output['admin']  = TRUE;
     $output['rights'] = __('You have all rights on this site');
     $output['posts']  = format_size(get_dir_size(POSTS));
-    if (isset(SYSTEM::$modules['catalogs']))  $output['catalogs']  = format_size(get_dir_size(CATALOGS));
-    if (isset(SYSTEM::$modules['galleries'])) $output['galleries'] = format_size(get_dir_size(GALLERIES));
-    if (isset(SYSTEM::$modules['forum']))     $output['forum']     = format_size(get_dir_size(FORUM));
-    if (isset(SYSTEM::$modules['aphorisms'])) $output['aphorisms'] = format_size(get_dir_size(APHORISMS));
-    if (isset(SYSTEM::$modules['banners']))   $output['banners']   = format_size(get_dir_size(BANNERS));
+    if (isset(SYSTEM::$modules['catalogs'])) {
+        $output['catalogs']  = format_size(get_dir_size(CATALOGS));
+    }
+    if (isset(SYSTEM::$modules['galleries'])) {
+        $output['galleries'] = format_size(get_dir_size(GALLERIES));
+    }
+    if (isset(SYSTEM::$modules['forum'])) {
+        $output['forum']     = format_size(get_dir_size(FORUM));
+    }
+    if (isset(SYSTEM::$modules['aphorisms'])) {
+        $output['aphorisms'] = format_size(get_dir_size(APHORISMS));
+    }
+    if (isset(SYSTEM::$modules['banners'])) {
+        $output['banners']   = format_size(get_dir_size(BANNERS));
+    }
     $output['users']     = '('.sizeof(GetFilesList(USERS)).') '.format_size(get_dir_size(USERS));
     $output['pm']        = format_size(get_dir_size(PM_DATA));
     $output['avatars']   = format_size(get_dir_size(AVATARS));
@@ -48,9 +58,11 @@ if (CMS::call('USER')->checkRoot()) {
     $output['logs']      = format_size(get_dir_size(LOGS));
     $output['backups']   = format_size(get_dir_size(BACKUPS));
     $FEEDBACK = new MESSAGE(CONTENT, 'feedback');
-    $output['feedback'] = '<strong>'.sizeof($FEEDBACK->getMessages()).'</strong>';
-    $output['temp']     = format_size(get_dir_size(TEMP));
+    $output['feedback']  = '<strong>'.sizeof($FEEDBACK->getMessages()).'</strong>';
+    $output['temp']      = format_size(get_dir_size(TEMP));
 }
+
+# Checking, whether there are articles expecting publications
 if (CMS::call('USER')->checkRoot()) {
     CMS::call('POSTS')->getSection('drafts');
     $content = CMS::call('POSTS')->getContent(2);

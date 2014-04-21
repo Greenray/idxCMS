@@ -1,16 +1,16 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE SITEMAP
 
 if (!defined('idxCMS')) die();
 
 $data   = GetUnserialized(CONTENT.'menu');
 $points = array_keys($data);
-
 $access = USER::getUser('access');
 $TPL = new TEMPLATE(dirname(__FILE__).DS.'sitemap.tpl');
 $output = '<div id="section"><ul class="level1">';
+
 foreach($data as $module => $menu) {
     if (!empty($menu['sections'])) {
         foreach ($menu['sections'] as $id => $section) {
@@ -36,6 +36,7 @@ foreach($data as $module => $menu) {
     }
     $output .= $TPL->parse($menu);
 }
+
 $output .= '</ul></div>';
 ShowWindow(__('Sitemap'), $output);
 ?>

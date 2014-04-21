@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - FILEMANAGER - RIGHTS TEMPLATE
 
 die();?>
@@ -8,7 +8,7 @@ die();?>
     <form name="form1" method="post" action="">
     <table class="std">
         <tr><th colspan="3">[__Rights]</th></td></tr>
-        <tr><td class="even center" colspan="3">[ifelse=dir][__Directory][else][__File][endelse]: <span style="color:red">{file}</span></td></tr>
+        <tr><td class="even center" colspan="3">[ifelse=dir][__Directory][else][__File][endelse]: <span class="special">{file}</span></td></tr>
         <tr>
             <td class="row1 center">[__Owner]</td>
             <td class="row1 center">[__Group]</td>

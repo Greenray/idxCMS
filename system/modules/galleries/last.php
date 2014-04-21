@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE GALLERIES - LAST TOPICS
 
 if (!defined('idxCMS')) die();
@@ -8,6 +8,7 @@ if (!defined('idxCMS')) die();
 $sections = CMS::call('GALLERIES')->getSections();
 $stat = array();
 $i = 1;
+
 foreach ($sections as $section => $null) {
     $categories = CMS::call('GALLERIES')->getCategories($section);
     foreach ($categories as $key => $category) {

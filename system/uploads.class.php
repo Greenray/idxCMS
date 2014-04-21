@@ -1,26 +1,24 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 
 # Uploads files
 class UPLOADER {
 
     private $upload_dir;
-    private $source_file;
-    private $target_file;
     private $max_size;
     private $file_size;
     private $file_tmp;
     private $file_type;
     private $allowed_types = array(
-                                'application/zip',
-                                'application/rar',
-                                'application/arj',
-                                'application/tar',
-                                'application/x-gzip',
-                                'application/bzip2',
-                                'application/pdf',
-                                'audio/mp3'
+        'application/zip',
+        'application/rar',
+        'application/arj',
+        'application/tar',
+        'application/x-gzip',
+        'application/bzip2',
+        'application/pdf',
+        'audio/mp3'
     );
 
     public function __construct($upload_dir, $max_size = '') {
@@ -38,12 +36,12 @@ class UPLOADER {
     }
 
     private function checkFile() {
-        if (!in_array($this->file_type, $this->allowed_types))
+        if (!in_array($this->file_type, $this->allowed_types)) {
             throw new Exception('Your file is not allowed or is corrupted');
-
-        if ($this->file_size >= $this->max_size)
+        }
+        if ($this->file_size >= $this->max_size) {
             throw new Exception('File is too large');
-
+        }
         return TRUE;
     }
 
@@ -53,9 +51,9 @@ class UPLOADER {
             $this->setFile($file);
             $this->checkFile();
             if (is_uploaded_file($this->file_tmp)) {
-                if (move_uploaded_file($this->file_tmp, $this->upload_dir.$this->file_name))
+                if (move_uploaded_file($this->file_tmp, $this->upload_dir.$this->file_name)) {
                     return array($this->file_name, $this->file_size);
-
+                }
             }
         }
         throw new Exception('Error of file uploading');
@@ -76,9 +74,9 @@ class IMAGE {
     private $image_tmp;
     private $image_type;
     private $allowed_types = array(
-                                'image/gif',
-                                'image/jpeg',
-                                'image/png',
+        'image/gif',
+        'image/jpeg',
+        'image/png',
     );
 
     public function __construct($upload_dir, $max_size = '', $thumb_width = '', $thumb_height = '') {
@@ -100,12 +98,12 @@ class IMAGE {
     }
 
     private function checkImage() {
-        if (!in_array($this->image_type, $this->allowed_types))
+        if (!in_array($this->image_type, $this->allowed_types)) {
             throw new Exception('Your file is not allowed or is corrupted');
-
-        if ($this->image_size >= $this->max_size)
+        }
+        if ($this->image_size >= $this->max_size) {
             throw new Exception('File is too large');
-
+        }
         return TRUE;
     }
 
@@ -126,9 +124,11 @@ class IMAGE {
 
     private function calcResizeParams() {
         $ratio = $this->image_width / $this->image_height;
-        if (($this->thumb_width / $this->thumb_height) > $ratio)
+        if (($this->thumb_width / $this->thumb_height) > $ratio) {
              $this->thumb_width  = $this->thumb_height * $ratio;
-        else $this->thumb_height = $this->thumb_width / $ratio;
+        } else {
+            $this->thumb_height = $this->thumb_width / $ratio;
+        }
     }
 
     public function generateThumbnail($file = '') {
@@ -159,9 +159,11 @@ class IMAGE {
     }
 
     public function generateIcon($name = '') {
-        if (!empty($name))
-             $name = $name.'.png';
-        else $name = 'icon.png';
+        if (!empty($name)) {
+            $name = $name.'.png';
+        } else {
+            $name = 'icon.png';
+        }
         self::calcResizeParams();
         $icon = imagecreatetruecolor($this->thumb_width, $this->thumb_height);
         switch($this->image_type) {
@@ -182,7 +184,9 @@ class IMAGE {
         imagepng($icon, $this->upload_dir.$name);
         imagedestroy($img);
         imagedestroy($icon);
-        if ($this->image_name !== $name) unlink($this->upload_dir.$this->image_name);
+        if ($this->image_name !== $name) {
+            unlink($this->upload_dir.$this->image_name);
+        }
         return TRUE;
     }
 }

@@ -1,9 +1,10 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE FORUM - INITIALIZATION
 
 if (!defined('idxCMS')) die();
+
 define('FORUM', CONTENT.'forum'.DS);
 
 # FORUM class
@@ -19,23 +20,23 @@ class FORUM extends CONTENT {
     }
 
     public function saveTopic($id = '') {
-        if (!USER::loggedIn())
+        if (!USER::loggedIn()) {
             throw new Exception('You are not logged in!');
-
+        }
         $title = trim(FILTER::get('REQUEST', 'title'));
-        if ($title === FALSE)
+        if ($title === FALSE) {
             throw new Exception('Title is empty');
-
+        }
         $text = trim(FILTER::get('REQUEST', 'text'));
-        if (empty($text))
+        if (empty($text)) {
             throw new Exception('Text is empty');
-
+        }
         $path = $this->sections[$this->section]['categories'][$this->category]['path'];
         if (empty($id)) {
             $id = $this->newId($this->content);
-            if (mkdir($path.$id, 0777) === FALSE)
+            if (mkdir($path.$id, 0777) === FALSE) {
                 throw new Exception('Cannot save topic');
-
+            }
             $this->content[$id]['id']       = (int)$id;
             $this->content[$id]['author']   = USER::getUser('username');
             $this->content[$id]['nick']     = USER::getUser('nickname');
@@ -47,9 +48,9 @@ class FORUM extends CONTENT {
         $this->content[$id]['title']  = $title;
         $this->content[$id]['opened'] = (bool) FILTER::get('REQUEST', 'opened');
         $this->content[$id]['pinned'] = (bool) FILTER::get('REQUEST', 'pinned');
-        if (file_put_contents($path.$id.DS.$this->text, $text, LOCK_EX) === FALSE)
+        if (file_put_contents($path.$id.DS.$this->text, $text, LOCK_EX) === FALSE) {
             throw new Exception('Cannot save topic');
-
+        }
         parent::saveContent($this->content);
         Sitemap();
         return $id;
@@ -105,6 +106,7 @@ SYSTEM::registerSiteMap('forum');
 SYSTEM::registerSearch('forum');
 
 $sections = CMS::call('FORUM')->getSections();
+
 if (!empty($sections['archive'])) unset($sections['archive']);
 foreach ($sections as $id => $section) {
     if ($section['access'] === 0) {

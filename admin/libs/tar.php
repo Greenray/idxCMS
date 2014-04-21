@@ -172,11 +172,15 @@ class TAR {
      */
     function __readTar($filename = '') {
         // Set the filename to load
-        if (!$filename) $filename = $this->filename;
+        if (!$filename) {
+            $filename = $this->filename;
+        }
         // Read in the TAR file
         $this->tarFile = file_get_contents($filename);
         if ($this->tarFile[0] == chr(31) && $this->tarFile[1] == chr(139) && $this->tarFile[2] == chr(8)) {
-            if (!function_exists("gzinflate")) return FALSE;
+            if (!function_exists("gzinflate")) {
+                return FALSE;
+            }
             $this->isGzipped = TRUE;
             $this->tarFile   = gzinflate(substr($this->tarFile, 10, -4));
         }
@@ -277,7 +281,9 @@ class TAR {
         unset($this->numFiles);
         unset($this->numDirs);
         // If the tar file doesn't exist...
-        if (!file_exists($filename)) return FALSE;
+        if (!file_exists($filename)) {
+            return FALSE;
+        }
         $this->filename = $filename;
         // Parse this file
         $this->__readTar();
@@ -290,7 +296,9 @@ class TAR {
      * @return boolean
      */
     function appendTar($filename) {
-        if (!file_exists($filename)) return FALSE;
+        if (!file_exists($filename)) {
+            return FALSE;
+        }
         $this->__readTar($filename);
         return TRUE;
     }
@@ -336,7 +344,7 @@ class TAR {
         if ($this->numFiles > 0) {
             foreach ($this->files as $key => $info) {
                 if ($info["name"] == $filename) {
-                	return TRUE;
+                    return TRUE;
                 }
             }
         }
@@ -352,7 +360,7 @@ class TAR {
         if ($this->numDirs > 0) {
             foreach ($this->dirs as $key => $info) {
                 if ($info["name"] == $dirname) {
-                	return TRUE;
+                    return TRUE;
                 }
             }
         }
@@ -370,7 +378,9 @@ class TAR {
      * @return boolean
      */
     function addDirectory($dirname, $recurse = FALSE) {
-        if (!file_exists($dirname)) return FALSE;
+        if (!file_exists($dirname)) {
+            return FALSE;
+        }
         clearstatcache();
         // Get directory information
         $file_info = stat($dirname);
@@ -387,7 +397,7 @@ class TAR {
         foreach ($files as $key => $file) {
             if (($file != '.') && ($file != '..') && (!in_array($this->baseDir.DS.$file, $this->exclude_dirs))) {
                 if (is_file($dirname.DS.$file)) {
-                	$this->addFile($dirname.DS.$file);
+                    $this->addFile($dirname.DS.$file);
                 } else {
                     if ($recurse) {
                         $this->addDirectory($dirname.DS.$file, TRUE);
@@ -405,9 +415,13 @@ class TAR {
      * @return boolean
      */
     function addFile($filename, $binary = FALSE) {
-        if (!file_exists($filename)) return FALSE;
+        if (!file_exists($filename)) {
+            return FALSE;
+        }
         // Make sure there are no other files in the archive that have this same filename
-        if ($this->containsFile($filename)) return FALSE;
+        if ($this->containsFile($filename)) {
+            return FALSE;
+        }
         $path_parts = pathinfo($filename);
         if (!empty($path_parts['extension'])) {
             if (in_array($path_parts['extension'], $this->exclude_files)) {
@@ -444,13 +458,13 @@ class TAR {
      */
     function removeDirectory($dirname) {
     	if ($this->numDirs > 0) {
-    		foreach ($this->dirs as $key => $info) {
-    			if ($info["name"] == $dirname) {
-    				$this->numDirs--;
-    				unset($this->dirs[$key]);
-    				return TRUE;
-    			}
+            foreach ($this->dirs as $key => $info) {
+                if ($info["name"] == $dirname) {
+                    $this->numDirs--;
+                    unset($this->dirs[$key]);
+                    return TRUE;
     		}
+            }
     	}
     	return FALSE;
     }
@@ -478,7 +492,9 @@ class TAR {
      * @return boolean
      */
     function saveTar() {
-        if (!$this->filename) return FALSE;
+        if (!$this->filename) {
+            return FALSE;
+        }
         // Write tar to current file using specified gzip compression
         $this->toTar($this->filename, $this->isGzipped);
         return TRUE;
@@ -491,7 +507,9 @@ class TAR {
      * @return boolean
      */
     function toTar($filename, $useGzip) {
-        if (!$filename) return FALSE;
+        if (!$filename) {
+            return FALSE;
+        }
         // Encode processed files into TAR file format
         $this->__generateTar();
         // GZ Compress the data if we need to
@@ -515,7 +533,9 @@ class TAR {
      * @return string
      */
     function toTarOutput($filename, $useGzip) {
-        if (!$filename) return FALSE;
+        if (!$filename) {
+            return FALSE;
+        }
         // Encode processed files into TAR file format
         $this->__generateTar();
         // GZ Compress the data if we need to

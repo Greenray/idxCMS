@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # COMMON FUNCTONS
 
 # FILES and DIRECTORIES
@@ -76,17 +76,25 @@ function DeleteTree($object, $recursive = TRUE) {
 
 # Get content of gziped file
 function gzfile_get_contents($file) {
-    if (!$file = gzfile($file))      return FALSE;
-    if (!$file = implode('', $file)) return FALSE;
+    if (!$file = gzfile($file)) {
+        return FALSE;
+    }
+    if (!$file = implode('', $file)) {
+        return FALSE;
+    }
     return $file;
 }
 
 # Write data to gziped file
 function gzfile_put_contents($file, $text, $mode = 'w+') {
-    if (($fp = @fopen($file.'.lock', 'w+')) === FALSE) return FALSE;
+    if (($fp = @fopen($file.'.lock', 'w+')) === FALSE) {
+        return FALSE;
+    }
     fwrite($fp, 'lock');
     fclose($fp);
-    if (($fp = gzopen($file, $mode)) === FALSE) return FALSE;
+    if (($fp = gzopen($file, $mode)) === FALSE) {
+        return FALSE;
+    }
     if (!empty($text) && !gzwrite($fp, $text)) {
         gzclose($fp);
         return FALSE;
@@ -108,8 +116,10 @@ function GetUnserialized($file) {
                 $data = preg_replace("!s:(\d+):\"(.*?)\";!se", "'s:'.strlen('$2').':\"$2\";'", $data);
                 $data = @unserialize($data);
                 if ($data === FALSE) {
-                     $data = array();
-                } else file_put_contents($file, serialize($data), LOCK_EX);
+                    $data = array();
+                } else {
+                    file_put_contents($file, serialize($data), LOCK_EX);
+                }
             }
         }
     }
@@ -153,7 +163,9 @@ function ArraySortFunc($a, $b = NULL) {
 
 function ArraySort(&$array) {
     $keys = array();
-    if (!$array) return $keys;
+    if (!$array) {
+        return $keys;
+    }
     $keys = func_get_args();
     array_shift($keys);
     ArraySortFunc($keys);
@@ -248,8 +260,11 @@ function SendMail($to, $from, $sender, $subj, $text) {
 
 function AdvancedPagination($total, $current, $last) {
     $pages   = array();
-    if     ($current < 1)     $current = 1;
-    elseif ($current > $last) $current = $last;
+    if ($current < 1) {
+        $current = 1;
+    } elseif ($current > $last) {
+        $current = $last;
+    }
     $pages['current']  = $current;
     $pages['previous'] = ($current == 1)     ? $current : $current - 1;
     $pages['next']     = ($current == $last) ? $last    : $current + 1;
@@ -272,7 +287,9 @@ function AdvancedPagination($total, $current, $last) {
     # At the end
     if ($current == $last) {
         $start = $last - $show;
-        if ($start < 1) $start = 0;
+        if ($start < 1) {
+            $start = 0;
+        }
         for ($i = $start; $i < $last; $i++) {
             array_push($pages['pages'], $i + 1);
         }
@@ -302,18 +319,24 @@ function Pagination($total, $perpage, $current, $link) {
     if ($numpages > 1) {
         $result .= '<div id="pagination">
                         <span class="pages">'.__('Pages').': </span>';
-        if ($pages['current'] != $pages['previous'])
-             $result .= '<a href="'.$link.'&amp;page=1"> &lt;</a>';
-        else $result .= '<span class="pages"> &lt; </span>';
+        if ($pages['current'] != $pages['previous']) {
+            $result .= '<a href="'.$link.'&amp;page=1"> &lt;</a>';
+        } else {
+            $result .= '<span class="pages"> &lt; </span>';
+        }
         $count = ($numpages > 5) ? 5 : $numpages;
         for ($i = 0; $i < $count; $i++) {
-            if ($pages['pages'][$i] != $pages['current'])
-                 $result .= '<a href="'.$link.'&amp;page='.$pages['pages'][$i].'">'.$pages['pages'][$i].'</a>';
-            else $result .= '<span class="active"> '.$pages['current'].'</span>';
+            if ($pages['pages'][$i] != $pages['current']) {
+                $result .= '<a href="'.$link.'&amp;page='.$pages['pages'][$i].'">'.$pages['pages'][$i].'</a>';
+            } else {
+                $result .= '<span class="active"> '.$pages['current'].'</span>';
+            }
         }
-        if ($pages['current'] != $pages['next'])
-             $result .= '<a href="'.$link.'&amp;page='.$pages['last'].'"> &gt; </a><span class="pages">['.__('Total').': '.$pages['last'].']</span>';
-        else $result .= '<span class="pages"> &gt; ['.__('Total').': '.$pages['last'].']</span>';
+        if ($pages['current'] != $pages['next']) {
+            $result .= '<a href="'.$link.'&amp;page='.$pages['last'].'"> &gt; </a><span class="pages">['.__('Total').': '.$pages['last'].']</span>';
+        } else {
+            $result .= '<span class="pages"> &gt; ['.__('Total').': '.$pages['last'].']</span>';
+        }
         $result .= '</div>
                     <div class="clear"></div>';
     }
@@ -340,7 +363,9 @@ function SelectTimeZone($name, $points, $default) {
 }
 
 function ShowCaptcha($param = '') {
-    if (USER::loggedIn()) return '';
+    if (USER::loggedIn()) {
+        return '';
+    }
     $captcha = empty($param) ? CONFIG::getValue('main', 'captcha') : $param;
     $code = mt_rand(0, 666);
     if ($captcha === 'Random') {
@@ -356,7 +381,9 @@ function ShowCaptcha($param = '') {
 }
 
 function CheckCaptcha() {
-    if (USER::loggedIn()) return TRUE;
+    if (USER::loggedIn()) {
+        return TRUE;
+    }
     if (!empty($_SESSION['code-length'])) {
         $antispam = substr(md5(FILTER::get('REQUEST', 'antispam')), 0, $_SESSION['code-length']);
         unset($_SESSION['code-length']);
@@ -462,7 +489,9 @@ function ShowElement($element, $parameters = '') {
             if ($parameters) {
                 $TPL = new TEMPLATE('copyright.tpl');
                 return CMS::call('SYSTEM')->showWindow('__NOWINDOW__', $TPL->parse());
-            } else return IDX_POWERED.'<br />'.IDX_COPYRIGHT;
+            } else {
+                return IDX_POWERED.'<br />'.IDX_COPYRIGHT;
+            }
             break;
         case 'error':
             $error = '';

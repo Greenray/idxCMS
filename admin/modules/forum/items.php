@@ -1,13 +1,13 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - FORUM - TOPICS
 
 if (!defined('idxADMIN')) die();
 
-$section  = FILTER::get('REQUEST', 'section');;
-$category = FILTER::get('REQUEST', 'category');
-$topic    = FILTER::get('REQUEST', 'edit');
+$section    = FILTER::get('REQUEST', 'section');;
+$category   = FILTER::get('REQUEST', 'category');
+$topic      = FILTER::get('REQUEST', 'edit');
 $sections   = CMS::call('FORUM')->getSections();
 $categories = CMS::call('FORUM')->getCategories($section);
 $content    = CMS::call('FORUM')->getContent($category);
@@ -16,14 +16,17 @@ $content    = CMS::call('FORUM')->getContent($category);
 if (!empty($REQUEST['save'])) {
     # Check if admin decided to move post
     if (($section !== $REQUEST['new_section']) || ($category !== $REQUEST['new_category'])) {
-        if (!empty($REQUEST['item']))
-             # Topic exists, so move it
-             $topic = CMS::call('FORUM')->moveItem($REQUEST['item'], $REQUEST['new_section'], $REQUEST['new_category']);
-        else $topic = '';     # Nothing to move, so add new
+        if (!empty($REQUEST['item'])) {
+            # Topic exists, so move it
+            $topic = CMS::call('FORUM')->moveItem($REQUEST['item'], $REQUEST['new_section'], $REQUEST['new_category']);
+        } else {
+            $topic = '';     # Nothing to move, so add new
+        }
         $section  = $REQUEST['new_section'];
         $category = $REQUEST['new_category'];
-    } else $topic = FILTER::get('REQUEST', 'item');
-
+    } else {
+        $topic = FILTER::get('REQUEST', 'item');
+    }
     $categories = CMS::call('FORUM')->getCategories($section);
     $content    = CMS::call('FORUM')->getContent($category);
     try {
@@ -97,7 +100,6 @@ if (!empty($REQUEST['new']) || !empty($topic)) {
     $output['bbCodes_text'] = ShowBbcodesPanel('topic.text');
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'topic.tpl');
     echo $TPL->parse($output);
-
 } elseif (!empty($sections[$section])) {
     $categories = CMS::call('FORUM')->getCategories($section);
     if (!empty($categories[$category])) {

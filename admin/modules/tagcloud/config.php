@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - TAGCLOUD - CONFIGURATION
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
@@ -12,9 +12,11 @@ function GetKeywords($words, $config, &$target) {
         $value = trim($value);             # Let's bite off superfluous blanks
         # Check for the resolved length of a keyword
         if ((mb_strlen($value) >= $config['query-min']) && (mb_strlen($value) <= $config['query-max'])) {
-            if (!empty($target[$value]))
-                 $target[$value]++;        # Existing tag
-            else $target[$value] = 1;      # New tag
+            if (!empty($target[$value])) {
+                $target[$value]++;        # Existing tag
+            } else {
+                $target[$value] = 1;      # New tag
+            }
         }
     }
 }
@@ -30,7 +32,9 @@ function CreateTags($posts = TRUE, $files = FALSE) {
         if (array_key_exists($module, $enabled)) {
             $obj = strtoupper($module);
             $sections = CMS::call($obj)->getSections();
-            if (!empty($sections['drafts'])) unset($sections['drafts']);
+            if (!empty($sections['drafts'])) {
+                unset($sections['drafts']);
+            }
             foreach ($sections as $id => $section) {
                 $categories = CMS::call($obj)->getCategories($id);
                 foreach ($categories as $key => $category) {
@@ -48,18 +52,19 @@ function CreateTags($posts = TRUE, $files = FALSE) {
 }
 
 $config = CONFIG::getSection('tagcloud');
+
 if (isset($init)) {
     if (empty($config)) {
-        $config['width'] = 210;
-        $config['height'] = 200;
+        $config['width']   = 210;
+        $config['height']  = 200;
         $config['bgcolor'] = '#FFFFFF';
-        $config['color'] = '';
+        $config['color']   = '';
         $config['hicolor'] = '';
-        $config['wmode'] = 'transparent';
-        $config['speed'] = 100;
-        $config['style'] = '16';
-        $config['tags']  = '20';
-        $config['distr'] = 'true';
+        $config['wmode']   = 'transparent';
+        $config['speed']   = 100;
+        $config['style']   = '16';
+        $config['tags']    = '20';
+        $config['distr']   = 'true';
         CMS::call('CONFIG')->setSection('tagcloud', $config);
         if (!CMS::call('CONFIG')->save()) {
             ShowMessage('Cannot save configuration');
@@ -86,14 +91,18 @@ if (isset($init)) {
         /*
         * @todo Make selection
         */
-        if (CONFIG::getValue('enabled', 'files'))
+        if (CONFIG::getValue('enabled', 'files')) {
              $result = CreateTags(TRUE, TRUE);
-        else $result = CreateTags(TRUE);
+        } else {
+            $result = CreateTags(TRUE);
+        }
         if ($result === FALSE) {
             ShowMessage('Cannot save tags');
         }
     }
-    if ($config['distr'] === 'false') unset($config['distr']);
+    if ($config['distr'] === 'false') {
+        unset($config['distr']);
+    }
     $search_ini = CONFIG::getSection('search');
     if (!empty($REQUEST['edit'])) {
         $tags = array();
@@ -107,7 +116,7 @@ if (isset($init)) {
             }
         }
         if (!file_put_contents(CONTENT.'tags', serialize($tags))) {
-             ShowMessage('Cannot save configuration');
+            ShowMessage('Cannot save configuration');
         }
     }
     $create_tags = 0;
@@ -116,7 +125,9 @@ if (isset($init)) {
     $config['hicolor'] = GetColor("hicolor", $config['hicolor']);
     $tags = PrepareTags();
     $tags_amount = sizeof($tags);
-    if ($config['tags'] < $tags_amount) $tags_amount = $config['tags'];
+    if ($config['tags'] < $tags_amount) {
+        $tags_amount = $config['tags'];
+    }
     $config['used']   = array_slice($tags, 0, $tags_amount, TRUE);
     $config['unused'] = array_slice($tags, $tags_amount, -1, TRUE);
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'config.tpl');

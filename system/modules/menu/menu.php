@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE MENU
 
 if (!defined('idxCMS')) die();
@@ -10,8 +10,9 @@ $points = array_keys($data);
 $last   = end($points);
 $class  = 'first';
 $access = USER::getUser('access');
-$TPL = new TEMPLATE(dirname(__FILE__).DS.'menu.tpl');
+$TPL    = new TEMPLATE(dirname(__FILE__).DS.'menu.tpl');
 $output = '<div id="menu"><ul class="menu menu-dropdown">';
+
 foreach($data as $module => $menu) {
     $active = '';
     if ($module === $_SESSION['request']) {
@@ -47,6 +48,7 @@ foreach($data as $module => $menu) {
     $class   = '';
     $output .= $TPL->parse($menu);
 }
+
 $output .= '</ul></div>';
 ShowWindow(__('Menu'), $output);
 ?>

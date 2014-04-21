@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - POSTS - POST TEMPLATE
 
 die();?>
@@ -94,14 +94,14 @@ die();?>
             </tr>
             <tr>
                 <td colspan="4">
-                    <div style="text-align:center;">
+                    <div class="center">
                         <p>
                             <a href="#post" onclick="document.getElementById('shdesc').style.display=ShowHide(document.getElementById('shdesc').style.display)">
                                 [__Description]
                             </a>
                         </p>
                     </div>
-                    <div id="shdesc" style="display:none;">
+                    <div id="shdesc" class="none">
                         <div>{bbCodes_desc}</div>
                         <div><textarea id="desc" name="desc" cols="80" rows="5">{desc}</textarea></div>
                     </div>

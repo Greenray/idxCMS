@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - NAVIGATION
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
@@ -26,6 +26,7 @@ if (!empty($REQUEST['save'])) {
 $icons = GetFilesList(ICONS);
 $links = CONFIG::getSection('navigation');
 $output = array();
+
 foreach ($links as $key => $values) {
     $i = 0;
     $output['links'][$key]['link'] = $values[0];
@@ -40,12 +41,14 @@ foreach ($links as $key => $values) {
         ++$i;
     }
 }
+
 $output['links'][$i] = array(
     'link' => '',
     'name' => '',
     'desc' => '',
     'icon' => ''
 );
+
 foreach ($icons as $icon) {
     $output['links'][$i]['icons'][]['id'] = $icon;
 }

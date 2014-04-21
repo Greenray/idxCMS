@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION  POSTS - CATEGORIES
 
 if (!defined('idxADMIN')) die();
@@ -11,6 +11,7 @@ if (!empty($REQUEST['posts'])) {
 }
 
 $sections = CMS::call('POSTS')->getSections();
+
 try {
     if (!empty($REQUEST['p'])) {
         SaveSortedSections('POSTS', $REQUEST['p']);
@@ -38,16 +39,24 @@ if (CMS::call('USER')->checkRoot()) {
     $output['system']['drafts']['categories'][1]['desc']  = ParseText($output['system']['drafts']['categories'][1]['desc']);
     $output['system']['drafts']['categories'][1]['class'] = 'odd';
     $content = CMS::call('POSTS')->getContent(1);
-    if (!empty($content)) $output['system']['drafts']['categories'][1]['posts'] = TRUE;
-} else unset($output['system']['drafts']['categories'][1]);
+    if (!empty($content)) {
+        $output['system']['drafts']['categories'][1]['posts'] = TRUE;
+    }
+} else {
+    unset($output['system']['drafts']['categories'][1]);
+}
 
 $output['system']['drafts']['categories'][2]['desc']  = ParseText($output['system']['drafts']['categories'][2]['desc']);
 $output['system']['drafts']['categories'][2]['class'] = 'even';
 $content = CMS::call('POSTS')->getContent(2);
-if (!empty($content)) $output['system']['drafts']['categories'][2]['posts'] = TRUE;
+
+if (!empty($content)) {
+    $output['system']['drafts']['categories'][2]['posts'] = TRUE;
+}
 
 unset($sections['drafts']);
 $choice = array();
+
 if (!empty($sections)) {
     $output['sections'] = $sections;
     foreach ($sections as $id => $section) {
@@ -66,9 +75,12 @@ if (!empty($sections)) {
                 $output['sections'][$id]['categories'][$key]['class'] = $class;
                 $class = ($class === 'odd') ? 'even' : 'odd';
             }
-        } else $output['sections'][$id]['categories'] = array();
+        } else {
+            $output['sections'][$id]['categories'] = array();
+        }
     }
 }
+
 $TPL = new TEMPLATE(dirname(__FILE__).DS.'categories.tpl');
 echo $TPL->parse($output);
 
@@ -85,6 +97,7 @@ if (!empty($REQUEST['new'])) {
         )
     );
 }
+
 # Edit category
 if (!empty($REQUEST['edit'])) {
     $param    = explode('.', $REQUEST['edit']);

@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE USER - USER PANEL
 
 if (!defined('idxCMS')) die();
@@ -30,17 +30,17 @@ ShowWindow(
             'mess_info'   => $info[1],
             'allow_skins' => CONFIG::getValue('main', 'allow-skin'),
             'select_skin' => SelectPoint(
-                                'skin',
-                                AdvScanDir(SKINS, '', 'dir', FALSE, array('images')),
-                                SYSTEM::get('skin'),
-                                'onchange="document.forms[\'skin_select\'].submit()" title="'.__('Skin').'"'
+                'skin',
+                AdvScanDir(SKINS, '', 'dir', FALSE, array('images')),
+                SYSTEM::get('skin'),
+                'onchange="document.forms[\'skin_select\'].submit()" title="'.__('Skin').'"'
             ),
             'allow_langs' => CONFIG::getValue('main', 'allow-lang'),
             'select_lang' => SelectPoint(
-                                'language',
-                                SYSTEM::get('languages'),
-                                SYSTEM::get('language'),
-                               'onchange="document.forms[\'lang_select\'].submit()" title="'.__('Language').'"'
+                'language',
+                SYSTEM::get('languages'),
+                SYSTEM::get('language'),
+                'onchange="document.forms[\'lang_select\'].submit()" title="'.__('Language').'"'
             )
         )
     )

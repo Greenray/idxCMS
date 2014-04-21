@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2setPageKeywords
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 
 define('FOREVER_COOKIE', time() + 3600 * 24 * 365 * 5);
 
@@ -11,10 +11,10 @@ class SYSTEM {
     private static $languages = array();
     private static $locale = '';
     private static $skin = '';
-    public static $skins = array();
-    public static $modules = array();
-    public static $current_point = '';
-    public static $output = array();
+    public static  $skins = array();
+    public static  $modules = array();
+    public static  $current_point = '';
+    public static  $output = array();
     private static $feeds = array();
     private static $navigation = array();
     private static $menu = array();
@@ -64,9 +64,11 @@ class SYSTEM {
             }
         }
         setcookie($cookie_skin, self::$skin, FOREVER_COOKIE);
-        if (is_dir(SKINS.self::$skin))
-             define('CURRENT_SKIN', SKINS.self::$skin.DS);
-        else define('CURRENT_SKIN', SKINS.'Default'.DS);
+        if (is_dir(SKINS.self::$skin)) {
+            define('CURRENT_SKIN', SKINS.self::$skin.DS);
+        } else {
+            define('CURRENT_SKIN', SKINS.'Default'.DS);
+        }
     }
 
     public static function set($param, $value) {
@@ -81,8 +83,7 @@ class SYSTEM {
         global $LANG;
         $enabled = CONFIG::getSection('enabled');
         if (empty($enabled) || $ignore_disabled) {
-            $enabled = GetFilesList(MODULES);
-            $enabled = array_flip($enabled);
+            $enabled = array_flip(GetFilesList(MODULES));
         }
         $included = array();
         foreach ($enabled as $module => $null) {
@@ -125,9 +126,11 @@ class SYSTEM {
     }
 
     public static function defineWindow($title, $content, $align = 'left') {
-        if (self::$current_point == '__MAIN__')
-             self::$output['main'][] = array($title, $content, $align);
-        else self::$output[self::$current_point][] = array($title, $content, $align);
+        if (self::$current_point == '__MAIN__') {
+            self::$output['main'][] = array($title, $content, $align);
+        } else {
+            self::$output[self::$current_point][] = array($title, $content, $align);
+        }
     }
 
     public static function showWindow($title, $content, $align, $template) {
@@ -136,22 +139,22 @@ class SYSTEM {
         } elseif ($title === 'Error') {
             $TPL = new TEMPLATE(SYSTEM::$skins['error']);
             return $TPL->parse(
-                    array(
-                        'title'   => __('Error'),
-                        'content' => $content,
-                        'align'   => 'center',
-                        'class'   => 'error'
-                    )
+                array(
+                    'title'   => __('Error'),
+                    'content' => $content,
+                    'align'   => 'center',
+                    'class'   => 'error'
+                )
             );
         } else {
             $TPL = new TEMPLATE(SYSTEM::$skins[$template]);
             return $TPL->parse(
-                    array(
-                        'title'   => $title,
-                        'content' => $content,
-                        'align'   => $align,
-                        'class'   => $template
-                    )
+                array(
+                    'title'   => $title,
+                    'content' => $content,
+                    'align'   => $align,
+                    'class'   => $template
+                )
             );
         }
     }
@@ -183,7 +186,9 @@ class SYSTEM {
                 $obj = strtoupper($module);
                 if (class_exists($obj)) {
                     $sections = CMS::call($obj)->getSections();
-                    if (!empty($sections['drafts'])) unset($sections['drafts']);
+                    if (!empty($sections['drafts'])) {
+                        unset($sections['drafts']);
+                    }
                     if (!empty($sections)) {
                         $data = explode(DS, $path, 3);
                         switch (sizeof($data)) {
@@ -224,7 +229,7 @@ class SYSTEM {
                                         );
                                     }
                                 }
-                                break;
+                            break;
                         }
                     }
                 }
@@ -243,7 +248,6 @@ class SYSTEM {
     public function createMainMenu() {
         $enabled = CONFIG::getSection('enabled');
         $menu  = array();
-        $width = array();
         $menu['index']['module'] = 'index';
         $menu['index']['link']   = MODULE.'index';
         $menu['index']['name']   = __('Index');

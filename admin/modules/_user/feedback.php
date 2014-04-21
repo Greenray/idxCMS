@@ -1,11 +1,12 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - FEEDBACK
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
 
 $FEEDBACK = new MESSAGE(CONTENT, 'feedback');
+
 if (!empty($REQUEST['submit']) && isset($REQUEST['delete'])) {
     foreach ($REQUEST['delete'] as $key => $id) {
         if (!$FEEDBACK->removeMessage($id)) {
@@ -13,7 +14,9 @@ if (!empty($REQUEST['submit']) && isset($REQUEST['delete'])) {
         }
     }
 }
+
 $messages = $FEEDBACK->getMessages();
+
 if (!empty($messages)) {
     $output = array();
     foreach ($messages as $id => $message) {
@@ -25,5 +28,7 @@ if (!empty($messages)) {
     }
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'feedback.tpl');
     echo $TPL->parse($output);
-} else ShowMessage(__('Database is empty'));
+} else {
+    ShowMessage(__('Database is empty'));
+}
 ?>

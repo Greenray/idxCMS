@@ -1,9 +1,10 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE INDEX - DEFAULT TEMPLATE
 
 die();?>
+
 <div class="title"><a href="{category[link]}">{category[title]}</a></div>
 <div id="tabs-{tab}">
     <div class="tabs">

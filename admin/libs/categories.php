@@ -1,12 +1,13 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - CATEGORIES
 
 if (!defined('idxADMIN')) die();
 
 $obj = strtoupper($module);
 $sections = CMS::call($obj)->getSections();
+
 try {
     if (!empty($REQUEST['p'])) {
         SaveSortedSections($obj, $REQUEST['p']);
@@ -25,10 +26,11 @@ try {
 }
 
 $sections = CMS::call($obj)->getSections();
+
 if (!empty($sections)) {
     $choice = array();
     $output = array();
-    $output['module'] = $module;
+    $output['module']   = $module;
     $output['sections'] = $sections;
     foreach ($sections as $id => $section) {
         $choice[$id]['id'] = $id;
@@ -45,11 +47,12 @@ if (!empty($sections)) {
                 $output['sections'][$id]['categories'][$key]['class'] = $class;
                 $class = ($class === 'odd') ? 'even' : 'odd';
             }
-        } else $output['sections'][$id]['categories'] = array();
+        } else {
+            $output['sections'][$id]['categories'] = array();
+        }
     }
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'categories.tpl');
     echo $TPL->parse($output);      # Existing categories
-
     if (!empty($REQUEST['edit'])) {
         $param    = explode('.', $REQUEST['edit']);
         $section  = CMS::call($obj)->getSection($param[0]);
@@ -85,5 +88,4 @@ if (!empty($sections)) {
 } else {
     header('Location: '.MODULE.'admin&id='.$module.'.sections');
     die();
-}
-?>
+}?>

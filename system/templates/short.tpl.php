@@ -1,9 +1,10 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # SHOT ITEM DESCRIPTION TEMPLATE
 
 die();?>
+
 <div class="post">
     <div class="date">{date}</div>
     [if=rateid]<div id="rate{rateid}" class="main_rate">{rate}</div>[endif]

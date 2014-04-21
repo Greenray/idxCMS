@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - POLLS - TEMPLATE
 
 die();?>
@@ -27,7 +27,7 @@ die();?>
                         </td>
                     </tr>
                 [endeach.polls[answers]]
-                <tr><td class="odd" colspan="3" style="text-align:center;">[__Total votes]: {polls[total]}</td></tr>
+                <tr><td class="odd center" colspan="3">[__Total votes]: {polls[total]}</td></tr>
             </table>
             <p align="center">
                 <input type="submit" name="stop" value="[__Stop]" class="submit" />

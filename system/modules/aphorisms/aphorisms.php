@@ -1,11 +1,12 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE APHORISMS
 
 if (!defined('idxCMS')) die();
 
 $aph = file(APHORISMS.SYSTEM::get('locale').'.txt');
+
 if (FILTER::get('REQUEST', 'flip')) {
     echo $aph[array_rand($aph, 1)].'$';    # Show random string
 } else {

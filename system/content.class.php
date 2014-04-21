@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 
 class CONTENT extends INDEX {
 
@@ -28,9 +28,9 @@ class CONTENT extends INDEX {
     }
 
     public function getSection($id) {
-        if (empty($this->sections[$id]))
+        if (empty($this->sections[$id])) {
             return FALSE;
-
+        }
         $this->section = $id;
         return $this->sections[$id];
     }
@@ -40,7 +40,9 @@ class CONTENT extends INDEX {
         SYSTEM::setPageDescription(SYSTEM::$modules[$this->module]['title'].' - '.__('Sections'));
         $output = array();
         $sections = $this->sections;
-        if (isset($sections['drafts'])) unset($sections['drafts']);
+        if (isset($sections['drafts'])) {
+            unset($sections['drafts']);
+        }
         foreach ($sections as $id => $section) {
             # Get only allowed categories for user
             # Don't show sections with empty categories
@@ -59,13 +61,15 @@ class CONTENT extends INDEX {
 
     public function ShowSection($section) {
         $categories = self::getCategories($section);
-        if ($categories === FALSE)
+        if ($categories === FALSE) {
             return FALSE;
-
+        }
         SYSTEM::set('pagename', $this->sections[$section]['title']);
-        if (!empty($this->sections[$section]['desc']))
-             SYSTEM::setPageDescription(SYSTEM::$modules[$this->module]['title'].' - '.$this->sections[$section]['title'].' - '.$this->sections[$section]['desc']);
-        else SYSTEM::setPageDescription(SYSTEM::$modules[$this->module]['title'].' - '.$this->sections[$section]['title']);
+        if (!empty($this->sections[$section]['desc'])) {
+            SYSTEM::setPageDescription(SYSTEM::$modules[$this->module]['title'].' - '.$this->sections[$section]['title'].' - '.$this->sections[$section]['desc']);
+        } else {
+            SYSTEM::setPageDescription(SYSTEM::$modules[$this->module]['title'].' - '.$this->sections[$section]['title']);
+        }
         SYSTEM::setPageKeywords($this->sections[$section]['id']);
         $output = array();
         $output['title'] = $this->sections[$section]['title'];
@@ -86,17 +90,17 @@ class CONTENT extends INDEX {
     # If parameter $id is not set, a new section will be created.
     public function saveSection() {
         $id = OnlyLatin(FILTER::get('REQUEST', 'section'));
-        if ($id === FALSE)
+        if ($id === FALSE) {
             throw new Exception('Invalid ID');
-
+        }
         $title = trim(FILTER::get('REQUEST', 'title'));
-        if ($title === FALSE)
+        if ($title === FALSE) {
             throw new Exception('Title is empty');
-
+        }
         if (!is_dir($this->container.$id)) {
-            if (mkdir($this->container.$id, 0777) === FALSE)
+            if (mkdir($this->container.$id, 0777) === FALSE) {
                 throw new Exception('Cannot save section');
-
+            }
             if ($this->saveIndex($this->container, array()) === FALSE) {
                 rmdir($this->container.$id);
                 throw new Exception('Cannot save section');
@@ -121,14 +125,15 @@ class CONTENT extends INDEX {
             $new[$section] = $this->sections[$section];
         }
         $this->sections = $new;
-        if ($this->saveIndex($this->container, $new) === FALSE)
+        if ($this->saveIndex($this->container, $new) === FALSE) {
             throw new Exception('Cannot save sections');
+        }
     }
 
     public function removeSection($id) {
-        if (empty($this->sections[$id]))
+        if (empty($this->sections[$id])) {
             throw new Exception('Invalid ID');
-
+        }
         unset($this->sections[$id]);
         if (($this->saveIndex($this->container, $this->sections) === FALSE) ||
             (DeleteTree($this->container.$id) === FALSE)) {
@@ -138,9 +143,9 @@ class CONTENT extends INDEX {
     }
 
     public function getCategories($section) {
-        if (empty($this->sections[$section]))
+        if (empty($this->sections[$section])) {
             return FALSE;
-
+        }
         $this->section = $section;
         $categories = array();
         if (!empty($this->sections[$section]['categories'])) {
@@ -154,9 +159,9 @@ class CONTENT extends INDEX {
     }
 
     public function getCategory($id) {
-        if (empty($this->sections[$this->section]['categories'][$id]))
+        if (empty($this->sections[$this->section]['categories'][$id])) {
             return FALSE;
-
+        }
         $this->category = $id;
         return $this->sections[$this->section]['categories'][$id];
     }
@@ -165,20 +170,22 @@ class CONTENT extends INDEX {
     # If parameter $id is not set, a new categor will be created.
     public function saveCategory() {
         $title = trim(FILTER::get('REQUEST', 'title'));
-        if ($title === FALSE)
+        if ($title === FALSE) {
             throw new Exception('Title is empty');
-
+        }
         $id = FILTER::get('REQUEST', 'category');
         if (empty($id)) {
             # Create new directory with empty index
             $id   = $this->newId($this->sections[$this->section]['categories']);
             $item = $this->sections[$this->section]['path'].$id;
             if (is_dir($item)) {
-                if (!DeleteTree($item))
+                if (!DeleteTree($item)) {
                     throw new Exception('Cannot create category');
+                }
             }
-            if ((mkdir($item, 0777) === FALSE) || ($this->saveIndex($item.DS, array()) === FALSE))
+            if ((mkdir($item, 0777) === FALSE) || ($this->saveIndex($item.DS, array()) === FALSE)) {
                 throw new Exception('Cannot create category');
+            }
         }
         # Access level of the category should be more or is equal to access level of the section
         $access = (int) FILTER::get('REQUEST', 'access');
@@ -191,25 +198,26 @@ class CONTENT extends INDEX {
         $this->sections[$this->section]['categories'][$id]['path']   = $this->sections[$this->section]['path'].$id.DS;
         # If icon is not set an empty image will be shown
         self::setIcon($this->sections[$this->section]['categories'][$id]['path'], FILTER::get('REQUEST', 'icon'));
-        if ($this->saveIndex($this->container, $this->sections) === FALSE)
+        if ($this->saveIndex($this->container, $this->sections) === FALSE) {
             throw new Exception('Cannot save category');
-
+        }
         Sitemap();
     }
 
     public function saveCategories($section, $categories) {
         $this->sections[$section]['categories'] = $categories;
-        if ($this->saveIndex($this->container, $this->sections) === FALSE)
+        if ($this->saveIndex($this->container, $this->sections) === FALSE) {
             throw new Exception('Cannot save categories');
+        }
     }
 
     public function moveCategory($id, $source, $dest) {
-        if (empty($this->sections[$source]))
+        if (empty($this->sections[$source])) {
             return FALSE;
-
-        if (empty($this->sections[$source]['categories'][$id]))
+        }
+        if (empty($this->sections[$source]['categories'][$id])) {
             return FALSE;
-
+        }
         $new = $this->newId($this->sections[$dest]['categories']);
         CopyTree($this->sections[$source]['path'].$id, $this->sections[$dest]['path'].$new);
         DeleteTree($this->sections[$source]['path'].$id);
@@ -231,9 +239,9 @@ class CONTENT extends INDEX {
     }
 
     protected function setIcon($path, $icon) {
-        if (empty($icon['name']) && file_exists($path.'icon.png'))
+        if (empty($icon['name']) && file_exists($path.'icon.png')) {
             return;
-
+        }
         $IMAGE = new IMAGE($path, '', 35, 35);
         if ($IMAGE->upload($icon) === FALSE) {
             copy(ICONS.'icon.png', $path.'tmp.png');
@@ -250,18 +258,18 @@ class CONTENT extends INDEX {
     }
 
     public function getContent($category) {
-        if (empty($this->sections[$this->section]['categories'][$category]))
+        if (empty($this->sections[$this->section]['categories'][$category])) {
             return FALSE;
-
+        }
         $this->category = $category;
         $this->content  = $this->getIndex($this->sections[$this->section]['categories'][$category]['path']);
         return $this->content;
     }
 
     public function getItem($id, $type = '', $parse = TRUE) {
-        if (empty($this->content[$id]))
+        if (empty($this->content[$id])) {
             return FALSE;
-
+        }
         $item = $this->content[$id];
         $path = $this->sections[$this->section]['categories'][$this->category]['path'].$id.DS;
         $item['link'] = $this->sections[$this->section]['categories'][$this->category]['link'].ITEM.$id;
@@ -308,24 +316,25 @@ class CONTENT extends INDEX {
 
     public function saveItem($id) {
         $title = trim(FILTER::get('REQUEST', 'title'));
-        if ($title === FALSE)
+        if ($title === FALSE) {
             throw new Exception('Title is empty');
-
+        }
         $text = trim(FILTER::get('REQUEST', 'text'));
-        if (empty($text))
+        if (empty($text)) {
             throw new Exception('Text is empty');
-
+        }
         $item = $this->sections[$this->section]['categories'][$this->category]['path'].$id;
         if (empty($id)) {
             $id = $this->newId($this->content);
             $item = $item.$id;
             if (is_dir($item)) {
-                if (!DeleteTree($item))
+                if (!DeleteTree($item)) {
                     throw new Exception('Cannot save item');
+                }
             }
-            if (mkdir($item, 0777) === FALSE)
+            if (mkdir($item, 0777) === FALSE) {
                 throw new Exception('Cannot save item');
-
+            }
             $this->content[$id]['id']       = (int)$id;
             $this->content[$id]['author']   = USER::getUser('username');
             $this->content[$id]['nick']     = USER::getUser('nickname');
@@ -337,8 +346,9 @@ class CONTENT extends INDEX {
         $this->content[$id]['keywords'] = preg_replace("/,[\s]+/", ',', FILTER::get('REQUEST', 'keywords'));
         $this->content[$id]['opened']   = (bool) FILTER::get('REQUEST', 'opened');
         $desc = FILTER::get('REQUEST', 'desc');
-        if (empty($desc))
+        if (empty($desc)) {
             $desc = CutText($text, CONFIG::getValue('posts', 'description-length'));
+        }
         if ((file_put_contents($item.DS.$this->desc, $desc, LOCK_EX) === FALSE) ||
             (file_put_contents($item.DS.$this->text, $text, LOCK_EX) === FALSE)) {
             throw new Exception('Cannot save item');
@@ -370,26 +380,27 @@ class CONTENT extends INDEX {
     }
 
     public function saveContent($content) {
-        if ($this->saveIndex($this->sections[$this->section]['categories'][$this->category]['path'], $content) === FALSE)
+        if ($this->saveIndex($this->sections[$this->section]['categories'][$this->category]['path'], $content) === FALSE) {
             throw new Exception('Cannot save content');
+        }
     }
 
     public function removeItem($id) {
-        if (empty($this->content[$id]))
+        if (empty($this->content[$id])) {
             throw new Exception('Invalid ID');
-
+        }
         $path = $this->sections[$this->section]['categories'][$this->category]['path'];
         unset($this->content[$id]);
-        if (($this->saveIndex($path, $this->content) === FALSE) || (DeleteTree($path.$id) === false))
+        if (($this->saveIndex($path, $this->content) === FALSE) || (DeleteTree($path.$id) === false)) {
             throw new Exception('Cannot remove item');
-
+        }
         Sitemap();
     }
 
     public function incCount($id, $field) {
-        if (empty($this->content[$id]))
+        if (empty($this->content[$id])) {
             return FALSE;
-
+        }
         $this->content[$id][$field]++;
         return $this->saveIndex($this->sections[$this->section]['categories'][$this->category]['path'], $this->content);
     }
@@ -468,16 +479,17 @@ class CONTENT extends INDEX {
 
     public function getComments($item) {
         $this->item = $item;
-        if (!empty($this->comments))
+        if (!empty($this->comments)) {
             return $this->comments;
+        }
         $this->comments = $this->getIndex($this->sections[$this->section]['categories'][$this->category]['path'].$item.DS);
         return $this->comments;
     }
 
     public function getComment($id, $page) {
-        if (empty($this->comments[$id]))
+        if (empty($this->comments[$id])) {
             return FALSE;
-
+        }
         $comment = $this->comments[$id];
         $comment['text']   = ParseText($comment['text'], $this->sections[$this->section]['categories'][$this->category]['path'].$this->item.DS);
         $comment['date']   = FormatTime('d F Y H:i:s', $comment['time']);
@@ -499,9 +511,11 @@ class CONTENT extends INDEX {
                 $comment['moderator'] = TRUE;
                 $comment['link'] = $this->sections[$this->section]['categories'][$this->category]['link'].ITEM.$this->item;
                 if (!empty($comment['ip'])) {
-                    if ($page < 2)
-                         $comment['ban'] = $comment['link'];
-                    else $comment['ban'] = $comment['link'].PAGE.$page;
+                    if ($page < 2) {
+                        $comment['ban'] = $comment['link'];
+                    } else {
+                        $comment['ban'] = $comment['link'].PAGE.$page;
+                    }
                 }
             }
         }
@@ -509,10 +523,16 @@ class CONTENT extends INDEX {
             if (!empty($comment['opened'])) {
                 $comment['rateid'] = $this->module.'.'.$this->section.'.'.$this->category.'.'.$this->item.'.'.$id;
             }
-            if ($comment['rate'] < 0)       $comment['rate_color'] = 'negative';
-            elseif ($comment['rate'] === 0) $comment['rate_color'] = 'no';
-            else                            $comment['rate_color'] = 'positive';
-        } else unset($comment['rate']);
+            if ($comment['rate'] < 0) {
+                $comment['rate_color'] = 'negative';
+            } elseif ($comment['rate'] === 0) {
+                $comment['rate_color'] = 'no';
+            } else {
+                $comment['rate_color'] = 'positive';
+            }
+        } else {
+            unset($comment['rate']);
+        }
         return $comment;
     }
 
@@ -523,13 +543,13 @@ class CONTENT extends INDEX {
     }
 
     public function newComment($item, $text) {
-        if (empty($this->content[$item]))
+        if (empty($this->content[$item])) {
             throw new Exception('Invalid ID');
-
+        }
         $text = trim($text);
-        if (empty($text))
+        if (empty($text)) {
             throw new Exception('Text is empty');
-
+        }
         $path = $this->sections[$this->section]['categories'][$this->category]['path'];
         $id = $this->newId($this->comments);
         $this->comments[$id]['id']     = (int)$id;
@@ -541,36 +561,36 @@ class CONTENT extends INDEX {
         $this->comments[$id]['rate']   = 0;
         $this->saveIndex($path.$item.DS, $this->comments);
         $this->content[$item]['comments']++;
-        if ($this->saveIndex($path, $this->content) === FALSE)
+        if ($this->saveIndex($path, $this->content) === FALSE) {
             throw new Exception('Cannot save comment');
-
+        }
         return $this->content[$item]['comments'];
     }
 
     public function saveComment($id, $item) {
-        if (!USER::loggedIn())
+        if (!USER::loggedIn()) {
             throw new Exception('You are not logged in!');
-
-        if (empty($this->content[$item]))
+        }
+        if (empty($this->content[$item])) {
             throw new Exception('Invalid ID');
-
-        if (empty($this->content[$item]['opened']))
+        }
+        if (empty($this->content[$item]['opened'])) {
             throw new Exception('Comments are not allowed');
-
+        }
         $text = trim(FILTER::get('REQUEST', 'text'));
-        if (empty($text))
+        if (empty($text)) {
             throw new Exception('Text is empty');
-
+        }
         if (empty($id)) {
             $this->newComment($item, $text);
         } else {
-            if (empty($this->comments[$id]))
+            if (empty($this->comments[$id])) {
                 throw new Exception('Invalid ID');
-
+            }
             $this->comments[$id]['text'] = $text;
-            if ($this->saveIndex($this->sections[$this->section]['categories'][$this->category]['path'].$item.DS, $this->comments) === FALSE)
+            if ($this->saveIndex($this->sections[$this->section]['categories'][$this->category]['path'].$item.DS, $this->comments) === FALSE) {
                 throw new Exception('Cannot save comment');
-
+            }
             USER::changeProfileField(USER::getUser('username'), 'comments', '+');
         }
         FILTER::remove('REQUEST', 'text');
@@ -578,26 +598,26 @@ class CONTENT extends INDEX {
     }
 
     public function removeComment($id) {
-        if (empty($this->comments[$id]))
+        if (empty($this->comments[$id])) {
             throw new Exception('Invalid ID');
-
-        if (!USER::moderator($this->module, $this->comments[$id]))
+        }
+        if (!USER::moderator($this->module, $this->comments[$id])) {
             throw new Exception('Cannot remove comment');
-
+        }
         unset($this->comments[$id]);
         $path = $this->sections[$this->section]['categories'][$this->category]['path'];
         if (!empty($this->comments)) {
             $this->content[$this->item]['comments']--;
-            if ($this->saveIndex($path.$this->item.DS, $this->comments) === FALSE)
+            if ($this->saveIndex($path.$this->item.DS, $this->comments) === FALSE) {
                 throw new Exception('Cannot remove comment');
-
+            }
         } else {
             $this->content[$this->item]['comments'] = 0;
             unlink($path.$this->item.DS.$this->index);
         }
-        if ($this->saveIndex($path, $this->content) === FALSE)
+        if ($this->saveIndex($path, $this->content) === FALSE) {
             throw new Exception('Cannot remove comment');
-
+        }
         return $this->content[$this->item]['comments'];
     }
 }

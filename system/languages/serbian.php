@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # SERBIAN LOCALIZATION
 
 $LANG['language'] = 'serbian';
@@ -115,7 +115,6 @@ $LANG['def']['Error'] = 'Грешка';
 $LANG['def']['File'] = 'Датотека';
 $LANG['def']['Fill this field'] = 'Попуните ово поље';
 $LANG['def']['Font'] = 'Фонт';
-$LANG['def']['Greetings to you from you on your website'] = 'Здраво теби од Вас на вашем сајту';
 $LANG['def']['Guest'] = 'Гост';
 $LANG['def']['Image'] = 'Слика';
 $LANG['def']['Index'] = 'Почетна';
@@ -157,7 +156,7 @@ $LANG['def']['Version for printer'] = 'Верзија за штампу';
 $LANG['def']['Views'] = 'Прикази';
 $LANG['def']['Yes'] = 'Да';
 $LANG['def']['You are not logged in!'] = 'Нисте овлашћени!';
-$LANG['def']['You are welcome'] = 'Добродошли';
+$LANG['def']['You are welcome!'] = 'Добродошли!';
 $LANG['def']['You have used an invalid symbols'] = 'Да ли сте користили недозвољене симболе';
 #COUNTER
 $LANG['def']['Counter'] = 'Бројач';

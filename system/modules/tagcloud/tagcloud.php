@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE TAGCLOUD
 
 if (!defined('idxCMS')) die();
@@ -10,6 +10,7 @@ function scmp($a, $b) {
 }
 
 $tc = CONFIG::getSection('tagcloud');
+
 if (!empty($tc['color'])) {
     $tc['color'] = strtr($tc['color'], array("#" => "0x"));
     for ($i = 0; $i < 11; $i++) {
@@ -18,6 +19,7 @@ if (!empty($tc['color'])) {
 } else {
     $colors = array('0xff0000','0x0000ff','0x00ff00','0xffff00','0xff00ff','0xff9900','0x808080','0x993300','0x00ffff','0x0f0f0f','0x6699ff');
 }
+
 if (!empty($tc['hicolor'])) {
     $tc['hicolor'] = strtr($tc['hicolor'], array("#" => "0x"));
     for ($i = 0; $i < 11; $i++) {
@@ -31,6 +33,7 @@ $tc['search'] = '';
 $tc['search_txt'] = '';
 $enabled = CONFIG::getSection('enabled');
 $search  = array('posts', 'forum', 'catalogs');
+
 foreach ($search as $allowed) {
     if (array_key_exists($allowed, $enabled)) {
         $tc['search'] .= '%26'.$allowed.'=on';
@@ -38,13 +41,19 @@ foreach ($search as $allowed) {
     }
 }
 
-if (empty($tc['wmode']))
-     $tc['wmode'] = '';
-else $tc['bgcolor'] = '';
+if (empty($tc['wmode'])) {
+    $tc['wmode'] = '';
+} else {
+    $tc['bgcolor'] = '';
+}
+
 $tags = PrepareTags();
+
 if (!empty($tags)) {
     $tags_amount = sizeof($tags);
-    if ($tc['tags'] < $tags_amount) $tags_amount = $tc['tags'];
+    if ($tc['tags'] < $tags_amount) {
+        $tags_amount = $tc['tags'];
+    }
     $tags = array_slice($tags, 0, $tags_amount, TRUE);
     uasort($tags, 'scmp');
     $tags_cloud = array();
@@ -67,7 +76,9 @@ if (!empty($tags)) {
     $tc['font_size']   = array('8','9','10','11','12','14','16','18','20','22');
     $tc['tags_txt']    = '';
     for ($i = 0; $i < $tc['tags_amount']; $i++) {
-        if ($tc['tags_rate'][$i] > 9) $tc['tags_rate'][$i] = 9;
+        if ($tc['tags_rate'][$i] > 9) {
+            $tc['tags_rate'][$i] = 9;
+        }
         $tc['tags_txt'] .= '<span><a href=\'./?module=search&amp;search='.$tc['tags_cloud'][$i].$tc['search_txt'].'\' style="color:'.$tc['tags_colors'][mt_rand(0,10)].';font-size:'.$tc['font_size'][$tc['tags_rate'][$i]].'px">'.$tc['tags_cloud'][$i].'</a></span>'.LF;
     }
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'tagcloud.tpl');

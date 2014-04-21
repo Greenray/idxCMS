@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 
 define('LOGS', CONTENT.'logs'.DS);
 
@@ -19,12 +19,16 @@ final class LOG {
 
     public static function logPut($type, $user, $message) {
         $entry = date('d-m-Y H:i:s', time()).' '.$type.' ';
-        if (!empty($user))
-             $entry .= '('.$user.' from '.$_SERVER['REMOTE_ADDR'].') '.$message.LF;
-        else $entry .= $message.LF;
-        if (self::$allow_gz)
-             gzfile_put_contents(LOGS.date('Y-m-d', time()).'.log.gz', $entry, 'a');
-        else file_put_contents(LOGS.date('Y-m-d', time()).'.log', $entry, FILE_APPEND | LOCK_EX);
+        if (!empty($user)) {
+            $entry .= '('.$user.' from '.$_SERVER['REMOTE_ADDR'].') '.$message.LF;
+        } else {
+            $entry .= $message.LF;
+        }
+        if (self::$allow_gz) {
+            gzfile_put_contents(LOGS.date('Y-m-d', time()).'.log.gz', $entry, 'a');
+        } else {
+            file_put_contents(LOGS.date('Y-m-d', time()).'.log', $entry, FILE_APPEND | LOCK_EX);
+        }
         return FALSE;
     }
 

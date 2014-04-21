@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - MODULE
 
 if (!defined('idxADMIN') || !USER::loggedIn()) die();?>
@@ -25,9 +25,11 @@ if (!defined('idxADMIN') || !USER::loggedIn()) die();?>
     <script type="text/javascript" src="<?php echo TOOLS?>message-min.js"></script>
     <script type="text/javascript">
         function ShowHide(obj) {
-            if (obj == "none")
-                 return "inline";
-            else return "none";
+            if (obj == "none") {
+                return "inline";
+            } else {
+                return "none";
+            }
         }
     </script>
 </head>

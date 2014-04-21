@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - PROFILE TEMPLATE
 
 die();?>
@@ -83,8 +83,8 @@ die();?>
                 <td>[__Confirm password]</td>
                 <td class="left"><input type="password" name="confirm" onkeyup="check('profile');" value="" /></td>
                 <td class="center">
-                    <div style="display: none" id="yes"><font color="#33cc00">[__Passwords are equal]</font></div>
-                    <div style="display: none" id="no"><font color="#ff0000">[__Passwords are not equal]</font></div>
+                    <div id="yes" class="none" ><font color="#33cc00">[__Passwords are equal]</font></div>
+                    <div id="no"  class="none"><font color="#ff0000">[__Passwords are not equal]</font></div>
                 </td>
             </tr>
             <tr class="odd"><td colspan="3" class="center"><a href="{MODULE}user.pm&amp;for={username}">[__Private message]</a></td></tr>

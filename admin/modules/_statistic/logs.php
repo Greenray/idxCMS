@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - LOGS
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
@@ -9,9 +9,11 @@ if (!empty($REQUEST['day']) && !empty($REQUEST['viewlog'])) {
     $output = '';
     foreach ($REQUEST['viewlog'] as $logfile) {
         $logfile = basename($logfile);
-        if (substr($logfile, -3) == '.gz')
-             $contents = gzfile_get_contents(LOGS.$logfile);
-        else $contents = file_get_contents(LOGS.$logfile);
+        if (substr($logfile, -3) == '.gz') {
+            $contents = gzfile_get_contents(LOGS.$logfile);
+        } else {
+            $contents = file_get_contents(LOGS.$logfile);
+        }
         $output .= ParseText('[quote='.$logfile.']'.$contents.'[/quote]');
     }
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'log.tpl');
@@ -33,7 +35,9 @@ if (!empty($REQUEST['day']) && !empty($REQUEST['viewlog'])) {
                     file_put_contents(LOGS.$logfile, $gz_contents, LOCK_EX);
                     $contents = gzfile_get_contents(LOGS.$logfile);
                     unlink(LOGS.$logfile);
-                } else $contents = &$gz_contents;
+                } else {
+                    $contents = &$gz_contents;
+                }
                 $output['text'] .= ParseText('[quote='.$logfile.']'.$contents.'[/quote]');
             }
         }
@@ -41,7 +45,7 @@ if (!empty($REQUEST['day']) && !empty($REQUEST['viewlog'])) {
     }
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'log.tpl');
     echo $TPL->parse($output);
-}  elseif (!empty($REQUEST['month']) && !empty($REQUEST['browse'])) {
+} elseif (!empty($REQUEST['month']) && !empty($REQUEST['browse'])) {
     $browse = basename($REQUEST['browse']);
     if (is_readable(LOGS.$browse)) {
         if (!class_exists('tar')) {

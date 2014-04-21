@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 
 # Saving and reading database files.
 class INDEX {
@@ -21,7 +21,9 @@ class INDEX {
 
     # Calculate new ID
     protected function newId($array) {
-        if (empty($array)) return 1;
+        if (empty($array)) {
+            return 1;
+        }
         $tmp = array_keys($array);
         sort($tmp);
         return end($tmp) + 1;

@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - OUTPUT TEMPLATE
 
 die();?>
@@ -215,23 +215,23 @@ die();?>
     <form name="output" method="post" action="" onsubmit="SaveList(document.output.elements['active[]'])">
         <table>
             <tr>
-                <th style="width:45%;text-align:center;">[__Included modules]</th>
+                <th class="center" style="width:45%;">[__Included modules]</th>
                 <td style="width:10%">&nbsp;</td>
-                <th style="width:45%;text-align:center;">[__Excluded modules]</th>
+                <th class="center" style="width:45%;">[__Excluded modules]</th>
             </tr>
             <tr>
-                <td style="width:45%;text-align:center;padding:0">
+                <td class="center" style="width:45%;padding:0">
                     <select name="active[]" size="30" style="width:100%" multiple>
                         [foreach=active.key.desc]
                             <option value="{key}">{desc}</option>
                         [endforeach.active]
                     </select>
                 </td>
-                <td style="width:10%;text-align:center">
+                <td class="center" style="width:10%;">
                     <input type="button" id="add" name="add" value="&lt; [__Include]" onclick="AddObject(document.output.elements['unused[]'], document.output.elements['active[]'])" />
                     <input type="button" id="del" name="del" value="[__Exclude] &gt;" onclick="AddObject(document.output.elements['active[]'], document.output.elements['unused[]'])" />
                 </td>
-                <td style="width:45%;text-align:center;;padding:0">
+                <td class="center" style="width:45%;padding:0">
                     <select name="unused[]" size="30" style="width:100%" multiple>
                         [foreach=unused.key.desc]
                             <option value="{key}">{desc}</option>
@@ -240,7 +240,7 @@ die();?>
                 </td>
             </tr>
             <tr>
-                <td style="width:45%;text-align:center">
+                <td class="center" style="width:45%;">
                     <input type="button" id="up" name="up" value="[__Up]" onclick="SortValues(document.output.elements['active[]'], 'up')" />
                     <input type="button" id="down" name="down" value="[__Down]" onclick="SortValues(document.output.elements['active[]'], 'down')" />
                     <input type="button" id="duplicate" name="duplicate" value="[__Duplicate]" onclick="Duplicate(document.output.elements['active[]'], document.output.elements['active[]'])" />

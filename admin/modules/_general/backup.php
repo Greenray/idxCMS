@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - BACKUP
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
@@ -21,7 +21,9 @@ if (!empty($REQUEST['backup'])) {
         $TAR->saveTar();
         ShowMessage(__('Done').' ('.basename($TAR->filename).')');
         unset($TAR);
-    } else ShowMessage(__('Nothing selected'));
+    } else {
+        ShowMessage(__('Nothing selected'));
+    }
 }
 
 if (!empty($REQUEST['delete']) && !empty($REQUEST['file'])) {
@@ -35,11 +37,14 @@ if (!empty($REQUEST['delete']) && !empty($REQUEST['file'])) {
 # INTERFACE
 $files  = GetFilesList(BACKUPS);
 $output = array();
+
 foreach ($files as $file) {
     $output['files'][$file] = filesize(BACKUPS.$file);
 }
+
 $output['total'] = format_size(get_dir_size(BACKUPS));
 $dirs  = AdvScanDir(CONTENT, '', 'dir', FALSE, array('temp'));
+
 foreach ($dirs as $dir) {
     $output['dirs'][$dir] = format_size(get_dir_size(CONTENT.$dir.DS));
 }

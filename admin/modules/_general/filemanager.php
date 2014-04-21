@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - FILEMANAGER
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
@@ -58,7 +58,9 @@ function CheckSerialized($file, &$content = '') {
     if (file_exists($file)) {
         $content = file_get_contents($file);
         $result = preg_match("/^(i|s|a|o|d):(.*);/si", $content);
-        if ($result) return GetUnserialized($content);
+        if ($result) {
+            return GetUnserialized($content);
+        }
     }
     return FALSE;
 }
@@ -66,11 +68,11 @@ function CheckSerialized($file, &$content = '') {
 $allowed = array('php','js','ini','log','gz','txt','html','css','xml');
 $images  = array('gif', 'jpeg', 'jpg', 'png');
 
-$path = empty($REQUEST['path']) ? realpath('.').DS : $REQUEST['path'];
-$path = str_replace('\\', '/', $path);
-$url  = MODULE.'admin&amp;id=_general.filemanager';
-
+$path   = empty($REQUEST['path']) ? realpath('.').DS : $REQUEST['path'];
+$path   = str_replace('\\', '/', $path);
+$url    = MODULE.'admin&amp;id=_general.filemanager';
 $output = array();
+
 if (!empty($REQUEST['save'])) {
     if (!empty($REQUEST['edit'])) {
         $path_parts = pathinfo($path.$REQUEST['edit']);
@@ -121,6 +123,7 @@ $output['back'] = ($path === realpath('.').DS) ? '' : $url.'&amp;path='.dirname(
 $output['url']  = $url;
 $output['path'] = $path;
 $elements = array_merge(AdvScanDir($path, '', 'dir'), AdvScanDir($path, '', 'file'));
+
 foreach ($elements as $key => $file) {
     $output['elements'][$key]['file'] = $file;
     $filedata = stat($path.$file);
@@ -135,20 +138,22 @@ foreach ($elements as $key => $file) {
     } else {
         $path_parts = pathinfo($path.$file);
         if (empty($path_parts['extension'])) {
-            if (!CheckSerialized($path.$file))
-                 $output['elements'][$key]['edit'] = $url.'&amp;path='.$path.'&amp;edit='.$file;
-            else $output['elements'][$key]['empty'] = TRUE;
+            if (!CheckSerialized($path.$file)) {
+                $output['elements'][$key]['edit'] = $url.'&amp;path='.$path.'&amp;edit='.$file;
+            } else {
+                $output['elements'][$key]['empty'] = TRUE;
+            }
         } else {
             preg_match('/[^.]+\.[^.]+$/', $path_parts['basename'], $matches);
-            if ($matches[0] === 'tar.gz')
+            if ($matches[0] === 'tar.gz') {
                 $output['elements'][$key]['download'] = TRUE;
-            elseif (in_array($path_parts['extension'], $allowed) && (substr($path_parts['basename'], -6) !== 'min.js'))
+            } elseif (in_array($path_parts['extension'], $allowed) && (substr($path_parts['basename'], -6) !== 'min.js')) {
                 $output['elements'][$key]['edit'] = $url.'&amp;path='.$path.'&amp;edit='.$file;
-            elseif (in_array($path_parts['extension'], $images))
+            } elseif (in_array($path_parts['extension'], $images)) {
                 $output['elements'][$key]['view'] = ROOT.str_replace(realpath('.').DS, '', $path).$file;
-            else
+            } else {
                 $output['elements'][$key]['empty'] = TRUE;
-
+            }
         }
         $output['elements'][$key]['alert'] = 'onClick="if(confirm(\''.__('Delete this file?').'\')) document.location.href = \''.$url.'&amp;path='.$path.'&amp;delete='.$file.'\'"';
         $output['elements'][$key]['style'] = 'row1';
@@ -157,6 +162,7 @@ foreach ($elements as $key => $file) {
     $output['elements'][$key]['rights_edit'] = $url.'&amp;path='.$path.'&amp;rights='.$file;
     $output['elements'][$key]['delete'] = $url.'&amp;path='.$path.'&amp;delete='.$file;
 }
+
 $TPL = new TEMPLATE(dirname(__FILE__).DS.'filemanager.tpl');
 echo $TPL->parse($output);
 clearstatcache();
@@ -189,9 +195,11 @@ if (!empty($REQUEST['edit'])) {
         }
     } else {
         if (in_array($path_parts['extension'], $allowed)) {
-            if ($path_parts['extension'] === 'gz')
-                 $output['content'] = gzfile_get_contents($path.$REQUEST['edit']);
-            else $output['content'] = file_get_contents($path.$REQUEST['edit']);
+            if ($path_parts['extension'] === 'gz') {
+                $output['content'] = gzfile_get_contents($path.$REQUEST['edit']);
+            } else {
+                $output['content'] = file_get_contents($path.$REQUEST['edit']);
+            }
         }
     }
     $output['name'] = $REQUEST['edit'];

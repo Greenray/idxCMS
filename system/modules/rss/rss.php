@@ -1,12 +1,13 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # RSS FEEDS
 
 if (!defined('idxCMS')) die();
 
 $feeds = SYSTEM::get('feeds');
 $feed  = FILTER::get('REQUEST', 'feed');
+
 if (!empty($feed)) {
     if (CONFIG::getValue('enabled', 'rss')) {
         if (!empty($feeds[$feed])) {

@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # RSS AGGREGATOR
 
 if (!defined('idxCMS')) die();
@@ -10,11 +10,14 @@ $rss = new LastRSS();
 $rss->cache_time  = $rss_cfg['cache-time'];
 $rss->cache_dir   = CONTENT.'rss-cache';
 $rss->items_limit = CONFIG::getValue('main', 'last');
+
 if (function_exists('iconv')) {
     $rss->default_cp = 'UTF-8';
     $rss->cp = 'UTF-8';
 }
+
 $rss->stripHTML = TRUE;
+
 if (!empty($rss_cfg['feeds'])) {
     foreach ($rss_cfg['feeds'] as $feed_url) {
         if (($feed = $rss->Get($feed_url)) !== FALSE) {

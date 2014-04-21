@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE RSS - RSS LIST
 
 if (!defined('idxCMS')) die();
@@ -25,5 +25,7 @@ if (CONFIG::getValue('enabled', 'rss')) {
     SYSTEM::set('pagename', __('RSS feeds list'));
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'list.tpl');
     ShowWindow(__('RSS feeds'), $TPL->parse($output));
-} else ShowWindow(__('RSS feeds'), __('RSS feeds are off'));
+} else {
+    ShowWindow(__('RSS feeds'), __('RSS feeds are off'));
+}
 ?>

@@ -1,30 +1,36 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - POSTS
 
 if (!defined('idxADMIN')) die();
 
-$section  = FILTER::get('REQUEST', 'section');
-$category = FILTER::get('REQUEST', 'category');
-$post     = FILTER::get('REQUEST', 'edit');
+$section    = FILTER::get('REQUEST', 'section');
+$category   = FILTER::get('REQUEST', 'category');
+$post       = FILTER::get('REQUEST', 'edit');
 $sections   = CMS::call('POSTS')->getSections();
 $categories = CMS::call('POSTS')->getCategories($section);
 $content    = CMS::call('POSTS')->getContent($category);
+
 # Save new or edited post
 if (!empty($REQUEST['save'])) {
     # Check if admin decided to move post
     if (($section !== $REQUEST['new_section']) || ($category !== $REQUEST['new_category'])) {
-        if (!empty($REQUEST['item']))
-             # Post exists, so move it
-             $post = CMS::call('POSTS')->moveItem($REQUEST['item'], $REQUEST['new_section'], $REQUEST['new_category']);
-        else $post = '';     # Nothing to move, so add new
+        if (!empty($REQUEST['item'])) {
+            # Post exists, so move it
+            $post = CMS::call('POSTS')->moveItem($REQUEST['item'], $REQUEST['new_section'], $REQUEST['new_category']);
+        } else {
+            $post = '';     # Nothing to move, so add new
+        }
         $section  = $REQUEST['new_section'];
         $category = $REQUEST['new_category'];
-    } else $post = FILTER::get('REQUEST', 'item');
+    } else {
+        $post = FILTER::get('REQUEST', 'item');
+    }
 
     $categories = CMS::call('POSTS')->getCategories($section);
     $content    = CMS::call('POSTS')->getContent($category);
+    
     try {
         CMS::call('POSTS')->saveItem($post);
         USER::changeProfileField(USER::getUser('username'), 'posts', '+');
@@ -52,14 +58,18 @@ if (!empty($REQUEST['save'])) {
 if ((empty($section) && empty($category)) || !empty($REQUEST['new']) || !empty($post)) {
     if (empty($section)) {
         $section = 'drafts';
-        if (CMS::call('USER')->checkRoot())
-             $category = 1;
-        else $category = 2;
+        if (CMS::call('USER')->checkRoot()) {
+            $category = 1;
+        } else {
+            $category = 2;
+        }
     }
+    
     $output = array();
     $choice = array();
     $list_i = array();
     $list_t = array();
+    
     foreach ($sections as $id => $data) {
         $categories = CMS::call('POSTS')->getCategories($id);
         if (!empty($categories)) {
@@ -78,9 +88,9 @@ if ((empty($section) && empty($category)) || !empty($REQUEST['new']) || !empty($
             }
         }
     }
-    $output['ids']      = implode(',', $list_i);
-    $output['titles']   = implode(',', $list_t);
-    $output['sections'] = $choice;
+    $output['ids']            = implode(',', $list_i);
+    $output['titles']         = implode(',', $list_t);
+    $output['sections']       = $choice;
     $output['section_id']     = $section;
     $output['section_title']  = $sections[$section]['title'];
     $categories = CMS::call('POSTS')->getCategories($section);

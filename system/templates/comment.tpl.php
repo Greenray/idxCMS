@@ -1,9 +1,10 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # COMMENT TEMPLATE
 
 die();?>
+
 <div class="comment">
     <a name="{id}"></a>
     <div class="content">

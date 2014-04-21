@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE USERS - INITIALIZATION
 
 if (!defined('idxCMS')) die();
@@ -18,15 +18,18 @@ class MESSAGE extends INDEX {
     public function __construct($path, $file) {
         $this->path = $path;
         $this->setIndex($file);
-        if ($path === CONTENT)
-             $this->config = CONFIG::getSection($file);
-        else $this->config = CONFIG::getSection('pm');
+        if ($path === CONTENT) {
+            $this->config = CONFIG::getSection($file);
+        } else { 
+            $this->config = CONFIG::getSection('pm');
+        }
         $this->messages = GetUnserialized($path.$file);
     }
 
     public function getMessages($from = '') {
-        if (empty($from))
+        if (empty($from)) {
             return $this->messages;
+        }
         return $this->messages[$from];
     }
 
@@ -47,9 +50,9 @@ class MESSAGE extends INDEX {
     private function checkText($text) {
         $text = trim($text);
         $text = (mb_strlen($text, 'UTF-8') > $this->config['message-length']) ? mb_substr($text, 0, $this->config['message-length'], 'UTF-8') : $text;
-        if (empty($text))
+        if (empty($text)) {
             throw new Exception('Text is empty');
-
+        }
         return $text;
     }
 
@@ -61,9 +64,11 @@ class MESSAGE extends INDEX {
         $message['text'] = $text;
         $message['time'] = time();
         $message['ip']   = CMS::call('USER')->checkRoot() ? '' : $_SERVER['REMOTE_ADDR'];
-        if (empty($this->messages))
-             $this->messages[1] = $message;
-        else $this->messages[]  = $message;
+        if (empty($this->messages)) {
+            $this->messages[1] = $message;
+        } else {
+            $this->messages[]  = $message;
+        }
         # Correct database size
         $this->messages = array_slice($this->messages, -$this->config['db-size'] + 1, $this->config['db-size'], TRUE);
         return $this->saveIndex($this->path, $this->messages);
@@ -71,21 +76,23 @@ class MESSAGE extends INDEX {
 
     public function sendPrivateMessage($for) {
         $text = self::checkText(FILTER::get('REQUEST', 'text'));
-        if (!file_exists(USERS.$for))
+        if (!file_exists(USERS.$for)) {
             return FALSE;
-
+        }
         $message = array();
         $message['author'] = USER::getUser('username');
-        if ($for === $message['author'])
+        if ($for === $message['author']) {
             throw new Exception('Cannot send message');
-
+        }
         $message['nick'] = USER::getUser('nickname');
         if (empty($email)) {
             $message['mail'] = '';
         } else {
-            if (!CMS::call('FILTER')->validEmail($email))
-                 throw new Exception('Invalid email');
-            else $message['mail'] = $email;
+            if (!CMS::call('FILTER')->validEmail($email)) {
+                throw new Exception('Invalid email');
+            } else {
+                $message['mail'] = $email;
+            }
         }
         $message['text'] = $text;
         $message['time'] = time();
@@ -99,14 +106,16 @@ class MESSAGE extends INDEX {
             $data['inbox'][] = $message;
             $data['inbox'] = array_slice($data['inbox'], -$this->config['db-size'] + 1, $this->config['db-size'], TRUE);    # Correct database size
         }
-        if (!file_put_contents(PM_DATA.$for, serialize($data), LOCK_EX))
+        if (!file_put_contents(PM_DATA.$for, serialize($data), LOCK_EX)) {
             throw new Exception('Cannot send message');
-
+        }
         # Save message in Outbox
         unset($message['new']);
-        if (empty($this->messages['outbox']))
-             $this->messages['outbox'][1] = $message;
-        else $this->messages['outbox'][]  = $message;
+        if (empty($this->messages['outbox'])) {
+            $this->messages['outbox'][1] = $message;
+        } else {
+            $this->messages['outbox'][]  = $message;
+        }
         # Correct database size
         $this->messages['outbox'] = array_slice($this->messages['outbox'], -$this->config['db-size'] + 1, $this->config['db-size'], TRUE);
         return $this->saveIndex($this->path, $this->messages);
@@ -127,18 +136,20 @@ class MESSAGE extends INDEX {
         $message['text'] = $text;
         $message['time'] = time();
         $message['ip']   = $_SERVER['REMOTE_ADDR'];
-        if (empty($this->messages))
+        if (empty($this->messages)) {
             $this->messages[1] = $message;
-        else $this->messages[]  = $message;
+        } else {
+            $this->messages[]  = $message;
+        }
         # Correct database size
         $this->messages = array_slice($this->messages, -$this->config['db-size'] + 1, $this->config['db-size'], TRUE);
         return $this->saveIndex($this->path, $this->messages);
     }
 
     public function saveMessage($id, $text) {
-        if (empty($this->messages[$id]))
+        if (empty($this->messages[$id])) {
             throw new Exception('Invalid ID');
-
+        }
         $text = self::checkText($text);
         $this->messages[$id]['text'] = $text;
         return $this->saveIndex($this->path, $this->messages);
@@ -168,14 +179,18 @@ class MESSAGE extends INDEX {
 }
 
 function CreateUserLink($user, $nick) {
-    if ($user === 'guest') return __('Guest');
+    if ($user === 'guest') {
+        return __('Guest');
+    }
     return '<a href="'.MODULE.'user&amp;user='.$user.'">'.$nick.'</a>';
 }
 
 function GetAvatar($user) {
-    if (file_exists(AVATARS.$user.'.png'))
-         return AVATARS.$user.'.png';
-    else return AVATARS.'noavatar.gif';
+    if (file_exists(AVATARS.$user.'.png')) {
+        return AVATARS.$user.'.png';
+    } else {
+        return AVATARS.'noavatar.gif';
+    }
 }
 
 SYSTEM::registerModule('user', 'User', 'main', 'system');

@@ -1,11 +1,12 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - FORUM - CONFIGURATION
 
 if (!defined('idxADMIN')) die();
 
 $config = CONFIG::getSection('forum');
+
 if (isset($init)) {
     if (empty($config)) {
         $config['topics-per-page']  = 10;

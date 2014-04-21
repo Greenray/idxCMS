@@ -1,11 +1,13 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - POLLS
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
+
 $POLLS = new POLLS();
 $polls = $POLLS->getActivePolls();
+
 try {
     if (!empty($REQUEST['new'])) {
         $POLLS->startPoll($REQUEST['question'], $REQUEST['variants']);
@@ -29,6 +31,7 @@ $colors = array(
 $data   = array();
 $output = array();
 $TPL    = new TEMPLATE(dirname(__FILE__).DS.'polls.tpl');
+
 foreach ($opened as $id => $poll) {
     $data['id'] = $id;
     unset($poll['ips']);
@@ -38,9 +41,11 @@ foreach ($opened as $id => $poll) {
         $data['answers'][$i]['answer'] = $answer;
         $data['answers'][$i]['count']  = $poll['count'][$i];
         $data['answers'][$i]['voices'] = $poll['voices'][$i];
-        if ($poll['voices'][$i] === 0)
+        if ($poll['voices'][$i] === 0) {
              $data['answers'][$i]['color'] = 'transparent';
-        else $data['answers'][$i]['color'] = $colors[$i];
+        } else {
+            $data['answers'][$i]['color'] = $colors[$i];
+        }
     }
     $data['total'] = $poll['total'];
     $output['polls'][] = $data;

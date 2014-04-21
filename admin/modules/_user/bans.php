@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - BANS
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
@@ -15,7 +15,9 @@ if (!empty($REQUEST['ban'])) {
     if (!empty($bans)) {
         natsort($bans);
         file_put_contents(CONTENT.'bans', implode(LF, $bans).LF);
-    } else file_put_contents(CONTENT.'bans', '');
+    } else {
+        file_put_contents(CONTENT.'bans', '');
+    }
 }
 
 if (!$bans = file(CONTENT.'bans', FILE_IGNORE_NEW_LINES)) {

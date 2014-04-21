@@ -1,18 +1,13 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - PROFILES
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
 
 # Check admin's rights
 if (FILTER::get('REQUEST', 'login')) {
-    if (CMS::call('USER')->checkUser(
-        FILTER::get('REQUEST', 'username'),
-        FILTER::get('REQUEST', 'password'),
-        FALSE,
-        $user_data) === TRUE
-       ) {
+    if (CMS::call('USER')->checkUser(FILTER::get('REQUEST', 'username'), FILTER::get('REQUEST', 'password'), FALSE, $user_data) === TRUE) {
         $tmp = GetUnserialized(TEMP.'rights.dat');
         unlink(TEMP.'rights.dat');
         if (!empty($tmp)) {
@@ -29,7 +24,9 @@ if (FILTER::get('REQUEST', 'login')) {
             USER::changeProfileField($tmp[0], 'access', $level);
             ShowMessage('Rights changed');
         }
-    } else ShowMessage('Invalid password');
+    } else {
+        ShowMessage('Invalid password');
+    }
 }
 
 if (!empty($REQUEST['act'])) {
@@ -98,6 +95,7 @@ if (FILTER::get('REQUEST', 'save')) {
 }
 
 $search = FILTER::get('REQUEST', 'search');
+
 if (!empty($edit) && ($userdata = USER::getUserData($edit))) {
     # Edit user profile
     $fields = FILTER::get('REQUEST', 'fields');
@@ -115,7 +113,9 @@ if (!empty($edit) && ($userdata = USER::getUserData($edit))) {
 
 } elseif (!empty($username)) {
     # Edit user rights
-    if (file_exists(TEMP.'rights.dat')) unlink(TEMP.'rights.dat');
+    if (file_exists(TEMP.'rights.dat')) {
+        unlink(TEMP.'rights.dat');
+    }
     $rights = USER::getUserRights($username, $root, $user);
     if ($user !== FALSE) {
         $output = array();
@@ -123,7 +123,7 @@ if (!empty($edit) && ($userdata = USER::getUserData($edit))) {
         $output['nick']   = $user['nickname'];
         $output['admin']  = $root;
         $output['access'] = $user['access'];
-        $system_rights = USER::getSystemRights();
+        $system_rights    = USER::getSystemRights();
         if (!$root) {
             foreach ($system_rights as $id => $desc) {
                 $output['rights'][$id]['right'] = $id;
@@ -135,15 +135,16 @@ if (!empty($edit) && ($userdata = USER::getUserData($edit))) {
         }
         $TPL = new TEMPLATE(dirname(__FILE__).DS.'rights.tpl');
         echo $TPL->parse($output);
-    } else ShowMessage('Invalid ID');
-
+    } else {
+        ShowMessage('Invalid ID');
+    }
 } elseif (!empty($search)) {
     # Search and show user profile
-    $output = array();
-    $users  = CMS::call('USER')->getUsersList($search);
-    $count  = sizeof($users);
-    $keys   = array_keys($users);
-    $page   = (int) FILTER::get('REQUEST', 'page');
+    $output  = array();
+    $users   = CMS::call('USER')->getUsersList($search);
+    $count   = sizeof($users);
+    $keys    = array_keys($users);
+    $page    = (int) FILTER::get('REQUEST', 'page');
     $perpage = 20;
     $pagination = GetPagination($page, $perpage, $count);
     for ($i = $pagination['start']; $i < $pagination['last']; $i++) {

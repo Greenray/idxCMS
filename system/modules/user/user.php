@@ -1,11 +1,12 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE USER
 
 if (!defined('idxCMS')) die();
 
 $just_reg = FALSE;
+
 if (!empty($REQUEST['save'])) {
     if (!USER::loggedIn()) {
         if (!empty($REQUEST['registration'])) {
@@ -61,11 +62,17 @@ if (!empty($REQUEST['save'])) {
                                 );
                                 unset($FEEDBACK);
                                 $message = 'Your request was sent to Administrator';
-                            } else $message = 'Your request was sent to your email';
+                            } else {
+                                $message = 'Your request was sent to your email';
+                            }
                             unset($REQUEST);
                             ShowWindow(__('Password recovery'), __($message), 'center');
-                        } else CMS::call('LOG')->logError('Error in email');
-                    } else CMS::call('LOG')->logError('Error in username');
+                        } else {
+                            CMS::call('LOG')->logError('Error in email');
+                        }
+                    } else {
+                        CMS::call('LOG')->logError('Error in username');
+                    }
                 } catch (Exception $error) {
                     ShowError(__($error->getMessage()));
                 }
@@ -97,8 +104,12 @@ if (!empty($REQUEST['save'])) {
                         } catch (Exception $error) {
                             ShowError(__($error->getMessage()));
                         }
-                    } else ShowError(__('Invalid password'));
-                } else ShowError(__('Invalid password'));
+                    } else {
+                        ShowError(__('Invalid password'));
+                    }
+                } else {
+                    ShowError(__('Invalid password'));
+                }
             }
         }
     }
@@ -132,10 +143,13 @@ if (!USER::loggedIn()) {
         } elseif ($just_reg) {
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'greeting.tpl');
             ShowWindow(__('Greeting'), $TPL->parse());
-        } else Redirect('index');
+        } else {
+            Redirect('index');
+        }
     } else {
-        if (!empty($REQUEST['user']))
+        if (!empty($REQUEST['user'])) {
             Redirect('user&act=register');
+        }
     }
 } elseif (USER::loggedIn()) {
     if (!empty($REQUEST['user'])) {
@@ -144,7 +158,9 @@ if (!USER::loggedIn()) {
             $user['avatar']    = GetAvatar($user['username']);
             $user['regdate']   = FormatTime('d F Y', $user['regdate']);
             $user['lastvisit'] = FormatTime('d F Y', $user['lastvisit']);
-            if ($user['blocked'] == '0') unset($user['blocked']);
+            if ($user['blocked'] == '0') {
+                unset($user['blocked']);
+            }
             unset($user['rights']);
             if (USER::getUser('username') !== $REQUEST['user']) {
                 $user['allow_pm'] = TRUE;
@@ -152,7 +168,9 @@ if (!USER::loggedIn()) {
             SYSTEM::set('pagename',  __('User profile').': '.$user['nickname']);
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'view.tpl');
             ShowWindow(__('Profile').': '.$user['nickname'], $TPL->parse($user));
-        } else Redirect('index');
+        } else {
+            Redirect('index');
+        }
     } else {
         $user = USER::getUser();
         $user['mode']      = 'profile';
@@ -167,8 +185,12 @@ if (!USER::loggedIn()) {
                 foreach ($user_rights as $right => $right_desc) {
                     $user['rights'] .= $right_desc.'<br />';
                 }
-            } else $user['rights'] = __('You are the registered user');
-        } else $user['admin'] = TRUE;
+            } else {
+                $user['rights'] = __('You are the registered user');
+            }
+        } else {
+            $user['admin'] = TRUE;
+        }
         $user['profile'] = TRUE;
         $TPL = new TEMPLATE(dirname(__FILE__).DS.'user-form.tpl');
         SYSTEM::set('pagename', __('Profile'));

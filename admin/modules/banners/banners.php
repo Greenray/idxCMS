@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - BANNERS
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
@@ -21,6 +21,7 @@ if (!empty($REQUEST['save'])) {
 $banners = GetFilesList(BANNERS);
 $i = 0;
 $output = array();
+
 foreach ($banners as $banner) {
     ++$i;
     $text = file_get_contents(BANNERS.$banner);
@@ -29,6 +30,7 @@ foreach ($banners as $banner) {
     $output['banner'][$i]['view'] = ParseText($text);
     $output['banner'][$i]['bbCodes'] = ShowBbcodesPanel('form.'.$i);
 }
+
 $i += 1;
 $output['banner'][$i]['id'] = $i;
 $output['banner'][$i]['text'] = '';

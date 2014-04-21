@@ -1,11 +1,12 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE USER - FEEDBACK
 
 if (!defined('idxCMS')) die();
 
 $message = FILTER::get('REQUEST', 'message');
+
 if (!empty($message)) {
     try {
         CheckCaptcha();
@@ -33,8 +34,12 @@ if (!empty($message)) {
                     $REQUEST['letter']
                 );
                 ShowWindow('', __('Message sent'));
-            } else ShowError(__('Text is empty'));
-        } else ShowError(__('Subject is empty'));
+            } else { 
+                ShowError(__('Text is empty'));
+            }
+        } else {
+            ShowError(__('Subject is empty'));
+        }
     } else {
         try {
             CheckCaptcha();
@@ -50,10 +55,18 @@ if (!empty($message)) {
                                 $REQUEST['letter']
                             );
                             ShowWindow('', __('Message sent'));
-                        } else ShowError(__('Text is empty'));
-                    } else ShowError(__('Subject is empty'));
-                } else ShowError(__('Error in email address'));
-            } else ShowError(__('What is your name?'));
+                        } else {
+                            ShowError(__('Text is empty'));
+                        }
+                    } else {
+                        ShowError(__('Subject is empty'));
+                    }
+                } else {
+                    ShowError(__('Error in email address'));
+                }
+            } else {
+                ShowError(__('What is your name?'));
+            }
         } catch (Exception $error) {
             ShowError(__($error->getMessage()));
         }
@@ -61,10 +74,12 @@ if (!empty($message)) {
 }
 
 $output = array();
+
 if (!USER::loggedIn()) {
     $output['email']   = empty($REQUEST['email']) ? __('Enter your e-mail') : $REQUEST['email'];
     $output['captcha'] = ShowCaptcha();
 }
+
 $output['message'] = $message;
 SYSTEM::set('pagename', __('Feedback'));
 $TPL = new TEMPLATE(dirname(__FILE__).DS.'feedback.tpl');

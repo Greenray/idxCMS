@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE MINICHAT
 
 if (!defined('idxCMS')) die();
@@ -39,6 +39,7 @@ if (!empty($REQUEST['mctext']) && !empty($REQUEST['save'])) {
 # Show messages
 $messages = $MC->getMessages();
 $output = array();
+
 if (!empty($messages)) {
     $messages = array_reverse($messages, TRUE);
     $messages = array_slice($messages, 0, (int) CONFIG::getValue('minichat', 'mess-to-show'), TRUE);

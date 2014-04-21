@@ -1,11 +1,12 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - GALLERIES - CONFIGURATION
 
 if (!defined('idxADMIN')) die();
 
 $config = CONFIG::getSection('galleries');
+
 if (isset($init)) {
     if (empty($config)) {
         $config['description-length'] = 300;
@@ -13,7 +14,7 @@ if (isset($init)) {
         $config['images-per-page']    = 9;
         $config['comments-per-page']  = 10;
         $config['random'] = 1;
-        $config['last'] = 1;
+        $config['last']   = 1;
         CMS::call('CONFIG')->setSection('galleries', $config);
         if (!CMS::call('CONFIG')->save()) {
             ShowMessage('Cannot save configuration');

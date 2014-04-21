@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE POSTS - PRINT PUBLICATION
 
 if (!defined('idxCMS')) die();
@@ -10,31 +10,34 @@ $category = FILTER::get('REQUEST', 'category');
 $post     = FILTER::get('REQUEST', 'item');
 
 $sections = CMS::call('POSTS')->getSections();
-if ($sections === FALSE)
-    Redirect('posts');
 
-if (!empty($sections['drafts'])) unset($sections['drafts']);
+if ($sections === FALSE) {
+    Redirect('posts');
+}
+
+if (!empty($sections['drafts'])) {
+    unset($sections['drafts']);
+}
 
 if (empty($sections)) {
     ShowWindow(__('Posts'), __('Database is empty'), 'center');
-}
-# Request of post
-elseif (!empty($post) && !empty($category) && !empty($section)) {
+} elseif (!empty($post) && !empty($category) && !empty($section)) {
+    # Request of post
     $categories = CMS::call('POSTS')->getCategories($section);
     # Wrong section request
-    if ($categories === FALSE)
+    if ($categories === FALSE) {
         Redirect('posts');
-
+    }
     $content = CMS::call('POSTS')->getContent($category);
     # Wrong category request
-    if ($content === FALSE)
+    if ($content === FALSE) {
         Redirect('posts', $section);
-
+    }
     $post = CMS::call('POSTS')->getItem($post, 'text');
     # Wrong post request
-    if ($post === FALSE)
+    if ($post === FALSE) {
          Redirect('posts', $section, $category);
-
+    }
     SYSTEM::set('pagename', $post['title'].' - '.__('Version for printer'));
     SYSTEM::setPageDescription($post['title']);
     SYSTEM::setPageKeywords($post['keywords']);

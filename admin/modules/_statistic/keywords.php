@@ -1,11 +1,12 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - KEYWORDS
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
 
 $keywords = array();
+
 if (!empty($REQUEST['clean'])) {
     file_put_contents(CONTENT.'keywords', '');
     ShowMessage('Done');
@@ -35,6 +36,7 @@ if (!empty($REQUEST['clean'])) {
         }
     }
 }
+
 if (!empty($output)) {
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'keywords.tpl');
     echo $TPL->parse($output);

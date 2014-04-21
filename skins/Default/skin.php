@@ -1,9 +1,10 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # SKIN DEFAULT - LAYOUT DEFINITION
 
 if (!defined('idxCMS')) die();
+
 # Output points
 $SKIN['left']        = __('Left panel');
 $SKIN['up-center']   = __('Center column, upper than main module');

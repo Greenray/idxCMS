@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # SKIN DEFAULT
 
 if (!defined('idxCMS')) die();?>
@@ -45,9 +45,11 @@ if (!defined('idxCMS')) die();?>
     <script type="text/javascript" src="{TOOLS}message-min.js"></script>
     <script type="text/javascript">
         function ShowHide(obj) {
-            if (obj == "none")
-                 return "inline";
-            else return "none";
+            if (obj == "none") {
+                return "inline";
+            } else {
+                return "none";
+            }
         }
     </script>
     <link type="image/x-icon" rel="shortcut icon" href="favicon.ico" />

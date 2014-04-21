@@ -1,11 +1,12 @@
 <?php
 # idxCMS version 2.2 - Flat Files Content Management System
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - POSTS - SECTIONS
 
 if (!defined('idxADMIN')) die();
 
 $sections = CMS::call('POSTS')->getSections();
+
 try {
     if (!empty($REQUEST['action'])) {
         $new = array();
@@ -32,6 +33,7 @@ $output = array();
 $output['drafts'] = $sections['drafts'];
 $output['drafts']['desc'] = ParseText($sections['drafts']['desc']);
 unset($sections['drafts']);
+
 if (!empty($sections)) {
     $class = 'odd';
     foreach ($sections as $id => $section) {

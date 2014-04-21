@@ -1,33 +1,38 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE POSTS
 
 if (!defined('idxCMS')) die();
 
 $sections = CMS::call('POSTS')->getSections();
-if ($sections === FALSE)
-    Redirect('posts');
 
-if (!empty($sections['drafts'])) unset($sections['drafts']);
+if ($sections === FALSE) {
+    Redirect('posts');
+}
+
+if (!empty($sections['drafts'])) {
+    unset($sections['drafts']);
+}
+
 if (empty($sections)) {
     ShowWindow(__('Posts'), __('Database is empty'), 'center');
 } else {
     $section = FILTER::get('REQUEST', 'section');
-    if ($section === 'drafts')
+    if ($section === 'drafts') {
         Redirect('posts');      # Wrong section request
-
+    }
     $category = (int) FILTER::get('REQUEST', 'category');
     $post     = (int) FILTER::get('REQUEST', 'item');
     if (!empty($post) && !empty($category) && !empty($section)) {
         $categories = CMS::call('POSTS')->getCategories($section);
-        if ($categories === FALSE)
+        if ($categories === FALSE) {
             Redirect('posts');      # Wrong section request
-
+        }
         $content = CMS::call('POSTS')->getContent($category);
-        if (($content === FALSE) || empty($content[$post]))
+        if (($content === FALSE) || empty($content[$post])) {
             Redirect('posts', $section);        # Wrong category or post request
-
+        }
         $comments = CMS::call('POSTS')->getComments($post);
         $comment  = (int) FILTER::get('REQUEST', 'comment');
         if (!empty($REQUEST['save'])) {
@@ -56,7 +61,9 @@ if (empty($sections)) {
                                     ShowWindow(__('Edit'), $TPL->parse($output));
                                 }
                             }
-                        } else ShowError(__('Comments are not allowed'));
+                        } else {
+                            ShowError(__('Comments are not allowed'));
+                        }
                         break;
                     case 'delete':
                         try {
@@ -67,16 +74,19 @@ if (empty($sections)) {
                         }
                         break;
                     case 'close':
-                        if (CMS::call('USER')->checkRoot())
+                        if (CMS::call('USER')->checkRoot()) {
                             CMS::call('POSTS')->setValue($post, 'opened', FALSE);
+                        }
                         break;
                     case 'open':
-                        if (CMS::call('USER')->checkRoot())
+                        if (CMS::call('USER')->checkRoot()) {
                             CMS::call('POSTS')->setValue($post, 'opened', TRUE);
+                        }
                         break;
                     case 'ban':
-                        if (USER::moderator('posts'))
+                        if (USER::moderator('posts')) {
                             CMS::call('FILTER')->ban();
+                        }
                         break;
                     default:
                         Redirect('posts', $section, $category, $post);
@@ -89,11 +99,13 @@ if (empty($sections)) {
         SYSTEM::setPageDescription($post['title']);
         SYSTEM::setPageKeywords($post['keywords']);
         $perpage = (int) CONFIG::getValue('posts', 'comments-per-page');
-        if (!empty($comment))
+        if (!empty($comment)) {
              $page = ceil((int)$comment / $perpage);
-        elseif (!empty($result))
-             $page = ceil((int)$result / $perpage);
-        else $page = (int) FILTER::get('REQUEST', 'page');
+        } elseif (!empty($result)) {
+            $page = ceil((int)$result / $perpage);
+        } else {
+            $page = (int) FILTER::get('REQUEST', 'page');
+        }
         # Don't show post, if number of comments > per page
         if ($page < 2) {
             # Show post with full text
@@ -144,13 +156,13 @@ if (empty($sections)) {
     } elseif (!empty($category) && !empty($section)) {
         # Show posts from category
         $categories = CMS::call('POSTS')->getCategories($section);
-        if ($categories === FALSE)
+        if ($categories === FALSE) {
             Redirect('posts');      # Wrong section request
-
+        }
         $content = CMS::call('POSTS')->getContent($category);
-        if ($content === FALSE)
+        if ($content === FALSE) {
             Redirect('posts', $section);    # Wrong category request
-
+        }
         SYSTEM::set('pagename', $categories[$category]['title']);
         SYSTEM::setPageDescription(__('Posts').' - '.$categories[$category]['title']);
         if (!empty($content)) {
@@ -181,8 +193,9 @@ if (empty($sections)) {
         } elseif (!empty($output['categories'])) {
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'categories.tpl');
             ShowWindow($output['title'], $TPL->parse($output));
-        } else ShowWindow($output['title'], __('Database is empty'), 'center');
-
+        } else {
+            ShowWindow($output['title'], __('Database is empty'), 'center');
+        }
     } elseif (FILTER::get('REQUEST', 'from') && FILTER::get('REQUEST', 'until'))  {
         SYSTEM::set('pagename', __('Posts').' - '.__('Search results'));
         SYSTEM::setPageDescription(__('Posts').' - '.__('Search results'));
@@ -203,16 +216,20 @@ if (empty($sections)) {
                 }
             }
         }
-        if (!empty($output))
-             ShowWindow(__('Search results'), $output);
-        else ShowWindow(__('Search results'), __('Nothing founded'), 'center');
+        if (!empty($output)) {
+            ShowWindow(__('Search results'), $output);
+        } else {
+            ShowWindow(__('Search results'), __('Nothing founded'), 'center');
+        }
     } else {
         # Show allowed sections with allowed categories
         $output = CMS::call('POSTS')->showSections();
         if (!empty($output)) {
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'sections.tpl');
             ShowWindow(__('Posts'), $TPL->parse(array('sections' => $output)));
-        } else ShowWindow(__('Posts'), __('Database is empty'), 'center');
+        } else {
+            ShowWindow(__('Posts'), __('Database is empty'), 'center');
+        }
     }
 }
 ?>

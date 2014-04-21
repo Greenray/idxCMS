@@ -1,9 +1,10 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # BBCODES PANEL
 
 die();?>
+
 <div class="bbcodes">
     <script>
         var clientPC = navigator.userAgent.toLowerCase();
@@ -495,7 +496,7 @@ die();?>
         </button>
     </div>
     [if=full]
-        <div id="image_{area}" unselectable="on" class="bbtools" style="display:none;">
+        <div id="image_{area}" unselectable="on" class="bbtools none">
             <div class="img">[__Link] (URL): <input type="text" id="image_url_{area}" size="50" /></div>
             <p>
                 <input type="button" onclick="OpenBrowseWin('{area}','{path}');" value="[__Choose / Upload]" />
@@ -503,12 +504,12 @@ die();?>
                 <input type="button" onclick="HideDialog('image_{area}');" value="[__Cancel]" />
             </p>
         </div>
-        <div id="link_{area}" unselectable="on" class="bbtools" style="display:none;">
+        <div id="link_{area}" unselectable="on" class="bbtools none">
             <input type="hidden" id="type_{area}" value="" />
             <div class="link_text">
                 [__Link] (URL): <input type="text" id="url_{area}" size="50" value="" />
             </div>
-            <div id="label_{area}" class="link_text" style="display:block">
+            <div id="label_{area}" class="link_text none"">
                 [__Text]: <input type="text" id="txt_{area}" size="50" value="" />
             </div>
             <p>
@@ -517,10 +518,10 @@ die();?>
             </p>
         </div>
     [endif]
-    <div id="color_{area}" unselectable="on" class="bbtools" style="display:none;">
+    <div id="color_{area}" unselectable="on" class="bbtools none">
         <input type="hidden" id="cmd_{area}" value="" />
-        <div style="background:#000;padding:1px;height:22px;width:125px;float:left;">
-            <div id="preview_{area}" style="background-color:red;height:100%;width:100%;"></div>
+        <div style="background:black;padding:1px;height:22px;width:125px;float:left;">
+            <div id="preview_{area}" class="red" style="height:100%;width:100%;"></div>
         </div>
         <input type=text id="clr_val_{area}" value="red" size="17" onpaste="ViewColor('', '{area}');" onblur="ViewColor('', '{area}');" />
         <input type="button" onmouseover="ViewColor('', '{area}');" onclick="SetColor('', '{area}');HideDialog('color_{area}');" value="[__OK]" />
@@ -538,7 +539,7 @@ die();?>
             [endeach.colors]
         </table>
     </div>
-    <div id="smiles_{area}" unselectable="on" class="bbtools" style="display:none;">
+    <div id="smiles_{area}" unselectable="on" class="bbtools none">
         [each=smile]<img src="{SMILES}{smile}.gif" alt="{smile}" onclick="SetSmile('[{smile}]','{area}');HideDialog('smiles_{area}');"" />[endeach.smile]
     </div>
 </div>

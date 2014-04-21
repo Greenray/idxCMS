@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 
 # BBCODES parser
 class PARSER {
@@ -61,13 +61,13 @@ class PARSER {
             }
         }
         $smiles = array(
-        ' :)'  => ' <img src="'.SMILES.'smile.gif" alt="smile" /> ',
-        ' ;)'  => ' <img src="'.SMILES.'wink.gif" alt="wink" /> ',
-        ' :('  => ' <img src="'.SMILES.'sad.gif" alt="sad" /> ',
-        ' :D'  => ' <img src="'.SMILES.'rofl.gif" alt="rofl" /> ',
-        ' :-D' => ' <img src="'.SMILES.'yahoo.gif" alt="yahoo" /> ',
-        ' :S'  => ' <img src="'.SMILES.'suicide.gif" alt="confused" /> ',
-        ' =)'  => ' <img src="'.SMILES.'yow.gif" alt="yow" /> ');
+            ' :)'  => ' <img src="'.SMILES.'smile.gif" alt="smile" /> ',
+            ' ;)'  => ' <img src="'.SMILES.'wink.gif" alt="wink" /> ',
+            ' :('  => ' <img src="'.SMILES.'sad.gif" alt="sad" /> ',
+            ' :D'  => ' <img src="'.SMILES.'rofl.gif" alt="rofl" /> ',
+            ' :-D' => ' <img src="'.SMILES.'yahoo.gif" alt="yahoo" /> ',
+            ' :S'  => ' <img src="'.SMILES.'suicide.gif" alt="confused" /> ',
+            ' =)'  => ' <img src="'.SMILES.'yow.gif" alt="yow" /> ');
         foreach ($smiles as $search => $replace) {
             $this->text = str_replace($search, $replace, $this->text);
         }
@@ -139,7 +139,7 @@ class PARSER {
             return  '<div id="'.RandomString(6).'" class="spoiler">'.
                         '<a onClick="javascript:document.getElementById(\''.$id.'\').style.display=\'block\';">'.$title.'</a>'.
                     '</div>'.
-                    '<div id="'.$id.'" style="display: none;" class="codetext">'.
+                    '<div id="'.$id.'" class="codetext none">'.
                         $matches[5].
                     '</div>';
         }
@@ -160,9 +160,11 @@ class PARSER {
                     # Parsing of an old image.
                     $parts = explode(DS, $picture);
                     if ($parts[0] !== 'http:') {
-                        if (file_exists($picture.'.jpg'))
-                             $zoom = $picture;
-                        else $internal = $picture;
+                        if (file_exists($picture.'.jpg')) {
+                            $zoom = $picture;
+                        } else {
+                            $internal = $picture;
+                        }
                     } else $external = $picture;
                 } else {
                     if (file_exists(TEMP.$picture)) {
@@ -181,9 +183,11 @@ class PARSER {
                         $internal = CONTENT.'images'.DS.$picture;
                     } else {
                         if (file_exists($path.$picture)) {
-                            if (file_exists($path.$picture.'.jpg'))
+                            if (file_exists($path.$picture.'.jpg')) {
                                  $zoom = $path.$picture;
-                            else $internal = $path.$picture;
+                            } else {
+                                $internal = $path.$picture;
+                            }
                         }
                     }
                 }
@@ -202,10 +206,14 @@ class PARSER {
                     $output = '<img src="'.$external.'" hspace="10" vspace="10" alt="" />';
                 } elseif (!empty($internal)) {
                     $size = getimagesize($internal);
-                    if ($size !== FALSE)
-                         $output = '<img src="'.$internal.'" '.$size[3].' hspace="10" vspace="10" alt="" />';
-                    else $output = '[Image not found]';
-                } else $output = '[Image not found]';
+                    if ($size !== FALSE) {
+                        $output = '<img src="'.$internal.'" '.$size[3].' hspace="10" vspace="10" alt="" />';
+                    } else {
+                        $output = '[Image not found]';
+                    }
+                } else {
+                    $output = '[Image not found]';
+                }
                 $this->text = str_replace($matches[0][$k], $output, $this->text);
             }
         }
@@ -297,14 +305,20 @@ class HtmlHighlighter {
                     $this->output .= str_replace("\r", '<br />', $this->text[$this->current]);
                     ++$this->current;
                     $this->output .= str_replace("\n", '', $this->text[$this->current]);
-                } else $this->output .= str_replace("\r", '<br />', $this->text[$this->current]);
+                } else {
+                    $this->output .= str_replace("\r", '<br />', $this->text[$this->current]);
+                }
             } elseif ($this->text[$this->current] === "\n") {
                 if ($nextChar === "\r") {
                     $this->output .= str_replace("\n", '<br />', $this->text[$this->current]);
                     ++$this->current;
                     $this->output .= str_replace("\r", '', $this->text[$this->current]);
-                } else $this->output .= str_replace("\n", '<br />', $this->text[$this->current]);
-            } else $this->output .= $this->text[$this->current];
+                } else {
+                    $this->output .= str_replace("\n", '<br />', $this->text[$this->current]);
+                }
+            } else {
+                $this->output .= $this->text[$this->current];
+            }
             ++$this->current;
         }
         $this->output .= '?';
@@ -358,10 +372,14 @@ class HtmlHighlighter {
                                             }
                                             $value .= '&gt;';
                                         }
-                                    } else $value .= $this->text[$this->current];
+                                    } else {
+                                        $value .= $this->text[$this->current];
+                                    }
                                 }
                                 $value .= $quote;
-                            } else $value .= $this->text[$this->current];
+                            } else {
+                                $value .= $this->text[$this->current];
+                            }
                         }
                         $this->output .= '<span style="'.$this->value.'">'.$value.'</span>';
                         break;
@@ -371,9 +389,12 @@ class HtmlHighlighter {
                     $this->output .= '<span style="'.$this->attr.'">'.$attribute.'</span>';
                 }
             }
-            if ($this->text[$this->current] === '>')
-                 break;
-            else $this->output .= $this->text[$this->current];
+            if ($this->text[$this->current] === '>') {
+                break;
+            }
+            else {
+                $this->output .= $this->text[$this->current];
+            }
         }
         if ($this->text[$this->current] === '>' && !$parsedTag) {
             $this->output .= '&gt;</span>';
@@ -391,22 +412,32 @@ class HtmlHighlighter {
             if ($this->text[$this->current] === ' ') {
                 $this->output .= str_replace(" ", '&nbsp;', $this->text[$this->current]);
             } elseif ($this->text[$this->current] === '<') {
-                if ($nextChar === '!')     $this->highlightComment();
-                elseif ($nextChar === '?') $this->highlightPhp();
-                else                       $this->highlightTag();
+                if ($nextChar === '!') {
+                    $this->highlightComment();
+                } elseif ($nextChar === '?') {
+                    $this->highlightPhp();
+                } else {
+                    $this->highlightTag();
+                }
             } elseif ($this->text[$this->current] === "\r") {
                 if ($nextChar === "\n") {
                     $this->output .= str_replace("\r", '<br />', $this->text[$this->current]);
                     ++$this->current;
                     $this->output .= str_replace("\n", '', $this->text[$this->current]);
-                } else $this->output .= str_replace("\r", '<br />', $this->text[$this->current]);
+                } else {
+                    $this->output .= str_replace("\r", '<br />', $this->text[$this->current]);
+                }
             } elseif ($this->text[$this->current] === "\n") {
                 if ($nextChar === "\r") {
                     $this->output .= str_replace("\n", '<br />', $this->text[$this->current]);
                     ++$this->current;
                     $this->output .= str_replace("\r", '', $this->text[$this->current]);
-                } else $this->output .= str_replace("\n", '<br />', $this->text[$this->current]);
-            } else $this->output .= $this->text[$this->current];
+                } else {
+                    $this->output .= str_replace("\n", '<br />', $this->text[$this->current]);
+                }
+            } else {
+                $this->output .= $this->text[$this->current];
+            }
         }
         $this->output = preg_replace(array_keys($regexp), array_values($regexp), $this->output);
         return '<code>'.$this->output.'</code>';
@@ -415,7 +446,9 @@ class HtmlHighlighter {
 
 function ParseText($text, $path = '') {
     $text = trim($text);
-    if (empty($text)) return '';
+    if (empty($text)) {
+        return '';
+    }
     if (!CMS::call('USER')->checkRoot()) {
         $text = htmlspecialchars($text);
     }

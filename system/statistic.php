@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # STATISTIC
 
 if (!defined('idxCMS')) die();
@@ -12,7 +12,7 @@ function detect_utf($string) {
         elseif ((ord($string[$i]) & 0xE0) == 0xC0) $n = 1;  # 110bbbbb
         elseif ((ord($string[$i]) & 0xF0) == 0xE0) $n = 2;  # 1110bbbb
         elseif ((ord($string[$i]) & 0xF0) == 0xF0) $n = 3;  # 1111bbbb
-        else return FALSE;                                  # Не UTF
+        else return FALSE;                                  # Not UTF
         for ($j = 0; $j < $n; $j++) {
             if ((++$i == strlen($string)) || ((ord($string[$i]) & 0xC0) != 0x80)) return FALSE;
         }
@@ -56,7 +56,9 @@ function DetectBadBot($agent) {
         'email exractor','sitesucker','w3af.sourceforge.net','xpymep'
     );
     foreach ($engines as $engine) {
-        if (stristr($agent, $engine)) return TRUE;
+        if (stristr($agent, $engine)) {
+            return TRUE;
+        }
     }
     return FALSE;
 }
@@ -93,7 +95,9 @@ function DetectSpider($agent) {
         'zeus','zippy','zyborg'
     );
     foreach ($engines as $engine) {
-        if (stristr($agent, $engine)) return TRUE;
+        if (stristr($agent, $engine)) {
+            return TRUE;
+        }
     }
     return FALSE;
 }
@@ -117,18 +121,28 @@ if (DetectSpider($agent)) {
     if (empty($spiders)) {
         $spiders['total'] = 1;
         $spiders['today'] = 1;
-        if (!empty($config['spider-ip'])) $spiders['ip'][$ip] = 1;
-        if (!empty($config['spider-ua'])) $spiders['ua'][$agent] = 1;
+        if (!empty($config['spider-ip'])) {
+            $spiders['ip'][$ip] = 1;
+        }
+        if (!empty($config['spider-ua'])) {
+            $spiders['ua'][$agent] = 1;
+        }
         $spiders['update'] = $time;
         file_put_contents(CONTENT.'spiders', serialize($spiders), LOCK_EX);
     } else {
         if (empty($spiders['ip'][$ip])) {
-            if ($spiders['update'] < mktime(0, 0, 0, date('n'), date('j'), date('Y')))
-                 $spiders['today'] = 1;
-            else $spiders['today'] = $spiders['today'] + 1;
+            if ($spiders['update'] < mktime(0, 0, 0, date('n'), date('j'), date('Y'))) {
+                $spiders['today'] = 1;
+            } else {
+                $spiders['today'] = $spiders['today'] + 1;
+            }
             $spiders['total'] = $spiders['total'] + 1;
-            if (!empty($config['spider-ip'])) $spiders['ip'][$ip] = empty($spiders['ip'][$ip]) ? 1 : $spiders['ip'][$ip] + 1;
-            if (!empty($config['spider-ua'])) $spiders['ua'][$agent] = empty($spiders['ua'][$agent]) ? 1 : $spiders['ua'][$agent] + 1;
+            if (!empty($config['spider-ip'])) {
+                $spiders['ip'][$ip] = empty($spiders['ip'][$ip]) ? 1 : $spiders['ip'][$ip] + 1;
+            }
+            if (!empty($config['spider-ua'])) {
+                $spiders['ua'][$agent] = empty($spiders['ua'][$agent]) ? 1 : $spiders['ua'][$agent] + 1;
+            }
             $spiders['update'] = $time;
             file_put_contents(CONTENT.'spiders', serialize($spiders), LOCK_EX);
         }
@@ -143,7 +157,9 @@ if (DetectSpider($agent)) {
         $stats['hosts']   = array();
         $stats['users']   = array();
         $stats['online']  = array();
-        if (!empty($config['user-ua'])) $stats['ua'][$agent] = 1;
+        if (!empty($config['user-ua'])) {
+            $stats['ua'][$agent] = 1;
+        }
         $stats['update'] = $time;
         file_put_contents(CONTENT.'stats', serialize($stats), LOCK_EX);
     } else {
@@ -154,7 +170,9 @@ if (DetectSpider($agent)) {
         if (empty($stats['ip'][$ip])) {
             $stats['total'] = $stats['total'] + 1;
             $stats['ip'][$ip] = 1;
-        } else $stats['ip'][$ip] = $stats['ip'][$ip] + 1;
+        } else {
+            $stats['ip'][$ip] = $stats['ip'][$ip] + 1;
+        }
         $stats['hosts'][$ip] = $time;
         if (!empty($config['user-ua'])) {
             $stats['ua'][$agent] = empty($stats['ua'][$agent]) ? 1 : $stats['ua'][$agent] + 1;

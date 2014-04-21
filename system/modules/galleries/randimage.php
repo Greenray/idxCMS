@@ -1,13 +1,14 @@
 <?php
 # idxCMS version 1.01
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE CATALOGS - RANDOM IMAGE
 
 if (!defined('idxCMS')) die();
 
 $sections = CMS::call('GALLERIES')->getSections();
-$section = array_slice($sections, rand(0, sizeof($sections) - 1), 1);
-$albums = CMS::call('GALLERIES')->getCategories(key($section));
+$section  = array_slice($sections, rand(0, sizeof($sections) - 1), 1);
+$albums   = CMS::call('GALLERIES')->getCategories(key($section));
+
 if (!empty($albums)) {
     $output = array();
     $random = (int) CONFIG::getValue('galleries', 'random');

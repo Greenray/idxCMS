@@ -1,9 +1,10 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE POSTS - CALENDAR TEMPLATE
 
 die();?>
+
 <table class="calendar">
     <tr><th colspan="7">{month}</th></tr>
     <tr>{header}</tr>
@@ -18,7 +19,7 @@ die();?>
         </tr>
     [endeach.calendar]
 </table>
-<form name="calendar" method="post" action="" style="text-align:center">
+<form name="calendar center" method="post" action="">
     <select name="cal-month">
         [each=months]
             <option value="{months[num]}" [if=months[selected]]selected="selected"[endif]>{months[name]}</option>

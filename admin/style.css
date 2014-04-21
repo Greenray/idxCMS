@@ -96,7 +96,8 @@ ul { height: 20px; list-style: none; border: 1px solid #ccc }
 .header { background: #d1d7dc; text-align: center; font-size: 12pt; font-weight: bold; height: 40px; line-height: 40px }
 .label  { padding: 0 10px; width: 150px }
 .help   { padding: 0 30px 0 10px; color: red; font-style: italic; text-align: right }
-
+.block  { display:block }
+.none   { display:none }
 .submit {
     background-color: #ccc; background-image: -o-linear-gradient(top, #eee, #ccc);
     border: 1px solid #777; border-radius: 0.2em;

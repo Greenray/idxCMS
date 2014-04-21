@@ -1,32 +1,34 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE CATALOGS
 
 if (!defined('idxCMS')) die();
 
 $sections = CMS::call('CATALOGS')->getSections();
-if ($sections === FALSE)
+
+if ($sections === FALSE) {
     Redirect('catalogs');
+}
 
 if (empty($sections)) {
     ShowWindow(__('Catalogs'), __('Database is empty'), 'center');
 } else {
     $section = FILTER::get('REQUEST', 'section');
-    if ($section === FALSE)
+    if ($section === FALSE) {
         Redirect('catalogs');      # Wrong section request
-
+    }
     $category = (int) FILTER::get('REQUEST', 'category');
     $item     = (int) FILTER::get('REQUEST', 'item');
     if (!empty($item) && !empty($category) && !empty($section)) {
         $categories = CMS::call('CATALOGS')->getCategories($section);
-        if ($categories === FALSE)
+        if ($categories === FALSE) {
             Redirect('catalogs');      # Wrong section request
-
+        }
         $content = CMS::call('CATALOGS')->getContent($category);
-        if (($content === FALSE) || empty($content[$item]))
+        if (($content === FALSE) || empty($content[$item])) {
             Redirect('catalogs', $section);        # Wrong category or post request
-
+        }
         if (!empty($REQUEST['get'])) {
             # Download file
             CMS::call('CATALOGS')->incCount($item, 'downloads');
@@ -67,7 +69,9 @@ if (empty($sections)) {
                                     ShowWindow(__('Edit'), $TPL->parse($output));
                                 }
                             }
-                        } else ShowError(__('Comments are not allowed'));
+                        } else {
+                            ShowError(__('Comments are not allowed'));
+                        }
                         break;
                     case 'delete':
                         try {
@@ -78,16 +82,19 @@ if (empty($sections)) {
                         }
                         break;
                     case 'close':
-                        if (CMS::call('USER')->checkRoot())
+                        if (CMS::call('USER')->checkRoot()) {
                             CMS::call('CATALOGS')->setValue($item, 'opened', FALSE);
+                        }
                         break;
                     case 'open':
-                        if (CMS::call('USER')->checkRoot())
+                        if (CMS::call('USER')->checkRoot()) {
                             CMS::call('CATALOGS')->setValue($item, 'opened', TRUE);
+                        }
                         break;
                     case 'ban':
-                        if (USER::moderator('catalogs'))
+                        if (USER::moderator('catalogs')) {
                             CMS::call('FILTER')->ban();
+                        }
                         break;
                     default:
                         Redirect('catalogs', $section, $category, $item);
@@ -100,11 +107,13 @@ if (empty($sections)) {
         SYSTEM::setPageDescription($item['title']);
         SYSTEM::setPageKeywords($item['keywords']);
         $perpage = (int) CONFIG::getValue('catalogs', 'comments-per-page');
-        if (!empty($comment))
-             $page = ceil((int)$comment / $perpage);
-        elseif (!empty($result))
-             $page = ceil((int)$result / $perpage);
-        else $page = (int) FILTER::get('REQUEST', 'page');
+        if (!empty($comment)) {
+            $page = ceil((int)$comment / $perpage);
+        } elseif (!empty($result)) {
+            $page = ceil((int)$result / $perpage);
+        } else {
+            $page = (int) FILTER::get('REQUEST', 'page');
+        }
         # Don't show post, if number of comments > per page
         if ($page < 2) {
             # Show post with full text
@@ -156,13 +165,13 @@ if (empty($sections)) {
     } elseif (!empty($category) && !empty($section)) {
         # Show items from category
         $categories = CMS::call('CATALOGS')->getCategories($section);
-        if ($categories === FALSE)
+        if ($categories === FALSE) {
             Redirect('catalogs');      # Wrong section request
-
+        }
         $content = CMS::call('CATALOGS')->getContent($category);
-        if ($content === FALSE)
+        if ($content === FALSE) {
             Redirect('catalogs', $section);    # Wrong category request
-
+        }
         SYSTEM::set('pagename', $categories[$category]['title']);
         SYSTEM::setPageDescription(__('Catalogs').' - '.$categories[$category]['title']);
         if (!empty($content)) {
@@ -184,7 +193,9 @@ if (empty($sections)) {
             if ($count > $perpage) {
                 ShowWindow('', Pagination($count, $perpage, $page, $categories[$category]['link']));
             }
-        } else ShowWindow($categories[$category]['title'], __('Database is empty'), 'center');
+        } else {
+            ShowWindow($categories[$category]['title'], __('Database is empty'), 'center');
+        }
     } elseif (!empty($section)) {
         # Show section with allowed categories and last items
         $output = CMS::call('CATALOGS')->showSection($section);
@@ -193,15 +204,18 @@ if (empty($sections)) {
         } elseif (!empty($output['categories'])) {
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'categories.tpl');
             ShowWindow($output['title'], $TPL->parse($output));
-        } else ShowWindow($output['title'], __('Database is empty'), 'center');
-
+        } else {
+            ShowWindow($output['title'], __('Database is empty'), 'center');
+        }
     } else {
         # Show allowed sections with allowed categories
         $output = CMS::call('CATALOGS')->showSections();
         if (!empty($output)) {
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'sections.tpl');
             ShowWindow(__('Catalogs'), $TPL->parse(array('sections' => $output)));
-        } else ShowWindow(__('Catalogs'), __('Database is empty'), 'center');
+        } else {
+            ShowWindow(__('Catalogs'), __('Database is empty'), 'center');
+        }
     }
 }
 ?>

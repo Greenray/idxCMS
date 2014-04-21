@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 1.03
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - CATALOGS - LINK TEMPLATE
 
 die();?>
@@ -62,7 +62,7 @@ die();?>
                             </a>
                         </p>
                     </div>
-                    <div id="shdesc" style="display:none;">
+                    <div id="shdesc" class="none">
                         {bbCodes_desc}
                         <textarea id="desc" name="desc" rows="5" >{desc}</textarea>
                     </div>

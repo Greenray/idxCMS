@@ -1,12 +1,14 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE POSTS
 
 if (!defined('idxCMS')) die();
 
 # Only registered users can post
-if (!USER::loggedIn()) Redirect('posts');
+if (!USER::loggedIn()) {
+    Redirect('posts');
+}
 
 $sections = CMS::call('POSTS')->getSections();
 
@@ -17,11 +19,16 @@ if (!CMS::call('USER')->checkRoot()) {
 } else {
     $section  = FILTER::get('REQUEST', 'section');
     $category = FILTER::get('REQUEST', 'category');
-    if (empty($section))  $section  = 'drafts';
-    if (empty($category)) $category = '1';
+    if (empty($section)) {
+        $section  = 'drafts';
+    }
+    if (empty($category)) {
+        $category = '1';
+    }
 }
 
 $post = FILTER::get('REQUEST', 'item');
+
 # Save new or edited post
 if (!empty($REQUEST['save'])) {
     $new_section  = FILTER::get('REQUEST', 'new_section');
@@ -46,7 +53,9 @@ if (!empty($REQUEST['save'])) {
     try {
         $post = CMS::call('POSTS')->saveItem($post);
         USER::changeProfileField(USER::getUser('username'), 'posts', '+');
-        if ($section === 'drafts') Redirect('posts');
+        if ($section === 'drafts') {
+            Redirect('posts');
+        }
         Redirect('posts', $section, $category, $post);
     } catch (Exception $error) {
         ShowError(__($error->getMessage()));
@@ -80,9 +89,12 @@ if (CMS::call('USER')->checkRoot()) {
     $output['titles']   = implode(',', $list_t);
     $output['sections'] = $choice;
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'post.tpl');
-} else $TPL = new TEMPLATE(dirname(__FILE__).DS.'post-user.tpl');
+} else {
+    $TPL = new TEMPLATE(dirname(__FILE__).DS.'post-user.tpl');
+}
 
 $categories = CMS::call('POSTS')->getCategories($section);
+
 $output['section_id']     = $section;
 $output['section_title']  = $sections[$section]['title'];
 $output['categories']     = $categories;
@@ -109,6 +121,7 @@ if (FILTER::get('REQUEST', 'edit') && CMS::call('USER')->checkRoot()) {
     $output['item']   = '';
     $output['header'] = __('New post');
 }
+
 $output['sections'][$output['section_id']]['selected']    = TRUE;
 $output['categories'][$output['category_id']]['selected'] = TRUE;
 $output['bbCodes_desc'] = ShowBbcodesPanel('post.desc');

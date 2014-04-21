@@ -1,9 +1,10 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com|
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com|
 # MODULE USER - USER PANEL TEMPLATE
 
 die();?>
+
 [ifelse=loggedin]
     <div class="center"><strong>[__Hello], {user}!</strong></div>
     <div class="user_panel">
@@ -61,7 +62,7 @@ die();?>
                 <img src="{ICONS}login.png" width="16" height="16" alt="" />
                 <a href="#" onclick="document.getElementById('login').style.display = ShowHide(document.getElementById('login').style.display)">[__Log in]</a>
             </li>
-            <li id="login" style="display:none;">
+            <li id="login" class="none">
                 <form id="login" name="login" method="post" action="" onsubmit="return checkLoginForm(this);">
                     <table>
                         <tr><td>[__Username]:</td><td><input type="text" name="username" id="username" size="15" /></td></tr>

@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE POSTS - CALENDAR
 
 if (!defined('idxCMS')) die();
@@ -16,20 +16,25 @@ if (!empty($REQUEST['from'])) {
 
 if (!empty($REQUEST['cal-year'])) {
     $year = (int) $REQUEST['cal-year'];
-    if (($year >= 2000) && ($year <= $current_year))
+    if (($year >= 2000) && ($year <= $current_year)) {
         $selected_year = $year;
-
-} else $selected_year = $current_year;
+    }
+} else {
+    $selected_year = $current_year;
+}
 
 if (!empty($REQUEST['cal-month'])) {
     $month = (int) $REQUEST['cal-month'];
     if (($month >= 1) && ($month <= 12)) {
         $selected_month = $month;
     }
-} else $selected_month = (int) FormatTime('n', $today);
+} else {
+    $selected_month = (int) FormatTime('n', $today);
+}
 
 $CALENDAR = new CALENDAR($selected_month, $selected_year, $LANG['datetime']);
 $sections = CMS::call('POSTS')->getSections();
+
 if (!empty($sections['drafts'])) unset($sections['drafts']);
 foreach ($sections as $section => $data) {
     CMS::call('POSTS')->getCategories($section);
@@ -53,6 +58,7 @@ foreach ($sections as $section => $data) {
 if (($selected_year === $current_year) && ($selected_month === $current_month)) {
     $CALENDAR->highlight(FormatTime('d', $today));
 }
+
 $TPL = new TEMPLATE(dirname(__FILE__).DS.'calendar.tpl');
 ShowWindow(__('Posts calendar'), $TPL->parse($CALENDAR->create($current_year, $selected_year, $selected_month)));
 unset($CALENDAR);

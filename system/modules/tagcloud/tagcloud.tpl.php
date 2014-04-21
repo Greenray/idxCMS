@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE TAGCLOUD - TEMPLATE
 
 # SWFObject v1.4: Flash Player detection and embed - http://blog.deconcept.com/swfobject/

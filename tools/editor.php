@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # EDITOR - IMAGE BROWSER AND POST PREVIEW
 
 if (!defined('idxCMS') || !USER::loggedIn()) die();
@@ -109,7 +109,7 @@ if (!empty($REQUEST['image']['name'])) {
                 <div id="preview">
                     <fieldset><legend><?php echo __('Preview');?></legend>
                         <div class="title"><h1><?php echo $title;?></h1></div>
-                        <div id="text" style="text-align:justify"><?php echo $text;?></div>
+                        <div id="text" class="justify"><?php echo $text;?></div>
                     </fieldset>
                 </div>
             </div>

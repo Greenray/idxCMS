@@ -1,9 +1,10 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE CATALOGS - INITIALIZATION
 
 if (!defined('idxCMS')) die();
+
 define('CATALOGS', CONTENT.'catalogs'.DS);
 
 class CATALOGS extends CONTENT {
@@ -15,35 +16,37 @@ class CATALOGS extends CONTENT {
 
     public function saveItem($id) {
         $title = trim(FILTER::get('REQUEST', 'title'));
-        if ($title === FALSE)
+        if ($title === FALSE) {
             throw new Exception('Title is empty');
-
+        }
         $text = trim(FILTER::get('REQUEST', 'text'));
-        if (empty($text))
+        if (empty($text)) {
             throw new Exception('Text is empty');
-
+        }
         $path = $this->sections[$this->section]['categories'][$this->category]['path'];
         $file = FILTER::get('REQUEST', 'file');
         if (empty($id)) {
-            if (($this->section !== 'links') && empty($file))
+            if (($this->section !== 'links') && empty($file)) {
                 throw new Exception('Nothing to upload');
-
+            }
             $id = $this->newId($this->content);
             if (is_dir($path.$id)) {
                 rmdir($path.$id);
             }
-            if (mkdir($path.$id, 0777) === FALSE)
+            if (mkdir($path.$id, 0777) === FALSE) {
                 throw new Exception('Cannot save file');
-
+            }
             $this->content[$id]['id']       = (int)$id;
             $this->content[$id]['author']   = USER::getUser('username');
             $this->content[$id]['nick']     = USER::getUser('nickname');
             $this->content[$id]['time']     = time();
             $this->content[$id]['views']    = 0;
             $this->content[$id]['comments'] = 0;
-            if ($this->section !== 'links')
-                 $this->content[$id]['downloads'] = 0;
-            else $this->content[$id]['clicks'] = 0;
+            if ($this->section !== 'links') {
+                $this->content[$id]['downloads'] = 0;
+            } else {
+                $this->content[$id]['clicks'] = 0;
+            }
         }
         if (!empty($file['name'])) {
             try {
@@ -52,9 +55,11 @@ class CATALOGS extends CONTENT {
                 throw new Exception($error->getMessage());
             }
             $path_parts = pathinfo($uploaded[0]);
-            if ($path_parts['extension'] === 'mp3')
-                 $this->content[$id]['song'] = $uploaded[0];
-            else $this->content[$id]['file'] = $uploaded[0];
+            if ($path_parts['extension'] === 'mp3') {
+                $this->content[$id]['song'] = $uploaded[0];
+            } else {
+                $this->content[$id]['file'] = $uploaded[0];
+            }
             $this->content[$id]['size'] = (int) $uploaded[1];
         } else {
             if ($this->section === 'links') {
@@ -78,9 +83,9 @@ class CATALOGS extends CONTENT {
     }
 
     protected function uploadFile($id, $file) {
-        if (empty($file['name']))
+        if (empty($file['name'])) {
             throw new Exception('Nothing to upload');
-
+        }
         $UPLOAD = new UPLOADER($this->sections[$this->section]['categories'][$this->category]['path'].$id.DS);
         return $UPLOAD->upload($file);
     }

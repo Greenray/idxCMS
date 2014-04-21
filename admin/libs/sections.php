@@ -1,12 +1,13 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - SECTIONS
 
 if (!defined('idxADMIN')) die();
 
 $obj = strtoupper($module);
 $sections = CMS::call($obj)->getSections();
+
 try {
     if (!empty($REQUEST['action']) && !empty($REQUEST['ids'])) {
         CMS::call($obj)->saveSections($REQUEST['ids']);
@@ -23,6 +24,7 @@ try {
 
 # Existing sections
 $sections = CMS::call($obj)->getSections();
+
 if (!empty($sections)) {
     $class  = 'even';
     $output = array();
@@ -46,7 +48,6 @@ if (!empty($REQUEST['edit'])) {
     $section['header']  = __('Edit');
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'section.tpl');
     echo $TPL->parse($section);
-
 } else {
     if (!empty($REQUEST['new']) || empty($sections)) {
         $TPL = new TEMPLATE(dirname(__FILE__).DS.'section.tpl');

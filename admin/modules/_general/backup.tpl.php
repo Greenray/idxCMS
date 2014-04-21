@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - BACKUP TEMPLATE
 
 die();?>
@@ -24,7 +24,7 @@ die();?>
                 </tr>
             [endforeach.files]
         </table>
-        <p align="center">[__Total]: <span style="color:red">{total}</span></p>
+        <p align="center">[__Total]: <span class="special">{total}</span></p>
         <p align="center">
             <input type="hidden" name="delete" value="1" />
             <input type="submit" value="[__Submit]" class="submit"/>

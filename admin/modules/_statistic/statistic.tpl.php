@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - STATISTIC TEMPLATE
 
 die();?>
@@ -11,18 +11,18 @@ die();?>
         <tr class="odd"><td>[__Today hosts]</td><td>{today_hosts}</td></tr>
         <tr>
             <th colspan="2">
-                <div style="text-align:center;">
+                <div class="center">
                     <p>
                         <a href="#ref" onclick="document.getElementById('ref').style.display=ShowHide(document.getElementById('ref').style.display)">
                            [__Referers]
                         </a>
                     </p>
                 </div>
-                <div id="ref" style="display:none;">
+                <div id="ref" class="none">
                     <table class="std">
                     [foreach=ref.host.count]
                         <tr class="odd">
-                            <td class="stat" style="text-align:left;">{host}</td>
+                            <td class="stat left">{host}</td>
                             <td class="stat">{count}</td>
                         </tr>
                     [endforeach.ref]
@@ -32,18 +32,18 @@ die();?>
         </tr>
         <tr>
             <th colspan="2">
-                <div style="text-align:center;">
+                <div class="center">
                     <p>
                         <a href="#ua" onclick="document.getElementById('ua').style.display=ShowHide(document.getElementById('ua').style.display)">
                            [__Browsers]
                         </a>
                     </p>
                 </div>
-                <div id="ua" style="display:none;">
+                <div id="ua" class="none">
                     <table class="std">
                     [foreach=ua.agent.count]
                         <tr class="odd">
-                            <td class="stat" style="text-align:left;">{agent}</td>
+                            <td class="stat left">{agent}</td>
                             <td class="stat">{count}</td>
                         </tr>
                     [endforeach.ua]
@@ -58,18 +58,18 @@ die();?>
         <tr class="odd"><td colspan="2">[foreach=users.key.user]{user} [endforeach.users]</td></tr>
         <tr>
             <th colspan="2">
-                <div style="text-align:center;">
+                <div class="center">
                     <p>
                         <a href="#ip" onclick="document.getElementById('ip').style.display=ShowHide(document.getElementById('ip').style.display)">
                            [__IP]
                         </a>
                     </p>
                 </div>
-                <div id="ip" style="display:none;">
+                <div id="ip" class="none">
                     <table class="std">
                     [foreach=ip.host.count]
                         <tr class="odd">
-                            <td class="stat" style="text-align:left;">{host}</td>
+                            <td class="stat left">{host}</td>
                             <td class="stat">{count}</td>
                         </tr>
                     [endforeach.ip]
@@ -93,18 +93,18 @@ die();?>
         <tr class="odd"><td>[__Today]</td><td>{today}</td></tr>
         <tr>
             <th colspan="2">
-                <div style="text-align:center;">
+                <div class="center">
                     <p>
                         <a href="#sua" onclick="document.getElementById('sua').style.display=ShowHide(document.getElementById('sua').style.display)">
                            [__User agents]
                         </a>
                     </p>
                 </div>
-                <div id="sua" style="display:none;">
+                <div id="sua" class="none">
                     <table class="std">
                     [foreach=sua.name.count]
                         <tr class="odd">
-                            <td class="stat" style="text-align:left;">{name}</td>
+                            <td class="stat left">{name}</td>
                             <td class="stat">{count}</td>
                         </tr>
                     [endforeach.sua]
@@ -114,18 +114,18 @@ die();?>
         </tr>
         <tr>
             <th colspan="2">
-                <div style="text-align:center;">
+                <div class="center">
                     <p>
                         <a href="#sip" onclick="document.getElementById('sip').style.display=ShowHide(document.getElementById('sip').style.display)">
                            [__Spiders IP]
                         </a>
                     </p>
                 </div>
-                <div id="sip" style="display:none;">
+                <div id="sip" class="none">
                     <table class="std">
                     [foreach=sip.ip.count]
                         <tr class="odd">
-                            <td class="stat" style="text-align:left;">{ip}</td>
+                            <td class="stat left">{ip}</td>
                             <td class="stat">{count}</td>
                         </tr>
                     [endforeach.sip]

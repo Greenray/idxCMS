@@ -1,9 +1,10 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE SITEMAP - INITIALIZATION
 
 if (!defined('idxCMS')) die();
+
 switch (SYSTEM::get('locale')) {
     case 'ru':
         $LANG['def']['Sitemap'] = 'Карта сайта';
@@ -15,5 +16,6 @@ switch (SYSTEM::get('locale')) {
         $LANG['def']['Sitemap'] = 'Карта сайта';
         break;
 }
+
 SYSTEM::registerModule('sitemap', 'Sitemap', 'main');
 ?>

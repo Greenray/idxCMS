@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - APHORISMS
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
@@ -14,6 +14,7 @@ if (!empty($REQUEST['save'])) {
 }
 
 $aphorisms = array_values(GetFilesList(APHORISMS));
+
 if (!empty($REQUEST['aph'])) {
     $output = array();
     if (in_array($REQUEST['aph'], $aphorisms)) {

@@ -1,9 +1,10 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE CATALOGS - INITIALIZATION
 
 if (!defined('idxCMS')) die();
+
 define('GALLERIES', CONTENT.'galleries'.DS);
 
 class GALLERIES extends CONTENT {
@@ -15,27 +16,27 @@ class GALLERIES extends CONTENT {
 
     public function saveItem($id) {
         $title = trim(FILTER::get('REQUEST', 'title'));
-        if ($title === FALSE)
+        if ($title === FALSE) {
             throw new Exception('Title is empty');
-
+        }
         $text = trim(FILTER::get('REQUEST', 'text'));
-        if (empty($text))
+        if (empty($text)) {
             throw new Exception('Text is empty');
-
+        }
         $path  = $this->sections[$this->section]['categories'][$this->category]['path'];
         $file  = FILTER::get('REQUEST', 'file');
         $image = FILTER::get('REQUEST', 'image');
         if (empty($id)) {
-            if (empty($file) && empty($image))
+            if (empty($file) && empty($image)) {
                 throw new Exception('Nothing to upload');
-
+            }
             $id = $this->newId($this->content);
             if (is_dir($path.$id)) {
                 rmdir($path.$id);
             }
-            if (mkdir($path.$id, 0777) === FALSE)
+            if (mkdir($path.$id, 0777) === FALSE) {
                 throw new Exception('Cannot save file');
-
+            }
             $this->content[$id]['id']       = (int)$id;
             $this->content[$id]['author']   = USER::getUser('username');
             $this->content[$id]['nick']     = USER::getUser('nickname');
@@ -79,9 +80,9 @@ class GALLERIES extends CONTENT {
     }
 
     protected function uploadFile($id, $file) {
-        if (empty($file['name']))
+        if (empty($file['name'])) {
             throw new Exception('Nothing to upload');
-
+        }
         $UPLOAD = new UPLOADER($this->sections[$this->section]['categories'][$this->category]['path'].$id.DS);
         return $UPLOAD->upload($file);
     }
@@ -97,23 +98,23 @@ class GALLERIES extends CONTENT {
 
     public function saveImage($id) {
         $title = trim(FILTER::get('REQUEST', 'title'));
-        if ($title === FALSE)
+        if ($title === FALSE) {
             throw new Exception('Title is empty');
-
+        }
         $text = trim(FILTER::get('REQUEST', 'text'));
-        if (empty($text))
+        if (empty($text)) {
             throw new Exception('Text is empty');
-
+        }
         $path  = $this->sections[$this->section]['categories'][$this->category]['path'];
         $image = FILTER::get('REQUEST', 'image');
         if (empty($id)) {
-            if (empty($image))
+            if (empty($image)) {
                 throw new Exception('Nothing to upload');
-
+            }
             $id = $this->newId($this->content);
-            if (mkdir($path.$id, 0777) === FALSE)
+            if (mkdir($path.$id, 0777) === FALSE) {
                 throw new Exception('Cannot save image');
-
+            }
             $this->content[$id]['id']       = (int)$id;
             $this->content[$id]['author']   = USER::getUser('username');
             $this->content[$id]['nick']     = USER::getUser('nickname');
@@ -133,17 +134,17 @@ class GALLERIES extends CONTENT {
         $this->content[$id]['title']    = $title;
         $this->content[$id]['keywords'] = FILTER::get('REQUEST', 'keywords');
         $this->content[$id]['opened']   = (bool) FILTER::get('REQUEST', 'opened');
-        if (file_put_contents($path.$id.DS.$this->text, $text, LOCK_EX) === FALSE)
+        if (file_put_contents($path.$id.DS.$this->text, $text, LOCK_EX) === FALSE) {
             throw new Exception('Cannot save image');
-
+        }
         parent::saveContent($this->content);
         Sitemap();
     }
 
     private function uploadImage($id, $image) {
-        if (empty($image['name']))
+        if (empty($image['name'])) {
             throw new Exception('Nothing to upload');
-
+        }
         $IMAGE = new IMAGE($this->sections[$this->section]['categories'][$this->category]['path'].$id.DS);
         $img   = $IMAGE->upload($image);
         $IMAGE->generateThumbnail();
@@ -152,9 +153,9 @@ class GALLERIES extends CONTENT {
 
     public function getRandomImage($id) {
         $images = parent::getContent($id);
-        if (empty($images))
+        if (empty($images)) {
             return FALSE;
-
+        }
         $i = mt_rand(1, sizeof($images));
         return $this->getImage($i, '', FALSE);
     }

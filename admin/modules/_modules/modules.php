@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - MODULES
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
@@ -9,6 +9,7 @@ CMS::call('SYSTEM')->initModules(TRUE);
 $registered_modules = SYSTEM::get('modules');
 $enabled = CONFIG::getSection('enabled');
 $unset = $enabled;
+
 if (!empty($REQUEST['enable'])) {
     $enabled = array();
     foreach ($REQUEST['enable'] as $mod => $active) {
@@ -46,6 +47,7 @@ if (!empty($REQUEST['enable'])) {
 $output  = array();
 $modules = array();
 $i = 0;
+
 foreach ($registered_modules as $mod => $values) {
     if (strpos($mod, '.')) {
         $id = explode('.', $mod, 2);
@@ -55,7 +57,9 @@ foreach ($registered_modules as $mod => $values) {
             if (!empty($values['system'])) {
                 $output['modules'][$id[0]]['ext'][$mod]['system'] = TRUE;
                 $output['modules'][$id[0]]['ext'][$mod]['class']  = 'even';
-            } else $output['modules'][$id[0]]['ext'][$mod]['class'] = 'odd';
+            } else {
+                $output['modules'][$id[0]]['ext'][$mod]['class'] = 'odd';
+            }
             if (!empty($enabled[$mod])) {
                 $output['modules'][$id[0]]['ext'][$mod]['enabled'] = TRUE;
                 $output['modules'][$id[0]]['ext'][$mod]['checked'] = 'checked="checked"';

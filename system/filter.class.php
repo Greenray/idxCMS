@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 
 # Cleans parameters of $_POST, $_GET, $_COOKIE, detect intrusions and ban unwanted visitors
 final class FILTER {
@@ -75,8 +75,9 @@ final class FILTER {
 
     public function ban() {
         $bans = file_exists(CONTENT.'bans') ? file_get_contents(CONTENT.'bans') : '';
-        if (strpos($bans, self::$REQUEST['host']) === FALSE)
+        if (strpos($bans, self::$REQUEST['host']) === FALSE) {
             file_put_contents(CONTENT.'bans', $bans.self::$REQUEST['host'].LF);
+        }
     }
 
     # Intrusion detection

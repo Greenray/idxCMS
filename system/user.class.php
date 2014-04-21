@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 
 class USER {
 
@@ -292,7 +292,9 @@ class USER {
                     $rights[$right] = self::$system_rights[$right];
                 }
             }
-        } else $root = TRUE;
+        } else {
+            $root = TRUE;
+        }
         return $rights;
     }
 
@@ -367,8 +369,7 @@ class USER {
     public static function moderator($module, $item = '') {
         if (self::$user['username'] === 'guest') return FALSE;
         if (!empty($item)) {
-            return self::checkRight($module) ||
-                    ((self::$user['username'] === $item['author']) && ((time() - $item['time']) < 300));
+            return self::checkRight($module) || ((self::$user['username'] === $item['author']) && ((time() - $item['time']) < 300));
         }
         return self::checkRight($module);
     }

@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - GENERAL CONFIGURATION
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
@@ -13,22 +13,26 @@ if (!empty($REQUEST['save'])) {
         if ($config['url']{strlen($config['url']) - 1} !== DS) {
             $config['url'] .= DS;
         }
-    } else $config['url']  = '';
+    } else {
+        $config['url'] = '';
+    }
     $config['description'] = !empty($REQUEST['description']) ? $REQUEST['description'] : 'Система управления сайтом idxCMS';
-    $config['copyright']   = !empty($REQUEST['copyright'])   ? $REQUEST['copyright']   : 'Greenray 2012';
+    $config['copyright']   = !empty($REQUEST['copyright'])   ? $REQUEST['copyright']   : 'Greenray 2014';
     $config['slogan']      = !empty($REQUEST['slogan'])      ? $REQUEST['slogan']      : 'Пока не треснешь как следует, ничего не заработает (В.В.Путин)';
     $config['cookie']      = !empty($REQUEST['cookie'])      ? $REQUEST['cookie']      : 'idxCMS';
-    if (empty($REQUEST['keywords']))
-         $config['keywords'] = 'idxCMS,CMS,opensource,php';
-    else $config['keywords'] = preg_replace('/\s/', '', $REQUEST['keywords']);
-    $config['index-module']  = empty($REQUEST['index-module']) ? 'default' : $REQUEST['index-module'];
-    $config['skin']          = empty($REQUEST['skin'])         ? 'Default' : $REQUEST['skin'];
-    $config['lang']          = empty($REQUEST['lang'])         ? 'russian' : $REQUEST['lang'];
-    $config['allow-skin']    = empty($REQUEST['allow-skin'])   ? ''        : '1';
-    $config['allow-lang']    = empty($REQUEST['allow-lang'])   ? ''        : '1';
-    $config['detect-lang']   = empty($REQUEST['detect-lang'])  ? ''        : '1';
-    $config['per-page']      = empty($REQUEST['per-page'])     ? 10        : (int) $REQUEST['per-page'];
-    $config['last']          = empty($REQUEST['last'])         ? 10        : (int) $REQUEST['last'];
+    if (empty($REQUEST['keywords'])) {
+        $config['keywords'] = 'idxCMS,CMS,opensource,php';
+    } else {
+        $config['keywords'] = preg_replace('/\s/', '', $REQUEST['keywords']);
+    }
+    $config['index-module'] = empty($REQUEST['index-module']) ? 'default' : $REQUEST['index-module'];
+    $config['skin']         = empty($REQUEST['skin'])         ? 'Default' : $REQUEST['skin'];
+    $config['lang']         = empty($REQUEST['lang'])         ? 'russian' : $REQUEST['lang'];
+    $config['allow-skin']   = empty($REQUEST['allow-skin'])   ? ''        : '1';
+    $config['allow-lang']   = empty($REQUEST['allow-lang'])   ? ''        : '1';
+    $config['detect-lang']  = empty($REQUEST['detect-lang'])  ? ''        : '1';
+    $config['per-page']     = empty($REQUEST['per-page'])     ? 10        : (int) $REQUEST['per-page'];
+    $config['last']         = empty($REQUEST['last'])         ? 10        : (int) $REQUEST['last'];
     $max_filesize = ini_get('upload_max_filesize');
     $config['file-max-size']  = empty($REQUEST['file-max-size'])  ? $max_filesize : (int) $REQUEST['file-max-size'];
     $config['image-max-size'] = empty($REQUEST['image-max-size']) ? $max_filesize : (int) $REQUEST['image-max-size'];
@@ -38,6 +42,7 @@ if (!empty($REQUEST['save'])) {
     $config['tz']             = empty($REQUEST['tz'])             ? 3         : (int) $REQUEST['tz'];
     $config['welcome']        = empty($REQUEST['welcome'])        ? ''        : '1';
     CMS::call('CONFIG')->setSection('main', $config);
+    
     $config = array();
     $config['query-min']   = empty($REQUEST['query-min'])   ? 6  : (int) $REQUEST['query-min'];
     $config['query-max']   = empty($REQUEST['query-max'])   ? 20 : (int) $REQUEST['query-max'];
@@ -45,6 +50,7 @@ if (!empty($REQUEST['save'])) {
     $config['per-page']    = empty($REQUEST['per-page'])    ? 20 : (int) $REQUEST['per-page'];
     $config['allow-guest'] = empty($REQUEST['allow-guest']) ? '' : '1';
     CMS::call('CONFIG')->setSection('search', $config);
+    
     $config = array();
     $config['width']          = empty($REQUEST['width'])          ? 290        : (int) $REQUEST['width'];
     $config['height']         = empty($REQUEST['height'])         ? 24         : (int) $REQUEST['height'];
@@ -63,6 +69,7 @@ if (!empty($REQUEST['save'])) {
     $config['autostart']      = empty($REQUEST['autostart'])      ? '' : '1';
     $config['loop']           = empty($REQUEST['loop'])           ? '' : '1';
     CMS::call('CONFIG')->setSection('audio', $config);
+    
     $config = array();
     $config['width']  = empty($REQUEST['width'])  ? 435 : (int) $REQUEST['width'];
     $config['height'] = empty($REQUEST['height']) ? 350 : (int) $REQUEST['height'];
@@ -71,11 +78,13 @@ if (!empty($REQUEST['save'])) {
         ShowMessage('Cannot save configuration');
     }
 }
+
 if (!empty($REQUEST['meta_tags'])) {
     if (!file_put_contents(CONTENT.'meta', $REQUEST['meta_tags'])) {
         ShowMessage('Cannot save', 'meta');
     }
 }
+
 if (!empty($REQUEST['welcome_msg'])) {
     if (!file_put_contents(CONTENT.'intro', ParseText($REQUEST['welcome_msg']))) {
         ShowMessage('Cannot save', 'intro');
@@ -99,6 +108,7 @@ $modules['catalogs'] = __('Catalogs');
 $modules['news']     = __('Last news');
 $modules['sitemap']  = __('Sitemap');
 $available_modules = array();
+
 foreach ($modules as $module => $title) {
     $available_modules[$module]['module'] = $module;
     $available_modules[$module]['title']  = $title;
@@ -106,24 +116,29 @@ foreach ($modules as $module => $title) {
         $available_modules[$module]['selected'] = TRUE;
     }
 }
+
 $config['modules'] = $available_modules;
 $skins = AdvScanDir(SKINS, '', 'dir', FALSE, array('bbcodes', 'forum', 'icons', 'images', 'smiles'));
 $available_skins = array();
+
 foreach ($skins as $i => $skin) {
     $available_skins[$i]['skin'] = $skin;
     if ($skin === $config['skin']) {
         $available_skins[$i]['selected'] = TRUE;
     }
 }
+
 $config['skins'] = $available_skins;
 $langs = SYSTEM::get('languages');
 $available_langs = array();
+
 foreach ($langs as $i => $lang) {
     $available_langs[$i]['lang'] = $lang;
     if ($lang === $config['lang']) {
         $available_langs[$i]['selected'] = TRUE;
     }
 }
+
 $config['langs'] = $available_langs;
 $captcha = array(
     'Original' => 'Original',
@@ -131,15 +146,18 @@ $captcha = array(
     'Random'   => 'Random'
 );
 $available_captcha = array();
+
 foreach ($captcha as $i => $type) {
     $available_captcha[$i]['captcha'] = $type;
     if ($type === $config['captcha']) {
         $available_captcha[$i]['selected'] = TRUE;
     }
 }
+
 $config['captcha'] = $available_captcha;
 $config['meta_tags'] = file_get_contents(CONTENT.'meta');
 $available_tz = array();
+
 foreach ($LANG['tz'] as $tz => $title) {
     $available_tz[$tz]['tz'] = $tz;
     $available_tz[$tz]['title'] = $title;
@@ -148,7 +166,10 @@ foreach ($LANG['tz'] as $tz => $title) {
     }
 }
 $config['tz'] = $available_tz;
-$config['welcome_msg'] = file_get_contents(CONTENT.'intro');
+$config['welcome_msg'] = '';
+if (file_exists(CONTENT.'intro')) {
+    $config['welcome_msg'] = file_get_contents(CONTENT.'intro');
+}
 $config['bgcolor']        = GetColor('bgcolor', strtr($config['bgcolor'], array("0x" => "#")));
 $config['leftbg']         = GetColor('leftbg', strtr($config['leftbg'], array("0x" => "#")));
 $config['lefticon']       = GetColor('lefticon', strtr($config['lefticon'], array("0x" => "#")));
@@ -157,10 +178,10 @@ $config['righticon']      = GetColor('righticon', strtr($config['righticon'], ar
 $config['rightbghover']   = GetColor('rightbghover', strtr($config['rightbghover'], array("0x" => "#")));
 $config['righticonhover'] = GetColor('righticonhover', strtr($config['righticonhover'], array("0x" => "#")));
 $config['playertext']     = GetColor('playertext', strtr($config['playertext'], array("0x" => "#")));
-$config['slider'] = GetColor('slider', strtr($config['slider'], array("0x" => "#")));
-$config['track']  = GetColor('track', strtr($config['track'], array("0x" => "#")));
-$config['border'] = GetColor('border', strtr($config['border'], array("0x" => "#")));
-$config['loader'] = GetColor('loader', strtr($config['loader'], array("0x" => "#")));
+$config['slider']         = GetColor('slider', strtr($config['slider'], array("0x" => "#")));
+$config['track']          = GetColor('track', strtr($config['track'], array("0x" => "#")));
+$config['border']         = GetColor('border', strtr($config['border'], array("0x" => "#")));
+$config['loader']         = GetColor('loader', strtr($config['loader'], array("0x" => "#")));
 
 $TPL = new TEMPLATE(dirname(__FILE__).DS.'config.tpl');
 echo $TPL->parse($config);

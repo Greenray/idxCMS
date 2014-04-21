@@ -1,11 +1,48 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - TAGCLOUD - CONFIGURATION TEMPLATE
 
 die();?>
+
+<script>
+    var curselectorinput;
+    function selectColor(color) {
+        document.getElementById(curselectorinput).value = color;
+        if (document.all) {
+            document.getElementById(curselectorinput + "btn").style.background = color;
+        } else {
+            if (document.getElementById) {
+                document.getElementById(curselectorinput + "btn").style.background = color;
+            }
+        }
+        closeColorSelector();
+    }
+    function openColorSelector(o, e) {
+        selecto = document.getElementById("colorselector").style;
+        if (selecto.display === "block") {
+            closeColorSelector();
+        } else {
+            selecto.display = "block";
+            if (document.all && typeof(window.opera) !== "object") {
+                selecto.left = event.x + document.body.scrollLeft - 420;
+                selecto.top  = event.y + document.body.scrollTop - 120;
+            } else {
+                if (document.getElementById) {
+                    selecto.left = (e.clientX + window.pageXOffset - 440) + "px";
+                    selecto.top = (e.clientY + window.pageYOffset - 120) + "px";
+                }
+            }
+            curselectorinput = o;
+        }
+    }
+    function closeColorSelector() {
+        document.getElementById("colorselector").style.display = "none";
+    }
+</script>
 <div class="module">[__Tagcloud]</div>
 <fieldset>
+
     <form name="config" method="post" action="">
         <table class="std">
             <tr><th colspan="3">[__General options]</th></tr>

@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE RATE
 
 if (!defined('idxCMS')) die();
@@ -8,6 +8,7 @@ if (!defined('idxCMS')) die();
 $act  = FILTER::get('REQUEST', 'act');
 $id   = FILTER::get('REQUEST', 'id');
 $user = FILTER::get('REQUEST', 'user');
+
 if (!empty($act) && !empty($id) && !empty($user)) {
     $time = microtime(TRUE);
     $rated = md5(USER::getUser('username').$id);
@@ -27,6 +28,7 @@ if (!empty($act) && !empty($id) && !empty($user)) {
 }
 
 $value = FILTER::get('REQUEST', 'val');
+
 if (!empty($value) && !empty($id)) {
     $user = USER::getUser('username');
     if ($user !== 'guest') {

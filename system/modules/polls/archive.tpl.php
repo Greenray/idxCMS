@@ -1,6 +1,6 @@
 <?php
 # idxCMS version 2.2
-# Copyright (c) 2012 Greenray greenray.spb@gmail.com
+# Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE POLLS - POLLS ARCHIVE TEMPLATE
 
 die();?>
@@ -9,7 +9,7 @@ die();?>
     [each=answers]
         <tr>
             <td class="question">{answers[answer]}</td>
-            <td style="width:50px;text-align:right;">{answers[voices]}%</td>
+            <td class="right" style="width:50px;">{answers[voices]}%</td>
         </tr>
         <tr>
             <td colspan="2">
@@ -22,5 +22,5 @@ die();?>
             </td>
         </tr>
     [endeach.answers]
-    <tr><td class="odd" colspan="2" style="text-align:center;">[__Total votes]: {total}</td></tr>
+    <tr><td class="odd center" colspan="2">[__Total votes]: {total}</td></tr>
 </table>

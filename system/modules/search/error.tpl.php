@@ -4,6 +4,7 @@
 # MODULE SEARCH - SEARCH ERROR TEMPLATE
 
 die();?>
+
 <div class="search-error">
     <center>
         [__Error]: <strong>{find}</strong><br />

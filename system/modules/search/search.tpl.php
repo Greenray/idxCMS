@@ -4,6 +4,7 @@
 # MODULE SEARCH - SEARCH FORM TEMPLATE
 
 die();?>
+
 <div class="center">
     <form name="search" method="post" action="">
         <input type="hidden" name="module" value="search" />

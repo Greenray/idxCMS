@@ -28,27 +28,34 @@ if (USER::loggedIn() || $config['allow-guest']) {
                         unset($sections['drafts']);
                     }
                     $result = array();
-                    foreach ($sections as $id => $section) {
-                        $categories = CMS::call($obj)->getCategories($id);
-                        foreach ($categories as $key => $category) {
-                            $content = CMS::call($obj)->getContent($key);
-                            foreach ($content as $i => $item) {
-                                $item = CMS::call($obj)->getItem($i, 'full', FALSE);
-                                if (!empty($item['keywords'])) {
-              	                    SearchResult($item['keywords'], $item['title'], $search, $item['link'], $result);
+                    if (!empty($sections)) {
+                        foreach ($sections as $id => $section) {
+                            $categories = CMS::call($obj)->getCategories($id);
+                            if (!empty($categories)) {
+                                foreach ($categories as $key => $category) {
+                                    $content = CMS::call($obj)->getContent($key);
+var_dump($content);
+                                    if (!empty($content)) {
+                                        foreach ($content as $i => $item) {
+                                            $item = CMS::call($obj)->getItem($i, 'full', FALSE);
+                                            if (!empty($item['keywords'])) {
+                                                SearchResult($item['keywords'], $item['title'], $search, $item['link'], $result);
+                                            }
+                                            SearchResult($item['title'], $item['title'], $search, $item['link'], $result);
+                                            SearchResult($item['nick'], $item['title'], $search, $item['link'], $result);
+                                            if (!empty($item['desc'])) {
+                                                SearchResult($item['desc'], $item['title'], $search, $item['link'], $result);
+                                            }
+                                            SearchResult($item['text'], $item['title'], $search, $item['link'], $result);
+                                        }
+                                    }
                                 }
-                                SearchResult($item['title'], $item['title'], $search, $item['link'], $result);
-                                SearchResult($item['nick'], $item['title'], $search, $item['link'], $result);
-                                if (!empty($item['desc'])) {
-                                    SearchResult($item['desc'], $item['title'], $search, $item['link'], $result);
-                                }
-                                SearchResult($item['text'], $item['title'], $search, $item['link'], $result);
                             }
                         }
-                    }
-                    $founded[$word] = $result;
-                    if (!empty($founded[$word])) {
-                        $common = array_merge($common, $founded[$word]);
+                        $founded[$word] = $result;
+                        if (!empty($founded[$word])) {
+                            $common = array_merge($common, $founded[$word]);
+                        }
                     }
                 }
             } else {

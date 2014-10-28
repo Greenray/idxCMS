@@ -4,6 +4,7 @@
 # MODULE SEARCH - SEARCH RESULTS TEMPLATE
 
 die();?>
+
 <div class="results">
     <div class="center"><b>[__Search results]: {count} [__coincidence]</b></div>
     <ul class="level1">

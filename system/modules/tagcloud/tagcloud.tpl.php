@@ -118,7 +118,7 @@ die();?>
         if (navigator.plugins && navigator.mimeTypes.length) {
             var x = navigator.plugins["Shockwave Flash"];
             if (x && x.description) {
-                _25 = new deconcept.PlayerVersion(x.description.replace(/([a-z]|[A-Z]|\s)+/,"").replace(/(\s+r|\s+b[0-9]+)/,".").split("."));
+                _25 = new deconcept.PlayerVersion(x.description.replace(/([a-z]|[A-Z]|[а-я]|[А-Я]|\s)+/,"").replace(/(\s+r|\s+b[0-9]+)/,".").split("."));
             }
         } else {
             try {
@@ -142,7 +142,7 @@ die();?>
     deconcept.PlayerVersion = function(_29) {
         this.major = parseInt(_29[0]) != null ? parseInt(_29[0]) : 0;
         this.minor = parseInt(_29[1]) || 0;
-        this.rev=parseInt(_29[2]) || 0;
+        this.rev   = parseInt(_29[2]) || 0;
     };
     deconcept.PlayerVersion.prototype.versionIsValid = function(fv) {
         if (this.major < fv.major) {return false;}

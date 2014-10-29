@@ -7,14 +7,14 @@ die();?>
 <script type="text/javascript">
     function check(id) {
         var form = document.getElementById(id);
-        if (form.password.value == form.confirm.value) {
+        if (form.password.value === form.confirm.value) {
             if (form.password.value !== "") {
-                document.getElementById("yes").style.display = "";
+                document.getElementById("yes").style.display = "block";
                 document.getElementById("no").style.display  = "none";
             }
         } else {
             document.getElementById("yes").style.display = "none";
-            document.getElementById("no").style.display  = "";
+            document.getElementById("no").style.display  = "block";
         }
     }
     function getPasswordStrength(pw) {
@@ -68,12 +68,12 @@ die();?>
         function checkUsername(id) {
             if (/^[a-zA-Z0-9]{3,10}$/.test(document.registration.user.value)) {
                 document.getElementById("help").style.display = "none";
-                document.getElementById("good").style.display = "";
+                document.getElementById("good").style.display = "block";
                 document.getElementById("bad").style.display  = "none";
             } else {
                 document.getElementById("help").style.display = "none";
                 document.getElementById("good").style.display = "none";
-                document.getElementById("bad").style.display  = "";
+                document.getElementById("bad").style.display  = "block";
             }
         }
         function checkUserForm(form) {

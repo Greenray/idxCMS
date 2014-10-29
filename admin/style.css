@@ -80,7 +80,7 @@ ul { height: 20px; list-style: none; border: 1px solid #ccc }
 
 #shdesc   { display: none; width: 100% }
 .clear    { clear: both; height: 0; overflow: hidden }
-.required { background: #fff999; color: red }
+.required { background: #fff888; color: red }
 .std      { border: 2px groove #fff; width: 100% }
 
 #pagination        { float: right; height: 20px; line-height: 20px; padding: 10px }

@@ -349,6 +349,8 @@ class USER {
 
     private function checkUserName($name, $type) {
         if (!empty($name)) {
+#            var_dump($name);
+#            var_dump($type);
             if (!in_array(strtolower($name), self::$disallowed_names)) {
                 if ($type === 'Name') {
                     if (OnlyLatin($name)) {

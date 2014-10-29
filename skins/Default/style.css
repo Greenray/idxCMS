@@ -113,7 +113,7 @@ td.date     { padding: 0 10px; width: 140px }
 .none    { display:none }
 
 .special  { color: red }
-.required { color: red; background: #ffffcc }
+.required { color: red; background: #fff888 }
 
 .odd  { background: #dee3e7 }
 .even { background: #d4dee3 }
@@ -311,6 +311,7 @@ ul.tabs li a:focus { outline: 0 }
 #section li.level3 a.level3:hover span.subtitle { background: #e8e8ea; color: red; text-shadow: 0 1px 0 #fff }
 #section li a.level2:hover,
 #section li a.level3:hover { background: #e8e8ea }
+#section li a.level1:hover span.title,
 #section li a.level2:hover span.title,
 #section li a.level3:hover span.title    { color: blue }
 #section li a.level2:hover span.subtitle { color: red }

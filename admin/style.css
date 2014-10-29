@@ -111,7 +111,7 @@ ul { height: 20px; list-style: none; border: 1px solid #ccc }
 
 .bbcodes  { margin: 10px; text-align: center }
 .bbselect { margin: 1px 0 4px }
-.bbbutton { margin: 0 -2px; padding: 1px }
+.bbbutton { margin: 0; padding: 3px }
 
 .bbtools {
     color: #000;

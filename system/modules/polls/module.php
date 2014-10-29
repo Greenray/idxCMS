@@ -134,12 +134,13 @@ class POLLS {
                 $result['answers'][$i]['answer'] = $answer;
                 $result['answers'][$i]['count']  = $poll['count'][$i];
                 $result['answers'][$i]['voices'] = $poll['voices'][$i];
-                if ($poll['voices'][$i] === 0) {
+                if ($poll['voices'][$i] == 0) {
                     $result['answers'][$i]['color'] = 'transparent';
                 } else {
                     $result['answers'][$i]['color'] = $colors[$i];
                 }
             }
+
             $output .= $tpl->parse($result);
         }
         return $output;

@@ -32,7 +32,7 @@ button.submit { margin: 0; padding: 2px 5px }
 input                  { color: black }
 input[type='button'],
 input[type='reset'],
-input[type='submit']   { margin: 0; padding: 0 5px }
+input[type='submit']   { margin: 0; padding: 2px 5px }
 input[type='text'],
 input[type='password'] { margin: 2px; padding: 1px 0 1px 5px; border: 1px solid #c8c8c8 }
 
@@ -68,7 +68,7 @@ sup { position: relative; vertical-align: baseline }
 sub { bottom: -0.3em }
 sup { top: -0.4em }
 
-select       { padding: 0 5px }
+select       { padding: 0 5px; color: #000; border: 1px solid #000 }
 select:focus { outline: 1px solid red }
 
 textarea       { background: #fff; color: black; margin: 0 0 10px; width: 100% }
@@ -261,7 +261,7 @@ ul.tabs li a:focus { outline: 0 }
 .tab_content .text img { margin: 0; padding: 0 5px }
 
 .main          { margin: 0 auto }
-.main .title   { margin: 20px 5px; text-transform: uppercase }
+.main .title   { color: #ff0000; margin: 20px 5px; text-transform: uppercase }
 .main .title a { text-transform: none }
 .main .content { margin: 20px auto }
 
@@ -309,8 +309,10 @@ ul.tabs li a:focus { outline: 0 }
 #section li.level2 a.level2:hover,
 #section li.level3 a.level3:hover               { background: #e8e8ea; color: blue; text-shadow: 0 1px 0 #fff }
 #section li.level3 a.level3:hover span.subtitle { background: #e8e8ea; color: red; text-shadow: 0 1px 0 #fff }
-#section li a.level2:hover { background: #e8e8ea }
-#section li a.level2:hover span.title    { color: blue }
+#section li a.level2:hover,
+#section li a.level3:hover { background: #e8e8ea }
+#section li a.level2:hover span.title,
+#section li a.level3:hover span.title    { color: blue }
 #section li a.level2:hover span.subtitle { color: red }
 
 /* Search results */

@@ -33,6 +33,7 @@ $LANG['def']['Center column, upper than main module'] = 'Центральная 
 $LANG['def']['Choose color'] = 'Выбирите цвет';
 $LANG['def']['Clean'] = 'Очистить';
 $LANG['def']['Clean agents'] = 'Очистить агенты';
+$LANG['def']['Clean ip'] = 'Очистить IP';
 $LANG['def']['Clean referers'] = 'Очистить источники';
 $LANG['def']['Clean spiders'] = 'Очистить боты';
 $LANG['def']['Clean stats'] = 'Очистить статистику';

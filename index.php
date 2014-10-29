@@ -19,9 +19,13 @@
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-ini_set('display_errors', 0);
+ini_set('display_errors', 1);
 
 mb_internal_encoding("UTF-8");
+iconv_set_encoding("input_encoding", "UTF-8");
+iconv_set_encoding("output_encoding", "UTF-8");
+iconv_set_encoding("internal_encoding", "UTF-8");
+
 if (date_default_timezone_set(date_default_timezone_get()) === FALSE) {
     date_default_timezone_set('UTC');
 }

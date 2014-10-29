@@ -4,6 +4,7 @@
 # ADMINISTRATION - LOG TEMPLATE
 
 die();?>
+
 <div class="module">[__Logs]</div>
 <fieldset>
     <table class="std">

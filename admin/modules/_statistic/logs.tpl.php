@@ -4,6 +4,7 @@
 # ADMINISTRATION - LOGS TEMPLATE
 
 die();?>
+
 <div class="module">[__Logs]</div>
 <fieldset>
     <form name="day" method="post" action="">

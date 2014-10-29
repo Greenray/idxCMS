@@ -125,7 +125,7 @@ class PARSER {
         $this->text = preg_replace(
             "#[\s\n\r]*\[quote=(\"|\"|)(.*?)(\"|\"|)\][\s\n\r]*(.*?)[\s\n\r]*\[/quote\][\s\n\r]*#is",
             '<div class="quotetitle">'.
-                '<strong>\\2 '.__('wrote').':</strong>'.
+                '<strong>\\2 :</strong>'.
                 '<div class="quotetext">\\4</div>'.
             '</div>',
             $this->text

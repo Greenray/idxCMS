@@ -8,14 +8,15 @@
 # **SWFObject is the SWF embed script formarly known as FlashObject. The name was changed for legal reasons.
 
 die();?>
+
 <script>
     if (typeof deconcept == "undefined") {var deconcept = new Object();}
     if (typeof deconcept.util == "undefined") {deconcept.util = new Object();}
     if (typeof deconcept.SWFObjectUtil == "undefined") {deconcept.SWFObjectUtil = new Object();}
     deconcept.SWFObject = function(_1, id, w, h, _5, c, _7, _8, _9, _a, _b) {
         if (!document.createElement || !document.getElementById) {return;}
-        this.DETECT_KEY = _b?_b : "detectflash";
-        this.skipDetect=deconcept.util.getRequestParameter(this.DETECT_KEY);
+        this.DETECT_KEY = _b ? _b : "detectflash";
+        this.skipDetect = deconcept.util.getRequestParameter(this.DETECT_KEY);
         this.params = new Object();
         this.variables = new Object();
         this.attributes = new Array();

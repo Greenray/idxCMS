@@ -18,6 +18,8 @@ if (!empty($poll) && !empty($answer)) {
     }
 }
 
+$polls  = $POLLS->getActivePolls();
+
 if (!empty($polls)) {
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'poll.tpl');
     ShowWindow(__('Poll'), $POLLS->showPolls($polls, $TPL));

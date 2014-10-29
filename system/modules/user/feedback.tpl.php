@@ -4,6 +4,7 @@
 # MODULE FEEDBACK - TEMPLATE
 
 die();?>
+
 <script type="text/javascript">
     function checkForm(form) {
         [if=email]
@@ -38,7 +39,7 @@ die();?>
     [if=email][__E-mail] <input type="text" id="email" name="email" size="30" value="{email}" class="required" />[endif]
     <fieldset>
         <legend>[__Text]</legend>
-        <textarea id="message" id="message" name="message" cols="70" rows="7">{message}</textarea>
+        <textarea id="message" id="message" name="message" cols="50" rows="7">{message}</textarea>
     </fieldset>
     <p class="center">
         [if=captcha]{captcha}[endif]

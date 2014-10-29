@@ -4,6 +4,7 @@
 # MODULE USER - PROFILE TEMPLATE
 
 die();?>
+
 <script type="text/javascript">
     function check(id) {
         var form = document.getElementById(id);

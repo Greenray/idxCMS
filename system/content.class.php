@@ -4,16 +4,16 @@
 
 class CONTENT extends INDEX {
 
-    protected $module = '';
+    protected $module    = '';
     protected $container = '';
-    protected $sections = array();
-    protected $section = '';        # ID of the current section.
-    protected $category = '';       # ID of the current category.
-    protected $content = array();
-    protected $text = 'text';       # Filename of the item with full text.
-    protected $desc = 'desc';       # Filename of the item with short description
-    protected $item = '';
-    protected $comments = array();
+    protected $sections  = array();
+    protected $section   = '';        # ID of the current section.
+    protected $category  = '';        # ID of the current category.
+    protected $content   = array();
+    protected $text      = 'text';    # Filename of the item with full text.
+    protected $desc      = 'desc';    # Filename of the item with short description
+    protected $item      = '';
+    protected $comments  = array();
 
     public function getSections() {
         if (empty($this->sections)) {

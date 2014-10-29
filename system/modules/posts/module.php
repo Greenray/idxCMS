@@ -94,21 +94,21 @@ class CALENDAR {
             ++$string;
         }
         return array(
-                'month'  => LocaliseDate(date('F Y', $this->temp['first_day'])),
-                'header' => LocaliseDate(
-                    '<th>Mon</th>
-                     <th>Tue</th>
-                     <th>Wed</th>
-                     <th>Thu</th>
-                     <th>Fri</th>
-                     <th>Sat</th>
-                     <th>Sun</th>'
-                ),
-                'calendar'       => $calendar,
-                'months'         => $months,
-                'years'          => $years,
-                'selected_year'  => $selected_year,
-                'selected_month' => $selected_month
+            'month'  => LocaliseDate(date('F Y', $this->temp['first_day'])),
+            'header' => LocaliseDate(
+                '<th>Mon</th>
+                 <th>Tue</th>
+                 <th>Wed</th>
+                 <th>Thu</th>
+                 <th>Fri</th>
+                 <th>Sat</th>
+                 <th>Sun</th>'
+            ),
+            'calendar'       => $calendar,
+            'months'         => $months,
+            'years'          => $years,
+            'selected_year'  => $selected_year,
+            'selected_month' => $selected_month
         );
     }
 }

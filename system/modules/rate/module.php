@@ -66,7 +66,7 @@ function ShowRate($for) {
                 array('value' => $value,              # Rate value
                       'voted' => $voices,             # Number of voices
                       'item'  => $for,                # Item
-                      'width' => $value * 84 / 100,   # Width of rate value field
+                      'width' => intval($value * 84 / 100),   # Width of rate value field
                       'event' => $event               # Allow rating?
                 )
     );

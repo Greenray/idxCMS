@@ -73,7 +73,7 @@ select:focus { outline: 1px solid red }
 
 textarea       { background: #fff; color: black; margin: 0 0 10px; width: 100% }
 textarea:hover { border-color: #aaa }
-textarea:focus { background: #ffffcc; border-color: #8c8c8c; outline: 2px solid red }
+textarea:focus { border-color: #8c8c8c; outline: 2px solid red }
 
 table       { border-collapse: separate; border-spacing: 0; width: 100% }
 table,th,td { padding: 2px; vertical-align: middle }

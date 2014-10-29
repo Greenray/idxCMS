@@ -112,10 +112,7 @@ if (empty($sections)) {
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'full.tpl');
             ShowWindow(
                 $categories[$category]['title'],
-                $TPL->parse(
-                    CMS::call('POSTS')->getItem($post['id'], 'text')
-                )
-            );
+                $TPL->parse(CMS::call('POSTS')->getItem($post['id'], 'text')));
             CMS::call('POSTS')->incCount($post['id'], 'views');
         }
         # Show comments

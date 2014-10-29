@@ -17,8 +17,8 @@ die();?>
             [endelse]
             [if=status]{status}<br />[endif]
             [if=stars][__Rate]: {stars}<br />[endif]
-            [if=country]{country}<br />[endif]
             [if=city]{city}[endif]
+            [if=country]{country}<br />[endif]
         </div>
         <div class="info">
             <span class="date">{date}</span>

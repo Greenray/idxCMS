@@ -83,6 +83,7 @@ $LANG['def']['Left panel'] = 'Левая панель';
 $LANG['def']['Length for user name or nick'] = 'Длина имени или ника';
 $LANG['def']['Level'] = 'Уровень';
 $LANG['def']['Loader color'] = 'Цвет загрузчика';
+$LANG['def']['Login'] = 'Логін';
 $LANG['def']['Logs'] = 'Логи';
 $LANG['def']['Loop'] = 'Автоматический повтор';
 $LANG['def']['Max comment length'] = 'Max размер комментария';

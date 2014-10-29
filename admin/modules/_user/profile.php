@@ -8,8 +8,11 @@ if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
 # Check admin's rights
 if (FILTER::get('REQUEST', 'login')) {
     if (CMS::call('USER')->checkUser(FILTER::get('REQUEST', 'username'), FILTER::get('REQUEST', 'password'), FALSE, $user_data) === TRUE) {
-        $tmp = GetUnserialized(TEMP.'rights.dat');
-        unlink(TEMP.'rights.dat');
+        $tmp = '';
+        if (file_exists(TEMP.'rights.dat')) {
+            $tmp = GetUnserialized(TEMP.'rights.dat');
+            unlink(TEMP.'rights.dat');
+        }
         if (!empty($tmp)) {
             $level = empty($tmp[3]) ? 1 : (int) $tmp[3];
             if (!empty($tmp[2])) {
@@ -47,6 +50,7 @@ if (!empty($REQUEST['act'])) {
                 break;
             case 'delete':
                 unlink(USERS.basename($action[1]));
+                unlink(PM_DATA.basename($action[1]));
                 break;
         }
     } catch (Exception $error) {

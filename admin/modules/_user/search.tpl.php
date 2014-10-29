@@ -4,6 +4,7 @@
 # ADMINISTRATION - SEARCH USERS TEMPLATE
 
 die();?>
+
 <div class="module">[__User profile]</div>
 <fieldset>
     <form name="config" method="post" action="">

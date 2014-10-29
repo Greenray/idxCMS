@@ -34,7 +34,6 @@ if (USER::loggedIn() || $config['allow-guest']) {
                             if (!empty($categories)) {
                                 foreach ($categories as $key => $category) {
                                     $content = CMS::call($obj)->getContent($key);
-var_dump($content);
                                     if (!empty($content)) {
                                         foreach ($content as $i => $item) {
                                             $item = CMS::call($obj)->getItem($i, 'full', FALSE);

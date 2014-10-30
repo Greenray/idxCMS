@@ -41,7 +41,7 @@ die();?>
         var username = form.username.value;
         var password = form.password.value;
         var nameRegex = /^[a-zA-Z0-9_]+(([\_][a-zA-Z0-9])?[a-zA-Z0-9_]*)*$/;
-        if  (user === '') {
+        if  (username === '') {
             ShowAlert('[__Enter your login]', '[__Error]');
             return false;
         }

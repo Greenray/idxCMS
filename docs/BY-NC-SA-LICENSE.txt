@@ -1,5 +1,4 @@
-«Content Management System INDEX CMS (idxCMS)»
-публикуется на условиях лицензии
+«Content Management System INDEX CMS (idxCMS)» публикуется на условиях лицензии
 Creative Commons Attribution-NonCommercial-ShareAlike
 (С указанием авторства — Некоммерческая — С сохранением условий) 3.0 Непортированная.
 http://creativecommons.org/licenses/by-nc-sa/3.0/legalcode

@@ -42,21 +42,19 @@ die();?>
         var password = form.password.value;
         var nameRegex = /^[a-zA-Z0-9_]+(([\_][a-zA-Z0-9])?[a-zA-Z0-9_]*)*$/;
         if  (user === '') {
-            var msg = '[__Enter your login]';
-            boxD(msg);
+            ShowAlert('[__Enter your login]', '[__Error]');
             return false;
         }
         if (!username.match(nameRegex)) {
-            inlineMsg('username', '[__You have used an invalid symbols]');
+            ShowAlert('[__Invalid symbols]', '[__Error]');
             return false;
         }
-        if (password == "") {
-            inlineMsg('password', '[__Enter your password]');
+        if (password === "") {
+            ShowAlert('[__Enter your password]', '[__Error]');
             return false;
         }
         return true;
     }
-    
     </script>
     <div class="login_panel">
         <ul class="links">

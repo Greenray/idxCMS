@@ -9,16 +9,16 @@ die();?>
         var title = form.title.value;
         var text = form.text.value;
         var textRegex = new RegExp(/<\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[^'">\s]+))?)+\s*|\s*)\/?>/gim);
-        if (title == "") {
-            inlineMsg('title', '[__Enter a title]');
+        if (title === '') {
+            ShowAlert('[__Enter a title]', '[__Error]');
             return false;
         }
         if (title.match(textRegex)) {
-            inlineMsg('text', '[__You have used an invalid symbols]');
+            ShowAlert('[__Invalid symbols]', '[__Error]');
             return false;
         }
-        if (text == "") {
-            inlineMsg('text', '[__Enter a description]');
+        if (text === '') {
+            ShowAlert('[__Enter a description]', '[__Error]');
             return false;
         }
         return true;

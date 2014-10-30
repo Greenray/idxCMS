@@ -21,7 +21,6 @@ die();?>
         var idsListCount = idsList.length;
         var titlesList = getTitles(index);
         var categoriesList = document.forms["post"].elements["new_category"];
-        var categoriesListCount = categoriesList.options.length;
         categoriesList.length = 0;
         for (i = 0; i < idsListCount; i++) {
             if (document.createElement) {
@@ -42,16 +41,16 @@ die();?>
         var title = form.title.value;
         var text = form.text.value;
         var textRegex = new RegExp(/<\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[^'">\s]+))?)+\s*|\s*)\/?>/gim);
-        if (title == "") {
-            inlineMsg('title', '[__Enter a title]');
+        if (title === '') {
+            ShowAlert('[__Enter a title]', '[__Error]');
             return false;
         }
         if (title.match(textRegex)) {
-            inlineMsg('title', '[__You have used an invalid symbols]');
+            ShowAlert('[__Invalid symbols]', '[__Error]');
             return false;
         }
-        if (text == "") {
-            inlineMsg('title', '[__Enter a text]');
+        if (text === '') {
+            ShowAlert('[__Enter a text]', '[__Error]');
             return false;
         }
         return true;

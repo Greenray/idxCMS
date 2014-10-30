@@ -10,24 +10,24 @@ die();?>
         [if=email]
             var emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
             var email = form.email.value;
-            if (email == "") {
-                inlineMsg('email', '[__Enter your email]');
+            if (email === '') {
+                ShowAlert('[__Enter your email]', '[__Error]');
                 return false;
             }
             if (!email.match(emailRegex)) {
-                inlineMsg('email', '[__Error]');
+                ShowAlert('[__Invalid email]', '[__Error]');
                 return false;
             }
         [endif]
         var text = form.message.value;
-        if (text == "") {
-            inlineMsg('message', '[__Fill this field]');
+        if (text === '') {
+            ShowAlert('[__Enter a text]', '[__Error]');
             return false;
         }
         [if=captcha]
             var capt = form.captcheckout.value;
-            if (capt == "") {
-                inlineMsg('captcheckout', '[__Fill this field]');
+            if (capt === '') {
+                ShowAlert('[__Enter a code]', '[__Error]');
                 return false;
             }
         [endif]

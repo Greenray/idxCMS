@@ -4,26 +4,27 @@
 # ADMINISTRATION - CATEGORY TEMPLATE
 
 die();?>
+
 <script type="text/javascript">
     function checkForm(form) {
         var title = form.title.value;
         var access = form.access.value;
         var textRegex = new RegExp(/<\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[^'">\s]+))?)+\s*|\s*)\/?>/gim);
         var numRegex = /^[0-9]{1}$/;
-        if (title == "") {
-            inlineMsg('title', '[__Enter a title]');
+        if (title === '') {
+            ShowAlert('[__Enter a title]', '[__Error]');
             return false;
         }
         if (title.match(textRegex)) {
-            inlineMsg('title', '[__You have used an invalid symbols]');
+            ShowAlert('[__Invalid symbols]', '[__Error]');
             return false;
         }
-        if (access == "") {
-            inlineMsg('access', '[__Enter a value of access level]');
+        if (access === '') {
+            ShowAlert('[__Enter a value of access level]', '[__Error]');
             return false;
         }
         if (!access.match(numRegex)) {
-            inlineMsg('access', '[__You have used an invalid value]');
+            ShowAlert('[__Enter a value of access level]', '[__Error]');
             return false;
         }
         return true;

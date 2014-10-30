@@ -4,6 +4,7 @@
 # ADMINISTRATION - SECTION TEMPLATE
 
 die();?>
+
 <script type="text/javascript">
     function checkForm(form) {
         var section = form.section.value;
@@ -11,29 +12,29 @@ die();?>
         var access = form.access.value;
         var nameRegex = /^[a-zA-Z0-9_]+(([\_][a-zA-Z0-9])?[a-zA-Z0-9_]*)*$/;
         var textRegex = new RegExp(/<\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[^'">\s]+))?)+\s*|\s*)\/?>/gim);
-        var numRegex = /^[0-9]{1}$/;
-        if (section == "") {
-            inlineMsg('section', '[__Enter a section name]');
+        var numRegex = /^[0-8]{1}$/;
+        if (section === '') {
+            ShowAlert('[__Enter a title]', '[__Error]');
             return false;
         }
         if (!section.match(nameRegex)) {
-            inlineMsg('section', '[__You have used an invalid symbols]');
+            ShowAlert('[__Invalid symbols]', '[__Error]');
             return false;
         }
-        if (title == "") {
-            inlineMsg('title', '[__Enter a title]');
+        if (title === '') {
+            ShowAlert('[__Enter a title]', '[__Error]');
             return false;
         }
         if (title.match(textRegex)) {
-            inlineMsg('title', '[__You have used an invalid symbols]');
+            ShowAlert('[__Invalid symbols]', '[__Error]');
             return false;
         }
-        if (access == "") {
-            inlineMsg('access', '[__Enter a value of access level]');
+        if (access === '') {
+            ShowAlert('[__Enter a value of access level]', '[__Error]');
             return false;
         }
         if (!access.match(numRegex)) {
-            inlineMsg('access', '[__You have used an invalid value]');
+            ShowAlert('[__Enter a value of access level]', '[__Error]');
             return false;
         }
         return true;

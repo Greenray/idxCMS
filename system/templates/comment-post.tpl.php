@@ -29,7 +29,7 @@ die();?>
             }
         }
         function displayLimit(name, id, limit) {
-            var form = (id != "") ? document.getElementById(id) : name;
+            var form = (id !== '') ? document.getElementById(id) : name;
             var limit_text = '<strong><span id="' + form.toString() + '">' + limit + '</span></strong>';
             if (document.all || ns6)
                 document.write(limit_text);
@@ -49,13 +49,13 @@ die();?>
         [if=captcha]
             var capt = form.captcheckout.value;
         [endif]
-        if (text == "") {
-            inlineMsg('text', '[__Fill this field]');
+        if (text == '') {
+            ShowAlert('[__Enter a code]', '[__Error]');
             return false;
         }
         [if=captcha]
-            if (capt == "") {
-                inlineMsg('captcheckout', '[__Fill this field]');
+            if (capt === '') {
+                ShowAlert('[__Enter a code]', '[__Error]');
                 return false;
             }
         [endif]

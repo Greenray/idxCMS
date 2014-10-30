@@ -4,21 +4,22 @@
 # MODULE FORUM - NEW TOPIC TEMPLATE
 
 die();?>
+
 <script type="text/javascript">
     function checkTopicForm(form) {
         var title = form.title.value;
         var text = form.text.value;
         var textRegex = new RegExp(/<\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[^'">\s]+))?)+\s*|\s*)\/?>/gim);
-        if (title == "") {
-            inlineMsg('title', '[__Fill this field]');
+        if (title === '') {
+            ShowAlert('[__Enter a title]', '[__Error]');
             return false;
         }
         if (title.match(textRegex)) {
-            inlineMsg('title', '[__You have used an invalid symbols]');
+            ShowAlert('[__Invalid symbols]', '[__Error]');
             return false;
         }
-        if (text == "") {
-            inlineMsg('text', '[__Fill this field]');
+        if (text === '') {
+            ShowAlert('[__Enter a text]', '[__Error]');
             return false;
         }
         return true;

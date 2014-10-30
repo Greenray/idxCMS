@@ -4,53 +4,52 @@
 # ADMINISTRATION - POSTS - POST TEMPLATE
 
 die();?>
+
 <script type="text/javascript">
     var ids = new Array({ids});
     var titles = new Array({titles});
     function getIds(index) {
         var idsValues = ids[index];
-        return idsValues.split(",");
+        return idsValues.split(',');
     }
     function getTitles(index) {
         var titlesText = titles[index];
-        return titlesText.split(",");
+        return titlesText.split(',');
     }
     function setCategories(index) {
         var idsList = getIds(index);
         var idsListCount = idsList.length;
         var titlesList = getTitles(index);
-        var categoriesList = document.forms["post"].elements["new_category"];
-        var categoriesListCount = categoriesList.options.length;
+        var categoriesList = document.forms['post'].elements['new_category'];
         categoriesList.length = 0;
         for (i = 0; i < idsListCount; i++) {
             if (document.createElement) {
-                var newCategoriesList = document.createElement("OPTION");
+                var newCategoriesList = document.createElement('OPTION');
                 newCategoriesList.text = titlesList[i];
                 newCategoriesList.value = idsList[i];
                 (categoriesList.options.add) ? categoriesList.options.add(newCategoriesList) : categoriesList.add(newCategoriesList, null);
             } else {
-                // M3.x-4.x
                 newCategoriesList.options[i] = new Option(idsList[i], titlesList[i], false, false);
             }
         }
     }
-    setCategories(document.forms["post"].elements["new_section"].selectedIndex);
+    setCategories(document.forms['post'].elements['new_section'].selectedIndex);
 </script>
 <script type="text/javascript">
     function checkPost(form) {
         var title = form.title.value;
         var text = form.text.value;
         var textRegex = new RegExp(/<\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[^'">\s]+))?)+\s*|\s*)\/?>/gim);
-        if (title == "") {
-            inlineMsg('title', '[__Enter a title]');
+        if (title === '') {
+            ShowAlert('[__Enter a title]', '[__Error]');
             return false;
         }
         if (title.match(textRegex)) {
-            inlineMsg('title', '[__You have used an invalid symbols]');
+            ShowAlert('[__Invalid symbols]', '[__Error]');
             return false;
         }
-        if (text == "") {
-            inlineMsg('title', '[__Enter a text]');
+        if (text === '') {
+            ShowAlert('[__Enter a text]', '[__Error]');
             return false;
         }
         return true;

@@ -7,24 +7,24 @@ die();?>
 <script type="text/javascript">
     function checkForm(form) {
         var name = form.name.value;
-        if (name == "") {
-            inlineMsg('name', '[__Fill this field]');
+        if (name === '') {
+            ShowAlert('[__Enter your name]', '[__Error]');
             return false;
         }
         var emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
         var email = form.email.value;
-        if (email == "") {
-            inlineMsg('email', '[__Enter your email]');
+        if (email === '') {
+            ShowAlert('[__Enter your email]', '[__Error]');
             return false;
         }
         if (!email.match(emailRegex)) {
-            inlineMsg('email', '[__You have entered an invalid email]');
+            ShowAlert('[__Invalid email]', '[__Error]');
             return false;
         }
         [if=captcha]
             var capt = form.captcheckout.value;
-            if (capt == "") {
-                inlineMsg('captcheckout', '[__Fill this field]');
+            if (capt === '') {
+                ShowAlert('[__Enter a code]', '[__Error]');
                 return false;
             }
         [endif]

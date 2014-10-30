@@ -47,11 +47,19 @@ if (!defined('idxCMS')) die();?>
     <script type="text/javascript" src='{TOOLS}message.js'></script>
     <script type="text/javascript">
         function ShowHide(obj) {
-            if (obj == "none") {
-                return "inline";
+            if (obj === 'none') {
+                return 'inline';
             } else {
-                return "none";
+                return 'none';
             }
+        }
+        function ShowAlert(msg, title) {
+            dhtmlx.modalbox({ 
+                type: 'alert-error',
+                title: title, 
+                text: '<strong>' + msg + '</strong>',
+                buttons: ["Ok"]
+            });
         }
     </script>
     <link type="image/x-icon" rel="shortcut icon" href="favicon.ico" />

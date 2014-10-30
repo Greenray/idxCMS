@@ -53,7 +53,7 @@ die();?>
         function checkUserForm(form) {
             var captcha = form.captcheckout.value;
             if (captcha === '') {
-                inlineMsg('captcheckout', '[__Enter a code]');
+                ShowAlert('[__Enter a code]', '[__Error]');
                 return false;
             }
             return true;
@@ -84,57 +84,39 @@ die();?>
             var nickRegex = /^[a-zA-Z0-9а-яА-Я_]+(([\_][a-zA-Z0-9а-яА-Я])?[a-zA-Z0-9а-яА-Я_]*)*$/;
             var emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
             if  (user === '') {
-                var msg = '[__Enter your login]';
-                boxD(msg);
+                ShowAlert('[__Enter your login]', '[__Error]');
                 return false;
             }
             if (!user.match(userRegex)) {
-                var msg = '[__Invalid symbols]';
-                boxD(msg);
+                ShowAlert('[__Invalid symbols]', '[__Error]');
                 return false;
             }
             if  (nick === '') {
-                var msg = '[__Enter your name]';
-                boxD(msg);
+                ShowAlert('[__Enter your name]', '[__Error]');
                 return false;
             }
             if (!nick.match(nickRegex)) {
-                var msg = '[__Invalid symbols]';
-                boxD(msg);
+                ShowAlert('[__Invalid symbols]', '[__Error]');
                 return false;
             }
             if  (password === '') {
-                var msg = '[__Enter your password]';
-                boxD(msg);
+                ShowAlert('[__Enter your password]', '[__Error]');
                 return false;
             }
             if  (email === '') {
-                var msg = '[__Enter your email]';
-                boxD(msg);
+                ShowAlert('[__Enter your email]', '[__Error]');
                 return false;
             }
             if (!email.match(emailRegex)) {
-                var msg = '[__Invalid email]';
-                boxD(msg);
+                ShowAlert('[__Invalid email]', '[__Error]');
                 return false;
             }
             if  (captcha === '') {
-                var msg = '[__Enter a code]';
-                boxD(msg);
+                ShowAlert('[__Enter a code]', '[__Error]');
                 return false;
             }
-            function boxD(msg) {
-                dhtmlx.modalbox({ 
-                    type:'alert-error',
-                    title:'[__Error]', 
-                    text:"<strong>" + msg + "</strong>",
-                    buttons:["Ok"]
-                });
-            }
-            return true;
         }
     </script>
-
     <form name="registration" id="registration" method="post" action="" enctype="multipart/form-data" onsubmit="return checkUserForm(this);">
 [endelse]
 <input type="hidden" name="{mode}" value="1" />

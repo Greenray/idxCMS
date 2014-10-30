@@ -206,6 +206,7 @@ $LANG['def']['Greeting'] = 'Приветствие';
 $LANG['def']['Hello'] = 'Привет';
 $LANG['def']['Inbox'] = 'Входящие';
 $LANG['def']['Invalid captcha code'] = 'Ошибка проверочного кода';
+$LANG['def']['Invalid email'] = 'Ошибка в адресе электронной почты';
 $LANG['def']['Invalid nickname'] = 'Запрещённое имя';
 $LANG['def']['Language'] = 'Язык';
 $LANG['def']['Last visit'] = 'Последний визит';

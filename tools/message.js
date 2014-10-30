@@ -246,3 +246,4 @@ if(!window.dhtmlx)
 		}
 	};
 })();
+

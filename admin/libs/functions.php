@@ -63,63 +63,10 @@ function LoginForm() {
 
 function GetColor($name = 'idselector', $def_color = '') {
     $output = '
-            <div id="colorselector" class="none" style="background:white;border:2px solid black;position:absolute;width:300px;z-index:10">
-                <table class="colortable">
-                    <tr><td colspan="18"><p align="center">'.__('Choose color').'</p></td></tr>
-                    <tr>';
-    
-    $col_r = 0;
-    $col_g = 0;
-    $col_b = 0;
-    $row_return   = 0;
-    $block_return = 0;
-    while ($col_r <= 255) {
-        $col_g = 0;
-        $block_return++;
-        while ($col_g <= 255) {
-            $col_b = 0;
-            while ($col_b <= 255) {
-                $red   = dechex($col_r);
-                $green = dechex($col_g);
-                $blue  = dechex($col_b);
-                $color = str_pad($red, 2, '0', STR_PAD_LEFT).''.str_pad($green, 2, '0', STR_PAD_LEFT).''.str_pad($blue, 2, '0', STR_PAD_LEFT);
-                $output .= '<td height="12px" width="12px" bgcolor="#'.$color.'" onclick="selectColor(\'#'.$color.'\');" style="cursor: pointer;"></td>';
-                $row_return++;
-                if ($row_return == 18) {
-                    $output .= '</tr><tr>';
-                    $row_return = 0;
-                }
-                $col_b += 51;
-            }
-            $col_g += 51;
-        }
-        $col_r += 51;
-    }
-    $output .= '<tr><td colspan="18"><p align="center">'.__('Gradation of grey color').'</p></td></tr>
-                <tr>';
-    $col = 15;
-    while ($col <= 255) {
-        $red   = strtoupper(dechex($col));
-        $green = strtoupper(dechex($col));
-        $blue  = strtoupper(dechex($col));
-        $color = str_pad($red, 2, '0', STR_PAD_LEFT).''.str_pad($green, 2, '0', STR_PAD_LEFT).''.str_pad($blue, 2, '0', STR_PAD_LEFT);
-        $output .= '<td height="12px" width="12px" bgcolor="#'.$color.'" onclick="selectColor(\'#'.$color.'\')" style="cursor: pointer;"></td>';
-        $col += 15;
-    }
-    $output .= '</tr>
-               </table>
-              </div>';
-    return '<input class="texte" type="text" id="'.$name.'" name="'.$name.'" size="8" maxlength="8" value="'.$def_color.'" />
-            <input id="'.$name.'btn" name="'.$name.'btn" type="button" value="" onclick="openColorSelector(\''.$name.'\', event)" style="padding:0 5px;background:'.$def_color.'" />'.
-            $output;
-}
-
-function GetColor1($name = 'idselector', $def_color = '') {
-    $output = '
-            <div id="colorselector" class="none" style="background:white;border:2px solid black;position:absolute;width:300px;z-index:10">
-                <table class="colortable">
-                    <tr><td colspan="18"><p align="center">'.__('Choose color').'</p></td></tr>
-                    <tr>';
+    <div id="colorselector" class="none" style="background:white;border:2px solid black;position:absolute;width:300px;z-index:10">
+        <table class="colortable">
+            <tr><td colspan="18"><p align="center">'.__('Choose color').'</p></td></tr>
+            <tr>';
     $col_r = 0;
     $col_g = 0;
     $col_b = 0;

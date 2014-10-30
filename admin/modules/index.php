@@ -7,19 +7,19 @@ if (!defined('idxADMIN')) die();
 if (!USER::loggedIn()) die();
 
 if (!empty($REQUEST['clean'])) {
-    $files  = GetFilesList(TEMP);
+    $files = GetFilesList(TEMP);
     if (!empty($files)) {
         foreach ($files as $file) {
-            unlink($TEMP.$file);
+            unlink(TEMP.$file);
         }
     }
 }
 
+$constants = get_defined_constants();
 $output = array();
 $output['server'] = $_SERVER['SERVER_SOFTWARE'];
 $output['os']     = php_uname('s').' '.php_uname('r').' '.php_uname('v');
 $output['php']    = phpversion();
-$constants = get_defined_constants();
 $output['host']   = php_uname('n');
 $output['rights'] = USER::getUserRights();
 
@@ -30,7 +30,6 @@ if (CMS::call('USER')->checkRoot()) {
     $output['smtp'] = ini_get('SMTP');
     $output['display_errors'] = ini_get('display_errors');
     $output['display_errors'] = empty($output['display_errors']) ? 'Off' : 'On';
-
     $output['admin']  = TRUE;
     $output['rights'] = __('You have all rights on this site');
     $output['posts']  = format_size(get_dir_size(POSTS));

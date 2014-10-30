@@ -7,6 +7,9 @@ class INDEX {
 
     protected $index = 'index';      # Name of the index file
 
+    private function __construct() {}
+    private function __clone() {}
+    
     protected function setIndex($name) {
         $this->index = $name;
     }

@@ -163,7 +163,7 @@ class USER {
             throw new Exception('Invalid username');
         }
         if (!$this->checkUserName($nickname, 'Nick')) {
-            throw new Exception('Invalid nickname');
+            throw new Exception(__('Invalid nickname'));
         }
         $email = FILTER::get('REQUEST', 'email');
         if (!CMS::call('FILTER')->validEmail($email)) {
@@ -349,8 +349,6 @@ class USER {
 
     private function checkUserName($name, $type) {
         if (!empty($name)) {
-#            var_dump($name);
-#            var_dump($type);
             if (!in_array(strtolower($name), self::$disallowed_names)) {
                 if ($type === 'Name') {
                     if (OnlyLatin($name)) {
@@ -369,7 +367,9 @@ class USER {
     }
 
     public static function moderator($module, $item = '') {
-        if (self::$user['username'] === 'guest') return FALSE;
+        if (self::$user['username'] === 'guest') {
+            return FALSE;
+        }
         if (!empty($item)) {
             return self::checkRight($module) || ((self::$user['username'] === $item['author']) && ((time() - $item['time']) < 300));
         }

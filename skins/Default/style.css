@@ -576,17 +576,6 @@ ol.horinaja_pagination li a {
     padding: 10px 0 0 0;
     cursor: pointer;
 }
-
-#err    { display: none; padding-left: 7px; position: absolute; z-index: 200 }
-#errmsg {
-    background: red; color: white;
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
-    display: block;
-    font-weight: bold;
-    padding: 5px;
-    text-align: center;
-}
-
 #unitip {
     color: black;
     display: none;
@@ -600,3 +589,9 @@ ol.horinaja_pagination li a {
 #unitipmid   { background: url(../images/tipmid.png) repeat; height: auto; padding: 5px 15px; width: 115px }
 #unitipcap   { background: url(../images/tipcap.png) no-repeat; height: 7px; overflow: hidden }
 .tip { color: black; cursor: default }
+
+#form_in_box div { text-align:left }
+input.inform     { width: 220px; margin-left: 20px }
+textarea.inform  { width: 220px; height: 50px; margin-left:20px }
+.dhtmlx_button   { margin-top:10px }
+                

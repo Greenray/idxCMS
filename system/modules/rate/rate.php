@@ -8,7 +8,9 @@ if (!defined('idxCMS')) die();
 $act  = FILTER::get('REQUEST', 'act');
 $id   = FILTER::get('REQUEST', 'id');
 $user = FILTER::get('REQUEST', 'user');
-
+var_dump($act);
+var_dump($id);
+var_dump($user);
 if (!empty($act) && !empty($id) && !empty($user)) {
     $time = microtime(TRUE);
     $rated = md5(USER::getUser('username').$id);
@@ -34,7 +36,7 @@ if (!empty($value) && !empty($id)) {
     if ($user !== 'guest') {
         $item = '';
         $rate = GetRate($id, $item);
-        $rate[$user] = (int) $value;
+        $rate[$user] = intval($value);
         file_put_contents($item, serialize($rate), LOCK_EX);
         echo ShowRate($id).'$';
     }

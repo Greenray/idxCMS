@@ -129,9 +129,11 @@ class MESSAGE extends INDEX {
         if (empty($email)) {
             $message['mail'] = '';
         } else {
-            if (!CMS::call('FILTER')->validEmail($email))
-                 throw new Exception('Invalid email');
-            else $message['mail'] = $email;
+            if (!CMS::call('FILTER')->validEmail($email)) {
+                throw new Exception('Invalid email');
+            } else {
+                $message['mail'] = $email;
+            }
         }
         $message['text'] = $text;
         $message['time'] = time();

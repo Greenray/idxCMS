@@ -9,25 +9,25 @@ die();?>
     function check(id) {
         var form = document.getElementById(id);
         if (form.password.value === form.confirm.value) {
-            if (form.password.value !== "") {
-                document.getElementById("yes").style.display = "block";
-                document.getElementById("no").style.display  = "none";
+            if (form.password.value !== '') {
+                document.getElementById('yes').style.display = 'block';
+                document.getElementById('no').style.display  = 'none';
             }
         } else {
-            document.getElementById("yes").style.display = "none";
-            document.getElementById("no").style.display  = "block";
+            document.getElementById('yes').style.display = 'none';
+            document.getElementById('no').style.display  = 'block';
         }
     }
     function getPasswordStrength(pw) {
         var pwlength = (pw.length);
         if (pwlength > 5) pwlength = 5;
-        var numnumeric = pw.replace(/[0-9]/g, "");
+        var numnumeric = pw.replace(/[0-9]/g, '');
         var numeric = (pw.length - numnumeric.length);
         if (numeric > 3) numeric = 3;
-        var symbols = pw.replace(/\W/g, "");
+        var symbols = pw.replace(/\W/g, '');
         var numsymbols = (pw.length - symbols.length);
         if (numsymbols > 3) numsymbols = 3;
-        var numupper = pw.replace(/[A-Z]/g, "");
+        var numupper = pw.replace(/[A-Z]/g, '');
         var upper = (pw.length - numupper.length);
         if (upper > 3) upper = 3;
         var pwstrength = ((pwlength * 10) - 20) + (numeric * 10) + (numsymbols * 15) + (upper * 10);
@@ -40,14 +40,10 @@ die();?>
         var pwstrength = getPasswordStrength(bpb);
         var bars = (parseInt(pwstrength / 10) * 10);
         var pwdivEl = document.getElementById(pwdiv);
-        if (!pwdivEl) {
-            alert('Password Strength Display Element Missing');
-        }
+        if (!pwdivEl) alert('Password Strength Display Element Missing');
         var divlist = pwdivEl.getElementsByTagName('div');
         var imgdivnum = 0;
-        if (divorderlist && divorderlist.image > -1) {
-            imgdivnum = divorderlist.image;
-        }
+        if (divorderlist && divorderlist.image > -1) imgdivnum = divorderlist.image;
         var imgdiv = divlist[imgdivnum];
         imgdiv.id  = 'passbar-' + bars;
     }
@@ -55,26 +51,26 @@ die();?>
 [ifelse=profile]
     <script type="text/javascript">
         function checkUserForm(form) {
-            var capt = form.captcheckout.value;
-            if (capt == "") {
+            var captcha = form.captcheckout.value;
+            if (captcha === '') {
                 inlineMsg('captcheckout', '[__Enter a code]');
                 return false;
             }
             return true;
         }
     </script>
-    <form name="profile" id="profile" method="post" action="" enctype="multipart/form-data">
+    <form name="profile" id="profile" method="post" action="" enctype="multipart/form-data" onsubmit="return checkUserForm(this);">
 [else]
     <script type="text/javascript">
         function checkUsername(id) {
             if (/^[a-zA-Z0-9]{3,10}$/.test(document.registration.user.value)) {
-                document.getElementById("help").style.display = "none";
-                document.getElementById("good").style.display = "block";
-                document.getElementById("bad").style.display  = "none";
+                document.getElementById('help').style.display = 'none';
+                document.getElementById('good').style.display = 'block';
+                document.getElementById('bad').style.display  = 'none';
             } else {
-                document.getElementById("help").style.display = "none";
-                document.getElementById("good").style.display = "none";
-                document.getElementById("bad").style.display  = "block";
+                document.getElementById('help').style.display = 'none';
+                document.getElementById('good').style.display = 'none';
+                document.getElementById('bad').style.display  = 'block';
             }
         }
         function checkUserForm(form) {
@@ -83,49 +79,62 @@ die();?>
             var password = form.password.value;
             var confirm  = form.confirm.value;
             var email = form.email.value;
-            var capt = form.captcheckout.value;
+            var captcha = form.captcheckout.value;
             var userRegex = /^[a-zA-Z0-9_]+(([\_][a-zA-Z0-9])?[a-zA-Z0-9_]*)*$/;
-            var nickRegex = /^[a-zA-Z0-9а-яА-Я_]+(([\_][a-zA-Z0-9а-яА-Я])?[a-zA-Z0-9_а-яА-Я]*)*$/;
+            var nickRegex = /^[a-zA-Z0-9а-яА-Я_]+(([\_][a-zA-Z0-9а-яА-Я])?[a-zA-Z0-9а-яА-Я_]*)*$/;
             var emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-            if (user == "") {
-                inlineMsg('user', '[__Enter your name]');
+            if  (user === '') {
+                var msg = '[__Enter your login]';
+                boxD(msg);
                 return false;
             }
             if (!user.match(userRegex)) {
-                inlineMsg('user', '[__You have used an invalid symbols]');
+                var msg = '[__Invalid symbols]';
+                boxD(msg);
                 return false;
             }
-            if (nick == "") {
-                inlineMsg('nick', '[__Enter your name]');
+            if  (nick === '') {
+                var msg = '[__Enter your name]';
+                boxD(msg);
                 return false;
             }
             if (!nick.match(nickRegex)) {
-                inlineMsg('nick', '[__You have used an invalid symbols]');
+                var msg = '[__Invalid symbols]';
+                boxD(msg);
                 return false;
             }
-            if (password == "") {
-                inlineMsg('password', '[__Enter password]');
+            if  (password === '') {
+                var msg = '[__Enter your password]';
+                boxD(msg);
                 return false;
             }
-            if (confirm == "") {
-                inlineMsg('confirm', '[__Confirm password]');
-                return false;
-            }
-            if (email == "") {
-                inlineMsg('email', '[__Enter your email]');
+            if  (email === '') {
+                var msg = '[__Enter your email]';
+                boxD(msg);
                 return false;
             }
             if (!email.match(emailRegex)) {
-                inlineMsg('email', '[__You have entered an invalid email]');
+                var msg = '[__Invalid email]';
+                boxD(msg);
                 return false;
             }
-            if (capt == "") {
-                inlineMsg('captcheckout', '[__Enter a code]');
+            if  (captcha === '') {
+                var msg = '[__Enter a code]';
+                boxD(msg);
                 return false;
+            }
+            function boxD(msg) {
+                dhtmlx.modalbox({ 
+                    type:'alert-error',
+                    title:'[__Error]', 
+                    text:"<strong>" + msg + "</strong>",
+                    buttons:["Ok"]
+                });
             }
             return true;
         }
     </script>
+
     <form name="registration" id="registration" method="post" action="" enctype="multipart/form-data" onsubmit="return checkUserForm(this);">
 [endelse]
 <input type="hidden" name="{mode}" value="1" />
@@ -138,15 +147,17 @@ die();?>
                     [__Avatar]
                 </a>
             </p>
-            <div id="shdesc"  class="none"><div class="avatar"><input type="file" name="avatar" value="" /></div></div>
+            <div id="shdesc"  class="none">
+                <div class="avatar"><input type="file" name="avatar" value="" /></div>
+            </div>
         </td>
     </tr>
     <tr class="even">
         <th style="width:165px;">[__Username]</th>
         [ifelse=profile]
-            <td class="left" colspan="2"><input type="text" name="user" id="user" value="{username}" /></td>
+            <td class="left" colspan="2"><input type="text" name="user" id="user" onkeyup="checkUsername('{mode}');" value="{username}" /></td>
        [else]
-            <td class="left"><input type="text" name="user" id="user" onkeyup="checkUsername('{mode}');" value="{user}" class="required" /></td>
+            <td class="left"><input type="text" name="user" id="user" value="{user}" class="required" /></td>
             <td class="center" style="width:380px;">
                 <div id="help" class="help block">[__Only latin characters, digits and symbol "_"]</div>
                 <div id="good" class="none"><font color="#00cc00">[__Login is allowed]</font></div>
@@ -163,9 +174,18 @@ die();?>
        [endelse]
     </tr>
     [if=profile]
-        <tr class="even"><th>[__Access level]</th><td colspan="2" class="left">{access}</td></tr>
-        <tr class="even"><th>[__Personal status]</th><td colspan="2" class="left">{status}</td></tr>
-        <tr class="even"><th>[__Rate]</th><td colspan="2" class="left">{stars}</td></tr>
+        <tr class="even">
+            <th>[__Access level]</th>
+            <td colspan="2" class="left">{access}</td>
+        </tr>
+        <tr class="even">
+            <th>[__Personal status]</th>
+            <td colspan="2" class="left">{status}</td>
+        </tr>
+        <tr class="even">
+            <th>[__Rate]</th>
+            <td colspan="2" class="left">{stars}</td>
+        </tr>
         <tr class="even">
             <th>[__Rights]</th>
             [ifelse=admin]
@@ -202,19 +222,55 @@ die();?>
             <th>[__E-mail]</th>
             <td colspan="2" class="left"><input type="text" name="email" id="email" value="{email}" size="35" class="required" /></td>
         </tr>
-        <tr class="even"><th>[__Time zone]</th><td colspan="2" class="left">{utz}</td></tr>
-        <tr class="even"><th>[__ICQ]</th><td colspan="2" class="left"><input type="text" name="fields[icq]" value="{icq}" size="12" /></td></tr>
-        <tr class="even"><th>[__Website]</th><td colspan="2" class="left"><input type="text" name="fields[website]" value="{website}" size="50" /></td></tr>
-        <tr class="even"><th>[__Country]</th><td colspan="2" class="left"><input type="text" name="fields[country]" value="{country}" size="25" /></td></tr>
-        <tr class="even"><th>[__City]</th><td colspan="2" class="left"><input type="text" name="fields[city]" value="{city}" size="25" /></td></tr>
+        <tr class="even">
+            <th>[__Time zone]</th>
+            <td colspan="2" class="left">{utz}</td>
+        </tr>
+        <tr class="even">
+            <th>[__ICQ]</th>
+            <td colspan="2" class="left"><input type="text" name="fields[icq]" value="{icq}" size="12" /></td>
+        </tr>
+        <tr class="even">
+            <th>[__Website]</th>
+            <td colspan="2" class="left"><input type="text" name="fields[website]" value="{website}" size="50" /></td>
+        </tr>
+        <tr class="even">
+            <th>[__Country]</th>
+            <td colspan="2" class="left"><input type="text" name="fields[country]" value="{country}" size="25" /></td>
+        </tr>
+        <tr class="even">
+            <th>[__City]</th>
+            <td colspan="2" class="left"><input type="text" name="fields[city]" value="{city}" size="25" /></td>
+        </tr>
         [ifelse=profile]
-            <tr class="even"><th>[__Registration]</th><td colspan="2" class="center">{regdate}</td></tr>
-            <tr class="even"><th>[__Last visit]</th><td colspan="2" class="center">{lastvisit}</td></tr>
-            <tr class="even"><th>[__Visits]</th><td colspan="2" class="center">{visits}</td></tr>
-            <tr class="even"><th>[__Posts]</th><td colspan="2" class="center">{posts}</td></tr>
-            <tr class="even"><th>[__Comments]</th><td colspan="2" class="center">{comments}</td></tr>
-            <tr class="even"><th>[__Topics]</th><td colspan="2" class="center">{topics}</td></tr>
-            <tr class="even"><th>[__Replies]</th><td colspan="2" class="center">{replies}</td></tr>
+            <tr class="even">
+                <th>[__Registration]</th>
+                <td colspan="2" class="center">{regdate}</td>
+            </tr>
+            <tr class="even">
+                <th>[__Last visit]</th>
+                <td colspan="2" class="center">{lastvisit}</td>
+            </tr>
+            <tr class="even">
+                <th>[__Visits]</th>
+                <td colspan="2" class="center">{visits}</td>
+            </tr>
+            <tr class="even">
+                <th>[__Posts]</th>
+                <td colspan="2" class="center">{posts}</td>
+            </tr>
+            <tr class="even">
+                <th>[__Comments]</th>
+                <td colspan="2" class="center">{comments}</td>
+            </tr>
+            <tr class="even">
+                <th>[__Topics]</th>
+                <td colspan="2" class="center">{topics}</td>
+            </tr>
+            <tr class="even">
+                <th>[__Replies]</th>
+                <td colspan="2" class="center">{replies}</td>
+            </tr>
         [else]
             <tr class="even"><td colspan="3" class="help">[__Required fields have a yellow background]</td></tr>
         [endelse]

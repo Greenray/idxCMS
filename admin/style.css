@@ -162,16 +162,6 @@ div#drag th   { border: 2px groove #fff }
 
 .rowhandler { text-align: center; width: 25px }
 
-#err    { display: none; padding-left: 7px; position: absolute; z-index: 200 }
-#errmsg {
-    background: red; color: #fff;
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
-    display: block;
-    font-weight: bold;
-    padding: 5px;
-    text-align: center;
-}
-
 #unitip {
     color: #000;
     display: none;

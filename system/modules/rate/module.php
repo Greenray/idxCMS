@@ -37,9 +37,11 @@ function RateComment($user, $act, $id) {
 
 function GetRate($for, &$item) {
     $item = explode('.', $for);
-    if (!empty($item[3]))
-         $item = CONTENT.$item[0].DS.$item[1].DS.$item[2].DS.$item[3].DS.'rate';
-    else $item = CONTENT.$item[0].DS.$item[1].DS.$item[2].DS.'rate';
+    if (!empty($item[3])) {
+        $item = CONTENT.$item[0].DS.$item[1].DS.$item[2].DS.$item[3].DS.'rate';
+    } else {
+        $item = CONTENT.$item[0].DS.$item[1].DS.$item[2].DS.'rate';
+    }
     return GetUnserialized($item);
 }
 
@@ -55,7 +57,9 @@ function ShowRate($for) {
         foreach ($rate as $key => $op) {
             $sum = $sum + $op;
         }
-        if ($voices !== 0) $value = (int) ($sum / $voices);
+        if ($voices !== 0) {
+            $value = intval($sum / $voices);
+        }
     }
     $user = USER::getUser('username');
     if (($user !== 'guest') && !array_key_exists($user, $rate)) {
@@ -63,12 +67,12 @@ function ShowRate($for) {
     }
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'rate.tpl');
     return $TPL->parse(
-                array('value' => $value,              # Rate value
-                      'voted' => $voices,             # Number of voices
-                      'item'  => $for,                # Item
-                      'width' => intval($value * 84 / 100),   # Width of rate value field
-                      'event' => $event               # Allow rating?
-                )
+        array('value' => $value,                      # Rate value
+              'voted' => $voices,                     # Number of voices
+              'item'  => $for,                        # Item
+              'width' => intval($value * 84 / 100),   # Width of rate value field
+              'event' => $event                       # Allow rating?
+        )
     );
 }
 

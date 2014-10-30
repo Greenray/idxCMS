@@ -12,6 +12,7 @@ if (!defined('idxCMS')) die();?>
     <meta http-equiv="Content-Language" content="{locale}" />
     [show=meta]
     <link href="{CURRENT_SKIN}style.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="{TOOLS}message.css" rel="stylesheet" type="text/css" media="screen" />
     <script type="text/javascript" src="{TOOLS}jquery.js"></script>
     [if=index]
         <script type="text/javascript">
@@ -43,6 +44,7 @@ if (!defined('idxCMS')) die();?>
     <script type="text/javascript" src="{TOOLS}jquery.rating-min.js"></script>
     <script type="text/javascript" src="{TOOLS}unitip-min.js"></script>
     <script type="text/javascript" src="{TOOLS}message-min.js"></script>
+    <script type="text/javascript" src='{TOOLS}message.js'></script>
     <script type="text/javascript">
         function ShowHide(obj) {
             if (obj == "none") {

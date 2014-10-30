@@ -41,8 +41,9 @@ die();?>
         var username = form.username.value;
         var password = form.password.value;
         var nameRegex = /^[a-zA-Z0-9_]+(([\_][a-zA-Z0-9])?[a-zA-Z0-9_]*)*$/;
-        if (username == "") {
-            inlineMsg('username', '[__Enter your login]');
+        if  (user === '') {
+            var msg = '[__Enter your login]';
+            boxD(msg);
             return false;
         }
         if (!username.match(nameRegex)) {
@@ -55,6 +56,7 @@ die();?>
         }
         return true;
     }
+    
     </script>
     <div class="login_panel">
         <ul class="links">
@@ -65,8 +67,14 @@ die();?>
             <li id="login" class="none">
                 <form id="login" name="login" method="post" action="" onsubmit="return checkLoginForm(this);">
                     <table>
-                        <tr><td>[__Username]:</td><td><input type="text" name="username" id="username" size="15" /></td></tr>
-                        <tr><td>[__Password]:</td><td><input type="password" name="password" id="password" size="15"/></td></tr>
+                        <tr>
+                            <td>[__Username]:</td>
+                            <td><input type="text" name="username" id="username" size="15" /></td>
+                        </tr>
+                        <tr>
+                            <td>[__Password]:</td>
+                            <td><input type="password" name="password" id="password" size="15"/></td>
+                        </tr>
                     </table>
                     <p class="center"><input type="submit" name="login" value="[__Log in]" class="submit" /></p>
                 </form>

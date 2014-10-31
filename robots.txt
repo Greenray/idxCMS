@@ -1,8 +1,7 @@
 User-agent: *
 Disallow: /admin/
-Disallow: /backups/
 Disallow: /content/
-Disallow: /system/
 Disallow: /skins/
+Disallow: /system/
 Disallow: /tools/
 Sitemap: sitemap.xml

@@ -20,11 +20,10 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 ini_set('display_errors', 0);
-
 mb_internal_encoding("UTF-8");
 
-setlocale(LC_CTYPE, array('ru_RU.utf8', 'ru_UA.utf8')); 
-setlocale(LC_ALL, array('ru_RU.utf8', 'ru_UA.utf8'));
+setlocale(LC_CTYPE, array('ru_RU.utf8', 'ru_UA.utf8', 'en_US.utf-8', 'en_GB.utf-8')); 
+setlocale(LC_ALL, array('ru_RU.utf8', 'ru_UA.utf8', 'en_US.utf-8', 'en_GB.utf-8'));
 
 if (date_default_timezone_set(date_default_timezone_get()) === FALSE) {
     date_default_timezone_set('UTC');
@@ -38,25 +37,29 @@ while (list($global) = each($GLOBALS)) {
 }
 unset($global);
 
-#error_reporting(0);
-error_reporting(-1);
+error_reporting(0);
 
-function idxErrorHandler ($errno, $errmsg, $filename, $linenum, $vars) {
-    $errortype = array (1 => "Error",
-                        2 => "Warning",
-                        4 => "Parsing Error",
-                        8 => "Notice",
-                       16 => "Core Error",
-                       32 => "Core Warning",
-                       64 => "Compile Error",
-                      128 => "Compile Warning",
-                      256 => "User Error",
-                      512 => "User Warning",
-                     1024 => "User Notice");
+function idxErrorHandler1($errno, $errmsg, $filename, $linenum) {
+    $errortype = array (
+           1 => "Error",
+           2 => "Warning",
+           4 => "Parsing Error",
+           8 => "Notice",
+          16 => "Core Error",
+          32 => "Core Warning",
+          64 => "Compile Error",
+         128 => "Compile Warning",
+         256 => "User Error",
+         512 => "User Warning",
+        1024 => "User Notice",
+        2048 => 'Runtime Notice',
+        4096 => 'Catchable Fatal Error',
+        8192 => 'Deprecated'
+    );
     $error = date("Y-m-d H:i:s (T)").' '.$errortype[$errno].': '.$errmsg.' in '.$filename.', line '.$linenum.PHP_EOL;
     file_put_contents('./content/logs/idxerror.log', $error, FILE_APPEND | LOCK_EX);
 }
-set_error_handler("idxErrorHandler", E_ALL | E_STRICT);
+set_error_handler("idxErrorHandler", E_ALL);
 
 # Constants
 define('idxCMS',  TRUE);

@@ -20,7 +20,7 @@ die();?>
         var idsList = getIds(index);
         var idsListCount = idsList.length;
         var titlesList = getTitles(index);
-        var categoriesList = document.forms['post'].elements['new_category'];
+        var categoriesList = document.forms['editor'].elements['new_category'];
         categoriesList.length = 0;
         for (i = 0; i < idsListCount; i++) {
             if (document.createElement) {
@@ -29,14 +29,11 @@ die();?>
                 newCategoriesList.value = idsList[i];
                 (categoriesList.options.add) ? categoriesList.options.add(newCategoriesList) : categoriesList.add(newCategoriesList, null);
             } else {
-                // M3.x-4.x
                 newCategoriesList.options[i] = new Option(idsList[i], titlesList[i], false, false);
             }
         }
     }
-    setCategories(document.forms['post'].elements['new_section'].selectedIndex);
-</script>
-<script type="text/javascript">
+    setCategories(document.forms['editor'].elements['new_section'].selectedIndex);
     function checkPost(form) {
         var title = form.title.value;
         var text = form.text.value;
@@ -56,7 +53,7 @@ die();?>
         return true;
     }
 </script>
-<form name="post" method="post" action="" onsubmit="return checkPost(this);">
+<form name="editor" method="post" action="" onsubmit="return checkPost(this);">
     <fieldset>
     <legend>{header}</legend>
         <table class="std">
@@ -107,7 +104,7 @@ die();?>
                     </div>
                 </td>
             </tr>
-            <tr class="odd"><th colspan="4">[__Text]</th></tr>
+            <tr class="odd center"><th colspan="4">[__Text]</th></tr>
             <tr><td colspan="4">{bbCodes_text}</td></tr>
             <tr><td colspan="4"><textarea id="text" name="text" cols="80" rows="25">{text}</textarea></td></tr>
             <tr class="odd">

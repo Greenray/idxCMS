@@ -105,7 +105,8 @@ $output['title']    = FILTER::get('REQUEST', 'title');
 $output['keywords'] = FILTER::get('REQUEST', 'keywords');
 $output['desc']     = FILTER::get('REQUEST', 'desc');
 $output['text']     = FILTER::get('REQUEST', 'text');
-$output['opened']   = FILTER::get('REQUEST', 'opened');
+$opened = FILTER::get('REQUEST', 'opened');
+$output['opened']   = empty($opened) ? TRUE : $opened;
 
 if (FILTER::get('REQUEST', 'edit') && CMS::call('USER')->checkRoot()) {
     $content = CMS::call('POSTS')->getContent($category);

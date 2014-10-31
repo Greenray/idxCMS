@@ -4,6 +4,7 @@
 # ADMINISTRATION - POSTS - SECTIONS TEMPLATE
 
 die();?>
+
 <script type="text/javascript" src="{TOOLS}redips-drag-min.js"></script>
 <script type="text/javascript" src="{TOOLS}drag-min.js"></script>
 <div class="module">[__Sections]</div>

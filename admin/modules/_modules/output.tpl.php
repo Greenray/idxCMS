@@ -4,6 +4,7 @@
 # ADMINISTRATION - OUTPUT TEMPLATE
 
 die();?>
+
 <div class="module">[__Output management]</div>
 <script>
     function CheckString(inputString, needle, startingIndex) {
@@ -27,10 +28,10 @@ die();?>
                     // Selected element section,
                     // so if it the first in the list of selected elements,
                     // we add it's index into array
-                    if (selectedIndexes.length == 0) {
+                    if (selectedIndexes.length === 0) {
                         selectedIndexes.push(i);
                         var j = 1;
-                        while (((i+j) <= (object.options.length-1)) && (object.options[i+j].value.substring(0,1) == '>')) {
+                        while (((i+j) <= (object.options.length-1)) && (object.options[i+j].value.substring(0,1) === '>')) {
                             selectedIndexes.push(j);
                             j++;
                         }
@@ -45,17 +46,17 @@ die();?>
     // If the section is selected, categories are displaced together with it irrespective of a choice
     function ShiftObjectUp(object, objSelectedIndexes) {
         var selectedElements = objSelectedIndexes.length;              // Number of xelected elements
-        if (section == 1) {
+        if (section === 1) {
             var prevSectionIndex = object.selectedIndex - 1;           // Next section
             var nextSection = new Array();
             var j = 0;                                                 // Number of elements
             // We search for the first element in the list of categories of this section
-            while (object.options[prevSectionIndex].value.substring(0,1) == '>') {
+            while (object.options[prevSectionIndex].value.substring(0,1) === '>') {
                 nextSection[prevSectionIndex] = object.options[prevSectionIndex].value;
                 prevSectionIndex--;
                 j++;
             }
-            if (object.options[prevSectionIndex].value.substring(0,1) == '/') {
+            if (object.options[prevSectionIndex].value.substring(0,1) === '/') {
                 j++;
             }
             // The element is found
@@ -64,18 +65,18 @@ die();?>
             }
             return;
         } else {
-            if (selectedElements == 1) {
+            if (selectedElements === 1) {
                 var currOption = object.options[objSelectedIndexes[0]];        // Current element
                 var nextOption = object.options[objSelectedIndexes[0] - 1];    // Next element
                 var sectOption = object.options[objSelectedIndexes[0] - 2];    // Element which can appear section
                 // Element can be moved between sections too
                 if (currOption.value.substring(0,1) !== '>') {
                     // Moving of categories between sections we will forbid while
-                    if (nextOption.value.substring(0,1) == '/' ) {
+                    if (nextOption.value.substring(0,1) === '/' ) {
                         nextOption = object.options[objSelectedIndexes[0]];
                     }
                 // Post can't be in section, only in category
-                } else if (sectOption.value.substring(0,1) == '/' ) {
+                } else if (sectOption.value.substring(0,1) === '/' ) {
                     nextOption = object.options[objSelectedIndexes[0] - 2];
                 }
                 // New position of the moving element
@@ -93,14 +94,14 @@ die();?>
     }
     function ShiftObjectDown(object, objSelectedIndexes) {
         var selectedElements = objSelectedIndexes.length;
-        if (section == 1) {
+        if (section === 1) {
             var nextSectionIndex = object.selectedIndex + selectedElements;
-            if (object.options[nextSectionIndex].value.substring(0,1) == '/') {
+            if (object.options[nextSectionIndex].value.substring(0,1) === '/') {
                 var nextSection = new Array();
                 nextSectionIndex++;
                 var j = 0;
                 // We search for the last element in the list of categories of this section
-                while ((nextSectionIndex < object.options.length) && (object.options[nextSectionIndex].value.substring(0,1) == '>')) {
+                while ((nextSectionIndex < object.options.length) && (object.options[nextSectionIndex].value.substring(0,1) === '>')) {
                     nextSection[nextSectionIndex] = object.options[nextSectionIndex].value;
                     nextSectionIndex++;
                     j++;
@@ -111,15 +112,15 @@ die();?>
             }
             return;
         } else {
-            if (selectedElements == 1) {
+            if (selectedElements === 1) {
                 var currOption = object.options[objSelectedIndexes[0]];
                 var nextOption = object.options[objSelectedIndexes[0] + 2];
                 var sectOption = object.options[objSelectedIndexes[0] + 1];
                 if (currOption.value.substring(0,1) !== '>') {
-                    if (object.options[objSelectedIndexes[0] + 1].value.substring(0,1) == '/' ) {
+                    if (object.options[objSelectedIndexes[0] + 1].value.substring(0,1) === '/' ) {
                         nextOption = object.options[objSelectedIndexes[0]];
                     }
-                } else if (sectOption.value.substring(0,1) == '/' ) {
+                } else if (sectOption.value.substring(0,1) === '/' ) {
                         nextOption = object.options[objSelectedIndexes[0] + 3];
                 }
                 object.insertBefore(currOption, nextOption);
@@ -134,7 +135,7 @@ die();?>
         return;
     }
     function MoveUp(object) {
-        if (object.selectedIndex != -1) {
+        if (object.selectedIndex !== -1) {
             object.options[object.selectedIndex-1].text  = object.options[object.selectedIndex].text;
             object.options[object.selectedIndex-1].value = object.options[object.selectedIndex].value;
             object.options[object.selectedIndex].text    = object.options[object.selectedIndex-1].text;
@@ -144,7 +145,7 @@ die();?>
         return;
     }
     function MoveDown(object) {
-        if (object.selectedIndex != -1) {
+        if (object.selectedIndex !== -1) {
             object.options[object.selectedIndex+1].text  = object.options[object.selectedIndex].text;
             object.options[object.selectedIndex+1].value = object.options[object.selectedIndex].value;
             object.options[object.selectedIndex].text    = object.options[object.selectedIndex+1].text;
@@ -156,10 +157,10 @@ die();?>
     // Moving of elements between lists
     function AddObject(from, to) {
         var newoption = document.createElement('option');
-        if (from.selectedIndex != -1) {
+        if (from.selectedIndex !== -1) {
             newoption.text  = from.options[from.selectedIndex].text;
             newoption.value = from.options[from.selectedIndex].value;
-            if (is_ie == -1)
+            if (is_ie === -1)
                  to.add(newoption, null);
             else to.add(newoption, 0);
             from.remove(from.selectedIndex);
@@ -167,13 +168,13 @@ die();?>
         return;
     }
     function SortValues(object, direction) {
-        if (object.selectedIndex != -1) {
+        if (object.selectedIndex !== -1) {
             var selIndexes = new Array();
             selIndexes = GetSelectedIndexes(object);
-            if (direction == 'up') {
+            if (direction === 'up') {
                 ShiftObjectUp(object, selIndexes);
             }
-            if (direction == 'down') {
+            if (direction === 'down') {
                 ShiftObjectDown(object, selIndexes);
             }
         }
@@ -183,24 +184,24 @@ die();?>
     // Duplicate element in the list
     function Duplicate(object) {
         var newelement = document.createElement('option');
-        if (object.selectedIndex != -1) {
+        if (object.selectedIndex !== -1) {
             newelement.text  = object.options[object.selectedIndex].text;
             newelement.value = object.options[object.selectedIndex].value;
-            if (is_ie == -1)
+            if (is_ie === -1)
                  object.add(newelement, null);
             else object.add(newelement, 0);
         }
         return;
     }
     function Remove(object) {
-        if (object.selectedIndex != -1) {
+        if (object.selectedIndex !== -1) {
             object.remove(object.selectedIndex);
         }
         return;
     }
     // Save the result of sorting
     function SaveList(object) {
-        if (object != null) {
+        if (object !== null) {
             object.multiple = true;
             i = 0;
             for (i = 0; i < object.options.length; i++) {

@@ -9,13 +9,13 @@ die();?>
     function check(id) {
         var form = document.getElementById(id);
         if (form.password.value === form.confirm.value) {
-            if (form.password.value !== "") {
-                document.getElementById("yes").style.display = "block";
-                document.getElementById("no").style.display  = "none";
+            if (form.password.value !== '') {
+                document.getElementById('yes').style.display = 'block';
+                document.getElementById('no').style.display  = 'none';
             }
         } else {
-            document.getElementById("yes").style.display = "none";
-            document.getElementById("no").style.display  = "block";
+            document.getElementById('yes').style.display = 'none';
+            document.getElementById('no').style.display  = 'block';
         }
     }
 </script>

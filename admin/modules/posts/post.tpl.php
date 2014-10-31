@@ -34,8 +34,6 @@ die();?>
         }
     }
     setCategories(document.forms['post'].elements['new_section'].selectedIndex);
-</script>
-<script type="text/javascript">
     function checkPost(form) {
         var title = form.title.value;
         var text = form.text.value;

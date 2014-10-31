@@ -8,7 +8,7 @@ CMS "out of the box" allows you to:
 - discuss any of publications with other users;
 - create the catalog of files with their detailed description and the possibility to download;
 - create the simple photo gallery of several albums;
-- create the catalog of references;
+- create the catalog of references with illustrations;
 - organize the forum;
 - conduct a survey of visitors;
 - conduct the private correspondence with other users.
@@ -33,9 +33,9 @@ idxCMS - это система управления сайтом, иначе, у
 CMS "из коробки" позволяет:
 - публиковать статьи с графическими иллюстрациями, php, html и иным кодом;
 - обсуждать публикации с пользователями;
-- создать каталог файлов с подробным описанием и возможностью скачивания;
+- создать каталог файлов с подробным описанием, скриншотами и возможностью скачивания;
 - создать простую фотогалерею из нескольких альбомов;
-- создать каталог ссылок;
+- создать каталог ссылок с иллюстрациями;
 - организовать форум;
 - организовать опрос посетителей;
 - вести приватную переписку с другими пользователями.

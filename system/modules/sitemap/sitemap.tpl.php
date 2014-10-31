@@ -4,6 +4,7 @@
 # MODULE SITEMAP - TEMPLATE
 
 die();?>
+
 <li class="level1 parent">
     <a class="level1 parent" href="{link}">
         <span class="bg">

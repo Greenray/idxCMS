@@ -588,6 +588,7 @@ function Sitemap() {
             $gsm = '';
             $obj = strtoupper($module);
             $sections = CMS::call($obj)->getSections();
+            unset($sections['drafts']);
             foreach ($sections as $id => $section) {
                 $categories = CMS::call($obj)->getCategories($id);
                 if (!empty($categories)) {
@@ -595,6 +596,7 @@ function Sitemap() {
                     "\t<url>".LF.
                     "\t\t<loc>".$url."?module=".$module.SECTION.$id."</loc>".LF.
                     "\t\t<lastmod>".$time."</lastmod>".LF.
+                    "\t\t<changefreq>weekly</changefreq>".LF.
                     "\t</url>".LF;
                     foreach ($categories as $key => $category) {
                         $category = CMS::call($obj)->getCategory($key);
@@ -604,6 +606,7 @@ function Sitemap() {
                             "\t<url>".LF.
                             "\t\t<loc>".$url."?module=".$module.SECTION.$id.CATEGORY.$key."</loc>".LF.
                             "\t\t<lastmod>".$time."</lastmod>".LF.
+                            "\t\t<changefreq>weekly</changefreq>".LF.
                             "\t</url>".LF;
                             foreach ($content as $i => $item) {
                                 $gsm .=

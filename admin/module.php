@@ -18,17 +18,17 @@ if (!defined('idxADMIN') || !USER::loggedIn()) die();?>
     <script type="text/javascript" src="<?php echo TOOLS;?>colorbox/jquery.colorbox-min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $(".cbox").colorbox({rel:'cbox'});
+            $('.cbox').colorbox({rel:'cbox'});
         });
     </script>
     <script type="text/javascript" src="<?php echo TOOLS;?>unitip-min.js"></script>
     <script type="text/javascript" src="<?php echo TOOLS?>message-min.js"></script>
     <script type="text/javascript">
         function ShowHide(obj) {
-            if (obj == "none") {
-                return "inline";
+            if (obj === 'none') {
+                return 'inline';
             } else {
-                return "none";
+                return 'none';
             }
         }
     </script>

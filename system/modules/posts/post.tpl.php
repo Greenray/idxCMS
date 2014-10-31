@@ -10,21 +10,21 @@ die();?>
     var titles = new Array({titles});
     function getIds(index) {
         var idsValues = ids[index];
-        return idsValues.split(",");
+        return idsValues.split(',');
     }
     function getTitles(index) {
         var titlesText = titles[index];
-        return titlesText.split(",");
+        return titlesText.split(',');
     }
     function setCategories(index) {
         var idsList = getIds(index);
         var idsListCount = idsList.length;
         var titlesList = getTitles(index);
-        var categoriesList = document.forms["post"].elements["new_category"];
+        var categoriesList = document.forms['post'].elements['new_category'];
         categoriesList.length = 0;
         for (i = 0; i < idsListCount; i++) {
             if (document.createElement) {
-                var newCategoriesList = document.createElement("OPTION");
+                var newCategoriesList = document.createElement('OPTION');
                 newCategoriesList.text = titlesList[i];
                 newCategoriesList.value = idsList[i];
                 (categoriesList.options.add) ? categoriesList.options.add(newCategoriesList) : categoriesList.add(newCategoriesList, null);
@@ -34,7 +34,7 @@ die();?>
             }
         }
     }
-    setCategories(document.forms["post"].elements["new_section"].selectedIndex);
+    setCategories(document.forms['post'].elements['new_section'].selectedIndex);
 </script>
 <script type="text/javascript">
     function checkPost(form) {

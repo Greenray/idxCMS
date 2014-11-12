@@ -4,8 +4,8 @@
 # Module BANNERS - TEMPLATE
 
 die();?>
-<script type="text/javascript" src="{TOOLS}jquery.mousewheel-min.js"></script>
-<script type="text/javascript" src="{TOOLS}jquery.horinaja-min.js"></script>
+<script type="text/javascript" src="{TOOLS}jquery.mousewheel.min.js"></script>
+<script type="text/javascript" src="{TOOLS}jquery.horinaja.min.js"></script>
 <script type="text/javascript">
     $(function() {
         $('#banner').Horinaja({

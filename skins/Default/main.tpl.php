@@ -35,15 +35,15 @@ if (!defined('idxCMS')) die();?>
         </script>
     [endif]
     <link href="{TOOLS}colorbox/colorbox.css" rel="stylesheet" type="text/css" media="screen" />
-    <script type="text/javascript" src="{TOOLS}colorbox/jquery.colorbox-min.js"></script>
+    <script type="text/javascript" src="{TOOLS}colorbox/jquery.colorbox.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $(".cbox").colorbox({rel:'cbox'});
         });
     </script>
-    <script type="text/javascript" src="{TOOLS}jquery.rating-min.js"></script>
-    <script type="text/javascript" src="{TOOLS}unitip-min.js"></script>
-    <script type="text/javascript" src="{TOOLS}message-min.js"></script>
+    <script type="text/javascript" src="{TOOLS}jquery.rating.min.js"></script>
+    <script type="text/javascript" src="{TOOLS}unitip.min.js"></script>
+    <script type="text/javascript" src="{TOOLS}message.min.js"></script>
     <script type="text/javascript" src='{TOOLS}message.js'></script>
     <script type="text/javascript">
         function ShowHide(obj) {

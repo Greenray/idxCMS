@@ -4,8 +4,8 @@
 # ADMINISTRATION - CATEGORIES TEMPLATE
 
 die();?>
-<script type="text/javascript" src="{TOOLS}redips-drag-min.js"></script>
-<script type="text/javascript" src="{TOOLS}drag-min.js"></script>
+<script type="text/javascript" src="{TOOLS}redips.drag.min.js"></script>
+<script type="text/javascript" src="{TOOLS}drag.min.js"></script>
 <div class="module">[__Categories]</div>
 <fieldset>
     <form name="sections" method="post" action="">

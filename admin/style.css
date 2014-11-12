@@ -158,7 +158,7 @@ div#nodrag th,
 div#drag th   { border: 2px groove #fff }
 
 .nodrag,
-.drag { margin: auto }
+.drag { border: 0; margin: auto }
 
 .rowhandler { text-align: center; width: 25px }
 

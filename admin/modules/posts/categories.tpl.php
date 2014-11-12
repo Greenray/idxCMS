@@ -4,8 +4,9 @@
 # ADMINISTRATION - POSTS - CATEGORIES TEMPLATE
 
 die();?>
-<script type="text/javascript" src="{TOOLS}redips-drag-min.js"></script>
-<script type="text/javascript" src="{TOOLS}drag-min.js"></script>
+
+<script type="text/javascript" src="{TOOLS}redips.drag.min.js"></script>
+<script type="text/javascript" src="{TOOLS}drag.min.js"></script>
 <div class="module">[__Categories]</div>
 <fieldset>
     <form name="sections" method="post" action="">
@@ -48,8 +49,14 @@ die();?>
         <div id="drag">
             <table id="sortable">
                 [each=sections]
-                    <tr><td colspan="7" class="mark header"><div id="{sections[id]}" class="group">{sections[title]}</div></td></tr>
-                    <tr style="line-height:2px;height:2px;"><td colspan="7" style="border:0;">&nbsp;</td></tr>
+                    <tr>
+                        <td colspan="7" class="mark header">
+                            <div id="{sections[id]}" class="group">{sections[title]}</div>
+                        </td>
+                    </tr>
+                    <tr style="line-height:2px;height:2px;">
+                        <td colspan="7" style="border:0;">&nbsp;</td>
+                    </tr>
                     [each=sections[categories]]
                         <tr class="{categories[class]}">
                             <td class="rowhandler">
@@ -58,7 +65,9 @@ die();?>
                                 </div>
                             </td>
                             <td class="id center">{categories[id]}</td>
-                            <td class="icon center"><img src="{categories[path]}icon.png" width="35" height="35" alt="icon" /></td>
+                            <td class="icon center">
+                                <img src="{categories[path]}icon.png" width="35" height="35" alt="icon" />
+                            </td>
                             <td class="title">{categories[title]}</td>
                             <td class="desc">{categories[desc]}</td>
                             <td class="access center">{categories[access]}</td>

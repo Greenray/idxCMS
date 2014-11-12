@@ -13,16 +13,16 @@ if (!defined('idxADMIN') || !USER::loggedIn()) die();?>
     <meta http-equiv="pragma" content="no-cache" />
     <link rel="stylesheet" type="text/css" href="<?php echo ADMIN;?>style.css" media="screen" />
     <script type="text/javascript" src="<?php echo TOOLS;?>jquery.js"></script>
-    <script type="text/javascript" src="<?php echo TOOLS;?>jquery.ui-min.js"></script>
+    <script type="text/javascript" src="<?php echo TOOLS;?>jquery.ui.min.js"></script>
     <link type="text/css" href="<?php echo TOOLS;?>colorbox/colorbox.css" rel="stylesheet" media="screen" />
-    <script type="text/javascript" src="<?php echo TOOLS;?>colorbox/jquery.colorbox-min.js"></script>
+    <script type="text/javascript" src="<?php echo TOOLS;?>colorbox/jquery.colorbox.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $('.cbox').colorbox({rel:'cbox'});
         });
     </script>
-    <script type="text/javascript" src="<?php echo TOOLS;?>unitip-min.js"></script>
-    <script type="text/javascript" src="<?php echo TOOLS?>message-min.js"></script>
+    <script type="text/javascript" src="<?php echo TOOLS;?>unitip.min.js"></script>
+    <script type="text/javascript" src="<?php echo TOOLS?>message.min.js"></script>
     <script type="text/javascript">
         function ShowHide(obj) {
             if (obj === 'none') {

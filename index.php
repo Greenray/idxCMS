@@ -133,7 +133,7 @@ if (!empty($REQUEST['logout'])) {
 }
 
 # If requested page is not set or is not exists, the site index page will be shown.
-$MODULE = empty($REQUEST['module']) ? 'forum' : basename($REQUEST['module']);
+$MODULE = empty($REQUEST['module']) ? 'index' : basename($REQUEST['module']);
 switch($MODULE) {
     case 'editor':
         include(TOOLS.'editor.php');

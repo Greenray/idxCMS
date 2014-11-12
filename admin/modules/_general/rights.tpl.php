@@ -37,9 +37,9 @@ die();?>
             <input type="checkbox" name="recursively" value="1" /> [__Recursively]<br />
         [endif]
         <input type="hidden" name="file" value="{file}" />
-        <input type="submit" name="save" value="[__Save]" />
-        <input type="reset" value="[__Reset]" />
-        <input type="button" value="[__Back]" onclick="javascript:history.back();" class="submit" />
+        <input type="submit" name="save" value="[__Save]" class="submit" />
+        <input type="reset" value="[__Reset]" class="submit" />
+        <input type="submit" value="[__Back]" onclick="javascript:history.back();" class="submit" />
     </p>
     </form>
 </fieldset>

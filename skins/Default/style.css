@@ -499,7 +499,7 @@ ul.tabs li a:focus { outline: 0 }
 .win .title     { margin: 20px 5px; text-transform: uppercase }
 .calendar       { width: 100% }
 table .calendar { padding: 2px; vertical-align: middle; border: 1px solid #e0dfdf }
-.calendar th    { background: #448aae; color: white }
+.calendar th    { background: #448aae; color: white; text-align: center }
 .last-posts li  { margin: 5px 0 }
 
 .poll { margin: 0 0 10px }
@@ -524,6 +524,7 @@ table .calendar { padding: 2px; vertical-align: middle; border: 1px solid #e0dfd
 .darkbox .title  { color: white; text-shadow: 0 1px 1px black; text-transform: uppercase }
 .lightbox .title { background: #448aae; color: white; text-transform: uppercase }
 
+.counter       { width: 250px; margin: 0 23px }
 .counter .odd  { background: inherit }
 .counter .even { background: inherit }
 

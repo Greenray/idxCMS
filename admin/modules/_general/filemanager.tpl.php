@@ -4,6 +4,7 @@
 # ADMINISTRATION - FILEMANAGER TEMPLATE
 
 die();?>
+
 <div class="module">[__Filemanager]</div>
 <fieldset>
     <table class="std">
@@ -31,7 +32,7 @@ die();?>
                 [if=elements[edit]]<td class="{elements[style]} center"><a href="{elements[edit]}">[__Edit]</a></td>[endif]
                 [if=elements[view]]<td class="{elements[style]} center"><a class="cbox" href="{elements[view]}">[__View]</a></td>[endif]
                 [if=elements[empty]]<td class="{elements[style]} center"></td>[endif]
-                <td class="{elements[style]} center"><a href="#" {elements[alert]}>[__Delete]</a></td>
+                <td class="{elements[style]} center"><a href="{elements[delete]}">[__Delete]</a></td>
             </tr>
         [endeach.elements]
     </table>

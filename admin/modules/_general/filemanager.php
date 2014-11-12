@@ -109,8 +109,8 @@ if (!empty($REQUEST['save'])) {
         }
     }
 } elseif(!empty($REQUEST['delete'])) {
-    if (!DeleteTree($path.$REQUEST['delete'], TRUE)) {
-        ShowMessage('Cannot delete directory');
+    if (!DeleteTree($path.$REQUEST['delete'])) {
+        ShowMessage('Cannot delete file or directory');
     }
 } elseif (!empty($REQUEST['mkdir'])) {
     if (!mkdir($path.$REQUEST['dirname'])) {
@@ -155,7 +155,7 @@ foreach ($elements as $key => $file) {
                 $output['elements'][$key]['empty'] = TRUE;
             }
         }
-        $output['elements'][$key]['alert'] = 'onClick="if(confirm(\''.__('Delete this file?').'\')) document.location.href = \''.$url.'&amp;path='.$path.'&amp;delete='.$file.'\'"';
+//        $output['elements'][$key]['alert'] = 'onClick="if(confirm(\''.__('Delete this file?').'\')) document.location.href = \''.$url.'&amp;path='.$path.'&amp;delete='.$file.'\'"';
         $output['elements'][$key]['style'] = 'row1';
     }
     $output['elements'][$key]['rights'] = GetRights($path.$file);

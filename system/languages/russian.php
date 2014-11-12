@@ -163,7 +163,7 @@ $LANG['def']['Online'] = 'Сейчас на сайте';
 $LANG['def']['registered'] = 'своих';
 $LANG['def']['Search bots'] = 'Поисковые боты';
 $LANG['def']['Today hosts'] = 'Сегодня хостов';
-$LANG['def']['Today users'] = 'Сегодня пользователей';
+$LANG['def']['Today visitors'] = 'Сегодня посетителей';
 $LANG['def']['Total hosts'] = 'Всего хостов';
 $LANG['def']['Total users'] = 'Всего пользователей';
 # MENU

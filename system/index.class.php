@@ -10,14 +10,17 @@ class INDEX {
     private function __construct() {}
     private function __clone() {}
     
+    # Set the name of the serialized file
     protected function setIndex($name) {
         $this->index = $name;
     }
 
+    # Get data from the serialized file
     public function getIndex($path) {
         return GetUnserialized($path.$this->index);
     }
 
+    # Write the file with serialization of data
     protected function saveIndex($path, $array) {
         return file_put_contents($path.$this->index, serialize($array), LOCK_EX);
     }

@@ -2,7 +2,7 @@
 # idxCMS version 2.2
 # Copyright (c) 2014 Greenray greenray.spb@gmail.com
 
-class CONFIG {
+final class CONFIG {
 
     private static $ini    = '';            # Configuration file
     private static $config = array();       # Site configuration.
@@ -41,19 +41,6 @@ class CONFIG {
                 if (!is_array($value)) {
                     $ini .= $key.' = "'. str_replace('"', '&quot;', $value).'"'.LF;
                 } else {
-/*
-                    # This is for PHP > 5.2
-                    foreach ($value as $i => $item) {
-                        if (!is_array($item))
-                            $ini .= $key.'['.$i.'] = "'. str_replace('"', '&quot;', $item).'"'.LF;
-                        else {
-                            foreach ($item as $j => $point) {
-                                if (!empty($point))
-                                    $ini .= $key.'['.$i.']['.$j.'] = "'. str_replace('"', '&quot;', $point).'"'.LF;
-                            }
-                        }
-                    }
-*/
                     foreach ($value as $i => $item) {
                         if (!is_array($item)) {
                             $ini .= $key.'[] = "'. str_replace('"', '&quot;', $item).'"'.LF;

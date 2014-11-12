@@ -18,12 +18,12 @@ class MESSAGE extends INDEX {
     public function __construct($path, $file) {
         $this->path = $path;
         $this->setIndex($file);
-        if ($path === CONTENT) {
-            $this->config = CONFIG::getSection($file);
+        if ($this->path === CONTENT) {
+            $this->config = CONFIG::getSection($this->index);
         } else { 
             $this->config = CONFIG::getSection('pm');
         }
-        $this->messages = GetUnserialized($path.$file);
+        $this->messages = self::getIndex($this->path);
     }
 
     public function getMessages($from = '') {

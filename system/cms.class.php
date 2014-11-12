@@ -21,6 +21,7 @@ class CMS {
         return empty(self::$obj[$class]) ? self::register($class) : self::$obj[$class];
     }
 
+    # Deleting of object
     public static function remove($class) {
         if (isset(self::$obj[$class])) {
             unset(self::$obj[$class]);

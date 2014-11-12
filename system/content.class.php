@@ -17,7 +17,7 @@ class CONTENT extends INDEX {
 
     public function getSections() {
         if (empty($this->sections)) {
-            $index = GetUnserialized($this->container.$this->index);
+            $index = self::getIndex($this->container);
             foreach ($index as $id => $section) {
                 if (USER::checkAccess($section)) {
                     $this->sections[$id] = $section;    # Section is allowed for current user

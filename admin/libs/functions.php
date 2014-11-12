@@ -84,7 +84,7 @@ function GetColor($name = 'idselector', $def_color = '') {
                 $color = str_pad($red, 2, '0', STR_PAD_LEFT).''.str_pad($green, 2, '0', STR_PAD_LEFT).''.str_pad($blue, 2, '0', STR_PAD_LEFT);
                 $output .= '<td height="12px" width="12px" bgcolor="#'.$color.'" onclick="selectColor(\'#'.$color.'\');" style="cursor: pointer;"></td>';
                 $row_return++;
-                if ($row_return == 18) {
+                if ($row_return === 18) {
                     $output .= '</tr><tr>';
                     $row_return = 0;
                 }

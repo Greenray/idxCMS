@@ -18,9 +18,9 @@ class SYSTEM {
     private static $feeds = array();
     private static $navigation = array();
     private static $menu = array();
+    private static $pagename = '';
     private static $sitemap = array();
     private static $search = array();
-    private static $pagename = '';
     private static $meta = array();
 
     public function __construct() {

@@ -244,7 +244,7 @@ class TEMPLATE {
     # Localization.
     # The template is:
     # - [__var]
-    private function translate($matches) {
+    private function __translate($matches) {
         return str_replace($matches[0], __($matches[1]), $matches[0]);
     }
 
@@ -252,7 +252,7 @@ class TEMPLATE {
     # Templates are:
     # - {var}        - constant or plain variable;
     # - {var[index]} - array of variables.
-    private function value($matches) {
+    private function __value($matches) {
         # Show constant.
         if (defined($matches[1])) {
             return str_replace($matches[0], constant($matches[1]), $matches[0]);
@@ -283,7 +283,7 @@ class TEMPLATE {
         return $matches[0];
     }
 
-    private function element($matches) {
+    private function __element($matches) {
         if (!empty($matches)) {
             $params = explode(',', $matches[1]);
             if (!empty($params[1])) {
@@ -302,9 +302,9 @@ class TEMPLATE {
         $tpl = preg_replace_callback($this->patterns['ifelse'], array(&$this, '__if_else'), $tpl);
         $tpl = preg_replace_callback($this->patterns['if'], array(&$this, '__if'), $tpl);
         $tpl = preg_replace_callback($this->patterns['for'], array(&$this, '__for'), $tpl);
-        $tpl = preg_replace_callback($this->patterns['translate'], array(&$this, 'translate'), $tpl);
-        $tpl = preg_replace_callback($this->patterns['value'], array(&$this, 'value'), $tpl);
-        $tpl = preg_replace_callback($this->patterns['show'], array(&$this, 'element'), $tpl);
+        $tpl = preg_replace_callback($this->patterns['translate'], array(&$this, '__translate'), $tpl);
+        $tpl = preg_replace_callback($this->patterns['value'], array(&$this, '__value'), $tpl);
+        $tpl = preg_replace_callback($this->patterns['show'], array(&$this, '__element'), $tpl);
         return $tpl;
     }
 }

@@ -8,8 +8,8 @@ die();?>
 <div class="bbcodes">
     <script>
         var clientPC = navigator.userAgent.toLowerCase();
-        var isIE  = ((clientPC.indexOf("msie") != -1) && (clientPC.indexOf("opera") == -1));
-        var isWin = ((clientPC.indexOf("win") != -1) || (clientPC.indexOf("16bit") != -1));
+        var isIE  = ((clientPC.indexOf("msie") !== -1) && (clientPC.indexOf("opera") === -1));
+        var isWin = ((clientPC.indexOf("win") !== -1) || (clientPC.indexOf("16bit") !== -1));
         var id;
         var stored_selection = '';
         var puw;                    // Popup window
@@ -21,11 +21,11 @@ die();?>
         }
         function GetFromDropDown(val, name, area) {
             if (!val) return;
-            if (name == 'colors')   CreateBBTag('[color="' + val + '"]','[/color]', area);
-            if (name == 'bgcolors') CreateBBTag('[bgcolor="' + val + '"]','[/bgcolor]', area);
-            if (name == 'format')   CreateBBTag('[' + val + ']' + val,'[/' + val + ']', area);
-            if (name == 'typeface') CreateBBTag('[font="' + val + '"]','[/font]', area);
-            if (name == 'size')     CreateBBTag('[size=' + val + ']','[/size]', area);
+            if (name === 'colors')   CreateBBTag('[color="' + val + '"]','[/color]', area);
+            if (name === 'bgcolors') CreateBBTag('[bgcolor="' + val + '"]','[/bgcolor]', area);
+            if (name === 'format')   CreateBBTag('[' + val + ']' + val,'[/' + val + ']', area);
+            if (name === 'typeface') CreateBBTag('[font="' + val + '"]','[/font]', area);
+            if (name === 'size')     CreateBBTag('[size=' + val + ']','[/size]', area);
         }
         function CreateBBTag(opener, closer, area) {
             if (isIE && isWin)
@@ -140,7 +140,7 @@ die();?>
             var items = new Array();
             var itemString = '';
             var item = '';
-            while (item == prompt('Enter an item\r\nLeave the box empty or click Cancel\r\nto complete the list', ''))
+            while (item === prompt('Enter an item\r\nLeave the box empty or click Cancel\r\nto complete the list', ''))
                 items.push('[*]' + item + '[/*]');
             itemString = items.join('');
             itemsize = items.length;
@@ -164,7 +164,7 @@ die();?>
             var items = new Array();
             var itemString = '';
             var item;
-            while (item == prompt('Enter an item\r\nLeave the box empty or click Cancel\r\nto complete the list', ''))
+            while (item === prompt('Enter an item\r\nLeave the box empty or click Cancel\r\nto complete the list', ''))
                 items.push('[*]' + item + '[/*]');
             itemString = items.join('');
             itemsize   = items.length;
@@ -181,11 +181,11 @@ die();?>
         function RemoveBBTag(area) {
             id = document.getElementById(area);
             var text = '';
-            if (id.value != undefined) {
+            if (id.value !== undefined) {
                 text = id.value;
                 text = text.replace (/\[[^\]]*\]/g, '');
                 id.value = text;
-            } else if (id.innerText != undefined) {
+            } else if (id.innerText !== undefined) {
                 text = id.innerText;
                 text = text.replace (/\[[^\]]*\]/g, '');
                 id.innerText = text;
@@ -218,7 +218,7 @@ die();?>
         function InsertText(area, text) {
             if (area.createTextRange && area.caretPos) {
                 var caretPos = area.caretPos;
-                caretPos.text = caretPos.text.charAt(caretPos.text.length - 1) == ' ' ? caretPos.text + text + ' ' : caretPos.text + text;
+                caretPos.text = caretPos.text.charAt(caretPos.text.length - 1) === ' ' ? caretPos.text + text + ' ' : caretPos.text + text;
             } else {
                 var selStart = area.selectionStart;
                 var selEnd   = area.selectionEnd;
@@ -232,14 +232,14 @@ die();?>
             if (window.getSelection)        myselection = window.getSelection();
             else if (document.selection)    myselection = document.selection.createRange().text;
             else if (document.getSelection) myselection = document.getSelection();
-            if ((myselection != '') && (myselection != null)) {
-                if (myselection != stored_selection ) {
-                    stored_selection = (myselection.toString() != '') ? myselection.toString() : null;
+            if ((myselection !== '') && (myselection !== null)) {
+                if (myselection !== stored_selection ) {
+                    stored_selection = (myselection.toString() !== '') ? myselection.toString() : null;
                 }
             } else stored_selection = null;
         }
         function AddQuote(area) {
-            if ((stored_selection != '') && (stored_selection != null)) {
+            if ((stored_selection !== '') && (stored_selection !== null)) {
                 InsertText(area, '[quote]' + stored_selection + '[/quote]\n');
             }
             return false;
@@ -247,7 +247,7 @@ die();?>
         // The possibility to open and close additional form with the same button
         function ShowForm(area) {
             id = document.getElementById(area);
-            if (id.style.display == 'none')
+            if (id.style.display === 'none')
                  id.style.display = 'block';
             else id.style.display = 'none';
         }
@@ -283,14 +283,14 @@ die();?>
         function SetColor(color, area) {
             var cmd = document.getElementById('cmd_' + area).value;
             if (!color) color = document.getElementById('clr_val_' + area).value;
-            if (cmd == 'color') CreateBBTag('[color="' + color + '"]','[/color]', area);
-            else if (cmd == 'bgcolor') CreateBBTag('[bgcolor="' + color + '"]','[/bgcolor]', area);
+            if (cmd === 'color') CreateBBTag('[color="' + color + '"]','[/color]', area);
+            else if (cmd === 'bgcolor') CreateBBTag('[bgcolor="' + color + '"]','[/bgcolor]', area);
             HideDialog('color_' + area);
         }
         function AddUrl(cmd, area) {
             document.getElementById('type_' + area).value = cmd;
             // This field will be open while typing
-            if (cmd == 'mp3') document.getElementById('label_' + area).style.display = 'none';
+            if (cmd === 'mp3') document.getElementById('label_' + area).style.display = 'none';
             ShowForm('link_' + area);
         }
         function InsertLink(area) {
@@ -321,9 +321,9 @@ die();?>
             var width = screen.width - 450;
             var id_txt = document.getElementById(area);
             // Fucking browsers standards...
-            if (id_txt.value != undefined)
+            if (id_txt.value !== undefined)
                 text = id_txt.value;
-            else if (id_txt.innerText != undefined)
+            else if (id_txt.innerText !== undefined)
                  text = id_txt.innerText;
             else text = id_txt.textContent;
             // We can't parse lines endings in popup window
@@ -338,7 +338,7 @@ die();?>
             // Article title. It is empty when user post comment or reply in forum
             var title = '';
             var id_title = document.getElementById('title');
-            if (id_title != undefined) title = id_title.value;
+            if (id_title !== undefined) title = id_title.value;
             var element = document.createElement('INPUT');
             element.setAttribute('type', 'text');
             element.setAttribute('name', 'title');

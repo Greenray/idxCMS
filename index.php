@@ -22,7 +22,7 @@
 ini_set('display_errors', 0);
 mb_internal_encoding("UTF-8");
 
-setlocale(LC_CTYPE, array('ru_RU.utf8', 'ru_UA.utf8', 'en_US.utf-8', 'en_GB.utf-8')); 
+setlocale(LC_CTYPE, array('ru_RU.utf8', 'ru_UA.utf8', 'en_US.utf-8', 'en_GB.utf-8'));
 setlocale(LC_ALL, array('ru_RU.utf8', 'ru_UA.utf8', 'en_US.utf-8', 'en_GB.utf-8'));
 
 if (date_default_timezone_set(date_default_timezone_get()) === FALSE) {
@@ -37,7 +37,7 @@ while (list($global) = each($GLOBALS)) {
 }
 unset($global);
 
-error_reporting(0);
+error_reporting(-1);
 
 function idxErrorHandler1($errno, $errmsg, $filename, $linenum) {
     $errortype = array (
@@ -59,7 +59,7 @@ function idxErrorHandler1($errno, $errmsg, $filename, $linenum) {
     $error = date("Y-m-d H:i:s (T)").' '.$errortype[$errno].': '.$errmsg.' in '.$filename.', line '.$linenum.PHP_EOL;
     file_put_contents('./content/logs/idxerror.log', $error, FILE_APPEND | LOCK_EX);
 }
-set_error_handler("idxErrorHandler", E_ALL);
+set_error_handler("idxErrorHandler", E_ALL | E_STRICT);
 
 # Constants
 define('idxCMS',  TRUE);
@@ -133,7 +133,7 @@ if (!empty($REQUEST['logout'])) {
 }
 
 # If requested page is not set or is not exists, the site index page will be shown.
-$MODULE = empty($REQUEST['module']) ? 'index' : basename($REQUEST['module']);
+$MODULE = empty($REQUEST['module']) ? 'forum' : basename($REQUEST['module']);
 switch($MODULE) {
     case 'editor':
         include(TOOLS.'editor.php');
@@ -201,12 +201,14 @@ switch($MODULE) {
         # Loading main module
         CMS::call('SYSTEM')->setCurrentPoint('__MAIN__');
         require_once(CURRENT_SKIN.'skin.php');  # Current skin definition
+
         $mod = explode('.', $MODULE, 2);
         if (empty(SYSTEM::$modules[$MODULE]) || !file_exists(MODULES.$mod[0].DS.end($mod).'.php')) {
             include_once(MODULES.'index'.DS.'index.php');
         } else {
             include_once(MODULES.$mod[0].DS.end($mod).'.php');   # Get active module
         }
+
         $_SESSION['request'] = $MODULE;
         # Load other modules
         $modules = array();

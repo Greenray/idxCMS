@@ -62,7 +62,11 @@ die();?>
             </tr>
             <tr><th colspan="4">[__Description]</th></tr>
             <tr><td class="bbcodes" colspan="3">{bbCodes}</td></tr>
-            <tr><td colspan="3"><textarea id="desc" name="desc" cols="130" rows="5">{desc}</textarea></td></tr>
+            <tr>
+                <td colspan="3">
+                    <textarea id="desc" name="desc" cols="130" rows="5">{desc}</textarea>
+                </td>
+            </tr>
             <tr>
                 <td class="label">[__Access level]</td>
                 <td><input type="text" name="access" id="access" size="2" value="{access}" class="center required" required="required" /></td>

@@ -109,7 +109,7 @@ class CONTENT extends INDEX {
         $this->sections[$id]['id']     = $id;
         $this->sections[$id]['title']  = $title;
         $this->sections[$id]['desc']   = FILTER::get('REQUEST', 'desc');
-        $this->sections[$id]['access'] = (int) FILTER::get('REQUEST', 'access');
+        $this->sections[$id]['access'] = intval(FILTER::get('REQUEST', 'access'));
         $this->sections[$id]['link']   = MODULE.$this->module.SECTION.$id;
         $this->sections[$id]['path']   = $this->container.$id.DS;
         if ($this->saveIndex($this->container, $this->sections) === FALSE) {
@@ -434,7 +434,7 @@ class CONTENT extends INDEX {
 
     public function getLastItems($items) {
         krsort($items);
-        $items  = array_slice($items, 0, (int) CONFIG::getValue('main', 'last'), TRUE);
+        $items  = array_slice($items, 0, intval(CONFIG::getValue('main', 'last'), TRUE));
         $result = array();
         foreach ($items as $key => $data) {
             $item = explode('.', $data);
@@ -465,7 +465,7 @@ class CONTENT extends INDEX {
         krsort($items);
         $result = array();
         if (!empty($items)) {
-            $items = array_slice($items, 0, (int) CONFIG::getValue('main', 'last'), TRUE);
+            $items = array_slice($items, 0, intval(CONFIG::getValue('main', 'last'), TRUE));
             foreach($items as $key => $data) {
                 $id = explode('.', $data);
                 self::getContent($id[0]);
@@ -552,7 +552,7 @@ class CONTENT extends INDEX {
         }
         $path = $this->sections[$this->section]['categories'][$this->category]['path'];
         $id = $this->newId($this->comments);
-        $this->comments[$id]['id']     = (int)$id;
+        $this->comments[$id]['id']     = intval($id);
         $this->comments[$id]['author'] = USER::getUser('username');
         $this->comments[$id]['nick']   = USER::getUser('nickname');
         $this->comments[$id]['time']   = time();

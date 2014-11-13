@@ -10,7 +10,22 @@ $sections = CMS::call($obj)->getSections();
 
 try {
     if (!empty($REQUEST['action']) && !empty($REQUEST['ids'])) {
-        CMS::call($obj)->saveSections($REQUEST['ids']);
+        if ($obj === 'POSTS') {
+            $new = array('drafts' => 'drafts');        
+            $ids = array_combine($REQUEST['ids'], $REQUEST['ids']);
+            $sec = array();  
+            $dat = $new + $ids;
+            foreach($dat as $key => $value) {
+                foreach($sections as $key1 => $value1) {
+                    if ($key === $key1) {
+                        $sec[] = $value;
+                    }
+                }
+            }
+            CMS::call('POSTS')->saveSections($sec);
+        } else {
+            CMS::call($obj)->saveSections($REQUEST['ids']);
+        }
     } elseif (!empty($REQUEST['save'])) {
         CMS::call($obj)->saveSection();
     } else {
@@ -24,6 +39,14 @@ try {
 
 # Existing sections
 $sections = CMS::call($obj)->getSections();
+        
+if ($obj === 'POSTS') {
+    # We can't move or delete section drafts and exclude it from sorting
+    $output = array();
+    $output['drafts'] = $sections['drafts'];
+    $output['drafts']['desc'] = ParseText($sections['drafts']['desc']);
+    unset($sections['drafts']);
+}
 
 if (!empty($sections)) {
     $class  = 'even';
@@ -48,19 +71,19 @@ if (!empty($REQUEST['edit'])) {
     $section['header']  = __('Edit');
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'section.tpl');
     echo $TPL->parse($section);
-} else {
-    if (!empty($REQUEST['new']) || empty($sections)) {
-        $TPL = new TEMPLATE(dirname(__FILE__).DS.'section.tpl');
-        echo $TPL->parse(
-            array(
-                'section' => FILTER::get('REQUEST', 'section'),
-                'title'   => FILTER::get('REQUEST', 'title'),
-                'desc'    => FILTER::get('REQUEST', 'desc'),
-                'access'  => (int) FILTER::get('REQUEST', 'access'),
-                'bbCodes' => ShowBbcodesPanel('form.desc'),
-                'header'  => __('New section')
-            )
-        );
-    }
+}
+
+if (!empty($REQUEST['new']) || empty($sections)) {
+    $TPL = new TEMPLATE(dirname(__FILE__).DS.'section.tpl');
+    echo $TPL->parse(
+        array(
+            'section' => FILTER::get('REQUEST', 'section'),
+            'title'   => FILTER::get('REQUEST', 'title'),
+            'desc'    => FILTER::get('REQUEST', 'desc'),
+            'access'  => (int) FILTER::get('REQUEST', 'access'),
+            'bbCodes' => ShowBbcodesPanel('form.desc'),
+            'header'  => __('New section')
+        )
+    );
 }
 ?>

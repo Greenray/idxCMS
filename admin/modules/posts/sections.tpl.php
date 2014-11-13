@@ -76,8 +76,8 @@ die();?>
             </table>
         </div>
         <p class="center">
-            [if=sections]<input type="submit" name="action" value="[__Save]" class="submit" />[endif]
-            <span class="button add"><input type="submit" name="new" value="[__New section]" class="submit" /></span>
+            <input type="submit" name="new" value="[__New section]" class="submit" />
+            <input type="submit" name="action" value="[__Save]" class="submit" />
         </p>
     </form>
 </fieldset>

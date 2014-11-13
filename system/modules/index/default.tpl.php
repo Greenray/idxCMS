@@ -5,7 +5,6 @@
 
 die();?>
 
-<div class="title"><a href="{category[link]}">{category[title]}</a></div>
 <div id="tabs-{tab}">
     <div class="tabs">
         <ul class="tabs">

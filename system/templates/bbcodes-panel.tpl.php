@@ -540,6 +540,6 @@ die();?>
         </table>
     </div>
     <div id="smiles_{area}" unselectable="on" class="bbtools none">
-        [each=smile]<img src="{SMILES}{smile}.gif" alt="{smile}" onclick="SetSmile('[{smile}]','{area}');HideDialog('smiles_{area}');"" />[endeach.smile]
+        [each=smile]<img src="{SMILES}{smile}.gif" alt="{smile}" onclick="SetSmile('[{smile}]','{area}');HideDialog('smiles_{area}');" />[endeach.smile]
     </div>
 </div>

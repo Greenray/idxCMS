@@ -63,7 +63,6 @@ die();?>
     }
 </script>
 <div class="post-comment">
-    [__Nick]: <strong>{nickname}</strong>
     {bbcodes}
     <form id="post-comment" name="post-comment" method="post" action="{action}" onsubmit="return checkForm(this);">
         <fieldset>

@@ -39,7 +39,7 @@ die();?>
                     </tr>
                 [endeach.answers]
             </table>
-            <p class="center"><input type="submit" name="save" value="[__Submit]" /></p>
+            <p class="center"><input type="submit" name="save" value="[__Submit]" class="submit" /></p>
         </form>
     [endelse]
     <div class="center"><a href="{MODULE}polls.archive">[__Polls archive]</a></div>

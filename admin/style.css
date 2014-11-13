@@ -3,11 +3,7 @@
 * Copyright (c) 2012 Greenray greenray.spb@gmail.com
 * ADMINISTRATION PANEL CSS
 */
-body {
-    background: #006699;
-    font: normal 12px arial, helvetica, verdana, sans-serif;
-    margin: 0; padding: 0;
-}
+body { background: #006699; margin: 0; padding: 0; font: normal 12px arial, helvetica, verdana, sans-serif }
 
 a:link,
 a:active,
@@ -34,12 +30,7 @@ input[type='password']:focus { border-color: #8c8c8c; outline: 1px solid red; ba
 
 img    { border: none }
 label  { width: 100px }
-legend {
-    background: #fff; color: red;
-    padding: 5px 10px 0;
-    font-weight: bold;
-    border-top: 1px solid #000; border-left: 1px solid #000; border-right: 1px solid #000;
-}
+legend { background: #fff; color: red; padding: 5px 10px 0; font-weight: bold; border-top: 1px solid #000; border-left: 1px solid #000; border-right: 1px solid #000 }
 p      { margin: 5px 0; font-size: 12px }
 pre    { margin: 0 }
 select { color: #000; border: 1px solid #000 }
@@ -47,12 +38,7 @@ select { color: #000; border: 1px solid #000 }
 table         { border-collapse: separate; border-spacing: 1px; width: 100% }
 table.bg      { background: #acbbc6 }
 table.message { border: 1px solid #000; margin: 10px auto; width: 500px }
-th {
-    background: #006699; color: #fff;
-    font-weight: bold;
-    padding: 10px;
-    text-align: center; text-shadow: 1px 1px 1px #000;
-}
+th { background: #006699; color: #fff; font-weight: bold; padding: 10px; text-align: center; text-shadow: 1px 1px 1px #000 }
 td { padding: 0 10px }
 th a:link    { color: #fff }
 th a:active  { color: #0000ff }
@@ -68,14 +54,7 @@ th .date, td .date     { width: 140px; padding: 0 10px }
 td.actions button { border: 0; height: 16px; margin: 0 5px }
 td.actions a img  { margin: 0 5px; vertical-align: bottom }
 td.stat     { color:#000;text-shadow:none;font-weight:normal }
-textarea {
-    background: #fff; color: #000;
-    font-size: 12px;
-    white-space: pre-wrap;
-    margin: 0; padding: 0;
-    outline: none;
-    min-width: 100%; min-height: 100%;
-}
+textarea { background: #fff; color: #000; font-size: 12px; white-space: pre-wrap; margin: 0; padding: 0; outline: none; min-width: 100%; min-height: 100% }
 ul { height: 20px; list-style: none; border: 1px solid #ccc }
 
 #shdesc   { display: none; width: 100% }
@@ -98,14 +77,8 @@ ul { height: 20px; list-style: none; border: 1px solid #ccc }
 .help   { padding: 0 30px 0 10px; color: red; font-style: italic; text-align: right }
 .block  { display:block }
 .none   { display:none }
-.submit {
-    background-color: #ccc; background-image: -o-linear-gradient(top, #eee, #ccc);
-    border: 1px solid #777; border-radius: 0.2em;
-    box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.804) inset, 0 1px 0 rgba(0, 0, 0, 0.149);
-    cursor: pointer;
-    padding: 5px 10px;
-    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.804);
-}
+.submit { background-color: #ccc; background-image: -o-linear-gradient(top, #eee, #ccc); border: 1px solid #777; border-radius: 0.2em; cursor: pointer; padding: 5px 10px;
+          box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.804) inset, 0 1px 0 rgba(0, 0, 0, 0.149); text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.804) }
 .submit:focus { background: #fafafa; outline: 0 }
 .submit:hover { background: #ddd }
 
@@ -113,12 +86,7 @@ ul { height: 20px; list-style: none; border: 1px solid #ccc }
 .bbselect { margin: 1px 0 4px }
 .bbbutton { margin: 0; padding: 3px }
 
-.bbtools {
-    color: #000;
-    border: 1px solid #777; border-radius: 0.4em;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .8);
-    margin: 10px 0 0; padding: 10px 0 0;
-}
+.bbtools { color: #000; border: 1px solid #777; border-radius: 0.4em; box-shadow: 0 0 10px rgba(0, 0, 0, .8); margin: 10px 0 0; padding: 10px 0 0 }
 .bbcodes .link_text { margin: 4px 20px; text-align: center }
 .bbcodes .link_text input[type='text'] { margin: 2px 20px }
 
@@ -135,12 +103,7 @@ ul { height: 20px; list-style: none; border: 1px solid #ccc }
 .even   { background: #dee3e7; height: 25px }
 .center { text-align: center }
 .right  { text-align: right }
-.module {
-    background: #006699; color: yellow;
-    font-size: 1.5em; font-weight: bold;
-    padding: 10px;
-    text-align: center; text-shadow: 1px 1px 1px #000;
-}
+.module { background: #006699; color: yellow; font-size: 1.5em; font-weight: bold; padding: 10px; text-align: center; text-shadow: 1px 1px 1px #000 }
 .admin_mess { background: yellow; color: red; text-align: center }
 .row1 { background: #efefef }
 .row2 { background: #dee3e7 }
@@ -160,14 +123,9 @@ div#drag th   { border: 2px groove #fff }
 .nodrag,
 .drag { border: 0; margin: auto }
 
-.rowhandler { text-align: center; width: 25px }
+.rowhandler  { text-align: center; width: 25px }
 
-#unitip {
-    color: #000;
-    display: none;
-    font: normal 1.1em/15px arial, verdana, helvetica, sans-serif;
-    position: absolute; top: -1000px; z-index: 1000;
-}
+#unitip      { color: #000; display: none; font: normal 1.1em/15px arial, verdana, helvetica, sans-serif; position: absolute; top: -1000px; z-index: 1000 }
 #unitippoint,
 #unitipmid,
 #unitipcap   { display: block; left: 0px; top: 0px; position: relative; width: 145px }
@@ -179,21 +137,12 @@ div#drag th   { border: 2px groove #fff }
 .ldt,
 .ldt label,
 .ldt pre,
-.ldt textarea {
-    font-size: 12px; font-family: monospace !important;
-    white-space: pre-wrap; overflow: none;
-    margin: 0; padding: 10px 0;
-    border: 0;
-}
+.ldt textarea { font-size: 12px; font-family: monospace !important; padding: 10px 0; margin: 0; white-space: pre-wrap; overflow: none; border: 0 }
 .ldt          { position: relative }
 .ldt label    { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: inline; cursor: text }
-.ldt textarea {
-    color: transparent !important; color: rgba(0,0,0,.2) !important; background: 0;
-    outline: none;
-    min-width: 100%; min-height: 100%;
-    /* IE doesn't support rgba texarea, so use vendor specific alpha filter */
-    filter: alpha(opacity = 20);
-}
+.ldt textarea { color: transparent !important; color: rgba(0,0,0,.2) !important; background: 0; outline: none; min-width: 100%; min-height: 100%;
+ /* IE doesn't support rgba texarea, so use vendor specific alpha filter */
+                filter: alpha(opacity = 20) }
 .ldt .comment  { color: silver }
 .ldt .string   { color: red }
 .ldt .number   { color: navy }

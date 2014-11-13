@@ -7,13 +7,7 @@
 * { padding: 0; margin: 0 }
 
 html { height: 100% }
-body {
-    color: black;
-    font: normal 10pt arial, helvetica, verdana, sans-serif;
-    height: auto !important; min-height: 100%;
-    margin: 0; padding: 0;
-    overflow-y: scroll;
-}
+body { color: black; font: normal 10pt arial, helvetica, verdana, sans-serif; height: auto !important; min-height: 100%; margin: 0; padding: 0; overflow-y: scroll }
 
 a,
 a:link,
@@ -41,6 +35,12 @@ input[type='password']:hover { border-color: #aaa }
 input[type='text']:focus,
 input[type='password']:focus { border-color: #8c8c8c; background: #ffffcc; outline: 1px solid red }
 
+.submit { background-color: #ccc; background-image: -o-linear-gradient(top, #eee, #ccc); border: 1px solid #777; border-radius: 0.2em; cursor: pointer;
+          padding: 5px 10px; box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.804) inset, 0 1px 0 rgba(0, 0, 0, 0.149); height: 20px;
+          text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.804); font-size: 10px }
+.submit:focus { background: #fafafa; outline: 0 }
+.submit:hover { background: #ddd }
+
 fieldset { border: 1px solid black; margin: 10px 0 0; padding: 10px }
 
 h1,
@@ -56,12 +56,7 @@ p  { margin: 10px 0 }
 label  { margin: 0; padding: 0 10px }
 legend { padding: .4em }
 
-pre {
-    background: #fafafa; color: #2e8b57;
-    border: 1px dotted #aab4be; border-left: 20px solid #b4b4b4;
-    padding: 5px 0;
-    white-space: pre-wrap;
-}
+pre { background: #fafafa; color: #2e8b57; border: 1px dotted #aab4be; border-left: 20px solid #b4b4b4; padding: 5px 0; white-space: pre-wrap }
 
 sub,
 sup { position: relative; vertical-align: baseline }
@@ -75,8 +70,8 @@ textarea       { background: #fff; color: black; margin: 0 0 10px; width: 100% }
 textarea:hover { border-color: #aaa }
 textarea:focus { border-color: #8c8c8c; outline: 2px solid red }
 
-table       { border-collapse: separate; border-spacing: 0; width: 100% }
-table,th,td { padding: 2px; vertical-align: middle }
+table        { border-collapse: separate; border-spacing: 0; width: 100% }
+table,th,td  { padding: 2px; vertical-align: middle }
 
 table#std    { border-collapse: separate; border-spacing: 0 }
 table#std tr { height: 35px }
@@ -102,8 +97,9 @@ td.date     { padding: 0 10px; width: 140px }
 
 #wrapper { background: #bfcfdf; height: auto !important; height: 100%; overflow: hidden }
 #shdesc  { display: none; width: 99% }
-.content { padding: 10px 5px }
-.title   { color: black; font-size: 1.17em; font-weight: bold; text-align: center }
+.main          { margin: 0 auto }
+.main .title   { color: black; margin: 20px 5px 10px 5px; font-size: 1.11em; font-weight: bold; text-align: center; text-transform: uppercase }
+.main .content { padding: 10px }
 .clear   { clear: both; height: 0; overflow: hidden }
 .left    { text-align: left }
 .center  { text-align: center }
@@ -164,14 +160,8 @@ td.date     { padding: 0 10px; width: 140px }
 #menu a.level1.last,
 #menu span.level1.last    { background-position: 100% -165px; background-repeat: repeat-x }
 #menu a.level1 span.bg,
-#menu span.level1 span.bg {
-    background-position: 50% -220px; background-repeat: repeat-x; color: white;
-    float: left;
-    font-weight: bold;
-    height: 42px; line-height: 40px;
-    padding: 0 5px;
-    text-shadow: 0 1px 0 #000;
-}
+#menu span.level1 span.bg { background-position: 50% -220px; background-repeat: repeat-x; color: white;
+                            float: left; font-weight: bold; height: 42px; line-height: 40px; padding: 0 5px; text-shadow: 0 1px 0 #000 }
 #menu li.level1.active                       { background-position: 0 -605px }
 #menu ul:first-child li.level1.first.active  { background-position: 0 -715px }
 #menu li.level1.active .level1               { background-position: 100% -660px }
@@ -187,12 +177,7 @@ td.date     { padding: 0 10px; width: 140px }
 #menu span.level1 span.title    { line-height: 24px; text-align: center }
 #menu a.level1 span.subtitle,
 #menu span.level1 span.subtitle { line-height: 10px; text-align: center; letter-spacing: 0; margin-top: -3px; text-transform: none }
-#menu .dropdown {
-    border: 1px solid #555; border-radius: 5px;
-    box-shadow: 10px 10px 10px #000;
-    position: absolute; top: 43px; left: -999em;
-    z-index: 100;
-}
+#menu .dropdown          { border: 1px solid #555; border-radius: 5px; box-shadow: 10px 10px 10px #000; position: absolute; top: 43px; left: -999em; z-index: 100 }
 #menu li:hover .dropdown { left: -170px }
 #menu ul.level2          { background: transparent; margin: 5px }
 #menu li.level2 .box     { padding: 5px 5px 0; text-shadow: 0 1px 0 #fff }
@@ -225,11 +210,7 @@ td.date     { padding: 0 10px; width: 140px }
 #layout-left  { float: left }
 #layout-right { float: right }
 #layout-left,
-#layout-right {
-    background: #d4dee3 url(images/dld.jpg) 0 0 repeat-x;
-    margin: 0 0 -9000px; padding: 0 5px 9000px; position: relative; width: 230px;
-    overflow: hidden;
-}
+#layout-right { background: #d4dee3 url(images/dld.jpg) 0 0 repeat-x; margin: 0 0 -9000px; padding: 0 5px 9000px; position: relative; width: 230px; overflow: hidden }
 #layout-left li,
 #layout-right li    { margin-left: 5px }
 #layout-left:after,
@@ -259,11 +240,6 @@ ul.tabs li a:focus { outline: 0 }
 .tab_content .date     { float: right; font-style: italic; margin: 0 50px 0 0 }
 .tab_content img       { float: left }
 .tab_content .text img { margin: 0; padding: 0 5px }
-
-.main          { margin: 0 auto }
-.main .title   { color: #ff0000; margin: 20px 5px; text-transform: uppercase }
-.main .title a { text-transform: none }
-.main .content { margin: 20px auto }
 
 #section    { margin: 0 20px }
 #section ul { margin: 0; padding: 0; list-style: none }
@@ -328,12 +304,7 @@ ul.tabs li a:focus { outline: 0 }
 .results span.level1       { text-align: left; overflow: hidden; padding-top: 10px }
 .results li a.level1:hover { background: #e8e8ea; color: red; text-shadow: 0 1px 0 #fff }
 .results a.level1 span.title,
-.results span.level1 span.title    {
-    font-weight: bold; font-size: 10pt;
-    line-height: 20px;
-    margin: 0; padding: 0 10px;
-    text-align: left;
-}
+.results span.level1 span.title { font-weight: bold; font-size: 10pt; line-height: 20px; margin: 0; padding: 0 10px; text-align: left }
 .results a.level1 span.subtitle,
 .results span.level1 span.subtitle { font-weight: normal; line-height: 16px; padding: 0 10px; text-transform: none }
 .results a.level1 span.icon,
@@ -384,34 +355,18 @@ ul.tabs li a:focus { outline: 0 }
 .star div.voted,
 .star div.sep { float: right }
 .star         { height: 20px; margin: 0 50px 0 0 }
-.star ul.star {
-    background: url(../images/icons/stars.gif) repeat-x;
-    cursor: pointer;
-    height: 22px; width: 85px;
-    list-style: none;
-    margin: 0 50px 0 0; padding: 0;
-}
-.star li {
-    display: block;
-    float: right;
-    height: 20px; width: 85px;
-    margin: 0; padding: 0; position: absolute; z-index: 1;
-    text-decoration: none; text-indent: -9000px;
-}
+.star ul.star { background: url(../images/icons/stars.gif) repeat-x; cursor: pointer; height: 22px; width: 85px; list-style: none; margin: 0 50px 0 0; padding: 0 }
+.star li { display: block; float: right; height: 20px; width: 85px; margin: 0; padding: 0; position: absolute; z-index: 1; text-decoration: none; text-indent: -9000px }
 .star li.curr   { background: url(../images/icons/stars.gif) left 25px; font-size: 1px }
 .star div.rates { margin: -16px 0 0 5px }
 .star div.sep   { margin: 0 3px }
 
 .post,
-.post-comment,
+.comment,
 .topic,
-.gallery .item {
-    border: 1px solid #777; border-radius: 0.4em;
-    margin: .5em; padding: .5em;
-    overflow: hidden;
-    box-shadow: 0 0 2px 2px rgba(255, 255, 255, .8) inset, 0 2px 0 rgba(0, 0, 0, .3);
-}
-
+.gallery .item,
+.post-comment   { border: 1px solid #777; border-radius: 2px; margin: 10px; padding: 10px; overflow: hidden;
+                  box-shadow: 0 0 2px 2px rgba(255, 255, 255, .8) inset, 0 2px 0 rgba(0, 0, 0, .3) }
 .post           { background: #fff }
 .post .title    { margin: 10px 5px; text-transform: none }
 .post .date     { margin: 2px 0 0 40px; width: 300px }
@@ -429,18 +384,19 @@ ul.tabs li a:focus { outline: 0 }
 .gallery img    { margin: 5px 0 0 5px }
 
 .comment,
-.topic             { margin: 10px 0 0 }
+.topic             { margin: 10px 0 0; background: #fff }
 .comment .info,
 .topic .info       { line-height: 18px }
 .comment .text,
-.topic .text       { margin: 15px 10px 5px 120px }
+.topic .text       { margin: 15px 10px 10px 150px }
 .comment .content,
 .topic .content    { overflow: hidden; margin: 2px }
 .comment .profile,
 .topic .profile    { margin: 0 0 0 50px }
+.comment .date     { font-size: 10px }
 .topic .content .title { margin: 0 0 20px }
-
 .post-comment { background: #d4dee3; text-align: center }
+
 .section  { margin: 5px 0 2px 50px; font-size: 8pt }
 .category { margin: 0 0 0 50px; font-size: 8pt }
 .pass_img { margin: 0 auto }
@@ -456,30 +412,13 @@ ul.tabs li a:focus { outline: 0 }
 
 .codehtml,
 .codephp,
-.codetext   {
-    background: #ffffc0; color: black;
-    border: #6da4da solid 1px;
-    font: normal 8pt mono, "Courier New", Courier;
-    margin: 5px 0; padding: 5px;
-    overflow: auto;
-    white-space: nowrap;
-}
-.quotetitle {
-    background: #aabbcc; color: black;
-    border: #a9b8c2 solid 1px;
-    font-size: 8pt; font-style: italic;
-    margin: 5px 0 0; padding: 2px;
-}
-.quotetext  {
-    background: #fafafa; color: #555;
-    border: #a9b8c2 solid 1px;
-    font: italic 9pt "Courier New", Courier, mono;
-    margin: 0 0 5px; padding: 5px;
-    overflow: auto;
-}
+.codetext   { background: #ffffc0; color: black; border: #6da4da solid 1px; font: normal 8pt mono, "Courier New", Courier; margin: 5px 0; padding: 5px;
+              overflow: auto; white-space: nowrap }
+.quotetitle { background: #aabbcc; color: black; border: #a9b8c2 solid 1px; font-size: 8pt; font-style: italic; margin: 5px 0 0; padding: 2px }
+.quotetext  { background: #fafafa; color: #555; border: #a9b8c2 solid 1px; font: italic 9pt "Courier New", Courier, mono; margin: 0 0 5px; padding: 5px; overflow: auto }
 
 .admin  { margin: 5px 10px 5px 88px }
-.author { margin: 0 0 10px; width: 120px; float: left; text-align: center }
+.author { margin: 0 0 10px; width: 120px; text-align: center }
 .info a:hover { color: red }
 .text { text-align: justify; margin: 10px }
 .note { background: #ffffcc; border: red solid 2px; color: black; margin: 20px; padding: 5px }
@@ -529,12 +468,7 @@ table .calendar { padding: 2px; vertical-align: middle; border: 1px solid #e0dfd
 .counter .even { background: inherit }
 
 /* Footer */
-#footer {
-    background: #333; color: white;
-    overflow: hidden;
-    padding: 10px 30px; position: relative;
-    text-shadow: 0 1px 1px #000;
-}
+#footer    { background: #333; color: white; overflow: hidden; padding: 10px 30px; position: relative; text-shadow: 0 1px 1px #000 }
 #copyright { float: left; margin: 10px 0; text-align: center; width: 33% }
 #valid     { float: right; margin: 10px 0; position: relative; text-align: center; width: 20% }
 
@@ -560,29 +494,12 @@ table .calendar { padding: 2px; vertical-align: middle; border: 1px solid #e0dfd
 .horinaja ul    { position: relative; width: 220px; padding: 0; margin: 0 }
 .horinaja ul li { background: transparent; display: block; top: 0; width: 215px }
 
-ol.horinaja_pagination {
-    background: transparent;
-    height: 40px;
-    margin: 0 auto; padding: 5px 0 0 0; position: relative;
-    clear: both;
+ol.horinaja_pagination { background: transparent; height: 40px; margin: 0 auto; padding: 5px 0 0 0; position: relative; clear: both;
 }
 ol.horinaja_pagination li   { float: left; height: 40px; display: block }
-ol.horinaja_pagination li a {
-    background: transparent; color: white;
-    height: 30px;
-    display: block;
-    float: left;
-    font-size: 12px; font-weight: bold;
-    text-align: center;
-    padding: 10px 0 0 0;
-    cursor: pointer;
-}
-#unitip {
-    color: black;
-    display: none;
-    font: normal 1.1em/15px arial, verdana, helvetica, sans-serif;
-    position: absolute; top: -1000px; z-index: 1000;
-}
+ol.horinaja_pagination li a { background: transparent; color: white; height: 30px; display: block; float: left; font-size: 12px; font-weight: bold;
+                              text-align: center; padding: 10px 0 0 0; cursor: pointer }
+#unitip { color: black; display: none; font: normal 1.1em/15px arial, verdana, helvetica, sans-serif; position: absolute; top: -1000px; z-index: 1000 }
 #unitippoint,
 #unitipmid,
 #unitipcap   { display: block; left: 0px; top: 0px; position: relative; width: 145px }
@@ -595,4 +512,3 @@ ol.horinaja_pagination li a {
 input.inform     { width: 220px; margin-left: 20px }
 textarea.inform  { width: 220px; height: 50px; margin-left:20px }
 .dhtmlx_button   { margin-top:10px }
-                

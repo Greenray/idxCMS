@@ -22,8 +22,8 @@ if (empty($sections)) {
     if ($section === 'drafts') {
         Redirect('posts');      # Wrong section request
     }
-    $category = (int) FILTER::get('REQUEST', 'category');
-    $post     = (int) FILTER::get('REQUEST', 'item');
+    $category = intval(FILTER::get('REQUEST', 'category'));
+    $post     = intval(FILTER::get('REQUEST', 'item'));
     if (!empty($post) && !empty($category) && !empty($section)) {
         $categories = CMS::call('POSTS')->getCategories($section);
         if ($categories === FALSE) {
@@ -34,7 +34,7 @@ if (empty($sections)) {
             Redirect('posts', $section);        # Wrong category or post request
         }
         $comments = CMS::call('POSTS')->getComments($post);
-        $comment  = (int) FILTER::get('REQUEST', 'comment');
+        $comment  = intval(FILTER::get('REQUEST', 'comment'));
         if (!empty($REQUEST['save'])) {
             try {
                 # If $comment is empty a new comment will be created
@@ -98,21 +98,19 @@ if (empty($sections)) {
         SYSTEM::set('pagename', $post['title']);
         SYSTEM::setPageDescription($post['title']);
         SYSTEM::setPageKeywords($post['keywords']);
-        $perpage = (int) CONFIG::getValue('posts', 'comments-per-page');
+        $perpage = intval(CONFIG::getValue('posts', 'comments-per-page'));
         if (!empty($comment)) {
-             $page = ceil((int)$comment / $perpage);
+             $page = ceil(intval($comment / $perpage));
         } elseif (!empty($result)) {
-            $page = ceil((int)$result / $perpage);
+            $page = ceil(intval($result / $perpage));
         } else {
-            $page = (int) FILTER::get('REQUEST', 'page');
+            $page = intval(FILTER::get('REQUEST', 'page'));
         }
         # Don't show post, if number of comments > per page
         if ($page < 2) {
             # Show post with full text
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'full.tpl');
-            ShowWindow(
-                $categories[$category]['title'],
-                $TPL->parse(CMS::call('POSTS')->getItem($post['id'], 'text')));
+            ShowWindow(__('Articles'), $TPL->parse(CMS::call('POSTS')->getItem($post['id'], 'text')));
             CMS::call('POSTS')->incCount($post['id'], 'views');
         }
         # Show comments
@@ -166,8 +164,8 @@ if (empty($sections)) {
             krsort($content);
             $count = sizeof($content);
             $keys  = array_keys($content);
-            $page  = (int) FILTER::get('REQUEST', 'page');
-            $perpage = (int) CONFIG::getValue('posts', 'posts-per-page');
+            $page  = intval(FILTER::get('REQUEST', 'page'));
+            $perpage = intval(CONFIG::getValue('posts', 'posts-per-page'));
             $pagination = GetPagination($page, $perpage, $count);
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'short.tpl');
             $output = '';

@@ -18,16 +18,14 @@ die();?>
         <a href="{MODULE}posts.print{SECTION}{section}{CATEGORY}{category}{ITEM}{id}" target="_blank">
             <img src="{ICONS}printer.png" width="16" height="16" hspace="5" vspace="5" class="tip" alt="[__Version for printer]" />
         </a>
-        <span class="author">[__Posted by]: <a href="{MODULE}user&amp;user={author}">{nick}</a></span>
+        <span class="author">[__Author]: <a href="{MODULE}user&amp;user={author}">{nick}</a></span>
         [if=admin]
-            <span class="admin">
-                <a href="{MODULE}posts{SECTION}{section}{CATEGORY}{category}{ITEM}{id}&amp;action={action}">
-                    <img src="{ICONS}{action}.png" width="16" height="16" class="tip" alt="{command}" />
-                </a>
-            </span>
-            <span class="admin">
-                <a href="{MODULE}posts.post{SECTION}{section}{CATEGORY}{category}{ITEM}{id}&amp;edit=1">[__Edit]</a>
-            </span>
+            <div class="menu">
+                <form name="post" method="post" action="">
+                    <button formaction="{MODULE}posts{SECTION}{section}{CATEGORY}{category}{ITEM}{id}&amp;action={action}" class="submit">[__Edit]</button>
+                    <button formaction="{command}" class="submit">[__Close]</button>
+                </form>
+            </div>
         [endif]
     </div>
 </div>

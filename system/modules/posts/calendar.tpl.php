@@ -30,5 +30,5 @@ die();?>
             <option value="{years[year]}" [if=years[selected]]selected="selected"[endif]>{years[year]}</option>
         [endeach.years]
     </select>
-    <input type="submit" value="OK" />
+    <input type="submit" value="OK" class="submit" />
 </form>

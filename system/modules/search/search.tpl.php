@@ -9,6 +9,6 @@ die();?>
     <form name="search" method="post" action="">
         <input type="hidden" name="module" value="search" />
         <input type="text" name="search" size="30" value="" />
-        <input type="submit" value="[__Search]" />
+        <input type="submit" value="[__Search]" class="submit" />
     </form>
 </div>

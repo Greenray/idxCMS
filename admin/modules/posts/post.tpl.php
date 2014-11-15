@@ -6,8 +6,8 @@
 die();?>
 
 <script type="text/javascript">
-    var ids = new Array({ids});
-    var titles = new Array({titles});
+    var ids = new Array(ids);
+    var titles = new Array(titles);
     function getIds(index) {
         var idsValues = ids[index];
         return idsValues.split(',');

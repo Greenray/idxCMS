@@ -70,7 +70,6 @@ if (!defined('idxADMIN') || !USER::loggedIn()) die();?>
                 };
             }
         };
-    -->
     </script>
 </head>
 <body onload="ClickMenu('menu')">

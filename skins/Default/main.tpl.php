@@ -42,7 +42,6 @@ if (!defined('idxCMS')) die();?>
         });
     </script>
     <script type="text/javascript" src="{TOOLS}jquery.rating.min.js"></script>
-    <script type="text/javascript" src="{TOOLS}unitip.min.js"></script>
     <script type="text/javascript" src="{TOOLS}message.min.js"></script>
     <script type="text/javascript" src='{TOOLS}message.js'></script>
     <script type="text/javascript">
@@ -54,9 +53,9 @@ if (!defined('idxCMS')) die();?>
             }
         }
         function ShowAlert(msg, title) {
-            dhtmlx.modalbox({ 
+            dhtmlx.modalbox({
                 type: 'alert-error',
-                title: title, 
+                title: title,
                 text: '<strong>' + msg + '</strong>',
                 buttons: ["Ok"]
             });

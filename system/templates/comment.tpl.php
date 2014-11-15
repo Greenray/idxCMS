@@ -19,18 +19,20 @@ die();?>
             <span class="{rate_color}" style="float:right;padding:0 26px 0 0;">{rate}</span>
         [endelse]
     </div>
-    <div class="text">{text}</div>
-    <div class="author">
-        <img src="{avatar}" hspace="5" vspace="5" alt="" /><br />
-        [ifelse=opened]
-            <strong><a href="javascript:InsertText(document.forms['post-comment'].elements['text'], '[b]{nick}![/b]' + '\n');">{nick}</a></strong><br />
-        [else]
-            {nick}<br />
-        [endelse]
-        [if=status]{status}<br />[endif]
-        [if=stars][__Rate]: {stars}<br />[endif]
-        [if=city]{city}[endif]
-        [if=country]{country}<br />[endif]
+    <div>
+        <div class="author">
+            <img src="{avatar}" hspace="5" vspace="5" alt="" /><br />
+            [ifelse=opened]
+                <strong><a href="javascript:InsertText(document.forms['post-comment'].elements['text'], '[b]{nick}![/b]' + '\n');">{nick}</a></strong><br />
+            [else]
+                {nick}<br />
+            [endelse]
+            [if=status]{status}<br />[endif]
+            [if=stars][__Rate]: {stars}<br />[endif]
+            [if=city]{city}[endif]
+            [if=country]{country}<br />[endif]
+        </div>
+        <div class="text">{text}</div>
     </div>
     [if=opened]
         <span class="menu">
@@ -57,4 +59,5 @@ die();?>
             </form>
         </div>
     [endif]
+</div>
 <div class="clear"></div>

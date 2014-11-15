@@ -5,8 +5,7 @@
 
 if (!defined('idxCMS')) die();
 
-INDEX::setIndex('menu');
-$data = INDEX::getIndex(CONTENT);
+$data   = GetUnserialized(CONTENT.'menu');
 $points = array_keys($data);
 $access = USER::getUser('access');
 $TPL = new TEMPLATE(dirname(__FILE__).DS.'sitemap.tpl');

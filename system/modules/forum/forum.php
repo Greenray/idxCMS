@@ -28,6 +28,7 @@ if (empty($sections)) {
         }
         $replies = CMS::call('FORUM')->getComments($topic);
         $reply   = FILTER::get('REQUEST', 'comment');
+
         if (!empty($REQUEST['save'])) {
             try {
                 $result = CMS::call('FORUM')->saveComment($reply, $topic);
@@ -110,14 +111,14 @@ if (empty($sections)) {
                         break;
                     case 'pin':
                         if (USER::moderator('forum')) {
-                            CMS::call('FORUM')->setValue($topic, 'pinned', TRUE);
-                            CMS::call('FORUM')->sortTopics();
+                            CMS::call('FORUM')->setValue($topic, 'pinned', 1);
+//                            CMS::call('FORUM')->sortTopics();
                         }
                         break;
                     case 'unpin':
                         if (USER::moderator('forum')) {
-                            CMS::call('FORUM')->setValue($topic, 'pinned', FALSE);
-                            CMS::call('FORUM')->sortTopics();
+                            CMS::call('FORUM')->setValue($topic, 'pinned', 0);
+//                            CMS::call('FORUM')->sortTopics();
                         }
                         break;
                     case 'ban':
@@ -131,6 +132,7 @@ if (empty($sections)) {
                 }
             }
         }
+
         $topic = CMS::call('FORUM')->getItem($topic);
         SYSTEM::set('pagename', $topic['title']);
         SYSTEM::setPageDescription($topic['title']);
@@ -146,6 +148,7 @@ if (empty($sections)) {
         if ($page < 2) {
             # Show topic
             $topic = CMS::call('FORUM')->getItem($topic['id'], 'text');
+            $topic['date']   = FormatTime('d F Y H:i:s', $topic['time']);
             $topic['avatar']  = GetAvatar($topic['author']);
             $author = USER::getUserData($topic['author']);
             $topic['stars']   = $author['stars'];
@@ -173,8 +176,6 @@ if (empty($sections)) {
             if (USER::getUser('username') !== 'guest') {
                 $topic['profile'] = TRUE;
             }
-            $topic['category_link']  = $categories[$category]['link'];
-            $topic['category_title'] = $categories[$category]['title'];
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'topic.tpl');
             ShowWindow($categories[$category]['title'], $TPL->parse($topic));
             CMS::call('FORUM')->incCount($topic['id'], 'views');
@@ -226,6 +227,7 @@ if (empty($sections)) {
         }
         SYSTEM::set('pagename', $category['title']);
         SYSTEM::setPageDescription(__('Forum').' - '.$category['title']);
+
         if (!empty($REQUEST['new'])) {
             # New topic
             if (USER::loggedIn()) {
@@ -252,7 +254,7 @@ if (empty($sections)) {
                     )
                 );
             } else {
-                ShowError('Your have no right to post topic');
+                ShowError('You have no right to post topic');
             }
         } elseif (empty($content)) {
             $output = '';
@@ -280,7 +282,6 @@ if (empty($sections)) {
                     if ($output['topic'][$ids[$i]]['comments'] > 0) {
                         $output['topic'][$ids[$i]]['last_link'] = $output['topic'][$ids[$i]]['link'].COMMENT.$content[$ids[$i]]['comments'];
                     }
- //                 if ($content[$ids[$i]]['pinned'] === FALSE) unset($output['topic'][$ids[$i]]['pinned']);
                     if ($content[$ids[$i]]['opened']) {
                         $output['topic'][$ids[$i]]['flag'] = 'close';
                         if ($content[$ids[$i]]['comments'] > 10) {
@@ -292,6 +293,7 @@ if (empty($sections)) {
             if (USER::loggedIn()) {
                 $output['post_allowed'] = TRUE;
             }
+            ArraySort($output['topic'],'!pinned','!time');
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'category.tpl');
             ShowWindow($category['title'], $TPL->parse($output));
             if ($count > $perpage) {
@@ -338,7 +340,7 @@ if (empty($sections)) {
                 }
             }
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'section.tpl');
-            ShowWindow('Forum', $TPL->parse($output));
+            ShowWindow(__('Forum'), $TPL->parse($output));
         }
     } else {
         # Forum main page - Sections and categories

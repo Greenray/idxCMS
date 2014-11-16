@@ -142,36 +142,6 @@ function SearchInArray($needle, $haystack) {
     return $result;
 }
 
-# ArraySort callback
-function ArraySortFunc($a, $b = NULL) {
-    static $keys;
-    if ($b === NULL) {
-        return $keys = $a;
-    }
-    foreach ($keys as $key) {
-        if (@$key[0] == '!') {
-            $key = substr($key, 1);
-            if (@$a[$key] !== @$b[$key]) {
-                return strcmp(@$b[$key], @$a[$key]);
-            }
-        } elseif (@$a[$key] !== @$b[$key]) {
-            return strcmp(@$a[$key], @$b[$key]);
-        }
-    }
-    return FALSE;
-}
-
-function ArraySort(&$array) {
-    $keys = array();
-    if (!$array) {
-        return $keys;
-    }
-    $keys = func_get_args();
-    array_shift($keys);
-    ArraySortFunc($keys);
-    uasort($array, "ArraySortFunc");
-}
-
 function RandomString($num_chars) {
     $chars = array(
         'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',

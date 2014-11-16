@@ -4,11 +4,18 @@
 # MODULE FORUM - LIST OF TOPICS IN CATEGORY TEMPLATE
 
 die();?>
+
 <table id="std">
-    <tr><th colspan="2">[__Title]</th><th>[__Author]</th><th>[__Date]</th><th>[__Views]</th><th>[__Replies]</th></tr>
+    <tr>
+        <th colspan="2">[__Title]</th>
+        <th style="width:100px">[__Author]</th>
+        <th style="width:80px">[__Date]</th>
+        <th style="width:60px">[__Views]</th>
+        <th style="width:40px">[__Replies]</th>
+    </tr>
     [each=topic]
         <tr>
-            <td class="center"><img src="{ICONS}{topic[flag]}.png" width="16" height="16" alt="" /></td>
+            <td class="center" style="width:20px"><img src="{ICONS}{topic[flag]}.png" width="16" height="16" alt="" /></td>
             <td>
                 [if=topic[pinned]]<img src="{ICONS}pinned.png" width="16" height="16" alt="Pinned" />&nbsp;[endif]
                 <a href="{topic[link]}">{topic[title]}</a>

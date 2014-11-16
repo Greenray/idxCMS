@@ -37,7 +37,7 @@ class FORUM extends CONTENT {
             if (mkdir($path.$id, 0777) === FALSE) {
                 throw new Exception('Cannot save topic');
             }
-            $this->content[$id]['id']       = (int)$id;
+            $this->content[$id]['id']       = (int) ($id);
             $this->content[$id]['author']   = USER::getUser('username');
             $this->content[$id]['nick']     = USER::getUser('nickname');
             $this->content[$id]['time']     = time();
@@ -46,8 +46,8 @@ class FORUM extends CONTENT {
             $this->content[$id]['comments'] = 0;
         }
         $this->content[$id]['title']  = $title;
-        $this->content[$id]['opened'] = (bool) FILTER::get('REQUEST', 'opened');
-        $this->content[$id]['pinned'] = (bool) FILTER::get('REQUEST', 'pinned');
+        $this->content[$id]['opened'] = (int) empty(FILTER::get('REQUEST', 'opened')) ? 1 : 0;
+        $this->content[$id]['pinned'] = (int) FILTER::get('REQUEST', 'pinned');
         if (file_put_contents($path.$id.DS.$this->text, $text, LOCK_EX) === FALSE) {
             throw new Exception('Cannot save topic');
         }
@@ -55,16 +55,43 @@ class FORUM extends CONTENT {
         Sitemap();
         return $id;
     }
+}
 
-    public function sortTopics() {
-        ArraySort($this->content,'!pinned','!time');
-        parent::saveContent($this->content);
+# ArraySort callback
+function ArraySortFunc($a, $b = NULL) {
+    static $keys;
+    if ($b === NULL) {
+        return $keys = $a;
     }
+    foreach ($keys as $key) {
+        if (@$key[0] == '!') {
+            $key = substr($key, 1);
+            if (@$a[$key] !== @$b[$key]) {
+                return strcmp(@$b[$key], @$a[$key]);
+            }
+        } elseif (@$a[$key] !== @$b[$key]) {
+            return strcmp(@$a[$key], @$b[$key]);
+        }
+    }
+    return FALSE;
+}
+
+function ArraySort(&$array) {
+    $keys = array();
+    if (!$array) {
+        return $keys;
+    }
+    $keys = func_get_args();
+    array_shift($keys);
+    ArraySortFunc($keys);
+    uasort($array, "ArraySortFunc");
 }
 
 switch (SYSTEM::get('locale')) {
     case 'ru':
+        $LANG['def']['Cannot save topic'] = 'Не могу сохранить тему';
         $LANG['def']['Forum'] = 'Форум';
+        $LANG['def']['Last topics'] = 'Последние темы';
         $LANG['def']['New topic'] = 'Новая тема';
         $LANG['def']['Pin'] = 'Прикрепить';
         $LANG['def']['Reply'] = 'Ответ';
@@ -72,10 +99,12 @@ switch (SYSTEM::get('locale')) {
         $LANG['def']['Reply editing'] = 'Редактирование ответа';
         $LANG['def']['Topic'] = 'Тема';
         $LANG['def']['Topics'] = 'Темы';
-        $LANG['def']['Last topics'] = 'Последние темы';
+        $LANG['def']['Unpin'] = 'Открепить';
         break;
     case 'ua':
+        $LANG['def']['Cannot save topic'] = 'Не можу зберегти тему';
         $LANG['def']['Forum'] = 'Форум';
+        $LANG['def']['Last topics'] = 'Останні повідомлення';
         $LANG['def']['New topic'] = 'Нова тема';
         $LANG['def']['Pin'] = 'Прикріпити';
         $LANG['def']['Reply'] = 'Відповідь';
@@ -83,10 +112,12 @@ switch (SYSTEM::get('locale')) {
         $LANG['def']['Reply editing'] = 'Редагування відповіді';
         $LANG['def']['Topic'] = 'Тема';
         $LANG['def']['Topics'] = 'Теми';
-        $LANG['def']['Last topics'] = 'Останні повідомлення';
+        $LANG['def']['Unpin'] = 'Відкріпити';
         break;
     case 'by':
+        $LANG['def']['Cannot save topic'] = 'Не магу захаваць тэму';
         $LANG['def']['Forum'] = 'Форум';
+        $LANG['def']['Last topics'] = 'Апошнія паведамленні';
         $LANG['def']['New topic'] = 'Новая тэма';
         $LANG['def']['Pin'] = 'Прымацаваць';
         $LANG['def']['Reply'] = 'Адказ';
@@ -94,7 +125,7 @@ switch (SYSTEM::get('locale')) {
         $LANG['def']['Reply editing'] = 'Рэдагаванне адказу';
         $LANG['def']['Topic'] = 'Тэма';
         $LANG['def']['Topics'] = 'Тэмы';
-        $LANG['def']['Last topics'] = 'Апошнія паведамленні';
+        $LANG['def']['Unpin'] = 'Распушчае мацаваньне';
         break;
 }
 

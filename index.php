@@ -39,7 +39,7 @@ unset($global);
 
 error_reporting(-1);
 
-function idxErrorHandler1($errno, $errmsg, $filename, $linenum) {
+function idxErrorHandler($errno, $errmsg, $filename, $linenum) {
     $errortype = array (
            1 => "Error",
            2 => "Warning",

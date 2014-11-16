@@ -4,16 +4,17 @@
 # MODULE FORUM - TEMPLATE
 
 die();?>
+
 <table id="std">
     <tr><th colspan="2">[__Title]</a></th><th>[__Description]</th><th>[__Topics]</th></tr>
     [each=sections]
         <tr><td class="center" colspan="4"><a href="{sections[link]}">{sections[title]}</a></td></tr>
         [each=sections[categories]]
             <tr>
-                <td class="center"><img src="{categories[path]}icon.png" width="35" height="35" alt="" /></td>
+                <td class="center" style="width:40px"><img src="{categories[path]}icon.png" width="35" height="35" alt="" /></td>
                 <td class="left"><a href="{categories[link]}">{categories[title]}</a></td>
                 <td class="left">{categories[desc]}</td>
-                <td class="right">{categories[topics]}</td>
+                <td class="right" style="width:40px">{categories[topics]}</td>
             </tr>
         [endeach.sections[categories]]
     [endeach.sections]

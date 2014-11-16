@@ -434,8 +434,9 @@ class CONTENT extends INDEX {
 
     public function getLastItems($items) {
         krsort($items);
-        $items  = array_slice($items, 0, intval(CONFIG::getValue('main', 'last'), TRUE));
+        $items  = array_slice($items, 0, (int) CONFIG::getValue('main', 'last'), TRUE);
         $result = array();
+
         foreach ($items as $key => $data) {
             $item = explode('.', $data);
             self::getCategories($item[0]);
@@ -520,15 +521,13 @@ class CONTENT extends INDEX {
             }
         }
         if (CONFIG::getValue('enabled', 'rate')) {
-            if (!empty($comment['opened'])) {
-                $comment['rateid'] = $this->module.'.'.$this->section.'.'.$this->category.'.'.$this->item.'.'.$id;
-            }
+            $comment['rateid'] = $this->module.'.'.$this->section.'.'.$this->category.'.'.$this->item.'.'.$id;
             if ($comment['rate'] < 0) {
-                $comment['rate_color'] = 'negative';
+                $comment['rate_color'] = 'red';
             } elseif ($comment['rate'] === 0) {
-                $comment['rate_color'] = 'no';
+                $comment['rate_color'] = 'black';
             } else {
-                $comment['rate_color'] = 'positive';
+                $comment['rate_color'] = 'green';
             }
         } else {
             unset($comment['rate']);

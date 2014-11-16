@@ -11,11 +11,6 @@ $sections = CMS::call('FORUM')->getSections();
 $topics = CMS::call('FORUM')->getSectionsLastItems();
 if (!empty($topics)) {
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'last.tpl');
-    ShowWindow(
-        __('Last topics'), 
-        $TPL->parse(
-            CMS::call('FORUM')->getLastItems($topics)
-        )
-    );
+    ShowWindow(__('Last topics'), $TPL->parse(CMS::call('FORUM')->getLastItems($topics)));
 }
 ?>

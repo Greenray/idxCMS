@@ -7,7 +7,7 @@ die();?>
 
 <div class="comment">
     <a name="{id}"></a>
-    <div class="info">
+    <div class="content">
         <span class="date">{date}</span>
         [ifelse=rateid]
             <span class="rate">
@@ -18,8 +18,6 @@ die();?>
         [else]
             <span class="{rate_color}" style="float:right;padding:0 26px 0 0;">{rate}</span>
         [endelse]
-    </div>
-    <div>
         <div class="author">
             <img src="{avatar}" hspace="5" vspace="5" alt="" /><br />
             [ifelse=opened]

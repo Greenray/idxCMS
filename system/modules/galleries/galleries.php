@@ -108,9 +108,7 @@ if (empty($sections)) {
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'full.tpl');
             ShowWindow(
                 $categories[$category]['title'],
-                $TPL->parse(
-                    CMS::call('GALLERIES')->getItem($item['id'], 'text')
-                )
+                $TPL->parse(CMS::call('GALLERIES')->getItem($item['id'], 'text'))
             );
             CMS::call('GALLERIES')->incCount($item['id'], 'views');
         }
@@ -162,7 +160,7 @@ if (empty($sections)) {
         SYSTEM::set('pagename', $categories[$category]['title']);
         SYSTEM::setPageDescription(__('Galleries').' - '.$categories[$category]['title']);
         if (!empty($content)) {
-            $count  = sizeof($content);
+            $count   = sizeof($content);
             $keys    = array_keys($content);
             $page    = (int) FILTER::get('REQUEST', 'page');
             $width   = CONFIG::getValue('main', 'thumb-width');
@@ -175,10 +173,10 @@ if (empty($sections)) {
             $output = '';
             for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
                 $item = CMS::call('GALLERIES')->getImage($keys[$i]);
-                $item['date'] = FormatTime('d F Y', $item['time']).' '.__('year');
-                $item['path'] = $categories[$category]['path'];
-                $item['width']  = $width;
-                $item['height'] = $height;
+                $item['date']    = FormatTime('d F Y', $item['time']).' '.__('year');
+                $item['path']    = $categories[$category]['path'];
+                $item['width']   = $width;
+                $item['height']  = $height;
                 $item['comment'] = ($item['comments'] > 0) ? $item['link'].COMMENT.$item['comments'] : $item['link'];
                 SYSTEM::setPageKeywords($item['keywords']);
                 $images[] = $item;

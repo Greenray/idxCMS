@@ -4,6 +4,7 @@
 # ADMINISTRATION - GALLERIES - IMAGE TEMPLATE
 
 die();?>
+
 <script type="text/javascript">
     function checkImage(form) {
         var title = form.title.value;
@@ -81,7 +82,11 @@ die();?>
             </tr>
             <tr><th colspan="4">[__Text]</th></tr>
             <tr><td colspan="4">{bbCodes_text}</td></tr>
-            <tr><td colspan="4"><textarea id="text" name="text" id="text" rows="15">{text}</textarea></td></tr>
+            <tr>
+                <td colspan="4">
+                    <textarea id="text" name="text" id="text" rows="15">{text}</textarea>
+                </td>
+            </tr>
             <tr class="odd">
                 <td>[__Copyright]</td>
                 <td colspan="3">&copy; <input type="text" name="copyright" value="{copyright}" size="50" class="text" /></td>

@@ -4,6 +4,7 @@
 # MODULE CATALOGS - SHORT IMAGE DESCRIPTION TEMPLATE
 
 die();?>
+
 <div class="gallery">
     [each=images]
         <span class="item">
@@ -14,7 +15,7 @@ die();?>
             <div class="title">{images[title]}</div>
             <div class="info">
                 <a href="{images[link]}">[__Read more...] [if=images[views]]{images[views]}[endif]</a>
-                <a href="{comment}">[__Comments] [if=comments][{comments}][endif]</a>
+                <a href="{images[comment]}">[__Comments] [if=comments][{comments}][endif]</a>
             </div>
         </span>
     [endeach.images]

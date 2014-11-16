@@ -17,7 +17,7 @@ if (!empty($REQUEST['save'])) {
     # Check if admin decided to move item
     if ($category !== $REQUEST['new_category']) {
         if (!empty($REQUEST['item'])) {
-            # Topic exists, so move it
+            # Item exists, so move it
             $item = CMS::call('GALLERIES')->moveItem($REQUEST['item'], $section, $REQUEST['new_category']);
         } else {
             $item = '';     # Nothing to move, so add new

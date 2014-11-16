@@ -366,10 +366,10 @@ ul.tabs li a:focus { outline:0 }
 .topic,
 .gallery .item,
 .post-comment   { border:1px solid #777;border-radius:2px;margin:10px;padding:10px;overflow:hidden;
-                  box-shadow:0 0 2px 2px rgba(255, 255, 255, .8) inset, 0 2px 0 rgba(0, 0, 0, .3) }
+                 box-shadow:0 0 2px 2px rgba(255, 255, 255, .8) inset, 0 2px 0 rgba(0, 0, 0, .3) }
 .post           { background:#fff }
 .post .title    { margin:10px 5px;text-transform:none }
-.post .date,    { margin:2px 0 0 40px;width:300px }
+.post .date     { margin:2px 0 0 40px;width:300px }
 .post .author   { margin:0 0 0 10px;width:200px;line-height:16px }
 .post .admin    { margin:0 20px 0;float:right;line-height:18px }
 .post .admin a  { margin:0 2px }
@@ -436,7 +436,7 @@ ul.tabs li a:focus { outline:0 }
 .positive  { color:green;font-weight:bold }
 
 /* Left Panel */
-.win .title     { margin:20px 5px;text-transform:uppercase }
+.win .title     { margin:20px 5px;text-transform:uppercase;text-align:center }
 .calendar       { width:100% }
 table .calendar { padding:2px;vertical-align:middle;border:1px solid #e0dfdf }
 .calendar th    { background:#448aae;color:white;text-align:center }

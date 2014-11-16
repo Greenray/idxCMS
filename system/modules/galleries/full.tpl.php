@@ -19,6 +19,6 @@ die();?>
     </div>
     <div class="info">
         <span class="author">[__Posted by]: <a href="{MODULE}user&amp;user={author}">{nick}</a></span>
-        <span class="admin">[__Copyright]: &copy; {copyright}</span>
+        <span class="admin">[__Copyright]: {copyright}</span>
     </div>
 </div>

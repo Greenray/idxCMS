@@ -86,7 +86,7 @@ if (!defined('idxADMIN') || !USER::loggedIn()) die();?>
                         $navigation = GetUnserialized(CONTENT.'menu');
                         foreach ($navigation as $k => $item) {
                             if (!empty($item['icon'])) {
-                                $menu .= '<li><a href="'.$item['link'].'" target="_top"><img src="'.$item['icon'].'" width="16" height="16" alt="" /> '.$item['name'].'</a></li>';
+                                $menu .= '<li><a href="'.$item['link'].'" target="_top"><img src="'.$item['icon'].'" width="16" height="16" alt="" />'.$item['name'].'</a></li>';
                             } else {
                                 $menu .= '<li><a href="'.$item['link'].'" target="_top">'.$item['name'].'</a></li>';
                             }

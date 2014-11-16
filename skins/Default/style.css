@@ -377,7 +377,7 @@ ul.tabs li a:focus { outline:0 }
 .post img       { float:left }
 .post .text img { margin:10px }
 
-.gallery        { margin:0 auto;width:695px }
+.gallery        { margin:0 auto;width:720px }
 .gallery .item  { margin:10px 3px;width:210px;float:left }
 .gallery .info  { padding:0 0 0 15px }
 .gallery .title { text-transform:none }
@@ -445,7 +445,7 @@ table .calendar { padding:2px;vertical-align:middle;border:1px solid #e0dfdf }
 .poll { margin:0 0 10px }
 
 /* Right panel */
-.panel .title { background:#448aae;color:#fff;padding:10px 5px;text-transform:uppercase }
+.panel .title { background:#448aae;color:#fff;padding:10px 5px;text-transform:uppercase;text-align:center;font-weight:bold }
 .login_panel  { margin:10px 0 }
 .user_panel   { margin:10px;padding:0 10px }
 

@@ -19,7 +19,7 @@ if (!empty($REQUEST['save'])) {
     }
     CMS::call('CONFIG')->setSection('navigation', $result);
     if (!CMS::call('CONFIG')->save()) {
-         ShowMessage('Cannot save configuration');
+         ShowMessage('Cannot save file');
     }
 }
 

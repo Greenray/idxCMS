@@ -36,14 +36,14 @@ die();?>
                             <td class="desc">{categories[desc]}</td>
                             <td class="access center">{categories[access]}</td>
                             <td class="actions center">
-                                <button type="submit" name="edit" value="{sections[id]}.{categories[id]}" class="tip" title="[__Edit]">
+                                <button type="submit" name="edit" value="{sections[id]}.{categories[id]}" title="[__Edit]">
                                     <img src="{ICONS}edit.png" width="16" height="16" alt="[__Edit]" />
                                 </button>
-                                <button formaction="{MODULE}admin&amp;id={module}.items&amp;section={sections[id]}&amp;category={categories[id]}" class="tip" title="[__Posts]">
+                                <button formaction="{MODULE}admin&amp;id={module}.items&amp;section={sections[id]}&amp;category={categories[id]}" title="[__Posts]">
                                     <img src="{ICONS}posts.png" width="16" height="16" alt="[__Posts]" />
                                 </button>
                                 [if=categories[delete]]
-                                    <button type="submit" name="delete" value="{sections[id]}.{categories[id]}" class="tip" title="[__Delete]">
+                                    <button type="submit" name="delete" value="{sections[id]}.{categories[id]}" title="[__Delete]">
                                         <img src="{ICONS}delete.png" width="16" height="16" alt="[__Delete]" />
                                     </button>
                                 [endif]

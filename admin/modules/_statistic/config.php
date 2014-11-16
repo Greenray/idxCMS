@@ -12,7 +12,7 @@ if (!empty($REQUEST['save'])) {
     $config['spider-ua'] = empty($REQUEST['spider-ua']) ? '' : '1';
     CMS::call('CONFIG')->setSection('statistic', $config);
     if (!CMS::call('CONFIG')->save()) {
-        ShowMessage('Cannot save configuration');
+        ShowMessage('Cannot save file');
     }
 }
 

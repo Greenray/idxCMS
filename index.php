@@ -190,8 +190,8 @@ switch($MODULE) {
                     break;
             }
         } else {
-            $message  = __('Access denied');
-            $message .= LoginForm();
+            $message[0] = __('Access denied');
+            $message[1] = LoginForm();
             include(ADMIN.'error.php');
         }
         break;

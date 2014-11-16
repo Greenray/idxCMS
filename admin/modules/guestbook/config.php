@@ -15,7 +15,7 @@ if (isset($init)) {
         $config['allow-guests-post'] = '';
         CMS::call('CONFIG')->setSection('guestbook', $config);
         if (!CMS::call('CONFIG')->save()) {
-            ShowMessage('Cannot save configuration');
+            ShowMessage('Cannot save file');
         }
     }
 } else {
@@ -26,7 +26,7 @@ if (isset($init)) {
         $config['allow-guests-post'] = FILTER::get('REQUEST', 'allow-guests-post');
         CMS::call('CONFIG')->setSection('guestbook', $config);
         if (!CMS::call('CONFIG')->save()) {
-            ShowMessage('Cannot save configuration');
+            ShowMessage('Cannot save file');
         }
     }
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'config.tpl');

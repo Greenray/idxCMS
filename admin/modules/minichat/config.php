@@ -14,7 +14,7 @@ if (isset($init)) {
         $config['mess-to-show']   = 5;
         CMS::call('CONFIG')->setSection('minichat', $config);
         if (!CMS::call('CONFIG')->save()) {
-            ShowMessage('Cannot save configuration');
+            ShowMessage('Cannot save file');
         }
     }
 } else {
@@ -27,7 +27,7 @@ if (isset($init)) {
         }
         CMS::call('CONFIG')->setSection('minichat', $config);
         if (!CMS::call('CONFIG')->save()) {
-            ShowMessage('Cannot save configuration');
+            ShowMessage('Cannot save file');
         }
     }
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'config.tpl');

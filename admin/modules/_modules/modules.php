@@ -31,14 +31,14 @@ if (!empty($REQUEST['enable'])) {
     }
     CMS::call('CONFIG')->setSection('enabled', $enabled);
     if (!CMS::call('CONFIG')->save()) {
-         ShowMessage('Cannot save configuration');
+         ShowMessage('Cannot save file');
     }
     if (!empty($unset)) {
         foreach($unset as $mod => $axtive) {
             CMS::call('CONFIG')->unsetSection($mod);
         }
         if (!CMS::call('CONFIG')->save()) {
-            ShowMessage('Cannot save configuration');
+            ShowMessage('Cannot save file');
         }
     }
     Sitemap();

@@ -14,7 +14,7 @@ if (isset($init)) {
         $config['reply-length']     = 4000;
         CMS::call('CONFIG')->setSection('forum', $config);
         if (!CMS::call('CONFIG')->save()) {
-            ShowMessage('Cannot save configuration');
+            ShowMessage('Cannot save file');
         }
     }
 } else {
@@ -25,7 +25,7 @@ if (isset($init)) {
         $config['reply-length']     = empty($REQUEST['reply-length'])     ? 4000 : (int) $REQUEST['reply-length'];
         CMS::call('CONFIG')->setSection('forum', $config);
         if (!CMS::call('CONFIG')->save()) {
-            ShowMessage('Cannot save configuration');
+            ShowMessage('Cannot save file');
         }
     }
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'config.tpl');

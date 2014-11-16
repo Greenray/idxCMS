@@ -5,9 +5,14 @@
 
 if (!defined('idxADMIN')) die();
 
-$section    = FILTER::get('REQUEST', 'section');
-$category   = FILTER::get('REQUEST', 'category');
-$post       = FILTER::get('REQUEST', 'edit');
+$section  = FILTER::get('REQUEST', 'section');
+$category = FILTER::get('REQUEST', 'category');
+$item     = FILTER::get('REQUEST', 'item');
+$post     = FILTER::get('REQUEST', 'edit');
+
+$new_section  = FILTER::get('REQUEST', 'new_section');
+$new_category = FILTER::get('REQUEST', 'new_category');
+
 $sections   = CMS::call('POSTS')->getSections();
 $categories = CMS::call('POSTS')->getCategories($section);
 $content    = CMS::call('POSTS')->getContent($category);
@@ -15,22 +20,20 @@ $content    = CMS::call('POSTS')->getContent($category);
 # Save new or edited post
 if (!empty($REQUEST['save'])) {
     # Check if admin decided to move post
-    if (($section !== $REQUEST['new_section']) || ($category !== $REQUEST['new_category'])) {
-        if (!empty($REQUEST['item'])) {
+    if (($section !== $new_section) || ($category !== $new_category)) {
+        if (!empty($item)) {
             # Post exists, so move it
-            $post = CMS::call('POSTS')->moveItem($REQUEST['item'], $REQUEST['new_section'], $REQUEST['new_category']);
+            $post = CMS::call('POSTS')->moveItem($item, $new_section, $new_category);
         } else {
             $post = '';     # Nothing to move, so add new
         }
-        $section  = $REQUEST['new_section'];
-        $category = $REQUEST['new_category'];
     } else {
-        $post = FILTER::get('REQUEST', 'item');
+        $post = $item;      # It's edited post
     }
+var_dump($post);
+    $categories = CMS::call('POSTS')->getCategories($new_section);
+    $content    = CMS::call('POSTS')->getContent($new_category);
 
-    $categories = CMS::call('POSTS')->getCategories($section);
-    $content    = CMS::call('POSTS')->getContent($category);
-    
     try {
         CMS::call('POSTS')->saveItem($post);
         USER::changeProfileField(USER::getUser('username'), 'posts', '+');
@@ -39,11 +42,12 @@ if (!empty($REQUEST['save'])) {
         ShowMessage(__($error->getMessage()));
     }
     $post = '';
+
 } elseif (!empty($REQUEST['close']) || !empty($REQUEST['open'])) {
     CMS::call('POSTS')->setValue(
         empty($REQUEST['close']) ? $REQUEST['open'] : $REQUEST['close'],
         'opened',
-        empty($REQUEST['close']) ? TRUE : FALSE
+        empty($REQUEST['close']) ? 1 : 0
     );
 } else {
     if (!empty($REQUEST['delete'])) {
@@ -64,12 +68,12 @@ if ((empty($section) && empty($category)) || !empty($REQUEST['new']) || !empty($
             $category = 2;
         }
     }
-    
+
     $output = array();
     $choice = array();
     $list_i = array();
     $list_t = array();
-    
+
     foreach ($sections as $id => $data) {
         $categories = CMS::call('POSTS')->getCategories($id);
         if (!empty($categories)) {
@@ -88,6 +92,7 @@ if ((empty($section) && empty($category)) || !empty($REQUEST['new']) || !empty($
             }
         }
     }
+
     $output['ids']            = implode(',', $list_i);
     $output['titles']         = implode(',', $list_t);
     $output['sections']       = $choice;
@@ -107,11 +112,11 @@ if ((empty($section) && empty($category)) || !empty($REQUEST['new']) || !empty($
         $output['opened']   = empty($REQUEST['opened'])   ? $post['opened']   : $REQUEST['opened'];
     } else {
         $output['item']     = '';
-        $output['title']    = FILTER::get('REQUEST', 'title');
-        $output['keywords'] = FILTER::get('REQUEST', 'keywords');
-        $output['desc']     = FILTER::get('REQUEST', 'desc');
-        $output['text']     = FILTER::get('REQUEST', 'text');
-        $output['opened']   = empty($REQUEST['opened']) ? TRUE : $REQUEST['opened'];
+        $output['title']    = $REQUEST['title'];
+        $output['keywords'] = $REQUEST['keywords'];
+        $output['desc']     = $REQUEST['desc'];
+        $output['text']     = $REQUEST['text'];
+        $output['opened']   = empty($REQUEST['opened']) ? 1 : $REQUEST['opened'];
     }
     $output['sections'][$output['section_id']]['selected']    = TRUE;
     $output['categories'][$output['category_id']]['selected'] = TRUE;
@@ -121,7 +126,9 @@ if ((empty($section) && empty($category)) || !empty($REQUEST['new']) || !empty($
     echo $TPL->parse($output);
 
 } elseif (!empty($sections[$section])) {
+
     $categories = CMS::call('POSTS')->getCategories($section);
+
     if (!empty($categories[$category])) {
         $output = array();
         $output['section_id']     = $section;
@@ -129,6 +136,7 @@ if ((empty($section) && empty($category)) || !empty($REQUEST['new']) || !empty($
         $output['category_id']    = $category;
         $output['category_title'] = $categories[$category]['title'];
         $content = CMS::call('POSTS')->getContent($category);
+
         foreach ($content as $key => $post) {
             $post['date'] = FormatTime('d m Y', $post['time']);
             if ($post['opened']) {
@@ -140,6 +148,7 @@ if ((empty($section) && empty($category)) || !empty($REQUEST['new']) || !empty($
             }
             $output['items'][] = $post;
         }
+
         $TPL = new TEMPLATE(dirname(__FILE__).DS.'items.tpl');
         echo $TPL->parse($output);
 

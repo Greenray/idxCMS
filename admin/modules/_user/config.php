@@ -11,26 +11,26 @@ if (!empty($REQUEST['save'])) {
     $config['nick-length'] = empty($REQUEST['nick-length']) ? 1   : (int) $REQUEST['nick-length'];
     $config['timeout']     = empty($REQUEST['timeout'])     ? 300 : (int) $REQUEST['timeout'];
     CMS::call('CONFIG')->setSection('user', $config);
-    
+
     $config = array();
     $config['width']  = empty($REQUEST['width'])  ? 70    : (int) $REQUEST['width'];
     $config['height'] = empty($REQUEST['height']) ? 70    : (int) $REQUEST['height'];
     $config['size']   = empty($REQUEST['size'])   ? 50000 : (int) $REQUEST['size'];
     CMS::call('CONFIG')->setSection('avatar', $config);
-    
+
     $config = array();
     $config['db-size']        = empty($REQUEST['db-size'])        ? 100  : (int) $REQUEST['db-size'];
     $config['per-page']       = empty($REQUEST['per-page'])       ? 30   : (int) $REQUEST['per-page'];
     $config['message-length'] = empty($REQUEST['message-length']) ? 2000 : (int) $REQUEST['message-length'];
     CMS::call('CONFIG')->setSection('pm', $config);
-    
+
     $config = array();
     $config['email']          = trim(FILTER::get('REQUEST', 'email'));
     $config['message-length'] = empty($REQUEST['message-length']) ? 2000 : (int) $REQUEST['message-length'];
     $config['db-size']        = empty($REQUEST['db-size'])        ? 100  : (int) $REQUEST['db-size'];
     CMS::call('CONFIG')->setSection('feedback', $config);
     if (!CMS::call('CONFIG')->save()) {
-        ShowMessage('Cannot save configuration');
+        ShowMessage('Cannot save file');
     }
 }
 

@@ -364,10 +364,11 @@ class CONTENT extends INDEX {
         $old_category = $this->category;
         $this->section = $section;
         self::getContent($category);
-        $new  = $this->newId($this->content);
-        $path = $this->sections[$old_section]['categories'][$old_category]['path'];
-        if (CopyTree($path.$id, $path.$new) === FALSE) {
-            rmdir($path.$new);
+        $new    = $this->newId($this->content);
+        $source = $this->sections[$old_section]['categories'][$old_category]['path'];
+        $dest   = $this->sections[$section]['categories'][$category]['path'];
+        if (CopyTree($source.$id, $dest.$new) === FALSE) {
+            rmdir($dest.$new);
             throw new Exception('Cannot move item');
         }
         $this->content[$new] = $item;

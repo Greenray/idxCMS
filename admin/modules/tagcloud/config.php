@@ -67,7 +67,7 @@ if (isset($init)) {
         $config['distr']   = 'true';
         CMS::call('CONFIG')->setSection('tagcloud', $config);
         if (!CMS::call('CONFIG')->save()) {
-            ShowMessage('Cannot save configuration');
+            ShowMessage('Cannot save file');
         }
     }
 } else {
@@ -84,7 +84,7 @@ if (isset($init)) {
         $config['distr']   = empty($REQUEST['distr'])   ? 'false' : 'true';
         CMS::call('CONFIG')->setSection('tagcloud', $config);
         if (!CMS::call('CONFIG')->save()) {
-            ShowMessage('Cannot save configuration');
+            ShowMessage('Cannot save file');
         }
     }
     if (!empty($REQUEST['create'])) {
@@ -97,7 +97,7 @@ if (isset($init)) {
             $result = CreateTags(TRUE);
         }
         if ($result === FALSE) {
-            ShowMessage('Cannot save tags');
+            ShowMessage('Cannot save file');
         }
     }
     if ($config['distr'] === 'false') {
@@ -116,7 +116,7 @@ if (isset($init)) {
             }
         }
         if (!file_put_contents(CONTENT.'tags', serialize($tags))) {
-            ShowMessage('Cannot save configuration');
+            ShowMessage('Cannot save file');
         }
     }
     $create_tags = 0;

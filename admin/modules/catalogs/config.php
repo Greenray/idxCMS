@@ -15,7 +15,7 @@ if (isset($init)) {
         $config['comments-per-page']  = 10;
         CMS::call('CONFIG')->setSection('catalogs', $config);
         if (!CMS::call('CONFIG')->save()) {
-            ShowMessage('Cannot save configuration');
+            ShowMessage('Cannot save file');
         }
     }
 } else {
@@ -27,7 +27,7 @@ if (isset($init)) {
         $config['comments-per-page']  = empty($REQUEST['comments-per-page'])  ? 10   : (int) $REQUEST['comments-per-page'];
         CMS::call('CONFIG')->setSection('catalogs', $config);
         if (!CMS::call('CONFIG')->save()) {
-            ShowMessage('Cannot save configuration');
+            ShowMessage('Cannot save file');
         }
     }
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'config.tpl');

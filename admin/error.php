@@ -13,7 +13,8 @@ if (!defined('idxCMS')) die();?>
 </head>
 <body>
 <table class="message center">
-    <tr><td class="row2"><?php echo $message?></td></tr>
+    <tr><td class="module row2"><?php echo $message[0]?></td></tr>
+    <tr><td class="row2" style="padding:0 10px 10px 10px;"><?php echo $message[1]?></td></tr>
 </table>
 </body>
 </html>

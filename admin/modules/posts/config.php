@@ -14,7 +14,7 @@ if (!empty($REQUEST['save'])) {
     $config['comments-per-page']  = empty($REQUEST['comments-per-page'])  ? 10   : (int) $REQUEST['comments-per-page'];
     CMS::call('CONFIG')->setSection('posts', $config);
     if (!CMS::call('CONFIG')->save()) {
-        ShowMessage('Cannot save configuration');
+        ShowMessage('Cannot save file');
     }
 }
 

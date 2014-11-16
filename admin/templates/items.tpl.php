@@ -4,6 +4,7 @@
 # ADMINISTRATION - ITEMS TEMPLATE
 
 die();?>
+
 <div class="module">[__Topics]</div>
 <fieldset>
     <form name="topics" method="post" action="">

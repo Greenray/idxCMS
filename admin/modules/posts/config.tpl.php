@@ -4,6 +4,7 @@
 # ADMINISTRATION - POSTS - CONFIGURATION TEMPLATE
 
 die();?>
+
 <div class="module">[__Options]</div>
 <fieldset>
     <form name="config" method="post" action="">

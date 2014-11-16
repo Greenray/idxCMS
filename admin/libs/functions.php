@@ -56,7 +56,7 @@ function LoginForm() {
                         <td class="row2">'.__('Password').':</td>
                         <td class="row2 left"><input type="password" name="password" style="width: 95%;" /></td>
                     </tr>
-                    <tr><td class="row2" colspan="2"><input type="submit" name="login" value="'.__('Log in').'" /></td></tr>
+                    <tr><td class="row2" colspan="2"><input type="submit" name="login" value="'.__('Log in').'" class="submit" /></td></tr>
                 </table>
             </form>';
 }

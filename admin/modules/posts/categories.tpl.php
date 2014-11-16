@@ -32,12 +32,12 @@ die();?>
                             <td class="desc">{categories[desc]}</td>
                             <td class="access center">{categories[access]}</td>
                             <td class="actions center">
-                                <button type="submit" name="edit" value="{system[id]}.{categories[id]}" class="tip" title="[__Edit]">
+                                <button type="submit" name="edit" value="{system[id]}.{categories[id]}" title="[__Edit]">
                                     <img src="{ICONS}edit.png" width="16" height="16" alt="[__Edit]" />
                                 </button>
                                 [if=categories[posts]]
                                     <a href="./?module=admin&amp;id=posts.posts&amp;section={system[id]}&amp;category={categories[id]}" target="main">
-                                        <img src="{ICONS}posts.png" width="16" height="16" class="tip" alt="[__Posts]" />
+                                        <img src="{ICONS}posts.png" width="16" height="16" alt="[__Posts]" />
                                     </a>
                                 [endif]
                             </td>
@@ -72,15 +72,15 @@ die();?>
                             <td class="desc">{categories[desc]}</td>
                             <td class="access center">{categories[access]}</td>
                             <td class="actions center">
-                                <button type="submit" name="edit" value="{sections[id]}.{categories[id]}" class="tip" title="[__Edit]">
-                                    <img src="{ICONS}edit.png" width="16" height="16" class="tip" alt="[__Edit]" />
+                                <button type="submit" name="edit" value="{sections[id]}.{categories[id]}" title="[__Edit]">
+                                    <img src="{ICONS}edit.png" width="16" height="16" alt="[__Edit]" />
                                 </button>
                                 [ifelse=categories[posts]]
                                     <a href="./?module=admin&amp;id=posts.posts&amp;section={sections[id]}&amp;category={categories[id]}" target="main">
-                                        <img src="{ICONS}posts.png" width="16" height="16" class="tip" alt="[__Posts]" />
+                                        <img src="{ICONS}posts.png" width="16" height="16" alt="[__Posts]" />
                                     </a>
                                 [else]
-                                    <button type="submit" name="delete" value="{sections[id]}.{categories[id]}" class="tip" title="[__Delete]">
+                                    <button type="submit" name="delete" value="{sections[id]}.{categories[id]}" title="[__Delete]">
                                         <img src="{ICONS}delete.png" width="16" height="16" alt="[__Delete]" />
                                     </button>
                                 [endelse]

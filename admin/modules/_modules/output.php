@@ -25,7 +25,7 @@ if (!empty($REQUEST['save'])) {
     }
     CMS::call('CONFIG')->setSection('output', $config);
     if (!CMS::call('CONFIG')->save()) {
-        ShowMessage('Cannot save configuration');
+        ShowMessage('Cannot save file');
     }
 }
 

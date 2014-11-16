@@ -6,8 +6,8 @@
 die();?>
 
 <script type="text/javascript">
-    var ids = new Array(ids);
-    var titles = new Array(titles);
+    var ids = new Array({ids});
+    var titles = new Array({titles});
     function getIds(index) {
         var idsValues = ids[index];
         return idsValues.split(',');
@@ -33,7 +33,7 @@ die();?>
             }
         }
     }
-    setCategories(document.forms['post'].elements['new_section'].selectedIndex);
+//    setCategories(document.forms['post'].elements['new_section'].selectedIndex);
     function checkPost(form) {
         var title = form.title.value;
         var text = form.text.value;
@@ -59,8 +59,8 @@ die();?>
         <table class="std">
             <tr class="odd">
                 <td class="label">[__Section]</td>
-                <td><input type="hidden" name="section" value="{section_id}" /><b>{section_title}</b></td>
-                <td class="label">[__Select section]</td>
+                <td style="width:550px"><input type="hidden" name="section" value="{section_id}" /><b>{section_title}</b></td>
+                <td class="label"style="width:150px" >[__Select section]</td>
                 <td>
                     <select name="new_section" onChange="setCategories(this.selectedIndex)">
                         [each=sections]

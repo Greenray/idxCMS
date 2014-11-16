@@ -42,7 +42,7 @@ if (!empty($REQUEST['save'])) {
     $config['tz']             = empty($REQUEST['tz'])             ? 3         : (int) $REQUEST['tz'];
     $config['welcome']        = empty($REQUEST['welcome'])        ? ''        : '1';
     CMS::call('CONFIG')->setSection('main', $config);
-    
+
     $config = array();
     $config['query-min']   = empty($REQUEST['query-min'])   ? 6  : (int) $REQUEST['query-min'];
     $config['query-max']   = empty($REQUEST['query-max'])   ? 20 : (int) $REQUEST['query-max'];
@@ -50,7 +50,7 @@ if (!empty($REQUEST['save'])) {
     $config['per-page']    = empty($REQUEST['per-page'])    ? 20 : (int) $REQUEST['per-page'];
     $config['allow-guest'] = empty($REQUEST['allow-guest']) ? '' : '1';
     CMS::call('CONFIG')->setSection('search', $config);
-    
+
     $config = array();
     $config['width']          = empty($REQUEST['width'])          ? 290        : (int) $REQUEST['width'];
     $config['height']         = empty($REQUEST['height'])         ? 24         : (int) $REQUEST['height'];
@@ -69,13 +69,13 @@ if (!empty($REQUEST['save'])) {
     $config['autostart']      = empty($REQUEST['autostart'])      ? '' : '1';
     $config['loop']           = empty($REQUEST['loop'])           ? '' : '1';
     CMS::call('CONFIG')->setSection('audio', $config);
-    
+
     $config = array();
     $config['width']  = empty($REQUEST['width'])  ? 435 : (int) $REQUEST['width'];
     $config['height'] = empty($REQUEST['height']) ? 350 : (int) $REQUEST['height'];
     CMS::call('CONFIG')->setSection('video', $config);
     if (!CMS::call('CONFIG')->save()) {
-        ShowMessage('Cannot save configuration');
+        ShowMessage('Cannot save file');
     }
 }
 

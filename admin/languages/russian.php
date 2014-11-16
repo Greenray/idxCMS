@@ -4,6 +4,7 @@
 # ADMINISTRATION - RUSSIAN LOCALISATION
 
 $LANG['def']['Access'] = 'Доступ';
+$LANG['def']['Access denied'] = 'Доступ запрещен';
 $LANG['def']['Actions'] = 'Действия';
 $LANG['def']['Active right background'] = 'Фон активной правой части';
 $LANG['def']['Active right icon color'] = 'Цвет активной правой иконки';

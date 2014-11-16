@@ -17,7 +17,7 @@ if (isset($init)) {
         $config['last']   = 1;
         CMS::call('CONFIG')->setSection('galleries', $config);
         if (!CMS::call('CONFIG')->save()) {
-            ShowMessage('Cannot save configuration');
+            ShowMessage('Cannot save file');
         }
     }
 } else {
@@ -31,7 +31,7 @@ if (isset($init)) {
         $config['last'] = empty($REQUEST['last']) ? 1 : (int) $REQUEST['last'];
         CMS::call('CONFIG')->setSection('galleries', $config);
         if (!CMS::call('CONFIG')->save()) {
-            ShowMessage('Cannot save configuration');
+            ShowMessage('Cannot save file');
         }
     }
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'config.tpl');

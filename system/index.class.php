@@ -5,10 +5,10 @@
 # Saving and reading database files.
 class INDEX {
 
-    private $index = 'index';      # Name of the index file
+    protected $index = 'index';      # Name of the index file
 
-    private function __construct() {}
-    private function __clone() {}
+    protected function __construct() {}
+    protected function __clone() {}
 
     # Set the name of the serialized file
     protected function setIndex($name) {

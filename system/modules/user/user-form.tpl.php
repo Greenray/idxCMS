@@ -130,7 +130,7 @@ die();?>
                 </a>
             </p>
             <div id="shdesc"  class="none">
-                <div class="avatar"><input type="file" name="avatar" value="" /></div>
+                <div class="avatar"><input type="file" name="avatar" value="" class="submit" /></div>
             </div>
         </td>
     </tr>

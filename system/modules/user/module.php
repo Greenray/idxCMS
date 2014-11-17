@@ -16,11 +16,12 @@ class MESSAGE extends INDEX {
     private $config   = array();
 
     public function __construct($path, $file) {
+        parent::__construct();
         $this->path = $path;
         $this->setIndex($file);
         if ($this->path === CONTENT) {
             $this->config = CONFIG::getSection($this->index);
-        } else { 
+        } else {
             $this->config = CONFIG::getSection('pm');
         }
         $this->messages = self::getIndex($this->path);

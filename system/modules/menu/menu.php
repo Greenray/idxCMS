@@ -6,21 +6,12 @@
 if (!defined('idxCMS')) die();
 
 $data   = GetUnserialized(CONTENT.'menu');
-$points = array_keys($data);
-$last   = end($points);
-$class  = 'first';
 $access = USER::getUser('access');
+
 $TPL    = new TEMPLATE(dirname(__FILE__).DS.'menu.tpl');
-$output = '<div id="menu"><ul class="menu menu-dropdown">';
+$output = '<div id="menu"><ul class="menu">';
 
 foreach($data as $module => $menu) {
-    $active = '';
-    if ($module === $_SESSION['request']) {
-        $active = 'active';
-    }
-    if ($module === $last) {
-        $class = 'last';
-    }
     if (!empty($menu['sections'])) {
         foreach ($menu['sections'] as $id => $section) {
             if ($section['access'] > $access) {
@@ -43,9 +34,6 @@ foreach($data as $module => $menu) {
             }
         }
     }
-    $menu['active'] = $active;
-    $menu['class']  = $class;
-    $class   = '';
     $output .= $TPL->parse($menu);
 }
 

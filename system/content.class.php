@@ -492,6 +492,7 @@ class CONTENT extends INDEX {
         if (empty($this->comments[$id])) {
             return FALSE;
         }
+
         $comment = $this->comments[$id];
         $comment['text']   = ParseText($comment['text'], $this->sections[$this->section]['categories'][$this->category]['path'].$this->item.DS);
         $comment['date']   = FormatTime('d F Y H:i:s', $comment['time']);
@@ -501,6 +502,7 @@ class CONTENT extends INDEX {
         $comment['stars']   = $author['stars'];
         $comment['country'] = $author['country'];
         $comment['city']    = $author['city'];
+
         $user = USER::getUser('username');
         if (($author['rights'] === '*') || ($user === $comment['author'])) {
             unset($comment['ip']);
@@ -521,6 +523,7 @@ class CONTENT extends INDEX {
                 }
             }
         }
+
         if (CONFIG::getValue('enabled', 'rate')) {
             $comment['rateid'] = $this->module.'.'.$this->section.'.'.$this->category.'.'.$this->item.'.'.$id;
             if ($comment['rate'] < 0) {

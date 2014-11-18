@@ -6,14 +6,18 @@
 die();?>
 
 <table id="std">
+    <tr>
+        <th colspan="2">[__Title]</th>
+        <th>[__Description]</th>
+        <th>[__Topics]</th>
+    </tr>
     <tr><td colspan="4"class="center"><a href="{link}">{title}</a></td></tr>
-    <tr><th colspan="2">[__Title]</th><th>[__Description]</th><th>[__Topics]</th></tr>
     [each=categories]
         <tr>
             <td style="width:40px"><img src="{categories[path]}icon.png" width="35" height="35" alt="" /></td>
             <td class="left"><a href="{categories[link]}">{categories[title]}</a></td>
             <td class="left">{categories[desc]}</td>
-            <td class="right" style="width:40px">{categories[topics]}</td>
+            <td class="center" style="width:40px">{categories[topics]}</td>
         </tr>
     [endeach.categories]
 </table>

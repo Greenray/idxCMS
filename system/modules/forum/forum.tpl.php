@@ -6,9 +6,13 @@
 die();?>
 
 <table id="std">
-    <tr><th colspan="2">[__Title]</a></th><th>[__Description]</th><th>[__Topics]</th></tr>
+    <tr>
+        <th colspan="2">[__Title]</a></th>
+        <th>[__Description]</th>
+        <th>[__Topics]</th>
+    </tr>
     [each=sections]
-        <tr><td class="center" colspan="4"><a href="{sections[link]}">{sections[title]}</a></td></tr>
+        <tr><td colspan="4" class="center"><a href="{sections[link]}">{sections[title]}</a></td></tr>
         [each=sections[categories]]
             <tr>
                 <td class="center" style="width:40px"><img src="{categories[path]}icon.png" width="35" height="35" alt="" /></td>

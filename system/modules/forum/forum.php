@@ -14,18 +14,22 @@ if ($sections === FALSE) {
 if (empty($sections)) {
     ShowWindow(__('Forum'), __('Database is empty'), 'center');
 } else {
+
     $section  = FILTER::get('REQUEST', 'section');
     $category = FILTER::get('REQUEST', 'category');
     $topic    = FILTER::get('REQUEST', 'item');
+
     if (!empty($topic) && !empty($category) && !empty($section)) {
         $categories = CMS::call('FORUM')->getCategories($section);
         if ($section === FALSE) {
             Redirect('forum');        # Wrong section request
         }
+
         $content = CMS::call('FORUM')->getContent($category);
         if (($content === FALSE) || empty($content[$topic])) {
             Redirect('forum', $section);        # Wrong category request
         }
+
         $replies = CMS::call('FORUM')->getComments($topic);
         $reply   = FILTER::get('REQUEST', 'comment');
 
@@ -136,6 +140,7 @@ if (empty($sections)) {
         $topic = CMS::call('FORUM')->getItem($topic);
         SYSTEM::set('pagename', $topic['title']);
         SYSTEM::setPageDescription($topic['title']);
+
         $perpage = (int) CONFIG::getValue('forum', 'replies-per-page');
         if (!empty($reply)) {
             $page = ceil((int)$reply / $perpage);
@@ -148,7 +153,7 @@ if (empty($sections)) {
         if ($page < 2) {
             # Show topic
             $topic = CMS::call('FORUM')->getItem($topic['id'], 'text');
-            $topic['date']   = FormatTime('d F Y H:i:s', $topic['time']);
+            $topic['date']    = FormatTime('d F Y H:i:s', $topic['time']);
             $topic['avatar']  = GetAvatar($topic['author']);
             $author = USER::getUserData($topic['author']);
             $topic['stars']   = $author['stars'];
@@ -183,11 +188,12 @@ if (empty($sections)) {
         # Show comments
         $replies = CMS::call('FORUM')->getComments($topic['id']);
         if (!empty($replies)) {
+            $TPL = new TEMPLATE(dirname(__FILE__).DS.'comment.tpl');
+
             $count  = sizeof($replies);
             $ids    = array_keys($replies);
             $output = '';
             $pagination = GetPagination($page, $perpage, $count);
-            $TPL = new TEMPLATE(dirname(__FILE__).DS.'comment.tpl');
             for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
                 $output .= $TPL->parse(CMS::call('FORUM')->getComment($ids[$i], $page));
             }
@@ -196,6 +202,7 @@ if (empty($sections)) {
                 ShowWindow('', Pagination($count, $perpage, $page, $topic['link']));
             }
         }
+
         if (USER::loggedIn() && $topic['opened']) {
             # Form to post reply
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'comment-post.tpl');
@@ -220,11 +227,13 @@ if (empty($sections)) {
         if (empty($categories)) {
             Redirect('forum');
         }
+
         $category = CMS::call('FORUM')->getCategory($category);
         $content  = CMS::call('FORUM')->getContent($category['id']);
         if ($content === FALSE) {
             Redirect('forum', $section);
         }
+
         SYSTEM::set('pagename', $category['title']);
         SYSTEM::setPageDescription(__('Forum').' - '.$category['title']);
 
@@ -281,6 +290,12 @@ if (empty($sections)) {
                     $output['topic'][$ids[$i]]['date'] = FormatTime('d m Y', $content[$ids[$i]]['time']);
                     if ($output['topic'][$ids[$i]]['comments'] > 0) {
                         $output['topic'][$ids[$i]]['last_link'] = $output['topic'][$ids[$i]]['link'].COMMENT.$content[$ids[$i]]['comments'];
+                        $replies = CMS::call('FORUM')->getComments($content[$ids[$i]]['id']);
+                        $reply   = CMS::call('FORUM')->getComment($ids[$i], 0);
+//                        var_dump($reply);
+                        $output['topic'][$ids[$i]]['short'] = mb_substr(ParseText($reply['text'].'...'), 50);
+                        $output['topic'][$ids[$i]]['nick']  = $reply['nick'];
+//                        var_dump($output['topic'][$ids[$i]]['short']);
                     }
                     if ($content[$ids[$i]]['opened']) {
                         $output['topic'][$ids[$i]]['flag'] = 'close';
@@ -294,6 +309,7 @@ if (empty($sections)) {
                 $output['post_allowed'] = TRUE;
             }
             ArraySort($output['topic'],'!pinned','!time');
+
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'category.tpl');
             ShowWindow($category['title'], $TPL->parse($output));
             if ($count > $perpage) {
@@ -306,6 +322,7 @@ if (empty($sections)) {
         if ($categories === FALSE) {
             Redirect('forum');
         }
+
         SYSTEM::set('pagename', $section['title']);
         if (!empty($section['desc'])) {
             SYSTEM::setPageDescription(__('Forum').' - '.$section['title'].' - '.$section['desc']);
@@ -313,6 +330,7 @@ if (empty($sections)) {
             SYSTEM::setPageDescription(__('Forum').' - '.$section['title']);
         }
         SYSTEM::setPageKeywords($section['id']);
+
         if (empty($categories)) {
             ShowWindow($section['title'], __('Database is empty'), 'center');
         } else {
@@ -346,6 +364,7 @@ if (empty($sections)) {
         # Forum main page - Sections and categories
         SYSTEM::set('pagename', __('Forum'));
         SYSTEM::setPageDescription(__('Forum'));
+
         $output = array();
         $output['total_sections']   = sizeof($sections);
         $output['total_categories'] = 0;

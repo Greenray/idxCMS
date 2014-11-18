@@ -8,6 +8,7 @@ die();?>
 <table id="std">
     <tr>
         <th colspan="2">[__Title]</th>
+        <th style="width:400px">[__Answer]</th>
         <th style="width:100px">[__Author]</th>
         <th style="width:80px">[__Date]</th>
         <th style="width:60px">[__Views]</th>
@@ -20,11 +21,16 @@ die();?>
                 [if=topic[pinned]]<img src="{ICONS}pinned.png" width="16" height="16" alt="Pinned" />&nbsp;[endif]
                 <a href="{topic[link]}">{topic[title]}</a>
             </td>
-            <td>{topic[nick]}</td>
+            [ifelse=topic[last_link]]
+                <td><a href="{topic[last_link]}">{topic[short]}</a></td>
+            [else]
+                <td></td>
+            [endelse]
+            <td class="center">{topic[nick]}</td>
             <td class="center">{topic[date]}</td>
-            <td class="right">{topic[views]}</td>
+            <td class="center">{topic[views]}</td>
             [ifelse=topic[comments]]
-                <td class="right"><a href="{topic[last_link]}">{topic[comments]}</a></td>
+                <td class="center"><a href="{topic[last_link]}">{topic[comments]}</a></td>
             [else]
                 <td class="center"> - </td>
             [endelse]

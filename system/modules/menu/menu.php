@@ -9,7 +9,7 @@ $data   = GetUnserialized(CONTENT.'menu');
 $access = USER::getUser('access');
 
 $TPL    = new TEMPLATE(dirname(__FILE__).DS.'menu.tpl');
-$output = '<div id="menu"><ul class="menu">';
+$output = '<div id="menu"><ul class="main_menu">';
 
 foreach($data as $module => $menu) {
     if (!empty($menu['sections'])) {

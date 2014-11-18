@@ -184,17 +184,17 @@ td.date     { padding:0 10px;width:140px }
     z-index: 10;
 }
 
-.menu,
-.menu ul,
-.menu li,
-.menu a {
+.main_menu,
+.main_menu ul,
+.main_menu li,
+.main_menu a {
     margin: 0;
     padding: 0;
     border: none;
     outline: none;
 }
 
-.menu {
+.main_menu {
     height: 40px;
 
     background: #059daa;
@@ -209,7 +209,7 @@ td.date     { padding:0 10px;width:140px }
     border-radius: 5px;
 }
 
-.menu li {
+.main_menu li {
     position: relative;
     list-style: none;
     float: left;
@@ -217,7 +217,7 @@ td.date     { padding:0 10px;width:140px }
     height: 40px;
 }
 
-.menu li a {
+.main_menu li a {
     display: block;
     padding: 0 14px;
     margin: 6px 0;
@@ -241,12 +241,12 @@ td.date     { padding:0 10px;width:140px }
     transition: color .2s ease-in-out;
 }
 
-.menu li:first-child a { border-left: none; }
-.menu li:last-child a  { border-right: none; }
+.main_menu li:first-child a { border-left: none; }
+.main_menu li:last-child a  { border-right: none; }
 
-.menu li:hover > a { color: red; }
+.main_menu li:hover > a { color: red; }
 
-.menu ul {
+.main_menu ul {
     position: absolute;
     top: 40px;
     left: 0;
@@ -264,9 +264,9 @@ td.date     { padding:0 10px;width:140px }
     transition: opacity .25s ease .1s;
 }
 
-.menu li:hover > ul { opacity: 1; }
+.main_menu li:hover > ul { opacity: 1; }
 
-.menu ul li {
+.main_menu ul li {
     height: 0;
     overflow: hidden;
     padding: 0;
@@ -278,13 +278,13 @@ td.date     { padding:0 10px;width:140px }
     transition: height .25s ease .1s;
 }
 
-.menu li:hover > ul li {
+.main_menu li:hover > ul li {
     height: 36px;
     overflow: visible;
     padding: 0;
 }
 
-.menu ul li a {
+.main_menu ul li a {
     min-width: 100px;
     padding: 4px 0;
     margin: 0;
@@ -292,14 +292,7 @@ td.date     { padding:0 10px;width:140px }
     margin: 0 0 0 35px;
 }
 
-.menu ul li:last-child a { border: none; }
-
-/* Icons */
-
-.menu a.documents { background: url(../img/docs.png) no-repeat 6px center; }
-.menu a.messages { background: url(../img/bubble.png) no-repeat 6px center; }
-.menu a.signout { background: url(../img/arrow.png) no-repeat 6px center; }
-
+.main_menu ul li:last-child a { border: none; }
 
 /* Layout */
 #layout-root  { height:100%;position:relative;height:auto !important }

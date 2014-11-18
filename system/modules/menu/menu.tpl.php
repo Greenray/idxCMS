@@ -10,7 +10,7 @@ die();?>
     [ifelse=sections]
         <ul>
             [each=sections]
-                <li><a href="{sections[link]}" class="">{sections[title]}</a></li>
+                <li><a href="{sections[link]}" style="width:{sections[width]}px">{sections[title]}</a></li>
             [endeach.sections]
         </ul>
     [else]

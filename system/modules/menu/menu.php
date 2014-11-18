@@ -27,13 +27,6 @@ foreach($data as $module => $menu) {
             }
         }
     }
-    if (!empty($menu['categories'])) {
-        foreach ($menu['categories'] as $key => $category) {
-            if ($category['access'] > $access) {
-                unset($menu['categories'][$key]);
-            }
-        }
-    }
     $output .= $TPL->parse($menu);
 }
 

@@ -134,6 +134,7 @@ $LANG['def']['Pages'] = 'Страницы';
 $LANG['def']['Passer-by'] = 'Прохожий';
 $LANG['def']['Post'] = 'Публикация';
 $LANG['def']['Posts'] = 'Публикации';
+$LANG['def']['Posted by'] = 'Автор';
 $LANG['def']['Read more...'] = 'Подробнее...';
 $LANG['def']['Reset'] = 'Сброс';
 $LANG['def']['Required fields have a yellow background'] = 'Обязательные поля выделены желтым';

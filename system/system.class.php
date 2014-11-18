@@ -285,26 +285,29 @@ class SYSTEM {
                         $width = mb_strlen($menu[$module]['desc'], 'UTF-8') * 7;
                         $menu[$module]['width'] = ($menu[$module]['width'] > $width) ? $menu[$module]['width'] : $width;
                         if (!empty($point[$module]['sections'])) {
-                            foreach($point[$module]['sections'] as $id => $data) {
-                                $width = mb_strlen($data['title'], 'UTF-8') * 7 + 55;
+                            foreach($point[$module]['sections'] as $id => $section) {
+                                $width = mb_strlen($section['title'], 'UTF-8') * 7 + 55;
+                                $menu[$module]['sections'][$id]['width'] = $width;
                                 $menu[$module]['width'] = ($menu[$module]['width'] > $width) ? $menu[$module]['width'] : $width;
-                                $width = mb_strlen($data['desc'], 'UTF-8') * 7 + 55;
+                                $width = mb_strlen($section['desc'], 'UTF-8') * 7 + 55;
                                 $menu[$module]['width'] = ($menu[$module]['width'] > $width) ? $menu[$module]['width'] : $width;
-                                if (!empty($data['categories'])) {
-                                    foreach($data['categories'] as $key => $value) {
-                                        $width = mb_strlen($value['title'], 'UTF-8') * 7 + 55;
+                                if (!empty($section['categories'])) {
+                                    foreach($section['categories'] as $key => $category) {
+                                        $width = mb_strlen($category['title'], 'UTF-8') * 7 + 55;
+                                        $menu[$module]['categories'][$id]['width'] = $width;
                                         $menu[$module]['width'] = ($menu[$module]['width'] > $width) ? $menu[$module]['width'] : $width;
-                                        $width = mb_strlen($value['desc'], 'UTF-8') * 7 + 55;
+                                        $width = mb_strlen($category['desc'], 'UTF-8') * 7 + 55;
                                         $menu[$module]['width'] = ($menu[$module]['width'] > $width) ? $menu[$module]['width'] : $width;
                                     }
                                 }
                             }
                         }
                         if (!empty($point[$module]['categories'])) {
-                            foreach($point[$module]['categories'] as $id => $data) {
-                                $width = mb_strlen($data['title'], 'UTF-8') * 7 + 55;
+                            foreach($point[$module]['categories'] as $id => $category) {
+                                $width = mb_strlen($category['title'], 'UTF-8') * 7 + 55;
+                                $menu[$module]['categories'][$id]['width'] = $width;
                                 $menu[$module]['width'] = ($menu[$module]['width'] > $width) ? $menu[$module]['width'] : $width;
-                                $width = mb_strlen($data['desc'], 'UTF-8') * 7 + 55;
+                                $width = mb_strlen($category['desc'], 'UTF-8') * 7 + 55;
                                 $menu[$module]['width'] = ($menu[$module]['width'] > $width) ? $menu[$module]['width'] : $width;
                             }
                         }

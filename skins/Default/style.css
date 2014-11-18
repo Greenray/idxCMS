@@ -7,7 +7,15 @@
 * { padding:0;margin:0 }
 
 html { height:100% }
-body { color:black;font:normal 10pt arial, helvetica, verdana, sans-serif;height:auto !important;min-height:100%;margin:0;padding:0;overflow-y:scroll }
+body {
+    color: black;
+    font: normal 10pt arial, helvetica, verdana, sans-serif;
+    height: auto !important;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-y: scroll;
+}
 
 a,
 a:link,
@@ -26,18 +34,30 @@ button.submit { margin:0;padding:2px 5px }
 input                  { color:black }
 input[type='button'],
 input[type='reset'],
-input[type='submit']   { margin:0;padding:2px 5px }
+input[type='submit'],
 input[type='text'],
-input[type='password'] { margin:2px;padding:1px 0 1px 5px;border:1px solid #c8c8c8 }
+input[type='password']   { margin:0;padding:2px 5px }
+input[type='text'],
+input[type='password']   { border:1px solid #c8c8c8 }
 
 input[type='text']:hover,
 input[type='password']:hover { border-color:#aaa }
 input[type='text']:focus,
 input[type='password']:focus { border-color:#8c8c8c;background:#ffffcc;outline:1px solid red }
 
-.submit { background-color:#ccc;background-image:-o-linear-gradient(top, #eee, #ccc);border:1px solid #777;border-radius:0.2em;cursor:pointer;
-          padding:5px 10px;box-shadow:0 0 1px 1px rgba(255, 255, 255, 0.804) inset, 0 1px 0 rgba(0, 0, 0, 0.149);height:20px;
-          text-shadow:1px 1px 1px rgba(255, 255, 255, 0.804);font-size:10px }
+.submit {
+    background-color: #ccc;
+    background-image: -o-linear-gradient(top, #eee, #ccc);
+    border: 1px solid #777;
+    border-radius: 0.2em;
+    cursor: pointer;
+    padding: 5px 10px;
+    box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.804) inset, 0 1px 0 rgba(0, 0, 0, 0.149);
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.804);
+    height: 20px;
+    font-size: 10px;
+}
+
 .submit:focus { background:#fafafa;outline:0 }
 .submit:hover { background:#ddd }
 
@@ -56,7 +76,14 @@ p  { margin:10px 0 }
 label  { margin:0;padding:0 10px }
 legend { padding:.4em }
 
-pre { background:#fafafa;color:#2e8b57;border:1px dotted #aab4be;border-left:20px solid #b4b4b4;padding:5px 0;white-space:pre-wrap }
+pre {
+    background: #fafafa;
+    color: #2e8b57;
+    border: 1px dotted #aab4be;
+    border-left: 20px solid #b4b4b4;
+    padding: 5px 0;
+    white-space: pre-wrap;
+}
 
 sub,
 sup { position:relative;vertical-align:baseline }
@@ -76,8 +103,9 @@ table,th,td  { padding:2px;vertical-align:middle }
 table#std    { border-collapse:separate;border-spacing:0 }
 table#std tr { height:35px }
 table#std td { border:2px groove #fff;padding:0 10px }
-table#std th { border:2px groove #fff;background:#448aae;color:white;text-shadow:0 1px 0 #000 }
+table#std th { border:2px groove #fff;background:#297377;color:white;text-shadow:0 1px 0 #000 }
 table.std    { border:2px groove #fff;padding:10px;width:100% }
+
 th.icon,
 td.icon     { width:47px }
 th.title,
@@ -95,8 +123,18 @@ td.comments { width:120px }
 th.date,
 td.date     { padding:0 10px;width:140px }
 
-#wrapper { background:#bfcfdf;height:auto !important;height:100%;overflow:hidden }
-#shdesc  { display:none;width:99% }
+#wrapper {
+    background: #bfcfdf;
+    height: auto !important;
+    height: 100%;
+    overflow: hidden;
+}
+
+#shdesc  {
+    display: none;
+    width: 99%;
+}
+
 .main          { margin:0 auto }
 .main .title   { color:black;margin:20px 5px 10px 5px;font-size:16px;font-weight:bold;text-align:center;text-transform:uppercase }
 .main .content { padding:10px }
@@ -115,7 +153,7 @@ td.date     { padding:0 10px;width:140px }
 .even { background:#d4dee3 }
 
 /* Header */
-#header { background:#448aae }
+#header { background:#297377 }
 
 #toolbar    { margin:0 20px 0;text-align:right }
 #toolbar ul { margin:0;padding:0 }
@@ -136,74 +174,132 @@ td.date     { padding:0 10px;width:140px }
 #slogan  { color:yellow;float:right;font-size:12pt;margin:-25px 20px 0;text-shadow:black -1px 1px 1px }
 .version { color:red;font-weight:bold;position:relative;left:230px;bottom:54px }
 .search  { float:right;margin:0 50px 0 0 }
-.idx     { color:#4ea2cc;font-size:120pt;font-style:italic;font-weight:bold;text-shadow:#000 -10px 10px 10px }
+.idx     { color:#297377;font-size:120pt;font-style:italic;font-weight:bold;text-shadow:#000 -10px 10px 10px }
 
 /* Main menu */
-#menu    { position:absolute;right:200px;top:35px;z-index:10 }
-#menu ul { list-style:none;margin:0;padding:0 }
-#menu li { margin:0;padding:0;position:relative }
-#menu a,
-#menu span { display:block;text-align:left }
-#menu a    { margin:0;text-decoration:none }
-#menu span.icon { background-position:0 50%;background-repeat:no-repeat }
-#menu ul.menu,
-#menu li.level1 { background:#4ea2cc;border-radius:8px;float:left }
-#menu li.level1,
-#menu a.level1,
-#menu span.level1,
-#menu a.level1 span.bg,
-#menu span.level1 span.bg { background:url(images/menu.png) }
-#menu li.level1                      { background-position:0 0;background-repeat:no-repeat }
-#menu ul:first-child li.level1.first { background-position:0 -110px }
-#menu a.level1,
-#menu span.level1         { background-position:100% -55px;background-repeat:repeat-x;float:left;padding:0 10px }
-#menu a.level1.last,
-#menu span.level1.last    { background-position:100% -165px;background-repeat:repeat-x }
-#menu a.level1 span.bg,
-#menu span.level1 span.bg { background-position:50% -220px;background-repeat:repeat-x;color:white;
-                            float:left;font-weight:bold;height:42px;line-height:40px;padding:0 5px;text-shadow:0 1px 0 #000 }
-#menu li.level1.active                       { background-position:0 -605px }
-#menu ul:first-child li.level1.first.active  { background-position:0 -715px }
-#menu li.level1.active .level1               { background-position:100% -660px }
-#menu ul.last li.level1.active.last .level1  { background-position:100% -770px }
-#menu li.level1.active .level1 span.bg       { background-position:50% -825px;text-shadow:0 -1px 0 black }
-#menu li.level1:hover                        { background-position:0 -275px }
-#menu ul:first-child li.level1.first:hover   { background-position:0 -385px }
-#menu li.level1:hover .level1                { background-position:100% -330px }
-#menu li.level1.last:hover .level1           { background-position:100% -440px }
-#menu li.level1:hover .level1 span.bg        { background-position:50% -495px;text-shadow:0 0 5px black }
-#menu li.level1.parent:hover .level1 span.bg { background-position:0 -550px;color:yellow;font-weight:bold }
-#menu a.level1 span.title,
-#menu span.level1 span.title    { line-height:24px;text-align:center }
-#menu a.level1 span.subtitle,
-#menu span.level1 span.subtitle { line-height:10px;text-align:center;letter-spacing:0;margin-top:-3px;text-transform:none }
-#menu .dropdown          { border:1px solid #555;border-radius:5px;box-shadow:10px 10px 10px #000;position:absolute;top:43px;left:-999em;z-index:100 }
-#menu li:hover .dropdown { left:-170px }
-#menu ul.level2          { background:transparent;margin:5px }
-#menu li.level2 .box     { padding:5px 5px 0;text-shadow:0 1px 0 #fff }
-#menu li.level2.parent   { background:#ffffd9 }
-#menu a.level2,
-#menu span.level2        { padding:5px;overflow:hidden;text-align:left }
-#menu li a.level2:hover  { background:#e8e8ea;color:red }
-#menu li a.level2:hover span.subtitle { color:red }
-#menu a.level2 span.title,
-#menu span.level2 span.title    { font-size:10pt;font-weight:bold;line-height:20px;margin:0;padding:0 10px;text-align:left }
-#menu a.level2 span.subtitle,
-#menu span.level2 span.subtitle { color:#666;font-weight:normal;line-height:16px;padding:0 10px;text-transform:none }
-#menu a.level2 span.icon,
-#menu span.level2 span.icon { padding-left:50px }
-#menu .sub           { padding:0 }
-#menu ul.level2 .sub { padding:0 5px 5px }
-#menu ul.level3      { background:transparent;margin:5px }
-#menu ul.level3 img  { float:left }
-#menu li.level3      { background:#ffffd9;height:35px }
-#menu li.level3 .title,
-#menu li.level3 .subtitle { font-size:10pt;line-height:18px;padding:0 }
-#menu li.level3 .title    { margin:5px 10px 0 45px }
-#menu li.level3 .subtitle { color:#666;margin:0 10px 5px 45px }
-#menu li a.level3:hover   { background:#e8e8ea }
-#menu li a.level3:hover span.title    { color:blue }
-#menu li a.level3:hover span.subtitle { color:red }
+#menu    {
+    position: absolute;
+    right: 200px;
+    top: 35px;
+    z-index: 10;
+}
+
+.menu,
+.menu ul,
+.menu li,
+.menu a {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+}
+
+.menu {
+    height: 40px;
+
+    background: #059daa;
+    background: -webkit-linear-gradient(top, #059daa 0%,#2c2d33 100%);
+    background: -moz-linear-gradient(top, #059daa 0%,#2c2d33 100%);
+    background: -o-linear-gradient(top, #059daa 0%,#2c2d33 100%);
+    background: -ms-linear-gradient(top, #059daa 0%,#2c2d33 100%);
+    background: linear-gradient(top, #059daa 0%,#2c2d33 100%);
+
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.menu li {
+    position: relative;
+    list-style: none;
+    float: left;
+    display: block;
+    height: 40px;
+}
+
+.menu li a {
+    display: block;
+    padding: 0 14px;
+    margin: 6px 0;
+    line-height: 28px;
+    text-decoration: none;
+
+    border-left: 1px solid #393942;
+    border-right: 1px solid #4f5058;
+
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    font-size: 13px;
+
+    color: #f3f3f3;
+    text-shadow: 1px 1px 1px rgba(0,0,0,.6);
+
+    -webkit-transition: color .2s ease-in-out;
+    -moz-transition: color .2s ease-in-out;
+    -o-transition: color .2s ease-in-out;
+    -ms-transition: color .2s ease-in-out;
+    transition: color .2s ease-in-out;
+}
+
+.menu li:first-child a { border-left: none; }
+.menu li:last-child a  { border-right: none; }
+
+.menu li:hover > a { color: red; }
+
+.menu ul {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    opacity: 0;
+    background: #297377;
+
+    -webkit-border-radius: 0 0 5px 5px;
+    -moz-border-radius: 0 0 5px 5px;
+    border-radius: 0 0 5px 5px;
+
+    -webkit-transition: opacity .25s ease .1s;
+    -moz-transition: opacity .25s ease .1s;
+    -o-transition: opacity .25s ease .1s;
+    -ms-transition: opacity .25s ease .1s;
+    transition: opacity .25s ease .1s;
+}
+
+.menu li:hover > ul { opacity: 1; }
+
+.menu ul li {
+    height: 0;
+    overflow: hidden;
+    padding: 0;
+
+    -webkit-transition: height .25s ease .1s;
+    -moz-transition: height .25s ease .1s;
+    -o-transition: height .25s ease .1s;
+    -ms-transition: height .25s ease .1s;
+    transition: height .25s ease .1s;
+}
+
+.menu li:hover > ul li {
+    height: 36px;
+    overflow: visible;
+    padding: 0;
+}
+
+.menu ul li a {
+    min-width: 100px;
+    padding: 4px 0;
+    margin: 0;
+    border: none;
+    margin: 0 0 0 35px;
+}
+
+.menu ul li:last-child a { border: none; }
+
+/* Icons */
+
+.menu a.documents { background: url(../img/docs.png) no-repeat 6px center; }
+.menu a.messages { background: url(../img/bubble.png) no-repeat 6px center; }
+.menu a.signout { background: url(../img/arrow.png) no-repeat 6px center; }
+
 
 /* Layout */
 #layout-root  { height:100%;position:relative;height:auto !important }
@@ -353,10 +449,10 @@ ul.tabs li a:focus { outline:0 }
 .star div.rates,
 .star div.user,
 .star div.voted,
-.star div.sep { float:right }
-.star         { height:20px;margin:0 50px 0 0 }
-.star ul.star { background:url(../images/icons/stars.gif) repeat-x;cursor:pointer;height:22px;width:85px;list-style:none;margin:0 50px 0 0;padding:0 }
-.star li { display:block;float:right;height:20px;width:85px;margin:0;padding:0;position:absolute;z-index:1;text-decoration:none;text-indent:-9000px }
+.star div.sep   { float:right }
+.star           { height:20px;margin:0 50px 0 0 }
+.star ul.star   { background:url(../images/icons/stars.gif) repeat-x;cursor:pointer;height:22px;width:85px;list-style:none;margin:0 50px 0 0;padding:0 }
+.star li        { display:block;float:right;height:20px;width:85px;margin:0;padding:0;position:absolute;z-index:1;text-decoration:none;text-indent:-9000px }
 .star li.curr   { background:url(../images/icons/stars.gif) left 25px;font-size:1px }
 .star div.rates { margin:-16px 0 0 5px }
 .star div.sep   { margin:0 3px }
@@ -366,7 +462,7 @@ ul.tabs li a:focus { outline:0 }
 .topic,
 .gallery .item,
 .post-comment   { border:1px solid #777;border-radius:2px;margin:10px;padding:10px;overflow:hidden;
-                 box-shadow:0 0 2px 2px rgba(255, 255, 255, .8) inset, 0 2px 0 rgba(0, 0, 0, .3) }
+                  box-shadow:0 0 2px 2px rgba(255, 255, 255, .8) inset, 0 2px 0 rgba(0, 0, 0, .3) }
 .post           { background:#fff }
 .post .title    { margin:10px 5px;text-transform:none }
 .post .date     { margin:2px 0 0 40px;width:300px }
@@ -413,10 +509,36 @@ ul.tabs li a:focus { outline:0 }
 
 .codehtml,
 .codephp,
-.codetext   { background:#ffffc0;color:black;border:#6da4da solid 1px;font:normal 8pt mono, "Courier New", Courier;margin:5px 0;padding:5px;
-              overflow:auto;white-space:nowrap }
-.quotetitle { background:#aabbcc;color:black;border:#a9b8c2 solid 1px;font-size:8pt;font-style:italic;margin:5px 0 0;padding:2px }
-.quotetext  { background:#fafafa;color:#555;border:#a9b8c2 solid 1px;font:italic 9pt "Courier New", Courier, mono;margin:0 0 5px;padding:5px;overflow:auto }
+.codetext {
+    background: #ffffc0;
+    color: black;
+    border: #6da4da solid 1px;
+    font: normal 8pt mono, "Courier New", Courier;
+    margin: 5px 0;
+    padding: 5px;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+.quotetitle {
+    background: #aabbcc;
+    color:black;
+    border: #a9b8c2 solid 1px;
+    font-size: 8pt;
+    font-style: italic;
+    margin: 5px 0 0;
+    padding: 2px;
+}
+
+.quotetext {
+    background: #fafafa;
+    color: #555;
+    border: #a9b8c2 solid 1px;
+    font: italic 9pt "Courier New", Courier, mono;
+    margin: 0 0 5px;
+    padding: 5px;
+    overflow: auto;
+}
 
 .admin  { margin:5px 10px 5px 88px }
 .author { margin:0 0 10px;width:120px;text-align:center;float:left }
@@ -439,13 +561,21 @@ ul.tabs li a:focus { outline:0 }
 .win .title     { margin:20px 5px;text-transform:uppercase;text-align:center }
 .calendar       { width:100% }
 table .calendar { padding:2px;vertical-align:middle;border:1px solid #e0dfdf }
-.calendar th    { background:#448aae;color:white;text-align:center }
+.calendar th    { background:#297377;color:white;text-align:center }
 .last-posts li  { margin:5px 0 }
 
 .poll { margin:0 0 10px }
 
 /* Right panel */
-.panel .title { background:#448aae;color:#fff;padding:10px 5px;text-transform:uppercase;text-align:center;font-weight:bold }
+.panel .title {
+    background: #297377;
+    color: #fff;
+    padding: 10px 5px;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+}
+
 .login_panel  { margin:10px 0 }
 .user_panel   { margin:10px;padding:0 10px }
 
@@ -459,21 +589,41 @@ table .calendar { padding:2px;vertical-align:middle;border:1px solid #e0dfdf }
 
 .box        { background:#bfcfdf;border:1px solid #808385;border-radius:8px;margin:3px 0px 5px 0;padding:10px }
 .box ul     { list-style-type:none }
-.box .title { background:#448aae;color:white;font-weight:bold;padding:10px 5px;text-align:center }
+.box .title { background:#297377;color:white;font-weight:bold;padding:10px 5px;text-align:center }
 
 .darkbox .title  { color:white;text-shadow:0 1px 1px black;text-transform:uppercase }
-.lightbox .title { background:#448aae;color:white;text-transform:uppercase }
+.lightbox .title { background:#297377;color:white;text-transform:uppercase }
 
 .counter       { width:250px;margin:0 23px }
 .counter .odd  { background:inherit }
 .counter .even { background:inherit }
 
 /* Footer */
-#footer    { background:#333;color:white;overflow:hidden;padding:10px 30px;position:relative;text-shadow:0 1px 1px #000 }
-#copyright { float:left;margin:10px 0;text-align:center;width:33% }
-#valid     { float:right;margin:10px 0;position:relative;text-align:center;width:20% }
+#footer {
+    background: #333;
+    color: #fff;
+    overflow: hidden;
+    padding: 10px 30px;
+    position: relative;
+    text-shadow: 0 1px 1px #000;
+}
 
-#simple-menu    { background:#44738c;padding:10px;text-align:center }
+#copyright {
+    float: left;
+    margin: 10px 0;
+    text-align: center;
+    width: 33%;
+}
+
+#valid {
+    float: right;
+    margin: 10px 0;
+    position: relative;
+    text-align: center;
+    width: 20%;
+}
+
+#simple-menu    { background:#297377;padding:10px;text-align:center }
 #simple-menu ul { margin:0;padding:0 }
 #simple-menu li            { border-left:1px solid #000;margin-left:8px;padding-left:12px;display:inline }
 #simple-menu li:last-child { border-right:1px solid #000;margin-right:8px;padding-right:12px }
@@ -495,8 +645,7 @@ table .calendar { padding:2px;vertical-align:middle;border:1px solid #e0dfdf }
 .horinaja ul    { position:relative;width:220px;padding:0;margin:0 }
 .horinaja ul li { background:transparent;display:block;top:0;width:215px }
 
-ol.horinaja_pagination { background:transparent;height:40px;margin:0 auto;padding:5px 0 0 0;position:relative;clear:both;
-}
+ol.horinaja_pagination { background:transparent;height:40px;margin:0 auto;padding:5px 0 0 0;position:relative;clear:both }
 ol.horinaja_pagination li   { float:left;height:40px;display:block }
 ol.horinaja_pagination li a { background:transparent;color:white;height:30px;display:block;float:left;font-size:12px;font-weight:bold;
                               text-align:center;padding:10px 0 0 0;cursor:pointer }

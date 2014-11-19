@@ -498,11 +498,36 @@ ul.tabs li a:focus { outline: 0 }
 .star div.rates,
 .star div.user,
 .star div.voted,
-.star div.sep   { float: right }
-.star           { height: 20px; margin: 0 50px 0 0 }
-.star ul.star   { background: url(../images/icons/stars.gif) repeat-x; cursor: pointer; height: 22px; width: 85px; list-style: none; margin: 0 50px 0 0; padding: 0 }
-.star li        { display: block; float: right; height: 20px; width: 85px; margin: 0; padding: 0; position: absolute; z-index: 1; text-decoration: none; text-indent: -9000px }
-.star li.curr   { background: url(../images/icons/stars.gif) left 25px; font-size: 1px }
+.star div.sep { float: right }
+.star         { height: 20px; margin: 0 50px 0 0 }
+.star ul.star {
+    background: url(../images/icons/stars.gif) repeat-x;
+    cursor: pointer;
+    height: 22px;
+    width: 85px;
+    list-style: none;
+    margin: 0 50px 0 0;
+    padding: 0;
+}
+
+.star li {
+    display: block;
+    float: right;
+    height: 20px;
+    width: 85px;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    z-index: 1;
+    text-decoration: none;
+    text-indent: -9000px;
+}
+
+.star li.curr   {
+    background: url(../images/icons/stars.gif) left 25px;
+    font-size: 1px;
+}
+
 .star div.rates { margin: -16px 0 0 5px }
 .star div.sep   { margin: 0 3px }
 
@@ -510,20 +535,55 @@ ul.tabs li a:focus { outline: 0 }
 .comment,
 .topic,
 .gallery .item,
-.post-comment   { border: 1px solid #777; border-radius: 2px; margin: 10px; padding: 10px; overflow: hidden;
-                  box-shadow: 0 0 2px 2px rgba(255, 255, 255, .8) inset, 0 2px 0 rgba(0, 0, 0, .3) }
-.post           { background: #fff }
-.post .title    { margin: 10px 5px; text-transform: none }
-.post .date     { margin: 2px 0 0 40px; width: 300px }
-.post .author   { margin: 0 0 0 10px; width: 200px; line-height: 16px }
-.post .admin    { margin: 0 20px 0; float: right; line-height: 18px }
-.post .admin a  { margin: 0 2px }
-.post .info     { padding: 4px 10px; font-size: 8pt; clear: both }
-.post img       { float: left }
+.post-comment   {
+    border: 1px solid #777;
+    border-radius: 2px;
+    margin: 10px;
+    padding: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 2px 2px rgba(255, 255, 255, .8) inset, 0 2px 0 rgba(0, 0, 0, .3);
+}
+
+.post { background: #fff }
+.post .title  {
+    margin: 10px 5px;
+    text-transform: none;
+}
+
+.post .date   {
+    margin: 2px 0 0 40px;
+    width: 300px;
+}
+
+.post .author {
+    margin: 0 0 0 10px;
+    width: 200px;
+    line-height: 16px;
+}
+
+.post .admin {
+    margin: 0 20px 0;
+    float: right;
+    line-height: 18px;
+}
+
+.post .admin a { margin: 0 2px }
+.post .info {
+    padding: 4px 10px;
+    font-size: 8pt;
+    clear: both;
+}
+
+.post img { float: left }
 .post .text img { margin: 10px }
 
-.gallery        { margin: 0 auto; width: 720px }
-.gallery .item  { margin: 10px 3px; width: 210px; float: left }
+.gallery { margin: 0 auto; width: 720px }
+.gallery .item {
+    margin: 10px 3px;
+    width: 210px;
+    float: left;
+}
+
 .gallery .info  { padding: 0 0 0 15px }
 .gallery .title { text-transform: none }
 .gallery img    { margin: 5px 0 0 5px }
@@ -546,18 +606,38 @@ ul.tabs li a:focus { outline: 0 }
     text-align: center;
 }
 
-.section  { margin: 5px 0 2px 50px; font-size: 8pt }
-.category { margin: 0 0 0 50px; font-size: 8pt }
+.section  {
+    margin: 5px 0 2px 50px;
+    font-size: 8pt;
+}
+
+.category {
+    margin: 0 0 0 50px;
+    font-size: 8pt;
+}
+
 .pass_img { margin: 0 auto }
 
-.bbcodes                               { margin: 10px 20px 0; text-align: center }
-.bbcodes .smiles                       { margin: 0 0 5px }
-.bbcodes .link_text                    { margin: 4px 20px; text-align: right }
+.bbcodes {
+    margin: 10px 20px 0;
+    text-align: center;
+}
+
+.bbcodes .smiles { margin: 0 0 5px }
+.bbcodes .link_text {
+    margin: 4px 20px;
+    text-align: right;
+}
+
 .bbcodes .link_text input[type='text'] { margin: 2px 20px }
 
 .bbselect { margin: 1px 0 4px }
 .bbbutton { margin: 0 -2px; padding: 1px }
-.bbtools  { margin: 10px 0 0; padding: 10px 0 0; background: #bfcfdf }
+.bbtools  {
+    margin: 10px 0 0;
+    padding: 10px 0 0;
+    background: #bfcfdf;
+}
 
 .codehtml,
 .codephp,
@@ -593,11 +673,35 @@ ul.tabs li a:focus { outline: 0 }
 }
 
 .admin  { margin: 5px 10px 5px 88px }
-.author { margin: 0 0 10px; width: 120px; text-align: center; float: left }
+.author {
+    margin: 0 0 10px;
+    width: 120px;
+    text-align: center;
+    float: left;
+}
+
 .info a:hover { color: red }
-.text { text-align: justify; margin: 10px; left: -120px }
-.note { background: #ffffcc; border: red solid 2px; color: black; margin: 20px; padding: 5px }
-.help { padding: 0 50px 0 10px; color: red; font-style: italic; text-align: right }
+.text {
+    text-align: justify;
+    margin: 10px;
+    left: -120px;
+}
+
+.note {
+    background: #ffffcc;
+    border: red solid 2px;
+    color: black;
+    margin: 20px;
+    padding: 5px;
+}
+
+.help {
+    padding: 0 50px 0 10px;
+    color: red;
+    font-style: italic;
+    text-align: right;
+}
+
 .rate,
 .menu, .more { float: right }
 .menu, .more { margin: 0 2px }
@@ -605,16 +709,31 @@ ul.tabs li a:focus { outline: 0 }
 .rate button { border: 0; width: 14px }
 
 .main_rate { margin: -20px 0 10px; padding: 0 0 20px }
-.negative  { color: red; font-weight: bold }
+.negative  { color: red;   font-weight: bold }
 .no        { color: black; font-weight: bold }
 .positive  { color: green; font-weight: bold }
 
 /* Left Panel */
-.win .title     { margin: 20px 5px; text-transform: uppercase; text-align: center }
-.calendar       { width: 100% }
-table .calendar { padding: 2px; vertical-align: middle; border: 1px solid #e0dfdf }
-.calendar th    { background: #297377; color: white; text-align: center }
-.last-posts li  { margin: 5px 0 }
+.win .title     {
+    margin: 20px 5px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.calendar { width: 100% }
+table .calendar {
+    padding: 2px;
+    vertical-align: middle;
+    border: 1px solid #e0dfdf;
+}
+
+.calendar th {
+    background: #297377;
+    color: white;
+    text-align: cente;
+}
+
+.last-posts li { margin: 5px 0 }
 
 .poll { margin: 0 0 10px }
 
@@ -628,23 +747,63 @@ table .calendar { padding: 2px; vertical-align: middle; border: 1px solid #e0dfd
     font-weight: bold;
 }
 
-.login_panel  { margin: 10px 0 }
-.user_panel   { margin: 10px; padding: 0 10px }
+.login_panel { margin: 10px 0 }
+.user_panel  { margin: 10px; padding: 0 10px }
 
 /* Box */
-#boxes         { background: #829298 url(images/boxes-bg.png) 0 0 repeat-x; color: white }
+#boxes {
+    background: #829298 url(images/boxes-bg.png) 0 0 repeat-x;
+    color: white;
+}
+
 #boxes .left,
 #boxes .middle,
-#boxes .right  { float: left; padding: 0 10px; width: 310px }
-#boxes .box-container { background: #d4dee3; margin: 0 auto; min-width: 1000px; width: 1000px }
-#boxes .title { margin: 20px 5px; text-align: center }
+#boxes .right {
+    float: left;
+    padding: 0 10px;
+    width: 310px;
+}
 
-.box        { background: #bfcfdf; border: 1px solid #808385; border-radius: 8px; margin: 3px 0px 5px 0; padding: 10px }
+#boxes .box-container {
+    background: #d4dee3;
+    margin: 0 auto;
+    min-width: 1000px;
+    width: 1000px;
+}
+
+#boxes .title {
+    margin: 20px 5px;
+    text-align: center;
+}
+
+.box {
+    background: #bfcfdf;
+    border: 1px solid #808385;
+    border-radius: 8px;
+    margin: 3px 0px 5px 0;
+    padding: 10px;
+}
+
 .box ul     { list-style-type: none }
-.box .title { background: #297377; color: white; font-weight: bold; padding: 10px 5px; text-align: center }
+.box .title {
+    background: #297377;
+    color: white;
+    font-weight: bold;
+    padding: 10px 5px;
+    text-align: center;
+}
 
-.darkbox .title  { color: white; text-shadow: 0 1px 1px black; text-transform: uppercase }
-.lightbox .title { background: #297377; color: white; text-transform: uppercase }
+.darkbox .title {
+    color: white;
+    text-shadow: 0 1px 1px black;
+    text-transform: uppercase;
+}
+
+.lightbox .title {
+    background: #297377;
+    color: white;
+    text-transform: uppercase;
+}
 
 .counter       { width: 250px; margin: 0 23px }
 .counter .odd  { background: inherit }
@@ -675,32 +834,90 @@ table .calendar { padding: 2px; vertical-align: middle; border: 1px solid #e0dfd
     width: 20%;
 }
 
-#simple-menu    { background: #297377; padding: 10px; text-align: center }
+#simple-menu {
+    background: #297377;
+    padding: 10px;
+    text-align: center;
+}
+
 #simple-menu ul { margin: 0; padding: 0 }
-#simple-menu li            { border-left: 1px solid #000; margin-left: 8px; padding-left: 12px; display: inline }
-#simple-menu li:last-child { border-right: 1px solid #000; margin-right: 8px; padding-right: 12px }
+#simple-menu li {
+    border-left: 1px solid #000;
+    margin-left: 8px;
+    padding-left: 12px;
+    display: inline;
+}
+
+#simple-menu li:last-child {
+    border-right: 1px solid #000;
+    margin-right: 8px;
+    padding-right: 12px;
+}
+
 #simple-menu a       { color: white }
 #simple-menu a:hover { color: red }
 
 /* Aphorisms */
-#flipbox         { text-align: center; min-height: 50px }
-#flippad         { text-align: center }
-#flippad a       { padding: 5px 0; font-weight: bold; line-height: 30px; height: 30px; text-decoration: none }
-#flippad .revert { border: 2px solid #ff9000; display: none }
+#flipbox {
+    text-align: center;
+    min-height: 50px;
+}
+
+#flippad   { text-align: center }
+#flippad a {
+    padding: 5px 0;
+    font-weight: bold;
+    line-height: 30px;
+    height: 30px;
+    text-decoration: none;
+}
 
 /* Banners */
 #banner,
 #banner li { padding: 10px 0; margin: 0 }
 #banner a  { color: white }
 
-.horinaja img   { padding: 0; margin: 0 }
-.horinaja ul    { position: relative; width: 220px; padding: 0; margin: 0 }
-.horinaja ul li { background: transparent; display: block; top: 0; width: 215px }
+.horinaja img { padding: 0; margin: 0 }
+.horinaja ul  {
+    position: relative;
+    width: 220px;
+    padding: 0;
+    margin: 0;
+}
 
-ol.horinaja_pagination { background: transparent; height: 40px; margin: 0 auto; padding: 5px 0 0 0; position: relative; clear: both }
-ol.horinaja_pagination li   { float: left; height: 40px; display: block }
-ol.horinaja_pagination li a { background: transparent; color: white; height: 30px; display: block; float: left; font-size: 12px; font-weight: bold;
-                              text-align: center; padding: 10px 0 0 0; cursor: pointer }
+.horinaja ul li {
+    background: transparent;
+    display: block;
+    top: 0;
+    width: 215px;
+}
+
+ol.horinaja_pagination {
+    background: transparent;
+    height: 40px;
+    margin: 0 auto;
+    padding: 5px 0 0 0;
+    position: relative;
+    clear: both;
+}
+
+ol.horinaja_pagination li {
+    float: left;
+    height: 40px;
+    display: block;
+}
+
+ol.horinaja_pagination li a {
+    background: transparent;
+    color: white;
+    height: 30px;
+    display: block;
+    float: left;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 0 0 0;
+    cursor: pointer;
+}
 
 #form_in_box div { text-align: left }
 input.inform     { width: 220px; margin-left: 20px }

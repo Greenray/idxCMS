@@ -4,6 +4,7 @@
 # MODULE APHORISMS - TEMPLATE
 
 die();?>
+
 <script type="text/javascript" src="{TOOLS}jquery.ui.min.js"></script>
 <script type="text/javascript" src="{TOOLS}jquery.flip.min.js"></script>
 <script type="text/javascript">
@@ -20,7 +21,7 @@ die();?>
                         req = false;
                     }
                 }
-                if (!req && typeof XMLHttpRequest != 'undefined')
+                if (!req && typeof XMLHttpRequest !== 'undefined')
                     req = new XMLHttpRequest();
                 return req;
             }
@@ -29,16 +30,16 @@ die();?>
                 var request = createRequest();
                 request.open("GET", url, false);
                 request.send(null);
-                if (request.status == 200) {
+                if (request.status === 200) {
                     data = request.responseText.split('$', 2);
                     return data[0];
                 }
                 return '';
             }
             $('#flipbox').flip({
-                direction       : $(this).attr('rel'),
-                content         : getData('./?module=aphorisms&flip=1'),
-                dontChangeColor : true
+                direction : $(this).attr('rel'),
+                content   : getData('./?module=aphorisms&flip=1'),
+                color     : '#829298'
             })
             return false;
         });

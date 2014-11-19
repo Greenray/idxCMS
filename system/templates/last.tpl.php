@@ -18,6 +18,7 @@ die();?>
                     [endif]
                 </span>
             </li>
+            <hr>
         [endeach.items]
     </ul>
 </div>

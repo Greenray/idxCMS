@@ -1,9 +1,10 @@
 <?php
-# idxCMS version 2.2
+# idxCMS version 2.3
 # Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - BACKUP TEMPLATE
 
 die();?>
+
 <div class="module">[__Backup]</div>
 <fieldset>
     <form name="form" method="post" action="">
@@ -44,15 +45,14 @@ die();?>
             <tr class="odd">
                 <td>{name}</td>
                 <td class="right">{size}</td>
-                <td class="center"><label><input type="checkbox" name="dir[]" value="{name}" /> [__Select]</label></td>
+                <td class="center">
+                    <label>
+                        <input type="checkbox" name="dir[]" value="{name}" /> [__Select]
+                    </label>
+                </td>
             </tr>
             [endforeach.dirs]
         </table>
-        <p align="center">
-            <label>
-                <input type="checkbox" name="gzip" value="1" checked="checked" /> [__Pack file with gzip (uncheck if you experience problems)]
-            </label>
-        </p>
         <p align="center">
             <input type="hidden" name="backup" value="1" />
             <input type="submit" value="[__Submit]" class="submit"/>

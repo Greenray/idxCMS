@@ -1,26 +1,31 @@
 <?php
-# idxCMS version 2.2
+# idxCMS version 2.3
 # Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - BACKUP
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
 
-require_once(ADMINLIBS.'tar.php');
+require_once(ADMINLIBS.'tar.class.php');
 
 if (!empty($REQUEST['backup'])) {
-    $suffix = empty($REQUEST['gzip']) ? '' : '.gz';
-    $TAR = new TAR();
-    $TAR->isGzipped = !empty($REQUEST['gzip']);
-    $TAR->filename  = BACKUPS.'backup_'.date('H-i-s_d.m.Y').'.tar'.$suffix;
-    chdir(ROOT);
-    foreach($REQUEST['dir'] as $dir) {
-        $TAR->addDirectory(CONTENT.$dir, TRUE);
-    }
-    chdir(getcwd());
-    if (!empty($TAR->directories)) {
-        $TAR->saveTar();
-        ShowMessage(__('Done').' ('.basename($TAR->filename).')');
-        unset($TAR);
+    if (!empty($REQUEST['dir'])) {
+        $exclude_files = array('arj','avi','bzip','bzip2','gz','gzip','mp3','mov','mpeg','rar','tar','wmv','zip');
+        $backup = BACKUPS.'backup_'.date('H-i-s_d.m.Y').'.tar.gz';
+        $PHAR = new PharData($backup);
+
+        foreach($REQUEST['dir'] as $dir) {
+            try {
+                $list = GetFilesList(CONTENT.$dir);
+                foreach ($list as $file) {
+                    $info = pathinfo(CONTENT.$dir.'/'.$file);
+                        if (!in_array($info['extension'], $exclude_files)) {
+                        $PHAR->addFile(CONTENT.$dir.'/'.$file);
+                    }
+                }
+            } catch (Exception $error) {
+                ShowMessage(__($error->getMessage()));
+            }
+        }
     } else {
         ShowMessage(__('Nothing selected'));
     }
@@ -51,4 +56,3 @@ foreach ($dirs as $dir) {
 
 $TPL = new TEMPLATE(dirname(__FILE__).DS.'backup.tpl');
 echo $TPL->parse($output);
-?>

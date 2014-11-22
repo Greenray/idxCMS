@@ -1,22 +1,55 @@
 <?php
-# idxCMS version 2.2
+# idxCMS version 2.3
 # Copyright (c) 2014 Greenray greenray.spb@gmail.com
+# SYSTEM - LOG
 
 define('LOGS', CONTENT.'logs'.DS);
 
+/** The Log Class.
+ *
+ * Works with log and errorlog files
+ *
+ * @package   idxCMS
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ *            http://creativecommons.org/licenses/by-nc-sa/3.0/
+ * @copyright (c) 2011 - 2014 Victor Nabatov
+ * @link      https://github.com/Greenray/idxCMS/system/cms.class.php
+ */
 final class LOG {
 
-    private static $allow_gz;                   # Allow gzip log files
+    /**
+     * Allow compress log file
+     * @var boolean
+     */
+    private static $allow_gz;
 
+    /**
+     * Class initialization.
+     * @return boolean Is zlib extension loaded?
+     */
     public function __construct() {
         self::$allow_gz = extension_loaded('zlib');
     }
 
+    /**
+     * Writes error message into log file.
+     * @param  string $message Error message
+     * @param  string $info    Additioinal info
+     * @return boolean FALSE
+     */
     public function logError($message, $info = '') {
         file_put_contents(LOGS.'error.log', $message.' '.$info.LF, LOCK_EX);
         return FALSE;
     }
 
+    /**
+     * Registers users logins into log file.
+     * @param  string  $type    Message type
+     * @param  string  $user    Username
+     * @param  string  $message Message
+     * @return boolean FALSE
+     */
     public static function logPut($type, $user, $message) {
         $entry = date('d-m-Y H:i:s', time()).' '.$type.' ';
         if (!empty($user)) {
@@ -32,8 +65,18 @@ final class LOG {
         return FALSE;
     }
 
+    /**
+     * Сreates tar archive of logs for the month.
+     * @param  string  $title       Filename
+     * @param  integer $day         Date
+     * @param  integer $month       Month
+     * @param  integer $year        Year
+     * @param  integer $first_month The first month of the year
+     * @param  integer #first_year  The first etar of the age
+     * @return boolean TRUE
+     */
     public static function logMerge($title, $day, $month, $year, $first_month = 1, $first_year = 1980) {
-        $logs = GetFilesList(LOGS);
+        $logs  = GetFilesList(LOGS);
         $start = mktime(0, 0, 0, $first_month, 1, $first_year);
         $today = mktime(0, 0, 0, $month, $day, $year);
         $to_merge = array();
@@ -46,35 +89,39 @@ final class LOG {
             }
         }
         if (!empty($to_merge)) {
-            $suffix = self::$allow_gz ? '.gz' : '';
-            $TAR = new TAR();
-            $TAR->isGzipped = self::$allow_gz;
-            $TAR->filename  = LOGS.$title.'.tar'.$suffix;
-            $path = getcwd();
-            chdir(LOGS);
-            foreach ($to_merge as $file) {
-                $TAR->addFile($file, substr($file, -3) === '.gz');
-            }
-            chdir($path);
-            if ($TAR->saveTar()) {
+            try {
+                $PHAR = new PharData(LOGS.$title.'.tar');
                 foreach ($to_merge as $file) {
-                    unlink(LOGS.$file);
+                    $PHAR->addFile(LOGS.$file, $file);
                 }
+                $PHAR->compress(Phar::GZ);
+            } catch (Exception $error) {
+                ShowMessage(__($error->getMessage()));
             }
-            unset($TAR);
+
+            foreach ($to_merge as $file) {
+                    unlink(LOGS.$file);
+            }
+            unlink(LOGS.$title.'.tar');
         }
         return TRUE;
     }
 
+    /**
+     * Prepares daily log files to create a single file per month.
+     * @return boolean TRUE
+     * @uses   self::logMerge() Creates tar or tar.gz archive
+     */
     public static function logMergeByMonth() {
         $logs   = GetFilesList(LOGS);
         $month  = date('m');
         $year   = date('Y');
         $merged = array();
+
         foreach ($logs as $log_entry) {
             if (preg_match("/^(.*?)-(.*?)-(.*?)\.log(|.gz)$/i", $log_entry, $matches)) {
                 if (!in_array($matches[1].'-'.$matches[2], $merged) &&
-                    (($matches[2] != $month) || ($matches[1] != $year))) {
+                    (($matches[2] < $month) || ($matches[1] < $year))) {
                         self::logMerge(
                             $matches[1].'-'.$matches[2],
                             date('t', mktime(0, 0, 0, $matches[2], $matches[3], $matches[1])),
@@ -82,12 +129,11 @@ final class LOG {
                             $matches[1],
                             $matches[2],
                             $matches[1]
-                        );
-                        $merged[] = $matches[1].'-'.$matches[2];
+                    );
+                    $merged[] = $matches[1].'-'.$matches[2];    # Already processed files
                 }
             }
         }
         return TRUE;
     }
 }
-?>

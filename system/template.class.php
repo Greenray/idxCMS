@@ -1,5 +1,5 @@
 <?php
-# idxCMS version 2.2
+# idxCMS version 2.3
 # Copyright (c) 2014 Greenray greenray.spb@gmail.com
 
 class TEMPLATE {
@@ -135,7 +135,7 @@ class TEMPLATE {
                     preg_match_all($this->patterns['ifelse'], $tpl, $sigs);
                     if (!empty($sigs)) {
                         foreach ($sigs[1] as $k => $idx) {
-                            $val = SearchInArray($sigs[3][$k], $var);
+                            $val = SearchValueInArray($sigs[3][$k], $var);
                             if (!empty($var[$sigs[3][$k]]) || !empty($val)) {
                                 $tpl = str_replace($sigs[0][$k], $sigs[4][$k], $tpl);
                             } else {
@@ -175,7 +175,7 @@ class TEMPLATE {
         }
         return str_replace($matches[0], $temp, $matches[0]);
     }
-    
+
     # Parse of a control structure FOR.
     # The template is:
     # - [for=x.var]...[endfor]
@@ -199,7 +199,7 @@ class TEMPLATE {
             return str_replace($matches[0], $matches[5], $matches[0]);
         }
         if (!empty($matches[3])) {
-            $var = SearchInArray($matches[3], $this->vars[$matches[1]]);
+            $var = SearchValueInArray($matches[3], $this->vars[$matches[1]]);
             if (empty($var)) {
                 return str_replace($matches[0], $matches[5], $matches[0]);
             }
@@ -216,7 +216,7 @@ class TEMPLATE {
             return str_replace($matches[0], '', $matches[0]);
         }
         if (!empty($matches[3])) {
-            $var = SearchInArray($matches[3], $this->vars[$matches[1]]);
+            $var = SearchValueInArray($matches[3], $this->vars[$matches[1]]);
             if (empty($var)) {
                 return str_replace($matches[0], '', $matches[0]);
             }

@@ -1,5 +1,5 @@
 <?php
-# idxCMS version 2.2
+# idxCMS version 2.3
 # Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - LOG TEMPLATE
 
@@ -11,6 +11,6 @@ die();?>
         <tr class="odd"><td>{text}</td></tr>
     </table>
     <form name="month" method="post" action="">
-        <p align="center"><input type="button" value="[__Back]" onclick="javascript:history.back();" class="submit" /></p>
+        <p align="center"><input type="submit" value="[__Back]" class="submit" /></p>
     </form>
 </fieldset>

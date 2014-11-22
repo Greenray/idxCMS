@@ -1,30 +1,49 @@
 /*
-* idxCMS version 2.2
-* Copyright (c) 2012 Greenray greenray.spb@gmail.com
-* PRINT.CSS
+ idxCMS version 2.3
+ Copyright (c) 2012 Greenray greenray.spb@gmail.com
+ PRINT.CSS
 */
 body {
- background-color: white; font: 11px normal arial, verdana, helvetica, sans, serif, sans-serif, "Times New Roman";
- margin: 0px; padding: 0px;
+    background-color: white;
+    font: 11px normal arial, verdana, helvetica, sans, serif, sans-serif, "Times New Roman";
+    margin: 0px;
+    padding: 0px
 }
+
 a {
- color: black; text-decoration: underline;
+    color: black;
+    text-decoration: underline;
 }
 h1 {
- font-size: 21px; text-align: center; margin: 0px; padding: 0px;
+    font-size: 21px;
+    margin: 0px;
+    padding: 0px;
+    text-align: center
 }
-.text img {
- float: left;
+.text img { float: left }
+
+.codehtml,
+.codephp,
+.codetext {
+    font: normal 8pt mono, "Courier New", Courier;
+    margin: 5px 0;
+    padding: 5px;
+    overflow: auto;
+    white-space: nowrap
 }
-.codehtml,.codephp,.codetext {
- font: normal 8pt mono, "Courier New", Courier; margin: 5px 0; padding: 5px; overflow: auto; white-space: nowrap;
-}
+
 .quotetitle {
- border: black solid 1px; font-size: 8pt; font-style: italic; margin: 10px 0; padding: 5px;
+    border: black solid 1px;
+    font-size: 8pt;
+    font-style: italic;
+    margin: 10px 0;
+    padding: 5px
 }
 .quotetext {
- border: black solid 1px; font: italic 9pt "Courier New", Courier, mono; margin: 10px 0; padding: 5px; overflow: auto;
+    border: black solid 1px;
+    font: italic 9pt "Courier New", Courier, mono;
+    margin: 10px 0;
+    padding: 5px;
+    overflow: auto
 }
-.right {
- text-align: right;
-}
+.right { text-align: right }

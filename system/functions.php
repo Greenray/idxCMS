@@ -1,5 +1,5 @@
 <?php
-# idxCMS version 2.2
+# idxCMS version 2.3
 # Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # COMMON FUNCTONS
 
@@ -17,10 +17,10 @@ function AdvScanDir($directory, $mask = '', $type = 'all', $filter = FALSE, $exc
     }
     if (is_dir($directory)) {
         $fh = opendir($directory);
-        while (FALSE !== ($filename = readdir($fh))) {
+        while (($filename = readdir($fh)) !== FALSE) {
             if (substr($filename, 0, 1) != '.' || $filter) {
                 if (!in_array($filename, $exclude)) {
-                    if ((empty($type) || ($type == 'all') || $func($directory.DS.$filename)) &&
+                    if ((empty($type) || ($type === 'all') || $func($directory.DS.$filename)) &&
                         (empty($mask) || preg_match($mask, $filename))) {
                             $dir[] = $filename;
                     }
@@ -126,17 +126,43 @@ function GetUnserialized($file) {
     return $data;
 }
 
-# ARRAY
+# ARRAYe
 
-# Recursive search of the needed key value in a multidimensional array.
-function SearchInArray($needle, $haystack) {
+/**
+ * Recursive search of the value in a multidimensional array.
+ * @param  mixed $needle   The desired value
+ * @param  array $haystack Array to search
+ * @return mixed The value of the key
+ */
+function SearchValueInArray($needle, $haystack) {
     $result = '';
     foreach ($haystack as $key => $value) {
         if ($needle == $key) {
             $result = $value;
         }
         if (is_array($value)) {
-            $result = SearchInArray($needle, $value);
+            $result = SearchValueInArray($needle, $value);
+        }
+    }
+    return $result;
+}
+
+/**
+ * Recursive search of the key in a multidimensional array.
+ * @param  mixed $needle   The desired value
+ * @param  array $haystack Array to search
+ * @return mixed The key of the value
+ */
+function SearchKeyInArray($needle, $haystack) {
+    $result = '';
+    foreach ($haystack as $key => $value) {
+        var_dump($value);
+        if (is_array($value)) {
+            $result = SearchKeyInArray($needle, $value);
+        } else {
+            if ($needle == $value) {
+                $result = $key;
+            }
         }
     }
     return $result;

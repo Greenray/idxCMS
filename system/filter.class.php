@@ -1,5 +1,5 @@
 <?php
-# idxCMS version 2.2
+# idxCMS version 2.3
 # Copyright (c) 2014 Greenray greenray.spb@gmail.com
 
 # Cleans parameters of $_POST, $_GET, $_COOKIE, detect intrusions and ban unwanted visitors

@@ -1,5 +1,5 @@
 <?php
-# idxCMS version 2.2setPageKeywords
+# idxCMS version 2.3setPageKeywords
 # Copyright (c) 2014 Greenray greenray.spb@gmail.com
 
 define('FOREVER_COOKIE', time() + 3600 * 24 * 365 * 5);

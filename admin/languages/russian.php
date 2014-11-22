@@ -1,5 +1,5 @@
 <?php
-# idxCMS version 2.2
+# idxCMS version 2.3
 # Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - RUSSIAN LOCALISATION
 
@@ -105,24 +105,23 @@ $LANG['def']['Move'] = 'Переместить';
 $LANG['def']['Multimedia configuration'] = 'Настройка мультимедиа';
 $LANG['def']['Navigation panel'] = 'Панель навигации';
 $LANG['def']['New category'] = 'Новая категория';
-$LANG['def']['New icon'] = 'Новая иконка';
-$LANG['def']['New section'] = 'Новый раздел';
-$LANG['def']['Not actual for admin'] = 'Не имеет значения для администратора';
-$LANG['def']['Nothing selected'] = 'Ничего не выбрано';
+$LANG['def']['New icon']                  = 'Новая иконка';
+$LANG['def']['New section']               = 'Новый раздел';
+$LANG['def']['Not actual for admin']      = 'Не имеет значения для администратора';
+$LANG['def']['Nothing selected']          = 'Ничего не выбрано';
 $LANG['def']['Number of latest elements'] = 'Число последних элементов';
-$LANG['def']['Operation system'] = 'Операционная система';
-$LANG['def']['Options'] = 'Параметры';
-$LANG['def']['Output block length'] = 'Длина блока вывода';
-$LANG['def']['Output management'] = 'Управление выводом';
-$LANG['def']['Pack file with gzip (uncheck if you experience problems)'] = 'Сжать файл (Отключите, если возникают проблемы)';
+$LANG['def']['Operation system']          = 'Операционная система';
+$LANG['def']['Options']                   = 'Параметры';
+$LANG['def']['Output block length']       = 'Длина блока вывода';
+$LANG['def']['Output management']         = 'Управление выводом';
 $LANG['def']['Period when one password request can be acomplished'] = 'Таймаут для пароля';
-$LANG['def']['Player height'] = 'Высота плейера';
-$LANG['def']['Player width'] = 'Ширина плейера';
+$LANG['def']['Player height']             = 'Высота плейера';
+$LANG['def']['Player width']              = 'Ширина плейера';
 $LANG['def']['Please do not delete user, just block him to keep the structure of site'] = 'Пожалуйста, не удаляйте пользователя, просто заблокируйте его, чтобы не нарушить структуру данных сайта';
-$LANG['def']['Plugin'] = 'Плагин';
-$LANG['def']['Popular pages'] = 'Популярные страницы';
-$LANG['def']['Posts awaits moderation'] = 'Публикации, ожидающие модерации';
-$LANG['def']['Posts per page'] = 'Публикаций на страницу';
+$LANG['def']['Plugin']                    = 'Плагин';
+$LANG['def']['Popular pages']             = 'Популярные страницы';
+$LANG['def']['Posts awaits moderation']   = 'Публикации, ожидающие модерации';
+$LANG['def']['Posts per page']            = 'Публикаций на страницу';
 $LANG['def']['Referers'] = 'Источники';
 $LANG['def']['Register spider IP'] = 'Регистрировать IP бота';
 $LANG['def']['Register spider agent'] = 'Регистрировать агент бота';
@@ -169,4 +168,3 @@ $LANG['def']['Video player'] = 'Видеоплейер';
 $LANG['def']['Welcome message'] = 'Приветствие';
 $LANG['def']['Welcome to administration panel'] = 'Добро пожаловать в панель администратора';
 $LANG['def']['You may use the site name'] = 'Можно использовать имя сайта';
-?>

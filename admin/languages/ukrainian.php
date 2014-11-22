@@ -1,5 +1,5 @@
 <?php
-# idxCMS version 2.2
+# idxCMS version 2.3
 # Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - UKRAINIAN LOCALISATION
 
@@ -107,16 +107,15 @@ $LANG['def']['New category'] = 'Нова категорія';
 $LANG['def']['New icon'] = 'Нова іконка';
 $LANG['def']['New section'] = 'Новий розділ';
 $LANG['def']['Not actual for admin'] = 'Не має значення для адміністратора';
-$LANG['def']['Nothing selected'] = 'Нічого не вибрано';
+$LANG['def']['Nothing selected']          = 'Нічого не вибрано';
 $LANG['def']['Number of latest elements'] = 'Кількість останніх елементів';
-$LANG['def']['Operation system'] = 'Операційна система';
-$LANG['def']['Options'] = 'Параметри';
-$LANG['def']['Output block length'] = 'Довжина блоку виведення';
-$LANG['def']['Output management'] = 'Управління висновком';
-$LANG['def']['Pack file with gzip (uncheck if you experience problems)'] = 'Стиснути файл (Вимкніть, якщо виникають проблеми)';
+$LANG['def']['Operation system']          = 'Операційна система';
+$LANG['def']['Options']                   = 'Параметри';
+$LANG['def']['Output block length']       = 'Довжина блоку виведення';
+$LANG['def']['Output management']         = 'Управління висновком';
 $LANG['def']['Period when one password request can be acomplished'] = 'Таймаут для пароля';
-$LANG['def']['Player height'] = 'Висота плейера';
-$LANG['def']['Player width'] = 'Ширина плейера';
+$LANG['def']['Player height']             = 'Висота плейера';
+$LANG['def']['Player width']              = 'Ширина плейера';
 $LANG['def']['Please do not delete user, just block him to keep the structure of site'] = 'Будь ласка, не видаляйте користувача, просто заблокуйте його, щоб не порушити структуру даних сайту';
 $LANG['def']['Plugin'] = 'Плагін';
 $LANG['def']['Popular pages'] = 'Популярні сторінки';
@@ -168,4 +167,3 @@ $LANG['def']['Video player'] = 'Видеоплейер';
 $LANG['def']['Welcome message'] = 'Привітання';
 $LANG['def']['Welcome to administration panel'] = 'Ласкаво просимо в панель адміністратора';
 $LANG['def']['You may use the site name'] = 'Можна використовувати ім\'я сайту';
-?>

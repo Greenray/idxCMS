@@ -1,5 +1,5 @@
 <?php
-# idxCMS version 2.2 - Flat Files Content Management System
+# idxCMS version 2.3 - Flat Files Content Management System
 # Copyright (c) 2014 Greenray greenray.spb@gmail.com
 
 # This project is based on the idea and experience of work in the ReloadCMS project
@@ -19,7 +19,9 @@
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-ini_set('display_errors', 0);
+
+ini_set('phar.readonly', 0);
+ini_set('display_errors', 1);
 mb_internal_encoding("UTF-8");
 
 setlocale(LC_CTYPE, array('ru_RU.utf8', 'ru_UA.utf8', 'en_US.utf-8', 'en_GB.utf-8'));
@@ -108,7 +110,7 @@ $REQUEST = FILTER::getAll('REQUEST');
 global $LANG;
 $CMS = CMS::call('SYSTEM');
 
-define('IDX_VERSION',   '2.2');
+define('IDX_VERSION',   '2.3');
 define('IDX_COPYRIGHT', '&copy; 2014 '.__('Greenray'));
 define('IDX_POWERED',   'Powered by idxCMS - '.IDX_VERSION);
 
@@ -154,6 +156,7 @@ switch($MODULE) {
         define('ADMINLIBS', ADMIN.'libs'.DS);
         define('TEMPLATES', ADMIN.'templates'.DS);
         require_once(ADMINLIBS.'functions.php');
+        require_once(ADMINLIBS.'tar.class.php');
         include_once(ADMIN.'languages'.DS.SYSTEM::get('language').'.php');
         if (CMS::call('USER')->checkRoot()) {
             $modules = AdvScanDir(ADMIN.'modules', '', 'dir');

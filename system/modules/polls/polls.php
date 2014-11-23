@@ -8,9 +8,10 @@ if (!defined('idxCMS')) die();
 $POLLS  = new POLLS();
 $polls  = $POLLS->getActivePolls();
 $poll   = FILTER::get('REQUEST', 'poll');
+$save   = FILTER::get('REQUEST', 'save');
 $answer = FILTER::get('REQUEST', 'answer');
 
-if (!empty($poll) && !empty($answer)) {
+if (!empty($poll) && !empty($save)) {
     try {
         $POLLS->voteInPoll($poll, $answer);
     } catch (Exception $error) {
@@ -25,4 +26,3 @@ if (!empty($polls)) {
     ShowWindow(__('Poll'), $POLLS->showPolls($polls, $TPL));
 }
 unset($POLLS);
-?>

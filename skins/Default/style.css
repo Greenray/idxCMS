@@ -118,11 +118,15 @@ table {
     border-spacing: 0;
     width: 100%
     }
-    table,th,td { padding: 2px; vertical-align: middle }
+    table,th,td {
+        padding: 2px;
+        text-align: center;
+        vertical-align: middle
+    }
     table#std {
-        font-size: 12px;
         border-collapse: separate;
-        border-spacing: 0
+        border-spacing: 0;
+        font-size: 12px;
     }
     table#std tr { height: 35px }
     table#std td { border: 2px groove #fff; padding: 0 10px }
@@ -932,7 +936,7 @@ ul.tabs  {
     .calendar th {
         background: #297377;
         color: white;
-        text-align: cente
+        text-align: center
     }
 
 .last-posts li { margin: 5px 0 }

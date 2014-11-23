@@ -6,24 +6,27 @@
 /** The Config Class.
  *
  * Works with configuration.
+ * 
  * @package   idxCMS
- * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ * @ingroup   SYSTEM
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
  *            http://creativecommons.org/licenses/by-nc-sa/3.0/
  * @copyright (c) 2011 - 2014 Victor Nabatov
+ * @file      config.class.php
  * @link      https://github.com/Greenray/idxCMS/system/config.class.php
  */
 final class CONFIG {
 
     /**
      * Configuration filename.
-     * @var string
+     * @param string
      */
     private static $ini = '';
 
     /**
      * Site configuration data.
-     * @var array
+     * @param array
      */
     private static $config = array();       #
 

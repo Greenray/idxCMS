@@ -2,8 +2,22 @@
 # idxCMS version 2.3setPageKeywords
 # Copyright (c) 2014 Greenray greenray.spb@gmail.com
 
+/** Site COOKIE */
 define('FOREVER_COOKIE', time() + 3600 * 24 * 365 * 5);
 
+/** The System Class.
+ *
+ * System, modules, users and templates initialization.
+ * 
+ * @package   idxCMS
+ * @ingroup   SYSTEM
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *            http://creativecommons.org/licenses/by-nc-sa/3.0/
+ * @copyright (c) 2011 - 2014 Victor Nabatov
+ * @file      system.class.php
+ * @link      https://github.com/Greenray/idxCMS/system/system.class.php
+ */
 class SYSTEM {
 
     private static $url = '';

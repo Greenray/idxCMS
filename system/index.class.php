@@ -5,20 +5,22 @@
 
 /** The Index Class.
  *
- * Reading and saving database files
+ * Reading and saving database files.
  *
  * @package   idxCMS
- * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ * @ingroup   SYSTEM
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
  *            http://creativecommons.org/licenses/by-nc-sa/3.0/
  * @copyright (c) 2011 - 2014 Victor Nabatov
+ * @file      index.class.php
  * @link      https://github.com/Greenray/idxCMS/system/index.class.php
  */
 class INDEX {
 
     /**
      * Name of the index file.
-     * @var string
+     * @param string
      */
     protected $index = 'index';      # Name of the index file
 

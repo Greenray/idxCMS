@@ -5,21 +5,25 @@
 
 if (!defined('idxCMS')) die();
 
-# Detect utf8 encoding
-function detect_utf($string) {
-    for ($i = 0; $i < strlen($string); $i++) {
-        if     (ord($string[$i]) < 0x80)           $n = 0;  # 0bbbbbbb
-        elseif ((ord($string[$i]) & 0xE0) == 0xC0) $n = 1;  # 110bbbbb
-        elseif ((ord($string[$i]) & 0xF0) == 0xE0) $n = 2;  # 1110bbbb
-        elseif ((ord($string[$i]) & 0xF0) == 0xF0) $n = 3;  # 1111bbbb
-        else return FALSE;                                  # Not UTF
-        for ($j = 0; $j < $n; $j++) {
-            if ((++$i == strlen($string)) || ((ord($string[$i]) & 0xC0) != 0x80)) return FALSE;
-        }
-    }
-    return TRUE;
-}
+/** Site ststistic.
+ *
+ * Registers a visitы to the website by visitors, users, bots and spiders
+ *
+ * @package   idxCMS
+ * @ingroup   SYSTEM
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *            http://creativecommons.org/licenses/by-nc-sa/3.0/
+ * @copyright (c) 2011 - 2014 Victor Nabatov
+ * @file      system/modules/aphorisms/module.php
+ * @link      https://github.com/Greenray/idxCMS/system//modules/aphorisms/module.php
+ */
 
+ /**
+ * Extractes keywords from the user`s query.
+ * @param  string $url User`s URL
+ * @return mixed Decoded keywords or FALSE
+ */
 function ExtractKeyword($url) {
     # Searching  keys
     $search_queries = array(
@@ -51,6 +55,11 @@ function ExtractKeyword($url) {
     return FALSE;
 }
 
+ /**
+ * Detects bad bots.
+ * @param  string $agent $_SERVER['HTTP_USER_AGENT']
+ * @return boolean Is bad bot detected?
+ */
 function DetectBadBot($agent) {
     $engines = array(
         'email exractor','sitesucker','w3af.sourceforge.net','xpymep'
@@ -63,6 +72,11 @@ function DetectBadBot($agent) {
     return FALSE;
 }
 
+ /**
+ * Detects spiders.
+ * @param  string $agent $_SERVER['HTTP_USER_AGENT']
+ * @return boolean Is spider detected?
+ */
 function DetectSpider($agent) {
     $engines = array(
         '110search','12move',
@@ -107,14 +121,17 @@ $agent   = $_SERVER['HTTP_USER_AGENT'];
 $ip      = $_SERVER['REMOTE_ADDR'];
 $referer = $_SERVER['HTTP_REFERER'];
 $page    = $_SERVER['REQUEST_URI'];
+
 if (DetectBadBot($agent)) {
     $bans   = file_get_contents(CONTENT.'bans');
     $result = $bans.$ip.LF;
     file_put_contents(CONTENT.'bans', $result, LOCK_EX);
     die();
 }
+
 $config = CONFIG::getSection('statistic');
 $time = time();
+
 if (DetectSpider($agent)) {
     # Detect and register of searching bot
     $spiders = GetUnserialized(CONTENT.'spiders');
@@ -185,7 +202,7 @@ if (DetectSpider($agent)) {
             }
         }
     }
-    
+
     $online = $stats['online'];
     $online[$ip]['name'] = $user['username'];
     $online[$ip]['nick'] = $user['nickname'];
@@ -202,6 +219,7 @@ if (DetectSpider($agent)) {
         }
     }
     $stats['update'] = $time;
+    
     file_put_contents(CONTENT.'stats', serialize($stats), LOCK_EX);
     $keyword = ExtractKeyword($referer);
     if (!empty($keyword)) {
@@ -210,4 +228,3 @@ if (DetectSpider($agent)) {
         file_put_contents(CONTENT.'keywords', $file.$keyword."|".$page.LF, LOCK_EX);
     }
 }
-?>

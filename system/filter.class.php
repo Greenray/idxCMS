@@ -2,16 +2,47 @@
 # idxCMS version 2.3
 # Copyright (c) 2014 Greenray greenray.spb@gmail.com
 
-# Cleans parameters of $_POST, $_GET, $_COOKIE, detect intrusions and ban unwanted visitors
+/** The Filter Class.
+ *
+ * Cleans parameters of $_POST, $_GET, $_COOKIE, detect intrusions and ban unwanted visitors
+ *
+ * @package   idxCMS
+ * @ingroup   SYSTEM
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ *            Reloadcms Team http://reloadcms.com
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *            http://creativecommons.org/licenses/by-nc-sa/3.0/
+ * @copyright (c) 2011 - 2014 Victor Nabatov
+ * @file      filter.class.php
+ * @link      https://github.com/Greenray/idxCMS/system/filter.class.php
+ */
 final class FILTER {
 
+    /**
+     * Array of filtered $_POST and/or $_GET parameters.
+     * @param array
+     */
     private static $REQUEST = array();
+    /**
+     * Array of filtered $_COOKIE parameters.
+     * @param array
+     */
     private static $COOKIE  = array();
+    /**
+     * Array of parameters types.
+     * @param array
+     */
     private $types = array('GET', 'POST', 'FILES', 'COOKIE');
 
+    /** Class initialization */
     public function __construct() {}
     public function __clone() {}
 
+    /**
+     * Cleans all keys of the request array.
+     * @param  array $input Input array of parameters
+     * @return array Filered keys of array of parameters
+     */
     private function cleanKey($input) {
         $input = iconv(mb_detect_encoding($input), 'UTF-8//IGNORE', $input);
         $input = strip_tags($input);
@@ -19,12 +50,22 @@ final class FILTER {
         return str_replace(array("\r\n", "\n\r", "\r", "\n"), '', $input);
     }
 
+    /**
+     * Cleans all values of the request array.
+     * @param  array $input Input array of parameters
+     * @return array Filered values of array parameters
+     */
     private function cleanValue($input) {
         $input = iconv(mb_detect_encoding($input), 'UTF-8//IGNORE', $input);
         $input = stripslashes($input);
         return UnifyBr($input);
     }
 
+    /**
+     * Cleans variables.
+     * @param  array $vars Input array of parameters
+     * @return array Filered values of array parameters
+     */
     private function clear($vars) {
         $result = array();
         foreach($vars as $key => $value) {
@@ -41,6 +82,11 @@ final class FILTER {
         return $result;
     }
 
+    /**
+     * Main function.
+     * @return void
+     * @uses Intrusion detection system
+     */
     public function sanitaze() {
         $this->ids();
         foreach($this->types as $VAR) {
@@ -51,10 +97,21 @@ final class FILTER {
         self::$COOKIE  = $COOKIE;
     }
 
+    /**
+     * Gets all filtered parameter of the specified type.
+     * @param  string $type  Type of parameter
+     * @return array Array of filtered parameters of the specified type
+     */
     public static function getAll($type) {
         return self::$$type;
     }
 
+    /**
+     * Gets requested filtered parameter.
+     * @param  string $type  Type of parameter
+     * @param  string $param Name of parameter
+     * @return mixed  Value of parameter
+     */
     public static function get($type, $param) {
         if (array_key_exists($param, self::$$type)) {
             $value = self::$$type;
@@ -63,16 +120,31 @@ final class FILTER {
         return '';
     }
 
+    /**
+     * Removes filtered parameter.
+     * @param  string $type  Type of parameter
+     * @param  string $param Name of parameter
+     * @return void
+     */
     public static function remove($type, $param) {
         if (array_key_exists($param, self::$$type)) {
             unset(self::${$type}[$param]);
         }
     }
 
+    /**
+     * Checks if the email is valid.
+     * @param  string $email Email address
+     * @return boolean
+     */
     public function validEmail($email) {
         return preg_match('/^([a-zA-Z0-9\!\#\$\%\&\'\*\+\-\/\=\?\^\_\`\{\|\}\~]+(\.[a-zA-Z0-9\!\#\$\%\&\'\*\+\-\/\=\?\^\_\`\{\|\}\~]+)*)@((([a-z]([-a-z0-9]*[a-z0-9])?)|(#[0-9]+)|(\[((([01]?[0-9]{0,2})|(2(([0-4][0-9])|(5[0-5]))))\.){3}(([01]?[0-9]{0,2})|(2(([0-4][0-9])|(5[0-5]))))\]))\.)*(([a-z]([-a-z0-9]*[a-z0-9])?)|(#[0-9]+)|(\[((([01]?[0-9]{0,2})|(2(([0-4][0-9])|(5[0-5]))))\.){3}(([01]?[0-9]{0,2})|(2(([0-4][0-9])|(5[0-5]))))\]))$/', $email) ? TRUE : FALSE;
     }
 
+    /**
+     * Ban user.
+     * @return boolean
+     */
     public function ban() {
         $bans = file_exists(CONTENT.'bans') ? file_get_contents(CONTENT.'bans') : '';
         if (strpos($bans, self::$REQUEST['host']) === FALSE) {
@@ -80,7 +152,10 @@ final class FILTER {
         }
     }
 
-    # Intrusion detection
+    /**
+     * Intrusion detection.
+     * @return void
+     */
     private function ids() {
         $ids = array(
             'base64', 'benchmark', 'concat', 'document.cookie', 'eval', 'echo', 'etc/passwd', 'etc/shadow', 'insert', 'into',
@@ -108,11 +183,13 @@ final class FILTER {
             }
         }
         unset($bans);
+
         $url  = $_SERVER['REQUEST_URI'];
         $info = 'Remote address: '   .$_SERVER['REMOTE_ADDR'].LF.
                 'Suspected URI: '    .$_SERVER['REQUEST_URI'].LF.
                 'Suspected referer: '.$_SERVER['HTTP_REFERER'].LF.
                 'User agent: '       .$_SERVER['HTTP_USER_AGENT'].LF;
+
         $result = '';
         foreach($this->types as $var) {
             $result .= $var.': ';
@@ -141,6 +218,7 @@ final class FILTER {
                 session_destroy();
                 die();
         }
+
         foreach($ids as $key) {
             if (stristr($url, $key)) {
                 $this->ban($_SERVER['REMOTE_ADDR']);
@@ -155,4 +233,3 @@ final class FILTER {
         }
     }
 }
-?>

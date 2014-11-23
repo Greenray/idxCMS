@@ -3,6 +3,7 @@
 # Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # SYSTEM - LOG
 
+/** Logs datafiles */
 define('LOGS', CONTENT.'logs'.DS);
 
 /** The Log Class.
@@ -10,27 +11,18 @@ define('LOGS', CONTENT.'logs'.DS);
  * Works with log and errorlog files
  *
  * @package   idxCMS
- * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ * @ingroup   SYSTEM
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
  *            http://creativecommons.org/licenses/by-nc-sa/3.0/
  * @copyright (c) 2011 - 2014 Victor Nabatov
- * @link      https://github.com/Greenray/idxCMS/system/cms.class.php
+ * @file      log.class.php
+ * @link      https://github.com/Greenray/idxCMS/system/log.class.php
  */
 final class LOG {
 
-    /**
-     * Allow compress log file
-     * @var boolean
-     */
-    private static $allow_gz;
-
-    /**
-     * Class initialization.
-     * @return boolean Is zlib extension loaded?
-     */
-    public function __construct() {
-        self::$allow_gz = extension_loaded('zlib');
-    }
+    /** Class initialization */
+    public function __construct() {}
 
     /**
      * Writes error message into log file.
@@ -57,11 +49,7 @@ final class LOG {
         } else {
             $entry .= $message.LF;
         }
-        if (self::$allow_gz) {
-            gzfile_put_contents(LOGS.date('Y-m-d', time()).'.log.gz', $entry, 'a');
-        } else {
-            file_put_contents(LOGS.date('Y-m-d', time()).'.log', $entry, FILE_APPEND | LOCK_EX);
-        }
+        gzfile_put_contents(LOGS.date('Y-m-d', time()).'.log.gz', $entry, 'a');
         return FALSE;
     }
 

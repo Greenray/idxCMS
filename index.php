@@ -19,28 +19,52 @@
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
+/** idxCMS.
+ *
+ * Flat Files Content.Management System.
+ *
+ * @package   idxCMS
+ * @mainpage  IdxCMS - Content Management System
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *            http://creativecommons.org/licenses/by-nc-sa/3.0/
+ * @copyright (c) 2011 - 2014 Victor Nabatov
+ * @file      cms.class.php
+ * @link      https://github.com/Greenray/idxCMS
+ */
 
+/** Set phar.readonly to prevent PharException */
 ini_set('phar.readonly', 0);
+/** Allow display errors */
 ini_set('display_errors', 1);
+/** Set default system internal encoding */
 mb_internal_encoding("UTF-8");
-
+/** Set default locale */
 setlocale(LC_CTYPE, array('ru_RU.utf8', 'ru_UA.utf8', 'en_US.utf-8', 'en_GB.utf-8'));
 setlocale(LC_ALL, array('ru_RU.utf8', 'ru_UA.utf8', 'en_US.utf-8', 'en_GB.utf-8'));
-
+/** Set default timezone */
 if (date_default_timezone_set(date_default_timezone_get()) === FALSE) {
     date_default_timezone_set('UTC');
 }
 
-# Unset any globals created by register_globals being turned ON
+/** Unset any globals created by register_globals being turned ON */
 while (list($global) = each($GLOBALS)) {
     if (!preg_match('/^(_POST|_GET|_COOKIE|_SERVER|_FILES|GLOBALS|HTTP.*)$/', $global)) {
         unset($$global);
     }
 }
 unset($global);
-
+/** Set default error reporting */
 error_reporting(-1);
 
+/**
+ * Set error handler.
+ * @param  interger $errno    Error number
+ * @param  string   $errmsg   Error message
+ * @param  string   $filename Nameof the file where the error was generated
+ * @param  integer  $linenum  Line number where the error was generated
+ * @return void
+ */
 function idxErrorHandler($errno, $errmsg, $filename, $linenum) {
     $errortype = array (
            1 => "Error",
@@ -64,26 +88,45 @@ function idxErrorHandler($errno, $errmsg, $filename, $linenum) {
 set_error_handler("idxErrorHandler", E_ALL | E_STRICT);
 
 # Constants
+/** Constant to prevent direct access to php files */
 define('idxCMS',  TRUE);
+/** Alias for directory separator */
 define('DS',      DIRECTORY_SEPARATOR);
+/** Alias for the line feed */
 define('LF',      PHP_EOL);
+/** System root directory */
 define('ROOT',   '.'.DS);
+/** Site content directory */
 define('CONTENT', ROOT.'content'.DS);
+/** Directory for scins */
 define('SKINS',   ROOT.'skins'.DS);
+/** System directory */
 define('SYS',     ROOT.'system'.DS);
+/** System tools */
 define('TOOLS',   ROOT.'tools'.DS);
+/** System modules */
 define('MODULES', SYS.'modules'.DS);
+/** Temporary directory */
 define('TEMP',    CONTENT.'temp'.DS);
+/** User`s prpoofiles */
 define('USERS',   CONTENT.'users'.DS);
+ /** Images */
 define('IMAGES',  SKINS.'images'.DS);
+/** Site skins */
 define('ICONS',   IMAGES.'icons'.DS);
+/** Smiles */
 define('SMILES',  IMAGES.'smiles'.DS);
-
+/** The query of module */
 define('MODULE',    ROOT.'?module=');
+/** The query of section */
 define('SECTION',  '&amp;section=');
+/** The query of category */
 define('CATEGORY', '&amp;category=');
+/** The query of item */
 define('ITEM',     '&amp;item=');
+/** The query of comment or forum reply */
 define('COMMENT',  '&amp;comment=');
+/** The query of page */
 define('PAGE',     '&amp;page=');
 
 umask(000);     # UMASK Must be 000!
@@ -110,8 +153,11 @@ $REQUEST = FILTER::getAll('REQUEST');
 global $LANG;
 $CMS = CMS::call('SYSTEM');
 
+/** The version of CMS */
 define('IDX_VERSION',   '2.3');
+/** Copiright */
 define('IDX_COPYRIGHT', '&copy; 2014 '.__('Greenray'));
+/** This message is reflected in the pages of the website */
 define('IDX_POWERED',   'Powered by idxCMS - '.IDX_VERSION);
 
 # Send main headers
@@ -152,15 +198,19 @@ switch($MODULE) {
         include(MODULES.'rss'.DS.'rss.php');
         break;
     case 'admin':
+        /** Administration section of the website */
         define('ADMIN', ROOT.'admin'.DS);
+        /** Admin libruaries */
         define('ADMINLIBS', ADMIN.'libs'.DS);
+        /** Admin templates */
         define('TEMPLATES', ADMIN.'templates'.DS);
         require_once(ADMINLIBS.'functions.php');
-        require_once(ADMINLIBS.'tar.class.php');
         include_once(ADMIN.'languages'.DS.SYSTEM::get('language').'.php');
+
         if (CMS::call('USER')->checkRoot()) {
             $modules = AdvScanDir(ADMIN.'modules', '', 'dir');
             $MODULES = array();
+            /** Constant to prevent direct access to php files */
             define('idxADMIN', TRUE);
             foreach ($modules as $module) {
                 if ((substr($module, 0, 1) === '_') || CONFIG::getValue('enabled', $module)) {
@@ -168,6 +218,7 @@ switch($MODULE) {
                 }
             }
             $id = empty($REQUEST['id']) ? '' : basename($REQUEST['id']);
+
             switch ($id) {
                 case 'header':
                     include(ADMIN.'header.php');
@@ -200,6 +251,7 @@ switch($MODULE) {
         break;
     default:
         include_once(SYS.'statistic.php');
+        /** Pages templates */
         define('TEMPLATES', SYS.'templates'.DS);
         # Loading main module
         CMS::call('SYSTEM')->setCurrentPoint('__MAIN__');
@@ -250,4 +302,3 @@ switch($MODULE) {
         echo $TPL->parse($output);
         break;
 }
-?>

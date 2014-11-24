@@ -5,6 +5,7 @@
 
 if (!defined('idxCMS')) die();
 
+/** Catalogs data store */
 define('CATALOGS', CONTENT.'catalogs'.DS);
 
 class CATALOGS extends CONTENT {
@@ -141,4 +142,3 @@ USER::setSystemRights(array('catalogs' => __('Catalogs').': '.__('Moderator')));
 SYSTEM::registerMainMenu('catalogs');
 SYSTEM::registerSiteMap('catalogs');
 SYSTEM::registerSearch('catalogs');
-?>

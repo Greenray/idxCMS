@@ -208,6 +208,7 @@ if (DetectSpider($agent)) {
     $online[$ip]['nick'] = $user['nickname'];
     $online[$ip]['time'] = $time;
     $stats['online'] = array();
+    
     foreach ($online as $ip => $data) {
         if ($data['time'] > ($time - 300)) {
             $stats['online'][$ip] = $data;
@@ -219,9 +220,10 @@ if (DetectSpider($agent)) {
         }
     }
     $stats['update'] = $time;
-    
+
     file_put_contents(CONTENT.'stats', serialize($stats), LOCK_EX);
     $keyword = ExtractKeyword($referer);
+
     if (!empty($keyword)) {
         $file = (file_exists(CONTENT.'keywords')) ? file_get_contents(CONTENT.'keywords') : '';
         # Save bot|keyword|page

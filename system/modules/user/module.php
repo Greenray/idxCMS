@@ -5,7 +5,9 @@
 
 if (!defined('idxCMS')) die();
 
+/** Private messages data store */
 define('PM_DATA', CONTENT.'pm'.DS);
+/** User`s avatars data store */
 define('AVATARS', CONTENT.'avatars'.DS);
 
 # MESSAGE class
@@ -200,4 +202,3 @@ SYSTEM::registerModule('user', 'User', 'main', 'system');
 SYSTEM::registerModule('user.panel', 'User panel', 'box', 'system');
 SYSTEM::registerModule('user.pm', 'Private messages', 'main', 'system');
 SYSTEM::registerModule('user.feedback', 'Feedback', 'main', 'system');
-?>

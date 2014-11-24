@@ -5,6 +5,7 @@
 
 if (!defined('idxCMS')) die();
 
+/**Banners data store */
 define('BANNERS', CONTENT.'banners'.DS);
 
 switch (SYSTEM::get('locale')) {
@@ -18,6 +19,5 @@ switch (SYSTEM::get('locale')) {
         $LANG['def']['Banners'] = 'Банеры';
         break;
 }
-
+# Register module as box
 SYSTEM::registerModule('banners', 'Banners', 'box');
-?>

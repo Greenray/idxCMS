@@ -30,7 +30,7 @@ if (!empty($REQUEST['save'])) {
     } else {
         $post = $item;      # It's edited post
     }
-var_dump($post);
+
     $categories = CMS::call('POSTS')->getCategories($new_section);
     $content    = CMS::call('POSTS')->getContent($new_category);
 
@@ -160,4 +160,3 @@ if ((empty($section) && empty($category)) || !empty($REQUEST['new']) || !empty($
     header('Location: '.MODULE.'admin&id=posts.categories');
     die();
 }
-?>

@@ -297,15 +297,14 @@ class TEMPLATE {
     public function parse($params = '', $secure = TRUE) {
         $this->vars = $params;
         $this->tpl = preg_replace($this->patterns['die'], '', $this->tpl);
-        $tpl = preg_replace_callback($this->patterns['foreach'], array(&$this, '__foreach'), $this->tpl);
-        $tpl = preg_replace_callback($this->patterns['each'], array(&$this, '__each'), $tpl);
-        $tpl = preg_replace_callback($this->patterns['ifelse'], array(&$this, '__if_else'), $tpl);
-        $tpl = preg_replace_callback($this->patterns['if'], array(&$this, '__if'), $tpl);
-        $tpl = preg_replace_callback($this->patterns['for'], array(&$this, '__for'), $tpl);
+        $tpl = preg_replace_callback($this->patterns['foreach'],   array(&$this, '__foreach'), $this->tpl);
+        $tpl = preg_replace_callback($this->patterns['each'],      array(&$this, '__each'), $tpl);
+        $tpl = preg_replace_callback($this->patterns['ifelse'],    array(&$this, '__if_else'), $tpl);
+        $tpl = preg_replace_callback($this->patterns['if'],        array(&$this, '__if'), $tpl);
+        $tpl = preg_replace_callback($this->patterns['for'],       array(&$this, '__for'), $tpl);
         $tpl = preg_replace_callback($this->patterns['translate'], array(&$this, '__translate'), $tpl);
-        $tpl = preg_replace_callback($this->patterns['value'], array(&$this, '__value'), $tpl);
-        $tpl = preg_replace_callback($this->patterns['show'], array(&$this, '__element'), $tpl);
+        $tpl = preg_replace_callback($this->patterns['value'],     array(&$this, '__value'), $tpl);
+        $tpl = preg_replace_callback($this->patterns['show'],      array(&$this, '__element'), $tpl);
         return $tpl;
     }
 }
-?>

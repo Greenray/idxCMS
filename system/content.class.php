@@ -2,6 +2,19 @@
 # idxCMS version 2.3
 # Copyright (c) 2014 Greenray greenray.spb@gmail.com
 
+/** The CONTENT Class.
+ *
+ * Works with content: articles, topics, comments and replies.
+ *
+ * @package   idxCMS
+ * @ingroup   SYSTEM
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *            http://creativecommons.org/licenses/by-nc-sa/3.0/
+ * @copyright (c) 2011 - 2014 Victor Nabatov
+ * @file      content.class.php
+ * @link      https://github.com/Greenray/idxCMS/system/content.class.php
+ */
 class CONTENT extends INDEX {
 
     protected $module    = '';
@@ -15,6 +28,10 @@ class CONTENT extends INDEX {
     protected $item      = '';
     protected $comments  = array();
 
+    /**
+     * Gets module sections data.
+     * @return array Module sections data
+     */
     public function getSections() {
         if (empty($this->sections)) {
             $index = self::getIndex($this->container);
@@ -27,6 +44,11 @@ class CONTENT extends INDEX {
         return $this->sections;
     }
 
+    /**
+     * Gets section`s data.
+     * @param  string $id Section ID
+     * @return array Section data
+     */
     public function getSection($id) {
         if (empty($this->sections[$id])) {
             return FALSE;
@@ -266,6 +288,13 @@ class CONTENT extends INDEX {
         return $this->content;
     }
 
+    /**
+     * Get item.
+     * @param  integer $id    Item ID
+     * @param  string  $type  Type of item: full text or description
+     * @param  boolean $parse Parse text?
+     * @return array Item data
+     */
     public function getItem($id, $type = '', $parse = TRUE) {
         if (empty($this->content[$id])) {
             return FALSE;
@@ -273,6 +302,7 @@ class CONTENT extends INDEX {
         $item = $this->content[$id];
         $path = $this->sections[$this->section]['categories'][$this->category]['path'].$id.DS;
         $item['link'] = $this->sections[$this->section]['categories'][$this->category]['link'].ITEM.$id;
+//        $item['link'] = CMS::call('FILTER')->encode($item['link']);
         if (!empty($type)) {
             switch ($type) {
                 case 'desc':
@@ -539,12 +569,26 @@ class CONTENT extends INDEX {
         return $comment;
     }
 
+    /**
+     * Get last comment or reply.
+     * @return integer ID of the last comment or reply
+     */
     public function getLastComment() {
         $last = array_pop($this->comments);
         array_push($this->comments, $last);
         return $last;
     }
 
+    /**
+     * Saves new comment or reply.
+     * @param  integer $item ID of the article or reply
+     * @param  string  $test Comment text
+     * @return integer ID of the last comment or reply
+     * @throw  Invalid ID          Invalid ID of the article or topic
+     * @throw  Text is empty       An attempt to write an empty article or topic
+     * @throw  Cannot save comment File system error or user have no rights to post
+     * @return array List of comments related to article or topic
+     */
     public function newComment($item, $text) {
         if (empty($this->content[$item])) {
             throw new Exception('Invalid ID');
@@ -567,6 +611,7 @@ class CONTENT extends INDEX {
         if ($this->saveIndex($path, $this->content) === FALSE) {
             throw new Exception('Cannot save comment');
         }
+
         return $this->content[$item]['comments'];
     }
 
@@ -596,6 +641,7 @@ class CONTENT extends INDEX {
             }
             USER::changeProfileField(USER::getUser('username'), 'comments', '+');
         }
+
         FILTER::remove('REQUEST', 'text');
         return $this->content[$item]['comments'];
     }
@@ -608,7 +654,9 @@ class CONTENT extends INDEX {
             throw new Exception('Cannot remove comment');
         }
         unset($this->comments[$id]);
+
         $path = $this->sections[$this->section]['categories'][$this->category]['path'];
+
         if (!empty($this->comments)) {
             $this->content[$this->item]['comments']--;
             if ($this->saveIndex($path.$this->item.DS, $this->comments) === FALSE) {
@@ -618,10 +666,11 @@ class CONTENT extends INDEX {
             $this->content[$this->item]['comments'] = 0;
             unlink($path.$this->item.DS.$this->index);
         }
+
         if ($this->saveIndex($path, $this->content) === FALSE) {
             throw new Exception('Cannot remove comment');
         }
+
         return $this->content[$this->item]['comments'];
     }
 }
-?>

@@ -19,7 +19,7 @@
 
 if (!defined('idxCMS')) die();
 
-/** Path to aphorisms module data */
+//** Aphorizms data store */
 define('APHORISMS', CONTENT.'aphorisms'.DS);
 
 switch (SYSTEM::get('locale')) {
@@ -42,4 +42,3 @@ switch (SYSTEM::get('locale')) {
 
 # Register module as box
 SYSTEM::registerModule('aphorisms', 'Aphorisms', 'box');
-?>

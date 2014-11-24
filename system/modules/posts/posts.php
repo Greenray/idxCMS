@@ -22,20 +22,26 @@ if (empty($sections)) {
     if ($section === 'drafts') {
         Redirect('posts');      # Wrong section request
     }
+
     $category = intval(FILTER::get('REQUEST', 'category'));
     $post     = intval(FILTER::get('REQUEST', 'item'));
+
     if (!empty($post) && !empty($category) && !empty($section)) {
         $categories = CMS::call('POSTS')->getCategories($section);
         if ($categories === FALSE) {
             Redirect('posts');      # Wrong section request
         }
+
         $content = CMS::call('POSTS')->getContent($category);
         if (($content === FALSE) || empty($content[$post])) {
             Redirect('posts', $section);        # Wrong category or post request
         }
+
         $comments = CMS::call('POSTS')->getComments($post);
         $comment  = intval(FILTER::get('REQUEST', 'comment'));
+
         if (!empty($REQUEST['save'])) {
+            # Save new or edited comment
             try {
                 # If $comment is empty a new comment will be created
                 $result = CMS::call('POSTS')->saveComment($comment, $post);
@@ -45,6 +51,7 @@ if (empty($sections)) {
         } else {
             if (!empty($REQUEST['action'])) {
                 switch ($REQUEST['action']) {
+
                     case 'edit':
                         if (!empty($content[$post]['opened'])) {
                             if (!empty($comments[$comment])) {
@@ -65,6 +72,7 @@ if (empty($sections)) {
                             ShowError(__('Comments are not allowed'));
                         }
                         break;
+
                     case 'delete':
                         try {
                             $result = CMS::call('POSTS')->removeComment($comment);
@@ -73,34 +81,39 @@ if (empty($sections)) {
                             ShowError(__($error->getMessage()));
                         }
                         break;
+
                     case 'close':
                         if (CMS::call('USER')->checkRoot()) {
                             CMS::call('POSTS')->setValue($post, 'opened', FALSE);
                         }
                         break;
+
                     case 'open':
                         if (CMS::call('USER')->checkRoot()) {
                             CMS::call('POSTS')->setValue($post, 'opened', TRUE);
                         }
                         break;
+
                     case 'ban':
                         if (USER::moderator('posts')) {
                             CMS::call('FILTER')->ban();
                         }
                         break;
+
                     default:
                         Redirect('posts', $section, $category, $post);
                         break;
                 }
             }
         }
+
         $post = CMS::call('POSTS')->getItem($post);
         SYSTEM::set('pagename', $post['title']);
         SYSTEM::setPageDescription($post['title']);
         SYSTEM::setPageKeywords($post['keywords']);
         $perpage = intval(CONFIG::getValue('posts', 'comments-per-page'));
         if (!empty($comment)) {
-             $page = ceil(intval($comment / $perpage));
+            $page = ceil(intval($comment / $perpage));
         } elseif (!empty($result)) {
             $page = ceil(intval($result / $perpage));
         } else {
@@ -227,4 +240,3 @@ if (empty($sections)) {
         }
     }
 }
-?>

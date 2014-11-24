@@ -5,6 +5,7 @@
 
 if (!defined('idxCMS')) die();
 
+/** Galleries data store */
 define('GALLERIES', CONTENT.'galleries'.DS);
 
 class GALLERIES extends CONTENT {
@@ -191,4 +192,3 @@ USER::setSystemRights(array('galleries' => __('Galleries').': '.__('Moderator'))
 SYSTEM::registerMainMenu('galleries');
 SYSTEM::registerSiteMap('galleries');
 SYSTEM::registerSearch('galleries');
-?>

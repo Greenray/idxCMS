@@ -292,10 +292,8 @@ if (empty($sections)) {
                         $output['topic'][$ids[$i]]['last_link'] = $output['topic'][$ids[$i]]['link'].COMMENT.$content[$ids[$i]]['comments'];
                         $replies = CMS::call('FORUM')->getComments($content[$ids[$i]]['id']);
                         $reply   = CMS::call('FORUM')->getComment($ids[$i], 0);
-//                        var_dump($reply);
                         $output['topic'][$ids[$i]]['short'] = mb_substr(ParseText($reply['text'].'...'), 50);
                         $output['topic'][$ids[$i]]['nick']  = $reply['nick'];
-//                        var_dump($output['topic'][$ids[$i]]['short']);
                     }
                     if ($content[$ids[$i]]['opened']) {
                         $output['topic'][$ids[$i]]['flag'] = 'close';

@@ -10,6 +10,7 @@
  * Adapted for idxCMS by Greenray
  */
 die();?>
+
 <script type="text/javascript">
 function TextareaDecorator(textarea, parser) {
     /* INIT */
@@ -18,7 +19,7 @@ function TextareaDecorator(textarea, parser) {
     var parent = document.createElement("div");
     var output = document.createElement("pre");
     parent.appendChild(output);
-    var label = document.createElement("label");
+    var label  = document.createElement("label");
     parent.appendChild(label);
     // replace the textarea with RTA DOM and reattach on label
     textarea.parentNode.replaceChild(parent, textarea);
@@ -113,14 +114,14 @@ function Parser(rules, i) {
     // generic syntax parser
     var parser = new Parser({
         whitespace: /\s+/,
-        comment: /\/\*([^\*]|\*[^\/])*(\*\/?)?|(\/\/|#)[^\r\n]*/,
-        string: /"(\\.|[^"\r\n])*"?|'(\\.|[^'\r\n])*'?/,
-        number: /0x[\dA-Fa-f]+|-?(\d+\.?\d*|\.\d+)/,
-        keyword: /(and|as|case|catch|class|const|def|delete|die|do|else|elseif|esac|exit|extends|false|fi|finally|for|foreach|function|global|if|new|null|or|private|protected|public|published|resource|return|self|static|struct|switch|then|this|throw|true|try|var|void|while|xor)(?!\w|=)/,
-        variable: /[\$\%\@](\->|\w)+(?!\w)|\${\w*}?/,
-        define: /[$A-Z_a-z0-9]+/,
-        op: /[\+\-\*\/=<>!]=?|[\(\)\{\}\[\]\.\|]/,
-        other: /\S+/,
+        comment:    /\/\*([^\*]|\*[^\/])*(\*\/?)?|(\/\/|#)[^\r\n]*/,
+        string:     /"(\\.|[^"\r\n])*"?|'(\\.|[^'\r\n])*'?/,
+        number:     /0x[\dA-Fa-f]+|-?(\d+\.?\d*|\.\d+)/,
+        keyword:    /(and|as|case|catch|class|const|def|delete|die|do|else|elseif|esac|exit|extends|false|fi|finally|for|foreach|function|global|if|new|null|or|private|protected|public|published|resource|return|self|static|struct|switch|then|this|throw|true|try|var|void|while|xor)(?!\w|=)/,
+        variable:   /[\$\%\@](\->|\w)+(?!\w)|\${\w*}?/,
+        define:     /[$A-Z_a-z0-9]+/,
+        op:         /[\+\-\*\/=<>!]=?|[\(\)\{\}\[\]\.\|]/,
+        other:      /\S+/,
     });
     // wait for the page to finish loading before accessing the DOM
     window.onload = function() {

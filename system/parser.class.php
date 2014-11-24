@@ -2,7 +2,19 @@
 # idxCMS version 2.3
 # Copyright (c) 2014 Greenray greenray.spb@gmail.com
 
-# BBCODES parser
+/** The PARSER Class.
+ *
+ * BBCODES parser.
+ *
+ * @package   idxCMS
+ * @defgroup  SYSTEM
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *            http://creativecommons.org/licenses/by-nc-sa/3.0/
+ * @copyright (c) 2011 - 2014 Victor Nabatov
+ * @file      parser.class.php
+ * @link      https://github.com/Greenray/idxCMS/system/parser.class.php
+ */
 class PARSER {
 
     private $text   = '';

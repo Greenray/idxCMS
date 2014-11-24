@@ -156,7 +156,6 @@ function SearchValueInArray($needle, $haystack) {
 function SearchKeyInArray($needle, $haystack) {
     $result = '';
     foreach ($haystack as $key => $value) {
-        var_dump($value);
         if (is_array($value)) {
             $result = SearchKeyInArray($needle, $value);
         } else {
@@ -184,7 +183,14 @@ function RandomString($num_chars) {
 
 # TEXT
 
-# String localization
+/**
+ * String localization.
+ *
+ * Currently, the system supports five languages: English, Russian, Belarusian, Serbian( partially) and Ukrainian.
+ * @global array $LANG    Array of language strings
+ * @param  string $string String to be translated
+ * @return string         Nhfyslated string
+ */
 function __($string) {
     global $LANG;
     return empty($LANG['def'][$string]) ? $string : $LANG['def'][$string];
@@ -240,6 +246,15 @@ function LocaliseDate($string) {
 
 # MAIL
 
+/**
+ * Sends email.
+ * @param  string $to     The recipient
+ * @param  string $from   Sender address
+ * @param  string $sender The sender
+ * @param  string $subj   Subject
+ * @param  string $text   Text
+ * @return boolean The result of email sending
+ */
 function SendMail($to, $from, $sender, $subj, $text) {
     $headers  = 'From: '.$sender.' <'.$from.'>'.LF;
     $headers .= "MIME-Version: 1.0\n";
@@ -349,6 +364,13 @@ function GetPagination($page, $perpage, $count) {
     return $result;
 }
 
+/**
+ * Selecting of time zone.
+ * @param  string $name    Time zone
+ * @param  array  $points  List of time zones
+ * @param  string $default THE DEFAULT TIME ZONE
+ * @return string Form to select time zone
+ */
 function SelectTimeZone($name, $points, $default) {
     $result = '<select name="'.$name.'">';
     foreach ($points as $id => $point) {
@@ -358,6 +380,18 @@ function SelectTimeZone($name, $points, $default) {
     return $result;
 }
 
+/**
+ * Shows captcha.
+ *
+ * There are three different options:
+ * - original: black an white;
+ * - color: with colored background;
+ * - random selection.
+ * The length of the captcha code also varies randomly from five to eight letters and numbers.
+ * Captcha сщву is displayed only for unregistered users.
+ * @param  string $param Type of captha
+ * @return string Captcha image and input field for captcha code
+ */
 function ShowCaptcha($param = '') {
     if (USER::loggedIn()) {
         return '';
@@ -393,6 +427,7 @@ function CheckCaptcha() {
 function ShowElement($element, $parameters = '') {
     $output = '';
     switch($element) {
+
         case 'point':
             list($point, $template) = explode('@', $parameters);
             if (!empty(SYSTEM::$output[$point])) {
@@ -419,6 +454,7 @@ function ShowElement($element, $parameters = '') {
             }
             return $output;
             break;
+
         case 'box':
             list($module, $template) = explode('@', $parameters);
             if (!empty(SYSTEM::$output['boxes'])) {
@@ -435,6 +471,7 @@ function ShowElement($element, $parameters = '') {
             }
             return $output;
             break;
+
         case 'main':
             if (!empty(SYSTEM::$output['main'])) {
                 foreach (SYSTEM::$output['main'] as $module) {
@@ -456,6 +493,7 @@ function ShowElement($element, $parameters = '') {
             }
             return $title;
         break;
+
         case 'meta':
             $output = '';
             $meta = SYSTEM::get('meta');
@@ -481,6 +519,7 @@ function ShowElement($element, $parameters = '') {
             }
             return $output;
             break;
+
         case 'copyright':
             if ($parameters) {
                 $TPL = new TEMPLATE('copyright.tpl');
@@ -489,6 +528,7 @@ function ShowElement($element, $parameters = '') {
                 return IDX_POWERED.'<br />'.IDX_COPYRIGHT;
             }
             break;
+
         case 'error':
             $error = '';
             if (file_exists(LOGS.'error.log')) {
@@ -541,6 +581,7 @@ function ShowBbcodesPanel($textarea, $moderator = FALSE, $dir = '') {
             }
         }
     }
+    
     $TPL = new TEMPLATE(SYS.'templates'.DS.'bbcodes-panel.tpl');
     return $TPL->parse(
         array(
@@ -632,4 +673,3 @@ function Sitemap() {
     }
     CMS::call('SYSTEM')->createMainMenu();
 }
-?>

@@ -5,6 +5,7 @@
 
 if (!defined('idxCMS')) die();
 
+/** Forum data store */
 define('FORUM', CONTENT.'forum'.DS);
 
 # FORUM class
@@ -149,4 +150,3 @@ foreach ($sections as $id => $section) {
         );
     }
 }
-?>

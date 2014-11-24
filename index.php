@@ -49,7 +49,7 @@ if (date_default_timezone_set(date_default_timezone_get()) === FALSE) {
 
 /** Unset any globals created by register_globals being turned ON */
 while (list($global) = each($GLOBALS)) {
-    if (!preg_match('/^(_POST|_GET|_COOKIE|_SERVER|_FILES|GLOBALS|HTTP.*)$/', $global)) {
+    if (!preg_match('/^(_REQUEST|_COOKIE|_SERVER|_FILES|GLOBALS|HTTP.*)$/', $global)) {
         unset($$global);
     }
 }

@@ -3,6 +3,7 @@
 # Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # ADMINISTRATION - FUNCTIONS
 
+/** Backups data store */
 define('BACKUPS', CONTENT.'backups'.DS);
 
 function format_size($i) {

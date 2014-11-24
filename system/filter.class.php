@@ -2,9 +2,9 @@
 # idxCMS version 2.3
 # Copyright (c) 2014 Greenray greenray.spb@gmail.com
 
-/** The Filter Class.
+/** The FILTER Class.
  *
- * Cleans parameters of $_POST, $_GET, $_COOKIE, detect intrusions and ban unwanted visitors
+ * Cleans parameters of $_REQUEST, $_FILES, $_COOKIE, detect intrusions and ban unwanted visitors
  *
  * @package   idxCMS
  * @ingroup   SYSTEM
@@ -32,7 +32,7 @@ final class FILTER {
      * Array of parameters types.
      * @param array
      */
-    private $types = array('GET', 'POST', 'FILES', 'COOKIE');
+    private $types = array('REQUEST', 'FILES', 'COOKIE');
 
     /** Class initialization */
     public function __construct() {}
@@ -93,7 +93,7 @@ final class FILTER {
             $$VAR = $this->clear($GLOBALS['_'.$VAR]);
             unset($GLOBALS['_'.$VAR]);
         }
-        self::$REQUEST = array_merge($GET, $POST, $FILES);
+        self::$REQUEST = array_merge($REQUEST, $FILES);
         self::$COOKIE  = $COOKIE;
     }
 
@@ -205,7 +205,7 @@ final class FILTER {
                 }
             }
         }
-        $info = 'Request: '.$result.LF;
+        $info .= 'Request: '.$result.LF;
 
         # Protection against malicious URL requests
         if (strlen($url) > 255) {

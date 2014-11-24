@@ -5,6 +5,7 @@
 
 if (!defined('idxCMS')) die();
 
+/** Articles and news data store */
 define('POSTS', CONTENT.'posts'.DS);
 
 # POSTS class
@@ -145,4 +146,3 @@ if (!empty($sections)) {
         }
     }
 }
-?>

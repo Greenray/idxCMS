@@ -3,7 +3,7 @@
 # Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # SYSTEM - LOG
 
-/** Logs datafiles */
+/** Logs data store */
 define('LOGS', CONTENT.'logs'.DS);
 
 /** The Log Class.

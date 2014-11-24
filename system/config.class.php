@@ -3,10 +3,10 @@
 # Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # SYSTEM - CONFIG
 
-/** The Config Class.
+/** The CONFIG Class.
  *
  * Works with configuration.
- * 
+ *
  * @package   idxCMS
  * @ingroup   SYSTEM
  * @author    Victor Nabatov <greenray.spb@gmail.com>\n

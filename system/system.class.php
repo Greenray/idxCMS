@@ -5,10 +5,10 @@
 /** Site COOKIE */
 define('FOREVER_COOKIE', time() + 3600 * 24 * 365 * 5);
 
-/** The System Class.
+/** The SYSTEM Class.
  *
  * System, modules, users and templates initialization.
- * 
+ *
  * @package   idxCMS
  * @ingroup   SYSTEM
  * @author    Victor Nabatov <greenray.spb@gmail.com>\n
@@ -64,9 +64,11 @@ class SYSTEM {
         include_once(SYS.'languages'.DS.self::$language.'.php');
         self::$language = $LANG['language'];
         self::$locale   = $LANG['locale'];
+
         setcookie($cookie_lang, self::$language, FOREVER_COOKIE);
         $cookie_skin = CONFIG::getValue('main', 'cookie').'_skin';
         self::$skin  = CONFIG::getValue('main', 'skin');
+
         if (CONFIG::getValue('main', 'allow-skin')) {
             $skin = FILTER::get('REQUEST', 'skin');
             if (!empty($skin)) {
@@ -79,8 +81,10 @@ class SYSTEM {
         }
         setcookie($cookie_skin, self::$skin, FOREVER_COOKIE);
         if (is_dir(SKINS.self::$skin)) {
+            /** User defined skin */
             define('CURRENT_SKIN', SKINS.self::$skin.DS);
         } else {
+            /** The default skin */
             define('CURRENT_SKIN', SKINS.'Default'.DS);
         }
     }
@@ -151,6 +155,7 @@ class SYSTEM {
         if (($title === '__NOWINDOW__') || ($template === 'empty')) {
             return $content;
         } elseif ($title === 'Error') {
+            /** @todo SYSTEM::$skins['error'] - ? */
             $TPL = new TEMPLATE(SYSTEM::$skins['error']);
             return $TPL->parse(
                 array(
@@ -206,6 +211,7 @@ class SYSTEM {
                     if (!empty($sections)) {
                         $data = explode(DS, $path, 3);
                         switch (sizeof($data)) {
+
                             case 1:
                                 if (!empty($sections[$data[0]])) {
                                     self::$navigation[] = array(
@@ -217,6 +223,7 @@ class SYSTEM {
                                     );
                                 }
                                 break;
+
                             case 2:
                                 $categories = CMS::call($obj)->getCategories($data[0]);
                                 if (!empty($categories[$data[1]])) {
@@ -229,6 +236,7 @@ class SYSTEM {
                                     );
                                 }
                                 break;
+
                             case 3:
                                 $categories = CMS::call($obj)->getCategories($data[0]);
                                 if (!empty($categories)) {
@@ -270,6 +278,7 @@ class SYSTEM {
         $menu['index']['width']  = mb_strlen($menu['index']['name'], 'UTF-8') * 7;
         $width = mb_strlen($menu['index']['desc'], 'UTF-8') * 7;
         $menu['index']['width'] = ($menu['index']['width'] > $width) ? $menu['index']['width'] : $width;
+
         foreach (self::$modules as $module => $data) {
             if (in_array($module, self::$menu) && array_key_exists($module, $enabled)) {
                 $obj = strtoupper($module);
@@ -279,6 +288,7 @@ class SYSTEM {
                 $point[$module]['name']   = SYSTEM::$modules[$module]['title'];
                 $point[$module]['desc']   = '';
                 $point[$module]['icon']   = ICONS.$module.'.png';
+
                 if (class_exists($obj)) {
                     $point[$module]['sections'] = CMS::call($obj)->getSections();
                     if (!empty($point[$module]['sections']['drafts'])) unset($point[$module]['sections']['drafts']);
@@ -292,6 +302,7 @@ class SYSTEM {
                         }
                     }
                 }
+
                 if (!empty($point)) {
                     $menu = array_merge($menu, $point);
                     if (!empty($point[$module]['name'])) {
@@ -316,6 +327,7 @@ class SYSTEM {
                                 }
                             }
                         }
+
                         if (!empty($point[$module]['categories'])) {
                             foreach($point[$module]['categories'] as $id => $category) {
                                 $width = mb_strlen($category['title'], 'UTF-8') * 7 + 55;
@@ -333,4 +345,3 @@ class SYSTEM {
         file_put_contents(CONTENT.'menu', serialize($menu));
     }
 }
-?>

@@ -36,7 +36,7 @@ $output['system']['drafts'] = $sections['drafts'];
 $output['system']['drafts']['categories'] = CMS::call('POSTS')->getCategories('drafts');
 
 if (CMS::call('USER')->checkRoot()) {
-    $output['system']['drafts']['categories'][1]['desc']  = ParseText($output['system']['drafts']['categories'][1]['desc']);
+    $output['system']['drafts']['categories'][1]['desc']  = CMS::call('PARSER')->parseText($output['system']['drafts']['categories'][1]['desc']);
     $output['system']['drafts']['categories'][1]['class'] = 'odd';
     $content = CMS::call('POSTS')->getContent(1);
     if (!empty($content)) {
@@ -46,7 +46,7 @@ if (CMS::call('USER')->checkRoot()) {
     unset($output['system']['drafts']['categories'][1]);
 }
 
-$output['system']['drafts']['categories'][2]['desc']  = ParseText($output['system']['drafts']['categories'][2]['desc']);
+$output['system']['drafts']['categories'][2]['desc']  = CMS::call('PARSER')->parseText($output['system']['drafts']['categories'][2]['desc']);
 $output['system']['drafts']['categories'][2]['class'] = 'even';
 $content = CMS::call('POSTS')->getContent(2);
 
@@ -67,7 +67,7 @@ if (!empty($sections)) {
             $output['sections'][$id]['categories'] = $categories;
             $class = 'odd';
             foreach ($categories as $key => $category) {
-                $output['sections'][$id]['categories'][$key]['desc'] = ParseText($category['desc']);
+                $output['sections'][$id]['categories'][$key]['desc'] = CMS::call('PARSER')->parseText($category['desc']);
                 $content = CMS::call('POSTS')->getContent($key);
                 if (!empty($content)) {
                      $output['sections'][$id]['categories'][$key]['posts'] = TRUE;  # If category is not empty we can't delete it
@@ -92,7 +92,7 @@ if (!empty($REQUEST['new'])) {
             'desc'     => FILTER::get('REQUEST', 'desc'),
             'access'   => (int) FILTER::get('REQUEST', 'access'),
             'sections' => $choice,
-            'bbCodes'  => ShowBbcodesPanel('form.desc'),
+            'bbCodes'  => CMS::call('PARSER')->showBbcodesPanel('form.desc'),
             'header'   => __('New category')
         )
     );
@@ -111,10 +111,10 @@ if (!empty($REQUEST['edit'])) {
         $category['desc']    = empty($REQUEST['desc'])   ? $category['desc']   : $REQUEST['desc'];
         $category['access']  = empty($REQUEST['access']) ? $category['access'] : $REQUEST['access'];
         $category['section'] = $section;
-        $category['bbCodes'] = ShowBbcodesPanel('form.desc');
+        $category['bbCodes'] = CMS::call('PARSER')->showBbcodesPanel('form.desc');
         $category['header']  = __('Edit');
+        
         $TPL = new TEMPLATE(dirname(__FILE__).DS.'category.tpl');
         echo $TPL->parse($category);
     }
 }
-?>

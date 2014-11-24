@@ -53,6 +53,7 @@ if (empty($sections)) {
         } else {
             if (!empty($REQUEST['action'])) {
                 switch ($REQUEST['action']) {
+
                     case 'edit':
                         if (!empty($content[$item]['opened'])) {
                             if (!empty($comments[$comment])) {
@@ -64,7 +65,7 @@ if (empty($sections)) {
                                     if (USER::moderator('catalogs')) {
                                         $output['moderator'] = TRUE;
                                     }
-                                    $output['bbcodes'] = ShowBbcodesPanel('edit.text', !empty($output['moderator']));
+                                    $output['bbcodes'] = CMS::call('PARSER')->showBbcodesPanel('edit.text', !empty($output['moderator']));
                                     $TPL = new TEMPLATE(dirname(__FILE__).DS.'comment-edit.tpl');
                                     ShowWindow(__('Edit'), $TPL->parse($output));
                                 }
@@ -73,6 +74,7 @@ if (empty($sections)) {
                             ShowError(__('Comments are not allowed'));
                         }
                         break;
+
                     case 'delete':
                         try {
                             $result = CMS::call('CATALOGS')->removeComment($comment);
@@ -81,21 +83,25 @@ if (empty($sections)) {
                             ShowError(__($error->getMessage()));
                         }
                         break;
+
                     case 'close':
                         if (CMS::call('USER')->checkRoot()) {
                             CMS::call('CATALOGS')->setValue($item, 'opened', FALSE);
                         }
                         break;
+
                     case 'open':
                         if (CMS::call('USER')->checkRoot()) {
                             CMS::call('CATALOGS')->setValue($item, 'opened', TRUE);
                         }
                         break;
+
                     case 'ban':
                         if (USER::moderator('catalogs')) {
                             CMS::call('FILTER')->ban();
                         }
                         break;
+
                     default:
                         Redirect('catalogs', $section, $category, $item);
                         break;
@@ -155,7 +161,7 @@ if (empty($sections)) {
                             'not_admin'      => !CMS::call('USER')->checkRoot(),
                             'text'           => FILTER::get('REQUEST', 'text'),
                             'action'         => $item['link'],
-                            'bbcodes'        => ShowBbcodesPanel('comment.text'),
+                            'bbcodes'        => CMS::call('PARSER')->showBbcodesPanel('comment.text'),
                             'comment-length' => CONFIG::getValue('catalogs', 'comment-length'),
                         )
                     )
@@ -218,4 +224,3 @@ if (empty($sections)) {
         }
     }
 }
-?>

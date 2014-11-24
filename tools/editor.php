@@ -87,7 +87,7 @@ if (!empty($REQUEST['image']['name'])) {
           if (!empty($REQUEST['text'])) {
             $title = empty($REQUEST['title']) ? '' : $REQUEST['title'];
             $text = preg_replace('/<br[^>]*?>/si', LF, $REQUEST['text']);
-            $text = ParseText($text);?>
+            $text = CMS::call('PARSER')->parseText($text);?>
             <title>idxCMS version <?php echo IDX_VERSION.' - '.__('Article preview');?></title>
             <style type="text/css">
                 <!--

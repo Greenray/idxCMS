@@ -120,8 +120,9 @@ if ((empty($section) && empty($category)) || !empty($REQUEST['new']) || !empty($
     }
     $output['sections'][$output['section_id']]['selected']    = TRUE;
     $output['categories'][$output['category_id']]['selected'] = TRUE;
-    $output['bbCodes_desc'] = ShowBbcodesPanel('post.desc');
-    $output['bbCodes_text'] = ShowBbcodesPanel('post.text');
+    $output['bbCodes_desc'] = CMS::call('PARSER')->showBbcodesPanel('post.desc');
+    $output['bbCodes_text'] = CMS::call('PARSER')->showBbcodesPanel('post.text');
+    
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'post.tpl');
     echo $TPL->parse($output);
 

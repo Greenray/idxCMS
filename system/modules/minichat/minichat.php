@@ -46,7 +46,7 @@ if (!empty($messages)) {
     foreach ($messages as $key => $message) {
         $output['msg'][$key] = $message;
         $output['msg'][$key]['id']   = $key;
-        $output['msg'][$key]['text'] = ParseText($message['text']);
+        $output['msg'][$key]['text'] = CMS::call('PARSER')->parseText($message['text']);
         $output['msg'][$key]['date'] = FormatTime('d.m.Y H:i:s', $message['time']);
         if (USER::moderator('minichat')) {
             $output['msg'][$key]['moderator'] = TRUE;

@@ -75,8 +75,8 @@ if (!empty($REQUEST['new']) || !empty($item)) {
         $output['category_title'] = $categories[$category]['title'];
         $output['categories'][$output['category_id']]['selected'] = TRUE;
     }
-    $output['bbCodes_desc'] = ShowBbcodesPanel('item.desc');
-    $output['bbCodes_text'] = ShowBbcodesPanel('item.text');
+    $output['bbCodes_desc'] = CMS::call('PARSER')->showBbcodesPanel('item.desc');
+    $output['bbCodes_text'] = CMS::call('PARSER')->showBbcodesPanel('item.text');
     switch ($section) {
         case 'links':
             $output['site'] = empty($item) ? FILTER::get('REQUEST', 'site') : $item['site'];
@@ -117,4 +117,3 @@ if (!empty($REQUEST['new']) || !empty($item)) {
     header('Location: '.MODULE.'admin&id=catalogs.categories');
     die();
 }
-?>

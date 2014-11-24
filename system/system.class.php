@@ -296,9 +296,9 @@ class SYSTEM {
                     $width = mb_strlen($point[$module]['desc'], 'UTF-8') * 7;
                     $point[$module]['width'] = ($point[$module]['width'] > $width) ? $point[$module]['width'] : $width;
                     foreach ($point[$module]['sections'] as $id => $section) {
-                        $point[$module]['sections'][$id]['desc'] = ParseText($section['desc']);
+                        $point[$module]['sections'][$id]['desc'] = CMS::call('PARSER')->parseText($section['desc']);
                         foreach ($section['categories'] as $key => $category) {
-                            $point[$module]['sections'][$id]['categories'][$key]['desc'] = ParseText($category['desc']);
+                            $point[$module]['sections'][$id]['categories'][$key]['desc'] = CMS::call('PARSER')->parseText($category['desc']);
                         }
                     }
                 }

@@ -97,9 +97,10 @@ if (!empty($REQUEST['new']) || !empty($topic)) {
     }
     $output['sections'][$output['section_id']]['selected']    = TRUE;
     $output['categories'][$output['category_id']]['selected'] = TRUE;
-    $output['bbCodes_text'] = ShowBbcodesPanel('topic.text');
+    $output['bbCodes_text'] = CMS::call('PARSER')->showBbcodesPanel('topic.text');
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'topic.tpl');
     echo $TPL->parse($output);
+
 } elseif (!empty($sections[$section])) {
     $categories = CMS::call('FORUM')->getCategories($section);
     if (!empty($categories[$category])) {
@@ -109,6 +110,7 @@ if (!empty($REQUEST['new']) || !empty($topic)) {
         $output['category_id']    = $category;
         $output['category_title'] = $categories[$category]['title'];
         $content = CMS::call('FORUM')->getContent($category);
+
         foreach ($content as $key => $topic) {
             $topic['date'] = FormatTime('d m Y', $topic['time']);
             if ($topic['opened']) {
@@ -120,6 +122,7 @@ if (!empty($REQUEST['new']) || !empty($topic)) {
             }
             $output['items'][] = $topic;
         }
+
         $TPL = new TEMPLATE(dirname(__FILE__).DS.'items.tpl');
         echo $TPL->parse($output);
 
@@ -131,4 +134,3 @@ if (!empty($REQUEST['new']) || !empty($topic)) {
     header('Location: '.MODULE.'admin&id=forum.categories');
     die();
 }
-?>

@@ -75,16 +75,18 @@ if (!empty($REQUEST['new']) || !empty($item)) {
         $output['copyright'] = FILTER::get('REQUEST', 'copyright');
         $output['opened']    = empty($REQUEST['opened']) ? TRUE : $REQUEST['opened'];
     }
-    $output['bbCodes_desc'] = ShowBbcodesPanel('item.desc');
-    $output['bbCodes_text'] = ShowBbcodesPanel('item.text');
+    $output['bbCodes_desc'] = CMS::call('PARSER')->showBbcodesPanel('item.desc');
+    $output['bbCodes_text'] = CMS::call('PARSER')->showBbcodesPanel('item.text');
     if (!empty($REQUEST['edit'])) {
         $output['name']  = $item['image'];
         $output['image'] = GALLERIES.$section.DS.$category.DS.$item['id'].DS.$item['image'];
     } else {
         $output['image'] = '';
     }
+
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'image.tpl');
     echo $TPL->parse($output);
+
 } elseif (!empty($sections[$section])) {
     $categories = CMS::call('GALLERIES')->getCategories($section);
     if (!empty($categories[$category])) {
@@ -94,6 +96,7 @@ if (!empty($REQUEST['new']) || !empty($item)) {
         $output['category_id']    = $category;
         $output['category_title'] = $categories[$category]['title'];
         $content = CMS::call('GALLERIES')->getContent($category);
+
         foreach ($content as $key => $item) {
             $item['date'] = FormatTime('d m Y', $item['time']);
             if ($item['opened']) {
@@ -105,8 +108,10 @@ if (!empty($REQUEST['new']) || !empty($item)) {
             }
             $output['items'][] = $item;
         }
+
         $TPL = new TEMPLATE(dirname(__FILE__).DS.'items.tpl');
         echo $TPL->parse($output);
+        
     } else {
         header('Location: '.MODULE.'admin&id=catalogs.categories');
         die();
@@ -115,4 +120,3 @@ if (!empty($REQUEST['new']) || !empty($item)) {
     header('Location: '.MODULE.'admin&id=catalogs.categories');
     die();
 }
-?>

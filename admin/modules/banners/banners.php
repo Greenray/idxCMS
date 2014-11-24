@@ -25,18 +25,17 @@ $output = array();
 foreach ($banners as $banner) {
     ++$i;
     $text = file_get_contents(BANNERS.$banner);
-    $output['banner'][$i]['id'] = $i;
-    $output['banner'][$i]['text'] = $text;
-    $output['banner'][$i]['view'] = ParseText($text);
-    $output['banner'][$i]['bbCodes'] = ShowBbcodesPanel('form.'.$i);
+    $output['banner'][$i]['id']      = $i;
+    $output['banner'][$i]['text']    = $text;
+    $output['banner'][$i]['view']    = CMS::call('PARSER')->parseText($text);
+    $output['banner'][$i]['bbCodes'] = CMS::call('PARSER')->showBbcodesPanel('form.'.$i);
 }
 
 $i += 1;
-$output['banner'][$i]['id'] = $i;
-$output['banner'][$i]['text'] = '';
-$output['banner'][$i]['view'] = '';
-$output['banner'][$i]['bbCodes'] = ShowBbcodesPanel('form.'.$i);
+$output['banner'][$i]['id']      = $i;
+$output['banner'][$i]['text']    = '';
+$output['banner'][$i]['view']    = '';
+$output['banner'][$i]['bbCodes'] = CMS::call('PARSER')->showBbcodesPanel('form.'.$i);
 
 $TPL = new TEMPLATE(dirname(__FILE__).DS.'banners.tpl');
 echo $TPL->parse($output);
-?>

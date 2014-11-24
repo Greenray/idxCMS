@@ -11,9 +11,9 @@ $sections = CMS::call($obj)->getSections();
 try {
     if (!empty($REQUEST['action']) && !empty($REQUEST['ids'])) {
         if ($obj === 'POSTS') {
-            $new = array('drafts' => 'drafts');        
+            $new = array('drafts' => 'drafts');
             $ids = array_combine($REQUEST['ids'], $REQUEST['ids']);
-            $sec = array();  
+            $sec = array();
             $dat = $new + $ids;
             foreach($dat as $key => $value) {
                 foreach($sections as $key1 => $value1) {
@@ -39,12 +39,12 @@ try {
 
 # Existing sections
 $sections = CMS::call($obj)->getSections();
-        
+
 if ($obj === 'POSTS') {
     # We can't move or delete section drafts and exclude it from sorting
     $output = array();
     $output['drafts'] = $sections['drafts'];
-    $output['drafts']['desc'] = ParseText($sections['drafts']['desc']);
+    $output['drafts']['desc'] = CMS::call('PARSER')->parseText($sections['drafts']['desc']);
     unset($sections['drafts']);
 }
 
@@ -53,7 +53,7 @@ if (!empty($sections)) {
     $output = array();
     $output['sections'] = $sections;
     foreach ($sections as $id => $section) {
-        $output['sections'][$id]['desc'] = ParseText($section['desc']);
+        $output['sections'][$id]['desc'] = CMS::call('PARSER')->parseText($section['desc']);
         $categories = CMS::call($obj)->getCategories($id);
         if (empty($categories)) {
             $output['sections'][$id]['delete'] = TRUE;      # If section is not empty we can't delete it
@@ -67,7 +67,7 @@ if (!empty($sections)) {
 
 if (!empty($REQUEST['edit'])) {
     $section = $sections[$REQUEST['edit']];
-    $section['bbCodes'] = ShowBbcodesPanel('form.desc');
+    $section['bbCodes'] = CMS::call('PARSER')->showBbcodesPanel('form.desc');
     $section['header']  = __('Edit');
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'section.tpl');
     echo $TPL->parse($section);
@@ -81,9 +81,8 @@ if (!empty($REQUEST['new']) || empty($sections)) {
             'title'   => FILTER::get('REQUEST', 'title'),
             'desc'    => FILTER::get('REQUEST', 'desc'),
             'access'  => (int) FILTER::get('REQUEST', 'access'),
-            'bbCodes' => ShowBbcodesPanel('form.desc'),
+            'bbCodes' => CMS::call('PARSER')->showBbcodesPanel('form.desc'),
             'header'  => __('New section')
         )
     );
 }
-?>

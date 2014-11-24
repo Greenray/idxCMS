@@ -15,7 +15,7 @@ if (!empty($REQUEST['day']) && !empty($REQUEST['viewlog'])) {
         } else {
             $contents = file_get_contents(LOGS.$logfile);
         }
-        $output .= ParseText('[quote='.$logfile.']'.$contents.'[/quote]');
+        $output .= CMS::call('PARSER')->parseText('[quote='.$logfile.']'.$contents.'[/quote]');
     }
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'log.tpl');
     echo $TPL->parse(array('text' => $output));
@@ -28,7 +28,7 @@ if (!empty($REQUEST['day']) && !empty($REQUEST['viewlog'])) {
         foreach ($REQUEST['viewlog'] as $logfile) {
             $logfile = basename($logfile);
             $contents = gzfile_get_contents(LOGS.$logfile);
-            $output['text'] .= ParseText('[quote='.$logfile.']'.$contents.'[/quote]');
+            $output['text'] .= CMS::call('PARSER')->parseText('[quote='.$logfile.']'.$contents.'[/quote]');
         }
     }
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'log.tpl');

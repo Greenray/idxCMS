@@ -563,40 +563,6 @@ function Redirect($module, $section = '', $category = '', $post = '', $comment =
     die();
 }
 
-# bbCodes panel code for selected textarea
-function ShowBbcodesPanel($textarea, $moderator = FALSE, $dir = '') {
-    $area = explode('.', $textarea);
-    $smiles = GetFilesList(SMILES);
-    foreach ($smiles as $smile) {
-        $names[] = basename($smile, '.gif');
-    }
-    $clrs = array('00', '33', '66', '99', 'cc', 'ff');
-    $colors = array();
-    $n = 0;
-    for ($i = 0; $i < 6; $i++) {
-        for ($j = 0; $j < 6; $j++) {
-            for ($k = 0; $k < 6; $k++) {
-                $colors[$i]['colors'][$n]['color'] = $clrs[$i].$clrs[$j].$clrs[$k];
-                ++$n;
-            }
-        }
-    }
-    
-    $TPL = new TEMPLATE(SYS.'templates'.DS.'bbcodes-panel.tpl');
-    return $TPL->parse(
-        array(
-            'moderator' => $moderator,
-            'full'   => USER::loggedIn(),
-            'bbimg'  => IMAGES.'bbcodes'.DS,
-            'form'   => $area[0],
-            'area'   => $area[1],
-            'smile'  => $names,
-            'colors' => $colors,
-            'path'   => MODULE.'editor&amp;dir='.$dir
-        )
-    );
-}
-
 function ShowError($message) {
     return CMS::call('SYSTEM')->defineWindow('Error', $message, 'center');
 }

@@ -71,10 +71,10 @@ class CONTENT extends INDEX {
             $categories = self::getCategories($id);
             if (!empty($categories)) {
                 $output[$id] = $section;
-                $output[$id]['desc'] = ParseText($section['desc']);
+                $output[$id]['desc'] = CMS::call('PARSER')->parseText($section['desc']);
                 foreach ($categories as $key => $category) {
                     $output[$id]['categories'][$key] = $category;
-                    $output[$id]['categories'][$key]['desc'] = ParseText($category['desc']);
+                    $output[$id]['categories'][$key]['desc'] = CMS::call('PARSER')->parseText($category['desc']);
                 }
             }
         }
@@ -98,7 +98,7 @@ class CONTENT extends INDEX {
         foreach($categories as $id => $category) {
             $category = self::getCategory($id);
             self::getContent($id);
-            $category['desc']  = ParseText($category['desc']);
+            $category['desc']  = CMS::call('PARSER')->parseText($category['desc']);
             $category['items'] = sizeof($this->content);
             if (!empty($this->content)) {
                 $category['last'] = end($this->content);
@@ -317,9 +317,9 @@ class CONTENT extends INDEX {
                     break;
             }
             if ($parse) {
-                if (!empty($item['desc'])) $item['desc'] = ParseText($item['desc'], $path);
+                if (!empty($item['desc'])) $item['desc'] = CMS::call('PARSER')->parseText($item['desc'], $path);
                 if (!empty($item['text'])) {
-                    $item['text'] = ParseText($item['text'], $path);
+                    $item['text'] = CMS::call('PARSER')->parseText($item['text'], $path);
                     if (CMS::call('USER')->checkRoot()) {
                         $item['admin'] = TRUE;
                         if (!empty($item['opened'])) {
@@ -524,7 +524,7 @@ class CONTENT extends INDEX {
         }
 
         $comment = $this->comments[$id];
-        $comment['text']   = ParseText($comment['text'], $this->sections[$this->section]['categories'][$this->category]['path'].$this->item.DS);
+        $comment['text']   = CMS::call('PARSER')->parseText($comment['text'], $this->sections[$this->section]['categories'][$this->category]['path'].$this->item.DS);
         $comment['date']   = FormatTime('d F Y H:i:s', $comment['time']);
         $comment['avatar'] = GetAvatar($comment['author']);
         $author = USER::getUserData($comment['author']);

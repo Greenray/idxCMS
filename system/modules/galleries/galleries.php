@@ -52,7 +52,7 @@ if (empty($sections)) {
                                     if (USER::moderator('galleries')) {
                                         $output['moderator'] = TRUE;
                                     }
-                                    $output['bbcodes'] = ShowBbcodesPanel('edit.text', !empty($output['moderator']));
+                                    $output['bbcodes'] = CMS::call('PARSER')->showBbcodesPanel('edit.text', !empty($output['moderator']));
                                     $TPL = new TEMPLATE(dirname(__FILE__).DS.'comment-edit.tpl');
                                     ShowWindow(__('Edit'), $TPL->parse($output));
                                 }
@@ -140,7 +140,7 @@ if (empty($sections)) {
                             'not_admin'      => !CMS::call('USER')->checkRoot(),
                             'text'           => FILTER::get('REQUEST', 'text'),
                             'action'         => $item['link'],
-                            'bbcodes'        => ShowBbcodesPanel('comment.text'),
+                            'bbcodes'        => CMS::call('PARSER')->showBbcodesPanel('comment.text'),
                             'comment-length' => CONFIG::getValue('galleries', 'comment-length'),
                         )
                     )
@@ -222,4 +222,3 @@ if (empty($sections)) {
         }
     }
 }
-?>

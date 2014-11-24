@@ -12,7 +12,7 @@ if (!USER::loggedIn()) {
 } elseif (!empty($REQUEST['save'])) {
     # Send message
     $PM = new MESSAGE(PM_DATA, USER::getUser('username'));
-    if ($PM->sendPrivateMessage($REQUEST['for']) !== FALSE) { 
+    if ($PM->sendPrivateMessage($REQUEST['for']) !== FALSE) {
         ShowWindow(__('Private messages'), __('Message sent'), 'center');
     } else {
         ShowError('Cannot send message');
@@ -33,7 +33,7 @@ if (!USER::loggedIn()) {
                     'nickname'       => $user['nickname'],
                     'text'           => FILTER::get('REQUEST', 'text'),
                     'comment-length' => CMS::call('USER')->checkRoot() ? '' : CONFIG::getValue('pm', 'message-length'),
-                    'bbcodes'        => ShowBbcodesPanel('comment.text'),
+                    'bbcodes'        => CMS::call('PARSER')->showBbcodesPanel('comment.text'),
                     'for'            => $REQUEST['for']
                 )
             )
@@ -57,7 +57,7 @@ if (!USER::loggedIn()) {
                 for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
                     if (!empty($messages[$ids[$i]])) {
                         $messages[$ids[$i]]['id']   = $ids[$i];
-                        $messages[$ids[$i]]['text'] = ParseText($messages[$ids[$i]]['text']);
+                        $messages[$ids[$i]]['text'] = CMS::call('PARSER')->parseText($messages[$ids[$i]]['text']);
                         $messages[$ids[$i]]['time'] = FormatTime('d F Y H:i:s', $messages[$ids[$i]]['time']);
                         $user = USER::getUserData($messages[$ids[$i]]['to']);
                         $messages[$ids[$i]]['nick'] = $user['nickname'];
@@ -86,7 +86,7 @@ if (!USER::loggedIn()) {
                                 'nickname'       => $user['nickname'],
                                 'text'           => empty($REQUEST['text']) ? '[quote]'.$messages[$REQUEST['re']]['text'].'[/quote]' : $REQUEST['text'],
                                 'comment-length' => CMS::call('USER')->checkRoot() ? '' : CONFIG::getValue('pm', 'message-length'),
-                                'bbcodes'        => ShowBbcodesPanel('comment.text'),
+                                'bbcodes'        => CMS::call('PARSER')->showBbcodesPanel('comment.text'),
                                 'for'            => $REQUEST['reply']
                             )
                         )
@@ -105,7 +105,7 @@ if (!USER::loggedIn()) {
                         if (!empty($messages[$ids[$i]])) {
                             $messages[$ids[$i]]['inbox'] = TRUE;
                             $messages[$ids[$i]]['id']    = $ids[$i];
-                            $messages[$ids[$i]]['text']  = ParseText($messages[$ids[$i]]['text']);
+                            $messages[$ids[$i]]['text']  = CMS::call('PARSER')->parseText($messages[$ids[$i]]['text']);
                             $messages[$ids[$i]]['time']  = FormatTime('d F Y H:i:s', $messages[$ids[$i]]['time']);
                             if ($messages[$ids[$i]]['author'] !== 'IDX') {
                                 $user = USER::getUserData($messages[$ids[$i]]['author']);
@@ -141,4 +141,3 @@ if (!USER::loggedIn()) {
     }
     unset($PM);
 }
-?>

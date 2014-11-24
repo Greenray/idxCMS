@@ -48,7 +48,6 @@ foreach ($users as $user) {
     $output['users'][$user['username']]['nick'] = $user['nickname'];
 }
 
-$output['bbcodes'] = ShowBbcodesPanel('pm.text');
+$output['bbcodes'] = CMS::call('PARSER')->showBbcodesPanel('pm.text');
 $TPL = new TEMPLATE(dirname(__FILE__).DS.'message.tpl');
 echo $TPL->parse($output);
-?>

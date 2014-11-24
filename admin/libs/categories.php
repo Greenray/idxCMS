@@ -39,7 +39,7 @@ if (!empty($sections)) {
         if (!empty($categories)) {
             $class = 'odd';
             foreach ($categories as $key => $category) {
-                $output['sections'][$id]['categories'][$key]['desc'] = ParseText($category['desc']);
+                $output['sections'][$id]['categories'][$key]['desc'] = CMS::call('PARSER')->parseText($category['desc']);
                 $content = CMS::call($obj)->getContent($key);
                 if (empty($content)) {
                      $output['sections'][$id]['categories'][$key]['delete'] = TRUE;      # If category is not empty we can't delete it
@@ -62,7 +62,7 @@ if (!empty($sections)) {
             $category['desc']    = empty($REQUEST['desc'])   ? $category['desc']   : $REQUEST['desc'];
             $category['access']  = empty($REQUEST['access']) ? $category['access'] : $REQUEST['access'];
             $category['section'] = $section;
-            $category['bbCodes'] = ShowBbcodesPanel('form.desc');
+            $category['bbCodes'] = CMS::call('PARSER')->showBbcodesPanel('form.desc');
             $category['header']  = __('Edit');
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'category.tpl');
             echo $TPL->parse($category);
@@ -79,7 +79,7 @@ if (!empty($sections)) {
                     'desc'     => FILTER::get('REQUEST', 'desc'),
                     'access'   => (int) FILTER::get('REQUEST', 'access'),
                     'sections' => $choice,
-                    'bbCodes'  => ShowBbcodesPanel('form.desc'),
+                    'bbCodes'  => CMS::call('PARSER')->showBbcodesPanel('form.desc'),
                     'header'   => __('New category')
                 )
             );
@@ -88,4 +88,4 @@ if (!empty($sections)) {
 } else {
     header('Location: '.MODULE.'admin&id='.$module.'.sections');
     die();
-}?>
+}

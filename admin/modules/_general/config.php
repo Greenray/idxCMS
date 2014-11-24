@@ -86,7 +86,7 @@ if (!empty($REQUEST['meta_tags'])) {
 }
 
 if (!empty($REQUEST['welcome_msg'])) {
-    if (!file_put_contents(CONTENT.'intro', ParseText($REQUEST['welcome_msg']))) {
+    if (!file_put_contents(CONTENT.'intro', CMS::call('PARSER')->parseText($REQUEST['welcome_msg']))) {
         ShowMessage('Cannot save', 'intro');
     }
 }

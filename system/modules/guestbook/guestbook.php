@@ -38,11 +38,12 @@ if (!empty($REQUEST['save'])) {
                     if (USER::moderator('guestbook')) {
                         $output['moderator'] = TRUE;
                     }
-                    $output['bbcodes'] = ShowBbcodesPanel('edit.text', !empty($output['moderator']));
+                    $output['bbcodes'] = CMS::call('PARSER')->showBbcodesPanel('edit.text', !empty($output['moderator']));
                     $TPL = new TEMPLATE(dirname(__FILE__).DS.'comment-edit.tpl');
                     ShowWindow(__('Edit'), $TPL->parse($output));
                 }
                 break;
+
             case 'delete':
                 if (!empty($messages[$id])) {
                     if (USER::moderator('guestbook', $messages[$id])) {
@@ -50,10 +51,12 @@ if (!empty($REQUEST['save'])) {
                     }
                 }
                 break;
+
             case 'ban':
                 if (USER::moderator('guestbook'))
                     CMS::call('FILTER')->ban();
                 break;
+
             default:
                 Redirect('guestbook');
                 break;
@@ -76,7 +79,7 @@ if (!empty($messages)) {
     for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
         if (!empty($messages[$ids[$i]])) {
             $messages[$ids[$i]]['id']   = $ids[$i];
-            $messages[$ids[$i]]['text'] = ParseText($messages[$ids[$i]]['text']);
+            $messages[$ids[$i]]['text'] = CMS::call('PARSER')->parseText($messages[$ids[$i]]['text']);
             $messages[$ids[$i]]['date'] = FormatTime('d F Y H:i:s', $messages[$ids[$i]]['time']);
             $messages[$ids[$i]]['avatar'] = GetAvatar($messages[$ids[$i]]['author']);
             if ($messages[$ids[$i]]['author'] !== 'guest') {
@@ -126,10 +129,9 @@ if (USER::loggedIn() || CONFIG::getValue('guestbook', 'allow-guests-post')) {
                 'text'           => FILTER::get('REQUEST', 'text'),
                 'action'         => MODULE.'guestbook',
                 'comment-length' => CONFIG::getValue('guestbook', 'message-length'),
-                'bbcodes'        => ShowBbcodesPanel('post-comment.text'),
+                'bbcodes'        => CMS::call('PARSER')->showBbcodesPanel('post-comment.text'),
                 'captcha'        => ShowCaptcha()
             )
         )
     );
 }
-?>

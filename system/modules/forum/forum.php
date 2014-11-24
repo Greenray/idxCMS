@@ -57,13 +57,13 @@ if (empty($sections)) {
                                     }
                                     $ed = CMS::call('FORUM')->getItem($topic, 'text', FALSE);
                                     $output = array();
-                                    $output['topic']  = $ed['id'];
-                                    $output['title']  = empty($REQUEST['title'])  ? $ed['title']  : $REQUEST['title'];
-                                    $output['text']   = empty($REQUEST['text'])   ? $ed['text']   : $REQUEST['text'];
-                                    $output['opened'] = empty($REQUEST['opened']) ? $ed['opened'] : $REQUEST['opened'];
-                                    $output['pinned'] = empty($REQUEST['pinned']) ? $ed['pinned'] : $REQUEST['pinned'];
+                                    $output['topic']     = $ed['id'];
+                                    $output['title']     = empty($REQUEST['title'])  ? $ed['title']  : $REQUEST['title'];
+                                    $output['text']      = empty($REQUEST['text'])   ? $ed['text']   : $REQUEST['text'];
+                                    $output['opened']    = empty($REQUEST['opened']) ? $ed['opened'] : $REQUEST['opened'];
+                                    $output['pinned']    = empty($REQUEST['pinned']) ? $ed['pinned'] : $REQUEST['pinned'];
                                     $output['moderator'] = USER::moderator('forum', $topic);
-                                    $output['bbCodes']   = ShowBbcodesPanel('topic.text');
+                                    $output['bbCodes']   = CMS::call('PARSER')->showBbcodesPanel('topic.text');
                                     $TPL = new TEMPLATE(dirname(__FILE__).DS.'post.tpl');
                                     ShowWindow(__('Edit'), $TPL->parse($output));
                                 } else {
@@ -78,7 +78,7 @@ if (empty($sections)) {
                                         if (USER::moderator('forum')) {
                                             $output['moderator'] = TRUE;
                                         }
-                                        $output['bbcodes'] = ShowBbcodesPanel('edit.text', !empty($output['moderator']));
+                                        $output['bbcodes'] = CMS::call('PARSER')->showBbcodesPanel('edit.text', !empty($output['moderator']));
                                         $TPL = new TEMPLATE(dirname(__FILE__).DS.'comment-edit.tpl');
                                         ShowWindow(__('Edit'), $TPL->parse($output));
                                     }
@@ -214,7 +214,7 @@ if (empty($sections)) {
                         'not_admin' => !CMS::call('USER')->checkRoot(),
                         'text'      => FILTER::get('REQUEST', 'text'),
                         'action'    => $topic['link'],
-                        'bbcodes'   => ShowBbcodesPanel('comment.text'),
+                        'bbcodes'   => CMS::call('PARSER')->showBbcodesPanel('comment.text'),
                         'comment-length' => CONFIG::getValue('forum', 'reply-length')
                     )
                 )
@@ -249,16 +249,17 @@ if (empty($sections)) {
                         ShowError(__($error->getMessage()));
                      }
                 }
+                
                 $TPL = new TEMPLATE(dirname(__FILE__).DS.'post.tpl');
                 ShowWindow(
                     __('New topic'),
                     $TPL->parse(
                         array(
-                            'new'   => TRUE,
-                            'title' => FILTER::get('REQUEST', 'title'),
-                            'text'  => FILTER::get('REQUEST', 'text'),
+                            'new'       => TRUE,
+                            'title'     => FILTER::get('REQUEST', 'title'),
+                            'text'      => FILTER::get('REQUEST', 'text'),
                             'moderator' => USER::moderator('forum'),
-                            'bbCodes'   => ShowBbcodesPanel('topic.text')
+                            'bbCodes'   => CMS::call('PARSER')->showBbcodesPanel('topic.text')
                         )
                     )
                 );
@@ -292,7 +293,7 @@ if (empty($sections)) {
                         $output['topic'][$ids[$i]]['last_link'] = $output['topic'][$ids[$i]]['link'].COMMENT.$content[$ids[$i]]['comments'];
                         $replies = CMS::call('FORUM')->getComments($content[$ids[$i]]['id']);
                         $reply   = CMS::call('FORUM')->getComment($ids[$i], 0);
-                        $output['topic'][$ids[$i]]['short'] = mb_substr(ParseText($reply['text'].'...'), 50);
+                        $output['topic'][$ids[$i]]['short'] = mb_substr(CMS::call('PARSER')->parseText($reply['text'].'...'), 50);
                         $output['topic'][$ids[$i]]['nick']  = $reply['nick'];
                     }
                     if ($content[$ids[$i]]['opened']) {
@@ -343,7 +344,7 @@ if (empty($sections)) {
                 $output['categories'] = $categories;
                 # Show each category
                 foreach ($categories as $key => $category) {
-                    $output['categories'][$key]['desc'] = ParseText($category['desc']);
+                    $output['categories'][$key]['desc'] = CMS::call('PARSER')->parseText($category['desc']);
                     $content = CMS::call('FORUM')->getContent($key);
                     $output['categories'][$key]['topics'] = sizeof($content);
                     if (!empty($content)) {
@@ -378,7 +379,7 @@ if (empty($sections)) {
                 # Show each category
                 foreach ($categories as $key => $category) {
                     $output['sections'][$id]['categories'][$key] = $category;
-                    $output['sections'][$id]['categories'][$key]['desc'] = ParseText($category['desc']);
+                    $output['sections'][$id]['categories'][$key]['desc'] = CMS::call('PARSER')->parseText($category['desc']);
                     $content = CMS::call('FORUM')->getContent($key);
                     $output['sections'][$id]['categories'][$key]['topics'] = sizeof($content);
                     if (!empty($content)) {
@@ -391,7 +392,9 @@ if (empty($sections)) {
                 }
             }
         }
+
         $TPL = new TEMPLATE(dirname(__FILE__).DS.'forum.tpl');
+
         if (!empty($output)) {
             ShowWindow(__('Forum'), $TPL->parse($output));
         } else {
@@ -399,4 +402,3 @@ if (empty($sections)) {
         }
     }
 }
-?>

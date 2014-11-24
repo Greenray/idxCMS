@@ -10,7 +10,7 @@ $banners = GetFilesList(BANNERS);
 if (!empty($banners)) {
     $output = array();
     foreach ($banners as $i => $banner) {
-        $output['banner'][$i]['text'] = ParseText(file_get_contents(BANNERS.$banner));
+        $output['banner'][$i]['text'] = CMS::call('PARSER')->parseText(file_get_contents(BANNERS.$banner));
     }
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'banners.tpl');
     ShowWindow(__('Banners'), $TPL->parse($output));

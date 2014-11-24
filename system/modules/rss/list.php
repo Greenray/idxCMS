@@ -17,7 +17,7 @@ if (CONFIG::getValue('enabled', 'rss')) {
         $data['feed']    = $feed[0];
         $data['categories'] = CMS::call($obj)->getCategories($section);
         foreach ($data['categories'] as $id => $category) {
-            $data['categories'][$id]['desc'] = ParseText($category['desc']);
+            $data['categories'][$id]['desc'] = CMS::call('PARSER')->parseText($category['desc']);
             $data['categories'][$id]['link'] = str_replace(MODULE, MODULE.'rss&amp;m=', $category['link']);
         }
         $output['feed'][] = $data;

@@ -77,34 +77,36 @@ function DetectSpider($agent) {
     /** List of spider engines */
     $engines = array(
         '110search','12move',
-        'a-counter','abcdatos','acoon','aesop','alexa','alkaline','allesklar','almaden','altavista','aport','appie','arachnoidea','architext','archiver','artabus','ask','aspdeek','aspseek','asterias','atomz','augurfind','austronaut',
-        'batsch','baidu','bdcindexer','bellnet','bestoftheweb','bigfoot','blitzsuche','boitho','bot',
+        'a-counter','abcdatos','acoon','aesop','alexa','alkaline','allesklar','almaden','altavista','aport','appie','arachnoidea','architext','archiver','artabus',
+        'ask','aspdeek','aspseek','asterias','atomz','augurfind','austronaut',
+        'batsch','baidu','bdcindexer','bellnet','bestoftheweb','bigfoot','blitzsuche','boitho','bot','butterfly',
         'club-internet','cnn','cobion','cortina','crawler',
         'datafountains','daum','deepnet','digout4u','ditto','dmoz','docomo',
         'earthcom','ec2linkfinder','echo.com','elsop','estyle','eule','euroseek','excite','ezresult','ezooms',
-        'find','fireball','fluffy','flunky','freenet','fujitsu',
+        'fast','find','fireball','firefly','fluffy','flunky','freenet','froogle','fujitsu',
         'galaxy','gazz','gendoor','genieknows','gigablast','google','goto','gulliver',
         'heritrix','hoppa','hubat','hubater',
         'ichiro','incywincy','informatch','infoseek','inktomi','internetseer','ip3000','ixquick',
         'jayde',
         'kit_fireball',
-        'lachesis','larbin','lexis-nexis','libwww-perl','linkwalker','live','lnspiderguy','lockstep','looksmart','lycos',
-        'mail','mantraagent','mariner','markwatch','mercator','meta','mirago','moget','muscatferret',
-        'najdi','nameprotect','national directory','nazilla','nbci','netcraft','netmechanic','netsprint','news','ng','nico','northernlight','nutch',
+        'lachesis','larbin','lexis-nexis','libwww-perl','linkwalker','live','lockstep','looksmart','lycos',
+        'mail','mantraagent','mariner','markwatch','me.dium','mercator','meta','mirago','moget','muscatferret',
+        'najdi','nameprotect','nationaldirectory','nazilla','nbci','netcraft','netmechanic','netsprint','news','ng','nico','northernlight','nutch',
         'openportal4u','osis-project',
         'pchome','pinpoint','pompos','portaljuice',
         'qualigo','quepasacreep',
-        'rambler','refer','roach','robot','robozilla','rotondo',
-        'scooter','scoutabout','scrubby','search','seventwentyfour','seznam','sidewinder','singingfish','sitecheck','slurp','spider',
-        'steeler','supersnooper','surfnomore','szuka',
-        'teoma','t-h-u-n-d-e-r-s-t-o-n-e','tivra','toutatis','tracerlock','twiceler',
+        'rabaz','rambler','refer','roach','robozilla','rotondo',
+        'scooter','scoutabout','scrubby','search','seventwentyfour','seznam','sidewinder','singingfish','sitecheck','slurp','spade','spider','steeler','supersnooper',
+        'surfnomore','szuka',
+        'teoma','technoratisnoop','tecnoseek','t-h-u-n-d-e-r-s-t-o-n-e','tivra','toutatis','tracerlock','twiceler','twitturls',
         'ultraseek',
         'vagabondo','validator','virgilio',
-        'w8net','walhello','webalta','webclipping','wespe','wget','whizbang','wholeweb','wiseguys','worldonline','wotbox',
+        'w8net','walhello','webalta','webbug','webclipping','wespe','wget','whizbang','wholeweb','wiseguys','worldonline','wotbox',
         'xenu',
         'yahoo','yam','yandex','yanga','yeti',
         'zeus','zippy','zyborg'
     );
+
     foreach ($engines as $engine) {
         if (stristr($agent, $engine)) {
             return TRUE;

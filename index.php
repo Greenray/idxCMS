@@ -19,18 +19,17 @@
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-/** idxCMS.
- *
- * Flat Files Content.Management System.
+/** Flat Files Content.Management System.
  *
  * @package   idxCMS
  * @mainpage  IdxCMS - Content Management System
+ * @file      index.php
+ * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>\n
  * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
  *            http://creativecommons.org/licenses/by-nc-sa/3.0/
  * @copyright (c) 2011 - 2014 Victor Nabatov
- * @file      cms.class.php
- * @link      https://github.com/Greenray/idxCMS
+ * @link      https://github.com/Greenray/index.php
  */
 
 /** Set phar.readonly to prevent PharException */
@@ -54,11 +53,11 @@ while (list($global) = each($GLOBALS)) {
     }
 }
 unset($global);
+
 /** Set default error reporting */
 error_reporting(-1);
 
-/**
- * Set error handler.
+/** Set error handler.
  * @param  interger $errno    Error number
  * @param  string   $errmsg   Error message
  * @param  string   $filename Nameof the file where the error was generated

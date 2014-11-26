@@ -1,35 +1,29 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# SYSTEM - INDEX
-
-/** The Index Class.
- *
- * Reading and saving database files.
- *
- * @package   idxCMS
- * @ingroup   SYSTEM
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *            http://creativecommons.org/licenses/by-nc-sa/3.0/
- * @copyright (c) 2011 - 2014 Victor Nabatov
- * @file      index.class.php
- * @link      https://github.com/Greenray/idxCMS/system/index.class.php
+/**
+ * @package    idxCMS
+ * @subpackage CONTENT
+ * @file       index.class.php
+ * @version    2.3
+ * @author     Victor Nabatov <greenray.spb@gmail.com>\n
+ * @license    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *             http://creativecommons.org/licenses/by-nc-sa/3.0/
+ * @copyright  (c) 2011 - 2014 Victor Nabatov\n
+ * @link       https://github.com/Greenray/idxCMS/system/index.class.php
  */
+
+/** Class INDEX - reading and saving database files */
 class INDEX {
 
-    /**
-     * Name of the index file.
-     * @param string
+    /** Name of the index file.
+     * @var string
      */
-    protected $index = 'index';      # Name of the index file
+    protected $index = 'index';
 
     /** Class initialization */
     protected function __construct() {}
     protected function __clone() {}
 
-    /**
-     * Sets the name of the serialized file.
+    /** Sets the name of the serialized file.
      * The default name is index.
      * @param  string $name Name of the index file
      * @return void
@@ -38,29 +32,26 @@ class INDEX {
         $this->index = $name;
     }
 
-    /**
-     * Gets the data from the index file.
+    /** Gets the data from the index file.
      * @param  string $path Path to index file
-     * @return array  Unserialised content of the index file
+     * @return array - Unserialised content of the index file
      */
     public function getIndex($path) {
         return GetUnserialized($path.$this->index);
     }
 
-    /**
-     * Writes the index file with serialization of data.
+    /** Writes the index file with serialization of data.
      * @param  string  $path  Path to index file
      * @param  array   $array Data for saving
-     * @return boolean The result of the operation
+     * @return boolean - The result of the operation
      */
     protected function saveIndex($path, $array) {
         return file_put_contents($path.$this->index, serialize($array), LOCK_EX);
     }
 
-    /**
-     * Calculate the new ID of the data for the index file.
+    /** Calculate the new ID of the data for the index file.
      * @param  array   $array For this array we need new ID for the new data
-     * @return integer Calculated ID
+     * @return integer - Calculated ID
      */
     protected function newId($array) {
         if (empty($array)) {

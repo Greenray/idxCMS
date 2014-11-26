@@ -1,8 +1,17 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE APHORISMS - TEMPLATE
+/**
+ * @package    idxCMS
+ * @subpackage MODULES
+ * @file       system/modules/aphorisms/aphorisms.tpl.php
+ * @version    2.3
+ * @author     Victor Nabatov <greenray.spb@gmail.com>\n
+ * @license    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *             http://creativecommons.org/licenses/by-nc-sa/3.0/
+ * @copyright  (c) 2011 - 2014 Victor Nabatov\n
+ * @link       https://github.com/Greenray/idxCMS/system/modules/aphorisms/aphorisms.tpl.php
+ */
 
+/** Module APORISMS - template */
 die();?>
 
 <script type="text/javascript" src="{TOOLS}jquery.ui.min.js"></script>

@@ -1,7 +1,15 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# COMMON FUNCTONS
+/**
+ * @package    idxCMS
+ * @subpackage SYSTEM
+ * @file       functions.class.php
+ * @version    2.3
+ * @author     Victor Nabatov <greenray.spb@gmail.com>\n
+ * @license    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *             http://creativecommons.org/licenses/by-nc-sa/3.0/
+ * @copyright  (c) 2011 - 2014 Victor Nabatov\n
+ * @link       https://github.com/Greenray/idxCMS/system/functions.class.php
+ */
 
 # FILES and DIRECTORIES
 
@@ -126,10 +134,9 @@ function GetUnserialized($file) {
     return $data;
 }
 
-# ARRAYe
+# ARRAY
 
-/**
- * Recursive search of the value in a multidimensional array.
+/** Recursive search of the value in a multidimensional array.
  * @param  mixed $needle   The desired value
  * @param  array $haystack Array to search
  * @return mixed The value of the key
@@ -147,8 +154,7 @@ function SearchValueInArray($needle, $haystack) {
     return $result;
 }
 
-/**
- * Recursive search of the key in a multidimensional array.
+/** Recursive search of the key in a multidimensional array.
  * @param  mixed $needle   The desired value
  * @param  array $haystack Array to search
  * @return mixed The key of the value
@@ -183,9 +189,7 @@ function RandomString($num_chars) {
 
 # TEXT
 
-/**
- * String localization.
- *
+/** String localization.
  * Currently, the system supports five languages: English, Russian, Belarusian, Serbian( partially) and Ukrainian.
  * @global array $LANG    Array of language strings
  * @param  string $string String to be translated
@@ -246,8 +250,7 @@ function LocaliseDate($string) {
 
 # MAIL
 
-/**
- * Sends email.
+/** Send email.
  * @param  string $to     The recipient
  * @param  string $from   Sender address
  * @param  string $sender The sender
@@ -364,8 +367,7 @@ function GetPagination($page, $perpage, $count) {
     return $result;
 }
 
-/**
- * Selecting of time zone.
+/** Select of time zone.
  * @param  string $name    Time zone
  * @param  array  $points  List of time zones
  * @param  string $default THE DEFAULT TIME ZONE
@@ -380,15 +382,14 @@ function SelectTimeZone($name, $points, $default) {
     return $result;
 }
 
-/**
- * Shows captcha.
+/** Show captcha.
  *
  * There are three different options:
  * - original: black an white;
  * - color: with colored background;
  * - random selection.
  * The length of the captcha code also varies randomly from five to eight letters and numbers.
- * Captcha сщву is displayed only for unregistered users.
+ * Captcha is displayed only for unregistered users.
  * @param  string $param Type of captha
  * @return string Captcha image and input field for captcha code
  */

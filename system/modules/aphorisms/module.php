@@ -1,25 +1,20 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE APHORISMS - INITIALIZATION
-
-/** The Filter Class.
- *
- * Cleans parameters of $_POST, $_GET, $_COOKIE, detect intrusions and ban unwanted visitors
- *
- * @package   idxCMS
- * @defgroup  MODULE APHORISMS
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *            http://creativecommons.org/licenses/by-nc-sa/3.0/
- * @copyright (c) 2011 - 2014 Victor Nabatov
- * @file      system/modules/aphorisms/module.php
- * @link      https://github.com/Greenray/idxCMS/system//modules/aphorisms/module.php
+/**
+ * @package    idxCMS
+ * @subpackage MODULES
+ * @file       system/modules/aphorisms/module.php
+ * @version    2.3
+ * @author     Victor Nabatov <greenray.spb@gmail.com>\n
+ * @license    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *             http://creativecommons.org/licenses/by-nc-sa/3.0/
+ * @copyright  (c) 2011 - 2014 Victor Nabatov\n
+ * @link       https://github.com/Greenray/idxCMS/system/modules/aphorisms/module.php
  */
 
+/** Module APHORISMS - initialisation */
 if (!defined('idxCMS')) die();
 
-//** Aphorizms data store */
+/** Aphorizms data store */
 define('APHORISMS', CONTENT.'aphorisms'.DS);
 
 switch (SYSTEM::get('locale')) {
@@ -40,5 +35,4 @@ switch (SYSTEM::get('locale')) {
         break;
 }
 
-# Register module as box
 SYSTEM::registerModule('aphorisms', 'Aphorisms', 'box');

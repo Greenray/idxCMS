@@ -1,30 +1,56 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE POSTS - MODULE INITIALIZATION
-
+/**
+ * @package    idxCMS
+ * @subpackage MODULES
+ * @file       module.php
+ * @version    2.3
+ * @author     Victor Nabatov <greenray.spb@gmail.com>\n
+ * @license    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *             http://creativecommons.org/licenses/by-nc-sa/3.0/
+ * @copyright  (c) 2011 - 2014 Victor Nabatov\n
+ * @link       https://github.com/Greenray/idxCMS/system/modules/post/module.php
+ */
 if (!defined('idxCMS')) die();
 
 /** Articles and news data store */
 define('POSTS', CONTENT.'posts'.DS);
 
-# POSTS class
+/** Class POSTS - news and articles */
 class POSTS extends CONTENT {
 
+    /** Class initialization */
     function __construct() {
         $this->module = 'posts';
         $this->container = POSTS;
     }
 }
 
-# CALENDAR class
-# Creates calendar with the possibility to search of posts.
+/** Class CALENDAR - Calendar of news and publications.
+ * This calendar ggivs a possibility to search of news and posts by date.
+ */
 class CALENDAR {
 
+    /** Current date
+     * @var array
+     */
     private $today = array();
+
+    /** Events for specific dates
+     * @var array
+     */
     private $events = array();
+
+    /** Auxiliary variable
+     * @var array
+     */
     private $temp = array();
 
+    /** Class initialization.
+     * @param  integer $month    Month
+     * @param  integer $year     Year
+     * @param  integer $datetime Time
+     * @return void
+     */
     function __construct($month, $year, $datetime) {
         $this->temp['first_day']      = mktime(0, 0, 0, $month, 1, $year);
         $this->temp['first_day_week'] = date('w', $this->temp['first_day']);
@@ -32,15 +58,28 @@ class CALENDAR {
         $this->datetime = $datetime;
     }
 
-    # Assign event to calendar.
+    /** Assign event to calendar
+     * @param integer $day Date
+     * @param string $link Link to existing post
+     */
     function event($day, $link) {
         $this->events[intval($day)] = $link;
     }
 
+    /** Highlight current date
+     * @param integer $day  Date
+     * @param string $style Style for highlighting
+     */
     function highlight($day, $style = '!') {
         $this->today[intval($day)] = $style;
     }
 
+    /** Create calendar
+     * @param  integer $current_year   Current year
+     * @param  integer $selected_year  Selected year
+     * @param  integer $selected_month Selected month
+     * @return array - Data for calendar
+     */
     function create($current_year, $selected_year, $selected_month) {
         foreach (array(1 => 'January',
                        2 => 'February',
@@ -114,16 +153,16 @@ class CALENDAR {
     }
 }
 
-SYSTEM::registerModule('posts', 'Posts', 'main', 'system');
-SYSTEM::registerModule('posts.post', 'Posting form', 'main', 'system');
-SYSTEM::registerModule('posts.calendar', 'Posts calendar', 'box', 'system');
-SYSTEM::registerModule('posts.last', 'Last posts', 'box');
-SYSTEM::registerModule('posts.news', 'Last news', 'box');
-SYSTEM::registerModule('posts.print', 'Version for printer', 'plugin');
-USER::setSystemRights(array('posts' => __('Posts').': '.__('Moderator')));
-SYSTEM::registerMainMenu('posts');
-SYSTEM::registerSiteMap('posts');
+SYSTEM::registerModule('posts',          'Posts',          'main', 'system');
+SYSTEM::registerModule('posts.post',     'Posting form',   'main', 'system');
+SYSTEM::registerModule('posts.calendar', 'Posts calendar', 'box',  'system');
+SYSTEM::registerModule('posts.last',     'Last posts',     'box');
+SYSTEM::registerModule('posts.news',     'Last news',      'box');
+SYSTEM::registerModule('posts.print',    'Version for printer', 'plugin');
 SYSTEM::registerSearch('posts');
+SYSTEM::registerSiteMap('posts');
+SYSTEM::registerMainMenu('posts');
+USER::setSystemRights(array('posts' => __('Posts').': '.__('Moderator')));
 
 $sections =  CMS::call('POSTS')->getSections();
 
@@ -131,9 +170,6 @@ if (!empty($sections)) {
     # Register RSS feeds for posts sections (ex. drafts)
     if (!empty($sections['drafts'])) {
         unset($sections['drafts']);
-    }
-    if (!empty($sections['archive'])) {
-        unset($sections['archive']);
     }
     foreach ($sections as $id => $section) {
         if ($section['access'] === 0) {

@@ -20,7 +20,7 @@ $rss->stripHTML = TRUE;
 
 if (!empty($rss_cfg['feeds'])) {
     foreach ($rss_cfg['feeds'] as $feed_url) {
-        if (($feed = $rss->Get($feed_url)) !== FALSE) {
+        if (($feed = $rss->get($feed_url)) !== FALSE) {
             $i = 2;
             $result = '<table cellspacing="0" cellpadding="0" border="0" width="100%">';
             foreach($feed['items'] as $id => $item) {
@@ -29,7 +29,7 @@ if (!empty($rss_cfg['feeds'])) {
                 }
                 $item['title'] = mb_substr($item['title'], 0, $rss_cfg['title-length']).((mb_strlen($item['title']) > $rss_cfg['title-length']) ? '...' : '');
                 $item['desc']  = mb_substr($item['desc'],  0, $rss_cfg['desc-length']).((mb_strlen($item['desc'])   > $rss_cfg['desc-length']) ? '...' : '');
-                $result .= '<tr><td class="row'.$i.'"><a href="'.$rss->unhtmlentities($item['link']).'"><abbr title="'.$item['desc'].'">'.$item['title'].' </abbr></a></td></tr>';
+                $result .= '<tr><td class="row'.$i.'"><a href="'.$rss->unHtmlEntities($item['link']).'"><abbr title="'.$item['desc'].'">'.$item['title'].' </abbr></a></td></tr>';
                 $i++;
                 if ($i > 3) $i = 2;
             }

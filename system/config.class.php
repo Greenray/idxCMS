@@ -1,37 +1,30 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# SYSTEM - CONFIG
-
-/** The CONFIG Class.
- *
- * Works with configuration.
- *
- * @package   idxCMS
- * @ingroup   SYSTEM
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *            http://creativecommons.org/licenses/by-nc-sa/3.0/
- * @copyright (c) 2011 - 2014 Victor Nabatov
- * @file      config.class.php
- * @link      https://github.com/Greenray/idxCMS/system/config.class.php
+/**
+ * @package    idxCMS
+ * @subpackage SYSTEM
+ * @file       config.class.php
+ * @version    2.3
+ * @author     Victor Nabatov <greenray.spb@gmail.com>\n
+ * @license    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *             http://creativecommons.org/licenses/by-nc-sa/3.0/
+ * @copyright  (c) 2011 - 2014 Victor Nabatov\n
+ * @link       https://github.com/Greenray/idxCMS/system/config.class.php
  */
+
+/** Class CONFIG - works with configuration */
 final class CONFIG {
 
-    /**
-     * Configuration filename.
-     * @param string
+    /** Configuration filename.
+     * @var string
      */
     private static $ini = '';
 
-    /**
-     * Site configuration data.
-     * @param array
+    /** Site configuration data.
+     * @var array
      */
-    private static $config = array();       #
+    private static $config = array();
 
-    /**
-     * Class initialization.
+    /** Class initialization.
      * Sets config filename, reads and parses config data.
      */
     public function __construct() {
@@ -39,8 +32,7 @@ final class CONFIG {
         self::$config = parse_ini_file(self::$ini, TRUE);
     }
 
-    /**
-     * Creates the configuration section.
+    /** Creates the configuration section.
      * Sets the parameters and their values in the specified config section.
      * @param  string $section Name of the config section
      * @param  array  $values  Config parameter = value for the current section
@@ -50,17 +42,15 @@ final class CONFIG {
         self::$config[$section] = $values;
     }
 
-    /**
-     * Gets parameters with their values from the specified config section.
+    /** Gets parameters with their values from the specified config section.
      * @param  string $section Name of the config section
-     * @return array  Config parameters = values for the current section or empty array
+     * @return array - Config parameters = values for the current section or empty array
      */
     public static function getSection($section) {
         return empty(self::$config[$section]) ? array() : self::$config[$section];
     }
 
-    /**
-     * Removes specified config section.
+    /** Removes specified config section.
      * @param  string $section Name of the config section
      * @return void
      */
@@ -69,8 +59,7 @@ final class CONFIG {
             unset(self::$config[$section]);
     }
 
-    /**
-     * Sets the parameter with its value for the specified config section.
+    /** Sets the parameter with its value for the specified config section.
      * @param  string $section Name of the config section
      * @param  string $param   Name of the config parameter
      * @param  mixed  $value   Value of the specified parameter
@@ -80,19 +69,17 @@ final class CONFIG {
         self::$config[$section][$param] = $value;
     }
 
-    /**
-     * Gets the parameter with its value from the specified config section.
+    /** Gets the parameter with its value from the specified config section.
      * @param  string $section Name of the config section
      * @param  string $param   Name of the config parameter
-     * @return mixed  Value of the specified parameter
+     * @return array|boolean - Value of the specified parameter
      */
     public static function getValue($section, $param) {
         return empty(self::$config[$section][$param]) ? FALSE : self::$config[$section][$param];
     }
 
-    /**
-     * Saves the config file.
-     * @return boolean The result of the operation
+    /** Saves the config file.
+     * @return boolean - The result of the operation
      */
     public function save() {
         $ini = '';

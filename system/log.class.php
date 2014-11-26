@@ -1,31 +1,26 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# SYSTEM - LOG
-
 /** Logs data store */
 define('LOGS', CONTENT.'logs'.DS);
 
-/** The Log Class.
- *
- * Works with log and errorlog files
- *
- * @package   idxCMS
- * @ingroup   SYSTEM
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *            http://creativecommons.org/licenses/by-nc-sa/3.0/
- * @copyright (c) 2011 - 2014 Victor Nabatov
- * @file      log.class.php
- * @link      https://github.com/Greenray/idxCMS/system/log.class.php
+/**
+ * @package    idxCMS
+ * @subpackage SYSTEM
+ * @file       log.class.php
+ * @version    2.3
+ * @author     Victor Nabatov <greenray.spb@gmail.com>\n
+ * @license    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *             http://creativecommons.org/licenses/by-nc-sa/3.0/
+ * @copyright  (c) 2011 - 2014 Victor Nabatov\n
+ * @link       https://github.com/Greenray/idxCMS/system/log.class.php
  */
+
+/** Class LOG -wWorks with log and errorlog files */
 final class LOG {
 
     /** Class initialization */
     public function __construct() {}
 
-    /**
-     * Writes error message into log file.
+    /** Write error message into log file.
      * @param  string $message Error message
      * @param  string $info    Additioinal info
      * @return boolean FALSE
@@ -35,8 +30,7 @@ final class LOG {
         return FALSE;
     }
 
-    /**
-     * Registers users logins into log file.
+    /** Register users logins into log file.
      * @param  string  $type    Message type
      * @param  string  $user    Username
      * @param  string  $message Message
@@ -53,8 +47,7 @@ final class LOG {
         return FALSE;
     }
 
-    /**
-     * Сreates tar archive of logs for the month.
+    /** Сreate tar archive of logs for the month.
      * @param  string  $title       Filename
      * @param  integer $day         Date
      * @param  integer $month       Month
@@ -95,8 +88,7 @@ final class LOG {
         return TRUE;
     }
 
-    /**
-     * Prepares daily log files to create a single file per month.
+    /** Prepare daily log files to create a single file per month.
      * @return boolean TRUE
      * @uses   self::logMerge() Creates tar or tar.gz archive
      */

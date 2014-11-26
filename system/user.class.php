@@ -1,38 +1,67 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-
-/** The USER Class.
- *
- * Works with users and their profiles.
- *
- * @package   idxCMS
- * @ingroup   SYSTEM
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *            http://creativecommons.org/licenses/by-nc-sa/3.0/
- * @copyright (c) 2011 - 2014 Victor Nabatov
- * @file      user.class.php
- * @link      https://github.com/Greenray/idxCMS/system/user.class.php
+/**
+ * @package    idxCMS
+ * @subpackage SYSTEM
+ * @file       user.class.php
+ * @version    2.3
+ * @author     Victor Nabatov <greenray.spb@gmail.com>\n
+ *             Reloadcms Team http://reloadcms.com\n
+ * @license    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *             http://creativecommons.org/licenses/by-nc-sa/3.0/
+ * @copyright  (c) 2011 - 2014 Victor Nabatov\n
+ * @link       https://github.com/Greenray/idxCMS/system/user.class.php
  */
+
+/** Class USER - works with users and their profiles */
 class USER {
 
+    /** User profile fields
+     * @var array
+     */
     private static $user_fields = array(
         'username', 'nickname', 'password', 'email', 'tz', 'access', 'rights', 'status', 'stars', 'regdate', 'visits', 'lastvisit',
         'posts', 'comments', 'topics', 'replies', 'blocked', 'icq', 'website', 'country', 'city', 'last_prr'
     );
-    # Disallowed names for registration
+
+    /** Disallowed names for registration
+     * @var array
+     */
     private static $disallowed_names = array(
         'administrator', 'false', 'guest', 'idxcms', 'moderator', 'noavatar', 'null', 'root', 'superuser', 'supervisor',
         'sponsor', 'system', 'test', 'true', 'unknown', 'user'
     );
-    private static $user = array();         # User's profile
+
+    /** User`s profile
+     * @var array
+     */
+    private static $user = array();
+
+    /** Is user logged in?
+     * @var boolean
+     */
     private static $logged_in   = FALSE;
+
+    /** Cookie with user name
+     * @var string
+     */
     private static $cookie_user = '';
+
+    /** Cookie with user nick
+     * @var string
+     */
     private static $cookie_nick = '';
+
+    /** System rights
+     * @var array
+     */
     private static $system_rights = array();
+
+    /** Is user admin?
+     * @var boolean
+     */
     private static $root = FALSE;
 
+    /** Class initialization */
     public function __construct() {
         # Set default guest userdata
         self::$user = array(

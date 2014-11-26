@@ -1,7 +1,15 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - OUTPUT
+/**
+ * @package    idxCMS
+ * @subpackage ADMINISTRATION
+ * @file       admin/modules/_modules/output.php
+ * @version    2.3
+ * @author     Victor Nabatov <greenray.spb@gmail.com>\n
+ * @license    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *             http://creativecommons.org/licenses/by-nc-sa/3.0/
+ * @copyright  (c) 2011 - 2014 Victor Nabatov\n
+ * @link       https://github.com/Greenray/idxCMS/admin/modules/_modules/output.php
+ */
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
 
@@ -10,7 +18,7 @@ if (!empty($REQUEST['save'])) {
     $page   = '';
     if (!empty($REQUEST['active'])) {
         foreach ($REQUEST['active'] as $element) {
-            if (substr($element, 0, 1) === '/') {
+            if (substr($element, 0, 1) === DS) {
                 $page = substr($element, 1);
                 $config[$page] = array();
             } else {
@@ -37,9 +45,9 @@ $unused = array();
 
 foreach ($panel as $point => $list) {
     if (!empty($SKIN[$point])) {
-         $active['/'.$point] = $SKIN[$point];
+         $active[DS.$point] = $SKIN[$point];
     } else {
-        $active['/'.$point] = __('Page').': '.SYSTEM::$modules[$point]['title'];
+        $active[DS.$point] = __('Page').': '.SYSTEM::$modules[$point]['title'];
     }
     foreach ($list as $i => $box) {
         $key = '>'.$box;
@@ -52,15 +60,15 @@ foreach ($panel as $point => $list) {
 }
 
 foreach ($SKIN as $point => $desc) {
-    if (!isset($active['/'.$point])) {
-        $unused['/'.$point] = $desc;
+    if (!isset($active[DS.$point])) {
+        $unused[DS.$point] = $desc;
     }
 }
 
 foreach (SYSTEM::$modules as $id => $module) {
-    if (!isset($active['/'.$id]) && !isset($active['>'.$id])) {
+    if (!isset($active[DS.$id]) && !isset($active['>'.$id])) {
         if ($module['type'] === 'main') {
-            $unused['/'.$id] = __('Page').': '.$module['title'];
+            $unused[DS.$id] = __('Page').': '.$module['title'];
         } elseif ($module['type'] === 'box') {
             $unused['>'.$id] = __('Box').': '.$module['title'];
         }
@@ -73,4 +81,3 @@ $output['unused'] = $unused;
 
 $TPL = new TEMPLATE(dirname(__FILE__).DS.'output.tpl');
 echo $TPL->parse($output);
-?>

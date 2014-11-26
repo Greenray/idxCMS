@@ -1,24 +1,49 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# TOOLS - CAPTCHA
-
 session_start();
 
+/**
+ * @package    idxCMS
+ * @subpackage TOOLS
+ * @file       tools/captcha.php
+ * @version    2.3
+ * @author     Victor Nabatov <greenray.spb@gmail.com>\n
+ * @license    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *             http://creativecommons.org/licenses/by-nc-sa/3.0/
+ * @copyright  (c) 2011 - 2014 Victor Nabatov\n
+ * @link       https://github.com/Greenray/idxCMS/tools/captcha.php
+ */
+
+/** Class CAPTCHA - captcha */
 class CAPTCHA {
 
+    /** Captcha images
+     * @var array
+     */
     private $image = array (0 => 'captcha.png', 1 => 'captcha_color.png');
+
+    /** Captcha code length
+     * @var integer
+     */
     private $length;
+
+    /** Captcha code
+     * @var string
+     */
     private $code;
+
+    /** Random array key to select image for captcha: b&w or color
+     * @var integer - 0 or 1
+     */
     private $idx;
 
+    /** Class initialization */
     public function __construct($code) {
         $this->length = (int) round(mt_rand(5, 8));
         $this->code   = strip_tags(stripslashes($code));
         $this->idx    = (int) round(mt_rand(0, 1));
     }
 
-    # Create CAPTCHA
+    /** Create Captcha */
     public function create() {
         $code  = substr(md5($this->code), 0, $this->length);
         $image = imagecreatefrompng($this->image[$this->idx]);
@@ -54,4 +79,3 @@ if (!empty($_GET['code'])) {
     $CAPTCHA = new CAPTCHA($_GET['code']);
     $CAPTCHA->create();
 }
-?>

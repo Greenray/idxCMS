@@ -17,9 +17,9 @@ if (!empty($REQUEST['backup'])) {
             try {
                 $list = GetFilesList(CONTENT.$dir);
                 foreach ($list as $file) {
-                    $info = pathinfo(CONTENT.$dir.'/'.$file);
+                    $info = pathinfo(CONTENT.$dir.DS.$file);
                         if (!in_array($info['extension'], $exclude_files)) {
-                        $PHAR->addFile(CONTENT.$dir.'/'.$file);
+                        $PHAR->addFile(CONTENT.$dir.DS.$file);
                     }
                 }
             } catch (Exception $error) {

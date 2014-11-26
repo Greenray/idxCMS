@@ -1,23 +1,21 @@
 <?php
-# idxCMS version 2.3setPageKeywords
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-
 /** Site COOKIE */
 define('FOREVER_COOKIE', time() + 3600 * 24 * 365 * 5);
 
-/** The SYSTEM Class.
- *
- * System, modules, users and templates initialization.
- *
- * @package   idxCMS
- * @ingroup   SYSTEM
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *            http://creativecommons.org/licenses/by-nc-sa/3.0/
- * @copyright (c) 2011 - 2014 Victor Nabatov
- * @file      system.class.php
- * @link      https://github.com/Greenray/idxCMS/system/system.class.php
+/**
+ * @package    idxCMS
+ * @subpackage SYSTEM
+ * @file       system.class.php
+ * @version    2.3
+ * @author     Victor Nabatov <greenray.spb@gmail.com>\n
+ *             Reloadcms Team http://reloadcms.com\n
+ * @license    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *             http://creativecommons.org/licenses/by-nc-sa/3.0/
+ * @copyright  (c) 2011 - 2014 Victor Nabatov\n
+ * @link       https://github.com/Greenray/idxCMS/system/system.class.php
  */
+
+/** Class SYSTEM - system, modules, users and templates initialization */
 class SYSTEM {
 
     private static $url = '';
@@ -37,6 +35,7 @@ class SYSTEM {
     private static $search = array();
     private static $meta = array();
 
+    /** Class initialization */
     public function __construct() {
         global $LANG;
         self::$url = CMS::call('CONFIG')->getValue('main', 'url');
@@ -186,7 +185,7 @@ class SYSTEM {
         self::$meta['desc'] = $data;
     }
 
-    # Gets site navigation. If navigation is not exists creates it.
+    # Get site navigation. If navigation is not exists creates it.
     public function getNavigation() {
         if (empty(self::$navigation)) {
             return self::createNavigation();

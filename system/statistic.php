@@ -1,31 +1,28 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# STATISTIC
-
 if (!defined('idxCMS')) die();
 
-/** Site ststistic.
- *
- * Registers a visitы to the website by visitors, users, bots and spiders
- *
- * @package   idxCMS
- * @ingroup   SYSTEM
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *            http://creativecommons.org/licenses/by-nc-sa/3.0/
- * @copyright (c) 2011 - 2014 Victor Nabatov
- * @file      system/modules/aphorisms/module.php
- * @link      https://github.com/Greenray/idxCMS/system//modules/aphorisms/module.php
+/**
+ * @package    idxCMS
+ * @subpackage SYSTEM
+ * @file       system/statistic.php
+ * @version    2.3
+ * @author     Victor Nabatov <greenray.spb@gmail.com>\n
+ *             Reloadcms Team http://reloadcms.com\n
+ * @license    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *             http://creativecommons.org/licenses/by-nc-sa/3.0/
+ * @copyright  (c) 2011 - 2014 Victor Nabatov\n
+ * @link       https://github.com/Greenray/idxCMS/system/statistic.php
  */
 
- /**
- * Extractes keywords from the user`s query.
+/** Site ststistic - registers a visitы to the website by visitors, users, bots and spiders */
+
+ /** Extractes keywords from the user`s query.
  * @param  string $url User`s URL
- * @return mixed Decoded keywords or FALSE
+ * @return mixed - Decoded keywords or FALSE
  */
 function ExtractKeyword($url) {
-    # Searching  keys
+
+    /** Searching queries mask */
     $search_queries = array(
         'a-counter' => 'sub_data', 'about'  => 'terms',  'alice'     => 'qs',
         'alltheweb' => 'q',        'altavista' => 'q',   'aol'       => 'encquery',
@@ -55,10 +52,9 @@ function ExtractKeyword($url) {
     return FALSE;
 }
 
- /**
- * Detects bad bots.
+ /** Detect bad bots.
  * @param  string $agent $_SERVER['HTTP_USER_AGENT']
- * @return boolean Is bad bot detected?
+ * @return boolean - Is bad bot detected?
  */
 function DetectBadBot($agent) {
     $engines = array(
@@ -72,12 +68,13 @@ function DetectBadBot($agent) {
     return FALSE;
 }
 
- /**
- * Detects spiders.
+ /** Detect spiders.
  * @param  string $agent $_SERVER['HTTP_USER_AGENT']
- * @return boolean Is spider detected?
+ * @return boolean - Is spider detected?
  */
 function DetectSpider($agent) {
+
+    /** List of spider engines */
     $engines = array(
         '110search','12move',
         'a-counter','abcdatos','acoon','aesop','alexa','alkaline','allesklar','almaden','altavista','aport','appie','arachnoidea','architext','archiver','artabus','ask','aspdeek','aspseek','asterias','atomz','augurfind','austronaut',
@@ -117,10 +114,10 @@ function DetectSpider($agent) {
 }
 
 # Save counter data
-$agent   = $_SERVER['HTTP_USER_AGENT'];
-$ip      = $_SERVER['REMOTE_ADDR'];
-$referer = $_SERVER['HTTP_REFERER'];
-$page    = $_SERVER['REQUEST_URI'];
+$agent   = $_SERVER['HTTP_USER_AGENT']; /**< Header from the current request, if there is one */
+$ip      = $_SERVER['REMOTE_ADDR'];     /**< User`s IP address */
+$referer = $_SERVER['HTTP_REFERER'];    /**< The page which referred the user agent, if there is one */
+$page    = $_SERVER['REQUEST_URI'];     /**< The URI which was given in order to access site */
 
 if (DetectBadBot($agent)) {
     $bans   = file_get_contents(CONTENT.'bans');
@@ -129,12 +126,12 @@ if (DetectBadBot($agent)) {
     die();
 }
 
-$config = CONFIG::getSection('statistic');
-$time = time();
+$config = CONFIG::getSection('statistic'); /**< Statistic configuration */
+$time = time();                            /**< Current time */
 
 if (DetectSpider($agent)) {
     # Detect and register of searching bot
-    $spiders = GetUnserialized(CONTENT.'spiders');
+    $spiders = GetUnserialized(CONTENT.'spiders'); /**< Spaders data storage */
     if (empty($spiders)) {
         $spiders['total'] = 1;
         $spiders['today'] = 1;
@@ -165,8 +162,8 @@ if (DetectSpider($agent)) {
         }
     }
 } else {
-    $user  = USER::getUser();
-    $stats = GetUnserialized(CONTENT.'stats');
+    $user  = USER::getUser();                   /**< User profile */
+    $stats = GetUnserialized(CONTENT.'stats');  /**< Statistic data storage */
     if (empty($stats)) {
         $stats['total']   = 1;
         $stats['today']   = 1;
@@ -203,12 +200,12 @@ if (DetectSpider($agent)) {
         }
     }
 
-    $online = $stats['online'];
-    $online[$ip]['name'] = $user['username'];
-    $online[$ip]['nick'] = $user['nickname'];
-    $online[$ip]['time'] = $time;
-    $stats['online'] = array();
-    
+    $online = $stats['online'];               /**< Users and visitors online at the current time */
+    $online[$ip]['name'] = $user['username']; /**< Current username */
+    $online[$ip]['nick'] = $user['nickname']; /**< Current Usernick */
+    $online[$ip]['time'] = $time;             /**< Current time */
+    $stats['online'] = array();               /**< Users and visitors online */
+
     foreach ($online as $ip => $data) {
         if ($data['time'] > ($time - 300)) {
             $stats['online'][$ip] = $data;
@@ -219,10 +216,10 @@ if (DetectSpider($agent)) {
             }
         }
     }
-    $stats['update'] = $time;
+    $stats['update'] = $time;   /**< Set the time of the last ststistic data update */
 
     file_put_contents(CONTENT.'stats', serialize($stats), LOCK_EX);
-    $keyword = ExtractKeyword($referer);
+    $keyword = ExtractKeyword($referer);                            /**< Keyword from $_SERVER['HTTP_REFERER'] */
 
     if (!empty($keyword)) {
         $file = (file_exists(CONTENT.'keywords')) ? file_get_contents(CONTENT.'keywords') : '';
@@ -230,3 +227,6 @@ if (DetectSpider($agent)) {
         file_put_contents(CONTENT.'keywords', $file.$keyword."|".$page.LF, LOCK_EX);
     }
 }
+
+unset ($agent);
+unset ($ip);

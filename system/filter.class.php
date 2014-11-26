@@ -1,36 +1,31 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-
-/** The FILTER Class.
- *
- * Cleans parameters of $_REQUEST, $_FILES, $_COOKIE, detect intrusions and ban unwanted visitors
- *
- * @package   idxCMS
- * @ingroup   SYSTEM
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- *            Reloadcms Team http://reloadcms.com
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *            http://creativecommons.org/licenses/by-nc-sa/3.0/
- * @copyright (c) 2011 - 2014 Victor Nabatov
- * @file      filter.class.php
- * @link      https://github.com/Greenray/idxCMS/system/filter.class.php
+/**
+ * @package    idxCMS
+ * @subpackage SYSTEM
+ * @file       filter.class.php
+ * @version    2.3
+ * @author     Victor Nabatov <greenray.spb@gmail.com>\n
+ * @license    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *             http://creativecommons.org/licenses/by-nc-sa/3.0/
+ * @copyright  (c) 2011 - 2014 Victor Nabatov\n
+ * @link       https://github.com/Greenray/idxCMS/system/filter.class.php
  */
+
+/** Class FILTER - cleans parameters of $_REQUEST, $_FILES, $_COOKIE, detect intrusions and ban unwanted visitors */
 final class FILTER {
 
-    /**
-     * Array of filtered $_POST and/or $_GET parameters.
-     * @param array
+    /** Array of filtered $_POST and/or $_GET parameters.
+     * @var array
      */
     private static $REQUEST = array();
-    /**
-     * Array of filtered $_COOKIE parameters.
-     * @param array
+
+    /** Array of filtered $_COOKIE parameters.
+     * @var array
      */
     private static $COOKIE  = array();
-    /**
-     * Array of parameters types.
-     * @param array
+
+    /** Array of parameters types.
+     * @var array
      */
     private $types = array('REQUEST', 'FILES', 'COOKIE');
 
@@ -38,10 +33,9 @@ final class FILTER {
     public function __construct() {}
     public function __clone() {}
 
-    /**
-     * Cleans all keys of the request array.
+    /** Clean all keys of the request array.
      * @param  array $input Input array of parameters
-     * @return array Filered keys of array of parameters
+     * @return array - Filered keys of array of parameters
      */
     private function cleanKey($input) {
         $input = iconv(mb_detect_encoding($input), 'UTF-8//IGNORE', $input);
@@ -50,10 +44,9 @@ final class FILTER {
         return str_replace(array("\r\n", "\n\r", "\r", "\n"), '', $input);
     }
 
-    /**
-     * Cleans all values of the request array.
+    /** Clean all values of the request array.
      * @param  array $input Input array of parameters
-     * @return array Filered values of array parameters
+     * @return array - Filered values of array parameters
      */
     private function cleanValue($input) {
         $input = iconv(mb_detect_encoding($input), 'UTF-8//IGNORE', $input);
@@ -61,10 +54,9 @@ final class FILTER {
         return UnifyBr($input);
     }
 
-    /**
-     * Cleans variables.
+    /** Clean variables.
      * @param  array $vars Input array of parameters
-     * @return array Filered values of array parameters
+     * @return array - Filered values of array parameters
      */
     private function clear($vars) {
         $result = array();
@@ -82,8 +74,7 @@ final class FILTER {
         return $result;
     }
 
-    /**
-     * Main function.
+    /** Main function.
      * @return void
      * @uses Intrusion detection system
      */
@@ -97,20 +88,18 @@ final class FILTER {
         self::$COOKIE  = $COOKIE;
     }
 
-    /**
-     * Gets all filtered parameter of the specified type.
+    /** Get all filtered parameter of the specified type.
      * @param  string $type  Type of parameter
-     * @return array Array of filtered parameters of the specified type
+     * @return array - Array of filtered parameters of the specified type
      */
     public static function getAll($type) {
         return self::$$type;
     }
 
-    /**
-     * Gets requested filtered parameter.
+    /** Get requested filtered parameter.
      * @param  string $type  Type of parameter
      * @param  string $param Name of parameter
-     * @return mixed  Value of parameter
+     * @return array|string  Value of parameter or empty string
      */
     public static function get($type, $param) {
         if (array_key_exists($param, self::$$type)) {
@@ -120,8 +109,7 @@ final class FILTER {
         return '';
     }
 
-    /**
-     * Removes filtered parameter.
+    /** Remove filtered parameter.
      * @param  string $type  Type of parameter
      * @param  string $param Name of parameter
      * @return void
@@ -132,8 +120,7 @@ final class FILTER {
         }
     }
 
-    /**
-     * Checks if the email is valid.
+    /** Check if the email is valid.
      * @param  string $email Email address
      * @return boolean
      */
@@ -141,8 +128,7 @@ final class FILTER {
         return preg_match('/^([a-zA-Z0-9\!\#\$\%\&\'\*\+\-\/\=\?\^\_\`\{\|\}\~]+(\.[a-zA-Z0-9\!\#\$\%\&\'\*\+\-\/\=\?\^\_\`\{\|\}\~]+)*)@((([a-z]([-a-z0-9]*[a-z0-9])?)|(#[0-9]+)|(\[((([01]?[0-9]{0,2})|(2(([0-4][0-9])|(5[0-5]))))\.){3}(([01]?[0-9]{0,2})|(2(([0-4][0-9])|(5[0-5]))))\]))\.)*(([a-z]([-a-z0-9]*[a-z0-9])?)|(#[0-9]+)|(\[((([01]?[0-9]{0,2})|(2(([0-4][0-9])|(5[0-5]))))\.){3}(([01]?[0-9]{0,2})|(2(([0-4][0-9])|(5[0-5]))))\]))$/', $email) ? TRUE : FALSE;
     }
 
-    /**
-     * Ban user.
+    /** Ban user.
      * @return boolean
      */
     public function ban() {
@@ -152,8 +138,7 @@ final class FILTER {
         }
     }
 
-    /**
-     * Intrusion detection.
+    /** Intrusion detection.
      * @return void
      */
     private function ids() {

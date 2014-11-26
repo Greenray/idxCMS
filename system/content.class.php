@@ -1,20 +1,17 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-
-/** The CONTENT Class.
- *
- * Works with content: articles, topics, comments and replies.
- *
- * @package   idxCMS
- * @ingroup   SYSTEM
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *            http://creativecommons.org/licenses/by-nc-sa/3.0/
- * @copyright (c) 2011 - 2014 Victor Nabatov
- * @file      content.class.php
- * @link      https://github.com/Greenray/idxCMS/system/content.class.php
+/**
+ * @package    idxCMS
+ * @subpackage SYSTEM
+ * @file       content.class.php
+ * @version    2.3
+ * @author     Victor Nabatov <greenray.spb@gmail.com>\n
+ * @license    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *             http://creativecommons.org/licenses/by-nc-sa/3.0/
+ * @copyright  (c) 2011 - 2014 Victor Nabatov\n
+ * @link       https://github.com/Greenray/idxCMS/system/content.class.php
  */
+
+/** Class CONTENT - works with content: articles, topics, comments and replies */
 class CONTENT extends INDEX {
 
     protected $module    = '';
@@ -28,9 +25,8 @@ class CONTENT extends INDEX {
     protected $item      = '';
     protected $comments  = array();
 
-    /**
-     * Gets module sections data.
-     * @return array Module sections data
+    /** Get module sections data.
+     * @return array - Module sections data
      */
     public function getSections() {
         if (empty($this->sections)) {
@@ -44,10 +40,9 @@ class CONTENT extends INDEX {
         return $this->sections;
     }
 
-    /**
-     * Gets section`s data.
+    /** Get section`s data.
      * @param  string $id Section ID
-     * @return array Section data
+     * @return array - Section data
      */
     public function getSection($id) {
         if (empty($this->sections[$id])) {
@@ -288,12 +283,11 @@ class CONTENT extends INDEX {
         return $this->content;
     }
 
-    /**
-     * Get item.
+    /** Get item.
      * @param  integer $id    Item ID
      * @param  string  $type  Type of item: full text or description
      * @param  boolean $parse Parse text?
-     * @return array Item data
+     * @return array - Item data
      */
     public function getItem($id, $type = '', $parse = TRUE) {
         if (empty($this->content[$id])) {
@@ -569,9 +563,8 @@ class CONTENT extends INDEX {
         return $comment;
     }
 
-    /**
-     * Get last comment or reply.
-     * @return integer ID of the last comment or reply
+    /** Get last comment or reply.
+     * @return integer - ID of the last comment or reply
      */
     public function getLastComment() {
         $last = array_pop($this->comments);
@@ -579,15 +572,14 @@ class CONTENT extends INDEX {
         return $last;
     }
 
-    /**
-     * Saves new comment or reply.
+    /** Save new comment or reply.
      * @param  integer $item ID of the article or reply
-     * @param  string  $test Comment text
+     * @param  string  $text Comment text
      * @return integer ID of the last comment or reply
      * @throw  Invalid ID          Invalid ID of the article or topic
      * @throw  Text is empty       An attempt to write an empty article or topic
      * @throw  Cannot save comment File system error or user have no rights to post
-     * @return array List of comments related to article or topic
+     * @return array - List of comments related to article or topic
      */
     public function newComment($item, $text) {
         if (empty($this->content[$item])) {

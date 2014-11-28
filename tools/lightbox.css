@@ -102,11 +102,11 @@
 }
 
 .close {
-	background:url('../images/icons/delete.png') no-repeat;
-	width:24px;
-	height:24px;
+	background:url('../skins/images/icons/delete.png') no-repeat;
+	width:16px;
+	height:16px;
 	top:25px;
-	right:15px;
+	right:20px;
 	position:absolute
 }
 

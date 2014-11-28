@@ -37,7 +37,7 @@ input { color: black }
     input[type='reset'],
     input[type='submit'],
     input[type='text'],
-    input[type='password'] { margin: 0; padding: 2px 5px }
+    input[type='password'] { padding: 2px 5px }
     input[type='text'],
     input[type='password'] { border: 1px solid #c8c8c8 }
     input[type='text']:hover,
@@ -419,7 +419,7 @@ ul.tabs  {
     padding: 0.2em 0 0;
     list-style: none
 }
-    ul.tabs li { border-bottom-width: 0 !important; display: inline }
+    ul.tabs li { border-bottom-width: 2 !important; display: inline }
     ul.tabs li a {
         background: #ddd;
         border: 1px solid #999;
@@ -1125,4 +1125,4 @@ textarea.inform {
     margin-left: 20px
 }
 
-.dhtmlx_button { margin-top: 10px }
+.dhtmlx_button { margin-bottom: 10px }

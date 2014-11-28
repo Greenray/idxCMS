@@ -35,6 +35,18 @@ die();?>
         </form>
     </div>
 [else]
+<script src="{TOOLS}jquery.lightbox_me.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			$(function() {
+				$('#enter').click(function(e) {
+					$(".login").lightbox_me({centered: true, onLoad: function() {
+						$(".login").find("input:first").focus();
+					}});
+					e.preventDefault();
+				});
+			});
+		</script>
+		<link rel="stylesheet" href="{CURRENT_SKIN}lightbox.css" type="text/css" media="screen">
     <script type="text/javascript">
     // form validation
     function checkLoginForm(form) {
@@ -60,23 +72,23 @@ die();?>
         <ul class="links">
             <li>
                 <img src="{ICONS}login.png" width="16" height="16" alt="" />
-                <a href="#" onclick="document.getElementById('login').style.display = ShowHide(document.getElementById('login').style.display)">[__Log in]</a>
-            </li>
-            <li id="login" class="none">
-                <form id="login" name="login" method="post" action="" onsubmit="return checkLoginForm(this);">
-                    <table>
-                        <tr>
-                            <td>[__Username]:</td>
-                            <td><input type="text" name="username" id="username" size="15" /></td>
-                        </tr>
-                        <tr>
-                            <td>[__Password]:</td>
-                            <td><input type="password" name="password" id="password" size="15"/></td>
-                        </tr>
-                    </table>
-                    <p class="center"><input type="submit" name="login" value="[__Log in]" class="submit" /></p>
+                <a href="#" id="enter">[__Log in]</a>
+                <form id="login" name="login" method="post" action="" onsubmit="return checkLoginForm(this);" class="login">
+                    <h1><span class="log-in">[__Log in]</span></h1>
+                    <p class="float">
+                        <label for="login"><i class="icon-user"></i>[__Username]</label>
+                        <input type="text" name="username" id="username" placeholder="Логин" />
+                    </p>
+                    <p class="float">
+                        <label for="password"><i class="icon-lock"></i>[__Password]</label>
+                        <input type="password" name="password" id="password" placeholder="Пароль" class="showpassword" />
+                    </p>
+
+                    <p class="dhtmlx_popup_controls">
+                        <div class='dhtmlx_popup_button'><div><input type="submit" name="login" value="[__Log in]" class="popup_input" /></div></div>
+                    </p>
+                    <a class="close" href="#"></a>
                 </form>
-            </li>
             <li>
                 <img src="{ICONS}forgetpass.png" width="16" height="16" alt="" />
                 <a href="{MODULE}user&amp;act=password_request">[__Password recovery]</a>

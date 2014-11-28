@@ -46,7 +46,7 @@ die();?>
 				});
 			});
 		</script>
-		<link rel="stylesheet" href="{CURRENT_SKIN}lightbox.css" type="text/css" media="screen">
+		<link rel="stylesheet" href="{TOOLS}lightbox.css" type="text/css" media="screen">
     <script type="text/javascript">
     // form validation
     function checkLoginForm(form) {

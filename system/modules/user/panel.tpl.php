@@ -77,15 +77,16 @@ die();?>
                     <h1><span class="log-in">[__Log in]</span></h1>
                     <p class="float">
                         <label for="login"><i class="icon-user"></i>[__Username]</label>
-                        <input type="text" name="username" id="username" placeholder="Логин" />
+                        <input type="text" name="username" id="username" placeholder="[__Login]" />
                     </p>
                     <p class="float">
                         <label for="password"><i class="icon-lock"></i>[__Password]</label>
-                        <input type="password" name="password" id="password" placeholder="Пароль" class="showpassword" />
+                        <input type="password" name="password" id="password" placeholder="[__Password]" class="showpassword" />
                     </p>
-
                     <p class="dhtmlx_popup_controls">
-                        <div class='dhtmlx_popup_button'><div><input type="submit" name="login" value="[__Log in]" class="popup_input" /></div></div>
+                        <div class='dhtmlx_popup_button'>
+                            <div><input type="submit" name="login" value="[__Log in]" class="popup_input" /></div>
+                        </div>
                     </p>
                     <a class="close" href="#"></a>
                 </form>

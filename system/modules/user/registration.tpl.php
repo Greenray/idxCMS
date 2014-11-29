@@ -179,6 +179,7 @@ die();?>
                     <p class="msg help">[__Required fields have a yellow background]</p>
                     <p class="submit"><button type="submit" name="save" value="1">[__Save]</button></p>
                 </fieldset>
+                <a class="close" href="{ROOT}"></a>
             </form>
         </div>
         <div id="navigation" style="display:none;">

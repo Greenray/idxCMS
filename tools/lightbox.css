@@ -7,20 +7,18 @@
     -o-box-sizing: border-box;
     box-sizing: border-box
 }
-
 .clearfix:after {
     content: "";
     clear: both;
     display: table
 }
-
 .login {
     width: 340px;
     padding: 15px;
     position: relative;
 	display:none;
     border-radius: 4px;
-    background-color:#fff;
+    background:#fff;
 	background:-webkit-linear-gradient(top, #fff 1%, #d0d0d0 99%);
 	background:-moz-linear-gradient(top, #fff 1%, #d0d0d0 99%);
     box-shadow: 5px 5px 5px rgba(0,0,0,0.8);
@@ -69,7 +67,7 @@
     }
     .login input[type=text],
     .login input[type=password] {
-        background: #f9ff76;
+        background: #fdffbf;
         border: 1px solid #747270;
         border-radius: 5px;
         -webkit-transition: all 0.3s ease-out;
@@ -100,7 +98,6 @@
         font-weight: 400;
         text-transform: capitalize
 }
-
 .close {
 	background:url('../skins/images/icons/delete.png') no-repeat;
 	width:16px;
@@ -109,7 +106,6 @@
 	right:20px;
 	position:absolute
 }
-
 .popup_input {
     background: transparent;
     border: 0;

@@ -1,6 +1,16 @@
 <?php
-# idxCMS version 2.3 - Flat Files Content Management System
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
+/** Flat Files Content.Management System.
+ *
+ * @package   idxCMS
+ * @mainpage  IdxCMS - Content Management System
+ * @file      index.php
+ * @version   2.3
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *            http://creativecommons.org/licenses/by-nc-sa/3.0/
+ * @copyright (c) 2011 - 2014 Victor Nabatov\n
+ * @link      https://github.com/Greenray/index.php
+ */
 
 # This project is based on the idea and experience of work in the ReloadCMS project
 # Copyright (c) 2004 ReloadCMS Development Team http://reloadcms.com
@@ -18,19 +28,6 @@
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-
-/** Flat Files Content.Management System.
- *
- * @package   idxCMS
- * @mainpage  IdxCMS - Content Management System
- * @file      index.php
- * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *            http://creativecommons.org/licenses/by-nc-sa/3.0/
- * @copyright (c) 2011 - 2014 Victor Nabatov
- * @link      https://github.com/Greenray/index.php
- */
 
 /** Set phar.readonly to prevent PharException */
 ini_set('phar.readonly', 0);
@@ -142,7 +139,7 @@ include_once(SYS.'index.class.php');
 include_once(SYS.'content.class.php');
 include_once(SYS.'parser.class.php');
 include_once(SYS.'template.class.php');
-include_once(SYS.'uploads.class.php');
+include_once(SYS.'uploader.class.php');
 
 session_start();
 
@@ -155,7 +152,7 @@ $CMS = CMS::call('SYSTEM');
 /** The version of CMS */
 define('IDX_VERSION',   '2.3');
 /** Copiright */
-define('IDX_COPYRIGHT', '&copy; 2014 '.__('Greenray'));
+define('IDX_COPYRIGHT', '&copy; 2011 - 2014 '.__('Greenray'));
 /** This message is reflected in the pages of the website */
 define('IDX_POWERED',   'Powered by idxCMS - '.IDX_VERSION);
 

@@ -157,7 +157,7 @@ $LANG['def']['Views'] = 'Прагляды';
 $LANG['def']['Yes'] = 'Так';
 $LANG['def']['You are not logged in!'] = 'Вы не ўвайшлі ў сістэму!';
 $LANG['def']['You are welcome!'] = 'Сардэчна запрашаем!';
-$LANG['def']['You have used an invalid symbols'] = 'Вы выкарысталі забароненыя сімвалы';
+$LANG['def']['You have used an invalid symbols'] = 'Забароненыя сімвалы';
 # COUNTER
 $LANG['def']['Counter'] = 'Лічыльнік';
 $LANG['def']['guests'] = 'гасцей';
@@ -191,11 +191,14 @@ $LANG['def']['Search'] = 'Пошук';
 $LANG['def']['Search results'] = 'Вынікі пошуку';
 # USER
 $LANG['def']['Access level'] = 'Узровень доступу';
+$LANG['def']['Account'] = 'Уліковы запіс';
+$LANG['def']['Additionally'] = 'Дадаткова';
 $LANG['def']['Avatar'] = 'Аватар';
 $LANG['def']['Blocked'] = 'заблакаваны';
 $LANG['def']['City'] = 'Горад';
-$LANG['def']['Country'] = 'Краіна';
+$LANG['def']['Communication'] = 'Сувязь';
 $LANG['def']['Confirm password'] = 'Паўтарыце пароль';
+$LANG['def']['Country'] = 'Краіна';
 $LANG['def']['Current password'] = 'Бягучы пароль';
 $LANG['def']['Enter your e-mail'] = 'Калі ласка, увядзіце e-mail адрас';
 $LANG['def']['Enter your login'] = 'Калі ласка, увядзіце свой ​​лагін';

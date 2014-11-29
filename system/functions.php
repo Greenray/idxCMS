@@ -408,7 +408,7 @@ function ShowCaptcha($param = '') {
     }
     return '<img src="'.TOOLS.'captcha.php?code='.$code.'" hspace="5" vspace="5" width="90" height="30" alt="CAPTCHA" /><br />
             <input type="hidden" name="antispam" value="'.$code.'" />
-            <input type="text" name="captcheckout" id="captcheckout" value="" size="10" />';
+            <input type="text" name="captcheckout" id="captcheckout" value="" size="10" class="required" />';
 }
 
 function CheckCaptcha() {

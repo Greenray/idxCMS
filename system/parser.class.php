@@ -35,7 +35,7 @@ class PARSER {
             "#\[align=(\"|&quot;|)(left|right|center|justify)(\"|&quot;|)\](.*?)\[/align(.*?)\]#is" => '<div style="text-align:\\2;">\\4</div>',
             "#\[(left|right|center|justify)\](.*?)\[/\\1\]#is" => '<div style="text-align:\\1;">\\2</div>',
             "#\[b\](.*?)\[/b\]#is" => '<b>\\1</b>',
-            "#\[bgcolor=(\"|&quot;|)([\#\w]*)(\"|&quot;|)\](.*?)\[/bgcolor(.*?)\]#is" => '<span style="background-color:\\2">\\4</span>',
+            "#\[bgcolor=(\"|&quot;|)([\#\w]*)(\"|&quot;|)\](.*?)\[/bgcolor(.*?)\]#is" => '<span style="background:\\2">\\4</span>',
             "#\[color=(\"|&quot;|)([\#\w]*)(\"|&quot;|)\](.*?)\[/color(.*?)\]#is" => '<span style="color:\\2;">\\4</span>',
             "#\[del\](.*?)\[/del\]#is" => '<del>\\1</del>',
             "#\[email\][\s\n\r]*([a-z0-9&\-_.]+?@[\w\-]+\.([\w\-\.]+\.)?[\w]+)[\s\n\r]*\[/email\]#is" => '<a href="mailto:\\1">\\1</a>',

@@ -54,11 +54,11 @@ die();?>
         var password = form.password.value;
         var nameRegex = /^[a-zA-Z0-9_]+(([\_][a-zA-Z0-9])?[a-zA-Z0-9_]*)*$/;
         if  (username === '') {
-            ShowAlert('[__Enter your login]', '[__Error]');
+            ShowAlert('[__Invalid login]', '[__Error]');
             return false;
         }
         if (!username.match(nameRegex)) {
-            ShowAlert('[__Invalid symbols]', '[__Error]');
+            ShowAlert('[__Invalid username]', '[__Error]');
             return false;
         }
         if (password === "") {

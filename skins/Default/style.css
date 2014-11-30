@@ -171,7 +171,6 @@ td.date { padding: 0 10px; width: 140px }
     display: none;
     width: 99%
 }
-
 .main { margin: 0 auto }
     .main .title {
         color: black;
@@ -182,13 +181,11 @@ td.date { padding: 0 10px; width: 140px }
         text-transform: uppercase
     }
     .main .content { padding: 10px }
-
 .clear {
     clear: both;
     height: 0;
     overflow: hidden
 }
-
 .none    { display: none }
 .left    { text-align: left }
 .center  { text-align: center }
@@ -201,7 +198,6 @@ td.date { padding: 0 10px; width: 140px }
     color: red;
     background: #fff888
 }
-
 .odd  { background: #dee3e7 }
 .even { background: #d4dee3 }
 
@@ -675,80 +671,103 @@ div.tabs { margin: 0; padding: 4px }
         text-decoration: none
     }
 
+#pass_title { margin: 0 0 0 55px }
 .pass_img#progresbar-2-0,
 .pass_img#passbar-0 {
     background: transparent url(../images/password/pass_0.gif) no-repeat;
+    float: right;
     height: 7px;
+    margin: 5px 5px 0 0 !important;
     width: 138px
 }
 
 .pass_img#progresbar-2-10,
 .pass_img#passbar-10 {
     background: transparent url(../images/password/pass_10.gif) no-repeat;
+    float: right;
     height: 7px;
+    margin: 5px 5px 0 0 !important;
     width: 138px
   }
 
 .pass_img#progresbar-2-20,
 .pass_img#passbar-20 {
     background: transparent url(../images/password/pass_20.gif) no-repeat;
+    float: right;
     height: 7px;
+    margin: 5px 5px 0 0 !important;
     width: 138px
   }
 
 .pass_img#progresbar-2-30,
 .pass_img#passbar-30 {
     background: transparent url(../images/password/pass_30.gif) no-repeat;
+    float: right;
     height: 7px;
-    width: 138px
+    margin: 5px 5px 0 0 !important;
+    width: 138px;
   }
 
 .pass_img#progresbar-2-40,
 .pass_img#passbar-40 {
     background: transparent url(../images/password/pass_40.gif) no-repeat;
+    float: right;
     height: 7px;
+    margin: 5px 5px 0 0 !important;
     width: 138px
   }
 
 .pass_img#progresbar-2-50,
 .pass_img#passbar-50 {
     background: transparent url(../images/password/pass_50.gif) no-repeat;
+    float: right;
     height: 7px;
+    margin: 5px 5px 0 0 !important;
     width: 138px
   }
 
 .pass_img#progresbar-2-60,
 .pass_img#passbar-60 {
     background: transparent url(../images/password/pass_60.gif) no-repeat;
+    float: right;
     height: 7px;
+    margin: 5px 5px 0 0 !important;
     width: 138px
   }
 
 .pass_img#progresbar-2-70,
 .pass_img#passbar-70 {
     background: transparent url(../images/password/pass_70.gif) no-repeat;
+    float: right;
     height: 7px;
+    margin: 5px 5px 0 0 !important;
     width: 138px
   }
 
 .pass_img#progresbar-2-80,
 .pass_img#passbar-80 {
     background: transparent url(../images/password/pass_80.gif) no-repeat;
+    float: right;
     height: 7px;
+    margin: 5px 5px 0 0 !important;
     width: 138px
   }
 
 .pass_img#progresbar-2-90,
 .pass_img#passbar-90 {
     background: transparent url(../images/password/pass_90.gif) no-repeat;
+    float: right;
     height: 7px;
+    margin: 5px 5px 0 0 !important;
     width: 138px
   }
 
 .pass_img#progresbar-2-100,
 .pass_img#passbar-100 {
     background: transparent url(../images/password/pass_100.gif) no-repeat;
+    float: right;
     height: 7px;
+    margin: 5px 5px 0 0 !important;
     width: 138px
   }
 
@@ -874,7 +893,7 @@ div.tabs { margin: 0; padding: 4px }
     font-size: 8pt
 }
 
-.pass_img { margin: 0 auto }
+//.pass_img { margin: 20px auto }
 .bbcodes  {
     margin: 10px 20px 0;
     text-align: center
@@ -934,14 +953,12 @@ div.tabs { margin: 0; padding: 4px }
     text-align: center;
     float: left
 }
-
 .info a:hover { color: red }
 .text {
     text-align: justify;
     margin: 10px;
     left: -120px
 }
-
 .note {
     background: #ffffcc;
     border: red solid 2px;
@@ -949,13 +966,18 @@ div.tabs { margin: 0; padding: 4px }
     margin: 20px;
     padding: 5px
 }
-
+.online_help { width:400px }
 .help {
     color: red;
     font-style: italic;
+    padding: 0 10px;
     text-align: right
 }
-
+#bad,
+#good {
+    padding: 0 10px;
+    text-align: right
+}
 .rate,
 .menu, .more { float: right }
 .menu, .more { margin: 0 2px }

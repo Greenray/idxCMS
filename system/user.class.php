@@ -160,7 +160,7 @@ class USER {
         }
         $email = FILTER::get('REQUEST', 'email');
         if (!CMS::call('FILTER')->validEmail($email)) {
-            throw new Exception('Invalid e-mail address');
+            throw new Exception('Invalid email');
         }
         global $LANG;
         $userdata = FILTER::get('REQUEST', 'fields');
@@ -209,7 +209,7 @@ class USER {
         }
         $email = FILTER::get('REQUEST', 'email');
         if (!CMS::call('FILTER')->validEmail($email)) {
-            throw new Exception('Invalid e-mail address');
+            throw new Exception('Invalid email');
         }
         $user = self::getUserData($username);
         if ($user === FALSE) {

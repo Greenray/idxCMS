@@ -37,13 +37,13 @@ die();?>
         if (pwstrength > 100) pwstrength = 100;
         return pwstrength;
     }
-    function updatePasswordStrength(pwbox,pwdiv,divorderlist) {
+    function updatePasswordStrength(pwbox, pwdiv, divorderlist) {
         var bpb = "" + pwbox.value;
         var pwstrength = getPasswordStrength(bpb);
         var bars = (parseInt(pwstrength / 10) * 10);
         var pwdivEl = document.getElementById(pwdiv);
-        if (!pwdivEl) alert('Password Strength Display Element Missing');
-        var divlist = pwdivEl.getElementsByTagName('div');
+        if (!pwdivEl) alert('Password strength display element missing');
+        var divlist = pwdivEl.getElementsByTagName('span');
         var imgdivnum = 0;
         if (divorderlist && divorderlist.image > -1) imgdivnum = divorderlist.image;
         var imgdiv = divlist[imgdivnum];
@@ -51,7 +51,7 @@ die();?>
     }
 </script>
 <script type="text/javascript">
-    function checkUsername(id) {
+    function checkUsername() {
         if (/^[a-zA-Z0-9]{3,10}$/.test(document.registration.user.value)) {
             document.getElementById('help').style.display = 'none';
             document.getElementById('good').style.display = 'block';
@@ -73,11 +73,11 @@ die();?>
         var nickRegex = /^[a-zA-Z0-9а-яА-Я_]+(([\_][a-zA-Z0-9а-яА-Я])?[a-zA-Z0-9а-яА-Я_]*)*$/;
         var emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
         if  (user === '') {
-            ShowAlert('[__Enter your login]', '[__Error]');
+            ShowAlert('[__Invalid login]', '[__Error]');
             return false;
         }
         if (!user.match(userRegex)) {
-            ShowAlert('[__Invalid symbols]', '[__Error]');
+            ShowAlert('[__Invalid login]', '[__Error]');
             return false;
         }
         if  (nick === '') {
@@ -85,7 +85,7 @@ die();?>
             return false;
         }
         if (!nick.match(nickRegex)) {
-            ShowAlert('[__Invalid symbols]', '[__Error]');
+            ShowAlert('[__Invalid nickname]', '[__Error]');
             return false;
         }
         if  (password === '') {
@@ -97,7 +97,7 @@ die();?>
             return false;
         }
         if  (email === '') {
-            ShowAlert('[__Enter your email]', '[__Error]');
+            ShowAlert('[__Invalid email]', '[__Error]');
             return false;
         }
         if (!email.match(emailRegex)) {
@@ -118,7 +118,12 @@ die();?>
                     <legend>[__Account]</legend>
                     <p>
                         <label for="user">[__Username]</label>
-                        <input type="text" name="user" id="user" value="{user}" class="required" />
+                        <input type="text" name="user" id="user" value="{user}" class="required" onkeyup="checkUsername();" />
+                        <span class="online_help">
+                            <span id="help" class="help block">[__Only latin characters, digits and symbol "_"]</span>
+                            <span id="good" class="none"><font color="#00cc00">[__Login is allowed]</font></span>
+                            <span id="bad" class="none"><font color="#ff0000">[__Login is not allowed]</font></span>
+                        </span>
                     </p>
                     <p>
                         <label for="nick">[__Nick]</label>
@@ -126,11 +131,21 @@ die();?>
                     </p>
                     <p>
                         <label for="password">[__Password]</label>
-                        <input id="password" name="password" type="password" value="{password}" class="required" AUTOCOMPLETE=OFF />
+                        <input id="password" name="password" type="password" value="{password}" class="required" AUTOCOMPLETE=OFF onkeyup="check('registration'); updatePasswordStrength(this, 'pass_rating', { 'image':0, 'text':1 });" />
+                        <span id="pass_rating">
+                            <span id="progresbar-2-0" class="pass_img"></span>
+                            <span id="pass_title">[__Password complexity]: </span>
+
+                        </span>
                     </p>
                     <p>
-                        <label for="confirmconfirm">[__Confirm password]</label>
-                        <input id="confirm" type="password" name="confirm" value="{confirm}" class="required" AUTOCOMPLETE=OFF />
+                        <label for="confirm">[__Confirm password]</label>
+                        <input id="confirm" type="password" name="confirm" value="{confirm}" class="required" AUTOCOMPLETE=OFF onkeyup="check('registration');" />
+                        <span class="online_help">
+                            <span id="yes" class="help none"><font color="#33cc00">[__Passwords are equal]</font></span>
+                            <span id="no" class="help none"><font color="#ff0000">[__Passwords are not equal]</font></span>
+                        </span>
+
                     </p>
                     <p class="msg help">[__Required fields have a yellow background]</p>
                 </fieldset>
@@ -170,7 +185,7 @@ die();?>
                     <p><img src="{avatar}" hspace="5" vspace="5" alt="" /></p>
                     <p>
                         <label for="avatar">[__Choose / Upload]</label>
-                        <input id="avatar" type="file" name="avatar" value="{avatar}" />
+                        <input id="avatar" type="file" name="avatar" value="" />
                     </p>
                 </fieldset>
                 <fieldset class="step">

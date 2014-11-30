@@ -29,9 +29,6 @@ if (FILTER::get('REQUEST', 'login')) {
         }
     } else {
         ShowMessage('Invalid password');
-?>
-<script type="text/javascript">ShowAlert('[__Invalid symbols]', '[__Error]');</script>
-<?php
     }
 }
 

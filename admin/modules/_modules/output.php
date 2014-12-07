@@ -14,6 +14,7 @@
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
 
 if (!empty($REQUEST['save'])) {
+    # Save configuration
     $config = array();
     $page   = '';
     if (!empty($REQUEST['active'])) {
@@ -31,53 +32,62 @@ if (!empty($REQUEST['save'])) {
             }
         }
     }
-    CMS::call('CONFIG')->setSection('output', $config);
-    if (!CMS::call('CONFIG')->save()) {
-        ShowMessage('Cannot save file');
-    }
+    CMS::call('CONFIG')->setSection('output.'.$REQUEST['skin'], $config);
+//    if (!CMS::call('CONFIG')->save()) {
+//        ShowMessage('Cannot save file');
+//    }
 }
 
 # INTERFACE
-$panel = CONFIG::getSection('output');
-include(SKINS.SYSTEM::get('skin').DS.'skin.php');  # Layout definition
-$active = array();
-$unused = array();
+if (!empty($REQUEST['selected'])) {
+    $panel = CONFIG::getSection('output.'.$REQUEST['selected']); /**< Modules layout for specified skin */
+    include(SKINS.$REQUEST['selected'].DS.'skin.php');  # Layout definition
+    $active = array(); /**< Active modules */
+    $unused = array(); /**< Unused modules */
 
-foreach ($panel as $point => $list) {
-    if (!empty($SKIN[$point])) {
-         $active[DS.$point] = $SKIN[$point];
-    } else {
-        $active[DS.$point] = __('Page').': '.SYSTEM::$modules[$point]['title'];
-    }
-    foreach ($list as $i => $box) {
-        $key = '>'.$box;
-        while (array_key_exists($key, $active)) {
-            $box = ' '.$box;
+    foreach ($panel as $point => $list) {
+        if (!empty($SKIN[$point])) {
+             $active[DS.$point] = $SKIN[$point];
+        } else {
+            $active[DS.$point] = __('Page').': '.SYSTEM::$modules[$point]['title'];
+        }
+        foreach ($list as $i => $box) {
             $key = '>'.$box;
-        }
-        $active[$key] = __('Box').': '.SYSTEM::$modules[$list[$i]]['title'];
-    }
-}
-
-foreach ($SKIN as $point => $desc) {
-    if (!isset($active[DS.$point])) {
-        $unused[DS.$point] = $desc;
-    }
-}
-
-foreach (SYSTEM::$modules as $id => $module) {
-    if (!isset($active[DS.$id]) && !isset($active['>'.$id])) {
-        if ($module['type'] === 'main') {
-            $unused[DS.$id] = __('Page').': '.$module['title'];
-        } elseif ($module['type'] === 'box') {
-            $unused['>'.$id] = __('Box').': '.$module['title'];
+            while (array_key_exists($key, $active)) {
+                $box = ' '.$box;
+                $key = '>'.$box;
+            }
+            $active[$key] = __('Box').': '.SYSTEM::$modules[$list[$i]]['title'];
         }
     }
+
+    foreach ($SKIN as $point => $desc) {
+        if (!isset($active[DS.$point])) {
+            $unused[DS.$point] = $desc;
+        }
+    }
+
+    foreach (SYSTEM::$modules as $id => $module) {
+        if (!isset($active[DS.$id]) && !isset($active['>'.$id])) {
+            if ($module['type'] === 'main') {
+                $unused[DS.$id] = __('Page').': '.$module['title'];
+            } elseif ($module['type'] === 'box') {
+                $unused['>'.$id] = __('Box').': '.$module['title'];
+            }
+        }
+    }
+
+    $output = array();
+    $output['skin']   = $REQUEST['selected'];
+    $output['active'] = $active;
+    $output['unused'] = $unused;
+
+    $TPL = new TEMPLATE(dirname(__FILE__).DS.'output.tpl');
+    echo $TPL->parse($output);
+
+} else {
+    $output['title']  = __('Output management');
+    $output['select'] = explode(',', CONFIG::getValue('main', 'skins'));
+    $TPL = new TEMPLATE(dirname(__FILE__).DS.'select.tpl');
+    echo $TPL->parse($output);
 }
-
-$output = array();
-$output['active'] = $active;
-$output['unused'] = $unused;
-
-$TPL = new TEMPLATE(dirname(__FILE__).DS.'output.tpl');
-echo $TPL->parse($output);

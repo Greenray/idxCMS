@@ -4,7 +4,6 @@ define('FOREVER_COOKIE', time() + 3600 * 24 * 365 * 5);
 
 /**
  * @package    idxCMS
- * @subpackage SYSTEM
  * @file       system.class.php
  * @version    2.3
  * @author     Victor Nabatov <greenray.spb@gmail.com>\n
@@ -21,8 +20,20 @@ class SYSTEM {
     private static $url = '';
     private static $language = '';
     private static $languages = array();
+
+    /** Current locale
+     * @var string
+     */
     private static $locale = '';
+
+    /** Current skin
+     * @var string
+     */
     private static $skin = '';
+
+    /** Website skins
+     * @var array
+     */
     public static  $skins = array();
     public static  $modules = array();
     public static  $current_point = '';
@@ -31,8 +42,16 @@ class SYSTEM {
     private static $navigation = array();
     private static $menu = array();
     private static $pagename = '';
+
+    /** Website map
+     * @var array
+     */
     private static $sitemap = array();
     private static $search = array();
+
+    /** Website meta
+     * @var array
+     */
     private static $meta = array();
 
     /** Class initialization */
@@ -63,8 +82,8 @@ class SYSTEM {
         include_once(SYS.'languages'.DS.self::$language.'.php');
         self::$language = $LANG['language'];
         self::$locale   = $LANG['locale'];
-
         setcookie($cookie_lang, self::$language, FOREVER_COOKIE);
+
         $cookie_skin = CONFIG::getValue('main', 'cookie').'_skin';
         self::$skin  = CONFIG::getValue('main', 'skin');
 

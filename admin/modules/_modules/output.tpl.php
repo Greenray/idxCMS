@@ -215,6 +215,10 @@ die();?>
 <fieldset>
     <form name="output" method="post" action="" onsubmit="SaveList(document.output.elements['active[]'])">
         <table>
+            <tr class="odd">
+                <td>[__Skin]</td>
+                <td colspan="2"><input type="hidden" name="skin" value="{skin}" />{skin}</td>
+            </tr>
             <tr>
                 <th class="center" style="width:45%;">[__Included modules]</th>
                 <td style="width:10%">&nbsp;</td>

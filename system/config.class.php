@@ -14,10 +14,10 @@
 /** Class CONFIG - works with configuration */
 final class CONFIG {
 
-    /** Configuration filename.
+    /** Main Configuration file.
      * @var string
      */
-    private static $ini = '';
+    private static $ini = 'config.ini';
 
     /** Site configuration data.
      * @var array
@@ -28,7 +28,7 @@ final class CONFIG {
      * Sets config filename, reads and parses config data.
      */
     public function __construct() {
-        self::$ini = CONTENT.'config.ini';
+        self::$ini = CONTENT.self::$ini;
         self::$config = parse_ini_file(self::$ini, TRUE);
     }
 

@@ -38,6 +38,7 @@ final class FILTER {
      * @return array - Filered keys of array of parameters
      */
     private function cleanKey($input) {
+        $input = trim($input);
         $input = iconv(mb_detect_encoding($input), 'UTF-8//IGNORE', $input);
         $input = strip_tags($input);
         $input = stripslashes($input);
@@ -49,6 +50,7 @@ final class FILTER {
      * @return array - Filered values of array parameters
      */
     private function cleanValue($input) {
+        $input = trim($input);
         $input = iconv(mb_detect_encoding($input), 'UTF-8//IGNORE', $input);
         $input = stripslashes($input);
         return UnifyBr($input);
@@ -142,10 +144,7 @@ final class FILTER {
      * @return void
      */
     private function ids() {
-        $ids = array(
-            'base64', 'benchmark', 'concat', 'document.cookie', 'eval', 'echo', 'etc/passwd', 'etc/shadow', 'insert', 'into',
-            'select', 'substr', 'union'
-        );
+        $ids = array('base64', 'benchmark', 'concat', 'document.cookie', 'eval', 'echo', 'etc/passwd', 'etc/shadow', 'insert', 'into', 'select', 'substr', 'union');
         $_SERVER['REQUEST_URI']     = empty($_SERVER['REQUEST_URI'])          ? htmlspecialchars($_SERVER['SCRIPT_NAME']) : htmlspecialchars($_SERVER['REQUEST_URI']);
         $_SERVER['REMOTE_ADDR']     = empty($_SERVER['REMOTE_ADDR'])          ? '0.0.0.0'               : htmlspecialchars($_SERVER['REMOTE_ADDR']);
         $_SERVER['REMOTE_ADDR']     = empty($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['REMOTE_ADDR'] : htmlspecialchars($_SERVER['HTTP_X_FORWARDED_FOR']);

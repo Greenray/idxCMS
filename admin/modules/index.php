@@ -96,7 +96,7 @@ $tpl = '
             <tr class="odd"><td><a href="{MODULE}admin&id=_general.backup">[__Backups]</a></td><td>{backups}</td></tr>
             <tr class="odd"><td><a href="{MODULE}admin&id=posts.categories">[__Posts awaits moderation]</a></td><td>{wait}</td></tr>
             <tr class="odd"><td><a href="{MODULE}admin&id=_user.feedback">[__Feedback requests]</a></td><td>{feedback}</td></tr>
-            <tr class="odd"><td><a href="{MODULE}admin&id=main&clean=temp">[__Temporary files]</a></td><td>{temp}</td></tr>
+            <tr class="odd"><td><a href="{MODULE}admin&clean=temp">[__Temporary files]</a></td><td>{temp}</td></tr>
             <tr><th colspan="2">[__Additional information]</th></tr>
             <tr class="odd"><td>[__File uploads]</td><td>{file_uploads}</td></tr>
             <tr class="odd"><td>[__Max file size]</td><td>{upload_max_filesize}</td></tr>

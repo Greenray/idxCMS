@@ -78,7 +78,7 @@ die();?>
             <tr class="odd">
                 <td>[__Meta tags for your site]</td>
                 <td colspan="2">
-                    &lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /&gt;<br />
+                    &lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;<br />
                     &lt;meta http-equiv="Content-Language" content="<i>[__Will be set automaticaly]</i>" /&gt;
                     <textarea name="meta_tags" cols="20" rows="7">{meta_tags}</textarea>
                 </td>
@@ -101,6 +101,9 @@ die();?>
                             <option value="{skins[skin]}" [if=skins[selected]]selected="selected"[endif]>{skins[skin]}</option>
                         [endeach.skins]
                     </select>
+                    [each=skins]
+                        <input type="hidden" name="skins[]" value="{skins[skin]}" />
+                    [endeach.skins]
                 </td>
             </tr>
             <tr class="odd">

@@ -18,4 +18,3 @@ switch (SYSTEM::get('locale')) {
 }
 $MODULES[$module][0] = __('Aphorisms');
 $MODULES[$module][1]['aphorisms'] = __('Aphorisms');
-?>

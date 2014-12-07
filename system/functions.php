@@ -425,6 +425,7 @@ function CheckCaptcha() {
     throw new Exception('Invalid captcha code');
 }
 
+/** @todo Move functions.php -> ShowElements() to the template.class */
 function ShowElement($element, $parameters = '') {
     $output = '';
     switch($element) {
@@ -486,6 +487,7 @@ function ShowElement($element, $parameters = '') {
             }
             return $output;
             break;
+
         case 'title':
             $title = CONFIG::getValue('main', 'title');
             $pagename = SYSTEM::get('pagename');

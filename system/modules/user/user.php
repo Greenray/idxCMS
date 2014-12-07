@@ -41,7 +41,7 @@ if (!empty($REQUEST['save'])) {
                                 CMS::call('LOG')->logError('Too many requests in limited period of time. Try later.');
                                 Redirect('index');
                             }
-                            if (FILTER::get('REQUEST', 'email') === $data['email']) {
+                            if ($REQUEST['email'] === $data['email']) {
                                 $new_password = RandomString(8);
                                 $siteurl = parse_url(SYSTEM::get('url'));
                                 $time = time();

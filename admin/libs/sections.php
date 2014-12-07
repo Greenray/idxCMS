@@ -77,10 +77,10 @@ if (!empty($REQUEST['new']) || empty($sections)) {
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'section.tpl');
     echo $TPL->parse(
         array(
-            'section' => FILTER::get('REQUEST', 'section'),
-            'title'   => FILTER::get('REQUEST', 'title'),
-            'desc'    => FILTER::get('REQUEST', 'desc'),
-            'access'  => (int) FILTER::get('REQUEST', 'access'),
+            'section' => $REQUEST['section'],
+            'title'   => $REQUEST['title'],
+            'desc'    => $REQUEST['desc'],
+            'access'  => (int) $REQUEST['access'],
             'bbCodes' => CMS::call('PARSER')->showBbcodesPanel('form.desc'),
             'header'  => __('New section')
         )

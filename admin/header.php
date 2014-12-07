@@ -5,8 +5,7 @@
 
 if (!defined('idxADMIN') || !USER::loggedIn()) die();?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo SYSTEM::get('locale');?>" lang="<?php echo SYSTEM::get('locale');?>">
+<!DOCTYPE html>
 <head>
     <title><?php echo __('Header');?></title>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -19,6 +18,6 @@ if (!defined('idxADMIN') || !USER::loggedIn()) die();?>
     </style>
 </head>
 <body>
-<div><h1><?php echo __('Content Management System idxCMS')?></h1></div>
+<div class="header" style="padding:0 0 0 180px"><h1><?php echo __('Content Management System idxCMS')?></h1></div>
 </body>
 </html>

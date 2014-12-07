@@ -23,7 +23,7 @@ if (!empty($messages)) {
         $output['messages'][$id] = $message;
         $output['messages'][$id]['id']   = $id;
         $output['messages'][$id]['time'] = '['.FormatTime('d F Y H:i:s', $message['time']).'] ';
-        $mail = FILTER::get('REQUEST', 'mail');
+        $mail = $REQUEST['mail'];
         $output['messages'][$id]['info'] = __('Message by').' '.CreateUserLink($message['author'], $message['nick']).' ('.$mail.')';
     }
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'feedback.tpl');

@@ -92,7 +92,7 @@ die();?>
     </div>
 [endeach.msg]
 [ifelse=allow_post]
-    <div class="post-comment">
+    <div class="post-comment center">
         <form id="post" name="post" method="post" action="" onsubmit="return checkForm(this);">
                 <textarea id="mctext" name="mctext" rows="5">{mctext}</textarea>
                 [if=not_admin]

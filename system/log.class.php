@@ -79,7 +79,6 @@ final class LOG {
             } catch (Exception $error) {
                 ShowMessage(__($error->getMessage()));
             }
-
             foreach ($to_merge as $file) {
                     unlink(LOGS.$file);
             }

@@ -1,331 +1,123 @@
 /**
-* idxCMS version 2.3
+* idxCMS version 2.2
 * Copyright (c) 2012 Greenray greenray.spb@gmail.com
 * ADMINISTRATION PANEL CSS
 */
-body {
-	background: #006699;
-	margin: 0;
-	padding: 0;
-	font: normal 12px arial, helvetica, verdana, sans-serif
-}
-
+body { background:#006699;margin:0;padding:0;font:normal 12px arial,helvetica,verdana,sans-serif }
 a:link,
 a:active,
-a:visited { color: #006699; text-decoration: none }
-a:hover   { color: red; text-decoration: underline }
-
-fieldset {
-	background: #d1d7dc;
-	margin: 0 0 10px;
-	padding: 0.75em
-}
-
-h1 { font: bold 14pt 'Times New Roman', times, serif; text-decoration: none }
-h2 { font: bold 12pt arial, helvetica, sans-serif; text-align: center }
-h3 { font: bold 11pt arial, helvetica, sans-serif; text-align: center }
-hr { border: solid #fff 1px; height: 1px }
-
-button {
-	color: #000;
-	margin: 0;
-	padding: 0;
-	vertical-align: middle
-}
-	button img { margin: -3px; vertical-align: middle }
-
-input { color: #000 }
-    input[type='button'] { margin: 0; padding: 2px 5px }
+a:visited { color:#006699;text-decoration:none }
+a:hover   { color:red;text-decoration:underline }
+fieldset  { background:#d1d7dc;margin:0 0 10px;padding:0.75em }
+h1 { font:bold 14pt 'Times New Roman',times,serif;text-decoration:none }
+h2 { font:bold 12pt arial,helvetica,sans-serif;text-align:center }
+h3 { font:bold 11pt arial,helvetica,sans-serif;text-align:center }
+hr { border:solid #fff 1px;height:1px }
+button { color:#000;margin:0;padding:0;vertical-align:middle }
+    button img { margin:-3px;vertical-align:middle }
+input { color:#000 }
+    input[type='button']   { margin:0;padding:2px 5px }
     input[type='text'],
-    input[type='password'] {
-        margin: 2px;
-        padding: 1px 0 1px 5px;
-        border: 1px solid #c8c8c8
-    }
+    input[type='password'] { margin:2px;padding:1px 0 1px 5px;border:1px solid #c8c8c8 }
     input[type='text']:hover,
-    input[type='password']:hover { border-color: #aaa }
+    input[type='password']:hover { border-color:#aaa }
     input[type='text']:focus,
-    input[type='password']:focus {
-        border-color: #8c8c8c;
-        outline: 1px solid red;
-        background: #ffffcc
-    }
-
-.submit {
-    background-color: #ccc;
-    background-image: -o-linear-gradient(top, #eee, #ccc);
-    border: 1px solid #777;
-    border-radius: .2em;
-    cursor: pointer;
-    padding: 5px 10px;
-    box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.804) inset, 0 1px 0 rgba(0, 0, 0, 0.149);
-    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.804);
-    height: 20px;
-    font-size: 10px
-    }
-    .submit:focus { background: #fafafa; outline: 0 }
-    .submit:hover { background: #ddd }
-
-img    { border: none }
-label  { width: 100px }
-legend {
-	background: #fff;
-	color: red;
-	padding: 5px 10px 0;
-	font-weight: bold;
-	border-top: 1px solid #000;
-	border-left: 1px solid #000;
-	border-right: 1px solid #000
-}
-
-p   { margin: 5px 0; font-size: 12px }
-pre { margin: 0 }
-
-select { color: #000; border: 1px solid #000 }
-table  {
-	border-collapse: separate;
-	border-spacing: 1px;
-	width: 100%
-}
- 	table.bg { background: #acbbc6 }
- 	table.message {
-		border: 1px solid #000;
-		margin: 10px auto;
-		width: 500px
-}
-
-th {
-	background: #006699;
-	color: #fff;
-	font-weight: bold;
-	padding: 10px;
-	text-align: center;
-	text-shadow: 1px 1px 1px #000
-}
-
-td { padding: 0 10px }
-th a:link    { color: #fff }
-th a:active  { color: #0000ff }
-th a:visited { color: #fff }
-th a:hover   { color: #ff0000; text-decoration: underline }
-th.id, td.id { width: 46px }
-th.icon, td.icon { width: 55px }
-th.title, td.title { width: 250px }
-th.access, td.access { width: 84px }
-th.actions, td.actions { width: 90px }
-th.author, td.author { width: 80px }
-th .date, td .date { width: 140px; padding: 0 10px }
-td.actions button {
-	border: 0;
-	height: 16px;
-	margin: 0 5px
-}
-td.actions a img { margin: 0 5px; vertical-align: bottom }
-td.stat {
-	color: #000;
-	text-shadow: none;
-	font-weight: normal
-}
-
-textarea {
-	background: #fff;
-	color: #000;
-	font-size: 12px;
-	white-space: pre-wrap;
-	margin: 0;
-	padding: 0;
-	outline: none;
-	min-width: 100%;
-	min-height: 100%
-}
-
-ul {
-	height: 20px;
-	list-style: none;
-	border: 1px solid #ccc
-}
-
-#shdesc { display: none; width: 100% }
-.clear  {
-	clear: both;
-	height: 0;
-	overflow: hidden
-}
-
-.required { background: #fff888; color: red }
-.std { border: 2px groove #fff; width: 100% }
-
-#pagination {
-	float: right;
-	height: 20px;
-	line-height: 20px;
-	padding: 10px
-}
-	#pagination li { list-style: none; margin: 0 }
-	#pagination a { margin-right: 2px; padding: 0 6px }
-	#pagination .pages {
-		display: block;
-		float: left;
-		padding: 0 6px
-}
- 	#pagination .next a,
-    #pagination .previous a { font-weight: bold }
- 	#pagination .active {
-		font-weight: bold;
-		padding: 0 6px;
-		float: left;
-		color: red;
-		background: #fff
-}
- 	#pagination a:link,
-    #pagination a:visited {
-		display: block;
-		float: left;
-		text-decoration: none
-}
-
-.header {
-	background: #d1d7dc;
-	text-align: center;
-	font-size: 10pt;
-	font-weight: bold
-}
-
-.label { padding: 0 10px; width: 150px }
-.help {
-	padding: 0 30px 0 10px;
-	color: red;
-	font-style: italic;
-	text-align: right
-}
-
-.block  { display: block }
-.none   { display: none }
-.submit {
-	background-color: #ccc;
-	background-image: -o-linear-gradient(top, #eee, #ccc);
-	border: 1px solid #777;
-	border-radius: 0.2em;
-	cursor: pointer;
-	padding: 5px 10px;
-	box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.804) inset, 0 1px 0 rgba(0, 0, 0, 0.149); text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.804)
-}
- 	.submit:focus { background: #fafafa; outline: 0 }
- 	.submit:hover { background: #ddd }
-
-.bbcodes { margin: 10px; text-align: center }
-.bbselect { margin: 1px 0 4px }
-.bbbutton { margin: 0; padding: 3px }
-.bbtools {
-	color: #000;
-	border: 1px solid #777;
-	border-radius: .4em;
-	box-shadow: 0 0 10px rgba(0, 0, 0, .8);
-	margin: 10px 0 0;
-	padding: 10px 0 0
-}
-
-.bbcodes .link_text { margin: 4px 20px; text-align: center }
- 	.bbcodes .link_text input[type='text'] { margin: 2px 20px }
-
-.colortable { box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5) }
- 	.colortable td { padding: 0 }
-
-.button { padding: 2px 5px; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.804) }
-    .button_edit {
-        width: 50%;
-        padding: 0 4px 0 0;
-        text-align: right
-    }
-    .button_delete {
-      width: 50%;
-      padding: 0 0 0 4px;
-      text-align: left
-  }
-  .button_edit input { padding: 0 2px; text-align: right }
-  .button_delete input { padding: 0 2px; text-align: left }
-
-.odd   { background: #efefef; height: 25px }
- .even { background: #dee3e7; height: 25px }
-
-.center { text-align: center }
- .right { text-align: right }
-
-.module {
-	background: #006699;
-	color: yellow;
-	font-size: 1.5em;
-	font-weight: bold;
-	padding: 10px;
-	text-align: center;
-	text-shadow: 1px 1px 1px #000
-}
-
-.admin_mess {
-	background: yellow;
-	color: red;
-	text-align: center
-}
-
-.row1 { background: #efefef }
-.row2 { background: #dee3e7 }
-.row3 { background: #d1d7dc; padding: 1px 5px }
-
+    input[type='password']:focus { border-color:#8c8c8c;outline:1px solid red;background:#ffffcc }
+img    { border:none }
+label  { width:100px }
+legend { background:#fff;color:red;padding:5px 10px 0;font-weight:bold;border-top:1px solid #000;border-left:1px solid #000;border-right:1px solid #000 }
+p      { margin:5px 0;font-size:12px }
+pre    { margin:0 }
+select { color:#000;border:1px solid #000 }
+table  { border-collapse:separate;border-spacing:1px;width:100% }
+    table.bg      { background:#acbbc6 }
+    table.message { border:1px solid #000;margin:10px auto;width:500px }
+th { background:#006699;color:#fff;font-weight:bold;padding:10px;text-align:center;text-shadow:1px 1px 1px #000 }
+td { padding:0 10px }
+th a:link    { color:#fff }
+th a:active  { color:#0000ff }
+th a:visited { color:#fff }
+th a:hover   { color:#ff0000;text-decoration:underline }
+th.id, td.id       { width:46px }
+th.icon, td.icon   { width:55px }
+th.title, td.title { width:250px }
+th.access, td.access   { width:84px }
+th.actions, td.actions { width:90px }
+th.author, td.author   { width:80px }
+th .date, td .date     { width:140px;padding:0 10px }
+td.actions button { border:0;height:16px;margin:0 5px }
+td.actions a img  { margin:0 5px;vertical-align:bottom }
+td.stat  { color:#000;text-shadow:none;font-weight:normal }
+textarea { background:#fff;color:#000;font-size:12px;white-space:pre-wrap;margin:0;padding:0;outline:none;min-width:100%;min-height:100% }
+ul { height:20px;list-style:none;border:1px solid #ccc }
+#shdesc   { display:none;width:100% }
+.clear    { clear:both;height:0;overflow:hidden }
+.required { background:#fff888;color:red }
+.std      { border:2px groove #fff;width:100% }
+#pagination        { float:right;height:20px;line-height:20px;padding:10px }
+    #pagination li     { list-style:none;margin:0 }
+    #pagination a      { margin-right:2px;padding:0 6px }
+    #pagination .pages { display:block;float:left;padding:0 6px }
+    #pagination .next a,
+    #pagination .previous a { font-weight:bold }
+    #pagination .active     { font-weight:bold;padding:0 6px;float:left;color:red;background:#fff }
+    #pagination a:link,
+    #pagination a:visited { display:block;float:left;text-decoration:none }
+.header { background:#d1d7dc;text-align:center;font-size:10pt;font-weight:bold }
+.label  { padding:0 10px;width:150px }
+.help   { padding:0 30px 0 10px;color:red;font-style:italic;text-align:right }
+.block  { display:block }
+.none   { display:none }
+.submit { background:#ccc;background-image:-o-linear-gradient(top, #eee, #ccc);border:1px solid #777;border-radius:0.2em;cursor:pointer;padding:5px 10px;
+          box-shadow:0 0 1px 1px rgba(255, 255, 255, 0.804) inset, 0 1px 0 rgba(0, 0, 0, 0.149);text-shadow:1px 1px 1px rgba(255, 255, 255, 0.804) }
+    .submit:focus { background:#fafafa;outline:0 }
+    .submit:hover { background:#ddd }
+.bbcodes  { margin:10px;text-align:center }
+.bbselect { margin:1px 0 4px }
+.bbbutton { margin:0;padding:3px }
+.bbtools  { color:#000;border:1px solid #777;border-radius:0.4em;box-shadow:0 0 10px rgba(0, 0, 0, .8);margin:10px 0 0;padding:10px 0 0 }
+.bbcodes .link_text { margin:4px 20px;text-align:center }
+.bbcodes .link_text input[type='text'] { margin:2px 20px }
+.colortable { box-shadow:10px 10px 10px rgba(0, 0, 0, 0.5) }
+    .colortable td { padding:0 }
+.button { padding:2px 5px;text-shadow:0 1px 0 rgba(255, 255, 255, 0.804) }
+    .button_edit         { width:50%;padding:0 4px 0 0;text-align:right }
+    .button_delete       { width:50%;padding:0 0 0 4px;text-align:left }
+    .button_edit input   { padding:0 2px;text-align:right }
+    .button_delete input { padding:0 2px;text-align:left }
+.odd    { background:#efefef;height:25px }
+.even   { background:#dee3e7;height:25px }
+.center { text-align:center }
+.right  { text-align:right }
+.module { background:#006699;color:yellow;font-size:1.5em;font-weight:bold;padding:10px;text-align:center;text-shadow:1px 1px 1px #000 }
+.admin_mess { background:yellow;color:red;text-align:center }
+.row1 { background:#efefef }
+.row2 { background:#dee3e7 }
+.row3 { background:#d1d7dc;padding:1px 5px }
 #nodrag,
-#drag { margin: 0px auto }
-  div#nodrag table,
-  div#drag table { border-collapse: separate; border-spacing: 0px }
-  div#nodrag table tr,
-  div#drag table tr { height: 35px }
-  div#nodrag td,
-  div#drag td { border: 2px groove #fff; padding: 0 10px }
-  div#nodrag th,
-  div#drag th { border: 2px groove #fff }
-  .nodrag,
-  .drag { border: 0; margin: auto }
-
-.rowhandler { text-align: center; width: 25px }
-
+#drag { margin:0px auto }
+    div#nodrag table,
+    div#drag table       { border-collapse:separate;border-spacing:0px }
+    div#nodrag table tr,
+    div#drag table tr    { height:35px }
+    div#nodrag td,
+    div#drag td   { border:2px groove #fff;padding:0 10px }
+    div#nodrag th,
+    div#drag th   { border:2px groove #fff }
+    .nodrag,
+    .drag   { border:0;margin:auto }
+.rowhandler { text-align:center;width:25px }
 .ldt,
 .ldt label,
 .ldt pre,
-.ldt textarea {
-	font-size: 12px;
-	font-family: monospace !important;
-	padding: 10px 0;
-	margin: 0;
-	white-space: pre-wrap;
-	overflow: hidden;
-	border: 0
-}
-    .ldt { position: relative }
- 	.ldt label {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		display: inline;
-		cursor: text
-}
- 	.ldt textarea {
-		color: transparent !important;
-		color: rgba(0,0,0,.2) !important;
-		background: 0;
-		outline: none;
-		min-width: 100%;
-		min-height: 100%;
-		filter: alpha(opacity = 20)
-}
- 	.ldt .comment { color: silver }
- 	.ldt .string { color: red }
- 	.ldt .number { color: navy }
- 	.ldt .keyword {
-		font-weight: bold;
-		display: inline-block;
-		color: #000
-	}
- 	.ldt .variable { color: blue }
- 	.ldt .define { color: purple }
-
-.banner { border: 1px solid #000 }
+.ldt textarea { font-size:12px;font-family:monospace !important;padding:10px 0;margin:0;white-space:pre-wrap;overflow:none;border:0 }
+    .ldt           { position:relative }
+    .ldt label     { position:absolute;top:0;left:0;width:100%;height:100%;display:inline;cursor:text }
+    .ldt textarea  { color:transparent !important;color:rgba(0,0,0,.2) !important;background:0;outline:none;min-width:100%;min-height:100%;filter:alpha(opacity = 20) }
+    .ldt .comment  { color:silver }
+    .ldt .string   { color:red }
+    .ldt .number   { color:navy }
+    .ldt .keyword  { font-weight:bold;display:inline-block;color:#000 }
+    .ldt .variable { color:blue }
+    .ldt .define   { color:purple }
+.banner { border:1px solid #000 }

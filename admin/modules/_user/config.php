@@ -25,7 +25,7 @@ if (!empty($REQUEST['save'])) {
     CMS::call('CONFIG')->setSection('pm', $config);
 
     $config = array();
-    $config['email']          = trim(FILTER::get('REQUEST', 'email'));
+    $config['email']          = $REQUEST['email'];
     $config['message-length'] = empty($REQUEST['message-length']) ? 2000 : (int) $REQUEST['message-length'];
     $config['db-size']        = empty($REQUEST['db-size'])        ? 100  : (int) $REQUEST['db-size'];
     CMS::call('CONFIG')->setSection('feedback', $config);

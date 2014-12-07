@@ -15,12 +15,12 @@ if (!empty($REQUEST['save'])) {
 
 $aphorisms = array_values(GetFilesList(APHORISMS));
 
-if (!empty($REQUEST['aph'])) {
+if (!empty($REQUEST['selected'])) {
     $output = array();
-    if (in_array($REQUEST['aph'], $aphorisms)) {
-        $output['file'] = $REQUEST['aph'];
-        if (file_exists(APHORISMS.$REQUEST['aph'])) {
-            $output['aph'] = file_get_contents(APHORISMS.$REQUEST['aph']);
+    if (in_array($REQUEST['selected'], $aphorisms)) {
+        $output['file'] = $REQUEST['selected'];
+        if (file_exists(APHORISMS.$REQUEST['selected'])) {
+            $output['aph'] = file_get_contents(APHORISMS.$REQUEST['selected']);
         } elseif (!file_exists(APHORISMS.SYSTEM::get('locale').'.txt')) {
             $output['aph'] = file_get_contents(APHORISMS.SYSTEM::get('locale').'.txt');
         } else {
@@ -30,8 +30,9 @@ if (!empty($REQUEST['aph'])) {
         echo $TPL->parse($output);
     }
 } else {
-    $output['aph'] = $aphorisms;
+    $output['title']  = __('Aphorisms');
+    $output['select'] = $aphorisms;
+
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'select.tpl');
     echo $TPL->parse($output);
 }
-?>

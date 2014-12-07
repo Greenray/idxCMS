@@ -6,7 +6,7 @@
 if (!defined('idxCMS')) die();
 
 function scmp($a, $b) {
-     return mt_rand(-1, 1);
+    return mt_rand(-1, 1);
 }
 
 $tc = CONFIG::getSection('tagcloud');

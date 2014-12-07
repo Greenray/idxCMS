@@ -75,9 +75,9 @@ if (!empty($sections)) {
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'category.tpl');
             echo $TPL->parse(
                 array(
-                    'title'    => FILTER::get('REQUEST', 'title'),
-                    'desc'     => FILTER::get('REQUEST', 'desc'),
-                    'access'   => (int) FILTER::get('REQUEST', 'access'),
+                    'title'    => $REQUEST['title'],
+                    'desc'     => $REQUEST['desc'],
+                    'access'   => (int) $REQUEST['access'],
                     'sections' => $choice,
                     'bbCodes'  => CMS::call('PARSER')->showBbcodesPanel('form.desc'),
                     'header'   => __('New category')

@@ -36,7 +36,7 @@ die();?>
                                     <img src="{ICONS}edit.png" width="16" height="16" alt="[__Edit]" />
                                 </button>
                                 [if=categories[posts]]
-                                    <a href="./?module=admin&amp;id=posts.posts&amp;section={system[id]}&amp;category={categories[id]}" target="main">
+                                    <a href="./?module=admin&amp;id=posts.posts&amp;section={system[id]}&amp;category={categories[id]}">
                                         <img src="{ICONS}posts.png" width="16" height="16" alt="[__Posts]" />
                                     </a>
                                 [endif]
@@ -50,9 +50,7 @@ die();?>
             <table id="sortable">
                 [each=sections]
                     <tr>
-                        <td colspan="7" class="mark header">
-                            <div id="{sections[id]}" class="group">{sections[title]}</div>
-                        </td>
+                        <td colspan="7" class="mark header"><div id="{sections[id]}" class="group">{sections[title]}</div></td>
                     </tr>
                     <tr style="line-height:2px;height:2px;">
                         <td colspan="7" style="border:0;">&nbsp;</td>
@@ -65,9 +63,7 @@ die();?>
                                 </div>
                             </td>
                             <td class="id center">{categories[id]}</td>
-                            <td class="icon center">
-                                <img src="{categories[path]}icon.png" width="35" height="35" alt="icon" />
-                            </td>
+                            <td class="icon center"><img src="{categories[path]}icon.png" width="35" height="35" alt="icon" /></td>
                             <td class="title">{categories[title]}</td>
                             <td class="desc">{categories[desc]}</td>
                             <td class="access center">{categories[access]}</td>
@@ -76,7 +72,7 @@ die();?>
                                     <img src="{ICONS}edit.png" width="16" height="16" alt="[__Edit]" />
                                 </button>
                                 [ifelse=categories[posts]]
-                                    <a href="./?module=admin&amp;id=posts.posts&amp;section={sections[id]}&amp;category={categories[id]}" target="main">
+                                    <a href="./?module=admin&amp;id=posts.posts&amp;section={sections[id]}&amp;category={categories[id]}">
                                         <img src="{ICONS}posts.png" width="16" height="16" alt="[__Posts]" />
                                     </a>
                                 [else]

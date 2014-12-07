@@ -41,7 +41,7 @@ class TEMPLATE {
     private $tpl  = '';
 
     /** Template patterns
-     * @var type @var array
+     * @var array
      */
     private $patterns = array(
         'die'       => "#<\?php(.*?)\?>#is",
@@ -68,10 +68,12 @@ class TEMPLATE {
         $tpl = basename($template);
         if (file_exists(CURRENT_SKIN.$tpl.'.php')) {
             $this->tpl = file_get_contents(CURRENT_SKIN.$tpl.'.php');
-        } elseif (file_exists($template.'.php')) {
-            $this->tpl = file_get_contents($template.'.php');
         } elseif (file_exists(TEMPLATES.$tpl.'.php')) {
             $this->tpl = file_get_contents(TEMPLATES.$tpl.'.php');
+        } elseif (file_exists($template.'.php')) {
+            $this->tpl = file_get_contents($template.'.php');
+        } elseif (file_exists(ADMIN.'templates'.DS.$tpl.'.php')) {
+            $this->tpl = file_get_contents(ADMIN.'templates'.DS.$tpl.'.php');
         } else {
             $this->tpl = $template;
         }

@@ -35,20 +35,20 @@ die();?>
         </form>
     </div>
 [else]
-<script src="{TOOLS}jquery.lightbox_me.js" type="text/javascript"></script>
-		<script type="text/javascript">
-			$(function() {
-				$('#enter').click(function(e) {
-					$(".login").lightbox_me({centered: true, onLoad: function() {
-						$(".login").find("input:first").focus();
-					}});
-					e.preventDefault();
-				});
+    <script src="{TOOLS}jquery.lightbox_me.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		$(function() {
+			$('#enter').click(function(e) {
+				$(".login").lightbox_me({centered: true, onLoad: function() {
+					$(".login").find("input:first").focus();
+				}});
+				e.preventDefault();
 			});
-		</script>
-		<link rel="stylesheet" href="{TOOLS}lightbox.css" type="text/css" media="screen">
+		});
+	</script>
+	<link rel="stylesheet" href="{TOOLS}lightbox.css" type="text/css" media="screen">
     <script type="text/javascript">
-    // form validation
+    // Form validation
     function checkLoginForm(form) {
         var username = form.username.value;
         var password = form.password.value;

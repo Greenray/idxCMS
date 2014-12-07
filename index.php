@@ -1,5 +1,5 @@
 <?php
-/** Flat Files Content.Management System.
+/** Flat Files Content Management System.
  *
  * @package   idxCMS
  * @mainpage  IdxCMS - Content Management System
@@ -9,7 +9,7 @@
  * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
  *            http://creativecommons.org/licenses/by-nc-sa/3.0/
  * @copyright (c) 2011 - 2014 Victor Nabatov\n
- * @link      https://github.com/Greenray/index.php
+ * @link      https://github.com/Greenray/idxCMS/index.php
  */
 
 # This project is based on the idea and experience of work in the ReloadCMS project
@@ -84,12 +84,9 @@ function idxErrorHandler($errno, $errmsg, $filename, $linenum) {
 set_error_handler("idxErrorHandler", E_ALL | E_STRICT);
 
 # Constants
-/** Constant to prevent direct access to php files */
-define('idxCMS',  TRUE);
-/** Alias for directory separator */
-define('DS',      DIRECTORY_SEPARATOR);
-/** Alias for the line feed */
-define('LF',      PHP_EOL);
+define('idxCMS',  TRUE);                /**< Constant to prevent direct access to php files */
+define('DS',      DIRECTORY_SEPARATOR); /**< Alias for directory separator */
+define('LF',      PHP_EOL);             /**< Alias for the line feed */
 /** System root directory */
 define('ROOT',   '.'.DS);
 /** Site content directory */
@@ -150,11 +147,11 @@ global $LANG;
 $CMS = CMS::call('SYSTEM');
 
 /** The version of CMS */
-define('IDX_VERSION',   '2.3');
+define('IDX_VERSION', '2.3');
 /** Copiright */
 define('IDX_COPYRIGHT', '&copy; 2011 - 2014 '.__('Greenray'));
 /** This message is reflected in the pages of the website */
-define('IDX_POWERED',   'Powered by idxCMS - '.IDX_VERSION);
+define('IDX_POWERED', 'Powered by idxCMS - '.IDX_VERSION);
 
 # Send main headers
 header('Last-Modified: '.gmdate('r'));
@@ -179,48 +176,49 @@ if (!empty($REQUEST['logout'])) {
 # If requested page is not set or is not exists, the site index page will be shown.
 $MODULE = empty($REQUEST['module']) ? 'index' : basename($REQUEST['module']);
 switch($MODULE) {
+    /** Edirot for posting */
     case 'editor':
         include(TOOLS.'editor.php');
         break;
+    /** Rate future */
     case 'rate':
         if (CONFIG::getValue('enabled', 'rate')) {
             include(MODULES.'rate'.DS.'rate.php');
         }
         break;
+    /** Aphorisms flipping */
     case 'aphorisms':
         include(MODULES.'aphorisms'.DS.'aphorisms.php');
         break;
+    /** RSS future */
     case 'rss':
         include(MODULES.'rss'.DS.'rss.php');
         break;
+    /** Website administratin */
     case 'admin':
-        /** Administration section of the website */
-        define('ADMIN', ROOT.'admin'.DS);
-        /** Admin libruaries */
-        define('ADMINLIBS', ADMIN.'libs'.DS);
-        /** Admin templates */
-        define('TEMPLATES', ADMIN.'templates'.DS);
-        require_once(ADMINLIBS.'functions.php');
-        include_once(ADMIN.'languages'.DS.SYSTEM::get('language').'.php');
+        define('ADMIN', ROOT.'admin'.DS);           /**< Administration section of the website */
+        define('ADMINLIBS', ADMIN.'libs'.DS);       /**< Admin libruaries */
+        define('TEMPLATES', ADMIN.'templates'.DS);  /**< Admin templates */
+
+        require_once(ADMINLIBS.'functions.php');                            /**< Functions libruary */
+        include_once(ADMIN.'languages'.DS.SYSTEM::get('language').'.php');  /**< Localization */
 
         if (CMS::call('USER')->checkRoot()) {
             $modules = AdvScanDir(ADMIN.'modules', '', 'dir');
             $MODULES = array();
-            /** Constant to prevent direct access to php files */
-            define('idxADMIN', TRUE);
+            define('idxADMIN', TRUE);                                       /**< Constant to prevent direct access to php files */
             foreach ($modules as $module) {
                 if ((substr($module, 0, 1) === '_') || CONFIG::getValue('enabled', $module)) {
-                    include_once(ADMIN.'modules'.DS.$module.DS.'module.php');     # Initialize module
+                    include_once(ADMIN.'modules'.DS.$module.DS.'module.php');     /**< Initialize module */
                 }
             }
             $id = empty($REQUEST['id']) ? '' : basename($REQUEST['id']);
-
             switch ($id) {
                 case 'header':
                     include(ADMIN.'header.php');
                     break;
                 case 'main':
-                    include(ADMIN.'frameset.php');      # Open administration panel or show frames error
+                    include(ADMIN.'frameset.php');      /**< Open administration panel or show frames error */
                     break;
                 case 'nav':
                     require(ADMIN.'navigation.php');
@@ -245,10 +243,12 @@ switch($MODULE) {
             include(ADMIN.'error.php');
         }
         break;
+
     default:
         include_once(SYS.'statistic.php');
-        /** Pages templates */
-        define('TEMPLATES', SYS.'templates'.DS);
+
+        define('TEMPLATES', SYS.'templates'.DS);        /**< System templates */
+
         # Loading main module
         CMS::call('SYSTEM')->setCurrentPoint('__MAIN__');
         require_once(CURRENT_SKIN.'skin.php');  # Current skin definition
@@ -262,13 +262,14 @@ switch($MODULE) {
 
         $_SESSION['request'] = $MODULE;
         # Load other modules
+        $skin    = SYSTEM::get('skin');
         $modules = array();
-        if (in_array($MODULE, array_keys(CONFIG::getSection('output')))) {
-            $modules[$MODULE] = CONFIG::getValue('output', $MODULE);
+        if (in_array($MODULE, array_keys(CONFIG::getSection('output.'.$skin)))) {
+            $modules[$MODULE] = CONFIG::getValue('output.'.$skin, $MODULE);
         }
-        $modules['left']  = CONFIG::getValue('output', 'left');
-        $modules['right'] = CONFIG::getValue('output', 'right');
-        $modules['boxes'] = CONFIG::getValue('output', 'boxes');
+        $modules['left']  = CONFIG::getValue('output.'.$skin, 'left');
+        $modules['right'] = CONFIG::getValue('output.'.$skin, 'right');
+        $modules['boxes'] = CONFIG::getValue('output.'.$skin, 'boxes');
         if (!empty($modules[$MODULE])) {
             unset($modules['left']);
         }

@@ -5,13 +5,11 @@
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
 
-require_once(ADMINLIBS.'tar.class.php');
-
 if (!empty($REQUEST['backup'])) {
     if (!empty($REQUEST['dir'])) {
-        $exclude_files = array('arj','avi','bzip','bzip2','gz','gzip','mp3','mov','mpeg','rar','tar','wmv','zip');
-        $backup = BACKUPS.'backup_'.date('H-i-s_d.m.Y').'.tar.gz';
-        $PHAR = new PharData($backup);
+        $exclude_files = array('arj','avi','bzip','bzip2','gz','gzip','mp3','mov','mpeg','rar','tar','wmv','zip');  /**< Disallowed files */
+        $backup = BACKUPS.'backup_'.date('H-i-s_d.m.Y').'.tar.gz';                                                  /**< Backup file name */
+        $PHAR = new PharData($backup);                                                                              /**< Initialize backup */
 
         foreach($REQUEST['dir'] as $dir) {
             try {

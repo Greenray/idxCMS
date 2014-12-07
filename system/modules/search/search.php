@@ -8,7 +8,7 @@ if (!defined('idxCMS')) die();
 $config = CONFIG::getSection('search');
 
 if (USER::loggedIn() || $config['allow-guest']) {
-    $search = FILTER::get('REQUEST', 'search');
+    $search = $REQUEST['search'];
     if (!empty($search)) {
         $items = explode(" ", $search);
         $TPL = new TEMPLATE(dirname(__FILE__).DS.'results.tpl');
@@ -71,7 +71,7 @@ if (USER::loggedIn() || $config['allow-guest']) {
         $results = array();
         $results['count'] = sizeof($common);
         $perpage = (int) CONFIG::getValue('search', 'per-page');
-        $page    = (int) FILTER::get('REQUEST', 'page');
+        $page    = (int) $REQUEST['page'];
         $pagination = GetPagination($page, $perpage, $results['count']);
         if (!empty($common)) {
             $show = array_slice($common, $pagination['start'], $perpage, TRUE);
@@ -95,4 +95,3 @@ if (USER::loggedIn() || $config['allow-guest']) {
         ShowWindow(__('Search'), $TPL->parse());
     }
 }
-?>

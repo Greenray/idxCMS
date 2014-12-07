@@ -27,6 +27,17 @@ if (!empty($REQUEST['save'])) {
     }
     $config['index-module'] = empty($REQUEST['index-module']) ? 'default' : $REQUEST['index-module'];
     $config['skin']         = empty($REQUEST['skin'])         ? 'Default' : $REQUEST['skin'];
+    $config['skins'] = 'Default';
+    if (!empty($REQUEST['skins'])) {
+        foreach ($REQUEST['skins'] as $key => $skin) {
+            CMS::call('CONFIG')->setSection('output.'.$skin, '');
+            if ($skin !== 'Default') {
+                $config['skins'] .= ','.$skin;
+            }
+        }
+    } else {
+        CMS::call('CONFIG')->setSection('output.Default', array());
+    }
     $config['lang']         = empty($REQUEST['lang'])         ? 'russian' : $REQUEST['lang'];
     $config['allow-skin']   = empty($REQUEST['allow-skin'])   ? ''        : '1';
     $config['allow-lang']   = empty($REQUEST['allow-lang'])   ? ''        : '1';
@@ -108,7 +119,6 @@ $modules['catalogs'] = __('Catalogs');
 $modules['news']     = __('Last news');
 $modules['sitemap']  = __('Sitemap');
 $available_modules = array();
-
 foreach ($modules as $module => $title) {
     $available_modules[$module]['module'] = $module;
     $available_modules[$module]['title']  = $title;
@@ -116,48 +126,45 @@ foreach ($modules as $module => $title) {
         $available_modules[$module]['selected'] = TRUE;
     }
 }
-
 $config['modules'] = $available_modules;
+
 $skins = AdvScanDir(SKINS, '', 'dir', FALSE, array('bbcodes', 'forum', 'icons', 'images', 'smiles'));
 $available_skins = array();
-
 foreach ($skins as $i => $skin) {
     $available_skins[$i]['skin'] = $skin;
     if ($skin === $config['skin']) {
         $available_skins[$i]['selected'] = TRUE;
     }
 }
-
 $config['skins'] = $available_skins;
+
 $langs = SYSTEM::get('languages');
 $available_langs = array();
-
 foreach ($langs as $i => $lang) {
     $available_langs[$i]['lang'] = $lang;
     if ($lang === $config['lang']) {
         $available_langs[$i]['selected'] = TRUE;
     }
 }
-
 $config['langs'] = $available_langs;
+
 $captcha = array(
     'Original' => 'Original',
     'Color'    => 'Color ',
     'Random'   => 'Random'
 );
 $available_captcha = array();
-
 foreach ($captcha as $i => $type) {
     $available_captcha[$i]['captcha'] = $type;
     if ($type === $config['captcha']) {
         $available_captcha[$i]['selected'] = TRUE;
     }
 }
-
 $config['captcha'] = $available_captcha;
-$config['meta_tags'] = file_get_contents(CONTENT.'meta');
-$available_tz = array();
 
+$config['meta_tags'] = file_get_contents(CONTENT.'meta');
+
+$available_tz = array();
 foreach ($LANG['tz'] as $tz => $title) {
     $available_tz[$tz]['tz'] = $tz;
     $available_tz[$tz]['title'] = $title;
@@ -166,10 +173,12 @@ foreach ($LANG['tz'] as $tz => $title) {
     }
 }
 $config['tz'] = $available_tz;
+
 $config['welcome_msg'] = '';
 if (file_exists(CONTENT.'intro')) {
     $config['welcome_msg'] = file_get_contents(CONTENT.'intro');
 }
+
 $config['bgcolor']        = GetColor('bgcolor', strtr($config['bgcolor'], array("0x" => "#")));
 $config['leftbg']         = GetColor('leftbg', strtr($config['leftbg'], array("0x" => "#")));
 $config['lefticon']       = GetColor('lefticon', strtr($config['lefticon'], array("0x" => "#")));
@@ -185,4 +194,3 @@ $config['loader']         = GetColor('loader', strtr($config['loader'], array("0
 
 $TPL = new TEMPLATE(dirname(__FILE__).DS.'config.tpl');
 echo $TPL->parse($config);
-?>

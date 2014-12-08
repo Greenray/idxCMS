@@ -1,7 +1,15 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE USERS - INITIALIZATION
+/**
+ * @package    idxCMS
+ * @subpackage MODULES
+ * @file       module.php
+ * @version    2.3
+ * @author     Victor Nabatov <greenray.spb@gmail.com>\n
+ * @license    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *             http://creativecommons.org/licenses/by-nc-sa/3.0/
+ * @copyright  (c) 2011 - 2014 Victor Nabatov\n
+ * @link       https://github.com/Greenray/idxCMS/system/modules/user/module.php
+ */
 
 if (!defined('idxCMS')) die();
 
@@ -10,13 +18,18 @@ define('PM_DATA', CONTENT.'pm'.DS);
 /** User`s avatars data store */
 define('AVATARS', CONTENT.'avatars'.DS);
 
-# MESSAGE class
+/** Class MESSAGE - user's private messages */
 class MESSAGE extends INDEX {
 
-    private $path     = '';         #Path to datafile
-    private $messages = array();
-    private $config   = array();
+    private $path     = '';         /**< Path to datafile */
+    private $messages = array();    /**< Messsages */
+    private $config   = array();    /**< Messages configuration */
 
+    /** Class initialization.
+     * @param  string $path Path to messages file
+     * @param  string $file Name of messges file
+     * @return void
+     */
     public function __construct($path, $file) {
         parent::__construct();
         $this->path = $path;
@@ -29,6 +42,10 @@ class MESSAGE extends INDEX {
         $this->messages = self::getIndex($this->path);
     }
 
+    /** Get messages.
+     * @param  string $from
+     * @return array - Messages
+     */
     public function getMessages($from = '') {
         if (empty($from)) {
             return $this->messages;
@@ -36,6 +53,9 @@ class MESSAGE extends INDEX {
         return $this->messages[$from];
     }
 
+    /** Check for new messages.
+     * @return array - Number of new messages and info about last new message
+     */
     public function checkNewMessages() {
         $new  = 0;
         $hint = __('No new messages');
@@ -50,6 +70,11 @@ class MESSAGE extends INDEX {
         return array($new, $hint);
     }
 
+    /** Check if user did\t sent an empty message.
+     * @param  string $text Message text
+     * @return string $text Message text with allowed length
+     * @throws Exception 'Text is empty'
+     */
     private function checkText($text) {
         $text = trim($text);
         $text = (mb_strlen($text, 'UTF-8') > $this->config['message-length']) ? mb_substr($text, 0, $this->config['message-length'], 'UTF-8') : $text;
@@ -183,6 +208,11 @@ class MESSAGE extends INDEX {
     }
 }
 
+/** Create link for user profile.
+ * @param  string $user Username
+ * @param  string $nick Usernick
+ * @return string - Link for user profile
+ */
 function CreateUserLink($user, $nick) {
     if ($user === 'guest') {
         return __('Guest');
@@ -190,6 +220,10 @@ function CreateUserLink($user, $nick) {
     return '<a href="'.MODULE.'user&amp;user='.$user.'">'.$nick.'</a>';
 }
 
+/** Get user avatar.
+ * @param  string $user Username
+ * @return string - Avatar image with full path
+ */
 function GetAvatar($user) {
     if (file_exists(AVATARS.$user.'.png')) {
         return AVATARS.$user.'.png';

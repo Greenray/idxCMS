@@ -84,14 +84,17 @@ function idxErrorHandler($errno, $errmsg, $filename, $linenum) {
 set_error_handler("idxErrorHandler", E_ALL | E_STRICT);
 
 # Constants
-define('idxCMS',  TRUE);                /**< Constant to prevent direct access to php files */
-define('DS',      DIRECTORY_SEPARATOR); /**< Alias for directory separator */
-define('LF',      PHP_EOL);             /**< Alias for the line feed */
+/** Constant to prevent direct access to php files */
+define('idxCMS',  TRUE);
+/** Alias for directory separator */
+define('DS',      DIRECTORY_SEPARATOR);
+/** Alias for the line feed */
+define('LF',      PHP_EOL);
 /** System root directory */
 define('ROOT',   '.'.DS);
-/** Site content directory */
+/** Website content directory */
 define('CONTENT', ROOT.'content'.DS);
-/** Directory for scins */
+/** Directory for skins */
 define('SKINS',   ROOT.'skins'.DS);
 /** System directory */
 define('SYS',     ROOT.'system'.DS);
@@ -109,17 +112,17 @@ define('IMAGES',  SKINS.'images'.DS);
 define('ICONS',   IMAGES.'icons'.DS);
 /** Smiles */
 define('SMILES',  IMAGES.'smiles'.DS);
-/** The query of module */
+/** The query for module */
 define('MODULE',    ROOT.'?module=');
-/** The query of section */
+/** The query for section */
 define('SECTION',  '&amp;section=');
-/** The query of category */
+/** The query for category */
 define('CATEGORY', '&amp;category=');
-/** The query of item */
+/** The query for item */
 define('ITEM',     '&amp;item=');
-/** The query of comment or forum reply */
+/** The query for comment or forum reply */
 define('COMMENT',  '&amp;comment=');
-/** The query of page */
+/** The query for page */
 define('PAGE',     '&amp;page=');
 
 umask(000);     # UMASK Must be 000!
@@ -143,12 +146,14 @@ session_start();
 CMS::call('FILTER')->sanitaze();
 $REQUEST = FILTER::getAll('REQUEST');
 
+/** Website localization */
 global $LANG;
+/** System initialization */
 $CMS = CMS::call('SYSTEM');
 
 /** The version of CMS */
 define('IDX_VERSION', '2.3');
-/** Copiright */
+/** Copyright */
 define('IDX_COPYRIGHT', '&copy; 2011 - 2014 '.__('Greenray'));
 /** This message is reflected in the pages of the website */
 define('IDX_POWERED', 'Powered by idxCMS - '.IDX_VERSION);
@@ -173,63 +178,72 @@ if (!empty($REQUEST['logout'])) {
     Redirect('index');
 }
 
-# If requested page is not set or is not exists, the site index page will be shown.
+/** If requested page is not set or is not exists, the site index page will be shown */
 $MODULE = empty($REQUEST['module']) ? 'index' : basename($REQUEST['module']);
 switch($MODULE) {
-    /** Edirot for posting */
+
     case 'editor':
-        include(TOOLS.'editor.php');
+        include(TOOLS.'editor.php');                        # Editor for posting
         break;
-    /** Rate future */
+
     case 'rate':
         if (CONFIG::getValue('enabled', 'rate')) {
-            include(MODULES.'rate'.DS.'rate.php');
+            include(MODULES.'rate'.DS.'rate.php');          # Rate feauture
         }
         break;
-    /** Aphorisms flipping */
-    case 'aphorisms':
-        include(MODULES.'aphorisms'.DS.'aphorisms.php');
-        break;
-    /** RSS future */
-    case 'rss':
-        include(MODULES.'rss'.DS.'rss.php');
-        break;
-    /** Website administratin */
-    case 'admin':
-        define('ADMIN', ROOT.'admin'.DS);           /**< Administration section of the website */
-        define('ADMINLIBS', ADMIN.'libs'.DS);       /**< Admin libruaries */
-        define('TEMPLATES', ADMIN.'templates'.DS);  /**< Admin templates */
 
-        require_once(ADMINLIBS.'functions.php');                            /**< Functions libruary */
-        include_once(ADMIN.'languages'.DS.SYSTEM::get('language').'.php');  /**< Localization */
+    case 'aphorisms':
+        include(MODULES.'aphorisms'.DS.'aphorisms.php');    # Aphorisms flipping
+        break;
+
+    case 'rss':
+        include(MODULES.'rss'.DS.'rss.php');                # RSS feature
+        break;
+
+    case 'admin':                                           # Website administratin
+        /** Administration section of the website */
+        define('ADMIN', ROOT.'admin'.DS);
+        /** Admin libruaries */
+        define('ADMINLIBS', ADMIN.'libs'.DS);
+        /** Admin templates */
+        define('TEMPLATES', ADMIN.'templates'.DS);
+
+        require_once(ADMINLIBS.'functions.php');                            # Functions libruary
+        include_once(ADMIN.'languages'.DS.SYSTEM::get('language').'.php');  # Localization
 
         if (CMS::call('USER')->checkRoot()) {
             $modules = AdvScanDir(ADMIN.'modules', '', 'dir');
             $MODULES = array();
-            define('idxADMIN', TRUE);                                       /**< Constant to prevent direct access to php files */
+            /** Constant to prevent direct access to php files */
+            define('idxADMIN', TRUE);
+
             foreach ($modules as $module) {
                 if ((substr($module, 0, 1) === '_') || CONFIG::getValue('enabled', $module)) {
-                    include_once(ADMIN.'modules'.DS.$module.DS.'module.php');     /**< Initialize module */
+                    include_once(ADMIN.'modules'.DS.$module.DS.'module.php');     # Initialize module
                 }
             }
             $id = empty($REQUEST['id']) ? '' : basename($REQUEST['id']);
             switch ($id) {
-                case 'header':
-                    include(ADMIN.'header.php');
-                    break;
                 case 'main':
-                    include(ADMIN.'frameset.php');      /**< Open administration panel or show frames error */
+                    include(ADMIN.'frameset.php');      # Open administration panel or show frames error
                     break;
+
+                case 'header':
+                    include(ADMIN.'header.php');        # Header of the administration panel
+                    break;
+
                 case 'nav':
-                    require(ADMIN.'navigation.php');
+                    require(ADMIN.'navigation.php');    # Menu of the administration panel
                     break;
+
                 case 'footer':
-                    include(ADMIN.'footer.php');
+                    include(ADMIN.'footer.php');        # Footer of the administration panel
                     break;
+
                 default:
                     if (empty($REQUEST['id'])) {
                         $id = 'index';
-                        require(ADMIN.'module.php');    # Activate module
+                        require(ADMIN.'module.php');    # Activate module 'index'
                     } else {
                         list($module, $action) = explode('.', $id);
                         $id = strtr($id, '.', DS);
@@ -246,12 +260,12 @@ switch($MODULE) {
 
     default:
         include_once(SYS.'statistic.php');
-
-        define('TEMPLATES', SYS.'templates'.DS);        /**< System templates */
+        /** System templates */
+        define('TEMPLATES', SYS.'templates'.DS);
 
         # Loading main module
         CMS::call('SYSTEM')->setCurrentPoint('__MAIN__');
-        require_once(CURRENT_SKIN.'skin.php');  # Current skin definition
+        require_once(CURRENT_SKIN.'skin.php');              # Current skin definition
 
         $mod = explode('.', $MODULE, 2);
         if (empty(SYSTEM::$modules[$MODULE]) || !file_exists(MODULES.$mod[0].DS.end($mod).'.php')) {

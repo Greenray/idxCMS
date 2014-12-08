@@ -1,7 +1,4 @@
 <?php
-/** Logs data store */
-define('LOGS', CONTENT.'logs'.DS);
-
 /**
  * @package    idxCMS
  * @subpackage SYSTEM
@@ -14,7 +11,10 @@ define('LOGS', CONTENT.'logs'.DS);
  * @link       https://github.com/Greenray/idxCMS/system/log.class.php
  */
 
-/** Class LOG -wWorks with log and errorlog files */
+/** Logs data store */
+define('LOGS', CONTENT.'logs'.DS);
+
+/** Class LOG - Works with log and errorlog files */
 final class LOG {
 
     /** Class initialization */

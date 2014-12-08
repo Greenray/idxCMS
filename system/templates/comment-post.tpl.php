@@ -62,7 +62,7 @@ die();?>
         return true;
     }
 </script>
-<div class="post-comment">
+<div class="post-comment center">
     {bbcodes}
     <form id="post-comment" name="post-comment" method="post" action="{action}" onsubmit="return checkForm(this);">
         <fieldset>

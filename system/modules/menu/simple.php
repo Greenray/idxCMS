@@ -5,9 +5,9 @@
 
 if (!defined('idxCMS')) die();
 
-$data    = GetUnserialized(CONTENT.'menu');
-$TPL     = new TEMPLATE(dirname(__FILE__).DS.'simple.tpl');
-$output  = '<div id="simple-menu"><ul class="simple-menu">';
+$data   = GetUnserialized(CONTENT.'menu');
+$TPL    = new TEMPLATE(dirname(__FILE__).DS.'simple.tpl');
+$output = '<div id="simple-menu"><ul class="center">';
 
 foreach ($data as $module => $menu) {
     $output .= $TPL->parse($menu);
@@ -15,4 +15,3 @@ foreach ($data as $module => $menu) {
 
 $output .= '</ul></div>';
 ShowWindow(__('Simple menu'), $output);
-?>

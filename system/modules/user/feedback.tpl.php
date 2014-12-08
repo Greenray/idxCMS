@@ -36,7 +36,7 @@ die();?>
 </script>
 <div class="center">[__Private message to Administrator]
 <form id="form" name="form" method="post" action="" onsubmit="return checkForm(this);">
-    [if=email][__E-mail] <input type="text" id="email" name="email" size="30" value="{email}" class="required" />[endif]
+    [if=email]<input type="text" id="email" name="email" size="30" value="{email}" class="required" />[endif]
     <fieldset>
         <legend>[__Text]</legend>
         <textarea id="message" id="message" name="message" cols="50" rows="7">{message}</textarea>

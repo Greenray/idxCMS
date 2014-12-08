@@ -36,8 +36,8 @@ ini_set('display_errors', 1);
 /** Set default system internal encoding */
 mb_internal_encoding("UTF-8");
 /** Set default locale */
-setlocale(LC_CTYPE, array('ru_RU.utf8', 'ru_UA.utf8', 'en_US.utf-8', 'en_GB.utf-8'));
-setlocale(LC_ALL, array('ru_RU.utf8', 'ru_UA.utf8', 'en_US.utf-8', 'en_GB.utf-8'));
+setlocale(LC_CTYPE, array('ru_RU.UTF-8', 'ru_UA.UTF-8', 'by_BY.UTF-8', 'en_US.UTF-8', 'en_GB.UTF-8'));
+setlocale(LC_ALL, array('ru_RU.UTF-8', 'ru_UA.UTF-8', 'by_BY.UTF-8', 'en_US.UTF-8', 'en_GB.UTF-8'));
 /** Set default timezone */
 if (date_default_timezone_set(date_default_timezone_get()) === FALSE) {
     date_default_timezone_set('UTC');

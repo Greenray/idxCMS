@@ -112,11 +112,10 @@ ul { margin:1em 0;padding:0 0 0 2em }
     #boxes .middle,
     #boxes .right { float:left;padding:0 10px;width:310px }
     #boxes .box-container { background:#d4dee3;margin:0 auto;min-width:1000px;width:1000px }
-    #boxes .title { margin:20px 5px;text-align:center }
-#copyright { float:left;margin:10px 0;text-align:center;width:33% }
-#flipbox   { min-height:50px;text-align:center }
-#flippad   { text-align:center }
-    #flippad a { padding:5px 0;font-weight:bold;line-height:30px;height:30px;text-decoration:none }
+    #boxes .title { margin:20px 5px }
+#copyright { margin:10px 0;text-align:center;width:33% }
+#flipbox   { min-height:50px }
+#flippad   {}
 #footer  { background:#333;color:#fff;overflow:hidden;padding:10px 30px;position:relative;text-shadow:0 1px 1px #000 }
 #header  { background:#297377 }
 #layout-center { height:auto !important;margin:0 230px;overflow:hidden }
@@ -275,13 +274,13 @@ div.tabs { margin:0;padding:4px }
     #toolbar a:hover { color:red }
 #top-navigation { background:#bfcfdf;border:1px solid #808385;border-radius:8px;margin:0 10px;padding:10px }
     #top-navigation ul { padding:0 }
-#valid   { float:right;margin:10px 0;position:relative;text-align:center;width:20% }
+#valid   { float:right;margin:10px 0;position:relative;width:20% }
 #wrapper { background:#bfcfdf;height:auto !important;overflow:hidden }
 
-.admin  { margin:5px 10px 5px 88px }
-.author { float:left;margin:0 0 10px;text-align:center;width:120px }
+.admin    { margin:5px 10px 5px 88px }
+.author   { float:left;margin:0 0 10px;text-align:center;width:120px }
 .bbbutton { margin:0 -2px;padding:1px }
-.bbcodes  { margin:10px 20px 0;text-align:center }
+.bbcodes  { margin:10px 20px 0 }
     .bbcodes .smiles    { margin:0 0 5px }
     .bbcodes .link_text { margin:4px 20px;text-align:right }
     .bbcodes .link_text input[type='text'] { margin:2px 20px }
@@ -290,7 +289,7 @@ div.tabs { margin:0;padding:4px }
 .block { display:block }
 .box   { background:#bfcfdf;border:1px solid #808385;border-radius:8px;margin:3px 0px 5px 0;padding:10px }
     .box ul     { list-style-type:none }
-    .box .title { background:#297377;color:#fff;font-weight:bold;padding:10px 5px;text-align:center }
+    .box .title { background:#297377;color:#fff;font-weight:bold;padding:10px 5px }
 .calendar { width:100% }
     table .calendar { padding:2px;vertical-align:middle;border:1px solid #e0dfdf }
     .calendar th    { background:#297377;color:#fff;text-align:center }
@@ -322,7 +321,7 @@ div.tabs { margin:0;padding:4px }
     .links li a:hover { color:red }
 .login_panel { margin:10px 0 }
 .main { margin:0 auto }
-    .main .title { color:#000;margin:20px 5px 10px 5px;font-size:16px;font-weight:bold;text-align:center }
+    .main .title   { color:#000;margin:20px 5px 10px 5px;font-size:16px;font-weight:bold;text-align:center }
     .main .content { padding:10px }
 .main_menu,
 .main_menu ul,
@@ -390,15 +389,15 @@ div.tabs { margin:0;padding:4px }
         transition:height .25s ease .1s
     }
     .main_menu li:hover > ul li { height:36px;overflow:visible;padding:0 }
-    .main_menu ul li a { min-width:100px;padding:4px 0;margin:0;border:0;margin:0 0 0 35px }
+    .main_menu ul li a { min-width:100px;padding:4px 0;border:0;margin:0 0 0 35px }
     .main_menu ul li:last-child a { border:0 }
 .negative  { color:red;font-weight:bold }
-.no   { color:black;font-weight:bold }
+.no   { color:#000;font-weight:bold }
 .note { background:#ffffcc;border:2px solid red;color:#000;margin:20px;padding:5px }
 .none { display:none }
 .odd  { background:#dee3e7 }
 .online_help  { width:400px }
-.panel .title { background:#297377;color:#fff;padding:10px 5px;text-transform:uppercase;text-align:center;font-weight:bold }
+.panel .title { background:#297377;color:#fff;padding:10px 5px;text-transform:uppercase;font-weight:bold }
 .poll { margin:0 0 10px }
 .positive     { color:green;font-weight:bold }
 .post-comment { background:#d4dee3 }
@@ -433,7 +432,7 @@ div.tabs { margin:0;padding:4px }
 .star div.sep { float:right }
     .star     { height:20px;margin:0 50px 0 0 }
     .star ul.star { background:url(../images/icons/stars.gif) repeat-x;cursor:pointer;height:22px;width:85px;list-style:none;margin:0 50px 0 0;padding:0 }
-    .star li { display:block;float:right;height:20px;width:85px;margin:0;padding:0;position:absolute;z-index:1;text-decoration:none;text-indent:-9000px }
+    .star li      { display:block;float:right;height:20px;width:85px;margin:0;padding:0;position:absolute;z-index:1;text-decoration:none;text-indent:-9000px }
     .star li.curr { background:url(../images/icons/stars.gif) left 25px;font-size:1px }
     .star div.rates { margin:-16px 0 0 5px }
     .star div.sep   { margin:0 3px }
@@ -443,7 +442,7 @@ div.tabs { margin:0;padding:4px }
 .section { margin:5px 0 2px 50px;font-size:8pt }
 .special { color:red }
 .submit  {
-    background-color:#ccc;
+    background:#ccc;
     background-image:-o-linear-gradient(top, #eee, #ccc);
     border:1px solid #777;
     border-radius:.2em;
@@ -456,10 +455,10 @@ div.tabs { margin:0;padding:4px }
     }
     .submit:focus { background:#fafafa;outline:0 }
     .submit:hover { background:#ddd }
-.text { text-align:justify;margin:10px;left:-120px }
+.text { margin:10px;left:-120px }
 .user_panel { margin:10px;padding:0 10px }
 .version    { color:red;font-weight:bold;position:relative;left:230px;bottom:54px }
-.win .title { margin:20px 5px;text-transform:uppercase;text-align:center }
+.win .title { margin:20px 5px;text-transform:uppercase }
 
 .post,
 .comment,

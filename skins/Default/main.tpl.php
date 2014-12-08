@@ -8,11 +8,11 @@ if (!defined('idxCMS')) die();?>
 <!DOCTYPE html>
 <head>
     <title>[show=title]</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta http-equiv="Content-Language" content="{locale}" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Language" content="{locale}">
     [show=meta]
-    <link rel="stylesheet" type="text/css" href="{CURRENT_SKIN}style.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="{TOOLS}message.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="{CURRENT_SKIN}style.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="{TOOLS}message.css" media="screen">
     <script type="text/javascript" src="{TOOLS}jquery.js"></script>
     [if=index]
         <script type="text/javascript">
@@ -34,7 +34,7 @@ if (!defined('idxCMS')) die();?>
             });
         </script>
     [endif]
-    <link rel="stylesheet" type="text/css" href="{TOOLS}colorbox/colorbox.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="{TOOLS}colorbox/colorbox.css" media="screen">
     <script type="text/javascript" src="{TOOLS}colorbox/jquery.colorbox.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
@@ -61,7 +61,7 @@ if (!defined('idxCMS')) die();?>
             });
         }
     </script>
-    <link type="image/x-icon" rel="shortcut icon" href="favicon.ico" />
+    <link type="image/x-icon" rel="shortcut icon" href="{ROOT}favicon.ico">
 </head>
 <body id="page">
 <div id="wrapper">
@@ -131,7 +131,7 @@ if (!defined('idxCMS')) die();?>
 </div>
 [show=box,menu.simple@empty]
 <div id="footer">
-    <div id="valid">
+    <div id="valid" class="center">
         <a href="./"><img src="{IMAGES}cms.gif" width="80" height="15" alt="idxCMS" /></a>
         <a href="http://www.php.net"><img src="{IMAGES}php.gif" width="80" height="15" alt="PHP powered" /></a>
         <a href="http://ru.wikipedia.org/wiki/NoSQ"><img src="{IMAGES}db.gif" width="80" height="15" alt="No SQL" /></a>

@@ -33,25 +33,16 @@ final class FILTER {
     public function __construct() {}
     public function __clone() {}
 
-    /** Clean all keys of the request array.
-     * @param  array $input Input array of parameters
-     * @return array - Filered keys of array of parameters
-     */
-    private function cleanKey($input) {
-        $input = trim($input);
-        $input = iconv(mb_detect_encoding($input), 'UTF-8//IGNORE', $input);
-        $input = strip_tags($input);
-        $input = stripslashes($input);
-        return str_replace(array("\r\n", "\n\r", "\r", "\n"), '', $input);
-    }
-
     /** Clean all values of the request array.
      * @param  array $input Input array of parameters
      * @return array - Filered values of array parameters
      */
     private function cleanValue($input) {
         $input = trim($input);
-        $input = iconv(mb_detect_encoding($input), 'UTF-8//IGNORE', $input);
+        # Transformation of variable $input into the internal encoding of the system
+        $encode = mb_internal_encoding();
+        $input = mb_convert_variables($encode, "ASCII,Windows-1251,UTF-8", $input);
+        $input = strip_tags($input);
         $input = stripslashes($input);
         return UnifyBr($input);
     }
@@ -64,13 +55,13 @@ final class FILTER {
         $result = array();
         foreach($vars as $key => $value) {
             if (!is_array($value)) {
-                $result[$this->cleanKey($key)] = $this->cleanValue($value);
+                $result[$this->cleanValue($key)] = $this->cleanValue($value);
             } else {
                 $clear = array();
                 foreach($value as $item => $field) {
-                    $clear[$this->cleanKey($item)] = $this->cleanValue($field);
+                    $clear[$this->cleanValue($item)] = $this->cleanValue($field);
                 }
-                $result[$this->cleanKey($key)] = $clear;
+                $result[$this->cleanValue($key)] = $clear;
             }
         }
         return $result;

@@ -1,47 +1,50 @@
 <?php
 /**
- * @package    idxCMS
- * @subpackage SYSTEM
- * @file       filter.class.php
- * @version    2.3
- * @author     Victor Nabatov <greenray.spb@gmail.com>\n
- * @license    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *             http://creativecommons.org/licenses/by-nc-sa/3.0/
- * @copyright  (c) 2011 - 2014 Victor Nabatov\n
- * @link       https://github.com/Greenray/idxCMS/system/filter.class.php
+ * @package   idxCMS
+ * @file      system/filter.class.php
+ * @version   2.3
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+  *            <https://github.com/Greenray/idxCMS/system/filter.class.php>
+ * @copyright (c) 2011 - 2014 Victor Nabatov\n
+ *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
  */
 
-/** Class FILTER - cleans parameters of $_REQUEST, $_FILES, $_COOKIE, detect intrusions and ban unwanted visitors */
+/**
+ * @addtogroup SYSTEM
+ * @{
+ */
+
+/** Class FILTER - clean parameters $_REQUEST, $_FILES, $_COOKIE, detect intrusions and ban unwanted visitors */
 final class FILTER {
 
-    /** Array of filtered $_POST and/or $_GET parameters.
-     * @var array
+    /** Array of filtered $_POST, $_GET and $_FILES parameters.
+     * @param array
      */
     private static $REQUEST = array();
 
     /** Array of filtered $_COOKIE parameters.
-     * @var array
+     * @param array
      */
     private static $COOKIE  = array();
 
     /** Array of parameters types.
-     * @var array
+     * @param array
      */
-    private $types = array('REQUEST', 'FILES', 'COOKIE');
+    private static $types = ['REQUEST', 'FILES', 'COOKIE'];
 
     /** Class initialization */
     public function __construct() {}
     public function __clone() {}
 
-    /** Clean all values of the request array.
+    /** Clean all parameters and their values of the request array.
      * @param  array $input Input array of parameters
-     * @return array - Filered values of array parameters
+     * @return string - Filered parameters
      */
     private function cleanValue($input) {
         $input = trim($input);
         # Transformation of variable $input into the internal encoding of the system
-        $encode = mb_internal_encoding();
-        $input = mb_convert_variables($encode, "ASCII,Windows-1251,UTF-8", $input);
+        $encode = mb_convert_variables(mb_internal_encoding(), "ASCII,Windows-1251,UTF-8", $input);
         $input = strip_tags($input);
         $input = stripslashes($input);
         return UnifyBr($input);
@@ -68,15 +71,17 @@ final class FILTER {
     }
 
     /** Main function.
+     * Detect intrusion, clean and unset $_POST, $_GET, $_FILES and $_COOKIE.
      * @return void
-     * @uses Intrusion detection system
      */
     public function sanitaze() {
         $this->ids();
-        foreach($this->types as $VAR) {
+        foreach(self::$types as $VAR) {
             $$VAR = $this->clear($GLOBALS['_'.$VAR]);
             unset($GLOBALS['_'.$VAR]);
         }
+        var_dump($REQUEST);
+        var_dump(self::$REQUEST);
         self::$REQUEST = array_merge($REQUEST, $FILES);
         self::$COOKIE  = $COOKIE;
     }
@@ -115,14 +120,14 @@ final class FILTER {
 
     /** Check if the email is valid.
      * @param  string $email Email address
-     * @return boolean
+     * @return boolean - The result of operation
      */
     public function validEmail($email) {
         return preg_match('/^([a-zA-Z0-9\!\#\$\%\&\'\*\+\-\/\=\?\^\_\`\{\|\}\~]+(\.[a-zA-Z0-9\!\#\$\%\&\'\*\+\-\/\=\?\^\_\`\{\|\}\~]+)*)@((([a-z]([-a-z0-9]*[a-z0-9])?)|(#[0-9]+)|(\[((([01]?[0-9]{0,2})|(2(([0-4][0-9])|(5[0-5]))))\.){3}(([01]?[0-9]{0,2})|(2(([0-4][0-9])|(5[0-5]))))\]))\.)*(([a-z]([-a-z0-9]*[a-z0-9])?)|(#[0-9]+)|(\[((([01]?[0-9]{0,2})|(2(([0-4][0-9])|(5[0-5]))))\.){3}(([01]?[0-9]{0,2})|(2(([0-4][0-9])|(5[0-5]))))\]))$/', $email) ? TRUE : FALSE;
     }
 
     /** Ban user.
-     * @return boolean
+     * @return boolean - The result of operation
      */
     public function ban() {
         $bans = file_exists(CONTENT.'bans') ? file_get_contents(CONTENT.'bans') : '';
@@ -166,7 +171,7 @@ final class FILTER {
                 'User agent: '       .$_SERVER['HTTP_USER_AGENT'].LF;
 
         $result = '';
-        foreach($this->types as $var) {
+        foreach(self::$types as $var) {
             $result .= $var.': ';
             foreach($GLOBALS['_'.$var] as $key => $value) {
                 if (!is_array($value)) {
@@ -208,3 +213,4 @@ final class FILTER {
         }
     }
 }
+/** @}*/

@@ -9,7 +9,6 @@ $config = CONFIG::getSection('search');
 
 if (USER::loggedIn() || $config['allow-guest']) {
     $search = $REQUEST['search'];
-    var_dump($search);
     if (!empty($search)) {
         $items = explode(" ", $search);
         $TPL = new TEMPLATE(dirname(__FILE__).DS.'results.tpl');

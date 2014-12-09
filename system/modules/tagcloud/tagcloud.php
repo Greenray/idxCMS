@@ -1,16 +1,30 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE TAGCLOUD
+/**
+ * @package   idxCMS
+ * @ingroup   MODULES TAGCLOUD
+ * @file      system/modules/tagcloud/tagcloud.php
+ * @version   2.3
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *            http://creativecommons.org/licenses/by-nc-sa/3.0/
+ * @copyright (c) 2011 - 2014 Victor Nabatov\n
+ * @see       https://github.com/Greenray/idxCMS/system/modules/tagcloud/tagcloud.php
+ */
 
 if (!defined('idxCMS')) die();
 
+/** Callback function for tags sorting
+ * @param  string $a First tag for comparing
+ * @param  string $b Second tag for comparing
+ * @return integer
+ */
 function scmp($a, $b) {
     return mt_rand(-1, 1);
 }
 
 $tc = CONFIG::getSection('tagcloud');
 
+# Tags colors
 if (!empty($tc['color'])) {
     $tc['color'] = strtr($tc['color'], array("#" => "0x"));
     for ($i = 0; $i < 11; $i++) {
@@ -20,6 +34,7 @@ if (!empty($tc['color'])) {
     $colors = array('0xff0000','0x0000ff','0x00ff00','0xffff00','0xff00ff','0xff9900','0x808080','0x993300','0x00ffff','0x0f0f0f','0x6699ff');
 }
 
+# Colors for highlighting tags
 if (!empty($tc['hicolor'])) {
     $tc['hicolor'] = strtr($tc['hicolor'], array("#" => "0x"));
     for ($i = 0; $i < 11; $i++) {
@@ -36,8 +51,8 @@ $search  = array('posts', 'forum', 'catalogs');
 
 foreach ($search as $allowed) {
     if (array_key_exists($allowed, $enabled)) {
-        $tc['search'] .= '%26'.$allowed.'=on';
-        $tc['search_txt'] .= '&amp;'.$allowed.'=on';
+        $tc['search'] .= '%26'.$allowed.'=on';          # Create the parameter for search from flash tagcloud
+        $tc['search_txt'] .= '&amp;'.$allowed.'=on';    # Create the parameter for search from text tagcloud
     }
 }
 
@@ -52,7 +67,7 @@ $tags = PrepareTags();
 if (!empty($tags)) {
     $tags_amount = sizeof($tags);
     if ($tc['tags'] < $tags_amount) {
-        $tags_amount = $tc['tags'];
+        $tags_amount = $tc['tags'];     # Number of tags to show in tagcloud
     }
     $tags = array_slice($tags, 0, $tags_amount, TRUE);
     uasort($tags, 'scmp');
@@ -84,4 +99,3 @@ if (!empty($tags)) {
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'tagcloud.tpl');
     ShowWindow(__('Tagcloud'), $TPL->parse($tc));
 }
-?>

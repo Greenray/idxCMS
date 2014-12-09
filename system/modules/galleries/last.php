@@ -6,24 +6,11 @@
 if (!defined('idxCMS')) die();
 
 $sections = CMS::call('GALLERIES')->getSections();
-$stat = array();
-$i = 1;
 
-foreach ($sections as $section => $null) {
-    $categories = CMS::call('GALLERIES')->getCategories($section);
-    foreach ($categories as $key => $category) {
-        $content = CMS::call('GALLERIES')->getContent($key);
-        if (!empty($content)) {
-            $stat[$i] = array_pop($content);
-            $stat[$i]['link'] = $category['link'].ITEM.$stat[$i]['id'];
-            $stat[$i]['path'] = $category['path'];
-            ++$i;
-        }
-    }
-} 
+# Updates
+$last = CMS::call('GALLERIES')->getSectionsLastItems();
 
-if (!empty($stat)) {
+if (!empty($last)) {
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'last.tpl');
-    ShowWindow(__('Updates'), $TPL->parse(array('items' => $stat)));
+    ShowWindow(__('Updates'), $TPL->parse(CMS::call('GALLERIES')->getLastItems($last)));
 }
-?>

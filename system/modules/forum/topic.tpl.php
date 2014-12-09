@@ -22,7 +22,7 @@ die();?>
                     </span>
                 [endif]
             </div>
-            <div class="author">
+            <div class="author center">
                 <img src="{avatar}" hspace="5" vspace="5" alt="" /><br />
                 <strong><a href="javascript:InsertText(document.forms['comment'].elements['text'], '[b]{nick}![/b]' + '\n');">{nick}</a></strong><br />
                 [if=status]{status}<br />[endif]
@@ -30,7 +30,7 @@ die();?>
                 [if=country]{country}<br />[endif]
                 [if=city]{city}[endif]
             </div>
-            <div class="text">{text}</div>
+            <div class="text justify">{text}</div>
         </div>
     </div>
     [if=admin]

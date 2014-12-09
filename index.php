@@ -9,7 +9,7 @@
  * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
  *            http://creativecommons.org/licenses/by-nc-sa/3.0/
  * @copyright (c) 2011 - 2014 Victor Nabatov\n
- * @link      https://github.com/Greenray/idxCMS/index.php
+ * @see       https://github.com/Greenray/idxCMS/index.php
  */
 
 # This project is based on the idea and experience of work in the ReloadCMS project
@@ -150,10 +150,9 @@ $REQUEST = FILTER::getAll('REQUEST');
 global $LANG;
 /** System initialization */
 $CMS = CMS::call('SYSTEM');
-
-/** The version of CMS */
+/** idxCMS version */
 define('IDX_VERSION', '2.3');
-/** Copyright */
+/** idxCMS copyright */
 define('IDX_COPYRIGHT', '&copy; 2011 - 2014 '.__('Greenray'));
 /** This message is reflected in the pages of the website */
 define('IDX_POWERED', 'Powered by idxCMS - '.IDX_VERSION);

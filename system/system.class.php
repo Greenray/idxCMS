@@ -1,18 +1,23 @@
 <?php
-/** Site COOKIE */
-define('FOREVER_COOKIE', time() + 3600 * 24 * 365 * 5);
+/**
+ * @package   idxCMS
+ * @file      system/system.class.php
+ * @version   2.3
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ *            <https://github.com/Greenray/idxCMS/system/filter.class.php>\n
+ *            Reloadcms Team <http://reloadcms.com>
+ * @copyright (c) 2011 - 2014 Victor Nabatov\n
+ *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ */
 
 /**
- * @package    idxCMS
- * @file       system.class.php
- * @version    2.3
- * @author     Victor Nabatov <greenray.spb@gmail.com>\n
- *             Reloadcms Team http://reloadcms.com\n
- * @license    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *             http://creativecommons.org/licenses/by-nc-sa/3.0/
- * @copyright  (c) 2011 - 2014 Victor Nabatov\n
- * @link       https://github.com/Greenray/idxCMS/system/system.class.php
+ * @addtogroup SYSTEM
+ * @{
  */
+
+/** Site COOKIE */
+define('FOREVER_COOKIE', time() + 3600 * 24 * 365 * 5);
 
 /** Class SYSTEM - system, modules, users and templates initialization */
 class SYSTEM {
@@ -21,18 +26,18 @@ class SYSTEM {
     private static $language = '';
     private static $languages = array();
 
-    /** Current locale
-     * @var string
+    /** Current locale.
+     * @param string
      */
     private static $locale = '';
 
-    /** Current skin
-     * @var string
+    /** Current skin.
+     * @param string
      */
-    private static $skin = '';
+    private static $skin = 'Default';
 
-    /** Website skins
-     * @var array
+    /** Website skins.
+     * @param array
      */
     public static  $skins = array();
     public static  $modules = array();
@@ -43,14 +48,14 @@ class SYSTEM {
     private static $menu = array();
     private static $pagename = '';
 
-    /** Website map
-     * @var array
+    /** Website map.
+     * @param array
      */
     private static $sitemap = array();
     private static $search = array();
 
-    /** Website meta
-     * @var array
+    /** Website meta.
+     * @param array
      */
     private static $meta = array();
 
@@ -103,7 +108,7 @@ class SYSTEM {
             define('CURRENT_SKIN', SKINS.self::$skin.DS);
         } else {
             /** The default skin */
-            define('CURRENT_SKIN', SKINS.'Default'.DS);
+ //           define('CURRENT_SKIN', SKINS.'Default'.DS);
         }
     }
 
@@ -363,3 +368,4 @@ class SYSTEM {
         file_put_contents(CONTENT.'menu', serialize($menu));
     }
 }
+/** @}*/

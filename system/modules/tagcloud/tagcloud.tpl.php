@@ -1,7 +1,15 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE TAGCLOUD - TEMPLATE
+/**
+ * @package   idxCMS
+ * @ingroup   MODULES TAGCLOUD
+ * @file      system/modules/tagcloud/tagcloud.tpl.php
+ * @version   2.3
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *            http://creativecommons.org/licenses/by-nc-sa/3.0/
+ * @copyright (c) 2011 - 2014 Victor Nabatov\n
+ * @see       https://github.com/Greenray/idxCMS/system/modules/tagcloud/tagcloud.tpl.php
+ */
 
 # SWFObject v1.4: Flash Player detection and embed - http://blog.deconcept.com/swfobject/
 # SWFObject is (c) 2006 Geoff Stearns and is released under the MIT License: http://www.opensource.org/licenses/mit-license.php

@@ -5,9 +5,9 @@
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
 
-$users = FILTER::get('REQUEST', 'users');
+$users = $REQUEST['users'];
 
-if (FILTER::get('REQUEST', 'pm')) {
+if ($REQUEST['pm']) {
     if (!empty($users)) {
         foreach ($users as $user) {
             $PM = new MESSAGE(PM_DATA, USER::getUser('username'));
@@ -19,7 +19,7 @@ if (FILTER::get('REQUEST', 'pm')) {
     } else ShowMessage('User\'s list is empty');
 }
 
-if (FILTER::get('REQUEST', 'letter')) {
+if ($REQUEST['letter']) {
     if (!empty($users)) {
         foreach ($users as $user) {
             $userdata = USER::getUserData($user);

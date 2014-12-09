@@ -88,7 +88,7 @@ die();?>
                 </span>
             [endif]
         </div>
-        <div class="text">{msg[text]}</div>
+        <div class="text justify">{msg[text]}</div>
     </div>
 [endeach.msg]
 [ifelse=allow_post]

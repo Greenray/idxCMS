@@ -11,7 +11,7 @@ if (!defined('idxCMS')) die();
  * @license    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
  *             http://creativecommons.org/licenses/by-nc-sa/3.0/
  * @copyright  (c) 2011 - 2014 Victor Nabatov\n
- * @link       https://github.com/Greenray/idxCMS/system/statistic.php
+ * @see        https://github.com/Greenray/idxCMS/system/statistic.php
  */
 
 /** Site ststistic - registers a visitы to the website by visitors, users, bots and spiders */

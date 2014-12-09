@@ -55,7 +55,7 @@ die();?>
                 <td colspan="2"><input type="text" name="title" value="{title}" id="title" size="50" class="required" required="required" /></td>
             </tr>
             <tr><th colspan="4">[__Description]</th></tr>
-            <tr><td class="bbcodes" colspan="3">{bbCodes}</td></tr>
+            <tr><td class="bbcodes center" colspan="3">{bbCodes}</td></tr>
             <tr><td colspan="3"><textarea id="desc" name="desc" cols="120" rows="5">{desc}</textarea></td></tr>
             <tr>
                 <td class="label">[__Access level]</td>

@@ -4,17 +4,18 @@
 # ADMINISTRATION - APHORISMA - SELECT FILE TEMPLATE
 
 die();?>
-<div class="module">[__Aphorisms]</div>
+
+<div class="module">{title}</div>
 <fieldset>
     <form name="config" method="post" action="">
         <table class="std">
             <tr class="odd">
                 <td>[__Select file]</td>
                 <td colspan="2">
-                    <select name="aph" style="width:200px">
-                        [foreach=aph.id.name]
+                    <select name="selected" style="width:200px">
+                        [foreach=select.id.name]
                             <option value="{name}">{name}</option>
-                        [endforeach.aph]
+                        [endforeach.select]
                     </select>
                 </td>
             </tr>

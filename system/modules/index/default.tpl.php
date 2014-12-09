@@ -1,15 +1,15 @@
 <?php
 /**
- * @package    idxCMS
- * @subpackage MODULES
- * @file       system/modules/index/statistic.php
- * @version    2.3
- * @author     Victor Nabatov <greenray.spb@gmail.com>\n
- *             Reloadcms Team http://reloadcms.com\n
- * @license    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *             http://creativecommons.org/licenses/by-nc-sa/3.0/
- * @copyright  (c) 2011 - 2014 Victor Nabatov\n
- * @link       https://github.com/Greenray/idxCMS/system/modules/index/statistic.php
+ * @package   idxCMS
+ * @ingroup   MODULES INDEX
+ * @file      system/modules/index/default.tpl.php
+ * @version   2.3
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ *            Reloadcms Team http://reloadcms.com\n
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *            http://creativecommons.org/licenses/by-nc-sa/3.0/
+ * @copyright (c) 2011 - 2014 Victor Nabatov\n
+ * @see       https://github.com/Greenray/idxCMS/system/modules/index/default.tpl.php
  */
 die();?>
 
@@ -31,9 +31,9 @@ die();?>
                     [__Category]: <a href="{category[link]}">{category[title]}</a>
                 </div>
                 <div class="title"><h1>{posts[title]}</h1></div>
-                <div class="text">{posts[desc]}</div>
+                <div class="text justify">{posts[desc]}</div>
                 <div class="info">
-                    <span class="author">[__Posted by]: <a href="{MODULE}user&amp;user={posts[author]}">{posts[nick]}</a></span>
+                    <span class="author center">[__Posted by]: <a href="{MODULE}user&amp;user={posts[author]}">{posts[nick]}</a></span>
                     <span class="more">
                         <a href="{posts[link]}">[__Read more...] [if=posts[views]][{posts[views]}][endif]</a>
                         [ifelse=posts[comment]]

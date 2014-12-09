@@ -8,7 +8,7 @@
  * @license    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
  *             http://creativecommons.org/licenses/by-nc-sa/3.0/
  * @copyright  (c) 2011 - 2014 Victor Nabatov\n
- * @link       https://github.com/Greenray/idxCMS/system/modules/aphorisms/aphorisms.tpl.php
+ * @see        https://github.com/Greenray/idxCMS/system/modules/aphorisms/aphorisms.tpl.php
  */
 
 /** Module APORISMS - template */
@@ -54,8 +54,8 @@ die();?>
         });
     });
 </script>
-<div id="flipbox">{text}</div>
-<div id="flippad">
+<div id="flipbox" class="center">{text}</div>
+<div id="flippad" class="center">
     <a href="#" rel="rl" rev="transparent" title="[__Previous]">
         <img src="{ICONS}arrow-left.png" width="16" height="16" alt="[__Previous]" />
     </a>

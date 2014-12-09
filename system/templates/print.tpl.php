@@ -8,7 +8,7 @@ die();?>
 <!DOCTYPE html>
 <head>
     <title>{title} - [__Version for printer]</title>
-    <link rel="stylesheet" href="{SKINS}print.css" type="text/css" />
+    <link rel="stylesheet" href="{SKINS}print.css" type="text/css">
 </head>
 <body>
     <table width="90%">
@@ -17,7 +17,7 @@ die();?>
                 <h1>{title}</h1>
                 <div class="right">{date}</div>
                 <p>[__Author]: <strong>{nick}</strong></p>
-                <div class="text">{text}</div>
+                <div class="text justify">{text}</div>
                 <hr />
             </td>
         </tr>

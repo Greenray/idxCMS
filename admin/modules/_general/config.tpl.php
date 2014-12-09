@@ -78,7 +78,7 @@ die();?>
             <tr class="odd">
                 <td>[__Meta tags for your site]</td>
                 <td colspan="2">
-                    &lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;<br />
+                    &lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /&gt;<br />
                     &lt;meta http-equiv="Content-Language" content="<i>[__Will be set automaticaly]</i>" /&gt;
                     <textarea name="meta_tags" cols="20" rows="7">{meta_tags}</textarea>
                 </td>

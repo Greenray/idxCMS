@@ -8,9 +8,8 @@ if (!defined('idxCMS')) die();
 $config = CONFIG::getSection('search');
 
 if (USER::loggedIn() || $config['allow-guest']) {
-    $search = $REQUEST['search'];
-    if (!empty($search)) {
-        $items = explode(" ", $search);
+    if (!empty($REQUEST['search'])) {
+        $items = explode(" ", $REQUEST['search']);
         $TPL = new TEMPLATE(dirname(__FILE__).DS.'results.tpl');
         $ERR = new TEMPLATE(dirname(__FILE__).DS.'error.tpl');
         $founded = array();
@@ -38,14 +37,14 @@ if (USER::loggedIn() || $config['allow-guest']) {
                                         foreach ($content as $i => $item) {
                                             $item = CMS::call($obj)->getItem($i, 'full', FALSE);
                                             if (!empty($item['keywords'])) {
-                                                SearchResult($item['keywords'], $item['title'], $search, $item['link'], $result);
+                                                SearchResult($item['keywords'], $item['title'], $REQUEST['search'], $item['link'], $result);
                                             }
-                                            SearchResult($item['title'], $item['title'], $search, $item['link'], $result);
-                                            SearchResult($item['nick'], $item['title'], $search, $item['link'], $result);
+                                            SearchResult($item['title'], $item['title'], $REQUEST['search'], $item['link'], $result);
+                                            SearchResult($item['nick'], $item['title'], $REQUEST['search'], $item['link'], $result);
                                             if (!empty($item['desc'])) {
-                                                SearchResult($item['desc'], $item['title'], $search, $item['link'], $result);
+                                                SearchResult($item['desc'], $item['title'], $REQUEST['search'], $item['link'], $result);
                                             }
-                                            SearchResult($item['text'], $item['title'], $search, $item['link'], $result);
+                                            SearchResult($item['text'], $item['title'], $REQUEST['search'], $item['link'], $result);
                                         }
                                     }
                                 }
@@ -71,7 +70,7 @@ if (USER::loggedIn() || $config['allow-guest']) {
         $results = array();
         $results['count'] = sizeof($common);
         $perpage = (int) CONFIG::getValue('search', 'per-page');
-        $page    = (int) $REQUEST['page'];
+        $page    = (int) FILTER::get('REQUEST', 'page');
         $pagination = GetPagination($page, $perpage, $results['count']);
         if (!empty($common)) {
             $show = array_slice($common, $pagination['start'], $perpage, TRUE);
@@ -88,7 +87,7 @@ if (USER::loggedIn() || $config['allow-guest']) {
         SYSTEM::set('pagename', __('Search results'));
         ShowWindow(__('Search results'), $output);
         if ($results['count'] > $perpage) {
-            ShowWindow('', Pagination($results['count'], $perpage, $page, '?module=search&search='.$search));
+            ShowWindow('', Pagination($results['count'], $perpage, $page, '?module=search&search='.$REQUEST['search']));
         }
     } else {
         $TPL = new TEMPLATE(dirname(__FILE__).DS.'search.tpl');

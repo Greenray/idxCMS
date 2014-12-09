@@ -5,14 +5,12 @@
 
 if (!defined('idxCMS')) die();
 
-$message = FILTER::get('REQUEST', 'message');
-
-if (!empty($message)) {
+if (!empty($REQUEST['message'])) {
     try {
         CheckCaptcha();
         $FEEDBACK = new MESSAGE(CONTENT, 'feedback');
         $FEEDBACK->sendFeedback(
-            $message,
+            $REQUEST['message'],
             '',
             empty($REQUEST['email']) ? USER::getUser('email') : $REQUEST['email']
         );
@@ -34,7 +32,7 @@ if (!empty($message)) {
                     $REQUEST['letter']
                 );
                 ShowWindow('', __('Message sent'));
-            } else { 
+            } else {
                 ShowError(__('Text is empty'));
             }
         } else {

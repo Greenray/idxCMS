@@ -12,13 +12,13 @@ die();?>
         <span class="date">{date}</span>
     </div>
     <div class="title"><h1>{title}</h1></div>
-    <div class="text">{text}</div>
+    <div class="text justify">{text}</div>
     <div class="info">
         <hr />
         <a href="{MODULE}posts.print{SECTION}{section}{CATEGORY}{category}{ITEM}{id}" target="_blank">
             <img src="{ICONS}printer.png" width="16" height="16" hspace="5" vspace="5" class="tip" alt="[__Version for printer]" />
         </a>
-        <span class="author">[__Author]: <a href="{MODULE}user&amp;user={author}">{nick}</a></span>
+        <span class="author center">[__Author]: <a href="{MODULE}user&amp;user={author}">{nick}</a></span>
         [if=admin]
             <div class="menu">
                 <form name="post" method="post" action="">

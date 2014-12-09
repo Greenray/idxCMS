@@ -5,7 +5,7 @@
 
 die();?>
 
-<div class="bbcodes">
+<div class="bbcodes center">
     <script>
         var clientPC = navigator.userAgent.toLowerCase();
         var isIE  = ((clientPC.indexOf("msie") !== -1) && (clientPC.indexOf("opera") === -1));

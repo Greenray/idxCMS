@@ -4,11 +4,12 @@
 # MODULE USER - PRIVATE MESSAGES TEMPLATE
 
 die();?>
+
 <div class="comment">
     <a name="{id}"></a>
     <div class="content">
         [ifelse=inbox]
-            <div class="author">
+            <div class="author center">
                 <img src="{avatar}" hspace="5" vspace="5" alt="" /><br />
                 {nick}<br />
                 [if=status]{status}<br />[endif]
@@ -24,7 +25,7 @@ die();?>
                     </a>
                 </span>
             </div>
-            <div class="text">{text}</div>
+            <div class="text justify">{text}</div>
         </div>
         <div class="menu">
             <form method="post" action="" class="menu">
@@ -41,14 +42,14 @@ die();?>
                 </form>
             [endif]
         [else]
-            <div class="author">
+            <div class="author center">
                 <img src="{avatar}" hspace="5" vspace="5" alt="" /><br />
                 {nick}
                 [if=country]<br />{country}[endif]
                 [if=city]<br />{city}[endif]
             </div>
             <div class="date">{time}</div>
-            <div class="text">{text}</div>
+            <div class="text justify">{text}</div>
             <div class="menu">
                 <form method="post" action="" class="menu">
                     <input type="hidden" name="mode" value="outbox" />

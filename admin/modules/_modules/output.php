@@ -1,14 +1,14 @@
 <?php
 /**
- * @package    idxCMS
- * @subpackage ADMINISTRATION
- * @file       admin/modules/_modules/output.php
- * @version    2.3
- * @author     Victor Nabatov <greenray.spb@gmail.com>\n
- * @license    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *             http://creativecommons.org/licenses/by-nc-sa/3.0/
- * @copyright  (c) 2011 - 2014 Victor Nabatov\n
- * @link       https://github.com/Greenray/idxCMS/admin/modules/_modules/output.php
+ * @package   ADMINISTRATION
+ * @ingroup   MODULES GENERAL CONFIG
+ * @file      admin/modules/_modules/output.php
+ * @version   2.3
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *            http://creativecommons.org/licenses/by-nc-sa/3.0/
+ * @copyright (c) 2011 - 2014 Victor Nabatov\n
+ * @see       https://github.com/Greenray/idxCMS/admin/modules/_modules/output.php
  */
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
@@ -33,9 +33,9 @@ if (!empty($REQUEST['save'])) {
         }
     }
     CMS::call('CONFIG')->setSection('output.'.$REQUEST['skin'], $config);
-//    if (!CMS::call('CONFIG')->save()) {
-//        ShowMessage('Cannot save file');
-//    }
+    if (!CMS::call('CONFIG')->save()) {
+        ShowMessage('Cannot save file');
+    }
 }
 
 # INTERFACE

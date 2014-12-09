@@ -8,7 +8,7 @@
  * @license    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
  *             http://creativecommons.org/licenses/by-nc-sa/3.0/
  * @copyright  (c) 2011 - 2014 Victor Nabatov\n
- * @link       https://github.com/Greenray/idxCMS/system/template.class.php
+ * @see        https://github.com/Greenray/idxCMS/system/template.class.php
  */
 
 /** Class TEMPLATE - templates parser.
@@ -72,8 +72,6 @@ class TEMPLATE {
             $this->tpl = file_get_contents(TEMPLATES.$tpl.'.php');
         } elseif (file_exists($template.'.php')) {
             $this->tpl = file_get_contents($template.'.php');
-        } elseif (file_exists(ADMIN.'templates'.DS.$tpl.'.php')) {
-            $this->tpl = file_get_contents(ADMIN.'templates'.DS.$tpl.'.php');
         } else {
             $this->tpl = $template;
         }
@@ -466,8 +464,7 @@ class TEMPLATE {
     }
 
     /** Parse template with givven variables.
-     * @param  array   $params Template variables.
-     * @param  boolean
+     * @param  array  $params Template variables.
      * @return string - Parsed template
      */
     public function parse($params = null) {

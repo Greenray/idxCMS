@@ -8,7 +8,7 @@
  * @license    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
  *             http://creativecommons.org/licenses/by-nc-sa/3.0/
  * @copyright  (c) 2011 - 2014 Victor Nabatov\n
- * @link       https://github.com/Greenray/idxCMS/system/content.class.php
+ * @see        https://github.com/Greenray/idxCMS/system/content.class.php
  */
 
 /** Class CONTENT - works with content: articles, topics, comments and replies */

@@ -1,11 +1,23 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE TAGCLOUD - INITIALIZATION
+/**
+ * @package   idxCMS
+ * @defgroup  TAGCLOUD
+ * @ingroup   MODULES
+ * @file      system/modules/tagcloud/module.php
+ * @version   2.3
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *            http://creativecommons.org/licenses/by-nc-sa/3.0/
+ * @copyright (c) 2011 - 2014 Victor Nabatov\n
+ * @see       https://github.com/Greenray/idxCMS/system/modules/tagcloud/module.php
+ */
 
 if (!defined('idxCMS')) die();
 
-# Transformation of a array: key <=> value
+/** Transformation of a array: key <=> value.
+ * @param  array $array Array to invert
+ * @return array - Inverted array
+ */
 function ArrayInvert($array) {
     $result = array();
     foreach (array_keys($array) as $key) {
@@ -17,8 +29,10 @@ function ArrayInvert($array) {
     return $result;
 }
 
-# Transformation of a two-dimensional array into one-dimensional
-# with restoration of reference values of keys
+/** Transformation of a two-dimensional array into one-dimensional with restoration of reference values of keys.
+ * @param  array $array Array to transform
+ * @return type - The result of transformation
+ */
 function ArrayNormalize($array) {
     $result = array();
     foreach ($array as $key => $items) {
@@ -29,6 +43,9 @@ function ArrayNormalize($array) {
     return $result;
 }
 
+/** Preparing tags for tagcloud.
+ * @return array - Array of tags for the tagcloud
+ */
 function PrepareTags() {
     $tags = GetUnserialized(CONTENT.'tags');
     if (!empty($tags)) {
@@ -52,4 +69,3 @@ switch (SYSTEM::get('locale')) {
 }
 
 SYSTEM::registerModule('tagcloud', 'Tagcloud', 'box');
-?>

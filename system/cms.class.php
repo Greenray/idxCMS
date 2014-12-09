@@ -1,21 +1,25 @@
 <?php
 /**
- * @package    idxCMS
- * @subpackage SYSTEM
- * @file       cms.class.php
- * @version    2.3
- * @author     Victor Nabatov <greenray.spb@gmail.com>\n
- * @license    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *             http://creativecommons.org/licenses/by-nc-sa/3.0/
- * @copyright  (c) 2011 - 2014 Victor Nabatov\n
- * @link       https://github.com/Greenray/idxCMS/system/cms.class.php
+ * @package   idxCMS
+ * @file      system/cms.class.php
+ * @version   2.3
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ *            https://github.com/Greenray/idxCMS/system/cms.class.php>
+ * @copyright (c) 2011 - 2014 Victor Nabatov\n
+ *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
  */
 
-/** Class CMS - registers classes and provides access to their methods */
+/**
+ * @addtogroup SYSTEM
+ * @{
+ */
+
+/** Class CMS - register objects and provide access to their methods */
 class CMS {
 
     /** Registered objects.
-     * @var array
+     * @param array
      */
     private static $obj = array();
 
@@ -23,7 +27,7 @@ class CMS {
     private function __construct() {}
     private function __clone() {}
 
-    /** Creating and registering of object.
+    /** Create and register the object.
      * @param  string $class Class name
      * @return object - Created and initialized object
      */
@@ -32,7 +36,7 @@ class CMS {
         return self::$obj[$class];
     }
 
-    /** Calling of object, if object is not set it'll be created.
+    /** Call the object, if object is not set it'll be created.
      * @param  string $class Class name
      * @return object - Existing or created and initialized object\n
      * Example:
@@ -48,7 +52,7 @@ class CMS {
         return empty(self::$obj[$class]) ? self::register($class) : self::$obj[$class];
     }
 
-    /** Removing of object.
+    /** Remove the object.
      * @param  string $class Class name
      * @return void
      */
@@ -58,3 +62,4 @@ class CMS {
         }
     }
 }
+/** @}*/

@@ -40,6 +40,11 @@ function in_array_recursive($needle, $haystack) {
     }
 }
 
+/** Show specified translated message with additional information.
+ *  @param $message Specified message.
+ *  @param $info    Additional information.
+ *  @return Formatted html table.
+ */
 function ShowMessage($message, $info = '') {
     echo '<table class="message center">
             <tr><td class="admin_mess">'.__($message).' '.$info.'</td></tr>
@@ -154,4 +159,3 @@ function SaveSortedSections($obj, $params) {
     }
     return TRUE;
 }
-?>

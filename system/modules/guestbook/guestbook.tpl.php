@@ -4,10 +4,11 @@
 # GUESTBOOK TEMPLATE
 
 die();?>
+
 <div class="comment">
     <a name="{id}"></a>
     <div class="content">
-        <div class="author">
+        <div class="author center">
             <img src="{avatar}" hspace="5" vspace="5" alt="" /><br />
             [ifelse=user]
                 <strong><a href="javascript:InsertText(document.forms['post-comment'].elements['text'], '[b]{nick}![/b]' + '\n');">{nick}</a></strong><br />
@@ -32,7 +33,7 @@ die();?>
                 [endif]
             </span>
         </div>
-        <div class="text">
+        <div class="text justify">
             {text}
         </div>
     </div>

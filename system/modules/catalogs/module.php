@@ -10,17 +10,18 @@ define('CATALOGS', CONTENT.'catalogs'.DS);
 
 class CATALOGS extends CONTENT {
 
+    /** Class initialization */
     public function __construct() {
         $this->module = 'catalogs';
         $this->container = CATALOGS;
     }
 
     public function saveItem($id) {
-        $title = trim(FILTER::get('REQUEST', 'title'));
+        $title = FILTER::get('REQUEST', 'title');
         if ($title === FALSE) {
             throw new Exception('Title is empty');
         }
-        $text = trim(FILTER::get('REQUEST', 'text'));
+        $text = FILTER::get('REQUEST', 'text');
         if (empty($text)) {
             throw new Exception('Text is empty');
         }

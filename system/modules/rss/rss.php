@@ -11,7 +11,7 @@ $feed  = $REQUEST['feed'];
 if (!empty($feed)) {
     if (CONFIG::getValue('enabled', 'rss')) {
         if (!empty($feeds[$feed])) {
-            header("Content-type: text/xml; charset=utf-8");
+            header("Content-type: text/xml; charset=UTF-8");
             $RSS = new RSS_FEED(
                 CONFIG::getValue('main', 'title').' - '.$feeds[$feed][0],
                 $feeds[$feed][1]

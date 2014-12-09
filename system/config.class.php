@@ -1,38 +1,42 @@
 <?php
 /**
- * @package    idxCMS
- * @subpackage SYSTEM
- * @file       config.class.php
- * @version    2.3
- * @author     Victor Nabatov <greenray.spb@gmail.com>\n
- * @license    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *             http://creativecommons.org/licenses/by-nc-sa/3.0/
- * @copyright  (c) 2011 - 2014 Victor Nabatov\n
- * @link       https://github.com/Greenray/idxCMS/system/config.class.php
+ * @package   idxCMS
+ * @file      system/config.class.php
+ * @version   2.3
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ *            <https://github.com/Greenray/idxCMS/system/config.class.php>
+ * @copyright (c) 2011 - 2014 Victor Nabatov\n
+ *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ */
+
+/**
+ * @addtogroup SYSTEM
+ * @{
  */
 
 /** Class CONFIG - works with configuration */
 final class CONFIG {
 
     /** Main Configuration file.
-     * @var string
+     * @param string
      */
     private static $ini = 'config.ini';
 
     /** Site configuration data.
-     * @var array
+     * @param array
      */
     private static $config = array();
 
     /** Class initialization.
-     * Sets config filename, reads and parses config data.
+     * Set config filename, read and parse config data.
      */
     public function __construct() {
         self::$ini = CONTENT.self::$ini;
         self::$config = parse_ini_file(self::$ini, TRUE);
     }
 
-    /** Creates the configuration section.
+    /** Create the configuration section.
      * Sets the parameters and their values in the specified config section.
      * @param  string $section Name of the config section
      * @param  array  $values  Config parameter = value for the current section
@@ -42,7 +46,7 @@ final class CONFIG {
         self::$config[$section] = $values;
     }
 
-    /** Gets parameters with their values from the specified config section.
+    /** Get parameters with their values from the specified config section.
      * @param  string $section Name of the config section
      * @return array - Config parameters = values for the current section or empty array
      */
@@ -50,7 +54,7 @@ final class CONFIG {
         return empty(self::$config[$section]) ? array() : self::$config[$section];
     }
 
-    /** Removes specified config section.
+    /** Remove specified config section.
      * @param  string $section Name of the config section
      * @return void
      */
@@ -59,7 +63,7 @@ final class CONFIG {
             unset(self::$config[$section]);
     }
 
-    /** Sets the parameter with its value for the specified config section.
+    /** Set the parameter with its value for the specified config section.
      * @param  string $section Name of the config section
      * @param  string $param   Name of the config parameter
      * @param  mixed  $value   Value of the specified parameter
@@ -69,7 +73,7 @@ final class CONFIG {
         self::$config[$section][$param] = $value;
     }
 
-    /** Gets the parameter with its value from the specified config section.
+    /** Get the parameter with its value from the specified config section.
      * @param  string $section Name of the config section
      * @param  string $param   Name of the config parameter
      * @return array|boolean - Value of the specified parameter
@@ -78,7 +82,8 @@ final class CONFIG {
         return empty(self::$config[$section][$param]) ? FALSE : self::$config[$section][$param];
     }
 
-    /** Saves the config file.
+    /** Create and save the config file.
+     * It can create sections with parameters and sections where parameter is an array.
      * @return boolean - The result of the operation
      */
     public function save() {
@@ -109,3 +114,4 @@ final class CONFIG {
         return file_put_contents(self::$ini, $ini, LOCK_EX);
     }
 }
+/** @}*/

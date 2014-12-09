@@ -18,7 +18,7 @@ die();?>
         [else]
             <span class="{rate_color}" style="float:right;padding:0 26px 0 0;">{rate}</span>
         [endelse]
-        <div class="author">
+        <div class="author center">
             <img src="{avatar}" hspace="5" vspace="5" alt="" /><br />
             [ifelse=opened]
                 <strong><a href="javascript:InsertText(document.forms['post-comment'].elements['text'], '[b]{nick}![/b]' + '\n');">{nick}</a></strong><br />
@@ -30,7 +30,7 @@ die();?>
             [if=city]{city}[endif]
             [if=country]{country}<br />[endif]
         </div>
-        <div class="text">{text}</div>
+        <div class="text justify">{text}</div>
     </div>
     [if=opened]
         <span class="menu">

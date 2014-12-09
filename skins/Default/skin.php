@@ -15,7 +15,7 @@ $SKIN['boxes']       = __('Boxes');
 $tpl = '
 <div class="{class}">
     [if=title]
-        <div class="title">{title}</div>
+        <div class="title center">{title}</div>
     [endif]
     <div class="content {align}">
         {content}
@@ -29,4 +29,3 @@ CMS::call('SYSTEM')->registerSkin('main', $tpl);
 CMS::call('SYSTEM')->registerSkin('panel', $tpl);
 CMS::call('SYSTEM')->registerSkin('win', $tpl);
 CMS::call('SYSTEM')->registerSkin('error', $tpl);
-?>

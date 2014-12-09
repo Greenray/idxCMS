@@ -2,13 +2,13 @@
 /**
  * @package    idxCMS
  * @subpackage MODULES
- * @file       module.php
+ * @file       system/modules/user/module.php
  * @version    2.3
  * @author     Victor Nabatov <greenray.spb@gmail.com>\n
  * @license    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
  *             http://creativecommons.org/licenses/by-nc-sa/3.0/
  * @copyright  (c) 2011 - 2014 Victor Nabatov\n
- * @link       https://github.com/Greenray/idxCMS/system/modules/user/module.php
+ * @see        https://github.com/Greenray/idxCMS/system/modules/user/module.php
  */
 
 if (!defined('idxCMS')) die();
@@ -21,9 +21,12 @@ define('AVATARS', CONTENT.'avatars'.DS);
 /** Class MESSAGE - user's private messages */
 class MESSAGE extends INDEX {
 
-    private $path     = '';         /**< Path to datafile */
-    private $messages = array();    /**< Messsages */
-    private $config   = array();    /**< Messages configuration */
+    /** Path to datafile */
+    private $path = '';
+    /** Messsages */
+    private $messages = array();
+    /** Messages configuration */
+    private $config = array();
 
     /** Class initialization.
      * @param  string $path Path to messages file
@@ -70,7 +73,7 @@ class MESSAGE extends INDEX {
         return array($new, $hint);
     }
 
-    /** Check if user did\t sent an empty message.
+    /** Check that the user does not send an empty message.
      * @param  string $text Message text
      * @return string $text Message text with allowed length
      * @throws Exception 'Text is empty'
@@ -103,7 +106,7 @@ class MESSAGE extends INDEX {
     }
 
     public function sendPrivateMessage($for) {
-        $text = self::checkText(FILTER::get('REQUEST', 'text'));
+        $text = self::checkText($REQUEST['text']);
         if (!file_exists(USERS.$for)) {
             return FALSE;
         }
@@ -198,6 +201,9 @@ class MESSAGE extends INDEX {
         return $this->saveIndex($this->path, $this->messages);
     }
 
+    /** Mark all messages as read.
+     * @return boolean - The result of operation
+     */
     public function setAllNoNew() {
         if (!empty($this->messages['inbox'])) {
             foreach ($this->messages['inbox'] as $id => $msg) {

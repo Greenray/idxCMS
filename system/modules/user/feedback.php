@@ -5,12 +5,14 @@
 
 if (!defined('idxCMS')) die();
 
-if (!empty($REQUEST['message'])) {
+$message = FILTER::get('REQUEST', 'message');
+
+if (!empty($message)) {
     try {
         CheckCaptcha();
         $FEEDBACK = new MESSAGE(CONTENT, 'feedback');
         $FEEDBACK->sendFeedback(
-            $REQUEST['message'],
+            $message,
             '',
             empty($REQUEST['email']) ? USER::getUser('email') : $REQUEST['email']
         );
@@ -82,4 +84,3 @@ $output['message'] = $message;
 SYSTEM::set('pagename', __('Feedback'));
 $TPL = new TEMPLATE(dirname(__FILE__).DS.'feedback.tpl');
 ShowWindow(__('Feedback'), $TPL->parse($output));
-?>

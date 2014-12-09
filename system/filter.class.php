@@ -80,8 +80,6 @@ final class FILTER {
             $$VAR = $this->clear($GLOBALS['_'.$VAR]);
             unset($GLOBALS['_'.$VAR]);
         }
-        var_dump($REQUEST);
-        var_dump(self::$REQUEST);
         self::$REQUEST = array_merge($REQUEST, $FILES);
         self::$COOKIE  = $COOKIE;
     }

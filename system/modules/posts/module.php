@@ -1,14 +1,12 @@
 <?php
 /**
- * @package    idxCMS
- * @subpackage MODULES
- * @file       module.php
- * @version    2.3
- * @author     Victor Nabatov <greenray.spb@gmail.com>\n
- * @license    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *             http://creativecommons.org/licenses/by-nc-sa/3.0/
- * @copyright  (c) 2011 - 2014 Victor Nabatov\n
- * @see        https://github.com/Greenray/idxCMS/system/modules/posts/module.php
+ * @file      system/modules/posts/module.php
+ * @version   2.3
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ *            <https://github.com/Greenray/idxCMS/system/modules/posts/module.php>
+ * @copyright (c) 2011 - 2014 Victor Nabatov\n
+ *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
  */
 
 if (!defined('idxCMS')) die();
@@ -32,17 +30,17 @@ class POSTS extends CONTENT {
 class CALENDAR {
 
     /** Current date
-     * @var array
+     * @param array
      */
     private $today = array();
 
     /** Events for specific dates
-     * @var array
+     * @param array
      */
     private $events = array();
 
     /** Auxiliary variable
-     * @var array
+     * @param array
      */
     private $temp = array();
 
@@ -169,9 +167,8 @@ $sections =  CMS::call('POSTS')->getSections();
 
 if (!empty($sections)) {
     # Register RSS feeds for posts sections (ex. drafts)
-    if (!empty($sections['drafts'])) {
-        unset($sections['drafts']);
-    }
+    if (!empty($sections['drafts']))  unset($sections['drafts']);
+    if (!empty($sections['archive'])) unset($sections['archive']);
     foreach ($sections as $id => $section) {
         if ($section['access'] === 0) {
             SYSTEM::registerFeed(

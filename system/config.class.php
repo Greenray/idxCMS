@@ -1,6 +1,5 @@
 <?php
 /**
- * @package   idxCMS
  * @file      system/config.class.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>\n
@@ -10,12 +9,18 @@
  *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
  */
 
-/**
- * @addtogroup SYSTEM
- * @{
+/** @class CONFIG
+ * Works with configuration.
+ * idxCMS config file is like this:
+ * @code
+ * [main]                       Section
+ * title = "idxCMS"             Paramemeter = "Value"
+ * [navigation]
+ * 0[] = "index"                Parameter = "Value" (parameter is an array)
+ * [output.Default]             Section (combined)
+ * left[] = "posts.calendar"    Parameter = "Value" (value is combined)
+ * @endcode
  */
-
-/** Class CONFIG - works with configuration */
 final class CONFIG {
 
     /** Main Configuration file.
@@ -30,6 +35,7 @@ final class CONFIG {
 
     /** Class initialization.
      * Set config filename, read and parse config data.
+     * @return nothing
      */
     public function __construct() {
         self::$ini = CONTENT.self::$ini;
@@ -40,7 +46,7 @@ final class CONFIG {
      * Sets the parameters and their values in the specified config section.
      * @param  string $section Name of the config section
      * @param  array  $values  Config parameter = value for the current section
-     * @return void
+     * @return nothing
      */
     public static function setSection($section, $values) {
         self::$config[$section] = $values;
@@ -56,18 +62,17 @@ final class CONFIG {
 
     /** Remove specified config section.
      * @param  string $section Name of the config section
-     * @return void
+     * @return nothing
      */
     public static function unsetSection($section) {
-        if (!empty(self::$config[$section]))
-            unset(self::$config[$section]);
+        if (!empty(self::$config[$section])) unset(self::$config[$section]);
     }
 
     /** Set the parameter with its value for the specified config section.
      * @param  string $section Name of the config section
      * @param  string $param   Name of the config parameter
      * @param  mixed  $value   Value of the specified parameter
-     * @return void
+     * @return nothing
      */
     public static function setValue($section, $param, $value) {
         self::$config[$section][$param] = $value;
@@ -76,7 +81,7 @@ final class CONFIG {
     /** Get the parameter with its value from the specified config section.
      * @param  string $section Name of the config section
      * @param  string $param   Name of the config parameter
-     * @return array|boolean - Value of the specified parameter
+     * @return array|FALSE - Value of the specified parameter
      */
     public static function getValue($section, $param) {
         return empty(self::$config[$section][$param]) ? FALSE : self::$config[$section][$param];
@@ -114,4 +119,3 @@ final class CONFIG {
         return file_put_contents(self::$ini, $ini, LOCK_EX);
     }
 }
-/** @}*/

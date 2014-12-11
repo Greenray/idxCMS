@@ -1,7 +1,13 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE FEEDBACK - TEMPLATE
+/**
+ * @file      system/modules/user/feedback.tpl.php
+ * @version   2.3
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ *            <https://github.com/Greenray/idxCMS/system/modules/user/feedback.tpl.php>
+ * @copyright (c) 2011 - 2014 Victor Nabatov\n
+ *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ */
 
 die();?>
 
@@ -39,7 +45,7 @@ die();?>
     [if=email]<input type="text" id="email" name="email" size="30" value="{email}" class="required" />[endif]
     <fieldset>
         <legend>[__Text]</legend>
-        <textarea id="message" id="message" name="message" cols="50" rows="7">{message}</textarea>
+        <textarea id="message" name="message" cols="50" rows="7">{message}</textarea>
     </fieldset>
     <p class="center">
         [if=captcha]{captcha}[endif]

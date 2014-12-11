@@ -1,39 +1,78 @@
 <?php
 /**
- * @package    idxCMS
- * @subpackage SYSTEM
- * @file       content.class.php
- * @version    2.3
- * @author     Victor Nabatov <greenray.spb@gmail.com>\n
- * @license    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *             http://creativecommons.org/licenses/by-nc-sa/3.0/
- * @copyright  (c) 2011 - 2014 Victor Nabatov\n
- * @see        https://github.com/Greenray/idxCMS/system/content.class.php
+ * @file      system/content.class.php
+ * @version   2.3
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ *            <https://github.com/Greenray/idxCMS/system/content.class.php>
+ * @copyright (c) 2011 - 2014 Victor Nabatov\n
+ *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
  */
 
-/** Class CONTENT - works with content: articles, topics, comments and replies */
+/** @class CONTENT
+ * Works with content: articles, topics, comments and replies.
+ */
 class CONTENT extends INDEX {
 
-    protected $module    = '';
+    /** Current module which use this class.
+     * @param string
+     */
+    protected $module = '';
+
+    /** The name of current module.
+     * @param string
+     */
     protected $container = '';
-    protected $sections  = array();
-    protected $section   = '';        # ID of the current section.
-    protected $category  = '';        # ID of the current category.
+
+    /** Sections of the content of the carrent module.
+     * @param array
+     */
+    protected $sections = array();
+
+    /** ID of the current section.
+     * @param string
+     */
+    protected $section = '';
+
+    /** ID of the current category.
+     * @param string
+     */
+    protected $category  = '';
+
+    /** Coontent of the current category.
+     * @param array
+     */
     protected $content   = array();
-    protected $text      = 'text';    # Filename of the item with full text.
-    protected $desc      = 'desc';    # Filename of the item with short description
-    protected $item      = '';
-    protected $comments  = array();
+
+    /** Filename of the item with full text.
+     * @param string
+     */
+    protected $text = 'text';
+
+    /** Filename of the item with short description.
+     * @param string
+     */
+    protected $desc = 'desc';
+
+    /** ID of the article, topic, image and so on.
+     * @param integer
+     */
+    protected $item;
+
+    /** Comments for article, topic, image and so on.
+     * @param array
+     */
+    protected $comments = array();
 
     /** Get module sections data.
-     * @return array - Module sections data
+     * @return array - Sections allowed for current user
      */
     public function getSections() {
         if (empty($this->sections)) {
             $index = self::getIndex($this->container);
             foreach ($index as $id => $section) {
                 if (USER::checkAccess($section)) {
-                    $this->sections[$id] = $section;    # Section is allowed for current user
+                    $this->sections[$id] = $section;
                 }
             }
         }
@@ -52,10 +91,13 @@ class CONTENT extends INDEX {
         return $this->sections[$id];
     }
 
+    /** Show all sections with their categories of the current module.
+     * @return array
+     */
     public function showSections() {
         SYSTEM::set('pagename', SYSTEM::$modules[$this->module]['title'].' - '.__('Sections'));
         SYSTEM::setPageDescription(SYSTEM::$modules[$this->module]['title'].' - '.__('Sections'));
-        $output = array();
+        $result   = array();
         $sections = $this->sections;
         if (isset($sections['drafts'])) {
             unset($sections['drafts']);
@@ -65,18 +107,21 @@ class CONTENT extends INDEX {
             # Don't show sections with empty categories
             $categories = self::getCategories($id);
             if (!empty($categories)) {
-                $output[$id] = $section;
-                $output[$id]['desc'] = CMS::call('PARSER')->parseText($section['desc']);
+                $result[$id] = $section;
+                $result[$id]['desc'] = CMS::call('PARSER')->parseText($section['desc']);
                 foreach ($categories as $key => $category) {
-                    $output[$id]['categories'][$key] = $category;
-                    $output[$id]['categories'][$key]['desc'] = CMS::call('PARSER')->parseText($category['desc']);
+                    $result[$id]['categories'][$key] = $category;
+                    $result[$id]['categories'][$key]['desc'] = CMS::call('PARSER')->parseText($category['desc']);
                 }
             }
         }
-        return $output;
+        return $result;
     }
 
-    public function ShowSection($section) {
+    /** Show requested section with its categories.
+     * @return array
+     */
+    public function showSection($section) {
         $categories = self::getCategories($section);
         if ($categories === FALSE) {
             return FALSE;
@@ -88,8 +133,8 @@ class CONTENT extends INDEX {
             SYSTEM::setPageDescription(SYSTEM::$modules[$this->module]['title'].' - '.$this->sections[$section]['title']);
         }
         SYSTEM::setPageKeywords($this->sections[$section]['id']);
-        $output = array();
-        $output['title'] = $this->sections[$section]['title'];
+        $result = array();
+        $result['title'] = $this->sections[$section]['title'];
         foreach($categories as $id => $category) {
             $category = self::getCategory($id);
             self::getContent($id);
@@ -99,12 +144,18 @@ class CONTENT extends INDEX {
                 $category['last'] = end($this->content);
                 $category['last']['link'] = $category['link'].ITEM.$category['last']['id'];
             }
-            $output['categories'][] = $category;
+            $result['categories'][] = $category;
         }
-        return $output;
+        return $result;
     }
 
-    # If parameter $id is not set, a new section will be created.
+    /** Save section.
+     * If parameter $id is not set, a new section will be created.
+     * @return boolean The result
+     * @throw Exception 'Invalid ID'
+     * @throw Exception 'Title is empty'
+     * @throw Exception 'Cannot save section'
+     */
     public function saveSection() {
         $id = OnlyLatin(FILTER::get('REQUEST', 'section'));
         if ($id === FALSE) {
@@ -136,6 +187,11 @@ class CONTENT extends INDEX {
         Sitemap();
     }
 
+    /** Save all sections.
+     * @param  array $sections Sections data
+     * @return nothing
+     * @throw Exception 'Cannot save sections'
+     */
     public function saveSections($sections) {
         $new = array();
         foreach ($sections as $key => $section) {
@@ -147,6 +203,12 @@ class CONTENT extends INDEX {
         }
     }
 
+    /** Remove section.
+     * If parameter $id is not set, a new section will be created.
+     * @return boolean The result
+     * @throw Exception 'Invalid ID'
+     * @throw Exception 'Cannot remove section'
+     */
     public function removeSection($id) {
         if (empty($this->sections[$id])) {
             throw new Exception('Invalid ID');
@@ -159,6 +221,9 @@ class CONTENT extends INDEX {
         Sitemap();
     }
 
+    /** Get all categories of the requested section.
+     * @return array - Section categories allowed for current user
+     */
     public function getCategories($section) {
         if (empty($this->sections[$section])) {
             return FALSE;
@@ -168,13 +233,17 @@ class CONTENT extends INDEX {
         if (!empty($this->sections[$section]['categories'])) {
             foreach ($this->sections[$section]['categories'] as $id => $category) {
                 if (USER::checkAccess($category)) {
-                    $categories[$id] = $category;               # Category is allowed for current user
+                    $categories[$id] = $category;
                 }
             }
         }
         return $categories;
     }
 
+    /** Get requested category.
+     * @param  integer $id Category ID
+     * @return array - Category data
+     */
     public function getCategory($id) {
         if (empty($this->sections[$this->section]['categories'][$id])) {
             return FALSE;
@@ -183,8 +252,12 @@ class CONTENT extends INDEX {
         return $this->sections[$this->section]['categories'][$id];
     }
 
-    # Save category.
-    # If parameter $id is not set, a new categor will be created.
+    /** Save category
+     * If parameter $id is not set, a new category will be created.
+     * @return boolean The result
+     * @throw Exception 'Title is empty'
+     * @throw Exception 'Cannot create category'
+     */
     public function saveCategory() {
         $title = trim(FILTER::get('REQUEST', 'title'));
         if ($title === FALSE) {
@@ -197,11 +270,11 @@ class CONTENT extends INDEX {
             $item = $this->sections[$this->section]['path'].$id;
             if (is_dir($item)) {
                 if (!DeleteTree($item)) {
-                    throw new Exception('Cannot create category');
+                    throw new Exception('Cannot save category');
                 }
             }
             if ((mkdir($item, 0777) === FALSE) || ($this->saveIndex($item.DS, array()) === FALSE)) {
-                throw new Exception('Cannot create category');
+                throw new Exception('Cannot save category');
             }
         }
         # Access level of the category should be more or is equal to access level of the section
@@ -221,6 +294,12 @@ class CONTENT extends INDEX {
         Sitemap();
     }
 
+    /** Save all categories from requested section.
+     * @param  string $section    Section name
+     * @param  array  $categories Categories data
+     * @return nothing
+     * @throw Exception 'Cannot save categories'
+     */
     public function saveCategories($section, $categories) {
         $this->sections[$section]['categories'] = $categories;
         if ($this->saveIndex($this->container, $this->sections) === FALSE) {
@@ -228,6 +307,12 @@ class CONTENT extends INDEX {
         }
     }
 
+    /** Move category into another section.
+     * @param integer $id     ID of the category which will be moved
+     * @param string  $source Name of the source section
+     * @param string  $dest   Name of the destination section
+     * @return integer|boolean ID of the new category or FALSE
+     */
     public function moveCategory($id, $source, $dest) {
         if (empty($this->sections[$source])) {
             return FALSE;
@@ -246,6 +331,11 @@ class CONTENT extends INDEX {
         return $new;
     }
 
+    /** Remove category.
+     * @param  integer $id Category ID
+     * @return boolean The result
+     * @throw Exception 'Cannot remove category'
+     */
     public function removeCategory($id) {
         unset($this->sections[$this->section]['categories'][$id]);
         if ((DeleteTree($this->sections[$this->section]['path'].$id) === FALSE) ||
@@ -255,6 +345,11 @@ class CONTENT extends INDEX {
         Sitemap();
     }
 
+    /** Set icon for category.
+     * @param  string $path Path to destination directory
+     * @param  array  $icon Image data
+     * @return boolean TRUE
+     */
     protected function setIcon($path, $icon) {
         if (empty($icon['name']) && file_exists($path.'icon.png')) {
             return;
@@ -274,6 +369,10 @@ class CONTENT extends INDEX {
         return $IMAGE->generateIcon();
     }
 
+    /** Get content from the requested category.
+     * @param  integer $category Category ID
+     * @return array|boolean Category content or FALSE
+     */
     public function getContent($category) {
         if (empty($this->sections[$this->section]['categories'][$category])) {
             return FALSE;
@@ -296,7 +395,6 @@ class CONTENT extends INDEX {
         $item = $this->content[$id];
         $path = $this->sections[$this->section]['categories'][$this->category]['path'].$id.DS;
         $item['link'] = $this->sections[$this->section]['categories'][$this->category]['link'].ITEM.$id;
-//        $item['link'] = CMS::call('FILTER')->encode($item['link']);
         if (!empty($type)) {
             switch ($type) {
                 case 'desc':

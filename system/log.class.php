@@ -1,20 +1,20 @@
 <?php
 /**
- * @package    idxCMS
- * @subpackage SYSTEM
- * @file       log.class.php
- * @version    2.3
- * @author     Victor Nabatov <greenray.spb@gmail.com>\n
- * @license    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *             http://creativecommons.org/licenses/by-nc-sa/3.0/
- * @copyright  (c) 2011 - 2014 Victor Nabatov\n
- * @see        https://github.com/Greenray/idxCMS/system/log.class.php
+ * @file      system/log.class.php
+ * @version   2.3
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ *            <https://github.com/Greenray/idxCMS/system/log.class.php>
+ * @copyright (c) 2011 - 2014 Victor Nabatov\n
+ *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
  */
 
 /** Logs data store */
 define('LOGS', CONTENT.'logs'.DS);
 
-/** Class LOG - Works with log and errorlog files */
+/** @class LOG
+ * Works with log and errorlog files.
+ */
 final class LOG {
 
     /** Class initialization */
@@ -53,7 +53,7 @@ final class LOG {
      * @param  integer $month       Month
      * @param  integer $year        Year
      * @param  integer $first_month The first month of the year
-     * @param  integer #first_year  The first etar of the age
+     * @param  integer $first_year  The first year of the age
      * @return boolean TRUE
      */
     public static function logMerge($title, $day, $month, $year, $first_month = 1, $first_year = 1980) {
@@ -89,7 +89,6 @@ final class LOG {
 
     /** Prepare daily log files to create a single file per month.
      * @return boolean TRUE
-     * @uses   self::logMerge() Creates tar or tar.gz archive
      */
     public static function logMergeByMonth() {
         $logs   = GetFilesList(LOGS);

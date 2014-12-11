@@ -1,21 +1,17 @@
 <?php
 /**
- * @package   idxCMS
  * @file      system/cms.class.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- *            https://github.com/Greenray/idxCMS/system/cms.class.php>
+ *            <https://github.com/Greenray/idxCMS/system/cms.class.php>
  * @copyright (c) 2011 - 2014 Victor Nabatov\n
  *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
  *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
  */
 
-/**
- * @addtogroup SYSTEM
- * @{
+/** @class CMS
+ * Register objects and provide access to their methods.
  */
-
-/** Class CMS - register objects and provide access to their methods */
 class CMS {
 
     /** Registered objects.
@@ -25,6 +21,7 @@ class CMS {
 
     /** Class initialization */
     private function __construct() {}
+    /** Prevent to clone object */
     private function __clone() {}
 
     /** Create and register the object.
@@ -54,7 +51,7 @@ class CMS {
 
     /** Remove the object.
      * @param  string $class Class name
-     * @return void
+     * @return nothing
      */
     public static function remove($class) {
         if (isset(self::$obj[$class])) {
@@ -62,4 +59,3 @@ class CMS {
         }
     }
 }
-/** @}*/

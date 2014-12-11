@@ -1,21 +1,17 @@
 <?php
 /**
- * @package   idxCMS
  * @file      system/filter.class.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>\n
-  *            <https://github.com/Greenray/idxCMS/system/filter.class.php>
+  *           <https://github.com/Greenray/idxCMS/system/filter.class.php>
  * @copyright (c) 2011 - 2014 Victor Nabatov\n
  *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
  *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
  */
 
-/**
- * @addtogroup SYSTEM
- * @{
+/** @class FILTER
+ * Clean parameters $_REQUEST, $_FILES, $_COOKIE, detect intrusions and ban unwanted visitors.
  */
-
-/** Class FILTER - clean parameters $_REQUEST, $_FILES, $_COOKIE, detect intrusions and ban unwanted visitors */
 final class FILTER {
 
     /** Array of filtered $_POST, $_GET and $_FILES parameters.
@@ -26,7 +22,7 @@ final class FILTER {
     /** Array of filtered $_COOKIE parameters.
      * @param array
      */
-    private static $COOKIE  = array();
+    private static $COOKIE = array();
 
     /** Array of parameters types.
      * @param array
@@ -35,19 +31,24 @@ final class FILTER {
 
     /** Class initialization */
     public function __construct() {}
+    /** Prevent to clone object */
     public function __clone() {}
 
-    /** Clean all parameters and their values of the request array.
+    /** Clean all parameters and their values of the request array and\n
+     * transforme them into the internal encoding of the system = UTF-8
      * @param  array $input Input array of parameters
      * @return string - Filered parameters
      */
-    private function cleanValue($input) {
-        $input = trim($input);
-        # Transformation of variable $input into the internal encoding of the system
-        $encode = mb_convert_variables(mb_internal_encoding(), "ASCII,Windows-1251,UTF-8", $input);
-        $input = strip_tags($input);
-        $input = stripslashes($input);
-        return UnifyBr($input);
+    private function cleanValue($value) {
+        $value = trim($value);
+        // Check for magic quotes and remove them if necessary
+        if (function_exists('get_magic_quotes_gpc') && !get_magic_quotes_gpc()) {
+            $value = preg_replace('(\\\(["\'/]))im', '$1', $value);
+        }
+        $encode = mb_convert_variables(mb_internal_encoding(), "ASCII,Windows-1251,UTF-8", $value);
+        $value = strip_tags($value);
+        $value = stripslashes($value);
+        return UnifyBr($value);
     }
 
     /** Clean variables.
@@ -71,8 +72,9 @@ final class FILTER {
     }
 
     /** Main function.
-     * Detect intrusion, clean and unset $_POST, $_GET, $_FILES and $_COOKIE.
-     * @return void
+     * Detect intrusion, clean and unset $_POST, $_GET, $_FILES and $_COOKIE.\n
+     * The result are two variables: $REQUEST and $COOKIE
+     * @return nothing
      */
     public function sanitaze() {
         $this->ids();
@@ -92,7 +94,7 @@ final class FILTER {
         return self::$$type;
     }
 
-    /** Get requested filtered parameter.
+    /** Get specified filtered parameter.
      * @param  string $type  Type of parameter
      * @param  string $param Name of parameter
      * @return array|string  Value of parameter or empty string
@@ -108,7 +110,7 @@ final class FILTER {
     /** Remove filtered parameter.
      * @param  string $type  Type of parameter
      * @param  string $param Name of parameter
-     * @return void
+     * @return nothing
      */
     public static function remove($type, $param) {
         if (array_key_exists($param, self::$$type)) {
@@ -116,7 +118,7 @@ final class FILTER {
         }
     }
 
-    /** Check if the email is valid.
+    /** Email validation.
      * @param  string $email Email address
      * @return boolean - The result of operation
      */
@@ -126,19 +128,29 @@ final class FILTER {
 
     /** Ban user.
      * @return boolean - The result of operation
+     * @todo Log the result
      */
     public function ban() {
         $bans = file_exists(CONTENT.'bans') ? file_get_contents(CONTENT.'bans') : '';
         if (strpos($bans, self::$REQUEST['host']) === FALSE) {
-            file_put_contents(CONTENT.'bans', $bans.self::$REQUEST['host'].LF);
+            return file_put_contents(CONTENT.'bans', $bans.self::$REQUEST['host'].LF);
         }
     }
 
     /** Intrusion detection.
-     * @return void
+     * If the intrusion will be detected this event will be logged and the system will die.\n
+     * In current it detected:\n
+     *  - bad words in $_SERVER;
+     *  - banned IP or cookie;
+     *  - malicious URL requests
+     * @return nothing
      */
     private function ids() {
-        $ids = array('base64', 'benchmark', 'concat', 'document.cookie', 'eval', 'echo', 'etc/passwd', 'etc/shadow', 'insert', 'into', 'select', 'substr', 'union');
+        # Bad words in $_SERVER
+        $ids = [
+            'base', 'benchmark', 'concat', 'document.cookie', 'eval', 'echo', 'etc/passwd', 'etc/shadow', 'insert', 'into', 'select', 'substr', 'union',
+            'script','iframe','applet','object','alert','embed','img','style'
+        ];
         $_SERVER['REQUEST_URI']     = empty($_SERVER['REQUEST_URI'])          ? htmlspecialchars($_SERVER['SCRIPT_NAME']) : htmlspecialchars($_SERVER['REQUEST_URI']);
         $_SERVER['REMOTE_ADDR']     = empty($_SERVER['REMOTE_ADDR'])          ? '0.0.0.0'               : htmlspecialchars($_SERVER['REMOTE_ADDR']);
         $_SERVER['REMOTE_ADDR']     = empty($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['REMOTE_ADDR'] : htmlspecialchars($_SERVER['HTTP_X_FORWARDED_FOR']);
@@ -150,6 +162,7 @@ final class FILTER {
             session_destroy();
             die();
         }
+
         # Ban check
         $bans = file_exists(CONTENT.'bans') ? file(CONTENT.'bans', FILE_IGNORE_NEW_LINES) : array();
         foreach ($bans as $ban) {
@@ -211,4 +224,3 @@ final class FILTER {
         }
     }
 }
-/** @}*/

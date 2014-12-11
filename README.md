@@ -1,5 +1,5 @@
-idxCMS
-======
+idxCMS - README
+===============
 
 idxCMS is a management system of the website, otherwise, the content management system, designed for operation with minimum system requirements: php5 interpreter is quite enough . Database management systems are not required. As the database idxCMS uses text files.
 

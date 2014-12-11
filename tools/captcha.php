@@ -1,49 +1,57 @@
 <?php
-session_start();
-
 /**
- * @package    idxCMS
- * @subpackage TOOLS
- * @file       tools/captcha.php
- * @version    2.3
- * @author     Victor Nabatov <greenray.spb@gmail.com>\n
- * @license    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *             http://creativecommons.org/licenses/by-nc-sa/3.0/
- * @copyright  (c) 2011 - 2014 Victor Nabatov\n
- * @see        https://github.com/Greenray/idxCMS/tools/captcha.php
+ * @file      tools/captcha.php
+ * @version   2.3
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ *            <https://github.com/Greenray/idxCMS/tools/captcha.php>
+ * @copyright (c) 2011 - 2014 Victor Nabatov\n
+ *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
  */
 
-/** Class CAPTCHA - captcha */
+session_start();
+
+/** @class CAPTCHA
+ * Captcha.
+ */
 class CAPTCHA {
 
     /** Captcha images
-     * @var array
+     * @param array
      */
-    private $image = array (0 => 'captcha.png', 1 => 'captcha_color.png');
+    private $image = ['captcha.png', 'captcha_color.png'];
 
     /** Captcha code length
-     * @var integer
+     * @param integer
      */
     private $length;
 
     /** Captcha code
-     * @var string
+     * @param string
      */
     private $code;
 
     /** Random array key to select image for captcha: b&w or color
-     * @var integer - 0 or 1
+     * @param integer (0 or 1)
      */
     private $idx;
 
-    /** Class initialization */
+    /** Class initialization.
+     * @param  string $code Captcha code
+     * @return nothing
+     */
     public function __construct($code) {
         $this->length = (int) round(mt_rand(5, 8));
         $this->code   = strip_tags(stripslashes($code));
         $this->idx    = (int) round(mt_rand(0, 1));
     }
 
-    /** Create Captcha */
+    /** Create Captcha.
+     * It takes one of two images (b$w or color), form code from 5...8 symbols.
+     * Then split code into two parts.
+     * So the captcha is different for every time.
+     * @return nothing
+     */
     public function create() {
         $code  = substr(md5($this->code), 0, $this->length);
         $image = imagecreatefrompng($this->image[$this->idx]);
@@ -70,7 +78,7 @@ class CAPTCHA {
         }
         imagepng($image);
         imagedestroy($image);
-        $_SESSION['code-length'] = $this->length;
+        $_SESSION['code-length'] = $this->length;   # It is for future validation
     }
 }
 

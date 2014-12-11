@@ -1,20 +1,18 @@
 <?php
-if (!defined('idxCMS')) die();
-
 /**
- * @package    idxCMS
- * @subpackage SYSTEM
- * @file       system/statistic.php
- * @version    2.3
- * @author     Victor Nabatov <greenray.spb@gmail.com>\n
- *             Reloadcms Team http://reloadcms.com\n
- * @license    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *             http://creativecommons.org/licenses/by-nc-sa/3.0/
- * @copyright  (c) 2011 - 2014 Victor Nabatov\n
- * @see        https://github.com/Greenray/idxCMS/system/statistic.php
+ * @file      system/statistic.php
+ * @version   2.3
+ * @version   2.3
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ *            <https://github.com/Greenray/idxCMS/system/statistic.php>
+ * @copyright (c) 2011 - 2014 Victor Nabatov\n
+ *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
  */
 
 /** Site ststistic - registers a visitы to the website by visitors, users, bots and spiders */
+
+if (!defined('idxCMS')) die();
 
  /** Extractes keywords from the user`s query.
  * @param  string $url User`s URL
@@ -23,7 +21,7 @@ if (!defined('idxCMS')) die();
 function ExtractKeyword($url) {
 
     /** Searching queries mask */
-    $search_queries = array(
+    $search_queries = [
         'a-counter' => 'sub_data', 'about'  => 'terms',  'alice'     => 'qs',
         'alltheweb' => 'q',        'altavista' => 'q',   'aol'       => 'encquery',
         'aol'       => 'q',        'aol'    => 'query',  'aport'     => 'r',
@@ -38,7 +36,7 @@ function ExtractKeyword($url) {
         'szukaj'    => 'qt',       'szukaj' => 'szukaj', 'virgilio'  => 'qs',
         'voila'     => 'rdata',    'yahoo'  => 'p',      'yam'       => 'k',
         'yandex'    => 'text'
-    );
+    ];
     $components = parse_url($url);
     if (isset($components['query'])) {
         $query_items = array();
@@ -57,9 +55,7 @@ function ExtractKeyword($url) {
  * @return boolean - Is bad bot detected?
  */
 function DetectBadBot($agent) {
-    $engines = array(
-        'email exractor','sitesucker','w3af.sourceforge.net','xpymep'
-    );
+    $engines = ['email exractor','sitesucker','w3af.sourceforge.net','xpymep'];
     foreach ($engines as $engine) {
         if (stristr($agent, $engine)) {
             return TRUE;
@@ -75,7 +71,7 @@ function DetectBadBot($agent) {
 function DetectSpider($agent) {
 
     /** List of spider engines */
-    $engines = array(
+    $engines = [
         '110search','12move',
         'a-counter','abcdatos','acoon','aesop','alexa','alkaline','allesklar','almaden','altavista','aport','appie','arachnoidea','architext','archiver','artabus',
         'ask','aspdeek','aspseek','asterias','atomz','augurfind','austronaut',
@@ -105,7 +101,7 @@ function DetectSpider($agent) {
         'xenu',
         'yahoo','yam','yandex','yanga','yeti',
         'zeus','zippy','zyborg'
-    );
+    ];
 
     foreach ($engines as $engine) {
         if (stristr($agent, $engine)) {

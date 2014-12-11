@@ -82,5 +82,6 @@ if (!USER::loggedIn()) {
 
 $output['message'] = $message;
 SYSTEM::set('pagename', __('Feedback'));
+
 $TPL = new TEMPLATE(dirname(__FILE__).DS.'feedback.tpl');
 ShowWindow(__('Feedback'), $TPL->parse($output));

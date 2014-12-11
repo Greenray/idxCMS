@@ -1,14 +1,12 @@
 <?php
 /**
- * @package    idxCMS
- * @subpackage SYSTEM
- * @file       functions.class.php
- * @version    2.3
- * @author     Victor Nabatov <greenray.spb@gmail.com>\n
- * @license    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *             http://creativecommons.org/licenses/by-nc-sa/3.0/
- * @copyright  (c) 2011 - 2014 Victor Nabatov\n
- * @see        https://github.com/Greenray/idxCMS/system/functions.class.php
+ * @file      system/functions.php
+ * @version   2.3
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ *            <https://github.com/Greenray/idxCMS/system/functions.php>
+ * @copyright (c) 2011 - 2014 Victor Nabatov\n
+ *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
  */
 
 # FILES and DIRECTORIES
@@ -191,7 +189,7 @@ function RandomString($num_chars) {
 
 /** String localization.
  * Currently, the system supports five languages: English, Russian, Belarusian, Serbian( partially) and Ukrainian.
- * @global array $LANG    Array of language strings
+ * @global array  $LANG   Array of language strings
  * @param  string $string String to be translated
  * @return string         Nhfyslated string
  */
@@ -542,7 +540,7 @@ function ShowElement($element, $parameters = '') {
                 unlink(LOGS.'error.log');
             }
             if (!empty($error)) {
-                return CMS::call('SYSTEM')->showWindow(__('Error'), $error, 'center', 'error');
+                return CMS::call('SYSTEM')->showWindow('Error', $error, 'center', 'error');
             }
         break;
     }

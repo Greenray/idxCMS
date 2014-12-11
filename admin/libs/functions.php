@@ -13,6 +13,11 @@ function format_size($i) {
     elseif ($i < 1024)                  return $i.' '.__('byte(s)');
 }
 
+
+/** Get size of the directory with subdirectiries.
+ * @param  string $dir The name of the main directory
+ * @return integer - The size of scanned directory
+ */
 function get_dir_size($dir) {
     $size = 0;
     if (($dh = opendir($dir)) !== FALSE) {

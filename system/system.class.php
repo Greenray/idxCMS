@@ -1,29 +1,34 @@
 <?php
 /**
- * @package   idxCMS
  * @file      system/system.class.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- *            <https://github.com/Greenray/idxCMS/system/filter.class.php>\n
+ *            <https://github.com/Greenray/idxCMS/system/system.class.php>\n
  *            Reloadcms Team <http://reloadcms.com>
  * @copyright (c) 2011 - 2014 Victor Nabatov\n
  *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
  *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
  */
 
-/**
- * @addtogroup SYSTEM
- * @{
+/** @class SYSTEM
+ * System, modules, users and templates initialization.
  */
-
-/** Site COOKIE */
-define('FOREVER_COOKIE', time() + 3600 * 24 * 365 * 5);
-
-/** Class SYSTEM - system, modules, users and templates initialization */
 class SYSTEM {
 
+    /** Website URL.
+     * This one may be configured by website administrator or detected automaticaly.
+     * @param string
+     */
     private static $url = '';
+
+    /** User language.
+     * @param string
+     */
     private static $language = '';
+
+    /** Available website translations.
+     * @param string
+     */
     private static $languages = array();
 
     /** Current locale.
@@ -40,11 +45,23 @@ class SYSTEM {
      * @param array
      */
     public static  $skins = array();
+
+    /** CMS modules.
+     * @param array
+     */
     public static  $modules = array();
     public static  $current_point = '';
     public static  $output = array();
+
+    /** Website RSS feeds
+     * @param array
+     */
     private static $feeds = array();
     private static $navigation = array();
+
+    /** Website menu.
+     * @param array
+     */
     private static $menu = array();
     private static $pagename = '';
 
@@ -59,13 +76,17 @@ class SYSTEM {
      */
     private static $meta = array();
 
-    /** Class initialization */
+    /** Class initialization.
+     * @global array $LANG - website translations
+     */
     public function __construct() {
         global $LANG;
+        # Detect website url
         self::$url = CMS::call('CONFIG')->getValue('main', 'url');
         if (empty(self::$url)) {
             self::$url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['SCRIPT_NAME'].basename($_SERVER['SCRIPT_NAME'])).DS;
         }
+        # Check if it is allowed to change website language and set user or default language
         $COOKIE = CMS::call('FILTER')->getAll('COOKIE');
         $cookie_lang    = CONFIG::getValue('main', 'cookie').'_lang';
         self::$language = CONFIG::getValue('main', 'lang');
@@ -87,11 +108,11 @@ class SYSTEM {
         include_once(SYS.'languages'.DS.self::$language.'.php');
         self::$language = $LANG['language'];
         self::$locale   = $LANG['locale'];
-        setcookie($cookie_lang, self::$language, FOREVER_COOKIE);
-
+        $cookie = time() + 3600 * 24 * 365 * 5;
+        setcookie($cookie_lang, self::$language, $cookie);
+        # Check if it is allowed to change website skin and set user or default skin
         $cookie_skin = CONFIG::getValue('main', 'cookie').'_skin';
         self::$skin  = CONFIG::getValue('main', 'skin');
-
         if (CONFIG::getValue('main', 'allow-skin')) {
             $skin = FILTER::get('REQUEST', 'skin');
             if (!empty($skin)) {
@@ -102,24 +123,35 @@ class SYSTEM {
                 }
             }
         }
-        setcookie($cookie_skin, self::$skin, FOREVER_COOKIE);
+        setcookie($cookie_skin, self::$skin, $cookie);
         if (is_dir(SKINS.self::$skin)) {
             /** User defined skin */
             define('CURRENT_SKIN', SKINS.self::$skin.DS);
-        } else {
-            /** The default skin */
- //           define('CURRENT_SKIN', SKINS.'Default'.DS);
         }
     }
 
+    /** Set system parameter.
+     * @param  string $param System parameter
+     * @param  string $value Value of the system parameter
+     * @return nothing
+     */
     public static function set($param, $value) {
-        return self::$$param = $value;
+        self::$$param = $value;
     }
 
+    /** Get system parameter.
+     * @param  string $param System parameter
+     * @return string - Value of the requested parameter
+     */
     public static function get($param) {
         return self::$$param;
     }
 
+    /** Modules initialization.
+     * @global array $LANG - website translations
+     * @param  boolean $ignore_disabled Init all existing modules
+     * @return nothing
+     */
     public function initModules($ignore_disabled = FALSE) {
         global $LANG;
         $enabled = CONFIG::getSection('enabled');
@@ -136,28 +168,65 @@ class SYSTEM {
         }
     }
 
+    /** Register module.
+     * Used for classify modules by type. There are three types:
+     * - system (cannot be excluded);
+     * - main (for full pages);
+     * - box (for panels or boxxes);
+     * - plugin (cannot be showed on any page);
+     * @param  string $module Module name
+     * @param  string $title  Module title
+     * @param  string $type   Module type
+     * @param  string $system
+     * @return nothing
+     */
     public static function registerModule($module, $title, $type, $system = '') {
         self::$modules[$module]['title']  = __($title);
         self::$modules[$module]['type']   = $type;
         self::$modules[$module]['system'] = $system;
     }
 
-    public static function registerFeed($module, $title, $desc, $real = '') {
-        self::$feeds[$module] = array(__($title), __($desc), $real);
+    /** Register RSS feed for module.
+     * RSS feed ID is looks like "module@section"
+     * @param  string $section RSS feed ID
+     * @param  string $title   RSS feed title
+     * @param  string $desc    RSS feed description
+     * @param  string $module  Module name
+     * @return nothing
+     */
+    public static function registerFeed($section, $title, $desc, $module = '') {
+        self::$feeds[$section] = array(__($title), __($desc), $module);
     }
 
+    /** Register module for menu link.
+     * @param  string $module Module name
+     * @return nothing
+     */
     public static function registerMainMenu($module) {
         self::$menu[] = $module;
     }
 
+    /** Register module for use in sitemap.
+     * @param  string $module Module name
+     * @return nothing
+     */
     public static function registerSiteMap($module) {
         self::$sitemap[] = $module;
     }
 
+    /** Register module for search requests.
+     * @param  string $module Module name
+     * @return nothing
+     */
     public static function registerSearch($module) {
         self::$search[] = $module;
     }
 
+    /** Register module for menu link.
+     * @param  string $name Skin name
+     * @param  string $skin Skin template
+     * @return nothing
+     */
     public static function registerSkin($name, $skin) {
         self::$skins[$name] = $skin;
     }
@@ -201,12 +270,23 @@ class SYSTEM {
         }
     }
 
-    public static function setPageKeywords($data) {
-        self::$meta['keywords'] = empty(self::$meta['keywords']) ? $data : self::$meta['keywords'].','.$data;
+    /** Set keywords for requested website page.
+     * This description will be used in meta tag.
+     * If some words has been set in website configuration (global keywords) the $keywords will be added to them
+     * @param  string $keywords Page keywords
+     * @return nothing
+     */
+    public static function setPageKeywords($keywords) {
+        self::$meta['keywords'] = empty(self::$meta['keywords']) ? $keywords : self::$meta['keywords'].','.$keywords;
     }
 
-    public static function setPageDescription($data) {
-        self::$meta['desc'] = $data;
+    /** Set description for requested website page.
+     * This description will be used in meta tag.
+     * @param  string $desc Page description
+     * @return nothing
+     */
+    public static function setPageDescription($desc) {
+        self::$meta['desc'] = $desc;
     }
 
     # Get site navigation. If navigation is not exists creates it.
@@ -290,6 +370,10 @@ class SYSTEM {
         return self::$navigation;
     }
 
+    /** Create main menu for website.
+     * The menu will be created only for registered and enabled modules.
+     * @return boolean - The result of operation
+     */
     public function createMainMenu() {
         $enabled = CONFIG::getSection('enabled');
         $menu  = array();
@@ -368,4 +452,3 @@ class SYSTEM {
         file_put_contents(CONTENT.'menu', serialize($menu));
     }
 }
-/** @}*/

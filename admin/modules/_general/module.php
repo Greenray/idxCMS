@@ -47,4 +47,3 @@ $MODULES[$module][0] = __('General options');
 $MODULES[$module][1]['config']      = __('Site configuration');
 $MODULES[$module][1]['backup']      = __('Backup');
 $MODULES[$module][1]['filemanager'] = __('Filemanager');
-?>

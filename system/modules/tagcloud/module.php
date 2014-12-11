@@ -1,20 +1,17 @@
 <?php
 /**
- * @package   idxCMS
- * @defgroup  TAGCLOUD
- * @ingroup   MODULES
  * @file      system/modules/tagcloud/module.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *            http://creativecommons.org/licenses/by-nc-sa/3.0/
+ *            <https://github.com/Greenray/idxCMS/system/modules/tagcloud/module.php>
  * @copyright (c) 2011 - 2014 Victor Nabatov\n
- * @see       https://github.com/Greenray/idxCMS/system/modules/tagcloud/module.php
+ *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
+ *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
  */
 
 if (!defined('idxCMS')) die();
 
-/** Transformation of a array: key <=> value.
+/** Transformation of an array: key <=> value.
  * @param  array $array Array to invert
  * @return array - Inverted array
  */

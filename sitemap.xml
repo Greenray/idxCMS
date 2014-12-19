@@ -26,10 +26,6 @@
 		<lastmod>2012-06-30</lastmod>
 	</url>
 	<url>
-		<loc>http://barracuda/idxCMS/?module=posts&amp;section=articles&amp;category=1&amp;item=2</loc>
-		<lastmod>2014-11-16</lastmod>
-	</url>
-	<url>
 		<loc>http://barracuda/idxCMS/?module=posts&amp;section=news</loc>
 		<lastmod>2014-11-18</lastmod>
 		<changefreq>weekly</changefreq>
@@ -57,58 +53,6 @@
 		<loc>http://barracuda/idxCMS/?module=forum</loc>
 		<lastmod>2014-11-18</lastmod>
 		<changefreq>weekly</changefreq>
-	</url>
-	<url>
-		<loc>http://barracuda/idxCMS/?module=forum&amp;section=Linux</loc>
-		<lastmod>2014-11-18</lastmod>
-		<changefreq>weekly</changefreq>
-	</url>
-	<url>
-		<loc>http://barracuda/idxCMS/?module=forum&amp;section=Linux&amp;category=1</loc>
-		<lastmod>2014-11-18</lastmod>
-		<changefreq>weekly</changefreq>
-	</url>
-	<url>
-		<loc>http://barracuda/idxCMS/?module=forum&amp;section=Linux&amp;category=1&amp;item=1</loc>
-		<lastmod>2014-11-16</lastmod>
-	</url>
-	<url>
-		<loc>http://barracuda/idxCMS/?module=forum&amp;section=Linux&amp;category=1&amp;item=2</loc>
-		<lastmod>2014-11-16</lastmod>
-	</url>
-	<url>
-		<loc>http://barracuda/idxCMS/?module=forum&amp;section=Linux&amp;category=1&amp;item=3</loc>
-		<lastmod>2014-11-16</lastmod>
-	</url>
-	<url>
-		<loc>http://barracuda/idxCMS/?module=forum&amp;section=Linux&amp;category=1&amp;item=4</loc>
-		<lastmod>2014-11-18</lastmod>
-	</url>
-	<url>
-		<loc>http://barracuda/idxCMS/?module=forum&amp;section=Windows</loc>
-		<lastmod>2014-11-18</lastmod>
-		<changefreq>weekly</changefreq>
-	</url>
-	<url>
-		<loc>http://barracuda/idxCMS/?module=forum&amp;section=Windows&amp;category=1</loc>
-		<lastmod>2014-11-18</lastmod>
-		<changefreq>weekly</changefreq>
-	</url>
-	<url>
-		<loc>http://barracuda/idxCMS/?module=forum&amp;section=Windows&amp;category=1&amp;item=4</loc>
-		<lastmod>2014-11-16</lastmod>
-	</url>
-	<url>
-		<loc>http://barracuda/idxCMS/?module=forum&amp;section=Windows&amp;category=1&amp;item=3</loc>
-		<lastmod>2014-11-16</lastmod>
-	</url>
-	<url>
-		<loc>http://barracuda/idxCMS/?module=forum&amp;section=Windows&amp;category=1&amp;item=2</loc>
-		<lastmod>2014-11-16</lastmod>
-	</url>
-	<url>
-		<loc>http://barracuda/idxCMS/?module=forum&amp;section=Windows&amp;category=1&amp;item=1</loc>
-		<lastmod>2014-11-16</lastmod>
 	</url>
 	<url>
 		<loc>http://barracuda/idxCMS/?module=galleries</loc>

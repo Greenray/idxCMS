@@ -3,15 +3,16 @@
  * @file      system/content.class.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- *            <https://github.com/Greenray/idxCMS/system/content.class.php>
- * @copyright (c) 2011 - 2014 Victor Nabatov\n
- *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @copyright (c) 2011 - 2014 Victor Nabatov
+ * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
  */
 
 /** @class CONTENT
+ * Class CONTENT.
  * Works with content: articles, topics, comments and replies.
+ * @package core
  */
+
 class CONTENT extends INDEX {
 
     /** Current module which use this class.
@@ -646,17 +647,15 @@ class CONTENT extends INDEX {
             }
         }
 
-        if (CONFIG::getValue('enabled', 'rate')) {
+        if (CONFIG::getValue('enabled', 'rate') && $user !== 'guest') {
             $comment['rateid'] = $this->module.'.'.$this->section.'.'.$this->category.'.'.$this->item.'.'.$id;
-            if ($comment['rate'] < 0) {
-                $comment['rate_color'] = 'red';
-            } elseif ($comment['rate'] === 0) {
-                $comment['rate_color'] = 'black';
-            } else {
-                $comment['rate_color'] = 'green';
-            }
+        }
+        if ($comment['rate'] < 0) {
+            $comment['rate_color'] = 'red';
+        } elseif ($comment['rate'] === 0) {
+            $comment['rate_color'] = 'black';
         } else {
-            unset($comment['rate']);
+            $comment['rate_color'] = 'green';
         }
         return $comment;
     }

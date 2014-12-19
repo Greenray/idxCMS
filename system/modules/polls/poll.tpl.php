@@ -8,7 +8,7 @@ die();?>
 <div class="poll">
     [ifelse=voited]
         <table>
-            <tr><th colspan="2">{question}</th></tr>
+            <tr><th colspan="2" class="center">{question}</th></tr>
             [each=answers]
                 <tr>
                     <td>{answers[answer]}</td>
@@ -31,7 +31,7 @@ die();?>
         <form name="poll" method="post" action="">
             <input type="hidden" name="poll" value="{id}" />
             <table>
-                <tr><th colspan="2">{question}</th></tr>
+                <tr><th colspan="2" class="center">{question}</th></tr>
                 [each=answers]
                     <tr>
                         <td><input type="radio" name="answer" value="{answers[id]}" /></td>

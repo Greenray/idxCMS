@@ -12,7 +12,7 @@ die();?>
         [ifelse=rateid]
             <span class="rate">
                 <button type="button" id="dnUser{rateid}" onclick="Rate('dn', '{author}', this)"> - </button>
-                <span id="rate{rateid}" class="{rate_color}">{rate}</span>
+                <span id="rate{rateid}" style="color:{rate_color}">{rate}</span>
                 <button type="button" id="upUser{rateid}" onclick="Rate('up', '{author}', this)"> + </button>
             </span>
         [else]

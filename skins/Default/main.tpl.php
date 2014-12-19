@@ -1,7 +1,16 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# SKIN DEFAULT
+/**
+ * @file      skins/Default/main.tpl.php
+ * @version   2.3
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ * @copyright (c) 2011 - 2014 Victor Nabatov
+ * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ */
+
+/**
+ * main.tpl.php - Skin Default: main template.
+ * @package Core
+ */
 
 if (!defined('idxCMS')) die();?>
 
@@ -41,7 +50,7 @@ if (!defined('idxCMS')) die();?>
             $(".cbox").colorbox({rel:'cbox'});
         });
     </script>
-    <script type="text/javascript" src="{TOOLS}jquery.rating.min.js"></script>
+    <script type="text/javascript" src="{TOOLS}jquery.rating.js"></script>
     <script type="text/javascript" src="{TOOLS}message.min.js"></script>
     <script type="text/javascript" src='{TOOLS}message.js'></script>
     <script type="text/javascript">

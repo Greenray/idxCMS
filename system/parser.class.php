@@ -13,17 +13,17 @@
 class PARSER {
 
     /** Text to parse
-     * @var string
+     * @param string
      */
     private $text = '';
 
     /** Temorary variable fo code processing
-     * @var array
+     * @param array
      */
     private $temp = array();
 
     /** Array of regexp
-     * @var array
+     * @param array
      */
     private $regexp = array();
 
@@ -373,35 +373,35 @@ class PARSER {
 class HtmlHighlighter extends PARSER {
 
     /** The results of parsing
-     * @var string
+     * @param string
      */
     private $output  = '';
     /** Text to parse
-     *  @var string
+     *  @param string
      */
     private $text    = '';
     /** Start parsing from the begining
-     * @var integer
+     * @param integer
      */
     private $current = 0;
     /** Tag name color
-     * @var string
+     * @param string
      */
     private $tag     = 'color:blue;';
     /** Tag attribute color
-     * @var string
+     * @param string
      */
     private $attr    = 'color:green;';
     /** Tag value color
-     * @var string
+     * @param string
      */
     private $value   = 'color:red;';
     /** php tag color
-     * @var string
+     * @param string
      */
     private $php     = 'color:black';
     /** inline style for comment
-     * @var string
+     * @param string
      */
     private $comment = 'font-style:italic;color:gray;';
 

@@ -13,32 +13,32 @@
 class UPLOADER {
 
     /** Directory for uploaded files.
-     * @var string
+     * @param string
      */
     private $upload_dir;
 
     /** Max size for uploading files.
-     * @var integer
+     * @param integer
      */
     private $max_size;
 
     /** Size of uploading file.
-     * @var integer
+     * @param integer
      */
     private $file_size;
 
     /** Temorary file.
-     * @var string
+     * @param string
      */
     private $file_tmp;
 
     /** Type of the file.
-     * @var string
+     * @param string
      */
     private $file_type;
 
     /** Allowed types of file for uploading.
-     * @var array
+     * @param array
      */
     private $allowed_types = array(
         'application/zip',
@@ -111,57 +111,57 @@ class UPLOADER {
 class IMAGE {
 
     /** Directory for uploaded files.
-     * @var string
+     * @param string
      */
     private $upload_dir;
 
     /** Max size for uploading files.
-     * @var integer
+     * @param integer
      */
     private $max_size;
 
     /** The width of the thumbnail.
-     * @var integer
+     * @param integer
      */
     private $thumb_width;
 
     /** The height of the thumbnail.
-     * @var integer
+     * @param integer
      */
     private $thumb_height;
 
     /** The name of the uploading image.
-     * @var string
+     * @param string
      */
     private $image_name;
 
     /** The size of the upoading image.
-     * @var integer
+     * @param integer
      */
     private $image_size;
 
     /** The width of the uploading image.
-     * @var integer
+     * @param integer
      */
     private $image_width;
 
     /** The height of the uploading image.
-     * @var integer
+     * @param integer
      */
     private $image_height;
 
     /** Name of the temporary image.
-     * @var string
+     * @param string
      */
     private $image_tmp;
 
     /** Image type.
-     * @var string
+     * @param string
      */
     private $image_type;
 
     /** Allowed image types.
-     * @var array
+     * @param array
      */
     private $allowed_types = array(
         'image/gif',

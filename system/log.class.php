@@ -2,27 +2,29 @@
 /**
  * @file      system/log.class.php
  * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- *            <https://github.com/Greenray/idxCMS/system/log.class.php>
- * @copyright (c) 2011 - 2014 Victor Nabatov\n
- *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2011 - 2014 Victor Nabatov
+ * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
  */
 
-/** Logs data store */
-define('LOGS', CONTENT.'logs'.DS);
 
-/** @class LOG
- * Works with log and errorlog files.
+
+/**
+ * Class LOG.
+ * Logging.
+ * @package core
  */
-final class LOG {
 
-    /** Class initialization */
+class LOG {
+
+    /** Class initialization. */
     public function __construct() {}
 
-    /** Write error message into log file.
-     * @param  string $message Error message
-     * @param  string $info    Additioinal info
+    /**
+     * Write error message into log file.
+     *
+     * @param  string $message Error message.
+     * @param  string $info    Additioinal info.
      * @return boolean FALSE
      */
     public function logError($message, $info = '') {
@@ -30,10 +32,12 @@ final class LOG {
         return FALSE;
     }
 
-    /** Register users logins into log file.
-     * @param  string  $type    Message type
-     * @param  string  $user    Username
-     * @param  string  $message Message
+    /**
+     * Register users logins into log file.
+     *
+     * @param  string  $type    Message type.
+     * @param  string  $user    Username.
+     * @param  string  $message Message.
      * @return boolean FALSE
      */
     public static function logPut($type, $user, $message) {
@@ -47,13 +51,15 @@ final class LOG {
         return FALSE;
     }
 
-    /** Сreate tar archive of logs for the month.
-     * @param  string  $title       Filename
-     * @param  integer $day         Date
-     * @param  integer $month       Month
-     * @param  integer $year        Year
-     * @param  integer $first_month The first month of the year
-     * @param  integer $first_year  The first year of the age
+    /**
+     * Сreate tar archive of logs for the month.
+     *
+     * @param  string  $title       Filename.
+     * @param  integer $day         Date.
+     * @param  integer $month       Month.
+     * @param  integer $year        Year.
+     * @param  integer $first_month The first month of the year.
+     * @param  integer $first_year  The first year of the age.
      * @return boolean TRUE
      */
     public static function logMerge($title, $day, $month, $year, $first_month = 1, $first_year = 1980) {
@@ -87,7 +93,9 @@ final class LOG {
         return TRUE;
     }
 
-    /** Prepare daily log files to create a single file per month.
+    /**
+     * Prepare daily log files to create a single file per month.
+     *
      * @return boolean TRUE
      */
     public static function logMergeByMonth() {
@@ -108,7 +116,7 @@ final class LOG {
                             $matches[2],
                             $matches[1]
                     );
-                    $merged[] = $matches[1].'-'.$matches[2];    # Already processed files
+                    $merged[] = $matches[1].'-'.$matches[2];    # Already processed files.
                 }
             }
         }

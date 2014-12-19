@@ -29,17 +29,17 @@
 class TEMPLATE {
 
     /** Template variables
-     * @var array
+     * @param array
      */
     private $vars = array();
 
     /** Temlate name
-     * @var string
+     * @param string
      */
     private $tpl  = '';
 
     /** Template patterns
-     * @var array
+     * @param array
      */
     private $patterns = array(
         'die'       => "#<\?php(.*?)\?>#is",

@@ -2,17 +2,17 @@
 /**
  * @file      system/system.class.php
  * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- *            <https://github.com/Greenray/idxCMS/system/system.class.php>\n
- *            Reloadcms Team <http://reloadcms.com>
- * @copyright (c) 2011 - 2014 Victor Nabatov\n
- *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2011 - 2014 Victor Nabatov
+ * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
  */
 
-/** @class SYSTEM
+/**
+ * Class SYSTEM.
  * System, modules, users and templates initialization.
+ * @package core
  */
+
 class SYSTEM {
 
     /** Website URL.
@@ -29,7 +29,7 @@ class SYSTEM {
     /** Available website translations.
      * @param string
      */
-    private static $languages = array();
+    private static $languages = [];
 
     /** Current locale.
      * @param string
@@ -44,49 +44,80 @@ class SYSTEM {
     /** Website skins.
      * @param array
      */
-    public static  $skins = array();
+    public static  $skins = [];
 
     /** CMS modules.
      * @param array
      */
-    public static  $modules = array();
-    public static  $current_point = '';
-    public static  $output = array();
+    public static  $modules = [];
 
-    /** Website RSS feeds
+    /** Array of the output points.
+     * Currently there are six points:
+     * - 'point' - may be left or right panel of the website page as well as upper or lawer than main module;
+     * - 'main'  - data for the website main window;
+     * - 'box'   - data for website boxes;
+     * - 'title' - name of the current page will be added to the website title, if the last has been configured;
+     * - 'meta'  - configured meta tags will be added to the head of the generating page;
+     * - 'error' - an error message will be shown.
+     *
+     * @param string
+     */
+    public static  $current_point = '';
+
+    /** Array of generated output data.
      * @param array
      */
-    private static $feeds = array();
-    private static $navigation = array();
+    public static  $output = [];
+
+    /** Website RSS feeds.
+     * @param array
+     */
+    private static $feeds = [];
+
+    /** Array of navigation pint of the website.
+     * @param array
+     */
+    private static $navigation = [];
 
     /** Website menu.
      * @param array
      */
-    private static $menu = array();
+    private static $menu = [];
+
+    /** Name of the current page.
+     * @param string
+     */
     private static $pagename = '';
 
     /** Website map.
      * @param array
      */
-    private static $sitemap = array();
-    private static $search = array();
+    private static $sitemap = [];
+
+    /** Search words from user request.
+     * @param array
+     */
+    private static $search = [];
 
     /** Website meta.
      * @param array
      */
-    private static $meta = array();
+    private static $meta = [];
 
-    /** Class initialization.
-     * @global array $LANG - website translations
+    /**
+     * Class initialization.
+     *
+     * @return void
+     * @uses $LANG Website translations.
      */
     public function __construct() {
         global $LANG;
-        # Detect website url
+        # Detect website url.
         self::$url = CMS::call('CONFIG')->getValue('main', 'url');
         if (empty(self::$url)) {
             self::$url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['SCRIPT_NAME'].basename($_SERVER['SCRIPT_NAME'])).DS;
         }
-        # Check if it is allowed to change website language and set user or default language
+        # Check if it is allowed to change website language and set user or default language.
         $COOKIE = CMS::call('FILTER')->getAll('COOKIE');
         $cookie_lang    = CONFIG::getValue('main', 'cookie').'_lang';
         self::$language = CONFIG::getValue('main', 'lang');
@@ -100,7 +131,7 @@ class SYSTEM {
                 }
             }
         }
-        # Avaible localizations list
+        # Avaible localizations list.
         $langs = GetFilesList(SYS.'languages');
         foreach ($langs as $lng) {
             self::$languages[] = basename($lng, '.php');
@@ -110,7 +141,7 @@ class SYSTEM {
         self::$locale   = $LANG['locale'];
         $cookie = time() + 3600 * 24 * 365 * 5;
         setcookie($cookie_lang, self::$language, $cookie);
-        # Check if it is allowed to change website skin and set user or default skin
+        # Check if it is allowed to change website skin and set user or default skin.
         $cookie_skin = CONFIG::getValue('main', 'cookie').'_skin';
         self::$skin  = CONFIG::getValue('main', 'skin');
         if (CONFIG::getValue('main', 'allow-skin')) {
@@ -125,32 +156,38 @@ class SYSTEM {
         }
         setcookie($cookie_skin, self::$skin, $cookie);
         if (is_dir(SKINS.self::$skin)) {
-            /** User defined skin */
+            /** User defined skin. */
             define('CURRENT_SKIN', SKINS.self::$skin.DS);
         }
     }
 
-    /** Set system parameter.
-     * @param  string $param System parameter
-     * @param  string $value Value of the system parameter
-     * @return nothing
+    /**
+     * Set system parameter.
+     *
+     * @param  string $param System parameter.
+     * @param  string $value Value of the system parameter.
+     * @return void
      */
     public static function set($param, $value) {
         self::$$param = $value;
     }
 
-    /** Get system parameter.
-     * @param  string $param System parameter
-     * @return string - Value of the requested parameter
+    /**
+     * Get system parameter.
+     *
+     * @param  string $param System parameter.
+     * @return string        Value of the requested parameter.
      */
     public static function get($param) {
         return self::$$param;
     }
 
-    /** Modules initialization.
-     * @global array $LANG - website translations
-     * @param  boolean $ignore_disabled Init all existing modules
-     * @return nothing
+    /**
+     * Modules initialization.
+     *
+     * @param  boolean $ignore_disabled Init all existing modules.
+     * @return void
+     * @uses array $LANG Website translations.
      */
     public function initModules($ignore_disabled = FALSE) {
         global $LANG;
@@ -168,17 +205,19 @@ class SYSTEM {
         }
     }
 
-    /** Register module.
+    /**
+     * Register module.
      * Used for classify modules by type. There are three types:
      * - system (cannot be excluded);
      * - main (for full pages);
-     * - box (for panels or boxxes);
-     * - plugin (cannot be showed on any page);
-     * @param  string $module Module name
-     * @param  string $title  Module title
-     * @param  string $type   Module type
+     * - box (for panels or boxes);
+     * - plugin (cannot be showed on any page).
+     *
+     * @param  string $module Module name.
+     * @param  string $title  Module title.
+     * @param  string $type   Module type.
      * @param  string $system
-     * @return nothing
+     * @return void
      */
     public static function registerModule($module, $title, $type, $system = '') {
         self::$modules[$module]['title']  = __($title);
@@ -186,51 +225,67 @@ class SYSTEM {
         self::$modules[$module]['system'] = $system;
     }
 
-    /** Register RSS feed for module.
-     * RSS feed ID is looks like "module@section"
-     * @param  string $section RSS feed ID
-     * @param  string $title   RSS feed title
-     * @param  string $desc    RSS feed description
-     * @param  string $module  Module name
-     * @return nothing
+    /**
+     * Register RSS feed for module.
+     * RSS feed ID is looks like "module@section".
+     *
+     * @param  string $section RSS feed ID.
+     * @param  string $title   RSS feed title.
+     * @param  string $desc    RSS feed description.
+     * @param  string $module  Module name.
+     * @return void
      */
     public static function registerFeed($section, $title, $desc, $module = '') {
         self::$feeds[$section] = array(__($title), __($desc), $module);
     }
 
-    /** Register module for menu link.
-     * @param  string $module Module name
-     * @return nothing
+    /**
+     * Register module for menu link.
+     *
+     * @param  string $module Module name.
+     * @return void
      */
     public static function registerMainMenu($module) {
         self::$menu[] = $module;
     }
 
-    /** Register module for use in sitemap.
-     * @param  string $module Module name
-     * @return nothing
+    /**
+     * Register module for use in sitemap.
+     *
+     * @param  string $module Module name.
+     * @return void
      */
     public static function registerSiteMap($module) {
         self::$sitemap[] = $module;
     }
 
-    /** Register module for search requests.
-     * @param  string $module Module name
-     * @return nothing
+    /**
+     * Register module for search requests.
+     *
+     * @param  string $module Module name.
+     * @return void
      */
     public static function registerSearch($module) {
         self::$search[] = $module;
     }
 
-    /** Register module for menu link.
-     * @param  string $name Skin name
-     * @param  string $skin Skin template
-     * @return nothing
+    /**
+     * Register module for menu link.
+     *
+     * @param  string $name Skin name.
+     * @param  string $skin Skin template.
+     * @return void
      */
     public static function registerSkin($name, $skin) {
         self::$skins[$name] = $skin;
     }
 
+    /**
+     * Set the point for output.
+     *
+     * @param type $point Output point name.
+     * @return void
+     */
     public static function setCurrentPoint($point) {
         self::$current_point = $point;
     }
@@ -243,6 +298,15 @@ class SYSTEM {
         }
     }
 
+    /**
+     * Show window.
+     *
+     * @param  string $title    The title of the output data.
+     * @param  string $content  The content for use in output.
+     * @param  string $align    Page data alignment.
+     * @param  string $template Name of the template for use in output.
+     * @return string           Website page.
+     */
     public static function showWindow($title, $content, $align, $template) {
         if (($title === '__NOWINDOW__') || ($template === 'empty')) {
             return $content;
@@ -270,109 +334,126 @@ class SYSTEM {
         }
     }
 
-    /** Set keywords for requested website page.
+    /**
+     * Set keywords for requested website page.
      * This description will be used in meta tag.
-     * If some words has been set in website configuration (global keywords) the $keywords will be added to them
-     * @param  string $keywords Page keywords
-     * @return nothing
+     * If some words has been set in website configuration (global keywords) the $keywords will be added to them.
+     *
+     * @param  string $keywords Page keywords.
+     * @return void
      */
     public static function setPageKeywords($keywords) {
         self::$meta['keywords'] = empty(self::$meta['keywords']) ? $keywords : self::$meta['keywords'].','.$keywords;
     }
 
-    /** Set description for requested website page.
+    /**
+     * Set description for requested website page.
      * This description will be used in meta tag.
-     * @param  string $desc Page description
-     * @return nothing
+     *
+     * @param  string $desc Page description.
+     * @return void
      */
     public static function setPageDescription($desc) {
         self::$meta['desc'] = $desc;
     }
 
-    # Get site navigation. If navigation is not exists creates it.
-    public function getNavigation() {
+    /**
+     * Get website navigation points.
+     * If navigation is not exists it will be created.
+     *
+     * @return array Website navigation points.
+     */
+    public function getNavigations() {
         if (empty(self::$navigation)) {
             return self::createNavigation();
         }
         return self::$navigation;
     }
 
-    # Create site navigation.
-    public static function createNavigation() {
-        $config = CONFIG::getSection('navigation');
-        foreach ($config as $link) {
-            $data   = explode(':', $link[0], 2);
-            $module = trim($data[0]);
-            if (!empty($data[1])) {
-                $path = trim($data[1]);
-                $obj = strtoupper($module);
-                if (class_exists($obj)) {
-                    $sections = CMS::call($obj)->getSections();
-                    if (!empty($sections['drafts'])) {
-                        unset($sections['drafts']);
-                    }
-                    if (!empty($sections)) {
-                        $data = explode(DS, $path, 3);
-                        switch (sizeof($data)) {
+    /**
+     * Create site navigation.
+     *
+     * @return array Website navigation points.
+     */
+    public static function getNavigation() {
+        if (empty(self::$navigation)) {
+            $config = CONFIG::getSection('navigation');
+            foreach ($config as $link) {
+                $data   = explode(':', $link[0], 2);
+                $module = trim($data[0]);
+                if (!empty($data[1])) {
+                    $path = trim($data[1]);
+                    $obj = strtoupper($module);
+                    if (class_exists($obj)) {
+                        $sections = CMS::call($obj)->getSections();
+                        if (!empty($sections['drafts'])) {
+                            unset($sections['drafts']);
+                        }
+                        if (!empty($sections)) {
+                            $data = explode(DS, $path, 3);
+                            switch (sizeof($data)) {
 
-                            case 1:
-                                if (!empty($sections[$data[0]])) {
-                                    self::$navigation[] = array(
-                                        'module' => $module,
-                                        'link'   => $sections[$data[0]]['link'],
-                                        'name'   => empty($link[1]) ? $sections[$data[0]]['title'] : __($link[1]),
-                                        'desc'   => empty($link[2]) ? (empty($sections[$data[0]]['desc']) ? '' : $sections[$data[0]]['desc']) : __($link[2]),
-                                        'icon'   => ICONS.$link[3]
-                                    );
-                                }
-                                break;
-
-                            case 2:
-                                $categories = CMS::call($obj)->getCategories($data[0]);
-                                if (!empty($categories[$data[1]])) {
-                                    self::$navigation[] = array(
-                                        'module' => $module,
-                                        'link'   => MODULE.$module.SECTION.$data[0].CATEGORY.$data[1],
-                                        'name'   => $categories[$data[1]]['title'],
-                                        'desc'   => empty($link[2]) ? (empty($categories[$data[1]]['desc']) ? '' : $categories[$data[1]]['desc']) : __($link[2]),
-                                        'icon'   => ICONS.$link[3]
-                                    );
-                                }
-                                break;
-
-                            case 3:
-                                $categories = CMS::call($obj)->getCategories($data[0]);
-                                if (!empty($categories)) {
-                                    $content = CMS::call($obj)->getContent($data[1]);
-                                    if (!empty($content[$data[2]])) {
-                                        self::$navigation[] = array(
+                                case 1:
+                                    if (!empty($sections[$data[0]])) {
+                                        self::$navigation[] = [
                                             'module' => $module,
-                                            'link'   => MODULE.$module.SECTION.$data[0].CATEGORY.$data[1].ITEM.$data[2],
-                                            'name'   => $content[$data[2]]['title'],
-                                            'desc'   => empty($link[2]) ? '' : __($link[2]),
+                                            'link'   => $sections[$data[0]]['link'],
+                                            'name'   => empty($link[1]) ? $sections[$data[0]]['title'] : __($link[1]),
+                                            'desc'   => empty($link[2]) ? (empty($sections[$data[0]]['desc']) ? '' : $sections[$data[0]]['desc']) : __($link[2]),
                                             'icon'   => ICONS.$link[3]
-                                        );
+                                        ];
                                     }
-                                }
-                            break;
+                                    break;
+
+                                case 2:
+                                    $categories = CMS::call($obj)->getCategories($data[0]);
+                                    if (!empty($categories[$data[1]])) {
+                                        self::$navigation[] = [
+                                            'module' => $module,
+                                            'link'   => MODULE.$module.SECTION.$data[0].CATEGORY.$data[1],
+                                            'name'   => $categories[$data[1]]['title'],
+                                            'desc'   => empty($link[2]) ? (empty($categories[$data[1]]['desc']) ? '' : $categories[$data[1]]['desc']) : __($link[2]),
+                                            'icon'   => ICONS.$link[3]
+                                        ];
+                                        }
+                                        break;
+
+                                case 3:
+                                    $categories = CMS::call($obj)->getCategories($data[0]);
+                                    if (!empty($categories)) {
+                                        $content = CMS::call($obj)->getContent($data[1]);
+                                        if (!empty($content[$data[2]])) {
+                                            self::$navigation[] = [
+                                                'module' => $module,
+                                                'link'   => MODULE.$module.SECTION.$data[0].CATEGORY.$data[1].ITEM.$data[2],
+                                                'name'   => $content[$data[2]]['title'],
+                                                'desc'   => empty($link[2]) ? '' : __($link[2]),
+                                                'icon'   => ICONS.$link[3]
+                                            ];
+                                        }
+                                    }
+                                break;
+                            }
                         }
                     }
+                } else {
+                    self::$navigation[] = [
+                        'link' => MODULE.$module,
+                        'name' => empty($link[1]) ? self::$modules[$module]['title'] : __($link[1]),
+                        'desc' => empty($link[2]) ? '' : __($link[2]),
+                        'icon' => ICONS.$link[3]
+                    ];
                 }
-            } else {
-                self::$navigation[] = array(
-                    'link' => MODULE.$module,
-                    'name' => empty($link[1]) ? self::$modules[$module]['title'] : __($link[1]),
-                    'desc' => empty($link[2]) ? '' : __($link[2]),
-                    'icon' => ICONS.$link[3]
-                );
             }
         }
         return self::$navigation;
     }
 
-    /** Create main menu for website.
+    /**
+     * Create main menu for website.
      * The menu will be created only for registered and enabled modules.
-     * @return boolean - The result of operation
+     *
+     * @return boolean The result of operation.
      */
     public function createMainMenu() {
         $enabled = CONFIG::getSection('enabled');

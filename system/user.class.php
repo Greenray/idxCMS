@@ -2,59 +2,62 @@
 /**
  * @file      system/user.class.php
  * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- *            https://github.com/Greenray/idxCMS/system/user.class.php>
- * @copyright (c) 2011 - 2014 Victor Nabatov\n
- *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2011 - 2014 Victor Nabatov
+ * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
  */
 
-/** Class USER - works with users and their profiles */
+/**
+ * Class USER.
+ * Users and their profiles.
+ * @package core
+ */
+
 class USER {
 
-    /** User profile fields
-     * @var array
+    /** User profile fields.
+     * @param array
      */
-    private static $user_fields = array(
-        'username', 'nickname', 'password', 'email', 'tz', 'access', 'rights', 'status', 'stars', 'regdate', 'visits', 'lastvisit',
-        'posts', 'comments', 'topics', 'replies', 'blocked', 'icq', 'website', 'country', 'city', 'last_prr'
-    );
+    private static $user_fields = [
+        'username', 'nickname', 'password', 'email', 'tz', 'access', 'rights', 'status', 'stars', 'regdate', 'visits',
+        'lastvisit','posts', 'comments', 'topics', 'replies', 'blocked', 'icq', 'website', 'country', 'city', 'last_prr'
+    ];
 
-    /** Disallowed names for registration
-     * @var array
+    /** Disallowed names for registration.
+     * @param array
      */
-    private static $disallowed_names = array(
-        'administrator', 'false', 'guest', 'idxcms', 'moderator', 'noavatar', 'null', 'root', 'superuser', 'supervisor',
-        'sponsor', 'system', 'test', 'true', 'unknown', 'user'
-    );
+    private static $disallowed_names = [
+        'administrator', 'false', 'guest', 'idxcms', 'moderator', 'noavatar', 'null', 'root',
+        'superuser', 'supervisor', 'sponsor', 'system', 'test', 'true', 'unknown', 'user'
+    ];
 
-    /** User`s profile
-     * @var array
+    /** User`s profile.
+     * @param array
      */
     private static $user = array();
 
     /** Is user logged in?
-     * @var boolean
+     * @param boolean
      */
     private static $logged_in   = FALSE;
 
-    /** Cookie with user name
-     * @var string
+    /** Cookie with user name.
+     * @param string
      */
     private static $cookie_user = '';
 
-    /** Cookie with user nick
-     * @var string
+    /** Cookie with user nick.
+     * @param string
      */
     private static $cookie_nick = '';
 
-    /** System rights
-     * @var array
+    /** System rights.
+     * @param array
      */
     private static $system_rights = array();
 
     /** Is user admin?
-     * @var boolean
+     * @param boolean
      */
     private static $root = FALSE;
 
@@ -73,7 +76,7 @@ class USER {
         self::$cookie_nick = CONFIG::getValue('main', 'cookie').'_nick';
     }
 
-    # Initialize user and load his profile
+    # Initialize user and load his profile.
     public function initUser() {
         # If user cookie is not present...
         $cookie_user = FILTER::get('COOKIE', self::$cookie_user);
@@ -84,7 +87,7 @@ class USER {
         if ($cookie_user !== $_SESSION['user']) {
             return self::clearCookie();
         }
-        # Now we must validate user's data
+        # Now we must validate user's data.
         if (!$this->checkUser($cookie_user, $_SESSION['pass'], TRUE, self::$user)) {
             self::$logged_in = FALSE;
             return self::clearCookie();
@@ -105,7 +108,7 @@ class USER {
         return FALSE;
     }
 
-    # Check user's data and log in him
+    # Check user's data and log in him.
     function logInUser() {
         $user = basename(FILTER::get('REQUEST', 'username'));
         if (($user === 'guest') || self::$logged_in) {
@@ -161,12 +164,12 @@ class USER {
         }
         global $LANG;
         $userdata = FILTER::get('REQUEST', 'fields');
-        # Also we must set a md5 hash of user's password to userdata
+        # Also we must set a md5 hash of user's password to userdata.
         $user['username']  = $username;
         $user['nickname']  = $nickname;
         $user['password']  = md5(FILTER::get('REQUEST', 'password'));
         $user['email']     = $email;
-        # Parse some system fields
+        # Parse some system fields.
         $user['tz']        = $userdata['tz'];
         $user['access']    = 1;
         $user['rights']    = '';
@@ -187,7 +190,7 @@ class USER {
         $user['last_prr']  = 0;
         if (self::saveUserData($username, $user)) {
             CMS::call('LOG')->logPut('Note', self::$user['username'], 'Registation');
-            # Create user's PM file
+            # Create user's PM file.
             file_put_contents(PM_DATA.$username, serialize(array('inbox' => array(), 'outbox' => array())), LOCK_EX);
             return TRUE;
         }
@@ -221,7 +224,7 @@ class USER {
                 $password = md5($password);
             }
         } else $password = $user['password'];
-        # Also we must set a md5 hash of user's password to userdata
+        # Also we must set a md5 hash of user's password to userdata.
         $user = array_merge($user, $userdata);
         $user['password'] = $password;
         $user['email']    = $email;
@@ -349,7 +352,7 @@ class USER {
     }
 
     /**
-    * @todo Correct $userdata
+    * @todo Correct $userdata.
     */
     public static function checkRight($right, $user = '', $userdata = '') {
         $rights = self::getUserRights($user, $root, $userdata);
@@ -363,7 +366,7 @@ class USER {
         return self::$root;
     }
 
-    # Check user's data and validate his data file
+    # Check user's data and validate his data file.
     public function checkUser($username, $password, $hash, &$userdata) {
         if (!$this->checkUserName($username, 'Name')) {
             return FALSE;
@@ -372,11 +375,11 @@ class USER {
             return FALSE;
         }
         $userdata = self::getUserData($username);
-        # If userdata is invalid we must exit with error
+        # If userdata is invalid we must exit with error.
         if (empty($userdata)) {
             return CMS::call('LOG')->logError('Invalid login or password');
         }
-        # If password is invalid - exit with error
+        # If password is invalid - exit with error.
         if ((!$hash && (md5($password) !== $userdata['password'])) || ($hash && ($password !== $userdata['password']))) {
             return CMS::call('LOG')->logError('Invalid login or password');
         }
@@ -405,6 +408,13 @@ class USER {
         return FALSE;
     }
 
+    /**
+     * Check if user has right to edit or remove the article, topic, comment or replay.
+     *
+     * @param  string  $module Module (ex. articles, forum, etc.)
+     * @param  integer $item   Item ID.
+     * @return boolean         The result of right checking.
+     */
     public static function moderator($module, $item = '') {
         if (self::$user['username'] === 'guest') {
             return FALSE;

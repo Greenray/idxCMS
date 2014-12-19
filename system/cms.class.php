@@ -2,16 +2,17 @@
 /**
  * @file      system/cms.class.php
  * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- *            <https://github.com/Greenray/idxCMS/system/cms.class.php>
- * @copyright (c) 2011 - 2014 Victor Nabatov\n
- *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2011 - 2014 Victor Nabatov
+ * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
  */
 
 /** @class CMS
+ * Class CMS.
  * Register objects and provide access to their methods.
+ * @package core
  */
+
 class CMS {
 
     /** Registered objects.
@@ -19,39 +20,41 @@ class CMS {
      */
     private static $obj = array();
 
-    /** Class initialization */
+    /** Class initialization. */
     private function __construct() {}
+
     /** Prevent to clone object */
     private function __clone() {}
 
-    /** Create and register the object.
-     * @param  string $class Class name
-     * @return object - Created and initialized object
+    /**
+     * Create and register the object.
+     *
+     * @param  string $class Class name.
+     * @return object        Created and initialized object.
      */
     public static function register($class) {
         self::$obj[$class] = new $class();
         return self::$obj[$class];
     }
 
-    /** Call the object, if object is not set it'll be created.
-     * @param  string $class Class name
-     * @return object - Existing or created and initialized object\n
-     * Example:
-     * @code
-     * $CMS = CMS::call('SYSTEM');
-     * @endcode
-     * or
-     * @code
-     * CMS::call('SYSTEM')->initModules();
-     * @endcode
+    /**
+     * Call the object, if object is not set it will be created.
+     * Examples:
+     * $CMS = CMS::call('SYSTEM'); - when it is need to initialize variable.
+     * CMS::call('SYSTEM')->initModules(); - when the return value is not needed.
+     *
+     * @param  string $class Class name.
+     * @return object        Existing or created and initialized object.
      */
     public static function call($class) {
         return empty(self::$obj[$class]) ? self::register($class) : self::$obj[$class];
     }
 
-    /** Remove the object.
-     * @param  string $class Class name
-     * @return nothing
+    /**
+     * Remove the object.
+     *
+     * @param  string $class Class name.
+     * @return void
      */
     public static function remove($class) {
         if (isset(self::$obj[$class])) {

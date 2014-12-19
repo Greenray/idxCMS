@@ -42,7 +42,7 @@ class CONTENT extends INDEX {
     /** Coontent of the current category.
      * @param array
      */
-    protected $content   = array();
+    protected $content = array();
 
     /** Filename of the item with full text.
      * @param string

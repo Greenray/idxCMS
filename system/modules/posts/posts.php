@@ -135,8 +135,6 @@ if (empty($sections)) {
             $pagination = GetPagination($page, $perpage, $count);
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'comment.tpl');
             for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
-$a = CMS::call('POSTS')->getComment($posts[$i], $page);
-var_dump($a);
                 $output .= $TPL->parse(CMS::call('POSTS')->getComment($posts[$i], $page));
             }
             ShowWindow(__('Comments'), $output);

@@ -15,16 +15,16 @@ die();?>
                 <td colspan="3"><b>{section_title}</b></td>
             </tr>
             <tr class="odd">
-                <td>[__Category]</td>
+                <td class="label">[__Category]</td>
                 <td colspan="3"><b>{category_title}</b></td>
             </tr>
             <tr class="odd">
-                <td>[__Title]</td>
+                <td class="label">[__Title]</td>
                 <td colspan="3"><input type="text" name="title" value="{title}" size="50" class="required" onfocus="if (this.value == '{title}') {this.value = '';}" onblur="if (this.value == '') {this.value = '{title}';}" required="required" /></td>
             </tr>
             <tr class="odd">
-                <td>[__Keywords]</td>
-                <td colspan="3"><input type="text" class="text" id="keywords" name="keywords"  size="50"  value="{keywords}" /></td>
+                <td class="label">[__Keywords]</td>
+                <td colspan="3"><input type="text" id="keywords" name="keywords"  size="50"  value="{keywords}" /></td>
             </tr>
             <tr>
                 <td colspan="4">
@@ -37,7 +37,7 @@ die();?>
                     </div>
                     <div id="shdesc" class="none">
                         {bbCodes_desc}
-                        <textarea id="desc" name="desc" cols="80" rows="5" >{desc}</textarea>
+                        <div class="center"><textarea id="desc" name="desc" cols="80" rows="5" >{desc}</textarea></div>
                     </div>
                 </td>
             </tr>
@@ -45,15 +45,14 @@ die();?>
                 <td colspan="4">
                     <div class="center">[__Text]</div>
                     {bbCodes_text}
-                    <textarea id="text" name="text" cols="80" rows="25">{text}</textarea>
+                    <div class="center"><textarea id="text" name="text" cols="80" rows="25">{text}</textarea></div>
                 </td>
             </tr>
-            <tr class="odd">
-                <td>[__Comments]</td>
-                <td colspan="3">
-                    <input type="checkbox" name="opened" value="1" id="opened" [if=opened]checked="checked"[endif] />
+             <tr class="odd">
+                <td colspan="4" class="center">[__Comments]: <input type="checkbox" name="opened" value="1" id="opened" [if=opened]checked="checked"[endif] />
                     <label for="opened"> [__Allow]</label>
                 </td>
+                <td colspan="3" >&nbsp;</td>
             </tr>
         </table>
         <input type="hidden" name="item" value="{item}" />

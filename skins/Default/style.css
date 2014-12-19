@@ -2,7 +2,7 @@
 * Copyright (c) 2012 Greenray greenray.spb@gmail.com
 * DEFAULT CSS
 */
-*,html,fieldset,li{margin:0;padding:0}
+*,html,li{margin:0;padding:0}
 html,#wrapper,#layout-root{height:100%}
 html{font-size:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}
 body{color:#000;font:normal 12px arial,helvetica,verdana,sans-serif;height:auto !important;min-height:100%;overflow-y:scroll;vertical-align:baseline}
@@ -21,7 +21,7 @@ button,input,select,textarea{font-size:100%;margin:0;vertical-align:baseline;*ve
     button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
     button,input{line-height:normal;*overflow:visible}
     button,input[type="button"],input[type="reset"],input[type="submit"]{cursor:pointer;-webkit-appearance:button}
-fieldset{border:0}
+fieldset{margin:20px 0}
 form{margin:0}
 h1,h2{text-transform:none;text-shadow:white 1px 1px 1px}
 h1{font-size:16px;padding:0 53px 0 0}
@@ -29,14 +29,14 @@ h2{font-size:12px}
 hr{margin:5px}
 img{border:0;-ms-interpolation-mode:bicubic}
 input{color:black}
-    input[type='button'],nput[type='reset'],input[type='submit'],input[type='text'],input[type='password']{padding:2px 5px} input[type='text'],input[type='password']{border:1px solid #c8c8c8}
+    input[type='button'],input[type='reset'],input[type='submit'],input[type='text'],input[type='password']{padding:2px 5px}
+    input[type='text'],input[type='password']{border:1px solid #c8c8c8}
     input[type='text']:hover,input[type='password']:hover{border-color:#aaa}
     input[type='text']:focus,input[type='password']:focus{border-color:#8c8c8c;background:#ffffcc;outline:1px solid red}
 label{margin:0;padding:0 3px;cursor:pointer}
-legend{border:0;*margin-left:-7px;padding:0}
+legend{border:0;padding:10px}
 nav ul,nav ol{list-style:none;margin:0;padding:0}
 ol,p{margin:10px 0}
-p{padding:0 0 0 30px}
 pre,code{font-family:monospace,monospace;_font-family:'courier new',monospace;font-size:1em}
 pre{background:#fafafa;color:#2e8b57;border:1px dotted #aab4be;border-left:20px solid #b4b4b4;padding:5px 0;white-space:pre;white-space:pre-wrap;word-wrap:break-word}
 select{padding:0 5px;color:#000;border:1px solid #000}
@@ -45,7 +45,7 @@ sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
 sub{bottom:-.3em}
 sup{top:-.4em}
 table{border-collapse:separate;border-spacing:0;width:100%}
-    table,th,td{padding:2px;text-align:center;vertical-align:middle}
+    table,th,td{padding:2px;vertical-align:middle}
     table#std{border-collapse:separate;border-spacing:0;font-size:12px;}
     table#std tr{height:35px}
     table#std td{border:2px groove #fff;padding:0 10px}
@@ -57,7 +57,7 @@ th.access,td.access,th.actions,td.actions{width:70px}
 th.author,td.author,th.views,td.views{width:80px}
 th.comments,td.comments{width:120px}
 th.date,td.date{padding:0 10px;width:140px}
-textarea{background:#fff;color:#000;margin:0 0 10px;overflow:auto;vertical-align:top;width:100%}
+textarea{background:#fff;color:#000;margin:0 0 10px;overflow:auto;vertical-align:top}
     textarea:hover{border-color:#aaa}
     textarea:focus{border-color:#8c8c8c;outline:2px solid red}
 ul{margin:1em 0;padding:0 0 0 10px}
@@ -173,7 +173,7 @@ div.tabs{margin:0;padding:4px}
 .admin{margin:5px 10px 5px 88px}
 .author{float:left;margin:0 0 10px;text-align:center;width:120px}
 .bbbutton{margin:0 -2px;padding:1px}
-.bbcodes{margin:10px 20px 0}
+.bbcodes{margin:10px 20px}
     .bbcodes .smiles{margin:0 0 5px}
     .bbcodes .link_text{margin:4px 20px;text-align:right}
     .bbcodes .link_text input[type='text']{margin:2px 20px}
@@ -204,6 +204,7 @@ div.tabs{margin:0;padding:4px}
 .idx{color:#297377;font-size:120pt;font-style:italic;font-weight:bold;text-shadow:#000 -10px 10px 10px}
 .info a:hover{color:red}
 .justify{text-align:justify}
+.label{padding:0 0 0 20px}
 .last-posts li{margin:5px 0}
 .left{text-align:left}
 .lightbox .title{background:#297377;color:#fff;text-transform:uppercase}

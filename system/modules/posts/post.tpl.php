@@ -56,7 +56,7 @@ die();?>
 <form name="editor" method="post" action="" onsubmit="return checkPost(this);">
     <fieldset>
     <legend>{header}</legend>
-        <table class="std">
+        <table>
             <tr class="odd">
                 <td class="label">[__Section]</td>
                 <td><input type="hidden" name="section" value="{section_id}" /><b>{section_title}</b></td>
@@ -70,9 +70,9 @@ die();?>
                 </td>
             </tr>
             <tr class="odd">
-                <td>[__Category]</td>
+                <td class="label">[__Category]</td>
                 <td><input type="hidden" name="category" value="{category_id}"/><b>{category_title}</b></td>
-                <td>[__Select category]</td>
+                <td class="label">[__Select category]</td>
                 <td>
                     <select name="new_category">
                         [each=categories]
@@ -82,12 +82,12 @@ die();?>
                 </td>
             </tr>
             <tr class="odd">
-                <td>[__Title]</td>
+                <td class="label">[__Title]</td>
                 <td colspan="3"><input type="text" name="title" value="{title}" id="title" size="60" class="required" required="required" /></td>
             </tr>
             <tr class="odd">
-                <td>[__Keywords]</td>
-                <td colspan="3"><input type="text" name="keywords" value="{keywords}" size="60" class="text" /></td>
+                <td class="label">[__Keywords]</td>
+                <td colspan="3"><input type="text" id="keywords" name="keywords"  size="50"  value="{keywords}" /></td>
             </tr>
             <tr>
                 <td colspan="4">
@@ -99,20 +99,23 @@ die();?>
                         </p>
                     </div>
                     <div id="shdesc" class="none">
-                        <div>{bbCodes_desc}</div>
-                        <div><textarea id="desc" name="desc" cols="80" rows="5">{desc}</textarea></div>
+                        {bbCodes_desc}
+                        <div class="center"><textarea id="desc" name="desc" cols="80" rows="5" >{desc}</textarea></div>
                     </div>
                 </td>
             </tr>
-            <tr class="odd center"><th colspan="4">[__Text]</th></tr>
-            <tr><td colspan="4">{bbCodes_text}</td></tr>
-            <tr><td colspan="4"><textarea id="text" name="text" cols="80" rows="25">{text}</textarea></td></tr>
+            <tr>
+                <td colspan="4">
+                    <div class="center">[__Text]</div>
+                    {bbCodes_text}
+                    <div class="center"><textarea id="text" name="text" cols="80" rows="25">{text}</textarea></div>
+                </td>
+            </tr>
             <tr class="odd">
-                <td>[__Comments]</td>
-                <td colspan="3">
-                    <input type="checkbox" name="opened" value="1" [if=opened]checked="checked"[endif] />
+                <td>[__Comments]: <input type="checkbox" name="opened" value="1" id="opened" [if=opened]checked="checked"[endif] />
                     <label for="opened"> [__Allow]</label>
                 </td>
+                <td colspan="3" >&nbsp;</td>
             </tr>
         </table>
         <p class="center">

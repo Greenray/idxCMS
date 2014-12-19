@@ -53,33 +53,46 @@ die();?>
         return true;
     }
 </script>
+[ifelse=admin]
+[else]
+    <div class="center">[__Post]</div>
+    <div class="center">[__Your article will be published after premoderation]</div>
+[endelse]
 <form name="editor" method="post" action="" onsubmit="return checkPost(this);">
     <fieldset>
     <legend>{header}</legend>
         <table>
             <tr class="odd">
                 <td class="label">[__Section]</td>
-                <td><input type="hidden" name="section" value="{section_id}" /><b>{section_title}</b></td>
-                <td class="label">[__Select section]</td>
-                <td>
-                    <select name="new_section" onChange="setCategories(this.selectedIndex)">
-                        [each=sections]
-                            <option value="{sections[id]}" [if=sections[selected]]selected="selected"[endif]>{sections[title]}</option>
-                        [endeach.sections]
-                    </select>
-                </td>
+                [ifelse=admin]
+                    <td><input type="hidden" name="section" value="{section_id}" /><b>{section_title}</b></td>
+                    <td class="label">[__Select section]</td>
+                    <td>
+                        <select name="new_section" onChange="setCategories(this.selectedIndex)">
+                            [each=sections]
+                                <option value="{sections[id]}" [if=sections[selected]]selected="selected"[endif]>{sections[title]}</option>
+                            [endeach.sections]
+                        </select>
+                    </td>
+                [else]
+                    <td colspan="3"><b>{section_title}</b></td>
+                [endelse]
             </tr>
             <tr class="odd">
                 <td class="label">[__Category]</td>
-                <td><input type="hidden" name="category" value="{category_id}"/><b>{category_title}</b></td>
-                <td class="label">[__Select category]</td>
-                <td>
-                    <select name="new_category">
-                        [each=categories]
-                            <option value="{categories[id]}" [if=categories[selected]]selected="selected"[endif]>{categories[title]}</option>
-                        [endeach.categories]
-                    </select>
-                </td>
+                [ifelse=admin]
+                    <td><input type="hidden" name="category" value="{category_id}"/><b>{category_title}</b></td>
+                    <td class="label">[__Select category]</td>
+                    <td>
+                        <select name="new_category">
+                            [each=categories]
+                                <option value="{categories[id]}" [if=categories[selected]]selected="selected"[endif]>{categories[title]}</option>
+                            [endeach.categories]
+                        </select>
+                    </td>
+                [else]
+                    <td colspan="3"><b>{category_title}</b></td>
+                [endelse]
             </tr>
             <tr class="odd">
                 <td class="label">[__Title]</td>
@@ -111,12 +124,16 @@ die();?>
                     <div class="center"><textarea id="text" name="text" cols="80" rows="25">{text}</textarea></div>
                 </td>
             </tr>
-            <tr class="odd">
-                <td>[__Comments]: <input type="checkbox" name="opened" value="1" id="opened" [if=opened]checked="checked"[endif] />
-                    <label for="opened"> [__Allow]</label>
-                </td>
-                <td colspan="3" >&nbsp;</td>
-            </tr>
+            [ifelse=admin]
+                <tr class="odd">
+                    <td>[__Comments]: <input type="checkbox" name="opened" value="1" id="opened" [if=opened]checked="checked"[endif] />
+                        <label for="opened"> [__Allow]</label>
+                    </td>
+                    <td colspan="3" >&nbsp;</td>
+                </tr>
+            [else]
+                <input type="hidden" name="opened" value="1" />
+            [endelse]
         </table>
         <p class="center">
             <input type="hidden" name="item" value="{item}" />

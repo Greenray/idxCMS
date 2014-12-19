@@ -63,18 +63,18 @@ if (!empty($REQUEST['save'])) {
 }
 
 if (CMS::call('USER')->checkRoot()) {
-    $output = array();
-    $choice = array();
-    $list_i = array();
-    $list_t = array();
+    $output = [];
+    $choice = [];
+    $list_i = [];
+    $list_t = [];
     foreach ($sections as $id => $data) {
         $categories = CMS::call('POSTS')->getCategories($id);
         if (!empty($categories)) {
             # Don't include sections without categories
             $choice[$id]['id']    = $data['id'];
             $choice[$id]['title'] = $data['title'];
-            $ids    = array();
-            $titles = array();
+            $ids    = [];
+            $titles = [];
             foreach ($categories as $key => $cat) {
                 $ids[$id][]    = $key;
                 $titles[$id][] = $cat['title'];
@@ -88,10 +88,9 @@ if (CMS::call('USER')->checkRoot()) {
     $output['ids']      = implode(',', $list_i);
     $output['titles']   = implode(',', $list_t);
     $output['sections'] = $choice;
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'post.tpl');
-} else {
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'post-user.tpl');
+    $output['admin']    = TRUE;
 }
+$TPL = new TEMPLATE(dirname(__FILE__).DS.'post.tpl');
 
 $categories = CMS::call('POSTS')->getCategories($section);
 

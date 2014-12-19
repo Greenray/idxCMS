@@ -1,10 +1,27 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE RATE - INITIALIZATION
+/**
+ * @file      system/modules/rate/module.php
+ * @version   2.3
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ * @copyright (c) 2011 - 2014 Victor Nabatov
+ * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ */
+
+/**
+ * Rate system for comments and replays.
+ * module.php - Module registration and internal functions.
+ * @package Rate
+ */
 
 if (!defined('idxCMS')) die();
 
+/**
+ * Rate publication.
+ * @param  string  $user           User name.
+ * @param  string  $act            Action: up|down rate.
+ * @param  string  $id             Post ID.
+ * @return boolean integer|boolean Rate value or FALSE
+ */
 function RateComment($user, $act, $id) {
     $item = explode('.', $id);
     if (empty($item[4])) {
@@ -35,6 +52,12 @@ function RateComment($user, $act, $id) {
     return FALSE;
 }
 
+/**
+ * Get rate for publication.
+ * @param  string $for  Publication ID.
+ * @param  string $item Item.
+ * @return array        Rate data.
+ */
 function GetRate($for, &$item) {
     $item = explode('.', $for);
     if (!empty($item[3])) {
@@ -45,6 +68,11 @@ function GetRate($for, &$item) {
     return GetUnserialized($item);
 }
 
+/**
+ * Show rate for publication.
+ * @param  string $for Publication ID.
+ * @return string      Parsed rate results.
+ */
 function ShowRate($for) {
     $value  = 0;
     $voices = 0;
@@ -77,4 +105,3 @@ function ShowRate($for) {
 }
 
 SYSTEM::registerModule('rate', 'Rate', 'plugin');
-?>

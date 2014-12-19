@@ -12,7 +12,7 @@
  * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
  */
 
-/** @package core */
+/** @package Core */
 
 ini_set('phar.readonly', 0);
 ini_set('display_errors', 1);
@@ -132,7 +132,6 @@ include_once(SYS.'config.class.php');
 include_once(SYS.'system.class.php');
 include_once(SYS.'user.class.php');
 include_once(SYS.'functions.php');
-include_once(SYS.'forms.class.php');
 include_once(SYS.'index.class.php');
 include_once(SYS.'content.class.php');
 include_once(SYS.'parser.class.php');

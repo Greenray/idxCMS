@@ -6,7 +6,7 @@
 die();?>
 
 <link rel="stylesheet" href="{TOOLS}sliding.css" type="text/css" media="screen"/>
-<script type="text/javascript" src="{TOOLS}sliding.form.min.js"></script>
+<script type="text/javascript" src="{TOOLS}sliding.form.js"></script>
 <script type="text/javascript">
     function check(id) {
         var form = document.getElementById(id);

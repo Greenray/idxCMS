@@ -9,7 +9,7 @@
 
 /**
  * main.tpl.php - Skin Default: main template.
- * @package Core
+ * @package Skins
  */
 
 if (!defined('idxCMS')) die();?>
@@ -51,7 +51,6 @@ if (!defined('idxCMS')) die();?>
         });
     </script>
     <script type="text/javascript" src="{TOOLS}jquery.rating.js"></script>
-    <script type="text/javascript" src="{TOOLS}message.min.js"></script>
     <script type="text/javascript" src='{TOOLS}message.js'></script>
     <script type="text/javascript">
         function ShowHide(obj) {

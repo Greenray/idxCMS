@@ -1,13 +1,64 @@
-/** idxCMS version 2.3
-* Copyright (c) 2012 Greenray greenray.spb@gmail.com
-* PRINT CSS
-*/
-body,h1{margin:0px;padding:0px}
-body{background:#fff;font:11px normal arial,verdana,helvetica,sans,serif,sans-serif,"Times New Roman"}
-a{color:#000;text-decoration:underline;}
-h1{font-size:21px;text-align:center}
-.text img{float:left}
-.codehtml,.codephp,.codetext{font:normal 8pt mono,"Courier New",Courier;margin:5px 0;padding:5px;overflow:auto;white-space:nowrap}
-.quotetitle{border:#000 solid 1px;font-size:8pt;font-style:italic;margin:10px 0;padding:5px}
-.quotetext{border:#000 solid 1px;font:italic 9pt "Courier New",Courier,mono;margin:10px 0;padding:5px;overflow:auto}
-.right{text-align:right}
+/**
+ * @file      skins/print.css
+ * @version   2.3
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ * @copyright (c) 2011 - 2014 Victor Nabatov
+ * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ */
+
+/**
+ * print.css - Skin Default: print styles.
+ * @package Skins
+ */
+body, h1 {
+	margin: 0px;
+	padding: 0px
+}
+
+body {
+	background: #fff;
+	font: 11px normal arial, verdana, helvetica, sans, serif, sans-serif,
+		"Times New Roman"
+}
+
+a {
+	color: #000;
+	text-decoration: underline;
+}
+
+h1 {
+	font-size: 21px;
+	text-align: center
+}
+
+.text img {
+	float: left
+}
+
+.codehtml, .codephp, .codetext {
+	font: normal 8pt mono, "Courier New", Courier;
+	margin: 5px 0;
+	padding: 5px;
+	overflow: auto;
+	white-space: nowrap
+}
+
+.quotetitle {
+	border: #000 solid 1px;
+	font-size: 8pt;
+	font-style: italic;
+	margin: 10px 0;
+	padding: 5px
+}
+
+.quotetext {
+	border: #000 solid 1px;
+	font: italic 9pt "Courier New", Courier, mono;
+	margin: 10px 0;
+	padding: 5px;
+	overflow: auto
+}
+
+.right {
+	text-align: right
+}

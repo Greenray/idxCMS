@@ -4,8 +4,8 @@
 # ADMINISTRATION - NAVIGATION TEMPLATE
 
 die();?>
-<script type="text/javascript" src="{TOOLS}redips.drag.min.js"></script>
-<script type="text/javascript" src="{TOOLS}drag.min.js"></script>
+<script type="text/javascript" src="{TOOLS}redips.drag.js"></script>
+<script type="text/javascript" src="{TOOLS}drag.js"></script>
 <div class="module">[__Navigation panel]</div>
 <fieldset>
     <form name="navigation" method="post" action="">

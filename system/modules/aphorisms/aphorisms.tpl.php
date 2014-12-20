@@ -13,7 +13,7 @@
 die();?>
 
 <script type="text/javascript" src="{TOOLS}jquery.ui.min.js"></script>
-<script type="text/javascript" src="{TOOLS}jquery.flip.min.js"></script>
+<script type="text/javascript" src="{TOOLS}jquery.flip.js"></script>
 <script type="text/javascript">
     $(function() {
         $('#flippad a:not(.revert)').bind('click', function() {

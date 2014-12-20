@@ -21,7 +21,7 @@ if (!defined('idxADMIN') || !USER::loggedIn()) die();?>
             $('.cbox').colorbox({rel:'cbox'});
         });
     </script>
-    <script type="text/javascript" src="<?php echo TOOLS?>message.min.js"></script>
+    <script type="text/javascript" src="<?php echo TOOLS?>message.js"></script>
     <script type="text/javascript">
         function ShowHide(obj) {
             if (obj === 'none') {

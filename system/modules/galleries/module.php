@@ -3,13 +3,30 @@
 # Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # MODULE CATALOGS - INITIALIZATION
 
+/**
+ * @package galleries
+ *
+ * This package works with galleries of images.
+ * @author Greenray <greenray.spb@gmail.com>
+ */
+
 if (!defined('idxCMS')) die();
 
 /** Galleries data store */
 define('GALLERIES', CONTENT.'galleries'.DS);
 
+/**
+ * Class GALLERIES
+ *
+ * @author greenray
+ *
+ */
 class GALLERIES extends CONTENT {
 
+	/**
+	 * Class initialization
+	 * @return nothing
+	 */
     public function __construct() {
         $this->module = 'galleries';
         $this->container = GALLERIES;

@@ -11,7 +11,11 @@
 
 if (!defined('idxCMS')) die();
 
-/** Aphorizms data store */
+/**
+ * const: APHORISMS
+ * 
+ * Aphorizms data store
+ */
 define('APHORISMS', CONTENT.'aphorisms'.DS);
 
 switch (SYSTEM::get('locale')) {

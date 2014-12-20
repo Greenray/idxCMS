@@ -20,4 +20,3 @@ switch (SYSTEM::get('locale')) {
 SYSTEM::registerModule('guestbook', 'Guestbook', 'main');
 USER::setSystemRights(array('guestbook' => __('Guestbook').': '.__('Moderator')));
 SYSTEM::registerMainMenu('guestbook');
-?>

@@ -44,7 +44,7 @@ if (!defined('idxCMS')) die();?>
         </script>
     [endif]
     <link rel="stylesheet" type="text/css" href="{TOOLS}colorbox/colorbox.css" media="screen">
-    <script type="text/javascript" src="{TOOLS}colorbox/jquery.colorbox.min.js"></script>
+    <script type="text/javascript" src="{TOOLS}colorbox/jquery.colorbox.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $(".cbox").colorbox({rel:'cbox'});

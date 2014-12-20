@@ -1,7 +1,17 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com|
-# MODULE USER - USER PANEL TEMPLATE
+/**
+ * @file      system/modules/user/panel.tpl.php
+ * @version   2.3
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ * @copyright (c) 2011 - 2014 Victor Nabatov
+ * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ */
+
+/**
+ * Module User.
+ * panel.tpl.php - Login panel template.
+ * @package User
+ */
 
 die();?>
 

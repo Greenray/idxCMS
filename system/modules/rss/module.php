@@ -15,37 +15,37 @@ if (!defined('idxCMS')) die();
 class RSS_FEED {
 
     /** RSS feed title
-     * @var string
+     * @param string
      */
     public $title = '';
 
     /** RSS feed URL
-     * @var string
+     * @param string
      */
     public $url = '';
 
     /** RSS feed description
-     * @var string
+     * @param string
      */
     public $description = '';
 
     /** RSS feed language
-     * @var string
+     * @param string
      */
     public $language = '';
 
     /** RSS feed copyright
-     * @var string
+     * @param string
      */
     public $copyright = '';
 
     /** RSS feed generator
-     * @var string
+     * @param string
      */
     public $generator = '';
 
     /** RSS feed items
-     * @var array
+     * @param array
      */
     public $items = array();
 
@@ -165,45 +165,45 @@ class RSS_FEED {
 class LastRSS {
 
     /** Default encoding
-     * @var string $default_cp
+     * @param string $default_cp
      */
     public $default_cp = 'UTF-8';
     public $CDATA = 'nochange';
     public $cp = '';
 
     /** Items limit
-     * @var integer $items_limit
+     * @param integer $items_limit
      */
     public $items_limit = 0;
 
     /**
      * Strip HTML?
-     * @var boolean $stripHTML
+     * @param boolean $stripHTML
      */
     public $stripHTML = FALSE;
 
     /** Date format
-     * @var string $date_format
+     * @param string $date_format
      */
     public $date_format = '';
 
     /** Channel tags
-     * @var array $channeltags
+     * @param array $channeltags
      */
     private $channeltags = array ('title', 'link', 'desc', 'language', 'copyright', 'managingEditor', 'webMaster', 'lastBuildDate', 'rating', 'docs');
 
     /** Item tags
-     * @var array $itemtags
+     * @param array $itemtags
      */
     private $itemtags = array('title', 'link', 'desc', 'author', 'category', 'comments', 'enclosure', 'guid', 'pubDate', 'source');
 
     /** Image tags
-     * @var array $imagetags
+     * @param array $imagetags
      */
     private $imagetags = array('title', 'url', 'link', 'width', 'height');
 
     /** Text input tags
-     * @var array $textinputtags
+     * @param array $textinputtags
      */
     private $textinputtags = array('title', 'desc', 'name', 'link');
 

@@ -45,7 +45,7 @@ die();?>
     [if=email]<input type="text" id="email" name="email" size="30" value="{email}" class="required" />[endif]
     <fieldset>
         <legend>[__Text]</legend>
-        <textarea id="message" name="message" cols="50" rows="7">{message}</textarea>
+        <textarea id="message" name="message" cols="120" rows="7">{message}</textarea>
     </fieldset>
     <p class="center">
         [if=captcha]{captcha}[endif]

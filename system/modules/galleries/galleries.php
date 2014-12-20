@@ -180,7 +180,6 @@ if (empty($sections)) {
                 $item['comment'] = ($item['comments'] > 0) ? $item['link'].COMMENT.$item['comments'] : $item['link'];
                 SYSTEM::setPageKeywords($item['keywords']);
                 $images[] = $item;
-                var_dump($images);
                 if (($i === 2) || ($i === 5)) {
                     $output .= $TPL->parse(array('images' => $images));
                     $images = array();

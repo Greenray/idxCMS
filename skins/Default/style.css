@@ -300,7 +300,7 @@ div.tabs{margin:0;padding:4px}
 .user_panel{margin:10px;padding:0 10px}
 .version{color:red;font-weight:bold;position:relative;left:230px;bottom:54px}
 .win .title{margin:20px 5px;text-transform:uppercase}
-.post,.comment,.topic,.gallery .item,.post-comment{border:1px solid #777;border-radius:2px;margin:10px;padding:10px;overflow:hidden;box-shadow:0 0 2px 2px rgba(255,255,255,.8) inset,0 2px 0 rgba(0,0,0,.3)}
+.post,.comment,.topic,.gallery .item,.post-comment{border:1px solid #777;border-radius:2px;margin:10px;padding:10px;overflow:hidden;box-shadow:0 0 2px 2px rgba(255,255,255,.8) inset,0 2px 0 rgba(0,0,0,.3);-webkit-box-sizing:content-box;-moz-box-sizing:content-box;-ms-box-sizing:content-box;-o-box-sizing:content-box;box-sizing:content-box}
 .post{background:#fff}
     .post .title{margin:10px 5px;text-transform:none}
     .post .date{margin:2px 0 0 40px;width:300px}

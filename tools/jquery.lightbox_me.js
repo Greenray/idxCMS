@@ -1,3 +1,15 @@
+/**
+ * @file      tools/jquery.lightbox_me.js
+ * @version   2.3
+ * @author    Buck Wilson
+ */
+
+/**
+ * Lightbox libruary.
+ * jquery.lightbox_me.js - Lightbox jquery libruary.
+ * @package Tools
+ */
+
 /*
 * $ lightbox_me
 * By: Buck Wilson

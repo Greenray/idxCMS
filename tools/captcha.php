@@ -2,43 +2,42 @@
 /**
  * @file      tools/captcha.php
  * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- *            <https://github.com/Greenray/idxCMS/tools/captcha.php>
- * @copyright (c) 2011 - 2014 Victor Nabatov\n
- *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2011 - 2014 Victor Nabatov
+ * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ * @package   Tools
  */
 
 session_start();
 
-/** @class CAPTCHA
+/** Class CAPTCHA
  * Captcha.
  */
 class CAPTCHA {
 
     /** Captcha images
-     * @param array
+     * @var array
      */
     private $image = ['captcha.png', 'captcha_color.png'];
 
     /** Captcha code length
-     * @param integer
+     * @var integer
      */
     private $length;
 
     /** Captcha code
-     * @param string
+     * @var string
      */
     private $code;
 
     /** Random array key to select image for captcha: b&w or color
-     * @param integer (0 or 1)
+     * @var integer (0 or 1)
      */
     private $idx;
 
     /** Class initialization.
      * @param  string $code Captcha code
-     * @return nothing
+     * @return void
      */
     public function __construct($code) {
         $this->length = (int) round(mt_rand(5, 8));
@@ -50,7 +49,7 @@ class CAPTCHA {
      * It takes one of two images (b$w or color), form code from 5...8 symbols.
      * Then split code into two parts.
      * So the captcha is different for every time.
-     * @return nothing
+     * @return void
      */
     public function create() {
         $code  = substr(md5($this->code), 0, $this->length);

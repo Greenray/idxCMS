@@ -6,7 +6,7 @@
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
 
 if (!empty($REQUEST['save'])) {
-    $config = array();
+    $config = [];
     $config['title'] = !empty($REQUEST['title']) ? $REQUEST['title'] : 'idxCMS';
     if (!empty($REQUEST['url'])) {
         $config['url'] = $REQUEST['url'];
@@ -36,7 +36,7 @@ if (!empty($REQUEST['save'])) {
             }
         }
     } else {
-        CMS::call('CONFIG')->setSection('output.Default', array());
+        CMS::call('CONFIG')->setSection('output.Default', []);
     }
     $config['lang']         = empty($REQUEST['lang'])         ? 'russian' : $REQUEST['lang'];
     $config['allow-skin']   = empty($REQUEST['allow-skin'])   ? ''        : '1';
@@ -54,7 +54,7 @@ if (!empty($REQUEST['save'])) {
     $config['welcome']        = empty($REQUEST['welcome'])        ? ''        : '1';
     CMS::call('CONFIG')->setSection('main', $config);
 
-    $config = array();
+    $config = [];
     $config['query-min']   = empty($REQUEST['query-min'])   ? 6  : (int) $REQUEST['query-min'];
     $config['query-max']   = empty($REQUEST['query-max'])   ? 20 : (int) $REQUEST['query-max'];
     $config['block']       = empty($REQUEST['block'])       ? 50 : (int) $REQUEST['block'];
@@ -62,7 +62,7 @@ if (!empty($REQUEST['save'])) {
     $config['allow-guest'] = empty($REQUEST['allow-guest']) ? '' : '1';
     CMS::call('CONFIG')->setSection('search', $config);
 
-    $config = array();
+    $config = [];
     $config['width']          = empty($REQUEST['width'])          ? 290        : (int) $REQUEST['width'];
     $config['height']         = empty($REQUEST['height'])         ? 24         : (int) $REQUEST['height'];
     $config['bgcolor']        = empty($REQUEST['bgcolor'])        ? '0x66ff66' : strtr($REQUEST['bgcolor'],        array("#" => "0x"));
@@ -81,7 +81,7 @@ if (!empty($REQUEST['save'])) {
     $config['loop']           = empty($REQUEST['loop'])           ? '' : '1';
     CMS::call('CONFIG')->setSection('audio', $config);
 
-    $config = array();
+    $config = [];
     $config['width']  = empty($REQUEST['width'])  ? 435 : (int) $REQUEST['width'];
     $config['height'] = empty($REQUEST['height']) ? 350 : (int) $REQUEST['height'];
     CMS::call('CONFIG')->setSection('video', $config);
@@ -111,14 +111,14 @@ $config['max_filesize'] = ini_get('upload_max_filesize');
 /*
  * @todo Automatic creation of list of available modules
  */
-$modules = array();
+$modules = [];
 $modules['default']  = __('Index');
 $modules['posts']    = __('Posts');
 $modules['forum']    = __('Forum');
 $modules['catalogs'] = __('Catalogs');
 $modules['news']     = __('Last news');
 $modules['sitemap']  = __('Sitemap');
-$available_modules = array();
+$available_modules = [];
 foreach ($modules as $module => $title) {
     $available_modules[$module]['module'] = $module;
     $available_modules[$module]['title']  = $title;
@@ -129,7 +129,7 @@ foreach ($modules as $module => $title) {
 $config['modules'] = $available_modules;
 
 $skins = AdvScanDir(SKINS, '', 'dir', FALSE, array('bbcodes', 'forum', 'icons', 'images', 'smiles'));
-$available_skins = array();
+$available_skins = [];
 foreach ($skins as $i => $skin) {
     $available_skins[$i]['skin'] = $skin;
     if ($skin === $config['skin']) {
@@ -139,7 +139,7 @@ foreach ($skins as $i => $skin) {
 $config['skins'] = $available_skins;
 
 $langs = SYSTEM::get('languages');
-$available_langs = array();
+$available_langs = [];
 foreach ($langs as $i => $lang) {
     $available_langs[$i]['lang'] = $lang;
     if ($lang === $config['lang']) {
@@ -153,7 +153,7 @@ $captcha = array(
     'Color'    => 'Color ',
     'Random'   => 'Random'
 );
-$available_captcha = array();
+$available_captcha = [];
 foreach ($captcha as $i => $type) {
     $available_captcha[$i]['captcha'] = $type;
     if ($type === $config['captcha']) {
@@ -164,7 +164,7 @@ $config['captcha'] = $available_captcha;
 
 $config['meta_tags'] = file_get_contents(CONTENT.'meta');
 
-$available_tz = array();
+$available_tz = [];
 foreach ($LANG['tz'] as $tz => $title) {
     $available_tz[$tz]['tz'] = $tz;
     $available_tz[$tz]['title'] = $title;

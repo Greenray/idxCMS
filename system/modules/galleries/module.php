@@ -1,13 +1,11 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE CATALOGS - INITIALIZATION
-
 /**
- * @package galleries
- *
- * This package works with galleries of images.
- * @author Greenray <greenray.spb@gmail.com>
+ * @file      system/system.class.php
+ * @version   2.3
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2011 - 2014 Victor Nabatov
+ * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ * @package   Galleries
  */
 
 if (!defined('idxCMS')) die();
@@ -15,17 +13,12 @@ if (!defined('idxCMS')) die();
 /** Galleries data store */
 define('GALLERIES', CONTENT.'galleries'.DS);
 
-/**
- * Class GALLERIES
- *
- * @author greenray
- *
- */
+/** Class GALLERIES */
+
 class GALLERIES extends CONTENT {
 
-	/**
-	 * Class initialization
-	 * @return nothing
+	/** Class initialization.
+	 * @return void
 	 */
     public function __construct() {
         $this->module = 'galleries';

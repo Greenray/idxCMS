@@ -46,7 +46,7 @@ if (empty($sections)) {
                             if (!empty($comments[$comment])) {
                                 if (USER::moderator('galleries', $comments[$comment])) {
                                     # For user it is actual only for 5 minits after post
-                                    $output = array();
+                                    $output = [];
                                     $output['comment'] = $comment;
                                     $output['text'] = empty($REQUEST['text']) ? $comments[$comment]['text'] : $REQUEST['text'];
                                     if (USER::moderator('galleries')) {
@@ -165,7 +165,7 @@ if (empty($sections)) {
             $page    = (int) FILTER::get('REQUEST', 'page');
             $width   = CONFIG::getValue('main', 'thumb-width');
             $height  = CONFIG::getValue('main', 'thumb-height');
-            $images  = array();
+            $images  = [];
             $showed  = 0;
             $perpage = 9;
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'images.tpl');
@@ -182,16 +182,16 @@ if (empty($sections)) {
                 $images[] = $item;
                 if (($i === 2) || ($i === 5)) {
                     $output .= $TPL->parse(array('images' => $images));
-                    $images = array();
+                    $images = [];
                 }
                 ++$showed;
             }
             $output .= $TPL->parse(array('images' => $images));
             if ($showed !== $perpage) {
                 for ($showed; $showed < $perpage; $showed++) {
-                    $images[] = array();
+                    $images[] = [];
                     if (($showed === 2) || ($showed === 5)) {
-                        $images = array();
+                        $images = [];
                     }
                 }
             }

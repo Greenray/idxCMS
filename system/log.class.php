@@ -5,24 +5,17 @@
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2014 Victor Nabatov
  * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ * @package   Core
  */
 
-
-
-/**
- * Class LOG.
- * Logging.
- * @package core
- */
+/** Class LOG - Logging. */
 
 class LOG {
 
     /** Class initialization. */
     public function __construct() {}
 
-    /**
-     * Write error message into log file.
-     *
+    /** Write error message into log file.
      * @param  string $message Error message.
      * @param  string $info    Additioinal info.
      * @return boolean FALSE
@@ -32,9 +25,7 @@ class LOG {
         return FALSE;
     }
 
-    /**
-     * Register users logins into log file.
-     *
+    /** Register users logins into log file.
      * @param  string  $type    Message type.
      * @param  string  $user    Username.
      * @param  string  $message Message.
@@ -51,9 +42,7 @@ class LOG {
         return FALSE;
     }
 
-    /**
-     * Сreate tar archive of logs for the month.
-     *
+    /** Сreate tar archive of logs for the month.
      * @param  string  $title       Filename.
      * @param  integer $day         Date.
      * @param  integer $month       Month.
@@ -66,7 +55,7 @@ class LOG {
         $logs  = GetFilesList(LOGS);
         $start = mktime(0, 0, 0, $first_month, 1, $first_year);
         $today = mktime(0, 0, 0, $month, $day, $year);
-        $to_merge = array();
+        $to_merge = [];
         foreach ($logs as $log_entry) {
             if (preg_match("/^(.*?)-(.*?)-(.*?)\.log(|.gz)$/i", $log_entry, $matches)) {
                 $c = mktime(0, 0, 0, $matches[2], $matches[3], $matches[1]);
@@ -93,16 +82,14 @@ class LOG {
         return TRUE;
     }
 
-    /**
-     * Prepare daily log files to create a single file per month.
-     *
+    /** Prepare daily log files to create a single file per month.
      * @return boolean TRUE
      */
     public static function logMergeByMonth() {
         $logs   = GetFilesList(LOGS);
         $month  = date('m');
         $year   = date('Y');
-        $merged = array();
+        $merged = [];
 
         foreach ($logs as $log_entry) {
             if (preg_match("/^(.*?)-(.*?)-(.*?)\.log(|.gz)$/i", $log_entry, $matches)) {

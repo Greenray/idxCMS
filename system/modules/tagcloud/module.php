@@ -16,10 +16,10 @@ if (!defined('idxCMS')) die();
  * @return array - Inverted array
  */
 function ArrayInvert($array) {
-    $result = array();
+    $result = [];
     foreach (array_keys($array) as $key) {
         if (!array_key_exists($array[$key], $result)) {
-            $result[$array[$key]] = array();
+            $result[$array[$key]] = [];
         }
         array_push($result[$array[$key]], $key);
     }
@@ -31,7 +31,7 @@ function ArrayInvert($array) {
  * @return type - The result of transformation
  */
 function ArrayNormalize($array) {
-    $result = array();
+    $result = [];
     foreach ($array as $key => $items) {
         foreach ($items as $arr => $value) {
             $result[$value] = $key;

@@ -18,7 +18,7 @@ if (!empty($REQUEST['submit']) && isset($REQUEST['delete'])) {
 $messages = $FEEDBACK->getMessages();
 
 if (!empty($messages)) {
-    $output = array();
+    $output = [];
     foreach ($messages as $id => $message) {
         $output['messages'][$id] = $message;
         $output['messages'][$id]['id']   = $id;

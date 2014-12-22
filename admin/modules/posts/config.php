@@ -7,7 +7,7 @@ if (!defined('idxADMIN')) die();
 
 # Save configuration
 if (!empty($REQUEST['save'])) {
-    $config = array();
+    $config = [];
     $config['description-length'] = empty($REQUEST['description-length']) ? 500  : (int) $REQUEST['description-length'];
     $config['comment-length']     = empty($REQUEST['comment-length'])     ? 4000 : (int) $REQUEST['comment-length'];
     $config['posts-per-page']     = empty($REQUEST['posts-per-page'])     ? 10   : (int) $REQUEST['posts-per-page'];

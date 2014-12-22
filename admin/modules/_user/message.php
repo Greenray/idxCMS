@@ -41,7 +41,7 @@ if ($REQUEST['letter']) {
 }
 
 $users  = CMS::call('USER')->getUsersList();
-$output = array();
+$output = [];
 
 foreach ($users as $user) {
     $output['users'][$user['username']]['name'] = $user['username'];

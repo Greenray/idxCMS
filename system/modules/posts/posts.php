@@ -57,7 +57,7 @@ if (empty($sections)) {
                             if (!empty($comments[$comment])) {
                                 if (USER::moderator('posts', $comments[$comment])) {
                                     # For user it is actual only for 5 minits after post
-                                    $output = array();
+                                    $output = [];
                                     $output['comment'] = $comment;
                                     $output['text'] = empty($REQUEST['text']) ? $comments[$comment]['text'] : $REQUEST['text'];
                                     if (USER::moderator('posts')) {

@@ -32,17 +32,17 @@ class CALENDAR {
     /** Current date
      * @param array
      */
-    private $today = array();
+    private $today = [];
 
     /** Events for specific dates
      * @param array
      */
-    private $events = array();
+    private $events = [];
 
     /** Auxiliary variable
      * @param array
      */
-    private $temp = array();
+    private $temp = [];
 
     /** Class initialization.
      * @param  integer $month    Month
@@ -105,7 +105,7 @@ class CALENDAR {
             }
         }
         $position = ($this->temp['first_day_week'] == 0) ? 7 : $this->temp['first_day_week'];
-        $calendar = array();
+        $calendar = [];
         $string   = 1;
         $showed   = 1;
         while ($showed <= $this->temp['num_of_days']) {

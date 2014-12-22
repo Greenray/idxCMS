@@ -2,14 +2,14 @@
 /**
  * @file      system/index.class.php
  * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- *            <https://github.com/Greenray/idxCMS/system/index.class.php>
- * @copyright (c) 2011 - 2014 Victor Nabatov\n
- *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2011 - 2014 Victor Nabatov
+ * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ * @package   Core
  */
 
-/** Class INDEX - read and save database files */
+/** Class INDEX - Read and save database files. */
+
 class INDEX {
 
     /** Name of the index file.
@@ -19,6 +19,8 @@ class INDEX {
 
     /** Class initialization */
     protected function __construct() {}
+
+    /** Prevent to clone object. */
     protected function __clone() {}
 
     /** Sets the name of the serialized file.
@@ -32,7 +34,7 @@ class INDEX {
 
     /** Gets the data from the index file.
      * @param  string $path Path to index file
-     * @return array - Unserialised content of the index file
+     * @return array        Unserialised content of the index file
      */
     public function getIndex($path) {
         return GetUnserialized($path.$this->index);
@@ -41,7 +43,7 @@ class INDEX {
     /** Writes the index file with serialization of data.
      * @param  string  $path  Path to index file
      * @param  array   $array Data for saving
-     * @return boolean - The result of the operation
+     * @return boolean        The result of the operation
      */
     protected function saveIndex($path, $array) {
         return file_put_contents($path.$this->index, serialize($array), LOCK_EX);
@@ -49,7 +51,7 @@ class INDEX {
 
     /** Calculate the new ID of the data for the index file.
      * @param  array   $array For this array we need new ID for the new data
-     * @return integer - Calculated ID
+     * @return integer        Calculated ID
      */
     protected function newId($array) {
         if (empty($array)) {

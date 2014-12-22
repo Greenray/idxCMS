@@ -73,7 +73,7 @@ if (!empty($message)) {
     }
 }
 
-$output = array();
+$output = [];
 
 if (!USER::loggedIn()) {
     $output['email']   = empty($REQUEST['email']) ? __('Enter your e-mail') : $REQUEST['email'];

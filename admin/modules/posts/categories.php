@@ -31,7 +31,7 @@ try {
 
 # Existing categories
 # We can't delete or move system section, so exlcude it from sorting
-$output = array();
+$output = [];
 $output['system']['drafts'] = $sections['drafts'];
 $output['system']['drafts']['categories'] = CMS::call('POSTS')->getCategories('drafts');
 
@@ -55,7 +55,7 @@ if (!empty($content)) {
 }
 
 unset($sections['drafts']);
-$choice = array();
+$choice = [];
 
 if (!empty($sections)) {
     $output['sections'] = $sections;
@@ -76,7 +76,7 @@ if (!empty($sections)) {
                 $class = ($class === 'odd') ? 'even' : 'odd';
             }
         } else {
-            $output['sections'][$id]['categories'] = array();
+            $output['sections'][$id]['categories'] = [];
         }
     }
 }

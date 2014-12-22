@@ -20,7 +20,7 @@ if (!empty($REQUEST['save'])) {
 
 $banners = GetFilesList(BANNERS);
 $i = 0;
-$output = array();
+$output = [];
 
 foreach ($banners as $banner) {
     ++$i;

@@ -8,7 +8,7 @@ if (!defined('idxCMS')) die();
 $banners = GetFilesList(BANNERS);
 
 if (!empty($banners)) {
-    $output = array();
+    $output = [];
     foreach ($banners as $i => $banner) {
         $output['banner'][$i]['text'] = CMS::call('PARSER')->parseText(file_get_contents(BANNERS.$banner));
     }

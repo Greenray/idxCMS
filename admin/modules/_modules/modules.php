@@ -11,7 +11,7 @@ $enabled = CONFIG::getSection('enabled');
 $unset = $enabled;
 
 if (!empty($REQUEST['enable'])) {
-    $enabled = array();
+    $enabled = [];
     foreach ($REQUEST['enable'] as $mod => $active) {
         $id = explode('.', $mod, 2);
         if (empty($id[1])) {
@@ -44,8 +44,8 @@ if (!empty($REQUEST['enable'])) {
     Sitemap();
 }
 
-$output  = array();
-$modules = array();
+$output  = [];
+$modules = [];
 $i = 0;
 
 foreach ($registered_modules as $mod => $values) {
@@ -75,7 +75,7 @@ foreach ($registered_modules as $mod => $values) {
             if (!empty($enabled[$mod])) {
                 $output['modules'][$id[0]]['enabled'] = TRUE;
             }
-            $output['modules'][$id[0]]['ext'] = array();
+            $output['modules'][$id[0]]['ext'] = [];
         }
     } else {
         if (!in_array($mod, $modules)) {
@@ -89,7 +89,7 @@ foreach ($registered_modules as $mod => $values) {
             if (!empty($enabled[$mod])) {
                 $output['modules'][$mod]['enabled'] = TRUE;
             }
-            $output['modules'][$mod]['ext'] = array();
+            $output['modules'][$mod]['ext'] = [];
         }
     }
 }

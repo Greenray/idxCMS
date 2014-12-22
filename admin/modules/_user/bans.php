@@ -6,7 +6,7 @@
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
 
 if (!empty($REQUEST['ban'])) {
-    $bans = array();
+    $bans = [];
     foreach ($REQUEST['ban'] as $key => $ban) {
         if (preg_match('/^(([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]).){2}(([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]|\*).)([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]|\*)$/', $ban)) {
             $bans[] = $ban;
@@ -21,7 +21,7 @@ if (!empty($REQUEST['ban'])) {
 }
 
 if (!$bans = file(CONTENT.'bans', FILE_IGNORE_NEW_LINES)) {
-    $bans = array();
+    $bans = [];
 }
 
 $TPL = new TEMPLATE(dirname(__FILE__).DS.'bans.tpl');

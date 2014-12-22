@@ -22,7 +22,7 @@ if (!empty($REQUEST['clean'])) {
 }
 
 $constants = get_defined_constants();
-$output = array();
+$output = [];
 $output['server'] = $_SERVER['SERVER_SOFTWARE'];
 $output['os']     = php_uname('s').' '.php_uname('r').' '.php_uname('v');
 $output['php']    = phpversion();

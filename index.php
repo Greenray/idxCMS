@@ -10,9 +10,8 @@
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2014 Victor Nabatov
  * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ * @package   Core
  */
-
-/** @package Core */
 
 ini_set('phar.readonly', 0);
 ini_set('display_errors', 1);
@@ -33,10 +32,8 @@ unset($global);
 
 error_reporting(-1);
 
-/**
- * Set error handler.
+/** Set error handler.
  * Handles php errors and writes info into the /content/logs/idxerror.log.
- *
  * @param  integer $num  Error number.
  * @param  string  $msg  Error message.
  * @param  string  $file Name of the file where the error was generated.
@@ -135,8 +132,10 @@ include_once(SYS.'functions.php');
 include_once(SYS.'index.class.php');
 include_once(SYS.'content.class.php');
 include_once(SYS.'parser.class.php');
+include_once(SYS.'highlighter.class.php');
 include_once(SYS.'template.class.php');
 include_once(SYS.'uploader.class.php');
+include_once(SYS.'image.class.php');
 
 session_start();
 
@@ -169,7 +168,17 @@ if (!empty($REQUEST['logout'])) {
     session_destroy();
     Redirect('index');
 }
+/*
+include 'nocomment.php';
+$NoComment = new NoComment(CONTENT.'logggg.txt');
 
+// Add Comment to all undocumented functions
+$file = 'HtmlHighlighter.class.php';
+$src = $NoComment->addFctComment(SYS.$file);
+if ($src !== NULL && $src !== false) {
+	file_put_contents(CONTENT.$file, $src);
+}
+ */
 /** Requested module. */
 $MODULE = empty($REQUEST['module']) ? 'index' : basename($REQUEST['module']);
 switch($MODULE) {
@@ -213,7 +222,7 @@ switch($MODULE) {
 
         if (CMS::call('USER')->checkRoot()) {
             $modules = AdvScanDir(ADMIN.'modules', '', 'dir');
-            $MODULES = array();
+            $MODULES = [];
 
             /** Prevent direct access to php files. */
             define('idxADMIN', TRUE);
@@ -287,7 +296,7 @@ switch($MODULE) {
         $skin = SYSTEM::get('skin');
 
         # Load other modules and organize them according output settings.
-        $modules = array();
+        $modules = [];
         if (in_array($MODULE, array_keys(CONFIG::getSection('output.'.$skin)))) {
             $modules[$MODULE] = CONFIG::getValue('output.'.$skin, $MODULE);
         }
@@ -311,7 +320,7 @@ switch($MODULE) {
             }
         }
 
-        $output = array();
+        $output = [];
         if ($MODULE === 'index') {
             $output['index'] = TRUE;
             $output['tabs']  = $_SESSION['tabs'];

@@ -38,7 +38,7 @@ if (!empty($REQUEST['mctext']) && !empty($REQUEST['save'])) {
 
 # Show messages
 $messages = $MC->getMessages();
-$output = array();
+$output = [];
 
 if (!empty($messages)) {
     $messages = array_reverse($messages, TRUE);

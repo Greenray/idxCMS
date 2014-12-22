@@ -71,7 +71,7 @@ $images  = array('gif', 'jpeg', 'jpg', 'png');
 $path   = empty($REQUEST['path']) ? realpath('.').DS : $REQUEST['path'];
 $path   = str_replace('\\', '/', $path);
 $url    = MODULE.'admin&amp;id=_general.filemanager';
-$output = array();
+$output = [];
 
 if (!empty($REQUEST['save'])) {
     if (!empty($REQUEST['edit'])) {
@@ -88,7 +88,7 @@ if (!empty($REQUEST['save'])) {
         unset($REQUEST['edit']);
     } elseif (!empty($REQUEST['rights'])) {
         if (is_array($REQUEST['rights'])) {
-            $rights = array();
+            $rights = [];
             for ($i = 0; $i < 9; ++$i) {
                 $rights[$i] = empty($REQUEST['rights'][$i]) ? '-' : $REQUEST['rights'][$i];
             }
@@ -118,7 +118,7 @@ if (!empty($REQUEST['save'])) {
     }
 }
 
-$output = array();
+$output = [];
 $output['back'] = ($path === realpath('.').DS) ? '' : $url.'&amp;path='.dirname($path).DS;
 $output['url']  = $url;
 $output['path'] = $path;
@@ -166,7 +166,7 @@ foreach ($elements as $key => $file) {
 $TPL = new TEMPLATE(dirname(__FILE__).DS.'filemanager.tpl');
 echo $TPL->parse($output);
 clearstatcache();
-$output = array();
+$output = [];
 
 if (!empty($REQUEST['rights'])) {
     $output['file'] = $REQUEST['rights'];

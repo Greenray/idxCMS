@@ -5,15 +5,15 @@
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
 
-$keywords = array();
+$keywords = [];
 
 if (!empty($REQUEST['clean'])) {
     file_put_contents(CONTENT.'keywords', '');
     ShowMessage('Done');
 } elseif (file_exists(CONTENT.'keywords')) {
     $keywords = file(CONTENT.'keywords', FILE_IGNORE_NEW_LINES);
-    $output = array();
-    $exists = array();
+    $output = [];
+    $exists = [];
     if (!empty($keywords)) {
         $i = 0;
         $word[$i] = $keywords[0];

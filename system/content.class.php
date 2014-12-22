@@ -5,13 +5,10 @@
  * @author    Victor Nabatov <greenray.spb@gmail.com>\n
  * @copyright (c) 2011 - 2014 Victor Nabatov
  * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ * @package   Core
  */
 
-/** @class CONTENT
- * Class CONTENT.
- * Works with content: articles, topics, comments and replies.
- * @package core
- */
+/** Class CONTENT - Processing content: articles, topics, comments and replies. */
 
 class CONTENT extends INDEX {
 
@@ -28,7 +25,7 @@ class CONTENT extends INDEX {
     /** Sections of the content of the carrent module.
      * @param array
      */
-    protected $sections = array();
+    protected $sections = [];
 
     /** ID of the current section.
      * @param string
@@ -38,12 +35,12 @@ class CONTENT extends INDEX {
     /** ID of the current category.
      * @param string
      */
-    protected $category  = '';
+    protected $category = '';
 
     /** Coontent of the current category.
      * @param array
      */
-    protected $content = array();
+    protected $content = [];
 
     /** Filename of the item with full text.
      * @param string
@@ -63,7 +60,7 @@ class CONTENT extends INDEX {
     /** Comments for article, topic, image and so on.
      * @param array
      */
-    protected $comments = array();
+    protected $comments = [];
 
     /** Get module sections data.
      * @return array - Sections allowed for current user
@@ -98,7 +95,7 @@ class CONTENT extends INDEX {
     public function showSections() {
         SYSTEM::set('pagename', SYSTEM::$modules[$this->module]['title'].' - '.__('Sections'));
         SYSTEM::setPageDescription(SYSTEM::$modules[$this->module]['title'].' - '.__('Sections'));
-        $result   = array();
+        $result   = [];
         $sections = $this->sections;
         if (isset($sections['drafts'])) {
             unset($sections['drafts']);
@@ -134,7 +131,7 @@ class CONTENT extends INDEX {
             SYSTEM::setPageDescription(SYSTEM::$modules[$this->module]['title'].' - '.$this->sections[$section]['title']);
         }
         SYSTEM::setPageKeywords($this->sections[$section]['id']);
-        $result = array();
+        $result = [];
         $result['title'] = $this->sections[$section]['title'];
         foreach($categories as $id => $category) {
             $category = self::getCategory($id);
@@ -170,7 +167,7 @@ class CONTENT extends INDEX {
             if (mkdir($this->container.$id, 0777) === FALSE) {
                 throw new Exception('Cannot save section');
             }
-            if ($this->saveIndex($this->container, array()) === FALSE) {
+            if ($this->saveIndex($this->container, []) === FALSE) {
                 rmdir($this->container.$id);
                 throw new Exception('Cannot save section');
             }
@@ -190,11 +187,11 @@ class CONTENT extends INDEX {
 
     /** Save all sections.
      * @param  array $sections Sections data
-     * @return nothing
+     * @return void
      * @throw Exception 'Cannot save sections'
      */
     public function saveSections($sections) {
-        $new = array();
+        $new = [];
         foreach ($sections as $key => $section) {
             $new[$section] = $this->sections[$section];
         }
@@ -230,7 +227,7 @@ class CONTENT extends INDEX {
             return FALSE;
         }
         $this->section = $section;
-        $categories = array();
+        $categories = [];
         if (!empty($this->sections[$section]['categories'])) {
             foreach ($this->sections[$section]['categories'] as $id => $category) {
                 if (USER::checkAccess($category)) {
@@ -274,7 +271,7 @@ class CONTENT extends INDEX {
                     throw new Exception('Cannot save category');
                 }
             }
-            if ((mkdir($item, 0777) === FALSE) || ($this->saveIndex($item.DS, array()) === FALSE)) {
+            if ((mkdir($item, 0777) === FALSE) || ($this->saveIndex($item.DS, []) === FALSE)) {
                 throw new Exception('Cannot save category');
             }
         }
@@ -298,7 +295,7 @@ class CONTENT extends INDEX {
     /** Save all categories from requested section.
      * @param  string $section    Section name
      * @param  array  $categories Categories data
-     * @return nothing
+     * @return void
      * @throw Exception 'Cannot save categories'
      */
     public function saveCategories($section, $categories) {
@@ -358,13 +355,12 @@ class CONTENT extends INDEX {
         $IMAGE = new IMAGE($path, '', 35, 35);
         if ($IMAGE->upload($icon) === FALSE) {
             copy(ICONS.'icon.png', $path.'tmp.png');
-            $IMAGE->setImage(
-                array(
-                    'name'     => 'tmp.png',
-                    'size'     => 149,
-                    'tmp_name' => ''
-                ),
-                array(35, 35, 'mime' => 'image/png')
+            $IMAGE->setImage([
+                'name'     => 'tmp.png',
+                'size'     => 149,
+                'tmp_name' => ''
+                ],
+                [35, 35, 'mime' => 'image/png']
             );
         }
         return $IMAGE->generateIcon();
@@ -437,6 +433,11 @@ class CONTENT extends INDEX {
         return $item;
     }
 
+    /**
+    * @todo Comment
+    * @param string $id	...
+    * @return 
+    */
     public function saveItem($id) {
         $title = trim(FILTER::get('REQUEST', 'title'));
         if ($title === FALSE) {
@@ -481,6 +482,13 @@ class CONTENT extends INDEX {
         return $id;
     }
 
+    /**
+    * @todo Comment
+    * @param string $id	...
+    * @param string $section	...
+    * @param string $category	...
+    * @return 
+    */
     public function moveItem($id, $section, $category) {
         $item = $this->content[$id];
         $old_section  = $this->section;
@@ -503,12 +511,22 @@ class CONTENT extends INDEX {
         return $new;
     }
 
+    /**
+    * @todo Comment
+    * @param string $content	...
+    * @return 
+    */
     public function saveContent($content) {
         if ($this->saveIndex($this->sections[$this->section]['categories'][$this->category]['path'], $content) === FALSE) {
             throw new Exception('Cannot save content');
         }
     }
 
+    /**
+    * @todo Comment
+    * @param string $id	...
+    * @return 
+    */
     public function removeItem($id) {
         if (empty($this->content[$id])) {
             throw new Exception('Invalid ID');
@@ -521,6 +539,12 @@ class CONTENT extends INDEX {
         Sitemap();
     }
 
+    /**
+    * @todo Comment
+    * @param string $id	...
+    * @param string $field	...
+    * @return 
+    */
     public function incCount($id, $field) {
         if (empty($this->content[$id])) {
             return FALSE;
@@ -529,13 +553,13 @@ class CONTENT extends INDEX {
         return $this->saveIndex($this->sections[$this->section]['categories'][$this->category]['path'], $this->content);
     }
 
-    public function setValue($id, $field, $value) {
-        $this->content[$id][$field] = $value;
-        return $this->saveIndex($this->sections[$this->section]['categories'][$this->category]['path'], $this->content);
-    }
-
+    /**
+    * @todo Comment
+    * @param string $param	...
+    * @return 
+    */
     public function getStat($param) {
-        $result = array();
+        $result = [];
         foreach ($this->sections[$this->section]['categories'] as $category => $data) {
             self::getContent($category);
             foreach ($this->content as $key => $item) {
@@ -545,8 +569,16 @@ class CONTENT extends INDEX {
         return $result;
     }
 
+    /**
+    * @todo Comment
+    * @param string $category	...
+    * @param string $param	...
+    * @param string $last	... (défaut : TRUE)
+    * @param string $limit	... (défaut : '')
+    * @return 
+    */
     public function getCategoryStat($category, $param, $last = TRUE, $limit = '') {
-        $result = array();
+        $result = [];
         self::getContent($category);
         foreach ($this->content as $key => $item) {
             $result[$key] = $item[$param];
@@ -556,10 +588,15 @@ class CONTENT extends INDEX {
         return $result;
     }
 
+    /**
+    * @todo Comment
+    * @param string $items	...
+    * @return 
+    */
     public function getLastItems($items) {
         krsort($items);
         $items  = array_slice($items, 0, (int) CONFIG::getValue('main', 'last'), TRUE);
-        $result = array();
+        $result = [];
 
         foreach ($items as $key => $data) {
             $item = explode('.', $data);
@@ -572,8 +609,13 @@ class CONTENT extends INDEX {
         return $result;
     }
 
+    /**
+    * @todo Comment
+    * @param string $sections	... (défaut : '')
+    * @return 
+    */
     public function getSectionsLastItems($sections = '') {
-        $result = array();
+        $result = [];
         if (empty($sections)) $sections = $this->sections;
         foreach($sections as $id => $section) {
             self::getCategories($id);
@@ -585,10 +627,15 @@ class CONTENT extends INDEX {
         return $result;
     }
 
+    /**
+    * @todo Comment
+    * @param string $format	...
+    * @return 
+    */
     public function getCategoryLastItems($format) {
         $items  = array_flip($this->getStat('time'));
         krsort($items);
-        $result = array();
+        $result = [];
         if (!empty($items)) {
             $items = array_slice($items, 0, intval(CONFIG::getValue('main', 'last'), TRUE));
             foreach($items as $key => $data) {
@@ -602,6 +649,11 @@ class CONTENT extends INDEX {
         return $result;
     }
 
+    /**
+    * @todo Comment
+    * @param string $item	...
+    * @return 
+    */
     public function getComments($item) {
         $this->item = $item;
         if (!empty($this->comments)) {
@@ -611,6 +663,12 @@ class CONTENT extends INDEX {
         return $this->comments;
     }
 
+    /**
+    * @todo Comment
+    * @param string $id	...
+    * @param string $page	...
+    * @return 
+    */
     public function getComment($id, $page) {
         if (empty($this->comments[$id])) {
             return FALSE;
@@ -704,6 +762,12 @@ class CONTENT extends INDEX {
         return $this->content[$item]['comments'];
     }
 
+    /**
+    * @todo Comment
+    * @param string $id	...
+    * @param string $item	...
+    * @return 
+    */
     public function saveComment($id, $item) {
         if (!USER::loggedIn()) {
             throw new Exception('You are not logged in!');
@@ -735,6 +799,11 @@ class CONTENT extends INDEX {
         return $this->content[$item]['comments'];
     }
 
+    /**
+    * @todo Comment
+    * @param string $id	...
+    * @return 
+    */
     public function removeComment($id) {
         if (empty($this->comments[$id])) {
             throw new Exception('Invalid ID');

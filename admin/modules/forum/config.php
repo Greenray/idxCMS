@@ -19,7 +19,7 @@ if (isset($init)) {
     }
 } else {
     if (!empty($REQUEST['save'])) {
-        $config = array();
+        $config = [];
         $config['topics-per-page']  = empty($REQUEST['topics-per-page'])  ? 10   : (int) $REQUEST['topics-per-page'];
         $config['replies-per-page'] = empty($REQUEST['replies-per-page']) ? 10   : (int) $REQUEST['replies-per-page'];
         $config['reply-length']     = empty($REQUEST['reply-length'])     ? 4000 : (int) $REQUEST['reply-length'];

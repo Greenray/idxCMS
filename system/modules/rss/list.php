@@ -7,7 +7,7 @@ if (!defined('idxCMS')) die();
 
 if (CONFIG::getValue('enabled', 'rss')) {
     $feeds  = SYSTEM::get('feeds');
-    $output = array();
+    $output = [];
     foreach ($feeds as $mod => $feed) {
         list ($module, $section) = explode('@', $mod);
         $obj = strtoupper($module);

@@ -5,25 +5,22 @@
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2014 Victor Nabatov
  * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ * @package   Core
  */
 
-/**
- * Class FILTER.
- * Clean parameters $_REQUEST, $_FILES, $_COOKIE, detect intrusions and ban unwanted visitors.
- * @package core
- */
+/** Class FILTER - Clean parameters $_REQUEST, $_FILES, $_COOKIE, detect intrusions and ban unwanted visitors. */
 
 final class FILTER {
 
     /** Array of filtered $_POST, $_GET and $_FILES parameters.
      * @param array
      */
-    private static $REQUEST = array();
+    private static $REQUEST = [];
 
     /** Array of filtered $_COOKIE parameters.
      * @param array
      */
-    private static $COOKIE = array();
+    private static $COOKIE = [];
 
     /** Array of parameters types.
      * @param array
@@ -39,7 +36,6 @@ final class FILTER {
     /**
      * Clean all parameters and their values of the request array and
      * transforme them into the internal encoding of the system = UTF-8.
-     *
      * @param  array $value Input array of parameters.
      * @return string       Filered parameters.
      */
@@ -55,19 +51,17 @@ final class FILTER {
         return UnifyBr($value);
     }
 
-    /**
-     * Clean variables.
-     *
+    /** Clean variables.
      * @param  array $vars Input array of parameters.
      * @return array       Filered values of array parameters.
      */
     private function clear($vars) {
-        $result = array();
+        $result = [];
         foreach($vars as $key => $value) {
             if (!is_array($value)) {
                 $result[$this->cleanValue($key)] = $this->cleanValue($value);
             } else {
-                $clear = array();
+                $clear = [];
                 foreach($value as $item => $field) {
                     $clear[$this->cleanValue($item)] = $this->cleanValue($field);
                 }
@@ -77,11 +71,9 @@ final class FILTER {
         return $result;
     }
 
-    /**
-     * Main function.
+    /** Main function.
      * Detect intrusion, clean and unset $_POST, $_GET, $_FILES and $_COOKIE.
      * The result are two variables: $REQUEST and $COOKIE.
-     *
      * @return void
      */
     public function sanitaze() {
@@ -94,9 +86,7 @@ final class FILTER {
         self::$COOKIE  = $COOKIE;
     }
 
-    /**
-     * Get all filtered parameter of the specified type.
-     *
+    /** Get all filtered parameter of the specified type.
      * @param  string $type Type of parameter.
      * @return array        Array of filtered parameters of the specified type.
      */
@@ -104,9 +94,7 @@ final class FILTER {
         return self::$$type;
     }
 
-    /**
-     * Get specified filtered parameter.
-     *
+    /** Get specified filtered parameter.
      * @param  string $type  - Type of parameter.
      * @param  string $param - Name of parameter.
      * @return array|string  - Value of parameter or empty string.
@@ -119,9 +107,7 @@ final class FILTER {
         return '';
     }
 
-    /**
-     * Remove filtered parameter.
-     *
+    /** Remove filtered parameter.
      * @param  string $type  Type of parameter.
      * @param  string $param Name of parameter.
      * @return void
@@ -132,9 +118,7 @@ final class FILTER {
         }
     }
 
-    /**
-     * Email validation.
-     *
+    /** Email validation.
      * @param  string $email Email address.
      * @return boolean       The result of operation.
      */
@@ -142,9 +126,7 @@ final class FILTER {
         return preg_match('/^([a-zA-Z0-9\!\#\$\%\&\'\*\+\-\/\=\?\^\_\`\{\|\}\~]+(\.[a-zA-Z0-9\!\#\$\%\&\'\*\+\-\/\=\?\^\_\`\{\|\}\~]+)*)@((([a-z]([-a-z0-9]*[a-z0-9])?)|(#[0-9]+)|(\[((([01]?[0-9]{0,2})|(2(([0-4][0-9])|(5[0-5]))))\.){3}(([01]?[0-9]{0,2})|(2(([0-4][0-9])|(5[0-5]))))\]))\.)*(([a-z]([-a-z0-9]*[a-z0-9])?)|(#[0-9]+)|(\[((([01]?[0-9]{0,2})|(2(([0-4][0-9])|(5[0-5]))))\.){3}(([01]?[0-9]{0,2})|(2(([0-4][0-9])|(5[0-5]))))\]))$/', $email) ? TRUE : FALSE;
     }
 
-    /**
-     * Ban user.
-     *
+    /** Ban user.
      * @return boolean The result of operation.
      * @todo Log the result.
      */
@@ -155,14 +137,12 @@ final class FILTER {
         }
     }
 
-    /**
-     * Intrusion detection.
+    /** Intrusion detection.
      * If the intrusion will be detected this event will be logged and the system will die.\n
      * In current it detected:
      *  - bad words in $_SERVER;
      *  - banned IP or cookie;
      *  - malicious URL requests.
-     *
      * @return void
      */
     private function ids() {
@@ -184,7 +164,7 @@ final class FILTER {
         }
 
         # Ban check.
-        $bans = file_exists(CONTENT.'bans') ? file(CONTENT.'bans', FILE_IGNORE_NEW_LINES) : array();
+        $bans = file_exists(CONTENT.'bans') ? file(CONTENT.'bans', FILE_IGNORE_NEW_LINES) : [];
         foreach ($bans as $ban) {
             $ban = '/^'.str_replace('*', '(\d*)', str_replace('.', '\\.', trim($ban))).'$/';
             if (preg_match($ban, $_SERVER['REMOTE_ADDR'])) {

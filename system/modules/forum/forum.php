@@ -56,7 +56,7 @@ if (empty($sections)) {
                                         }
                                     }
                                     $ed = CMS::call('FORUM')->getItem($topic, 'text', FALSE);
-                                    $output = array();
+                                    $output = [];
                                     $output['topic']     = $ed['id'];
                                     $output['title']     = empty($REQUEST['title'])  ? $ed['title']  : $REQUEST['title'];
                                     $output['text']      = empty($REQUEST['text'])   ? $ed['text']   : $REQUEST['text'];
@@ -72,7 +72,7 @@ if (empty($sections)) {
                             } else {
                                 if (!empty($replies[$reply])) {
                                     if (USER::moderator('forum', $replies[$reply])) {
-                                        $output = array();
+                                        $output = [];
                                         $output['comment'] = $reply;
                                         $output['text'] = empty($REQUEST['text']) ? $replies[$reply]['text'] : $REQUEST['text'];
                                         if (USER::moderator('forum')) {
@@ -280,7 +280,7 @@ if (empty($sections)) {
             $count = sizeof($content);
             $page  = (int) FILTER::get('REQUEST', 'page');
             $perpage = (int) CONFIG::getValue('forum', 'topics-per-page');
-            $output  = array();
+            $output  = [];
             $pagination = GetPagination($page, $perpage, $count);
             for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
                 if (!empty($content[$ids[$i]])) {
@@ -340,7 +340,7 @@ if (empty($sections)) {
             $output['link']  = $section['link'];
             $output['title'] = $section['title'];
             if (!empty($categories)) {
-                $stat = array();
+                $stat = [];
                 $output['categories'] = $categories;
                 # Show each category
                 foreach ($categories as $key => $category) {
@@ -364,7 +364,7 @@ if (empty($sections)) {
         SYSTEM::set('pagename', __('Forum'));
         SYSTEM::setPageDescription(__('Forum'));
 
-        $output = array();
+        $output = [];
         $output['total_sections']   = sizeof($sections);
         $output['total_categories'] = 0;
         $output['total_topics']     = 0;

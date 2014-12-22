@@ -6,7 +6,7 @@
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
 
 if (!empty($REQUEST['save'])) {
-    $config = array();
+    $config = [];
     $config['user-ua']   = empty($REQUEST['user-ua'])   ? '' : '1';
     $config['spider-ip'] = empty($REQUEST['spider-ip']) ? '' : '1';
     $config['spider-ua'] = empty($REQUEST['spider-ua']) ? '' : '1';

@@ -78,7 +78,7 @@ function ArraySortFunc($a, $b = NULL) {
 }
 
 function ArraySort(&$array) {
-    $keys = array();
+    $keys = [];
     if (!$array) {
         return $keys;
     }

@@ -7,7 +7,7 @@ if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
 
 # Save configuration
 if (!empty($REQUEST['save_s'])) {
-    $config = array();
+    $config = [];
     $config['cache-time']   = empty($REQUEST['cache-time'])   ? 3600 : (int) $REQUEST['cache-time'];
     $config['title-length'] = empty($REQUEST['title-length']) ? 30   : (int) $REQUEST['title-length'];
     $config['desc-length']  = empty($REQUEST['desc-length'])  ? 50   : (int) $REQUEST['desc-length'];

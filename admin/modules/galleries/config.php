@@ -22,7 +22,7 @@ if (isset($init)) {
     }
 } else {
     if (!empty($REQUEST['save'])) {
-        $config = array();
+        $config = [];
         $config['description-length'] = empty($REQUEST['description-length']) ? 300  : (int) $REQUEST['description-length'];
         $config['comment-length']     = empty($REQUEST['comment-length'])     ? 2000 : (int) $REQUEST['comment-length'];
         $config['images-per-page']    = empty($REQUEST['images-per-page'])    ? 10   : (int) $REQUEST['images-per-page'];

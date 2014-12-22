@@ -10,7 +10,7 @@ $section  = array_slice($sections, rand(0, sizeof($sections) - 1), 1);
 $albums   = CMS::call('GALLERIES')->getCategories(key($section));
 
 if (!empty($albums)) {
-    $output = array();
+    $output = [];
     $random = (int) CONFIG::getValue('galleries', 'random');
     $count  = sizeof($albums);
     if ($random >= $count) {
@@ -36,4 +36,3 @@ if (!empty($albums)) {
         ShowWindow(__('Random image'), $TPL->parse($output));
     }
 }
-?>

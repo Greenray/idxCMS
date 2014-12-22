@@ -23,13 +23,13 @@ if (!empty($archived)) {
         'red',   'yellow', 'blue', 'green',  'purple', 'aqua',
         'gray', 'olive',  'teal', 'white', 'black'
     );
-    $data   = array();
+    $data   = [];
     $output = '';
     foreach ($archived as $id => $poll) {
         $data['id'] = $id;
         unset($poll['ips']);
         $data['question'] = $poll['question'];
-        $data['answers'] = array();
+        $data['answers'] = [];
         foreach ($poll['answers'] as $i => $answer) {
             $data['answers'][$i]['id']     = $i;
             $data['answers'][$i]['answer'] = $poll['answers'][$i];

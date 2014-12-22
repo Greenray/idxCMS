@@ -5,13 +5,10 @@
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2014 Victor Nabatov
  * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ * @package   Core
  */
 
-/**
- * Class SYSTEM.
- * System, modules, users and templates initialization.
- * @package core
- */
+/** Class SYSTEM - System, modules, users and templates initialization. */
 
 class SYSTEM {
 
@@ -104,9 +101,7 @@ class SYSTEM {
      */
     private static $meta = [];
 
-    /**
-     * Class initialization.
-     *
+    /** Class initialization.
      * @return void
      * @uses $LANG Website translations.
      */
@@ -161,9 +156,7 @@ class SYSTEM {
         }
     }
 
-    /**
-     * Set system parameter.
-     *
+    /** Set system parameter.
      * @param  string $param System parameter.
      * @param  string $value Value of the system parameter.
      * @return void
@@ -172,9 +165,7 @@ class SYSTEM {
         self::$$param = $value;
     }
 
-    /**
-     * Get system parameter.
-     *
+    /** Get system parameter.
      * @param  string $param System parameter.
      * @return string        Value of the requested parameter.
      */
@@ -182,9 +173,7 @@ class SYSTEM {
         return self::$$param;
     }
 
-    /**
-     * Modules initialization.
-     *
+    /** Modules initialization.
      * @param  boolean $ignore_disabled Init all existing modules.
      * @return void
      * @uses array $LANG Website translations.
@@ -195,7 +184,7 @@ class SYSTEM {
         if (empty($enabled) || $ignore_disabled) {
             $enabled = array_flip(GetFilesList(MODULES));
         }
-        $included = array();
+        $included = [];
         foreach ($enabled as $module => $null) {
             $mod = explode('.', $module, 2);
             if (!in_array($mod[0], $included)) {
@@ -205,14 +194,12 @@ class SYSTEM {
         }
     }
 
-    /**
-     * Register module.
+    /** Register module.
      * Used for classify modules by type. There are three types:
      * - system (cannot be excluded);
      * - main (for full pages);
      * - box (for panels or boxes);
      * - plugin (cannot be showed on any page).
-     *
      * @param  string $module Module name.
      * @param  string $title  Module title.
      * @param  string $type   Module type.
@@ -225,10 +212,8 @@ class SYSTEM {
         self::$modules[$module]['system'] = $system;
     }
 
-    /**
-     * Register RSS feed for module.
+    /** Register RSS feed for module.
      * RSS feed ID is looks like "module@section".
-     *
      * @param  string $section RSS feed ID.
      * @param  string $title   RSS feed title.
      * @param  string $desc    RSS feed description.
@@ -239,9 +224,7 @@ class SYSTEM {
         self::$feeds[$section] = array(__($title), __($desc), $module);
     }
 
-    /**
-     * Register module for menu link.
-     *
+    /** Register module for menu link.
      * @param  string $module Module name.
      * @return void
      */
@@ -249,9 +232,7 @@ class SYSTEM {
         self::$menu[] = $module;
     }
 
-    /**
-     * Register module for use in sitemap.
-     *
+    /** Register module for use in sitemap.
      * @param  string $module Module name.
      * @return void
      */
@@ -259,9 +240,7 @@ class SYSTEM {
         self::$sitemap[] = $module;
     }
 
-    /**
-     * Register module for search requests.
-     *
+    /** Register module for search requests.
      * @param  string $module Module name.
      * @return void
      */
@@ -269,9 +248,7 @@ class SYSTEM {
         self::$search[] = $module;
     }
 
-    /**
-     * Register module for menu link.
-     *
+    /** Register module for menu link.
      * @param  string $name Skin name.
      * @param  string $skin Skin template.
      * @return void
@@ -280,9 +257,7 @@ class SYSTEM {
         self::$skins[$name] = $skin;
     }
 
-    /**
-     * Set the point for output.
-     *
+    /** Set the point for output.
      * @param type $point Output point name.
      * @return void
      */
@@ -290,17 +265,22 @@ class SYSTEM {
         self::$current_point = $point;
     }
 
+    /**
+    * @todo Comment
+    * @param string $title	...
+    * @param string $content	...
+    * @param string $align	... (défaut : 'left')
+    * @return 
+    */
     public static function defineWindow($title, $content, $align = 'left') {
         if (self::$current_point == '__MAIN__') {
-            self::$output['main'][] = array($title, $content, $align);
+            self::$output['main'][] = [$title, $content, $align];
         } else {
-            self::$output[self::$current_point][] = array($title, $content, $align);
+            self::$output[self::$current_point][] = [$title, $content, $align];
         }
     }
 
-    /**
-     * Show window.
-     *
+    /** Show window.
      * @param  string $title    The title of the output data.
      * @param  string $content  The content for use in output.
      * @param  string $align    Page data alignment.
@@ -334,11 +314,9 @@ class SYSTEM {
         }
     }
 
-    /**
-     * Set keywords for requested website page.
+    /** Set keywords for requested website page.
      * This description will be used in meta tag.
      * If some words has been set in website configuration (global keywords) the $keywords will be added to them.
-     *
      * @param  string $keywords Page keywords.
      * @return void
      */
@@ -346,10 +324,8 @@ class SYSTEM {
         self::$meta['keywords'] = empty(self::$meta['keywords']) ? $keywords : self::$meta['keywords'].','.$keywords;
     }
 
-    /**
-     * Set description for requested website page.
+    /** Set description for requested website page.
      * This description will be used in meta tag.
-     *
      * @param  string $desc Page description.
      * @return void
      */
@@ -357,10 +333,8 @@ class SYSTEM {
         self::$meta['desc'] = $desc;
     }
 
-    /**
-     * Get website navigation points.
+    /** Get website navigation points.
      * If navigation is not exists it will be created.
-     *
      * @return array Website navigation points.
      */
     public function getNavigations() {
@@ -370,9 +344,7 @@ class SYSTEM {
         return self::$navigation;
     }
 
-    /**
-     * Create site navigation.
-     *
+    /** Create site navigation.
      * @return array Website navigation points.
      */
     public static function getNavigation() {
@@ -449,15 +421,13 @@ class SYSTEM {
         return self::$navigation;
     }
 
-    /**
-     * Create main menu for website.
+    /** Create main menu for website.
      * The menu will be created only for registered and enabled modules.
-     *
      * @return boolean The result of operation.
      */
     public function createMainMenu() {
         $enabled = CONFIG::getSection('enabled');
-        $menu  = array();
+        $menu  = [];
         $menu['index']['module'] = 'index';
         $menu['index']['link']   = MODULE.'index';
         $menu['index']['name']   = __('Index');
@@ -470,7 +440,7 @@ class SYSTEM {
         foreach (self::$modules as $module => $data) {
             if (in_array($module, self::$menu) && array_key_exists($module, $enabled)) {
                 $obj = strtoupper($module);
-                $point = array();
+                $point = [];
                 $point[$module]['module'] = $module;
                 $point[$module]['link']   = MODULE.$module;
                 $point[$module]['name']   = SYSTEM::$modules[$module]['title'];

@@ -7,8 +7,8 @@ if (!defined('idxCMS')) die();
 
 class POLLS {
 
-    public  $active = array();       # Current poll
-    public  $old    = array();       # Old poll
+    public  $active = [];       # Current poll
+    public  $old    = [];       # Old poll
     private $cookie = '';
 
     public function __construct() {
@@ -26,7 +26,7 @@ class POLLS {
     }
 
     private function getPolls($polls) {
-        $result = array();
+        $result = [];
         if (!empty($polls)) {
             foreach ($polls as $id => $poll) {
                 $poll['total'] = array_sum($poll['count']);
@@ -49,7 +49,7 @@ class POLLS {
         if (empty($question) || empty($answers)) {
             throw new Exception('Empty question or no variants');
         }
-        $data = array();
+        $data = [];
         $data['question'] = $question;
         foreach (explode(LF, preg_replace("/[\n\r]+/", LF, $answers)) as $variant) {
             if (!empty($variant)) {
@@ -57,7 +57,7 @@ class POLLS {
                 $data['count'][] = 0;
             }
         }
-        $data['ips'] = array();
+        $data['ips'] = [];
         $this->active[RandomString(8)] = $data;
         return $this->savePolls(TRUE, FALSE);
     }
@@ -69,7 +69,7 @@ class POLLS {
     }
 
     public function removePoll($id) {
-        $new = array();
+        $new = [];
         foreach ($this->active as $key => $value) {
             if ($key != $id) {
                 $new[$key] = $value;
@@ -80,7 +80,7 @@ class POLLS {
     }
 
     public function removePollFromArchive($id) {
-        $new = array();
+        $new = [];
         foreach ($this->old as $key => $value) {
             if ($key != $id) {
                 $new[$key] = $value;
@@ -120,7 +120,7 @@ class POLLS {
 
     public function showPolls($polls, $tpl) {
         $colors = array('red', 'yellow', 'blue', 'green', 'purple', 'aqua', 'gray', 'teal', 'white', 'black');
-        $result = array();
+        $result = [];
         $output = '';
         foreach ($polls as $id => $poll) {
             $result = $poll;
@@ -128,7 +128,7 @@ class POLLS {
             if (!empty($this->active[$id])) {
                 $result['voited'] = $this->isVotedInPoll($id);
             }
-            $result['answers'] = array();
+            $result['answers'] = [];
             foreach ($poll['answers'] as $i => $answer) {
                 $result['answers'][$i]['id'] = $i;
                 $result['answers'][$i]['answer'] = $answer;

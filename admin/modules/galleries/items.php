@@ -50,7 +50,7 @@ if (!empty($REQUEST['save'])) {
 }
 
 if (!empty($REQUEST['new']) || !empty($item)) {
-    $output = array();
+    $output = [];
     $output['categories'] = $categories;
     if (!empty($category)) {
         $output['category_id']    = $category;
@@ -90,7 +90,7 @@ if (!empty($REQUEST['new']) || !empty($item)) {
 } elseif (!empty($sections[$section])) {
     $categories = CMS::call('GALLERIES')->getCategories($section);
     if (!empty($categories[$category])) {
-        $output = array();
+        $output = [];
         $output['section_id']     = $section;
         $output['section_title']  = $sections[$section]['title'];
         $output['category_id']    = $category;

@@ -52,7 +52,7 @@ if (!empty($REQUEST['day']) && !empty($REQUEST['viewlog'])) {
         }
         unset($PHAR);
 
-        $output = array();
+        $output = [];
         foreach($list as $key => $file) {
             if (preg_match("/^((.*?)-(.*?)-(.*?))\.log(|.gz)$/i", $file, $matches)) {
                 $output['day'][$key]['date'] = $matches[1];
@@ -74,8 +74,8 @@ if (!empty($REQUEST['day']) && !empty($REQUEST['viewlog'])) {
     $logs   = GetFilesList(LOGS);
     $month  = date('m');
     $year   = date('Y');
-    $output = array();
-    $remove = array();
+    $output = [];
+    $remove = [];
 
     foreach ($logs as $key => $log_entry) {
         if (preg_match("/^((.*?)-(.*?)-(.*?))\.log(|.gz)$/i", $log_entry, $matches)) {

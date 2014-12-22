@@ -47,7 +47,7 @@ class RSS_FEED {
     /** RSS feed items
      * @param array
      */
-    public $items = array();
+    public $items = [];
 
     /**Class initialization
      * @param  string $title       RSS feed title
@@ -338,7 +338,7 @@ class LastRSS {
             preg_match_all("'<item(| .*?)>(.*?)</item>'si", $rss_content, $items);
             $rss_items = $items[2];
             $i = 0;
-            $result['items'] = array(); // Create array even if there are no items
+            $result['items'] = []; // Create array even if there are no items
 
             foreach($rss_items as $rss_item) {
                 // If number of items is lower then limit: Parse one item

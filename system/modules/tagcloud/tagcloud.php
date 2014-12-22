@@ -69,8 +69,8 @@ if (!empty($tags)) {
     }
     $tags = array_slice($tags, 0, $tags_amount, TRUE);
     uasort($tags, 'scmp');
-    $tags_cloud = array();
-    $tags_rate  = array();
+    $tags_cloud = [];
+    $tags_rate  = [];
     foreach ($tags as $key => $value) {
         $tags_cloud[] = $key;
         $tags_rate[]  = $value;

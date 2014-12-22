@@ -94,14 +94,13 @@ function ShowRate($for) {
         $event = 'onmousedown="star.update(this, \''.$for.'\')" onmousemove="star.mouse(event, this)" title="Rate!"';
     }
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'rate.tpl');
-    return $TPL->parse(
-        array('value' => $value,                      # Rate value
-              'voted' => $voices,                     # Number of voices
-              'item'  => $for,                        # Item
-              'width' => intval($value * 84 / 100),   # Width of rate value field
-              'event' => $event                       # Allow rating?
-        )
-    );
+    return $TPL->parse([
+        'value' => $value,                      # Rate value
+        'voted' => $voices,                     # Number of voices
+        'item'  => $for,                        # Item
+        'width' => intval($value * 84 / 100),   # Width of rate value field
+        'event' => $event                       # Allow rating?
+    ]);
 }
 
 SYSTEM::registerModule('rate', 'Rate', 'plugin');

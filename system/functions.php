@@ -3,18 +3,28 @@
  * @file      system/functions.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- *            <https://github.com/Greenray/idxCMS/system/functions.php>
- * @copyright (c) 2011 - 2014 Victor Nabatov\n
- *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @copyright (c) 2011 - 2014 Victor Nabatov
+ * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ * @package   Core
  */
+
+/** functions.php - System functions libruary. */
 
 # FILES and DIRECTORIES
 
-function AdvScanDir($directory, $mask = '', $type = 'all', $filter = FALSE, $except = array()) {
-    $exc = array('.', '..', '.htaccess', 'index.html');
+/** Recursively get list of file from directory.
+ * Example:
+ * @param  string  $directory Directory for parsing.
+ * @param  string  $mask      Files mask.
+ * @param  string  $type      Files type: file or directory.
+ * @param  boolean $filter    Files filter
+ * @param  array   $except    List if files which will be excluded from result.
+ * @return array              List of files.
+ */
+function AdvScanDir($directory, $mask = '', $type = 'all', $filter = FALSE, $except = []) {
+    $exc     = ['.', '..', '.htaccess', 'index.html'];
     $exclude = array_unique(array_merge($exc, $except));
-    $dir = array();
+    $dir     = [];
     if (!empty($mask)) {
         $mask = '/^'.str_replace('*', '(.*)', str_replace('.', '\\.', $mask)).DS;
     }
@@ -39,10 +49,16 @@ function AdvScanDir($directory, $mask = '', $type = 'all', $filter = FALSE, $exc
     return $dir;
 }
 
-function GetFilesList($directory, $except = array()) {
-    $exclude = array_unique(array_merge(array('.', '..', '.htaccess', 'index.html'), $except));
-    $result  = array();
-    $list = scandir($directory);
+/**
+* @todo Comment
+* @param string $directory	...
+* @param string $except	...
+* @return 
+*/
+function GetFilesList($directory, $except = []) {
+    $exclude = array_unique(array_merge(['.', '..', '.htaccess', 'index.html'], $except));
+    $result  = [];
+    $list    = scandir($directory);
     foreach ($list as $filename) {
         if (!in_array($filename, $exclude)) {
             $result[] = $filename;
@@ -52,8 +68,16 @@ function GetFilesList($directory, $except = array()) {
 }
 
 # Recursively copy a folder and its contents
+/**
+* @todo Comment
+* @param string $source	...
+* @param string $dest	...
+* @return 
+*/
 function CopyTree($source, $dest) {
-    if (is_file($source)) return copy($source, $dest);
+    if (is_file($source)) {
+        return copy($source, $dest);
+    }
     if (!is_dir($dest)) {
         mkdir($dest, 0777);
         chmod($dest, 0777);
@@ -70,6 +94,12 @@ function CopyTree($source, $dest) {
 }
 
 # Remove files and directories recursively
+/**
+* @todo Comment
+* @param string $object	...
+* @param string $recursive	... (défaut : TRUE)
+* @return 
+*/
 function DeleteTree($object, $recursive = TRUE) {
     if ($recursive && is_dir($object)) {
         $els = GetFilesList($object);
@@ -81,6 +111,11 @@ function DeleteTree($object, $recursive = TRUE) {
 }
 
 # Get content of gziped file
+/**
+* @todo Comment
+* @param string $file	...
+* @return 
+*/
 function gzfile_get_contents($file) {
     if (!$file = gzfile($file)) {
         return FALSE;
@@ -92,6 +127,13 @@ function gzfile_get_contents($file) {
 }
 
 # Write data to gziped file
+/**
+* @todo Comment
+* @param string $file	...
+* @param string $text	...
+* @param string $mode	... (défaut : 'w+')
+* @return 
+*/
 function gzfile_put_contents($file, $text, $mode = 'w+') {
     if (($fp = @fopen($file.'.lock', 'w+')) === FALSE) {
         return FALSE;
@@ -111,8 +153,13 @@ function gzfile_put_contents($file, $text, $mode = 'w+') {
 }
 
 # Get unserialized data
+/**
+* @todo Comment
+* @param string $file	...
+* @return 
+*/
 function GetUnserialized($file) {
-    $data = array();
+    $data = [];
     if (file_exists($file)) {
         $content = file_get_contents($file);
         if ($content !== FALSE) {
@@ -122,7 +169,7 @@ function GetUnserialized($file) {
                 $data = preg_replace("!s:(\d+):\"(.*?)\";!se", "'s:'.strlen('$2').':\"$2\";'", $data);
                 $data = @unserialize($data);
                 if ($data === FALSE) {
-                    $data = array();
+                    $data = [];
                 } else {
                     file_put_contents($file, serialize($data), LOCK_EX);
                 }
@@ -171,12 +218,17 @@ function SearchKeyInArray($needle, $haystack) {
     return $result;
 }
 
+/**
+* @todo Comment
+* @param string $num_chars	...
+* @return 
+*/
 function RandomString($num_chars) {
-    $chars = array(
+    $chars = [
         'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
         'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
         '0','1','2','3','4','5','6','7','8','9','_'
-    );
+    ];
     $max_chars = sizeof($chars) - 1;
     $result = '';
     for ($i = 0; $i < $num_chars; $i++) {
@@ -198,6 +250,12 @@ function __($string) {
     return empty($LANG['def'][$string]) ? $string : $LANG['def'][$string];
 }
 
+/**
+* @todo Comment
+* @param string $text	...
+* @param string $length	...
+* @return 
+*/
 function CutText($text, $length) {
     if ((mb_strlen($text, 'UTF-8') - 1) < $length) {
         return $text;
@@ -207,10 +265,20 @@ function CutText($text, $length) {
     }
 }
 
+/**
+* @todo Comment
+* @param string $text	...
+* @return 
+*/
 function UnifyBr($text) {
-    return str_replace(array("\r\n", "\n\r", "\r"), LF, $text);
+    return str_replace(["\r\n", "\n\r", "\r"], LF, $text);
 }
 
+/**
+* @todo Comment
+* @param string $string	...
+* @return 
+*/
 function OnlyLatin($string) {
     if (empty($string) || preg_replace("/[\d\w]+/i", '', $string) != '') {
         return FALSE;
@@ -220,9 +288,15 @@ function OnlyLatin($string) {
 
 # DATE and TIME
 
+/**
+* @todo Comment
+* @param string $format	...
+* @param string $date	...
+* @return 
+*/
 function FormatTime($format, $date) {
     global $LANG;
-    $translate = array();
+    $translate = [];
     $locale = SYSTEM::get('locale');
     if ($locale !== 'en') {
         $datetime = 'datetime'.$locale;
@@ -235,9 +309,14 @@ function FormatTime($format, $date) {
 }
 
 # Return localised date from string generated by date()
+/**
+* @todo Comment
+* @param string $string	...
+* @return 
+*/
 function LocaliseDate($string) {
     global $LANG;
-    $translate = array();
+    $translate = [];
     if ($LANG['language'] !== 'english') {
         foreach($LANG['datetime'] as $match => $replace) {
             $translate[$match] = $replace;
@@ -270,8 +349,15 @@ function SendMail($to, $from, $sender, $subj, $text) {
 
 # PAGINATION
 
+/**
+* @todo Comment
+* @param string $total	...
+* @param string $current	...
+* @param string $last	...
+* @return 
+*/
 function AdvancedPagination($total, $current, $last) {
-    $pages   = array();
+    $pages = [];
     if ($current < 1) {
         $current = 1;
     } elseif ($current > $last) {
@@ -281,7 +367,7 @@ function AdvancedPagination($total, $current, $last) {
     $pages['previous'] = ($current == 1)     ? $current : $current - 1;
     $pages['next']     = ($current == $last) ? $last    : $current + 1;
     $pages['last']     = $last;
-    $pages['pages']    = array();
+    $pages['pages']    = [];
     $show = 5;                        # Number of page links to show
     # At the beginning
     if ($current == 1) {
@@ -324,6 +410,14 @@ function AdvancedPagination($total, $current, $last) {
     return $pages;
 }
 
+/**
+* @todo Comment
+* @param string $total	...
+* @param string $perpage	...
+* @param string $current	...
+* @param string $link	...
+* @return 
+*/
 function Pagination($total, $perpage, $current, $link) {
     $result   = '';
     $numpages = ceil($total / $perpage);
@@ -355,8 +449,15 @@ function Pagination($total, $perpage, $current, $link) {
     return $result;
 }
 
+/**
+* @todo Comment
+* @param string $page	...
+* @param string $perpage	...
+* @param string $count	...
+* @return 
+*/
 function GetPagination($page, $perpage, $count) {
-    $result = array();
+    $result = [];
     $result['page']  = $page > 0 ? $page - 1 : 0;
     $result['total'] = $count > $perpage ? $perpage : $count;
     $result['start'] = $result['page'] * $perpage;
@@ -381,7 +482,6 @@ function SelectTimeZone($name, $points, $default) {
 }
 
 /** Show captcha.
- *
  * There are three different options:
  * - original: black an white;
  * - color: with colored background;
@@ -409,6 +509,10 @@ function ShowCaptcha($param = '') {
             <input type="text" name="captcheckout" id="captcheckout" value="" size="10" class="required" />';
 }
 
+/**
+* @todo Comment
+* @return 
+*/
 function CheckCaptcha() {
     if (USER::loggedIn()) {
         return TRUE;
@@ -546,6 +650,15 @@ function ShowElement($element, $parameters = '') {
     }
 }
 
+/**
+* @todo Comment
+* @param string $module	...
+* @param string $section	... (défaut : '')
+* @param string $category	... (défaut : '')
+* @param string $post	... (défaut : '')
+* @param string $comment	... (défaut : '')
+* @return 
+*/
 function Redirect($module, $section = '', $category = '', $post = '', $comment = '') {
     $url = MODULE.$module;
     if (!empty($section)) {
@@ -564,14 +677,30 @@ function Redirect($module, $section = '', $category = '', $post = '', $comment =
     die();
 }
 
+/**
+* @todo Comment
+* @param string $message	...
+* @return 
+*/
 function ShowError($message) {
     return CMS::call('SYSTEM')->defineWindow('Error', $message, 'center');
 }
 
+/**
+* @todo Comment
+* @param string $title	...
+* @param string $content	...
+* @param string $align	... (défaut : 'left')
+* @return 
+*/
 function ShowWindow($title, $content, $align = 'left') {
     return CMS::call('SYSTEM')->defineWindow($title, $content, $align);
 }
 
+/**
+* @todo Comment
+* @return 
+*/
 function Sitemap() {
     $time     = FormatTime('Y-m-d', time());
     $url      = SYSTEM::get('url');

@@ -12,11 +12,11 @@ if (USER::loggedIn() || $config['allow-guest']) {
         $items = explode(" ", $REQUEST['search']);
         $TPL = new TEMPLATE(dirname(__FILE__).DS.'results.tpl');
         $ERR = new TEMPLATE(dirname(__FILE__).DS.'error.tpl');
-        $founded = array();
-        $common  = array();
+        $founded = [];
+        $common  = [];
         $output  = '';
         foreach ($items as $word) {
-            $founded[$word] = array();
+            $founded[$word] = [];
             $length = mb_strlen($word, 'UTF-8');
             if (($length >= $config['query-min']) && ($length <= $config['query-max'])) {
                 $searchs = SYSTEM::get('search');
@@ -26,7 +26,7 @@ if (USER::loggedIn() || $config['allow-guest']) {
                     if (!empty($sections['drafts'])) {
                         unset($sections['drafts']);
                     }
-                    $result = array();
+                    $result = [];
                     if (!empty($sections)) {
                         foreach ($sections as $id => $section) {
                             $categories = CMS::call($obj)->getCategories($id);
@@ -67,7 +67,7 @@ if (USER::loggedIn() || $config['allow-guest']) {
             }
         }
         unset($ERR);
-        $results = array();
+        $results = [];
         $results['count'] = sizeof($common);
         $perpage = (int) CONFIG::getValue('search', 'per-page');
         $page    = (int) FILTER::get('REQUEST', 'page');

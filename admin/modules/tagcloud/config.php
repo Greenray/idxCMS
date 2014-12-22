@@ -23,7 +23,7 @@ function GetKeywords($words, $config, &$target) {
 
 function CreateTags($posts = TRUE, $files = FALSE) {
     $config   = CONFIG::getSection('search');
-    $tags     = array();
+    $tags     = [];
     $keywords = CONFIG::getValue('main', 'keywords');
     GetKeywords($keywords, $config, $tags);
     $modules = array('posts','forum','catalogs','galleries');
@@ -105,7 +105,7 @@ if (isset($init)) {
     }
     $search_ini = CONFIG::getSection('search');
     if (!empty($REQUEST['edit'])) {
-        $tags = array();
+        $tags = [];
         foreach ($REQUEST['key'] as $key => $tag) {
             if ($tag != '') {
                 $tag = $tag;

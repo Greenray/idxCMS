@@ -16,7 +16,7 @@ if (!empty($REQUEST['save'])) {
 $aphorisms = array_values(GetFilesList(APHORISMS));
 
 if (!empty($REQUEST['selected'])) {
-    $output = array();
+    $output = [];
     if (in_array($REQUEST['selected'], $aphorisms)) {
         $output['file'] = $REQUEST['selected'];
         if (file_exists(APHORISMS.$REQUEST['selected'])) {

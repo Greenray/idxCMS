@@ -110,10 +110,6 @@ button, input[type="button"], input[type="reset"], input[type="submit"]
 	-webkit-appearance: button
 }
 
-fieldset {
-	margin: 20px 0
-}
-
 form {
 	margin: 0
 }
@@ -742,7 +738,7 @@ div.tabs {
 }
 
 ul.tabs {
-	margin: 0 0 10px 10px;
+	margin: 0 0 10px;
 	padding: 0;
 	float: left;
 	list-style: none;

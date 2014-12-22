@@ -7,7 +7,7 @@ if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
 
 # Save site menu
 if (!empty($REQUEST['save'])) {
-    $result = array();
+    $result = [];
     foreach ($REQUEST['links'] as $i => $link) {
         if (!empty($link)) {
             $ins[0] = $link;
@@ -25,7 +25,7 @@ if (!empty($REQUEST['save'])) {
 
 $icons = GetFilesList(ICONS);
 $links = CONFIG::getSection('navigation');
-$output = array();
+$output = [];
 
 foreach ($links as $key => $values) {
     $i = 0;

@@ -51,11 +51,11 @@ if (!empty(SYSTEM::$modules[$module])) {
                 $list = array_slice($content, -5, 5, TRUE);
                 ++$i;
                 $k = 1;
-                $post = array();
+                $post = [];
                 $post['tab'] = $i;
                 $post['section']  = $section;
                 $post['category'] = $category;
-                $post['posts'] = array();
+                $post['posts'] = [];
                 foreach ($list as $j => $data) {
                     # In article we need it's description
                     $post['posts'][$k] = CMS::call('POSTS')->getItem($j, 'desc');

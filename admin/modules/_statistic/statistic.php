@@ -6,11 +6,11 @@
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
 
 function StatisticClean($file, $field = '') {
-    $stat = array();
+    $stat = [];
     if (!empty($field)) {
         $stat = GetUnserialized($file);
         if (is_array($stat[$field])) {
-             $stat[$field] = array();
+             $stat[$field] = [];
         } else {
             $stat[$field] = 0;
         }
@@ -26,7 +26,7 @@ if (!empty($REQUEST['cleansip']))     StatisticClean(CONTENT.'spiders', 'ip');
 if (!empty($REQUEST['cleanspiders'])) StatisticClean(CONTENT.'spiders');
 
 $stats = GetUnserialized(CONTENT.'stats');
-$output = array();
+$output = [];
 
 if (!empty($stats)) {
     $output['total_hosts'] = $stats['total'];

@@ -39,7 +39,7 @@ if (!empty($REQUEST['delete']) && !empty($REQUEST['file'])) {
 
 # INTERFACE
 $files  = GetFilesList(BACKUPS);
-$output = array();
+$output = [];
 
 foreach ($files as $file) {
     $output['files'][$file] = filesize(BACKUPS.$file);

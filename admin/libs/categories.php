@@ -28,8 +28,8 @@ try {
 $sections = CMS::call($obj)->getSections();
 
 if (!empty($sections)) {
-    $choice = array();
-    $output = array();
+    $choice = [];
+    $output = [];
     $output['module']   = $module;
     $output['sections'] = $sections;
     foreach ($sections as $id => $section) {
@@ -48,7 +48,7 @@ if (!empty($sections)) {
                 $class = ($class === 'odd') ? 'even' : 'odd';
             }
         } else {
-            $output['sections'][$id]['categories'] = array();
+            $output['sections'][$id]['categories'] = [];
         }
     }
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'categories.tpl');

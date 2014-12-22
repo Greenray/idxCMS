@@ -28,15 +28,15 @@ $colors = array(
     'red',  'yellow', 'blue', 'green', 'purple', 'aqua',
     'gray', 'olive',  'teal', 'white', 'black'
 );
-$data   = array();
-$output = array();
+$data   = [];
+$output = [];
 $TPL    = new TEMPLATE(dirname(__FILE__).DS.'polls.tpl');
 
 foreach ($opened as $id => $poll) {
     $data['id'] = $id;
     unset($poll['ips']);
     $data['question'] = $poll['question'];
-    $data['answers']  = array();
+    $data['answers']  = [];
     foreach ($poll['answers'] as $i => $answer) {
         $data['answers'][$i]['answer'] = $answer;
         $data['answers'][$i]['count']  = $poll['count'][$i];

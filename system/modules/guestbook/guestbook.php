@@ -30,7 +30,7 @@ if (!empty($REQUEST['save'])) {
         switch ($REQUEST['action']) {
             case 'edit':
                 if (!empty($messages[$id])) {
-                    $output = array();
+                    $output = [];
                     if (USER::moderator('guestbook', $messages[$id])) {
                         $output['comment'] = $id;
                         $output['text'] = empty($REQUEST['text']) ? $messages[$id]['text'] : $REQUEST['text'];

@@ -126,20 +126,20 @@ function GetColor($name = 'idselector', $def_color = '') {
 
 function SaveSortedSections($obj, $params) {
     $params = explode('&', $params);
-    $sorted = array();
+    $sorted = [];
     foreach ($params as $key => $param) {
         $items = explode('.', $param);
         if (empty($items[1])) {
             # Param has no category value
             $section = $items[0];
-            $sorted[$section] = array();
+            $sorted[$section] = [];
         } else {
             $sorted[$section][] = $param;
         }
     }
-    $sections = array();
+    $sections = [];
     foreach ($sorted as $section => $values) {
-        $new_categories = array();
+        $new_categories = [];
         $categories = CMS::call($obj)->getCategories($section);
         foreach ($values as $i => $id) {
             # Get section and category

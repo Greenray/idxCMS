@@ -2,14 +2,14 @@
 /**
  * @file      system/parser.class.php
  * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- *            <https://github.com/Greenray/idxCMS/system/parser.class.php>
- * @copyright (c) 2011 - 2014 Victor Nabatov\n
- *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2011 - 2014 Victor Nabatov
+ * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ * @package   Core
  */
 
-/** Class PARSER - BBCODES parser */
+/** Class PARSER - BBCODES parser. */
+
 class PARSER {
 
     /** Text to parse
@@ -20,16 +20,16 @@ class PARSER {
     /** Temorary variable fo code processing
      * @param array
      */
-    private $temp = array();
+    private $temp = [];
 
     /** Array of regexp
      * @param array
      */
-    private $regexp = array();
+    private $regexp = [];
 
     /** Class initialization */
     public function __construct() {
-        $this->regexp[0] = array(
+        $this->regexp[0] = [
             "#\[align=(\"|&quot;|)(left|right|center|justify)(\"|&quot;|)\](.*?)\[/align(.*?)\]#is" => '<div style="text-align:\\2;">\\4</div>',
             "#\[(left|right|center|justify)\](.*?)\[/\\1\]#is" => '<div style="text-align:\\1;">\\2</div>',
             "#\[b\](.*?)\[/b\]#is" => '<b>\\1</b>',
@@ -67,14 +67,14 @@ class PARSER {
             "#\[\*\](.*?)\[/\*\]#is" => '<li>\\1</li>',
             "#\[mp3\](.*?)\[/mp3\]#is" => $this->parseMP3(),
             "#\[youtube\](.*?)\[/youtube\]#is" => $this->parseYouTube()
-        );
+        ];
     }
 
     /** bbCodes panel for the specified textarea.
      * @param  string  $textarea  Textarea ID
      * @param  boolean $moderator Is user an admin or moderator?
      * @param  string  $dir       Current directory
-     * @return array - bbCodes panel
+     * @return array              bbCodes panel
      */
     function showBbcodesPanel($textarea, $moderator = FALSE, $dir = '') {
         $area = explode('.', $textarea);
@@ -82,8 +82,8 @@ class PARSER {
         foreach ($smiles as $smile) {
             $names[] = basename($smile, '.gif');
         }
-        $clrs = array('00', '33', '66', '99', 'cc', 'ff');
-        $colors = array();
+        $clrs   = ['00', '33', '66', '99', 'cc', 'ff'];
+        $colors = [];
         $n = 0;
         for ($i = 0; $i < 6; $i++) {
             for ($j = 0; $j < 6; $j++) {
@@ -95,22 +95,20 @@ class PARSER {
         }
 
         $TPL = new TEMPLATE(SYS.'templates'.DS.'bbcodes-panel.tpl');
-        return $TPL->parse(
-                        array(
-                            'moderator' => $moderator,
-                            'full' => USER::loggedIn(),
-                            'bbimg' => IMAGES.'bbcodes'.DS,
-                            'form' => $area[0],
-                            'area' => $area[1],
-                            'smile' => $names,
-                            'colors' => $colors,
-                            'path' => MODULE.'editor&amp;dir='.$dir
-                        )
-        );
+        return $TPL->parse([
+            'moderator' => $moderator,
+            'full' => USER::loggedIn(),
+            'bbimg' => IMAGES.'bbcodes'.DS,
+            'form' => $area[0],
+            'area' => $area[1],
+            'smile' => $names,
+            'colors' => $colors,
+            'path' => MODULE.'editor&amp;dir='.$dir
+        ]);
     }
 
     /** Parse smiles in text.
-     * @return string - HTML tag with smile image
+     * @return string HTML tag with smile image
      */
     private function parseSmiles() {
         preg_match_all("#\[(.*?)\]#is", $this->text, $matches);
@@ -121,21 +119,22 @@ class PARSER {
                 }
             }
         }
-        $smiles = array(
+        $smiles = [
             ' :)' => ' <img src="'.SMILES.'smile.gif" alt="smile" /> ',
             ' ;)' => ' <img src="'.SMILES.'wink.gif" alt="wink" /> ',
             ' :(' => ' <img src="'.SMILES.'sad.gif" alt="sad" /> ',
             ' :D' => ' <img src="'.SMILES.'rofl.gif" alt="rofl" /> ',
            ' :-D' => ' <img src="'.SMILES.'yahoo.gif" alt="yahoo" /> ',
             ' :S' => ' <img src="'.SMILES.'suicide.gif" alt="confused" /> ',
-            ' =)' => ' <img src="'.SMILES.'yow.gif" alt="yow" /> ');
+            ' =)' => ' <img src="'.SMILES.'yow.gif" alt="yow" /> '
+        ];
         foreach ($smiles as $search => $replace) {
             $this->text = str_replace($search, $replace, $this->text);
         }
     }
 
     /** Parse [code]...[/code] bbtag.
-     * @return string - HTML div block with highlited php code
+     * @return string HTML div block with highlited php code
      */
     function parseCode() {
         preg_match_all("#[\s\n\r]*\[code\][\n\r]*(.*?)[\s\n\r]*\[/code\][\s\n\r]*#is", $this->text, $matches);
@@ -150,7 +149,7 @@ class PARSER {
     }
 
     /** Parse [php]...[/php] bbtag.
-     * @return string - HTML div block with highlited php code
+     * @return string HTML div block with highlited php code
      */
     private function parsePhp() {
         preg_match_all("#[\s\n\r]*\[php\][\n\r]*(.*?)[\s\n\r]*\[/php\][\s\n\r]*#is", $this->text, $matches);
@@ -168,13 +167,13 @@ class PARSER {
     }
 
     /** Parse [html]...[/html] bbtag.
-     * @return string - HTML div block with highlited html tags
+     * @return string HTML div block with highlited html tags
      */
     private function parseHtml() {
         preg_match_all("#[\s\n\r]*\[html\][\n\r]*(.*?)[\s\n\r]*\[/html\][\s\n\r]*#is", $this->text, $matches);
         if (!empty($matches)) {
             foreach ($matches[1] as $i => $code) {
-                $this->HtmlHighlighter(html_entity_decode($code));
+                $this->HIGHLIGHTER(html_entity_decode($code));
                 $tmp = '$:'.RandomString(6).':$';
                 $this->temp[$tmp] = '<div class="codehtml">'.$this->highlight().'</div>';
                 $this->text = str_replace($matches[0][$i], $tmp, $this->text);
@@ -183,23 +182,23 @@ class PARSER {
     }
 
     /** Parse [qoute|quote="Who"]...[/qoute] bbtags.
-     * @return string - HTML div block with the quoted text
+     * @return string HTML div block with the quoted text
      */
     private function parseQuote() {
         $this->text = preg_replace(
-                "#[\s\n\r]*\[quote\][\s\n\r]*(.*?)[\s\n\r]*\[/quote\][\s\n\r]*#is", '<div class="quotetext">\\1</div>', $this->text
+            "#[\s\n\r]*\[quote\][\s\n\r]*(.*?)[\s\n\r]*\[/quote\][\s\n\r]*#is", '<div class="quotetext">\\1</div>', $this->text
         );
         $this->text = preg_replace(
-                "#[\s\n\r]*\[quote=(\"|\"|)(.*?)(\"|\"|)\][\s\n\r]*(.*?)[\s\n\r]*\[/quote\][\s\n\r]*#is", '<div class="quotetitle">' .
-                '<strong>\\2 :</strong>' .
-                '<div class="quotetext">\\4</div>' .
-                '</div>', $this->text
+            "#[\s\n\r]*\[quote=(\"|\"|)(.*?)(\"|\"|)\][\s\n\r]*(.*?)[\s\n\r]*\[/quote\][\s\n\r]*#is", '<div class="quotetitle">' .
+            '<strong>\\2 :</strong>' .
+            '<div class="quotetext">\\4</div>' .
+            '</div>', $this->text
         );
     }
 
     /** Show spoiler with hidden text.
      * @param  array $matches  Array of spoiler parameters
-     * @return string - HTML div block with hidden text
+     * @return string HTML div block with hidden text
      */
     private function parseSpoiler($matches) {
         if (!empty($matches)) {
@@ -216,7 +215,7 @@ class PARSER {
 
     /** Parse [img]...[/img] bbtag.
      * @param  string $path Path to images directory
-     * @return string - HTML div block with the image
+     * @return string HTML div block with the image
      */
     private function parseImage($path = '') {
         preg_match_all("#\[img\][\s\n\r]*([^ \"\n\r\t<]*?)[\s\n\r]*\[/img\]#is", $this->text, $matches);
@@ -293,7 +292,7 @@ class PARSER {
     }
 
     /** Parse [mp3]...[/mp3] bbtag.
-     * @return string - HTML block with flash mp3 player
+     * @return string HTML block with flash mp3 player
      */
     private function parseMP3() {
         $player = CONFIG::getSection('audio');
@@ -309,7 +308,7 @@ class PARSER {
     }
 
     /** Parse [youtube]...[/youtube] bbtag.
-     * @return string - HTML block with youtube player
+     * @return string HTML block with youtube player
      */
     private function parseYouTube() {
         $width = CONFIG::getValue('video', 'width');
@@ -324,7 +323,7 @@ class PARSER {
     /** Main parser.
      * @param  string $text Text for parsing
      * @param  string $path Path of images directory
-     * @return string - Parsed text
+     * @return string       Parsed text
      */
     public function parse($text, $path) {
         $this->text = $text;
@@ -345,7 +344,7 @@ class PARSER {
     /** Parse text.
      * @param  string $text Text for parsing
      * @param  string $path Path to the images directory
-     * @return string _ Parsed text
+     * @return string       Parsed text
      */
     function parseText($text, $path = '') {
         $text = trim($text);
@@ -356,231 +355,5 @@ class PARSER {
             $text = htmlspecialchars($text);
         }
         return $this->parse($text, $path);
-    }
-}
-
-/**
- * @file      system/parser.class.php
- * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- *            <https://github.com/Greenray/idxCMS/system/parser.class.php>
- * @copyright (c) 2011 - 2014 Victor Nabatov\n
- *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
- */
-
-/** Class HtmlHighlighter - HTML and php highlighter */
-class HtmlHighlighter extends PARSER {
-
-    /** The results of parsing
-     * @param string
-     */
-    private $output  = '';
-    /** Text to parse
-     *  @param string
-     */
-    private $text    = '';
-    /** Start parsing from the begining
-     * @param integer
-     */
-    private $current = 0;
-    /** Tag name color
-     * @param string
-     */
-    private $tag     = 'color:blue;';
-    /** Tag attribute color
-     * @param string
-     */
-    private $attr    = 'color:green;';
-    /** Tag value color
-     * @param string
-     */
-    private $value   = 'color:red;';
-    /** php tag color
-     * @param string
-     */
-    private $php     = 'color:black';
-    /** inline style for comment
-     * @param string
-     */
-    private $comment = 'font-style:italic;color:gray;';
-
-    /** Class initialization */
-    public function __construct($code) {
-        $this->text = $code;
-    }
-
-    /** Comment highlighter.
-     * @return string - HTML span block with highlighted comment
-     */
-    private function highlightComment() {
-        $this->output .= '<span style="'.$this->comment.'">&lt;';
-        for ($this->current += 1; ($this->current < mb_strlen($this->text)) && ($this->text[$this->current] !== '>'); $this->current++) {
-            $this->output .= $this->text[$this->current];
-        }
-        $this->output .= '&gt;</span>';
-    }
-
-    /** php code highlighter.
-     * @return string - HTML span block with highlighted php code
-     */
-    private function highlightPhp() {
-        $this->output .= '<span style="'.$this->php.'">&lt;';
-        ++$this->current;
-        $this->output .= $this->text[$this->current];
-        ++$this->current;
-        while ($this->text[$this->current] !== '?') {
-            $nextChar = $this->text[$this->current + 1];
-            if ($this->text[$this->current] === ' ') {
-                $this->output .= '&nbsp;';
-            } elseif ($this->text[$this->current] === '<') {
-                $this->output .= '&lt;';
-            } elseif ($this->text[$this->current] === '>') {
-                $this->output .= '&gt;';
-            } elseif ($this->text[$this->current] === "\r") {
-                if ($nextChar === "\n") {
-                    $this->output .= str_replace("\r", '<br />', $this->text[$this->current]);
-                    ++$this->current;
-                    $this->output .= str_replace("\n", '', $this->text[$this->current]);
-                } else {
-                    $this->output .= str_replace("\r", '<br />', $this->text[$this->current]);
-                }
-            } elseif ($this->text[$this->current] === "\n") {
-                if ($nextChar === "\r") {
-                    $this->output .= str_replace("\n", '<br />', $this->text[$this->current]);
-                    ++$this->current;
-                    $this->output .= str_replace("\r", '', $this->text[$this->current]);
-                } else {
-                    $this->output .= str_replace("\n", '<br />', $this->text[$this->current]);
-                }
-            } else {
-                $this->output .= $this->text[$this->current];
-            }
-            ++$this->current;
-        }
-        $this->output .= '?';
-        ++$this->current;
-        $this->output .= '&gt;</span>';
-    }
-
-    /** Tag highlighter.
-     * @return string - HTML span block with highlighted tag
-     */
-    private function highlightTag() {
-        $this->output .= '<span style="'.$this->tag.'">&lt;';
-        $parsedTag = FALSE;
-        # Parse full tag
-        $length = mb_strlen($this->text);
-        for ($this->current += 1; ($this->current < $length) && ($this->text[$this->current] !== ">"); $this->current++) {
-            if (($this->text[$this->current] === ' ') && !$parsedTag) {
-                $parsedTag = TRUE;
-                $this->output .= '</span>';
-            } elseif (($this->text[$this->current] !== ' ') && $parsedTag) {
-                $attribute = '';
-                # While we are in the tag
-                for (; ($this->current < $length) && ($this->text[$this->current] !== '>'); $this->current++) {
-                    if ($this->text[$this->current] !== '=') {
-                        $attribute .= $this->text[$this->current];
-                    } else {
-                        $this->output .= '<span style="'.$this->attr.'">'.$attribute.'</span>=';
-                        $attribute = '';
-                        $value = '';
-                        $quote = '';
-                        for ($this->current += 1; ($this->current < $length) && ($this->text[$this->current] !== '>') && ($this->text[$this->current] !== ' '); $this->current++) {
-                            if ($this->text[$this->current] === '"' || $this->text[$this->current] === "'") {
-                                $quote = $this->text[$this->current];
-                                $value .= $quote;
-                                # Attribute value
-                                for ($this->current += 1; ($this->current < $length) && ($this->text[$this->current] !== '>') && ($this->text[$this->current] !== $quote); $this->current++) {
-                                    if ($this->text[$this->current] === '<') {
-                                        if ($this->text[$this->current + 1] === '?') {
-                                            $value .= '<span style="'.$this->php.'">&lt;';
-                                            ++$this->current;
-                                            $value .= $this->text[$this->current];
-                                            $this->current += 1;
-                                            while ($this->text[$this->current] !== '?') {
-                                                $value .= $this->text[$this->current];
-                                                ++$this->current;
-                                            }
-                                            $value .= '?';
-                                            ++$this->current;
-                                            $value .= '&gt;</span>';
-                                        } else {
-                                            $value .= '&lt;';
-                                            for ($this->current += 1; $this->text[$this->current] !== '>'; $this->current++) {
-                                                $value .= $this->text[$this->current];
-                                            }
-                                            $value .= '&gt;';
-                                        }
-                                    } else {
-                                        $value .= $this->text[$this->current];
-                                    }
-                                }
-                                $value .= $quote;
-                            } else {
-                                $value .= $this->text[$this->current];
-                            }
-                        }
-                        $this->output .= '<span style="'.$this->value.'">'.$value.'</span>';
-                        break;
-                    }
-                }
-                if (!empty($attribute)) {
-                    $this->output .= '<span style="'.$this->attr.'">'.$attribute.'</span>';
-                }
-            }
-            if ($this->text[$this->current] === '>') {
-                break;
-            } else {
-                $this->output .= $this->text[$this->current];
-            }
-        }
-        if ($this->text[$this->current] === '>' && !$parsedTag) {
-            $this->output .= '&gt;</span>';
-            ++$this->current;
-        }
-        --$this->current;
-    }
-
-    /** Hightlight string.
-     * @return string - Highlighted html
-     */
-    public function highlight() {
-        $regexp = array("#echo#is" => '<span style="color:purple;">echo</span>');
-        $length = mb_strlen($this->text) - 1;
-        for ($this->current = 0; $this->current < $length; $this->current++) {
-            $nextChar = $this->text[$this->current + 1];
-            if ($this->text[$this->current] === ' ') {
-                $this->output .= str_replace(" ", '&nbsp;', $this->text[$this->current]);
-            } elseif ($this->text[$this->current] === '<') {
-                if ($nextChar === '!') {
-                    $this->highlightComment();
-                } elseif ($nextChar === '?') {
-                    $this->highlightPhp();
-                } else {
-                    $this->highlightTag();
-                }
-            } elseif ($this->text[$this->current] === "\r") {
-                if ($nextChar === "\n") {
-                    $this->output .= str_replace("\r", '<br />', $this->text[$this->current]);
-                    ++$this->current;
-                    $this->output .= str_replace("\n", '', $this->text[$this->current]);
-                } else {
-                    $this->output .= str_replace("\r", '<br />', $this->text[$this->current]);
-                }
-            } elseif ($this->text[$this->current] === "\n") {
-                if ($nextChar === "\r") {
-                    $this->output .= str_replace("\n", '<br />', $this->text[$this->current]);
-                    ++$this->current;
-                    $this->output .= str_replace("\r", '', $this->text[$this->current]);
-                } else {
-                    $this->output .= str_replace("\n", '<br />', $this->text[$this->current]);
-                }
-            } else {
-                $this->output .= $this->text[$this->current];
-            }
-        }
-        $this->output = preg_replace(array_keys($regexp), array_values($regexp), $this->output);
-        return '<code>'.$this->output.'</code>';
     }
 }

@@ -2,12 +2,10 @@
 /**
  * @file      system/statistic.php
  * @version   2.3
- * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- *            <https://github.com/Greenray/idxCMS/system/statistic.php>
- * @copyright (c) 2011 - 2014 Victor Nabatov\n
- *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2011 - 2014 Victor Nabatov
+ * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ * @package   Core
  */
 
 /** Site ststistic - registers a visitы to the website by visitors, users, bots and spiders */
@@ -16,7 +14,7 @@ if (!defined('idxCMS')) die();
 
  /** Extractes keywords from the user`s query.
  * @param  string $url User`s URL
- * @return mixed - Decoded keywords or FALSE
+ * @return mixed       Decoded keywords or FALSE
  */
 function ExtractKeyword($url) {
 
@@ -39,7 +37,7 @@ function ExtractKeyword($url) {
     ];
     $components = parse_url($url);
     if (isset($components['query'])) {
-        $query_items = array();
+        $query_items = [];
         parse_str($components['query'], $query_items);
         foreach ($search_queries as $engine => $param) {
             if (strpos($components['host'], $engine) !== FALSE && !empty($query_items[$param])) {
@@ -52,7 +50,7 @@ function ExtractKeyword($url) {
 
  /** Detect bad bots.
  * @param  string $agent $_SERVER['HTTP_USER_AGENT']
- * @return boolean - Is bad bot detected?
+ * @return boolean       Is bad bot detected?
  */
 function DetectBadBot($agent) {
     $engines = ['email exractor','sitesucker','w3af.sourceforge.net','xpymep'];
@@ -66,7 +64,7 @@ function DetectBadBot($agent) {
 
  /** Detect spiders.
  * @param  string $agent $_SERVER['HTTP_USER_AGENT']
- * @return boolean - Is spider detected?
+ * @return boolean       Is spider detected?
  */
 function DetectSpider($agent) {
 
@@ -129,7 +127,7 @@ $time = time();                            /**< Current time */
 
 if (DetectSpider($agent)) {
     # Detect and register of searching bot
-    $spiders = GetUnserialized(CONTENT.'spiders'); /**< Spaders data storage */
+    $spiders = GetUnserialized(CONTENT.'spiders');
     if (empty($spiders)) {
         $spiders['total'] = 1;
         $spiders['today'] = 1;
@@ -166,9 +164,9 @@ if (DetectSpider($agent)) {
         $stats['total']   = 1;
         $stats['today']   = 1;
         $stats['ip'][$ip] = 1;
-        $stats['hosts']   = array();
-        $stats['users']   = array();
-        $stats['online']  = array();
+        $stats['hosts']   = [];
+        $stats['users']   = [];
+        $stats['online']  = [];
         if (!empty($config['user-ua'])) {
             $stats['ua'][$agent] = 1;
         }
@@ -176,8 +174,8 @@ if (DetectSpider($agent)) {
         file_put_contents(CONTENT.'stats', serialize($stats), LOCK_EX);
     } else {
         if ($stats['update'] < mktime(0, 0, 0, date('n'), date('j'), date('Y'))) {
-            $stats['hosts'] = array();
-            $stats['users'] = array();
+            $stats['hosts'] = [];
+            $stats['users'] = [];
         }
         if (empty($stats['ip'][$ip])) {
             $stats['total'] = $stats['total'] + 1;
@@ -202,7 +200,7 @@ if (DetectSpider($agent)) {
     $online[$ip]['name'] = $user['username']; /**< Current username */
     $online[$ip]['nick'] = $user['nickname']; /**< Current Usernick */
     $online[$ip]['time'] = $time;             /**< Current time */
-    $stats['online'] = array();               /**< Users and visitors online */
+    $stats['online'] = [];                    /**< Users and visitors online */
 
     foreach ($online as $ip => $data) {
         if ($data['time'] > ($time - 300)) {

@@ -7,7 +7,6 @@ if (!defined('idxCMS')) die();
 
 $sections = CMS::call('GALLERIES')->getSections();
 
-# Updates
 $last = CMS::call('GALLERIES')->getSectionsLastItems();
 
 if (!empty($last)) {

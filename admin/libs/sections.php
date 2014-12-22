@@ -13,7 +13,7 @@ try {
         if ($obj === 'POSTS') {
             $new = array('drafts' => 'drafts');
             $ids = array_combine($REQUEST['ids'], $REQUEST['ids']);
-            $sec = array();
+            $sec = [];
             $dat = $new + $ids;
             foreach($dat as $key => $value) {
                 foreach($sections as $key1 => $value1) {
@@ -42,7 +42,7 @@ $sections = CMS::call($obj)->getSections();
 
 if ($obj === 'POSTS') {
     # We can't move or delete section drafts and exclude it from sorting
-    $output = array();
+    $output = [];
     $output['drafts'] = $sections['drafts'];
     $output['drafts']['desc'] = CMS::call('PARSER')->parseText($sections['drafts']['desc']);
     unset($sections['drafts']);
@@ -50,7 +50,7 @@ if ($obj === 'POSTS') {
 
 if (!empty($sections)) {
     $class  = 'even';
-    $output = array();
+    $output = [];
     $output['sections'] = $sections;
     foreach ($sections as $id => $section) {
         $output['sections'][$id]['desc'] = CMS::call('PARSER')->parseText($section['desc']);

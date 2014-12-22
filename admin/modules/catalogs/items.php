@@ -50,7 +50,7 @@ if (!empty($REQUEST['save'])) {
 }
 
 if (!empty($REQUEST['new']) || !empty($item)) {
-    $output = array();
+    $output = [];
     $item = CMS::call('CATALOGS')->getItem($item, 'full', FALSE);
     if (!empty($item)) {
         $output = $item;
@@ -90,7 +90,7 @@ if (!empty($REQUEST['new']) || !empty($item)) {
 } elseif (!empty($sections[$section])) {
     $categories = CMS::call('CATALOGS')->getCategories($section);
     if (!empty($categories[$category])) {
-        $output = array();
+        $output = [];
         $output['section_id']     = $section;
         $output['section_title']  = $sections[$section]['title'];
         $output['category_id']    = $category;

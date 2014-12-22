@@ -53,16 +53,16 @@ if (!empty($REQUEST['save'])) {
 }
 
 if (!empty($REQUEST['new']) || !empty($topic)) {
-    $output = array();
-    $choice = array();
-    $list_i = array();
-    $list_t = array();
+    $output = [];
+    $choice = [];
+    $list_i = [];
+    $list_t = [];
     foreach ($sections as $id => $data) {
         $choice[$id]['id']    = $data['id'];
         $choice[$id]['title'] = $data['title'];
         $categories = CMS::call('FORUM')->getCategories($id);
-        $ids    = array();
-        $titles = array();
+        $ids    = [];
+        $titles = [];
         foreach ($categories as $key => $cat) {
             $ids[$id][]    = $key;
             $titles[$id][] = $cat['title'];
@@ -104,7 +104,7 @@ if (!empty($REQUEST['new']) || !empty($topic)) {
 } elseif (!empty($sections[$section])) {
     $categories = CMS::call('FORUM')->getCategories($section);
     if (!empty($categories[$category])) {
-        $output = array();
+        $output = [];
         $output['section_id']     = $section;
         $output['section_title']  = $sections[$section]['title'];
         $output['category_id']    = $category;

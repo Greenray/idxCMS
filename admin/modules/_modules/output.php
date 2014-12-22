@@ -13,13 +13,13 @@ if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
 
 if (!empty($REQUEST['save'])) {
     # Save configuration
-    $config = array();
+    $config = [];
     $page   = '';
     if (!empty($REQUEST['active'])) {
         foreach ($REQUEST['active'] as $element) {
             if (substr($element, 0, 1) === DS) {
                 $page = substr($element, 1);
-                $config[$page] = array();
+                $config[$page] = [];
             } else {
                 $config[$page][] = trim(substr($element, 1));
             }
@@ -40,8 +40,8 @@ if (!empty($REQUEST['save'])) {
 if (!empty($REQUEST['selected'])) {
     $panel = CONFIG::getSection('output.'.$REQUEST['selected']); /**< Modules layout for specified skin */
     include(SKINS.$REQUEST['selected'].DS.'skin.php');  # Layout definition
-    $active = array(); /**< Active modules */
-    $unused = array(); /**< Unused modules */
+    $active = []; /**< Active modules */
+    $unused = []; /**< Unused modules */
 
     foreach ($panel as $point => $list) {
         if (!empty($SKIN[$point])) {
@@ -75,7 +75,7 @@ if (!empty($REQUEST['selected'])) {
         }
     }
 
-    $output = array();
+    $output = [];
     $output['skin']   = $REQUEST['selected'];
     $output['active'] = $active;
     $output['unused'] = $unused;

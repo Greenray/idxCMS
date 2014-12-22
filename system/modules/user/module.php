@@ -22,9 +22,9 @@ class MESSAGE extends INDEX {
     /** Path to datafile */
     private $path = '';
     /** Messsages */
-    private $messages = array();
+    private $messages = [];
     /** Messages configuration */
-    private $config = array();
+    private $config = [];
 
     /** Class initialization.
      * @param  string $path Path to messages file
@@ -87,7 +87,7 @@ class MESSAGE extends INDEX {
 
     public function sendMessage($text) {
         $text = self::checkText($text);
-        $message = array();
+        $message = [];
         $message['author'] = USER::getUser('username');
         $message['nick']   = USER::getUser('nickname');
         $message['text'] = $text;
@@ -108,7 +108,7 @@ class MESSAGE extends INDEX {
         if (!file_exists(USERS.$for)) {
             return FALSE;
         }
-        $message = array();
+        $message = [];
         $message['author'] = USER::getUser('username');
         if ($for === $message['author']) {
             throw new Exception('Cannot send message');
@@ -152,7 +152,7 @@ class MESSAGE extends INDEX {
 
     public function sendFeedback($text, $email = '') {
         $text = self::checkText($text);
-        $message = array();
+        $message = [];
         $message['author'] = USER::getUser('username');
         $message['nick']   = USER::getUser('nickname');
         if (empty($email)) {

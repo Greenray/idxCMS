@@ -85,7 +85,7 @@ if (FILTER::get('REQUEST', 'save')) {
                 serialize(
                     array(
                         0 => $user,
-                        1 => empty($rights) ? array() : $rights,
+                        1 => empty($rights) ? [] : $rights,
                         2 => FILTER::get('REQUEST', 'root'),
                         3 => empty($level) ? 1 : $level
                     )
@@ -122,7 +122,7 @@ if (!empty($edit) && ($userdata = USER::getUserData($edit))) {
     }
     $rights = USER::getUserRights($username, $root, $user);
     if ($user !== FALSE) {
-        $output = array();
+        $output = [];
         $output['user']   = $user['username'];
         $output['nick']   = $user['nickname'];
         $output['admin']  = $root;
@@ -144,7 +144,7 @@ if (!empty($edit) && ($userdata = USER::getUserData($edit))) {
     }
 } elseif (!empty($search)) {
     # Search and show user profile
-    $output  = array();
+    $output  = [];
     $users   = CMS::call('USER')->getUsersList($search);
     $count   = sizeof($users);
     $keys    = array_keys($users);

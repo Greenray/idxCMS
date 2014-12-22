@@ -69,10 +69,10 @@ if ((empty($section) && empty($category)) || !empty($REQUEST['new']) || !empty($
         }
     }
 
-    $output = array();
-    $choice = array();
-    $list_i = array();
-    $list_t = array();
+    $output = [];
+    $choice = [];
+    $list_i = [];
+    $list_t = [];
 
     foreach ($sections as $id => $data) {
         $categories = CMS::call('POSTS')->getCategories($id);
@@ -80,8 +80,8 @@ if ((empty($section) && empty($category)) || !empty($REQUEST['new']) || !empty($
             # Don't include sections without categories
             $choice[$id]['id']    = $data['id'];
             $choice[$id]['title'] = $data['title'];
-            $ids    = array();
-            $titles = array();
+            $ids    = [];
+            $titles = [];
             foreach ($categories as $key => $cat) {
                 $ids[$id][]    = $key;
                 $titles[$id][] = $cat['title'];
@@ -131,7 +131,7 @@ if ((empty($section) && empty($category)) || !empty($REQUEST['new']) || !empty($
     $categories = CMS::call('POSTS')->getCategories($section);
 
     if (!empty($categories[$category])) {
-        $output = array();
+        $output = [];
         $output['section_id']     = $section;
         $output['section_title']  = $sections[$section]['title'];
         $output['category_id']    = $category;

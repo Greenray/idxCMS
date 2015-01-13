@@ -88,7 +88,7 @@ class UPLOADER {
         return TRUE;
     }
 
-    /** Checks if the file is acceptable and uploads it to upload directory.
+    /** Check if the file is acceptable and upload it to upload directory.
      * @param  array $file Data from global variable $_FILES
      * @return array       Name of file and file size
      * @throws Exception   Error of file uploading

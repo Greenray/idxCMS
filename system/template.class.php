@@ -6,16 +6,7 @@
  * @copyright (c) 2011 - 2014 Victor Nabatov
  * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
  * @package   Core
- */
-
-/**
- * Class TEMPLATE - templates parser.
- * Array variable $match contains:
- * - $matches[0] = part of template between control structures including them;
- * - $matches[1] = variable name;
- * - $matches[2] = part of template between control structures excluding them.
- * Example:
- * <code>
+ * @code
  *   array(
  *      0 => '[each=months]
  *                <option value="{months[num]}" [if=months[selected]]selected="selected"[endif]>{months[name]}</option>
@@ -23,7 +14,24 @@
  *      1 => 'months';
  *      2 => '<option value="{months[num]}" [if=months[selected]]selected="selected"[endif]>{months[name]}</option>';
  *   );
- * </code>
+ * @endcode
+ */
+
+/** Class TEMPLATE - templates parser.
+ * Array variable $match contains:
+ * - $matches[0] = part of template between control structures including them;
+ * - $matches[1] = variable name;
+ * - $matches[2] = part of template between control structures excluding them.
+ * Example:
+ * @code
+ *   array(
+ *      0 => '[each=months]
+ *                <option value="{months[num]}" [if=months[selected]]selected="selected"[endif]>{months[name]}</option>
+ *            [endeach.months]';
+ *      1 => 'months';
+ *      2 => '<option value="{months[num]}" [if=months[selected]]selected="selected"[endif]>{months[name]}</option>';
+ *   );
+ * @endcode
  */
 
 class TEMPLATE {
@@ -116,7 +124,7 @@ class TEMPLATE {
      * The template is:
      * - [each=var]...[endeach.var]
      * - [each=var[index]]...[endeach.var[index]]
-     * @param  array $matches Matches for control structuree "each"
+     * @param  array $matches Matches for control structure "each"
      * @return string         Parsed string
      */
     private function __each($matches) {
@@ -295,7 +303,7 @@ class TEMPLATE {
     /** Parse of a control structure FOR.
      * The template is:
      * - [for=x.var]...[endfor]
-     * @param  array $matches Matches for control structuree "each"
+     * @param  array $matches Matches for control structure "each"
      * @return string         Parsed string
      */
     private function __for($matches) {
@@ -313,7 +321,7 @@ class TEMPLATE {
     /** Parse of a control structure IF ELSE.
      * The template is:
      * - [ifelse=var]...[else]...[endelse]
-     * @param  array $matches Matches for control structuree "if else"
+     * @param  array $matches Matches for control structure "if else"
      * @return string         Parsed string
      */
     private function __if_else($matches) {
@@ -333,7 +341,7 @@ class TEMPLATE {
      * The template is:
      * - [if=var]...[endif]
      * - [if=var[index]]...[endif]
-     * @param  array $matches Matches for control structuree "if"
+     * @param  array $matches Matches for control structure "if"
      * @return string         Parsed string
      */
     private function __if($matches) {
@@ -373,7 +381,7 @@ class TEMPLATE {
     /** Localization.
      * The template is:
      * - [__var]
-     * @param  array $matches Matches for control structuree "if"
+     * @param  array $matches Matches for control structure "if"
      * @return string         Parsed string
      */
     private function __translate($matches) {
@@ -385,7 +393,7 @@ class TEMPLATE {
      * - {var}        - constant or plain variable;
      * - {var[index]} - array of variables;
      * - {var[index[x]][index[y]]} - array of variables.
-     * @param  array $matches Matches for control structuree "if"
+     * @param  array $matches Matches for control structure "if"
      * @return string         Parsed string
      */
     private function __value($matches) {
@@ -453,7 +461,7 @@ class TEMPLATE {
         }
     }
 
-    /** Parse template with givven variables.
+    /** Parse template with given variables.
      * @param  array  $params Template variables.
      * @return string         Parsed template
      */

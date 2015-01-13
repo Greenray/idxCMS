@@ -25,7 +25,7 @@ if (date_default_timezone_set(date_default_timezone_get()) === FALSE) {
 # Unset any globals created by register_globals being turned ON
 while (list($global) = each($GLOBALS)) {
     if (!preg_match('/^(_REQUEST|_COOKIE|_SERVER|_FILES|GLOBALS|HTTP.*)$/', $global)) {
-        unset($$global);
+        unset($global);
     }
 }
 unset($global);
@@ -60,7 +60,7 @@ function idxErrorHandler($num, $msg, $file, $line) {
     $error = date('Y-m-d H:i:s (T)').' '.$type[$num].': '.$msg.' in '.$file.', line '.$line.PHP_EOL;
     file_put_contents('./content/logs/idxerror.log', $error, FILE_APPEND | LOCK_EX);
 }
-set_error_handler("idxErrorHandler", E_ALL | E_STRICT);
+set_error_handler("idxErrorHandler", E_ALL);
 
 # Main conststants
 

@@ -20,7 +20,7 @@ class CMS {
     /** Class initialization. */
     private function __construct() {}
 
-    /** Prevent to clone object */
+    /** Prevent to clone object. */
     private function __clone() {}
 
     /** Create and register the object.
@@ -33,7 +33,6 @@ class CMS {
     }
 
     /** Call the object, if object is not set it will be created.
-     * Examples:
      * @code
      * $CMS = CMS::call('SYSTEM'); - when it is need to initialize variable.
      * CMS::call('SYSTEM')->initModules(); - when the return value is not needed.

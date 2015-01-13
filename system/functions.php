@@ -34,7 +34,7 @@ function AdvScanDir($directory, $mask = '', $type = 'all', $filter = FALSE, $exc
     if (is_dir($directory)) {
         $fh = opendir($directory);
         while (($filename = readdir($fh)) !== FALSE) {
-            if (substr($filename, 0, 1) != '.' || $filter) {
+            if (substr($filename, 0, 1) !== '.' || $filter) {
                 if (!in_array($filename, $exclude)) {
                     if ((empty($type) || ($type === 'all') || $func($directory.DS.$filename)) &&
                         (empty($mask) || preg_match($mask, $filename))) {
@@ -53,7 +53,7 @@ function AdvScanDir($directory, $mask = '', $type = 'all', $filter = FALSE, $exc
 * @todo Comment
 * @param string $directory	...
 * @param string $except	...
-* @return 
+* @return
 */
 function GetFilesList($directory, $except = []) {
     $exclude = array_unique(array_merge(['.', '..', '.htaccess', 'index.html'], $except));
@@ -72,7 +72,7 @@ function GetFilesList($directory, $except = []) {
 * @todo Comment
 * @param string $source	...
 * @param string $dest	...
-* @return 
+* @return
 */
 function CopyTree($source, $dest) {
     if (is_file($source)) {
@@ -98,7 +98,7 @@ function CopyTree($source, $dest) {
 * @todo Comment
 * @param string $object	...
 * @param string $recursive	... (défaut : TRUE)
-* @return 
+* @return
 */
 function DeleteTree($object, $recursive = TRUE) {
     if ($recursive && is_dir($object)) {
@@ -114,7 +114,7 @@ function DeleteTree($object, $recursive = TRUE) {
 /**
 * @todo Comment
 * @param string $file	...
-* @return 
+* @return
 */
 function gzfile_get_contents($file) {
     if (!$file = gzfile($file)) {
@@ -132,7 +132,7 @@ function gzfile_get_contents($file) {
 * @param string $file	...
 * @param string $text	...
 * @param string $mode	... (défaut : 'w+')
-* @return 
+* @return
 */
 function gzfile_put_contents($file, $text, $mode = 'w+') {
     if (($fp = @fopen($file.'.lock', 'w+')) === FALSE) {
@@ -156,7 +156,7 @@ function gzfile_put_contents($file, $text, $mode = 'w+') {
 /**
 * @todo Comment
 * @param string $file	...
-* @return 
+* @return
 */
 function GetUnserialized($file) {
     $data = [];
@@ -221,7 +221,7 @@ function SearchKeyInArray($needle, $haystack) {
 /**
 * @todo Comment
 * @param string $num_chars	...
-* @return 
+* @return
 */
 function RandomString($num_chars) {
     $chars = [
@@ -254,7 +254,7 @@ function __($string) {
 * @todo Comment
 * @param string $text	...
 * @param string $length	...
-* @return 
+* @return
 */
 function CutText($text, $length) {
     if ((mb_strlen($text, 'UTF-8') - 1) < $length) {
@@ -268,7 +268,7 @@ function CutText($text, $length) {
 /**
 * @todo Comment
 * @param string $text	...
-* @return 
+* @return
 */
 function UnifyBr($text) {
     return str_replace(["\r\n", "\n\r", "\r"], LF, $text);
@@ -277,7 +277,7 @@ function UnifyBr($text) {
 /**
 * @todo Comment
 * @param string $string	...
-* @return 
+* @return
 */
 function OnlyLatin($string) {
     if (empty($string) || preg_replace("/[\d\w]+/i", '', $string) != '') {
@@ -292,7 +292,7 @@ function OnlyLatin($string) {
 * @todo Comment
 * @param string $format	...
 * @param string $date	...
-* @return 
+* @return
 */
 function FormatTime($format, $date) {
     global $LANG;
@@ -312,7 +312,7 @@ function FormatTime($format, $date) {
 /**
 * @todo Comment
 * @param string $string	...
-* @return 
+* @return
 */
 function LocaliseDate($string) {
     global $LANG;
@@ -354,7 +354,7 @@ function SendMail($to, $from, $sender, $subj, $text) {
 * @param string $total	...
 * @param string $current	...
 * @param string $last	...
-* @return 
+* @return
 */
 function AdvancedPagination($total, $current, $last) {
     $pages = [];
@@ -416,7 +416,7 @@ function AdvancedPagination($total, $current, $last) {
 * @param string $perpage	...
 * @param string $current	...
 * @param string $link	...
-* @return 
+* @return
 */
 function Pagination($total, $perpage, $current, $link) {
     $result   = '';
@@ -454,7 +454,7 @@ function Pagination($total, $perpage, $current, $link) {
 * @param string $page	...
 * @param string $perpage	...
 * @param string $count	...
-* @return 
+* @return
 */
 function GetPagination($page, $perpage, $count) {
     $result = [];
@@ -511,7 +511,7 @@ function ShowCaptcha($param = '') {
 
 /**
 * @todo Comment
-* @return 
+* @return
 */
 function CheckCaptcha() {
     if (USER::loggedIn()) {
@@ -657,7 +657,7 @@ function ShowElement($element, $parameters = '') {
 * @param string $category	... (défaut : '')
 * @param string $post	... (défaut : '')
 * @param string $comment	... (défaut : '')
-* @return 
+* @return
 */
 function Redirect($module, $section = '', $category = '', $post = '', $comment = '') {
     $url = MODULE.$module;
@@ -680,7 +680,7 @@ function Redirect($module, $section = '', $category = '', $post = '', $comment =
 /**
 * @todo Comment
 * @param string $message	...
-* @return 
+* @return
 */
 function ShowError($message) {
     return CMS::call('SYSTEM')->defineWindow('Error', $message, 'center');
@@ -691,7 +691,7 @@ function ShowError($message) {
 * @param string $title	...
 * @param string $content	...
 * @param string $align	... (défaut : 'left')
-* @return 
+* @return
 */
 function ShowWindow($title, $content, $align = 'left') {
     return CMS::call('SYSTEM')->defineWindow($title, $content, $align);
@@ -699,7 +699,7 @@ function ShowWindow($title, $content, $align = 'left') {
 
 /**
 * @todo Comment
-* @return 
+* @return
 */
 function Sitemap() {
     $time     = FormatTime('Y-m-d', time());

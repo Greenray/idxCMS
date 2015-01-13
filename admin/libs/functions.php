@@ -46,9 +46,9 @@ function in_array_recursive($needle, $haystack) {
 }
 
 /** Show specified translated message with additional information.
- *  @param $message Specified message.
- *  @param $info    Additional information.
- *  @return Formatted html table.
+ *  @param  string $message Specified message.
+ *  @param  string $info    Additional information.
+ *  @return string          Formatted html table.
  */
 function ShowMessage($message, $info = '') {
     echo '<table class="message center">

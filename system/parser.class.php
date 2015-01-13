@@ -30,8 +30,8 @@ class PARSER {
     /** Class initialization */
     public function __construct() {
         $this->regexp[0] = [
+            "#\[\*\](.*?)\[/\*\]#is" => '<li>\\1</li>',
             "#\[align=(\"|&quot;|)(left|right|center|justify)(\"|&quot;|)\](.*?)\[/align(.*?)\]#is" => '<div style="text-align:\\2;">\\4</div>',
-            "#\[(left|right|center|justify)\](.*?)\[/\\1\]#is" => '<div style="text-align:\\1;">\\2</div>',
             "#\[b\](.*?)\[/b\]#is" => '<b>\\1</b>',
             "#\[bgcolor=(\"|&quot;|)([\#\w]*)(\"|&quot;|)\](.*?)\[/bgcolor(.*?)\]#is" => '<span style="background:\\2">\\4</span>',
             "#\[color=(\"|&quot;|)([\#\w]*)(\"|&quot;|)\](.*?)\[/color(.*?)\]#is" => '<span style="color:\\2;">\\4</span>',
@@ -43,8 +43,10 @@ class PARSER {
             "#\[hr\]#is" => '<hr />',
             "#\[i\](.*?)\[/i\]#is" => '<i>\\1</i>',
             "#\[indent\](.*?)\[/indent\]#is" => '<blockquote>\\1</blockquote>',
+            "#\[(left|right|center|justify)\](.*?)\[/\\1\]#is" => '<div style="text-align:\\1;">\\2</div>',
             "#\[mailto\][\s\n\r]*([a-z0-9&\-_.]+?@[\w\-]+\.([\w\-\.]+\.)?[\w]+)[\s\n\r]*\[/mailto\]#is" => '<a href="mailto:\\1">\\1</a>',
             "#\[mailto=(\"|&quot;|)([a-z0-9&\-_.]+?@[\w\-]+\.([\w\-\.]+\.)?[\w]+)(\"|&quot;|)\](.*?)\[/mailto\]#is" => '<a href="mailto:\\2">\\5</a>',
+            "#\[mp3\](.*?)\[/mp3\]#is" => $this->parseMP3(),
             "#\[note\](.*?)\[/note\]#is" => '<div class="note">\\1</div>',
             "#\[offtopic\](.*?)\[/offtopic\]#is" => '<small>\\1</small>',
             "#\[\[ol\]\](.*?)\[/\[ol\]\]#is" => '<ol>\\1</ol>',
@@ -64,8 +66,6 @@ class PARSER {
             "#\[url=(\"|&quot;|)(((https?|ftp|ed2k|irc)://)[^ \"\n\r\t\<]*?)(\"|&quot;|)(.*?)\](.*?)\[/url\]#is" => '<a href="\\2\\6" target="_blank">\\7</a>',
             "#\[user\]([\d\w]*?)\[/user\]#is" => '<a href="'.ROOT.'?module=user&user=\\1">\\1</a>',
             "#\[user=([\d\w]*?)\](.*?)\[/user\]#is" => '<a href="'.ROOT.'?module=user&user=\\1">\\2</a>',
-            "#\[\*\](.*?)\[/\*\]#is" => '<li>\\1</li>',
-            "#\[mp3\](.*?)\[/mp3\]#is" => $this->parseMP3(),
             "#\[youtube\](.*?)\[/youtube\]#is" => $this->parseYouTube()
         ];
     }
@@ -332,12 +332,12 @@ class PARSER {
         $this->parseHtml();
         $this->parseImage($path);
         $this->parseQuote();
-        $this->text = preg_replace_callback("#\[spoiler(=(\"|&quot;|)(.*?)(\"|&quot;|)|)\](.*?)\[/spoiler\]#is", array(&$this, 'parseSpoiler'), $this->text);
+        $this->text = preg_replace_callback("#\[spoiler(=(\"|&quot;|)(.*?)(\"|&quot;|)|)\](.*?)\[/spoiler\]#is", [&$this, 'parseSpoiler'], $this->text);
         $this->text = preg_replace(array_keys($this->regexp[0]), array_values($this->regexp[0]), $this->text);
         $this->parseSmiles();
-        $this->text = str_replace(array("\r\n", "\n\r", "\r", "\n"), "<br />", $this->text);
+        $this->text = str_replace(["\r\n", "\n\r", "\r", "\n"], "<br />", $this->text);
         $this->text = str_replace(array_keys($this->temp), array_values($this->temp), $this->text);
-        $this->text = str_replace(array('[', ']'), array('&#91;', '&#93;'), $this->text);
+        $this->text = str_replace(['[', ']'], ['&#91;', '&#93;'], $this->text);
         return $this->text;
     }
 

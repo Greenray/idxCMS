@@ -1,14 +1,14 @@
 <?php
-/**
+# idxCMS Flat Files Content Management Sysytem
+
+/** Logging.
  * @file      system/log.class.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2014 Victor Nabatov
- * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
  * @package   Core
  */
-
-/** Class LOG - Logging. */
 
 class LOG {
 
@@ -16,8 +16,8 @@ class LOG {
     public function __construct() {}
 
     /** Write error message into log file.
-     * @param  string $message Error message.
-     * @param  string $info    Additioinal info.
+     * @param  string $message Error message
+     * @param  string $info    Additioinal info
      * @return boolean FALSE
      */
     public function logError($message, $info = '') {
@@ -26,9 +26,9 @@ class LOG {
     }
 
     /** Register users logins into log file.
-     * @param  string  $type    Message type.
-     * @param  string  $user    Username.
-     * @param  string  $message Message.
+     * @param  string  $type    Message type
+     * @param  string  $user    Username
+     * @param  string  $message Message
      * @return boolean FALSE
      */
     public static function logPut($type, $user, $message) {
@@ -43,12 +43,12 @@ class LOG {
     }
 
     /** Сreate tar archive of logs for the month.
-     * @param  string  $title       Filename.
-     * @param  integer $day         Date.
-     * @param  integer $month       Month.
-     * @param  integer $year        Year.
-     * @param  integer $first_month The first month of the year.
-     * @param  integer $first_year  The first year of the age.
+     * @param  string  $title       Filename
+     * @param  integer $day         Date
+     * @param  integer $month       Month
+     * @param  integer $year        Year
+     * @param  integer $first_month The first month of the year
+     * @param  integer $first_year  The first year of the age
      * @return boolean TRUE
      */
     public static function logMerge($title, $day, $month, $year, $first_month = 1, $first_year = 1980) {
@@ -90,7 +90,6 @@ class LOG {
         $month  = date('m');
         $year   = date('Y');
         $merged = [];
-
         foreach ($logs as $log_entry) {
             if (preg_match("/^(.*?)-(.*?)-(.*?)\.log(|.gz)$/i", $log_entry, $matches)) {
                 if (!in_array($matches[1].'-'.$matches[2], $merged) &&

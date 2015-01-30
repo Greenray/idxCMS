@@ -18,4 +18,3 @@ switch (SYSTEM::get('locale')) {
 }
 
 SYSTEM::registerModule('sitemap', 'Sitemap', 'main');
-?>

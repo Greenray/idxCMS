@@ -48,4 +48,3 @@ function FormatFound($text, $word, $config) {
 }
 
 SYSTEM::registerModule('search', 'Search', 'box', 'system');
-?>

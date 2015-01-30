@@ -69,7 +69,7 @@ die();?>
             <legend>[__Text]</legend>
             <textarea id="text" name="text" cols="20" rows="7">{text}</textarea>
             [if=not_admin]
-                [__Max message length] [<script type="text/javascript">displayLimit("", "text", '{comment-length}')</script>] [__symbols]
+                <div>[__Max message length] [<script type="text/javascript">displayLimit("", "text", '{comment-length}')</script>] [__symbols]<div>
             [endif]
         </fieldset>
         <p class="center">

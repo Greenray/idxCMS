@@ -1,24 +1,16 @@
 <?php
-/**
+# idxCMS Flat Files Content Management Sysytem
+
+/** Flash and text tagcloud.
  * @file      system/modules/tagcloud/tagcloud.php
  * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- *            <https://github.com/Greenray/idxCMS/system/modules/tagcloud/tagcloud.php>
- * @copyright (c) 2011 - 2014 Victor Nabatov\n
- *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @package   Tagcloud
  */
 
 if (!defined('idxCMS')) die();
-
-/** Callback function for tags sorting
- * @param  string $a First tag for comparing
- * @param  string $b Second tag for comparing
- * @return integer
- */
-function scmp($a, $b) {
-    return mt_rand(-1, 1);
-}
 
 $tc = CONFIG::getSection('tagcloud');
 

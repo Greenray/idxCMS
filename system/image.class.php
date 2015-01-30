@@ -1,59 +1,59 @@
 <?php
-/**
+# idxCMS Flat Files Content Management Sysytem
+
+/** Uploads and resize images.
  * @file      system/image.class.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2014 Victor Nabatov
- * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
  * @package   Core
  */
-
-/** Class IMAGE - Uploads and resize images */
 
 class IMAGE {
 
     /** Directory for uploaded files.
-     * @param string
+     * @var string
      */
     private $upload_dir;
 
     /** Max size for uploading files.
-     * @param integer
+     * @var integer
      */
     private $max_size;
 
     /** The width of the thumbnail.
-     * @param integer
+     * @var integer
      */
     private $thumb_width;
 
     /** The height of the thumbnail.
-     * @param integer
+     * @var integer
      */
     private $thumb_height;
 
     /** The name of the uploading image.
-     * @param string
+     * @var string
      */
     private $image_name;
 
     /** The size of the upoading image.
-     * @param integer
+     * @var integer
      */
     private $image_size;
 
     /** The width of the uploading image.
-     * @param integer
+     * @var integer
      */
     private $image_width;
 
     /** The height of the uploading image.
-     * @param integer
+     * @var integer
      */
     private $image_height;
 
     /** Name of the temporary image.
-     * @param string
+     * @var string
      */
     private $image_tmp;
 
@@ -63,13 +63,9 @@ class IMAGE {
     private $image_type;
 
     /** Allowed image types.
-     * @param array
+     * @var array
      */
-    private $allowed_types = [
-        'image/gif',
-        'image/jpeg',
-        'image/png',
-    ];
+    private $allowed_types = ['image/gif', 'image/jpeg', 'image/png'];
 
     /** Class initialization.
      * @param  string  $upload_dir   Name of the upload directory

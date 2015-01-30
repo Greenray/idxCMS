@@ -1,18 +1,18 @@
 <?php
-/**
+# idxCMS Flat Files Content Management Sysytem
+
+/** Site ststistic - registers a visitы to the website by visitors, users, bots and spiders.
  * @file      system/statistic.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2014 Victor Nabatov
- * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
  * @package   Core
  */
 
-/** Site ststistic - registers a visitы to the website by visitors, users, bots and spiders */
-
 if (!defined('idxCMS')) die();
 
- /** Extractes keywords from the user`s query.
+/** Extracts keywords from the user`s query.
  * @param  string $url User`s URL
  * @return mixed       Decoded keywords or FALSE
  */
@@ -48,7 +48,7 @@ function ExtractKeyword($url) {
     return FALSE;
 }
 
- /** Detect bad bots.
+/** Detect bad bots.
  * @param  string $agent $_SERVER['HTTP_USER_AGENT']
  * @return boolean       Is bad bot detected?
  */
@@ -62,13 +62,13 @@ function DetectBadBot($agent) {
     return FALSE;
 }
 
- /** Detect spiders.
+/** Detect spiders.
  * @param  string $agent $_SERVER['HTTP_USER_AGENT']
  * @return boolean       Is spider detected?
  */
 function DetectSpider($agent) {
 
-    /** List of spider engines */
+    /** List of spider engines. */
     $engines = [
         '110search','12move',
         'a-counter','abcdatos','acoon','aesop','alexa','alkaline','allesklar','almaden','altavista','aport','appie','arachnoidea','architext','archiver','artabus',
@@ -109,11 +109,11 @@ function DetectSpider($agent) {
     return FALSE;
 }
 
-# Save counter data
-$agent   = $_SERVER['HTTP_USER_AGENT']; /**< Header from the current request, if there is one */
-$ip      = $_SERVER['REMOTE_ADDR'];     /**< User`s IP address */
-$referer = $_SERVER['HTTP_REFERER'];    /**< The page which referred the user agent, if there is one */
-$page    = $_SERVER['REQUEST_URI'];     /**< The URI which was given in order to access site */
+# Save counter data.
+$agent   = $_SERVER['HTTP_USER_AGENT']; # Header from the current request, if there is one
+$ip      = $_SERVER['REMOTE_ADDR'];     # User`s IP address
+$referer = $_SERVER['HTTP_REFERER'];    # The page which referred the user agent, if there is one
+$page    = $_SERVER['REQUEST_URI'];     # The URI which was given in order to access site
 
 if (DetectBadBot($agent)) {
     $bans   = file_get_contents(CONTENT.'bans');
@@ -122,11 +122,11 @@ if (DetectBadBot($agent)) {
     die();
 }
 
-$config = CONFIG::getSection('statistic'); /**< Statistic configuration */
-$time = time();                            /**< Current time */
+$config = CONFIG::getSection('statistic'); # Statistic configuration
+$time = time();                            # Current time
 
 if (DetectSpider($agent)) {
-    # Detect and register of searching bot
+    # Detect and register of searching bot.
     $spiders = GetUnserialized(CONTENT.'spiders');
     if (empty($spiders)) {
         $spiders['total'] = 1;
@@ -158,8 +158,8 @@ if (DetectSpider($agent)) {
         }
     }
 } else {
-    $user  = USER::getUser();                   /**< User profile */
-    $stats = GetUnserialized(CONTENT.'stats');  /**< Statistic data storage */
+    $user  = USER::getUser();                   # User profile
+    $stats = GetUnserialized(CONTENT.'stats');  # Statistic data storage
     if (empty($stats)) {
         $stats['total']   = 1;
         $stats['today']   = 1;
@@ -196,11 +196,11 @@ if (DetectSpider($agent)) {
         }
     }
 
-    $online = $stats['online'];               /**< Users and visitors online at the current time */
-    $online[$ip]['name'] = $user['username']; /**< Current username */
-    $online[$ip]['nick'] = $user['nickname']; /**< Current Usernick */
-    $online[$ip]['time'] = $time;             /**< Current time */
-    $stats['online'] = [];                    /**< Users and visitors online */
+    $online = $stats['online'];               # Users and visitors online at the current time
+    $online[$ip]['name'] = $user['username']; # Current username
+    $online[$ip]['nick'] = $user['nickname']; # Current nickname
+    $online[$ip]['time'] = $time;             # Current time
+    $stats['online'] = [];                    # Users and visitors online
 
     foreach ($online as $ip => $data) {
         if ($data['time'] > ($time - 300)) {
@@ -212,10 +212,10 @@ if (DetectSpider($agent)) {
             }
         }
     }
-    $stats['update'] = $time;   /**< Set the time of the last ststistic data update */
+    $stats['update'] = $time;   # Set the time of the last ststistic data update
 
     file_put_contents(CONTENT.'stats', serialize($stats), LOCK_EX);
-    $keyword = ExtractKeyword($referer);                            /**< Keyword from $_SERVER['HTTP_REFERER'] */
+    $keyword = ExtractKeyword($referer);                            # Keyword from $_SERVER['HTTP_REFERER']
 
     if (!empty($keyword)) {
         $file = (file_exists(CONTENT.'keywords')) ? file_get_contents(CONTENT.'keywords') : '';

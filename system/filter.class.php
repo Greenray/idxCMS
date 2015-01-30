@@ -1,29 +1,29 @@
 <?php
-/**
+# idxCMS Flat Files Content Management Sysytem
+
+/** Clean parameters $_REQUEST, $_FILES, $_COOKIE, detect intrusions and ban unwanted visitors.
  * @file      system/filter.class.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2014 Victor Nabatov
- * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
  * @package   Core
  */
-
-/** Class FILTER - Clean parameters $_REQUEST, $_FILES, $_COOKIE, detect intrusions and ban unwanted visitors. */
 
 final class FILTER {
 
     /** Array of filtered $_POST, $_GET and $_FILES parameters.
-     * @param array
+     * @var array
      */
     private static $REQUEST = [];
 
     /** Array of filtered $_COOKIE parameters.
-     * @param array
+     * @var array
      */
     private static $COOKIE = [];
 
     /** Array of parameters types.
-     * @param array
+     * @var array
      */
     private static $types = ['REQUEST', 'FILES', 'COOKIE'];
 
@@ -33,15 +33,14 @@ final class FILTER {
     /** Prevent to clone object. */
     public function __clone() {}
 
-    /**
-     * Clean all parameters and their values of the request array and
+    /** Clean all parameters and their values of the request array and
      * transforme them into the internal encoding of the system = UTF-8.
-     * @param  array $value Input array of parameters.
-     * @return string       Filered parameters.
+     * @param  array  $value Input array of parameters
+     * @return string        Filered parameters
      */
     private function cleanValue($value) {
         $value = trim($value);
-        // Check for magic quotes and remove them if necessary.
+        // Check for magic quotes and remove them if necessary
         if (function_exists('get_magic_quotes_gpc') && !get_magic_quotes_gpc()) {
             $value = preg_replace('(\\\(["\'/]))im', '$1', $value);
         }
@@ -52,8 +51,8 @@ final class FILTER {
     }
 
     /** Clean variables.
-     * @param  array $vars Input array of parameters.
-     * @return array       Filered values of array parameters.
+     * @param  array $vars Input array of parameters
+     * @return array       Filtered values of parameters
      */
     private function clear($vars) {
         $result = [];
@@ -71,8 +70,7 @@ final class FILTER {
         return $result;
     }
 
-    /** Main function.
-     * Detect intrusion, clean and unset $_POST, $_GET, $_FILES and $_COOKIE.
+    /** Detect intrusion, clean and unset $_POST, $_GET, $_FILES and $_COOKIE.
      * The result are two variables: $REQUEST and $COOKIE.
      * @return void
      */
@@ -87,17 +85,17 @@ final class FILTER {
     }
 
     /** Get all filtered parameter of the specified type.
-     * @param  string $type Type of parameter.
-     * @return array        Array of filtered parameters of the specified type.
+     * @param  string $type Type of parameter
+     * @return array        Array of filtered parameters of the specified type
      */
     public static function getAll($type) {
         return self::$$type;
     }
 
     /** Get specified filtered parameter.
-     * @param  string $type  - Type of parameter.
-     * @param  string $param - Name of parameter.
-     * @return array|string  - Value of parameter or empty string.
+     * @param  string $type   Type of parameter
+     * @param  string $param  Name of parameter
+     * @return array|string Parameter values or empty string
      */
     public static function get($type, $param) {
         if (array_key_exists($param, self::$$type)) {
@@ -108,8 +106,8 @@ final class FILTER {
     }
 
     /** Remove filtered parameter.
-     * @param  string $type  Type of parameter.
-     * @param  string $param Name of parameter.
+     * @param  string $type  Type of parameter
+     * @param  string $param Name of parameter
      * @return void
      */
     public static function remove($type, $param) {
@@ -119,16 +117,16 @@ final class FILTER {
     }
 
     /** Email validation.
-     * @param  string $email Email address.
-     * @return boolean       The result of operation.
+     * @param  string  $email Email address
+     * @return boolean        The result of operation
      */
     public function validEmail($email) {
         return preg_match('/^([a-zA-Z0-9\!\#\$\%\&\'\*\+\-\/\=\?\^\_\`\{\|\}\~]+(\.[a-zA-Z0-9\!\#\$\%\&\'\*\+\-\/\=\?\^\_\`\{\|\}\~]+)*)@((([a-z]([-a-z0-9]*[a-z0-9])?)|(#[0-9]+)|(\[((([01]?[0-9]{0,2})|(2(([0-4][0-9])|(5[0-5]))))\.){3}(([01]?[0-9]{0,2})|(2(([0-4][0-9])|(5[0-5]))))\]))\.)*(([a-z]([-a-z0-9]*[a-z0-9])?)|(#[0-9]+)|(\[((([01]?[0-9]{0,2})|(2(([0-4][0-9])|(5[0-5]))))\.){3}(([01]?[0-9]{0,2})|(2(([0-4][0-9])|(5[0-5]))))\]))$/', $email) ? TRUE : FALSE;
     }
 
     /** Ban user.
-     * @return boolean The result of operation.
-     * @todo Log the result.
+     * @return boolean The result of operation
+     * @todo Log the result
      */
     public function ban() {
         $bans = file_exists(CONTENT.'bans') ? file_get_contents(CONTENT.'bans') : '';
@@ -138,11 +136,11 @@ final class FILTER {
     }
 
     /** Intrusion detection.
-     * If the intrusion will be detected this event will be logged and the system will die.\n
      * In current it detected:
-     *  - bad words in $_SERVER;
-     *  - banned IP or cookie;
-     *  - malicious URL requests.
+     *  - bad words in $_SERVER
+     *  - malicious URL requests
+     *  - banned IP or cookie
+     * If the intrusion will be detected this event will be logged and the system will die.
      * @return void
      */
     private function ids() {
@@ -163,7 +161,7 @@ final class FILTER {
             die();
         }
 
-        # Ban check.
+        # Ban check
         $bans = file_exists(CONTENT.'bans') ? file(CONTENT.'bans', FILE_IGNORE_NEW_LINES) : [];
         foreach ($bans as $ban) {
             $ban = '/^'.str_replace('*', '(\d*)', str_replace('.', '\\.', trim($ban))).'$/';
@@ -198,7 +196,7 @@ final class FILTER {
         }
         $info .= 'Request: '.$result.LF;
 
-        # Protection against malicious URL requests.
+        # Protection against malicious URL requests
         if (strlen($url) > 255) {
 //                $this->ban($_SERVER['REMOTE_ADDR']);
 //                setcookie('UID', mt_rand(2, 50), time() + 7200);

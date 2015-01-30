@@ -1,52 +1,52 @@
 <?php
-/**
+# idxCMS Flat Files Content Management Sysytem
+
+/** HTML and PHP highlighter.
  * @file      system/highlighter.class.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2014 Victor Nabatov
- * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
  * @package   Core
  */
-
-/** Class HIGHLIGHTER - HTML and php highlighter */
 
 class HIGHLIGHTER extends PARSER {
 
     /** The results of parsing
-     * @param string
+     * @var string
      */
     private $output  = '';
     /** Text to parse
-     *  @param string
+     * @var string
      */
     private $text    = '';
     /** Start parsing from the begining
-     * @param integer
+     * @var integer
      */
     private $current = 0;
     /** Tag name color
-     * @param string
+     * @var string
      */
     private $tag     = 'color:blue;';
     /** Tag attribute color
-     * @param string
+     * @var string
      */
     private $attr    = 'color:green;';
     /** Tag value color
-     * @param string
+     * @var string
      */
     private $value   = 'color:red;';
     /** php tag color
-     * @param string
+     * @var string
      */
     private $php     = 'color:black';
     /** inline style for comment
-     * @param string
+     * @var string
      */
     private $comment = 'font-style:italic;color:gray;';
 
     /** Class initialization.
-     * @param  string $code Code for highlighting.
+     * @param  string $code Code for highlighting
      * @return void
      */
     public function __construct($code) {

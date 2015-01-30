@@ -1,7 +1,14 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# EDITOR - IMAGE BROWSER AND POST PREVIEW
+# idxCMS: Flat Files Content Management System
+
+/** Editor and images browser and uploader.
+ * @file      tools/editor.php
+ * @version   2.3
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @package   Tools
+ */
 
 if (!defined('idxCMS') || !USER::loggedIn()) die();
 

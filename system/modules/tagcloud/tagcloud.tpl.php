@@ -1,12 +1,14 @@
 <?php
-/**
+# idxCMS Flat Files Content Management Sysytem
+
+/** Flash and text tagcloud.
+ * Module template.
  * @file      system/modules/tagcloud/tagcloud.tpl.php
  * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- *            <https://github.com/Greenray/idxCMS/system/modules/tagcloud/tagcloud.tpl.php>
- * @copyright (c) 2011 - 2014 Victor Nabatov\n
- *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @package   Tagcloud
  */
 
 # SWFObject v1.4: Flash Player detection and embed - http://blog.deconcept.com/swfobject/

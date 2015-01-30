@@ -5,17 +5,17 @@
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
 
-# Keywords array creation
+# Keywords array creation.
 function GetKeywords($words, $config, &$target) {
-    $keywords = explode(',', $words);   # Keywords are written through a comma
+    $keywords = explode(',', $words);   # Keywords are written through a comma.
     foreach ($keywords as $k => $value) {
-        $value = trim($value);             # Let's bite off superfluous blanks
-        # Check for the resolved length of a keyword
+        $value = trim($value);             # Let's bite off superfluous blanks.
+        # Check for the resolved length of a keyword.
         if ((mb_strlen($value) >= $config['query-min']) && (mb_strlen($value) <= $config['query-max'])) {
             if (!empty($target[$value])) {
-                $target[$value]++;        # Existing tag
+                $target[$value]++;        # Existing tag.
             } else {
-                $target[$value] = 1;      # New tag
+                $target[$value] = 1;      # New tag.
             }
         }
     }
@@ -92,7 +92,7 @@ if (isset($init)) {
         * @todo Make selection
         */
         if (CONFIG::getValue('enabled', 'files')) {
-             $result = CreateTags(TRUE, TRUE);
+            $result = CreateTags(TRUE, TRUE);
         } else {
             $result = CreateTags(TRUE);
         }
@@ -107,11 +107,11 @@ if (isset($init)) {
     if (!empty($REQUEST['edit'])) {
         $tags = [];
         foreach ($REQUEST['key'] as $key => $tag) {
-            if ($tag != '') {
+            if ($tag !== '') {
                 $tag = $tag;
                 # Check for the resolved length of a tag
                 if ((mb_strlen($tag) >= $search_ini['query-min']) && (mb_strlen($tag) <= $search_ini['query-max'])) {
-                    $tags[$tag] = $REQUEST['value'][$key];     # New tag
+                    $tags[$tag] = $REQUEST['value'][$key];     # New tag.
                 }
             }
         }
@@ -133,4 +133,3 @@ if (isset($init)) {
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'config.tpl');
     echo $TPL->parse($config);
 }
-?>

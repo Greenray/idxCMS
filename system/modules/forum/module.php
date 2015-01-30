@@ -1,64 +1,44 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE FORUM - INITIALIZATION
+# idxCMS Flat Files Content Management Sysytem
+
+/** Forum.
+ * Module registration and internal functions.
+ * @file      system/modules/forum/module.php
+ * @version   2.3
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2011-2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @package   Forum
+ */
 
 if (!defined('idxCMS')) die();
 
-/** Forum data store */
+/** Forum data store. */
 define('FORUM', CONTENT.'forum'.DS);
 
-# FORUM class
-class FORUM extends CONTENT {
+require SYS.'forum.class.php';
 
-    public function __construct() {
-        $this->module = 'forum';
-        $this->container = FORUM;
+/** Sort of array.
+ * @param  array $array Array to sort
+ * @return array        Sorted array
+ */
+function ArraySort(&$array) {
+    $keys = [];
+    if (!$array) {
+        return $keys;
     }
-
-    public function getItem($id, $type = '', $parse = TRUE) {
-        return parent::getItem($id, 'text', $parse);
-    }
-
-    public function saveTopic($id = '') {
-        if (!USER::loggedIn()) {
-            throw new Exception('You are not logged in!');
-        }
-        $title = trim(FILTER::get('REQUEST', 'title'));
-        if ($title === FALSE) {
-            throw new Exception('Title is empty');
-        }
-        $text = trim(FILTER::get('REQUEST', 'text'));
-        if (empty($text)) {
-            throw new Exception('Text is empty');
-        }
-        $path = $this->sections[$this->section]['categories'][$this->category]['path'];
-        if (empty($id)) {
-            $id = $this->newId($this->content);
-            if (mkdir($path.$id, 0777) === FALSE) {
-                throw new Exception('Cannot save topic');
-            }
-            $this->content[$id]['id']       = (int) ($id);
-            $this->content[$id]['author']   = USER::getUser('username');
-            $this->content[$id]['nick']     = USER::getUser('nickname');
-            $this->content[$id]['time']     = time();
-            $this->content[$id]['ip']       = $_SERVER['REMOTE_ADDR'];
-            $this->content[$id]['views']    = 0;
-            $this->content[$id]['comments'] = 0;
-        }
-        $this->content[$id]['title']  = $title;
-        $this->content[$id]['opened'] = (int) empty(FILTER::get('REQUEST', 'opened')) ? 1 : 0;
-        $this->content[$id]['pinned'] = (int) FILTER::get('REQUEST', 'pinned');
-        if (file_put_contents($path.$id.DS.$this->text, $text, LOCK_EX) === FALSE) {
-            throw new Exception('Cannot save topic');
-        }
-        parent::saveContent($this->content);
-        Sitemap();
-        return $id;
-    }
+    $keys = func_get_args();
+    array_shift($keys);
+    ArraySortFunc($keys);
+    uasort($array, "ArraySortFunc");
 }
 
-# ArraySort callback
+/** ArraySort callback.
+ * String comparison.
+ * @param  array   $a Fist array to compare
+ * @param  array   $b Second array to compare (Default NULL)
+ * @return boolean    The result of operation
+ */
 function ArraySortFunc($a, $b = NULL) {
     static $keys;
     if ($b === NULL) {
@@ -77,17 +57,6 @@ function ArraySortFunc($a, $b = NULL) {
     return FALSE;
 }
 
-function ArraySort(&$array) {
-    $keys = [];
-    if (!$array) {
-        return $keys;
-    }
-    $keys = func_get_args();
-    array_shift($keys);
-    ArraySortFunc($keys);
-    uasort($array, "ArraySortFunc");
-}
-
 switch (SYSTEM::get('locale')) {
     case 'ru':
         $LANG['def']['Cannot save topic'] = 'Не могу сохранить тему';
@@ -96,7 +65,7 @@ switch (SYSTEM::get('locale')) {
         $LANG['def']['New topic'] = 'Новая тема';
         $LANG['def']['Pin'] = 'Прикрепить';
         $LANG['def']['Reply'] = 'Ответ';
-        $LANG['def']['Replies'] = 'Ответы';
+//        $LANG['def']['Replies'] = 'Ответы';
         $LANG['def']['Reply editing'] = 'Редактирование ответа';
         $LANG['def']['Topic'] = 'Тема';
         $LANG['def']['Topics'] = 'Темы';
@@ -109,7 +78,7 @@ switch (SYSTEM::get('locale')) {
         $LANG['def']['New topic'] = 'Нова тема';
         $LANG['def']['Pin'] = 'Прикріпити';
         $LANG['def']['Reply'] = 'Відповідь';
-        $LANG['def']['Replies'] = 'Відповіді';
+//        $LANG['def']['Replies'] = 'Відповіді';
         $LANG['def']['Reply editing'] = 'Редагування відповіді';
         $LANG['def']['Topic'] = 'Тема';
         $LANG['def']['Topics'] = 'Теми';
@@ -122,7 +91,7 @@ switch (SYSTEM::get('locale')) {
         $LANG['def']['New topic'] = 'Новая тэма';
         $LANG['def']['Pin'] = 'Прымацаваць';
         $LANG['def']['Reply'] = 'Адказ';
-        $LANG['def']['Replies'] = 'Адказы';
+//        $LANG['def']['Replies'] = 'Адказы';
         $LANG['def']['Reply editing'] = 'Рэдагаванне адказу';
         $LANG['def']['Topic'] = 'Тэма';
         $LANG['def']['Topics'] = 'Тэмы';

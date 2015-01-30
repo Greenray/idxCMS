@@ -1,7 +1,14 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE CATALOGS
+# idxCMS Flat Files Content Management Sysytem
+
+/** Catalogs.
+ * @file      system/modules/catalogs/catalogs.php
+ * @version   2.3
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @package   Catalogs
+ */
 
 if (!defined('idxCMS')) die();
 
@@ -134,40 +141,7 @@ if (empty($sections)) {
             CMS::call('CATALOGS')->incCount($item['id'], 'views');
         }
         # Show comments
-        $comments = CMS::call('CATALOGS')->getComments($item['id']);
-        if (!empty($comments)) {
-            $count  = sizeof($comments);
-            $items  = array_keys($comments);
-            $output = '';
-            $pagination = GetPagination($page, $perpage, $count);
-            $TPL = new TEMPLATE(dirname(__FILE__).DS.'comment.tpl');
-            for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
-                $output .= $TPL->parse(CMS::call('CATALOGS')->getComment($items[$i], $page));
-            }
-            ShowWindow(__('Comments'), $output);
-            if ($count > $perpage) {
-                ShowWindow('', Pagination($count, $perpage, $page, $item['link']));
-            }
-        }
-        if (USER::loggedIn()) {
-            if (!empty($item['opened'])) {
-                # Form to post comment
-                $TPL = new TEMPLATE(dirname(__FILE__).DS.'comment-post.tpl');
-                ShowWindow(
-                    __('Comment'),
-                    $TPL->parse(
-                        array(
-                            'nickname'       => USER::getUser('nickname'),
-                            'not_admin'      => !CMS::call('USER')->checkRoot(),
-                            'text'           => FILTER::get('REQUEST', 'text'),
-                            'action'         => $item['link'],
-                            'bbcodes'        => CMS::call('PARSER')->showBbcodesPanel('comment.text'),
-                            'comment-length' => CONFIG::getValue('catalogs', 'comment-length'),
-                        )
-                    )
-                );
-            }
-        }
+        ShowComments('CATALOGS', $item, $page, $perpage, dirname(__FILE__).DS);
     } elseif (!empty($category) && !empty($section)) {
         # Show items from category
         $categories = CMS::call('CATALOGS')->getCategories($section);

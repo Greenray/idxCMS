@@ -1,118 +1,117 @@
 <?php
-/**
+# idxCMS Flat Files Content Management Sysytem
+
+/** System, modules, users and templates initialization.
  * @file      system/system.class.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2014 Victor Nabatov
+ * @copyright (c) 2011 - 2015 Victor Nabatov
  * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
  * @package   Core
  */
-
-/** Class SYSTEM - System, modules, users and templates initialization. */
 
 class SYSTEM {
 
     /** Website URL.
      * This one may be configured by website administrator or detected automaticaly.
-     * @param string
+     * @var string
      */
     private static $url = '';
 
     /** User language.
-     * @param string
+     * @var string
      */
     private static $language = '';
 
     /** Available website translations.
-     * @param string
+     * @var string
      */
     private static $languages = [];
 
     /** Current locale.
-     * @param string
+     * @var string
      */
     private static $locale = '';
 
     /** Current skin.
-     * @param string
+     * @var string
      */
     private static $skin = 'Default';
 
     /** Website skins.
-     * @param array
+     * @var array
      */
     public static  $skins = [];
 
     /** CMS modules.
-     * @param array
+     * @var array
      */
     public static  $modules = [];
 
     /** Array of the output points.
      * Currently there are six points:
-     * - 'point' - may be left or right panel of the website page as well as upper or lawer than main module;
-     * - 'main'  - data for the website main window;
-     * - 'box'   - data for website boxes;
-     * - 'title' - name of the current page will be added to the website title, if the last has been configured;
-     * - 'meta'  - configured meta tags will be added to the head of the generating page;
-     * - 'error' - an error message will be shown.
-     *
+     * - 'point' may be left or right panel of the website page as well as upper or lawer than main module
+     * - 'main'  data for the website main window
+     * - 'box'   data for website boxes
+     * - 'title' name of the current page will be added to the website title, if the last has been configured
+     * - 'meta'  configured meta tags will be added to the head of the generating page
+     * - 'error' an error message will be shown
      * @param string
      */
     public static  $current_point = '';
 
     /** Array of generated output data.
-     * @param array
+     * @var array
      */
     public static  $output = [];
 
     /** Website RSS feeds.
-     * @param array
+     * @var array
      */
     private static $feeds = [];
 
     /** Array of navigation pint of the website.
-     * @param array
+     * @var array
      */
     private static $navigation = [];
 
     /** Website menu.
-     * @param array
+     * @var array
      */
     private static $menu = [];
 
     /** Name of the current page.
-     * @param string
+     * @var string
      */
     private static $pagename = '';
 
     /** Website map.
-     * @param array
+     * @var array
      */
     private static $sitemap = [];
 
     /** Search words from user request.
-     * @param array
+     * @var array
      */
     private static $search = [];
 
     /** Website meta.
-     * @param array
+     * @var array
      */
     private static $meta = [];
 
     /** Class initialization.
      * @return void
-     * @uses $LANG Website translations.
+     * @uses $LANG Website translations
      */
     public function __construct() {
         global $LANG;
-        # Detect website url.
+        # Detect website url
         self::$url = CMS::call('CONFIG')->getValue('main', 'url');
         if (empty(self::$url)) {
             self::$url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['SCRIPT_NAME'].basename($_SERVER['SCRIPT_NAME'])).DS;
         }
-        # Check if it is allowed to change website language and set user or default language.
+        # Check if it is allowed to change website language and set user or default language
         $COOKIE = CMS::call('FILTER')->getAll('COOKIE');
         $cookie_lang    = CONFIG::getValue('main', 'cookie').'_lang';
         self::$language = CONFIG::getValue('main', 'lang');
@@ -126,12 +125,12 @@ class SYSTEM {
                 }
             }
         }
-        # Avaible localizations list.
+        # Avaible localizations list
         $langs = GetFilesList(SYS.'languages');
         foreach ($langs as $lng) {
             self::$languages[] = basename($lng, '.php');
         }
-        include_once(SYS.'languages'.DS.self::$language.'.php');
+        include_once SYS.'languages'.DS.self::$language.'.php';
         self::$language = $LANG['language'];
         self::$locale   = $LANG['locale'];
         $cookie = time() + 3600 * 24 * 365 * 5;
@@ -157,8 +156,8 @@ class SYSTEM {
     }
 
     /** Set system parameter.
-     * @param  string $param System parameter.
-     * @param  string $value Value of the system parameter.
+     * @param  string $param System parameter
+     * @param  string $value Value of the system parameter
      * @return void
      */
     public static function set($param, $value) {
@@ -166,17 +165,17 @@ class SYSTEM {
     }
 
     /** Get system parameter.
-     * @param  string $param System parameter.
-     * @return string        Value of the requested parameter.
+     * @param  string $param System parameter
+     * @return string        Value of the requested parameter
      */
     public static function get($param) {
         return self::$$param;
     }
 
     /** Modules initialization.
-     * @param  boolean $ignore_disabled Init all existing modules.
+     * @param  boolean $ignore_disabled Init all existing modules
      * @return void
-     * @uses array $LANG Website translations.
+     * @uses array $LANG Website translations
      */
     public function initModules($ignore_disabled = FALSE) {
         global $LANG;
@@ -188,7 +187,7 @@ class SYSTEM {
         foreach ($enabled as $module => $null) {
             $mod = explode('.', $module, 2);
             if (!in_array($mod[0], $included)) {
-                include_once(MODULES.$mod[0].DS.'module.php');
+                include_once MODULES.$mod[0].DS.'module.php';
                 $included[] = $mod[0];
             }
         }
@@ -200,9 +199,9 @@ class SYSTEM {
      * - main (for full pages);
      * - box (for panels or boxes);
      * - plugin (cannot be showed on any page).
-     * @param  string $module Module name.
-     * @param  string $title  Module title.
-     * @param  string $type   Module type.
+     * @param  string $module Module name
+     * @param  string $title  Module title
+     * @param  string $type   Module type
      * @param  string $system
      * @return void
      */
@@ -214,10 +213,10 @@ class SYSTEM {
 
     /** Register RSS feed for module.
      * RSS feed ID is looks like "module@section".
-     * @param  string $section RSS feed ID.
-     * @param  string $title   RSS feed title.
-     * @param  string $desc    RSS feed description.
-     * @param  string $module  Module name.
+     * @param  string $section RSS feed ID
+     * @param  string $title   RSS feed title
+     * @param  string $desc    RSS feed description
+     * @param  string $module  Module name
      * @return void
      */
     public static function registerFeed($section, $title, $desc, $module = '') {
@@ -225,7 +224,7 @@ class SYSTEM {
     }
 
     /** Register module for menu link.
-     * @param  string $module Module name.
+     * @param  string $module Module name
      * @return void
      */
     public static function registerMainMenu($module) {
@@ -233,7 +232,7 @@ class SYSTEM {
     }
 
     /** Register module for use in sitemap.
-     * @param  string $module Module name.
+     * @param  string $module Module name
      * @return void
      */
     public static function registerSiteMap($module) {
@@ -241,7 +240,7 @@ class SYSTEM {
     }
 
     /** Register module for search requests.
-     * @param  string $module Module name.
+     * @param  string $module Module name
      * @return void
      */
     public static function registerSearch($module) {
@@ -249,8 +248,8 @@ class SYSTEM {
     }
 
     /** Register module for menu link.
-     * @param  string $name Skin name.
-     * @param  string $skin Skin template.
+     * @param  string $name Skin name
+     * @param  string $skin Skin template
      * @return void
      */
     public static function registerSkin($name, $skin) {
@@ -258,7 +257,7 @@ class SYSTEM {
     }
 
     /** Set the point for output.
-     * @param type $point Output point name.
+     * @param  type $point Output point name
      * @return void
      */
     public static function setCurrentPoint($point) {
@@ -270,7 +269,7 @@ class SYSTEM {
     * @param string $title	...
     * @param string $content	...
     * @param string $align	... (défaut : 'left')
-    * @return 
+    * @return
     */
     public static function defineWindow($title, $content, $align = 'left') {
         if (self::$current_point == '__MAIN__') {
@@ -281,11 +280,11 @@ class SYSTEM {
     }
 
     /** Show window.
-     * @param  string $title    The title of the output data.
-     * @param  string $content  The content for use in output.
-     * @param  string $align    Page data alignment.
-     * @param  string $template Name of the template for use in output.
-     * @return string           Website page.
+     * @param  string $title    The title of the output data
+     * @param  string $content  The content for use in output
+     * @param  string $align    Page data alignment
+     * @param  string $template Name of the template for use in output
+     * @return string           Website page
      */
     public static function showWindow($title, $content, $align, $template) {
         if (($title === '__NOWINDOW__') || ($template === 'empty')) {
@@ -317,7 +316,7 @@ class SYSTEM {
     /** Set keywords for requested website page.
      * This description will be used in meta tag.
      * If some words has been set in website configuration (global keywords) the $keywords will be added to them.
-     * @param  string $keywords Page keywords.
+     * @param  string $keywords Page keywords
      * @return void
      */
     public static function setPageKeywords($keywords) {
@@ -326,7 +325,7 @@ class SYSTEM {
 
     /** Set description for requested website page.
      * This description will be used in meta tag.
-     * @param  string $desc Page description.
+     * @param  string $desc Page description
      * @return void
      */
     public static function setPageDescription($desc) {
@@ -335,7 +334,7 @@ class SYSTEM {
 
     /** Get website navigation points.
      * If navigation is not exists it will be created.
-     * @return array Website navigation points.
+     * @return array Website navigation points
      */
     public function getNavigations() {
         if (empty(self::$navigation)) {
@@ -345,7 +344,7 @@ class SYSTEM {
     }
 
     /** Create site navigation.
-     * @return array Website navigation points.
+     * @return array Website navigation points
      */
     public static function getNavigation() {
         if (empty(self::$navigation)) {
@@ -423,7 +422,7 @@ class SYSTEM {
 
     /** Create main menu for website.
      * The menu will be created only for registered and enabled modules.
-     * @return boolean The result of operation.
+     * @return boolean The result of operation
      */
     public function createMainMenu() {
         $enabled = CONFIG::getSection('enabled');

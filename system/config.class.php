@@ -1,24 +1,24 @@
 <?php
-/**
- * @file      system/config.class.php
- * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2014 Victor Nabatov
- * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
- * @package   Core
- */
+# idxCMS Flat Files Content Management Sysytem
 
-/** Class CONFIG - Processing configuration.
+/** Processing configuration.
  * idxCMS config file is look like this:
- * Example:
- * @code
+ *
+ * <pre>
  * [main]                    Section
  * title = "idxCMS"          Paramemeter = "Value"
  * [navigation]
  * 0[] = "index"             Parameter = "Value" (parameter is an array)
  * [output.Default]          Section (combined)
  * left[] = "posts.calendar" Parameter = "Value" (value is combined)
- * @endcode
+ * </pre>
+ *
+ * @file      system/config.class.php
+ * @version   2.3
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @package   Core
  */
 
 class CONFIG {
@@ -31,7 +31,7 @@ class CONFIG {
     /** Site configuration data.
      * @var array
      */
-    private static $config = [];
+    private static $config = array();
 
     /** Class initialization.
      * Set config filename, read and parse config data.
@@ -44,8 +44,8 @@ class CONFIG {
 
     /** Create the configuration section.
      * Sets the parameters and their values in the specified config section.
-     * @param  string $section Name of the config section.
-     * @param  array  $values  Config parameter = value for the current section.
+     * @param  string $section Name of the config section
+     * @param  array  $values  Config parameter = value for the current section
      * @return void
      */
     public static function setSection($section, $values) {
@@ -53,15 +53,15 @@ class CONFIG {
     }
 
     /** Get parameters with their values from the specified config section.
-     * @param  string $section Name of the config section.
-     * @return array           Config parameters = values for the current section or empty array.
+     * @param  string $section Name of the config section
+     * @return array           Config parameters = values for the current section or empty array
      */
     public static function getSection($section) {
         return empty(self::$config[$section]) ? [] : self::$config[$section];
     }
 
     /** Remove specified config section.
-     * @param  string $section Name of the config section.
+     * @param  string $section Name of the config section
      * @return void
      */
     public static function unsetSection($section) {
@@ -69,9 +69,9 @@ class CONFIG {
     }
 
     /** Set the parameter with its value for the specified config section.
-     * @param  string $section Name of the config section.
-     * @param  string $param   Name of the config parameter.
-     * @param  mixed  $value   Value of the specified parameter.
+     * @param  string $section Name of the config section
+     * @param  string $param   Name of the config parameter
+     * @param  mixed  $value   Value of the specified parameter
      * @return void
      */
     public static function setValue($section, $param, $value) {
@@ -79,9 +79,9 @@ class CONFIG {
     }
 
     /** Get the parameter with its value from the specified config section.
-     * @param  string $section Name of the config section.
-     * @param  string $param   Name of the config parameter.
-     * @return array|FALSE     Value of the specified parameter.
+     * @param  string $section Name of the config section
+     * @param  string $param   Name of the config parameter
+     * @return array|FALSE     Value of the specified parameter
      */
     public static function getValue($section, $param) {
         return empty(self::$config[$section][$param]) ? FALSE : self::$config[$section][$param];
@@ -89,19 +89,19 @@ class CONFIG {
 
     /** Create and save the config file.
      * It can create sections with parameters and sections where parameter is an array.
-     * @return boolean The result of the operation.
+     * @return boolean The result of the operation
      */
     public function save() {
         $ini = '';
-        # Create section.
+        # Create section
         foreach (self::$config as $id => $section) {
             $ini .= '['.$id.']'.LF;
-            # Create parameter = "value" in the section.
+            # Create parameter = "value" in the section
             foreach ($section as $key => $value) {
                 if (!is_array($value)) {
                     $ini .= $key.' = "'. str_replace('"', '&quot;', $value).'"'.LF;
                 } else {
-                    # Create array of parameter = "value" in the section.
+                    # Create array of parameter = "value" in the section
                     foreach ($value as $i => $item) {
                         if (!is_array($item)) {
                             $ini .= $key.'[] = "'. str_replace('"', '&quot;', $item).'"'.LF;

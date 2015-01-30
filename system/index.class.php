@@ -1,30 +1,30 @@
 <?php
-/**
+# idxCMS Flat Files Content Management Sysytem
+
+/** Read and save database files.
  * @file      system/index.class.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2014 Victor Nabatov
- * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
  * @package   Core
  */
-
-/** Class INDEX - Read and save database files. */
 
 class INDEX {
 
     /** Name of the index file.
-     * @param string
+     * @var string
      */
     protected $index = 'index';
 
-    /** Class initialization */
+    /** Class initialization. */
     protected function __construct() {}
 
     /** Prevent to clone object. */
     protected function __clone() {}
 
     /** Sets the name of the serialized file.
-     * The default name is index.
+     * The default name is 'index'.
      * @param  string $name Name of the index file
      * @return void
      */

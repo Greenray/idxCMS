@@ -1,44 +1,44 @@
 <?php
-/**
+# idxCMS Flat Files Content Management Sysytem
+
+/** Uploads files.
  * @file      system/uploader.class.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2014 Victor Nabatov
- * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0>
  * @package   Core
  */
-
-/** Class UPLOADER - Uploads files. */
 
 class UPLOADER {
 
     /** Directory for uploaded files.
-     * @param string
+     * @var string
      */
     private $upload_dir;
 
     /** Max size for uploading files.
-     * @param integer
+     * @var integer
      */
     private $max_size;
 
     /** Size of uploading file.
-     * @param integer
+     * @var integer
      */
     private $file_size;
 
     /** Temorary file.
-     * @param string
+     * @var string
      */
     private $file_tmp;
 
     /** Type of the file.
-     * @param string
+     * @var string
      */
     private $file_type;
 
     /** Allowed types of file for uploading.
-     * @param array
+     * @var array
      */
     private $allowed_types = [
         'application/zip',

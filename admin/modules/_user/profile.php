@@ -93,7 +93,7 @@ if (FILTER::get('REQUEST', 'save')) {
             );
             $message  = __('Identification');
             $message .= LoginForm();
-            include(ADMIN.'error.php');
+            include ADMIN.'error.php';
         }
     }
 }

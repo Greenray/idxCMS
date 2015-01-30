@@ -19,7 +19,7 @@ if (!empty($REQUEST['enable'])) {
             if (empty($registered_modules[$id[0]]['system'])) {
                 if (file_exists(ADMIN.'modules'.DS.$id[0].DS.'config.php')) {
                     $init = TRUE;
-                    include(ADMIN.'modules'.DS.$id[0].DS.'config.php');
+                    include ADMIN.'modules'.DS.$id[0].DS.'config.php';
                     unset($init);
                 }
             }

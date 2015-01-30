@@ -1,39 +1,31 @@
 <?php
-/**
+# idxCMS: Flat Files Content Management System
+
+/** Captcha.
  * @file      tools/captcha.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2014 Victor Nabatov
- * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
  * @package   Tools
  */
 
-session_start();
-
-/** Class CAPTCHA
- * Captcha.
- */
 class CAPTCHA {
 
-    /** Captcha images
+    /** Captcha images.
      * @var array
      */
     private $image = ['captcha.png', 'captcha_color.png'];
 
-    /** Captcha code length
+    /** Captcha code length.
      * @var integer
      */
-    private $length;
+    private $length = 0;
 
-    /** Captcha code
-     * @var string
+    /** Captcha code.
+     * @var integer
      */
     private $code;
-
-    /** Random array key to select image for captcha: b&w or color
-     * @var integer (0 or 1)
-     */
-    private $idx;
 
     /** Class initialization.
      * @param  string $code Captcha code
@@ -41,19 +33,17 @@ class CAPTCHA {
      */
     public function __construct($code) {
         $this->length = (int) round(mt_rand(5, 8));
-        $this->code   = strip_tags(stripslashes($code));
-        $this->idx    = (int) round(mt_rand(0, 1));
+        $this->code   = (int) strip_tags(stripslashes($code));
     }
 
     /** Create Captcha.
-     * It takes one of two images (b$w or color), form code from 5...8 symbols.
-     * Then split code into two parts.
+     * It takes one of two images (b$w or color), form code from 5...8 symbols, then split code into two parts.
      * So the captcha is different for every time.
      * @return void
      */
     public function create() {
         $code  = substr(md5($this->code), 0, $this->length);
-        $image = imagecreatefrompng($this->image[$this->idx]);
+        $image = imagecreatefrompng($this->image[(int) round(mt_rand(0, 1))]);
         $color = imagecolorallocate($image, 255, 255, 255);
         $fh_code = substr($code, 0, 3);
         $sh_code = substr($code, 3);
@@ -77,7 +67,7 @@ class CAPTCHA {
         }
         imagepng($image);
         imagedestroy($image);
-        $_SESSION['code-length'] = $this->length;   # It is for future validation
+        $_SESSION['code-length'] = $this->length;   # It is for validation
     }
 }
 

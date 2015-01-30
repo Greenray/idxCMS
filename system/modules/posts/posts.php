@@ -1,7 +1,14 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE POSTS
+# idxCMS Flat Files Content Management Sysytem
+
+/** Publications.
+ * @file      system/modules/posts/posts.php
+ * @version   2.3
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @package   Posts
+ */
 
 if (!defined('idxCMS')) die();
 
@@ -127,40 +134,7 @@ if (empty($sections)) {
             CMS::call('POSTS')->incCount($post['id'], 'views');
         }
         # Show comments
-        $comments = CMS::call('POSTS')->getComments($post['id']);
-        if (!empty($comments)) {
-            $count  = sizeof($comments);
-            $posts  = array_keys($comments);
-            $output = '';
-            $pagination = GetPagination($page, $perpage, $count);
-            $TPL = new TEMPLATE(dirname(__FILE__).DS.'comment.tpl');
-            for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
-                $output .= $TPL->parse(CMS::call('POSTS')->getComment($posts[$i], $page));
-            }
-            ShowWindow(__('Comments'), $output);
-            if ($count > $perpage) {
-                ShowWindow('', Pagination($count, $perpage, $page, $post['link']));
-            }
-        }
-        if (USER::loggedIn()) {
-            if (!empty($post['opened'])) {
-                # Form to post comment
-                $TPL = new TEMPLATE(dirname(__FILE__).DS.'comment-post.tpl');
-                ShowWindow(
-                    __('Comment'),
-                    $TPL->parse(
-                        array(
-                            'nickname'       => USER::getUser('nickname'),
-                            'not_admin'      => !CMS::call('USER')->checkRoot(),
-                            'text'           => FILTER::get('REQUEST', 'text'),
-                            'action'         => $post['link'],
-                            'bbcodes'        => CMS::call('PARSER')->showBbcodesPanel('comment.text'),
-                            'comment-length' => CONFIG::getValue('posts', 'comment-length'),
-                        )
-                    )
-                );
-            }
-        }
+        ShowComments('POSTS', $post, $page, $perpage, dirname(__FILE__).DS);
     } elseif (!empty($category) && !empty($section)) {
         # Show posts from category
         $categories = CMS::call('POSTS')->getCategories($section);

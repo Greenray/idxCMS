@@ -12,7 +12,7 @@ if (!defined('idxADMIN') || !USER::loggedIn()) die();?>
     <title><?php echo __('Administration');?></title>
     <link rel="shortcut icon" href="<?php echo ROOT;?>favicon.ico" />
 </head>
-<frameset rows= "7%,88%,5%" framespacing="0" frameborder="yes" border="1">
+<frameset rows="7%,88%,5%" framespacing="0" frameborder="yes" border="1">
     <frameset>
         <frame src="<?php echo MODULE;?>admin&amp;id=header" name="header" marginwidth="0" marginheight="0" noresize scrolling="no">
     </frameset>

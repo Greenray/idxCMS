@@ -1,7 +1,14 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE FORUM
+# idxCMS Flat Files Content Management Sysytem
+
+/** Forum.
+ * @file      system/modules/forum/forum.php
+ * @version   2.3
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @package   Forum
+ */
 
 if (!defined('idxCMS')) die();
 
@@ -186,40 +193,7 @@ if (empty($sections)) {
             CMS::call('FORUM')->incCount($topic['id'], 'views');
         }
         # Show comments
-        $replies = CMS::call('FORUM')->getComments($topic['id']);
-        if (!empty($replies)) {
-            $TPL = new TEMPLATE(dirname(__FILE__).DS.'comment.tpl');
-
-            $count  = sizeof($replies);
-            $ids    = array_keys($replies);
-            $output = '';
-            $pagination = GetPagination($page, $perpage, $count);
-            for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
-                $output .= $TPL->parse(CMS::call('FORUM')->getComment($ids[$i], $page));
-            }
-            ShowWindow(__('Replies'), $output);
-            if ($count > $perpage) {
-                ShowWindow('', Pagination($count, $perpage, $page, $topic['link']));
-            }
-        }
-
-        if (USER::loggedIn() && $topic['opened']) {
-            # Form to post reply
-            $TPL = new TEMPLATE(dirname(__FILE__).DS.'comment-post.tpl');
-            ShowWindow(
-                __('Reply'),
-                $TPL->parse(
-                    array(
-                        'nickname'  => USER::getUser('nickname'),
-                        'not_admin' => !CMS::call('USER')->checkRoot(),
-                        'text'      => FILTER::get('REQUEST', 'text'),
-                        'action'    => $topic['link'],
-                        'bbcodes'   => CMS::call('PARSER')->showBbcodesPanel('comment.text'),
-                        'comment-length' => CONFIG::getValue('forum', 'reply-length')
-                    )
-                )
-            );
-        }
+        ShowComments('FORUM', $topic, $page, $perpage, dirname(__FILE__).DS);
     } elseif (!empty($category) && !empty($section)) {
         # Category request
         $section    = CMS::call('FORUM')->getSection($section);
@@ -249,7 +223,7 @@ if (empty($sections)) {
                         ShowError(__($error->getMessage()));
                      }
                 }
-                
+
                 $TPL = new TEMPLATE(dirname(__FILE__).DS.'post.tpl');
                 ShowWindow(
                     __('New topic'),

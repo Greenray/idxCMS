@@ -37,12 +37,12 @@ if (!defined('idxADMIN') || !USER::loggedIn()) die();?>
    <?php
     # Activate module
     if (file_exists(ADMIN.'modules'.DS.$id.'.php')) {
-        include(ADMIN.'modules'.DS.$id.'.php');
+        include ADMIN.'modules'.DS.$id.'.php';
     } elseif (file_exists(ADMINLIBS.$action.'.php')) {
-        include(ADMINLIBS.$action.'.php');
+        include ADMINLIBS.$action.'.php';
     } else {
         $message = __('Module not found').': '.$id;
-        include(ADMIN.'error.php');
+        include ADMIN.'error.php';
     }
    ?>
 </div>

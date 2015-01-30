@@ -1,7 +1,14 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE GALLERIES
+# idxCMS Flat Files Content Management Sysytem
+
+/** Galleries.
+ * @file      system/modules/galleries/galleries.php
+ * @version   2.3
+ * @author    Victor Nabatov <greenray.spb@gmail.com>\n
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @package   Galleries
+ */
 
 if (!defined('idxCMS')) die();
 
@@ -41,6 +48,7 @@ if (empty($sections)) {
         } else {
             if (!empty($REQUEST['action'])) {
                 switch ($REQUEST['action']) {
+
                     case 'edit':
                         if (!empty($content[$item]['opened'])) {
                             if (!empty($comments[$comment])) {
@@ -61,6 +69,7 @@ if (empty($sections)) {
                             ShowError(__('Comments are not allowed'));
                         }
                         break;
+
                     case 'delete':
                         try {
                             $result = CMS::call('GALLERIES')->removeComment($comment);
@@ -69,21 +78,25 @@ if (empty($sections)) {
                             ShowError(__($error->getMessage()));
                         }
                         break;
+
                     case 'close':
                         if (CMS::call('USER')->checkRoot()) {
                             CMS::call('GALLERIES')->setValue($item, 'opened', FALSE);
                         }
                         break;
+
                     case 'open':
                         if (CMS::call('USER')->checkRoot()) {
                             CMS::call('GALLERIES')->setValue($item, 'opened', TRUE);
                         }
                         break;
+
                     case 'ban':
                         if (USER::moderator('galleries')) {
                             CMS::call('FILTER')->ban();
                         }
                         break;
+                        
                     default:
                         Redirect('galleries', $section, $category, $item);
                         break;
@@ -113,40 +126,7 @@ if (empty($sections)) {
             CMS::call('GALLERIES')->incCount($item['id'], 'views');
         }
         # Show comments
-        $comments = CMS::call('GALLERIES')->getComments($item['id']);
-        if (!empty($comments)) {
-            $count  = sizeof($comments);
-            $items  = array_keys($comments);
-            $output = '';
-            $pagination = GetPagination($page, $perpage, $count);
-            $TPL = new TEMPLATE(dirname(__FILE__).DS.'comment.tpl');
-            for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
-                $output .= $TPL->parse(CMS::call('GALLERIES')->getComment($items[$i], $page));
-            }
-            ShowWindow(__('Comments'), $output);
-            if ($count > $perpage) {
-                ShowWindow('', Pagination($count, $perpage, $page, $item['link']));
-            }
-        }
-        if (USER::loggedIn()) {
-            if (!empty($item['opened'])) {
-                # Form to post comment
-                $TPL = new TEMPLATE(dirname(__FILE__).DS.'comment-post.tpl');
-                ShowWindow(
-                    __('Comment'),
-                    $TPL->parse(
-                        array(
-                            'nickname'       => USER::getUser('nickname'),
-                            'not_admin'      => !CMS::call('USER')->checkRoot(),
-                            'text'           => FILTER::get('REQUEST', 'text'),
-                            'action'         => $item['link'],
-                            'bbcodes'        => CMS::call('PARSER')->showBbcodesPanel('comment.text'),
-                            'comment-length' => CONFIG::getValue('galleries', 'comment-length'),
-                        )
-                    )
-                );
-            }
-        }
+        ShowComments('GALLERIES', $item, $page, $perpage, dirname(__FILE__).DS);
     } elseif (!empty($category) && !empty($section)) {
         # Show items from category
         $categories = CMS::call('GALLERIES')->getCategories($section);

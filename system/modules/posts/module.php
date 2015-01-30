@@ -1,156 +1,23 @@
 <?php
-/**
+# idxCMS Flat Files Content Management Sysytem
+
+/** Posts.
+ * Module registration and internal functions.
  * @file      system/modules/posts/module.php
  * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- *            <https://github.com/Greenray/idxCMS/system/modules/posts/module.php>
- * @copyright (c) 2011 - 2014 Victor Nabatov\n
- *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @package   Posts
  */
 
 if (!defined('idxCMS')) die();
 
-/** Articles and news data store */
+/** Data store for articles and news */
 define('POSTS', CONTENT.'posts'.DS);
 
-/** Class POSTS - news and articles */
-class POSTS extends CONTENT {
-
-    /** Class initialization */
-    function __construct() {
-        $this->module = 'posts';
-        $this->container = POSTS;
-    }
-}
-
-/** Class CALENDAR - Calendar of news and publications.
- * This calendar ggivs a possibility to search of news and posts by date.
- */
-class CALENDAR {
-
-    /** Current date
-     * @param array
-     */
-    private $today = [];
-
-    /** Events for specific dates
-     * @param array
-     */
-    private $events = [];
-
-    /** Auxiliary variable
-     * @param array
-     */
-    private $temp = [];
-
-    /** Class initialization.
-     * @param  integer $month    Month
-     * @param  integer $year     Year
-     * @param  integer $datetime Time
-     * @return void
-     */
-    function __construct($month, $year, $datetime) {
-        $this->temp['first_day']      = mktime(0, 0, 0, $month, 1, $year);
-        $this->temp['first_day_week'] = date('w', $this->temp['first_day']);
-        $this->temp['num_of_days']    = date('t', $this->temp['first_day']);
-        $this->datetime = $datetime;
-    }
-
-    /** Assign event to calendar
-     * @param integer $day Date
-     * @param string $link Link to existing post
-     */
-    function event($day, $link) {
-        $this->events[intval($day)] = $link;
-    }
-
-    /** Highlight current date
-     * @param integer $day  Date
-     * @param string $style Style for highlighting
-     */
-    function highlight($day, $style = '!') {
-        $this->today[intval($day)] = $style;
-    }
-
-    /** Create calendar
-     * @param  integer $current_year   Current year
-     * @param  integer $selected_year  Selected year
-     * @param  integer $selected_month Selected month
-     * @return array - Data for calendar
-     */
-    function create($current_year, $selected_year, $selected_month) {
-        foreach (array(1 => 'January',
-                       2 => 'February',
-                       3 => 'March',
-                       4 => 'April',
-                       5 => 'May',
-                       6 => 'June',
-                       7 => 'July',
-                       8 => 'August',
-                       9 => 'September',
-                      10 => 'October',
-                      11 => 'November',
-                      12 => 'December') as $num => $month) {
-            $months[$num]['name'] = $this->datetime[$month];
-            $months[$num]['num']  = $num;
-            if ($num == $selected_month) {
-                 $months[$num]['selected'] = TRUE;
-            }
-        }
-        for ($num = 2000; $num <= $current_year; $num++) {
-            $years[$num]['year'] = $num;
-            if ($num == $selected_year) {
-                 $years[$num]['selected'] = TRUE;
-            }
-        }
-        $position = ($this->temp['first_day_week'] == 0) ? 7 : $this->temp['first_day_week'];
-        $calendar = [];
-        $string   = 1;
-        $showed   = 1;
-        while ($showed <= $this->temp['num_of_days']) {
-            if ($position > 1) {
-                $calendar[$string]['span'] = $position - 1;
-            }
-            $inc = 0;
-            for ($i = $showed; $i < ($showed + 7) && ($i <= $this->temp['num_of_days']) && ($position <= 7); $i++) {
-                $class = 'event';
-                if (empty($this->events[$i])) {
-                    $class = 'usual';
-                } else {
-                    $calendar[$string]['dates'][$i]['events'] = $this->events[$i];
-                }
-                if (!empty($this->today[$i]) && ($current_year === $selected_year)) {
-                    $class .= ' special';
-                }
-                $calendar[$string]['dates'][$i]['class'] = $class;
-                $calendar[$string]['dates'][$i]['date']  = $i;
-                $position++;
-                $inc++;
-            }
-            $showed = $showed + $inc;
-            $position = 0;
-            ++$string;
-        }
-        return array(
-            'month'  => LocaliseDate(date('F Y', $this->temp['first_day'])),
-            'header' => LocaliseDate(
-                '<th>Mon</th>
-                 <th>Tue</th>
-                 <th>Wed</th>
-                 <th>Thu</th>
-                 <th>Fri</th>
-                 <th>Sat</th>
-                 <th>Sun</th>'
-            ),
-            'calendar'       => $calendar,
-            'months'         => $months,
-            'years'          => $years,
-            'selected_year'  => $selected_year,
-            'selected_month' => $selected_month
-        );
-    }
-}
+require SYS.'posts.class.php';
+require SYS.'calendar.class.php';
 
 SYSTEM::registerModule('posts',          'Posts',          'main', 'system');
 SYSTEM::registerModule('posts.post',     'Posting form',   'main', 'system');
@@ -166,7 +33,7 @@ USER::setSystemRights(array('posts' => __('Posts').': '.__('Moderator')));
 $sections =  CMS::call('POSTS')->getSections();
 
 if (!empty($sections)) {
-    # Register RSS feeds for posts sections (ex. drafts)
+    # Register RSS feeds for posts sections (ex. drafts).
     if (!empty($sections['drafts']))  unset($sections['drafts']);
     if (!empty($sections['archive'])) unset($sections['archive']);
     foreach ($sections as $id => $section) {

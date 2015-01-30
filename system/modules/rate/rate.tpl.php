@@ -3,7 +3,7 @@
  * @file      system/modules/rate/rate.tpl.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- * @copyright (c) 2011 - 2014 Victor Nabatov
+ * @copyright (c) 2011 - 2015 Victor Nabatov
  * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
  */
 

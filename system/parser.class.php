@@ -1,33 +1,33 @@
 <?php
-/**
+# idxCMS Flat Files Content Management Sysytem
+
+/** BBCODES parser.
  * @file      system/parser.class.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2014 Victor Nabatov
- * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
  * @package   Core
  */
 
-/** Class PARSER - BBCODES parser. */
-
 class PARSER {
 
-    /** Text to parse
-     * @param string
+    /** Text to parse.
+     * @var string
      */
     private $text = '';
 
-    /** Temorary variable fo code processing
-     * @param array
+    /** Temorary variable for code processing.
+     * @var array
      */
     private $temp = [];
 
-    /** Array of regexp
-     * @param array
+    /** Array of regexp.
+     * @var array
      */
     private $regexp = [];
 
-    /** Class initialization */
+    /** Class initialization. */
     public function __construct() {
         $this->regexp[0] = [
             "#\[\*\](.*?)\[/\*\]#is" => '<li>\\1</li>',
@@ -93,17 +93,16 @@ class PARSER {
                 }
             }
         }
-
         $TPL = new TEMPLATE(SYS.'templates'.DS.'bbcodes-panel.tpl');
         return $TPL->parse([
             'moderator' => $moderator,
-            'full' => USER::loggedIn(),
-            'bbimg' => IMAGES.'bbcodes'.DS,
-            'form' => $area[0],
-            'area' => $area[1],
-            'smile' => $names,
-            'colors' => $colors,
-            'path' => MODULE.'editor&amp;dir='.$dir
+            'full'      => USER::loggedIn(),
+            'bbimg'     => IMAGES.'bbcodes'.DS,
+            'form'      => $area[0],
+            'area'      => $area[1],
+            'smile'     => $names,
+            'colors'    => $colors,
+            'path'      => MODULE.'editor&amp;dir='.$dir
         ]);
     }
 
@@ -197,8 +196,8 @@ class PARSER {
     }
 
     /** Show spoiler with hidden text.
-     * @param  array $matches  Array of spoiler parameters
-     * @return string HTML div block with hidden text
+     * @param  array  $matches Array of spoiler parameters
+     * @return string          HTML div block with hidden text
      */
     private function parseSpoiler($matches) {
         if (!empty($matches)) {
@@ -215,7 +214,7 @@ class PARSER {
 
     /** Parse [img]...[/img] bbtag.
      * @param  string $path Path to images directory
-     * @return string HTML div block with the image
+     * @return string       HTML div block with the image
      */
     private function parseImage($path = '') {
         preg_match_all("#\[img\][\s\n\r]*([^ \"\n\r\t<]*?)[\s\n\r]*\[/img\]#is", $this->text, $matches);

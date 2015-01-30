@@ -1,25 +1,24 @@
 <?php
-/**
+# idxCMS Flat Files Content Management Sysytem
+
+/** System functions libruary.
  * @file      system/functions.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- * @copyright (c) 2011 - 2014 Victor Nabatov
- * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
  * @package   Core
  */
-
-/** functions.php - System functions libruary. */
 
 # FILES and DIRECTORIES
 
 /** Recursively get list of file from directory.
- * Example:
- * @param  string  $directory Directory for parsing.
- * @param  string  $mask      Files mask.
- * @param  string  $type      Files type: file or directory.
+ * @param  string  $directory Directory for parsing
+ * @param  string  $mask      Files mask
+ * @param  string  $type      Files type: file or directory
  * @param  boolean $filter    Files filter
- * @param  array   $except    List if files which will be excluded from result.
- * @return array              List of files.
+ * @param  array   $except    List if files which will be excluded from result
+ * @return array              List of files
  */
 function AdvScanDir($directory, $mask = '', $type = 'all', $filter = FALSE, $except = []) {
     $exc     = ['.', '..', '.htaccess', 'index.html'];
@@ -50,11 +49,11 @@ function AdvScanDir($directory, $mask = '', $type = 'all', $filter = FALSE, $exc
 }
 
 /**
-* @todo Comment
-* @param string $directory	...
-* @param string $except	...
-* @return
-*/
+ * @todo Comment
+ * @param string $directory	...
+ * @param string $except	...
+ * @return
+ */
 function GetFilesList($directory, $except = []) {
     $exclude = array_unique(array_merge(['.', '..', '.htaccess', 'index.html'], $except));
     $result  = [];
@@ -67,13 +66,11 @@ function GetFilesList($directory, $except = []) {
     return $result;
 }
 
-# Recursively copy a folder and its contents
-/**
-* @todo Comment
-* @param string $source	...
-* @param string $dest	...
-* @return
-*/
+/** Recursively copy a folder and its contents.
+ * @param  string $source Sourse directory
+ * @param  string $dest   Destination directory
+ * @return boolean        The result of operation
+ */
 function CopyTree($source, $dest) {
     if (is_file($source)) {
         return copy($source, $dest);
@@ -93,12 +90,10 @@ function CopyTree($source, $dest) {
     return TRUE;
 }
 
-# Remove files and directories recursively
-/**
-* @todo Comment
-* @param string $object	...
-* @param string $recursive	... (défaut : TRUE)
-* @return
+/** Remove files and directories recursively.
+* @param  string  $object    Directory to remove
+* @param  boolean $recursive Remove recursively? (défaut : TRUE)
+* @return boolean            The result of operation
 */
 function DeleteTree($object, $recursive = TRUE) {
     if ($recursive && is_dir($object)) {
@@ -110,11 +105,9 @@ function DeleteTree($object, $recursive = TRUE) {
     return (is_dir($object)) ? rmdir($object) : unlink($object);
 }
 
-# Get content of gziped file
-/**
-* @todo Comment
-* @param string $file	...
-* @return
+/** Get content of gziped file.
+* @param  string $file Name of the file
+* @return mixed        The content of file
 */
 function gzfile_get_contents($file) {
     if (!$file = gzfile($file)) {
@@ -126,13 +119,11 @@ function gzfile_get_contents($file) {
     return $file;
 }
 
-# Write data to gziped file
-/**
-* @todo Comment
-* @param string $file	...
-* @param string $text	...
-* @param string $mode	... (défaut : 'w+')
-* @return
+/** Write data to gziped file.
+* @param  string  $file Filename
+* @param  string  $text Data to gzip
+* @param  string  $mode Write mode (défaut : 'w+')
+* @return boolean       The result of operation
 */
 function gzfile_put_contents($file, $text, $mode = 'w+') {
     if (($fp = @fopen($file.'.lock', 'w+')) === FALSE) {
@@ -152,11 +143,10 @@ function gzfile_put_contents($file, $text, $mode = 'w+') {
     return TRUE;
 }
 
-# Get unserialized data
-/**
-* @todo Comment
-* @param string $file	...
-* @return
+/** Get unserialized data.
+ * This function can automatically restore 
+* @param  string $file Filename
+* @return array        Unserialized data
 */
 function GetUnserialized($file) {
     $data = [];
@@ -184,7 +174,7 @@ function GetUnserialized($file) {
 /** Recursive search of the value in a multidimensional array.
  * @param  mixed $needle   The desired value
  * @param  array $haystack Array to search
- * @return mixed The value of the key
+ * @return mixed           The value of the key
  */
 function SearchValueInArray($needle, $haystack) {
     $result = '';
@@ -202,7 +192,7 @@ function SearchValueInArray($needle, $haystack) {
 /** Recursive search of the key in a multidimensional array.
  * @param  mixed $needle   The desired value
  * @param  array $haystack Array to search
- * @return mixed The key of the value
+ * @return mixed           The key of the value
  */
 function SearchKeyInArray($needle, $haystack) {
     $result = '';
@@ -240,7 +230,7 @@ function RandomString($num_chars) {
 # TEXT
 
 /** String localization.
- * Currently, the system supports five languages: English, Russian, Belarusian, Serbian( partially) and Ukrainian.
+ * Currently, the system supports five languages: English, Russian, Belarusian, and Ukrainian.
  * @global array  $LANG   Array of language strings
  * @param  string $string String to be translated
  * @return string         Nhfyslated string
@@ -308,8 +298,7 @@ function FormatTime($format, $date) {
     return empty($translate) ? gmdate($format, $date + (3600 * $tz)) : strtr(gmdate($format, $date + (3600 * $tz)), $translate);
 }
 
-# Return localised date from string generated by date()
-/**
+/** Return localised date from string generated by date().
 * @todo Comment
 * @param string $string	...
 * @return
@@ -328,12 +317,12 @@ function LocaliseDate($string) {
 # MAIL
 
 /** Send email.
- * @param  string $to     The recipient
- * @param  string $from   Sender address
- * @param  string $sender The sender
- * @param  string $subj   Subject
- * @param  string $text   Text
- * @return boolean The result of email sending
+ * @param  string  $to     The recipient
+ * @param  string  $from   Sender address
+ * @param  string  $sender The sender
+ * @param  string  $subj   Subject
+ * @param  string  $text   Text
+ * @return boolean         The result of email sending
  */
 function SendMail($to, $from, $sender, $subj, $text) {
     $headers  = 'From: '.$sender.' <'.$from.'>'.LF;
@@ -368,11 +357,11 @@ function AdvancedPagination($total, $current, $last) {
     $pages['next']     = ($current == $last) ? $last    : $current + 1;
     $pages['last']     = $last;
     $pages['pages']    = [];
-    $show = 5;                        # Number of page links to show
+    $show = 5;                  # Number of page links to show
     # At the beginning
     if ($current == 1) {
         if ($pages['next'] == $current) {
-            return $pages;   # if one page only
+            return $pages;      # if one page only
         }
         for ($i = 0; $i < $show; $i++) {
             if ($i == $last) {
@@ -469,8 +458,8 @@ function GetPagination($page, $perpage, $count) {
 /** Select of time zone.
  * @param  string $name    Time zone
  * @param  array  $points  List of time zones
- * @param  string $default THE DEFAULT TIME ZONE
- * @return string Form to select time zone
+ * @param  string $default The default time zone
+ * @return string          Form to select time zone
  */
 function SelectTimeZone($name, $points, $default) {
     $result = '<select name="'.$name.'">';
@@ -489,7 +478,7 @@ function SelectTimeZone($name, $points, $default) {
  * The length of the captcha code also varies randomly from five to eight letters and numbers.
  * Captcha is displayed only for unregistered users.
  * @param  string $param Type of captha
- * @return string Captcha image and input field for captcha code
+ * @return string        Captcha image and input field for captcha code
  */
 function ShowCaptcha($param = '') {
     if (USER::loggedIn()) {
@@ -527,7 +516,7 @@ function CheckCaptcha() {
     throw new Exception('Invalid captcha code');
 }
 
-/** @todo Move functions.php -> ShowElements() to the template.class */
+/** @todo Move functions.php -> ShowElement() to the template.class */
 function ShowElement($element, $parameters = '') {
     $output = '';
     switch($element) {
@@ -557,7 +546,6 @@ function ShowElement($element, $parameters = '') {
                 }
             }
             return $output;
-            break;
 
         case 'box':
             list($module, $template) = explode('@', $parameters);
@@ -574,7 +562,6 @@ function ShowElement($element, $parameters = '') {
                 }
             }
             return $output;
-            break;
 
         case 'main':
             if (!empty(SYSTEM::$output['main'])) {
@@ -588,7 +575,6 @@ function ShowElement($element, $parameters = '') {
                 }
             }
             return $output;
-            break;
 
         case 'title':
             $title = CONFIG::getValue('main', 'title');
@@ -597,7 +583,6 @@ function ShowElement($element, $parameters = '') {
                 $title = $title.' - '.$pagename;
             }
             return $title;
-        break;
 
         case 'meta':
             $output = '';
@@ -623,7 +608,6 @@ function ShowElement($element, $parameters = '') {
                 }
             }
             return $output;
-            break;
 
         case 'copyright':
             if ($parameters) {
@@ -697,6 +681,41 @@ function ShowWindow($title, $content, $align = 'left') {
     return CMS::call('SYSTEM')->defineWindow($title, $content, $align);
 }
 
+function ShowComments($obj, $item, $page, $perpage, $path) {
+    $comments = CMS::call($obj)->getComments($item['id']);
+    if (!empty($comments)) {
+        $TPL = new TEMPLATE($path.'comment.tpl');
+        $count  = sizeof($comments);
+        $ids    = array_keys($comments);
+        $output = '';
+        $pagination = GetPagination($page, $perpage, $count);
+        for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
+            $output .= $TPL->parse(CMS::call($obj)->getComment($ids[$i], $page));
+        }
+        ShowWindow(__('Comments'), $output);
+        if ($count > $perpage) {
+            ShowWindow('', Pagination($count, $perpage, $page, $item['link']));
+        }
+    }
+    if (USER::loggedIn()) {
+        if (!empty($item['opened'])) {
+            # Form to post comment
+            $TPL = new TEMPLATE($path.'comment-post.tpl');
+            ShowWindow(
+                __('Comment'),
+                $TPL->parse([
+                    'nickname'       => USER::getUser('nickname'),
+                    'not_admin'      => !CMS::call('USER')->checkRoot(),
+                    'text'           => FILTER::get('REQUEST', 'text'),
+                    'action'         => $item['link'],
+                    'bbcodes'        => CMS::call('PARSER')->showBbcodesPanel('comment.text'),
+                    'comment-length' => CONFIG::getValue(strtolower($obj), 'comment-length')]
+                )
+            );
+        }
+    }
+}
+
 /**
 * @todo Comment
 * @return
@@ -708,14 +727,14 @@ function Sitemap() {
     $enabled  = CONFIG::getSection('enabled');
     $sitemap  = SYSTEM::get('sitemap');
     $site_map =
-"<\x3Fxml version=\"1.0\" encoding=\"UTF-8\"\x3F>".LF.
-"<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">".LF.
-"\t<url>".LF.
-"\t\t<loc>".$url."?module=index</loc>".LF.
-"\t\t<lastmod>".$time."</lastmod>".LF.
-"\t\t<changefreq>weekly</changefreq>".LF.
-"\t\t<priority>0.8</priority>".LF.
-"\t</url>".LF;
+    "<\x3Fxml version=\"1.0\" encoding=\"UTF-8\"\x3F>".LF.
+    "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">".LF.
+    "\t<url>".LF.
+    "\t\t<loc>".$url."?module=index</loc>".LF.
+    "\t\t<lastmod>".$time."</lastmod>".LF.
+    "\t\t<changefreq>weekly</changefreq>".LF.
+    "\t\t<priority>0.8</priority>".LF.
+    "\t</url>".LF;
     foreach ($modules as $module => $data) {
         if (in_array($module, $sitemap) && array_key_exists($module, $enabled)) {
             $gsm = '';
@@ -754,16 +773,15 @@ function Sitemap() {
             }
             if (!empty($gsm)) {
                 $site_map .=
-"\t<url>".LF.
-"\t\t<loc>".$url."?module=".$module."</loc>".LF.
-"\t\t<lastmod>".$time."</lastmod>".LF.
-"\t\t<changefreq>weekly</changefreq>".LF.
-"\t</url>".LF.$gsm;
+                "\t<url>".LF.
+                "\t\t<loc>".$url."?module=".$module."</loc>".LF.
+                "\t\t<lastmod>".$time."</lastmod>".LF.
+                "\t\t<changefreq>weekly</changefreq>".LF.
+                "\t</url>".LF.$gsm;
             }
         }
     }
-    $site_map .=
-"</urlset>";
+    $site_map .= "</urlset>";
     if (!file_put_contents(ROOT.'sitemap.xml', $site_map, LOCK_EX)) {
         CMS::call('LOG')->logPut('Error', '', 'Cannot save file sitemap.xml');
     }

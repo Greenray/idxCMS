@@ -6,7 +6,7 @@
 if (!defined('idxCMS')) die();
 
 $rss_cfg = CONFIG::getSection('rss-aggregator');
-$rss = new LastRSS();
+$rss = new RSS_AGGREGATOR();
 $rss->cache_time  = $rss_cfg['cache-time'];
 $rss->cache_dir   = CONTENT.'rss-cache';
 $rss->items_limit = CONFIG::getValue('main', 'last');

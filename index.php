@@ -1,20 +1,19 @@
 <?php
-#   idxCMS Flat Files Content Management Sysytem
-#   Version 2.3
-#   copyright (c) 2011 - 2014 Victor Nabatov
+# idxCMS Flat Files Content Management Sysytem
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
-/**
- * The core of the content management system.
- *
+/** The core of the content management system.
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2014 Victor Nabatov
+ * @copyright (c) 2011 - 2015 Victor Nabatov
  * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
  * @package   Core
  */
 
-ini_set('phar.readonly', 0);
-ini_set('display_errors', 1);
+ini_set('phar.readonly', 0);            # Allow phar to work with phars.
+ini_set('display_errors', 1);           # Allow to log php errors.
+ini_set('default_charset', 'UTF-8');    # PHP >= 5.6.0, empty for PHP < 5.6.0
 mb_internal_encoding('UTF-8');
 setlocale(LC_CTYPE, ['ru_RU.UTF-8', 'ru_UA.UTF-8', 'by_BY.UTF-8', 'en_US.UTF-8', 'en_GB.UTF-8']);
 setlocale(LC_ALL,   ['ru_RU.UTF-8', 'ru_UA.UTF-8', 'by_BY.UTF-8', 'en_US.UTF-8', 'en_GB.UTF-8']);
@@ -115,27 +114,27 @@ define('PAGE',     '&amp;page=');
 /** Version of the system. */
 define('IDX_VERSION', '2.3');
 /** Copyright. */
-define('IDX_COPYRIGHT', '&copy; 2011 - 2014 Greenray');
+define('IDX_COPYRIGHT', '&copy; 2011 - 2015 Greenray');
 /** Message about system generator. */
 define('IDX_POWERED', 'Powered by idxCMS - '.IDX_VERSION);
 
 umask(000);     # UMASK Must be 000!
 
 # Loading system libraries.
-include_once(SYS.'cms.class.php');
-include_once(SYS.'filter.class.php');
-include_once(SYS.'log.class.php');
-include_once(SYS.'config.class.php');
-include_once(SYS.'system.class.php');
-include_once(SYS.'user.class.php');
-include_once(SYS.'functions.php');
-include_once(SYS.'index.class.php');
-include_once(SYS.'content.class.php');
-include_once(SYS.'parser.class.php');
-include_once(SYS.'highlighter.class.php');
-include_once(SYS.'template.class.php');
-include_once(SYS.'uploader.class.php');
-include_once(SYS.'image.class.php');
+include_once SYS.'cms.class.php';
+include_once SYS.'filter.class.php';
+include_once SYS.'log.class.php';
+include_once SYS.'config.class.php';
+include_once SYS.'system.class.php';
+include_once SYS.'user.class.php';
+include_once SYS.'functions.php';
+include_once SYS.'index.class.php';
+include_once SYS.'content.class.php';
+include_once SYS.'parser.class.php';
+include_once SYS.'highlighter.class.php';
+include_once SYS.'template.class.php';
+include_once SYS.'uploader.class.php';
+include_once SYS.'image.class.php';
 
 session_start();
 
@@ -147,6 +146,7 @@ CMS::call('FILTER')->sanitaze();
 /** Filtered globals $_GET, $_POST, $_FILES and $_COOKIE. */
 $REQUEST = FILTER::getAll('REQUEST');
 
+# System initialization.
 CMS::call('SYSTEM');
 
 # Send main headers.
@@ -168,41 +168,31 @@ if (!empty($REQUEST['logout'])) {
     session_destroy();
     Redirect('index');
 }
-/*
-include 'nocomment.php';
-$NoComment = new NoComment(CONTENT.'logggg.txt');
 
-// Add Comment to all undocumented functions
-$file = 'HtmlHighlighter.class.php';
-$src = $NoComment->addFctComment(SYS.$file);
-if ($src !== NULL && $src !== false) {
-	file_put_contents(CONTENT.$file, $src);
-}
- */
 /** Requested module. */
 $MODULE = empty($REQUEST['module']) ? 'index' : basename($REQUEST['module']);
 switch($MODULE) {
 
     # Editor for posting.
     case 'editor':
-        include(TOOLS.'editor.php');
+        include TOOLS.'editor.php';
         break;
 
-    # Rate feauture.
+    # Rate.
     case 'rate':
         if (CONFIG::getValue('enabled', 'rate')) {
-            include(MODULES.'rate'.DS.'rate.php');
+            include MODULES.'rate'.DS.'rate.php';
         }
         break;
 
     # Aphorisms flipping.
     case 'aphorisms':
-        include(MODULES.'aphorisms'.DS.'aphorisms.php');
+        include MODULES.'aphorisms'.DS.'aphorisms.php';
         break;
 
-    # RSS feature.
+    # RSS.
     case 'rss':
-        include(MODULES.'rss'.DS.'rss.php');
+        include MODULES.'rss'.DS.'rss.php';
         break;
 
     # Website administration.
@@ -217,8 +207,8 @@ switch($MODULE) {
         /** Templates for administration panel. */
         define('TEMPLATES', ADMIN.'templates'.DS);
 
-        require_once(ADMINLIBS.'functions.php');
-        include_once(ADMIN.'languages'.DS.SYSTEM::get('language').'.php');  # Localization.
+        require_once ADMINLIBS.'functions.php';
+        include_once ADMIN.'languages'.DS.SYSTEM::get('language').'.php';  # Localization.
 
         if (CMS::call('USER')->checkRoot()) {
             $modules = AdvScanDir(ADMIN.'modules', '', 'dir');
@@ -230,7 +220,7 @@ switch($MODULE) {
             # Initialize enabled modules.
             foreach ($modules as $module) {
                 if ((substr($module, 0, 1) === '_') || CONFIG::getValue('enabled', $module)) {
-                    include_once(ADMIN.'modules'.DS.$module.DS.'module.php');
+                    include_once ADMIN.'modules'.DS.$module.DS.'module.php';
                 }
             }
 
@@ -239,29 +229,29 @@ switch($MODULE) {
 
                 # Open administration panel or show frames error.
                 case 'main':
-                    include(ADMIN.'frameset.php');
+                    include ADMIN.'frameset.php';
                     break;
 
                 case 'header':
-                    include(ADMIN.'header.php');        # Header of the administration panel.
+                    include ADMIN.'header.php';        # Header of the administration panel.
                     break;
 
                 case 'nav':
-                    require(ADMIN.'navigation.php');    # Menu of the administration panel.
+                    require ADMIN.'navigation.php';    # Menu of the administration panel.
                     break;
 
                 case 'footer':
-                    include(ADMIN.'footer.php');        # Footer of the administration panel.
+                    include ADMIN.'footer.php';        # Footer of the administration panel.
                     break;
 
                 default:
                     if (empty($REQUEST['id'])) {
                         $id = 'index';
-                        require(ADMIN.'module.php');    # Activate default module of admin panel
+                        require ADMIN.'module.php';    # Activate default module of admin panel
                     } else {
                         list($module, $action) = explode('.', $id);
                         $id = strtr($id, '.', DS);
-                        require(ADMIN.'module.php');    # Activate requested module
+                        require ADMIN.'module.php';    # Activate requested module
                     }
                     break;
             }
@@ -270,12 +260,12 @@ switch($MODULE) {
             # User is not admin or has no access rights.
             $message[0] = __('Access denied');
             $message[1] = LoginForm();
-            include(ADMIN.'error.php');
+            include ADMIN.'error.php';
         }
         break;
 
     default:
-        include_once(SYS.'statistic.php');
+        include_once SYS.'statistic.php';
 
         /** System templates. */
         define('TEMPLATES', SYS.'templates'.DS);
@@ -283,14 +273,14 @@ switch($MODULE) {
         # Loading main module.
         CMS::call('SYSTEM')->setCurrentPoint('__MAIN__');
         # Current skin definition
-        require_once(CURRENT_SKIN.'skin.php');
+        require_once CURRENT_SKIN.'skin.php';
 
         # Get requested or default module.
         $mod = explode('.', $MODULE, 2);
         if (empty(SYSTEM::$modules[$MODULE]) || !file_exists(MODULES.$mod[0].DS.end($mod).'.php')) {
-            include_once(MODULES.'index'.DS.'index.php');
+            include_once MODULES.'index'.DS.'index.php';
         } else {
-            include_once(MODULES.$mod[0].DS.end($mod).'.php');
+            include_once MODULES.$mod[0].DS.end($mod).'.php';
         }
 
         $skin = SYSTEM::get('skin');
@@ -313,7 +303,7 @@ switch($MODULE) {
                     if (CONFIG::getValue('enabled', $active)) {
                         $mod = explode('.', $active, 2);
                         if (!empty(SYSTEM::$modules[$active])) {
-                            include(MODULES.$mod[0].DS.end($mod).'.php');
+                            include MODULES.$mod[0].DS.end($mod).'.php';
                         }
                     }
                 }

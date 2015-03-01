@@ -31,7 +31,7 @@ class TEMPLATE {
         'each'      => "#\[each=(.*?)\](.*?)\[endeach.\\1\]#is",
         'foreach'   => "#\[foreach=([\w\_\-]*).([\w\_\-]*).([\w\_\-]*)\](.*?)\[endforeach.\\1\]#is",
         'for'       => "#\[for=(.*?)\](.*?)\[endfor\]#is",
-        'if'        => "#\[if=(.*?)(|\[(.*?)\])\](.*)\[endif\]#is",
+        'if'        => "#\[if=(.*?)(|\[(.*?)\])\](.*?)\[endif\]#is",
         'ifelse'    => "#\[ifelse=(.*?)(|\[(.*?)\])\](.*?)\[else\](.*?)\[endelse\]#is",
         'translate' => "#\[__(.*?)\]#is",
         'value'     => "#\{([\-\#\w]+)(|\[(.*?)\])\}#is",

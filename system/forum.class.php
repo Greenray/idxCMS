@@ -25,11 +25,11 @@ class FORUM extends CONTENT {
         if (!USER::loggedIn()) {
             throw new Exception('You are not logged in!');
         }
-        $title = trim(FILTER::get('REQUEST', 'title'));
+        $title = FILTER::get('REQUEST', 'title');
         if ($title === FALSE) {
             throw new Exception('Title is empty');
         }
-        $text = trim(FILTER::get('REQUEST', 'text'));
+        $text = FILTER::get('REQUEST', 'text');
         if (empty($text)) {
             throw new Exception('Text is empty');
         }

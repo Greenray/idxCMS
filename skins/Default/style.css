@@ -619,7 +619,7 @@ table .calendar {
 .main_menu ul li                    { height: 0; padding: 0; overflow: hidden; -webkit-transition: height .25s ease .1s; -moz-transition: height .25s ease .1s;
                                       -o-transition: height .25s ease .1s; -ms-transition: height .25s ease .1s; transition: height .25s ease .1s }
 .main_menu li:hover>ul li           { height: 36px; padding: 0; overflow: visible }
-.main_menu ul li a                  { border: 0; margin: 6px 0 0 40px; min-width: 100px }
+.main_menu ul li a                  { border: 0; min-width: 100px; text-align: center }
 .main_menu ul li:last-child a       { border: 0 }
 .negative                           { color: red; font-weight: bold }
 .no                                 { color: #000; font-weight: bold }

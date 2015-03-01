@@ -144,7 +144,7 @@ function gzfile_put_contents($file, $text, $mode = 'w+') {
 }
 
 /** Get unserialized data.
- * This function can automatically restore 
+ * This function can automatically restore
 * @param  string $file Filename
 * @return array        Unserialized data
 */
@@ -230,7 +230,8 @@ function RandomString($num_chars) {
 # TEXT
 
 /** String localization.
- * Currently, the system supports five languages: English, Russian, Belarusian, and Ukrainian.
+ * Currently, the system supports foure languages: English, Russian, Belarusian, and Ukrainian.
+ *
  * @global array  $LANG   Array of language strings
  * @param  string $string String to be translated
  * @return string         Nhfyslated string

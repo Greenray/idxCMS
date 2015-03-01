@@ -3,6 +3,7 @@
 
 /** Catalogs of files, links, etc.
  * Module registration.
+ *
  * @file      system/modules/catalogs/module.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>

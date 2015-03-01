@@ -2,6 +2,7 @@
 # idxCMS Flat Files Content Management Sysytem
 
 /** Clean parameters $_REQUEST, $_FILES, $_COOKIE, detect intrusions and ban unwanted visitors.
+ *
  * @file      system/filter.class.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
@@ -35,6 +36,7 @@ final class FILTER {
 
     /** Clean all parameters and their values of the request array and
      * transforme them into the internal encoding of the system = UTF-8.
+     *
      * @param  array  $value Input array of parameters
      * @return string        Filered parameters
      */
@@ -85,6 +87,7 @@ final class FILTER {
     }
 
     /** Get all filtered parameter of the specified type.
+     *
      * @param  string $type Type of parameter
      * @return array        Array of filtered parameters of the specified type
      */
@@ -93,6 +96,7 @@ final class FILTER {
     }
 
     /** Get specified filtered parameter.
+     *
      * @param  string $type   Type of parameter
      * @param  string $param  Name of parameter
      * @return array|string Parameter values or empty string
@@ -106,6 +110,7 @@ final class FILTER {
     }
 
     /** Remove filtered parameter.
+     *
      * @param  string $type  Type of parameter
      * @param  string $param Name of parameter
      * @return void
@@ -117,6 +122,7 @@ final class FILTER {
     }
 
     /** Email validation.
+     *
      * @param  string  $email Email address
      * @return boolean        The result of operation
      */
@@ -125,6 +131,7 @@ final class FILTER {
     }
 
     /** Ban user.
+     *
      * @return boolean The result of operation
      * @todo Log the result
      */
@@ -136,11 +143,13 @@ final class FILTER {
     }
 
     /** Intrusion detection.
-     * In current it detected:
-     *  - bad words in $_SERVER
-     *  - malicious URL requests
-     *  - banned IP or cookie
+     *
+     * In current it cfn detect:
+     *  - bad words in $_SERVER;
+     *  - malicious URL requests;
+     *  - banned IP or cookie.
      * If the intrusion will be detected this event will be logged and the system will die.
+     *
      * @return void
      */
     private function ids() {

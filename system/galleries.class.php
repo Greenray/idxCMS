@@ -1,7 +1,11 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 
-/** Processing photo albums.
+/** "Фотоальбомы".
+ * Это очень простая фотогалерея. Грузишь фотку, на станице её миниатюра.
+ * Кликнул - раскрылась на весь экран. Ну, если она не для паспорта...
+ * В админке их можно тусовать.
+ *
  * @file      system/galleries.class.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
@@ -12,7 +16,9 @@
 
 class GALLERIES extends CONTENT {
 
-	/** Class initialization.
+	/** Инициалиализация.
+     *
+     * Устанавливает имя модуля и путь к каталогам хранения фоток.
 	 * @return void
 	 */
     public function __construct() {
@@ -20,12 +26,18 @@ class GALLERIES extends CONTENT {
         $this->container = GALLERIES;
     }
 
+    /** Сохраняет изо.
+     *
+     * @param  integer $id ID изо. Остальное получает из массива REQUEST
+     * @throws Exception Нет названия изо, описания, прав на запись
+     * @return integer     ID изо при успехе
+     */
     public function saveItem($id) {
-        $title = trim(FILTER::get('REQUEST', 'title'));
+        $title = FILTER::get('REQUEST', 'title');
         if ($title === FALSE) {
             throw new Exception('Title is empty');
         }
-        $text = trim(FILTER::get('REQUEST', 'text'));
+        $text = FILTER::get('REQUEST', 'text');
         if (empty($text)) {
             throw new Exception('Text is empty');
         }
@@ -102,12 +114,18 @@ class GALLERIES extends CONTENT {
         return $image;
     }
 
+    /** Сохраняет изо.
+     *
+     * @param  integer    $id ID изо. Остальное получает из массива REQUEST
+     * @throws Exceptions Нет названия, описания, нечего грузить, ошибка записи.
+     * @todo Разобраться с saveImage vs saveItem
+     */
     public function saveImage($id) {
-        $title = trim(FILTER::get('REQUEST', 'title'));
+        $title = FILTER::get('REQUEST', 'title');
         if ($title === FALSE) {
             throw new Exception('Title is empty');
         }
-        $text = trim(FILTER::get('REQUEST', 'text'));
+        $text = FILTER::get('REQUEST', 'text');
         if (empty($text)) {
             throw new Exception('Text is empty');
         }
@@ -157,6 +175,14 @@ class GALLERIES extends CONTENT {
         return $img;
     }
 
+    /** Выдает случаным образом выбранную фотку.
+     *
+     * Шустрит по всем каталогам и фоткам и не факт одна и та же фотка не вылезет
+     * дважды подряд. Особенно когда их мало.
+     *
+     * @param  integer $id
+     * @return boolean Результат
+     */
     public function getRandomImage($id) {
         $images = parent::getContent($id);
         if (empty($images)) {

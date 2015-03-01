@@ -1,16 +1,15 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 
-/** Processing configuration.
+/** Processing of configuration.
  * idxCMS config file is look like this:
  *
  * <pre>
- * [main]                    Section
- * title = "idxCMS"          Paramemeter = "Value"
- * [navigation]
- * 0[] = "index"             Parameter = "Value" (parameter is an array)
- * [output.Default]          Section (combined)
- * left[] = "posts.calendar" Parameter = "Value" (value is combined)
+ * [main]                    - Section
+ * title = "idxCMS"          - Parameter = "Value"
+ * 0[] = "index"             - Parameter = "Value" (parameter is an array)
+ * [output.Default]          - Section (combined)
+ * left[] = "posts.calendar" - Parameter = "Value" (value is combined)
  * </pre>
  *
  * @file      system/config.class.php
@@ -31,10 +30,10 @@ class CONFIG {
     /** Site configuration data.
      * @var array
      */
-    private static $config = array();
+    private static $config = [];
 
     /** Class initialization.
-     * Set config filename, read and parse config data.
+     * Sest config filename, reads and parses config data.
      * @return void
      */
     public function __construct() {
@@ -42,17 +41,20 @@ class CONFIG {
         self::$config = parse_ini_file(self::$ini, TRUE);
     }
 
-    /** Create the configuration section.
+    /** Prevent to clone object. */
+    private function __clone() {}
+    
+    /** Creates the configuration section.
      * Sets the parameters and their values in the specified config section.
      * @param  string $section Name of the config section
-     * @param  array  $values  Config parameter = value for the current section
+     * @param  array  $values  Config "parameter = value" for the current section
      * @return void
      */
     public static function setSection($section, $values) {
         self::$config[$section] = $values;
     }
 
-    /** Get parameters with their values from the specified config section.
+    /** Gets parameters with their values from the specified config section.
      * @param  string $section Name of the config section
      * @return array           Config parameters = values for the current section or empty array
      */
@@ -60,7 +62,7 @@ class CONFIG {
         return empty(self::$config[$section]) ? [] : self::$config[$section];
     }
 
-    /** Remove specified config section.
+    /** Removes specified config section.
      * @param  string $section Name of the config section
      * @return void
      */
@@ -68,7 +70,7 @@ class CONFIG {
         if (!empty(self::$config[$section])) unset(self::$config[$section]);
     }
 
-    /** Set the parameter with its value for the specified config section.
+    /** Sets the parameter with its value for the specified config section.
      * @param  string $section Name of the config section
      * @param  string $param   Name of the config parameter
      * @param  mixed  $value   Value of the specified parameter
@@ -78,7 +80,7 @@ class CONFIG {
         self::$config[$section][$param] = $value;
     }
 
-    /** Get the parameter with its value from the specified config section.
+    /** Gets the parameter with its value from the specified config section.
      * @param  string $section Name of the config section
      * @param  string $param   Name of the config parameter
      * @return array|FALSE     Value of the specified parameter
@@ -87,7 +89,7 @@ class CONFIG {
         return empty(self::$config[$section][$param]) ? FALSE : self::$config[$section][$param];
     }
 
-    /** Create and save the config file.
+    /** Creates and saves the config file.
      * It can create sections with parameters and sections where parameter is an array.
      * @return boolean The result of the operation
      */

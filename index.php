@@ -7,7 +7,7 @@
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
  * @package   Core
  */
 
@@ -202,7 +202,7 @@ switch($MODULE) {
 
         /** Root directory for administrative part of CMS. */
         define('ADMIN', ROOT.'admin'.DS);
-        /** Libruries for administration panel. */
+        /** Libruaries for administration panel. */
         define('ADMINLIBS', ADMIN.'libs'.DS);
         /** Templates for administration panel. */
         define('TEMPLATES', ADMIN.'templates'.DS);

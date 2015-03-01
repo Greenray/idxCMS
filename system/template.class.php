@@ -2,22 +2,8 @@
 # idxCMS Flat Files Content Management Sysytem
 
 /** Class TEMPLATE - templates parser.
- * Array variable $match contains:
- * - $matches[0] = part of template between control structures including them
- * - $matches[1] = variable name
- * - $matches[2] = part of template between control structures excluding them
- * Example:
- * <pre>
- *   array(
- *      0 => '[each=months]
- *                <option value="{months[num]}" [if=months[selected]]selected="selected"[endif]>{months[name]}</option>
- *            [endeach.months]';
- *      1 => 'months';
- *      2 => '<option value="{months[num]}" [if=months[selected]]selected="selected"[endif]>{months[name]}</option>';
- *   );
- * </pre>
  *
- * @file      system/system.class.php
+ * @file      system/template.class.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2015 Victor Nabatov
@@ -45,7 +31,7 @@ class TEMPLATE {
         'each'      => "#\[each=(.*?)\](.*?)\[endeach.\\1\]#is",
         'foreach'   => "#\[foreach=([\w\_\-]*).([\w\_\-]*).([\w\_\-]*)\](.*?)\[endforeach.\\1\]#is",
         'for'       => "#\[for=(.*?)\](.*?)\[endfor\]#is",
-        'if'        => "#\[if=(.*?)(|\[(.*?)\])\](.*?)\[endif\]#is",
+        'if'        => "#\[if=(.*?)(|\[(.*?)\])\](.*)\[endif\]#is",
         'ifelse'    => "#\[ifelse=(.*?)(|\[(.*?)\])\](.*?)\[else\](.*?)\[endelse\]#is",
         'translate' => "#\[__(.*?)\]#is",
         'value'     => "#\{([\-\#\w]+)(|\[(.*?)\])\}#is",
@@ -53,10 +39,14 @@ class TEMPLATE {
     ];
 
     /** Class initialization.
+     *
+     * <pre>
      * There are three templates directories:
-     * - ./skins/CURRENT_SKIN/        created (modified) templates by site's disigner
-     * - ./system/modules/__MODULE__/ original module templates
-     * - ./system/templates/          common templates for two or more modules
+     * - ./skins/CURRENT_SKIN/        - created (modified) templates by site's disigner
+     * - ./system/modules/__MODULE__/ - original module templates
+     * - ./system/templates/          - common templates for two or more modules
+     * </pre>
+     *
      * @param  string $template Path to template
      * @return void
      */
@@ -73,9 +63,11 @@ class TEMPLATE {
         }
     }
 
-    /** Parse control structure FOREACH.
+    /** Parses control structure FOREACH.
+     *
      * The template is:
      * [foreach=var1.var2.var3]...[endforeach.var1]
+     *
      * @param  array $matches Matches for control structure "foreach"
      * @return string         Parsed string
      */
@@ -84,7 +76,6 @@ class TEMPLATE {
         if (!empty($this->vars[$matches[1]])) {
             foreach ($this->vars[$matches[1]] as $key => $var) {
                 preg_match($this->patterns['if'], $matches[4], $sigs);
-                # Parse:
                 # [foreach=var1.var2.var3]
                 #     [if]...[endif]
                 # [endforeach.var1]
@@ -95,7 +86,6 @@ class TEMPLATE {
                         $tmp = str_replace($sigs[0], '', $matches[4]);
                     }
                 } else $tmp = $matches[4];
-                # Parse:
                 # [foreach=var1.var2.var3]
                 #     {var}
                 # [endforeach.var1]
@@ -105,10 +95,12 @@ class TEMPLATE {
         return str_replace($matches[0], $temp, $matches[0]);
     }
 
-    /** Parse control structure EACH.
-     * The template is:
+    /** Parses control structure EACH.
+     *
+     * The templates are:
      * - [each=var]...[endeach.var]
      * - [each=var[index]]...[endeach.var[index]]
+     *
      * @param  array $matches Matches for control structure "each"
      * @return string         Parsed string
      */
@@ -118,7 +110,7 @@ class TEMPLATE {
             foreach ($this->vars[$matches[1]] as $key => $var) {
                 $tpl = $matches[2];
                 if (is_array($var)) {
-                    # Parse: [each=var[index]]...[endeach.var[index]
+                    # [each=var[index]]...[endeach.var[index]]
                     preg_match_all('#\[each='.$matches[1].'\[(.*)\]\](.*?)\[endeach.'.$matches[1].'\[\\1\]\]#is', $tpl, $sigs);
                     if (!empty($sigs[0])) {
                         $tmp = $sigs[2][0];
@@ -137,7 +129,6 @@ class TEMPLATE {
                             }
                             $tpl = str_replace($sigs[0][0], $tmpl, $tpl);
                         }
-                        # Parse nested code:
                         # [each=var[index]]
                         #     [ifelse=var]...[endelse]
                         # [endeach.var[index]]
@@ -151,7 +142,6 @@ class TEMPLATE {
                                     } else {
                                         $tmpl .= str_replace($ifsigs[0], $ifsigs[5], $tmp);
                                     }
-                                    # Parse nested code:
                                     # [each=var[index]]
                                     #     [ifelse=var]
                                     #         {var[index]}
@@ -164,7 +154,6 @@ class TEMPLATE {
                             }
                             $tpl = str_replace($sigs[0][0], $tmpl, $tpl);
                         }
-                        # Parse nested code:
                         # [each=var[index]]
                         #     {var[index]}
                         # [endeach.var[index]]
@@ -185,7 +174,6 @@ class TEMPLATE {
                             $tpl = str_replace($sigs[0][0], $tmpl, $tpl);
                         }
                     }
-                    # Parse nested code:
                     # [each=var[index]]
                     #     [if=var]...[endif]
                     # [endeach.var[index]]
@@ -199,7 +187,6 @@ class TEMPLATE {
                             }
                         }
                     }
-                    # Parse nested code:
                     # [each=var[index]]
                     #     [ifelse=var]...[endelse]
                     # [endeach.var[index]]
@@ -214,7 +201,6 @@ class TEMPLATE {
                             }
                         }
                     }
-                    # Parse nested code:
                     # [each=var[index]]
                     #     {var[index][subindex]}
                     # [endeach.var[index]]
@@ -232,7 +218,6 @@ class TEMPLATE {
                             }
                         }
                     }
-                    # Parse nested code:
                     # [each=var[index]]
                     #     {var[index]}
                     # [endeach.var[index]]
@@ -246,7 +231,6 @@ class TEMPLATE {
                     }
                     $temp .= $tpl;
                 } else {
-                    # Parse nested code:
                     # [each=var[index]]
                     #     {var}
                     # [endeach.var[index]]
@@ -257,9 +241,11 @@ class TEMPLATE {
         return str_replace($matches[0], $temp, $matches[0]);
     }
 
-    /** Parse of a control structure FOR.
+    /** Parses of a control structure FOR.
+     *
      * The template is:
      * [for=x.var]...[endfor]
+     *
      * @param  array  $matches Matches for control structure "each"
      * @return string          Parsed string
      */
@@ -275,9 +261,11 @@ class TEMPLATE {
         return str_replace($matches[0], $result, $matches[0]);
     }
 
-    /** Parse of a control structure IF ELSE.
+    /** Parses of a control structure IF ELSE.
+     *
      * The template is:
      * [ifelse=var]...[else]...[endelse]
+     *
      * @param  array  $matches Matches for control structure "if else"
      * @return string          Parsed string
      */
@@ -294,17 +282,32 @@ class TEMPLATE {
         return str_replace($matches[0], $matches[4], $matches[0]);
     }
 
-    /** Parse of a control structure IF.
-     * The template is:
+    /** Parses of a control structure IF.
+     *
+     * The templates are:
      * [if=var]...[endif]
+     * [if=var]
+     *      [if=var]...[endif]
+     * [endif]
      * [if=var[index]]...[endif]
+     *
+     * Array variable $matches contains:
+     * - $matches[0] = part of template between control structures including them;
+     * - $matches[1] = variable name;
+     * - $matches[2] = first variable index;
+     * - $matches[3] = second variable index;
+     * - $matches[4] = part of template between control structures excluding them.
+     *
      * @param  array  $matches Matches for control structure "if"
      * @return string          Parsed string
      */
     private function __if($matches) {
-        if (empty($this->vars[$matches[1]])) {
+        if (!isset($this->vars[$matches[1]])) {
             return str_replace($matches[0], '', $matches[0]);
         }
+        # [if=var]
+        #     [if=var]...[endif]
+        # [endif]
         if (!empty($matches[3])) {
             $var = SearchValueInArray($matches[3], $this->vars[$matches[1]]);
             if (empty($var)) {
@@ -312,7 +315,7 @@ class TEMPLATE {
             }
         }
         if (is_array($this->vars[$matches[1]])) {
-            # Parse: [if=var]...{var[index]}...[endif]
+            # [if=var]...{var[index]}...[endif]
             preg_match_all('/\{'.$matches[1].'(|\[(.*)\])\}/U', $matches[4], $sigs);
             if (!empty($sigs)) {
                 foreach ($sigs[2] as $key => $value) {
@@ -332,8 +335,14 @@ class TEMPLATE {
     }
 
     /** Localization.
+     *
      * The template is:
      * [__var]
+     *
+     * Array variable $matches contains:
+     * - $matches[0] = part of template between control structures including them;
+     * - $matches[1] = part of template between control structures excluding them.
+     *
      * @param  array  $matches Matches for control structure "if"
      * @return string          Parsed string
      */
@@ -342,20 +351,24 @@ class TEMPLATE {
     }
 
     /** Replaces constants and variables with their values.
-     * The template is:
+     *
+     * <pre>
+     * The templates are:
      * {var}        - constant or plain variable
      * {var[index]} - array of variables
      * {var[index[x]][index[y]]} - array of variables
+     * </pre>
+     *
      * @param  array  $matches Matches for control structure "if"
      * @return string          Parsed string
      */
     private function __value($matches) {
-        # Parse CONSTANT
+        # CONSTANT
         if (defined($matches[1])) {
             return str_replace($matches[0], constant($matches[1]), $matches[0]);
         }
         if (isset($this->vars[$matches[1]])) {
-            # Parse: {var[index][subindex[x]]}
+            # {var[index][subindex[x]]}
             preg_match_all('/\{'.$matches[1].'\[(.*)\]\[(.*)\]\}/U', $matches[0], $sigs);
             if (!empty($sigs)) {
                 foreach($sigs[1] as $k => $idx) {
@@ -368,26 +381,27 @@ class TEMPLATE {
                 }
             }
             if (isset($matches[3])) {
-                # Parse: {var[index][subindex]}
+                # {var[index][subindex]}
                 return str_replace($matches[0], $this->vars[$matches[1]][$matches[3]], $matches[0]);
             }
             if (is_array($this->vars[$matches[1]])) {
-                # Parse: {var[index]}
+                #  {var[index]}
                 return str_replace($matches[0], current($this->vars[$matches[1]]), $matches[0]);
             }
             if (array_key_exists($matches[1], $this->vars)) {
-                # Parse using key of variables array: {var[index]}
+                # Uses key of variables array: {var[index]}
                 return str_replace($matches[0], $this->vars[$matches[1]], $matches[0]);
             }
         }
         return $matches[0];
     }
 
-    /** Parse element.
+    /** Shows element.
+     *
      * @param  array  $matches Matches for parse
      * @return string          Parsed string
      */
-    private function __element($matches) {
+    private function __show($matches) {
         if (!empty($matches)) {
             $params = explode(',', $matches[1]);
             if (!empty($params[1])) {
@@ -398,7 +412,8 @@ class TEMPLATE {
         }
     }
 
-    /** Parse template with given variables.
+    /** Parses template with given variables.
+     *
      * @param  array  $params Template variables
      * @return string         Parsed template
      */
@@ -412,7 +427,7 @@ class TEMPLATE {
         $tpl = preg_replace_callback($this->patterns['for'],       [&$this, '__for'],       $tpl);
         $tpl = preg_replace_callback($this->patterns['translate'], [&$this, '__translate'], $tpl);
         $tpl = preg_replace_callback($this->patterns['value'],     [&$this, '__value'],     $tpl);
-        $tpl = preg_replace_callback($this->patterns['show'],      [&$this, '__element'],   $tpl);
+        $tpl = preg_replace_callback($this->patterns['show'],      [&$this, '__show'],      $tpl);
         return $tpl;
     }
 }

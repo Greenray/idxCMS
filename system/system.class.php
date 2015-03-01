@@ -2,11 +2,12 @@
 # idxCMS Flat Files Content Management Sysytem
 
 /** System, modules, users and templates initialization.
+ *
  * @file      system/system.class.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
  * @package   Core
  */
 
@@ -56,6 +57,7 @@ class SYSTEM {
      * - 'title' name of the current page will be added to the website title, if the last has been configured
      * - 'meta'  configured meta tags will be added to the head of the generating page
      * - 'error' an error message will be shown
+     *
      * @param string
      */
     public static  $current_point = '';
@@ -101,16 +103,19 @@ class SYSTEM {
     private static $meta = [];
 
     /** Class initialization.
+     *
      * @return void
      * @uses $LANG Website translations
      */
     public function __construct() {
         global $LANG;
+
         # Detect website url
         self::$url = CMS::call('CONFIG')->getValue('main', 'url');
         if (empty(self::$url)) {
             self::$url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['SCRIPT_NAME'].basename($_SERVER['SCRIPT_NAME'])).DS;
         }
+
         # Check if it is allowed to change website language and set user or default language
         $COOKIE = CMS::call('FILTER')->getAll('COOKIE');
         $cookie_lang    = CONFIG::getValue('main', 'cookie').'_lang';
@@ -125,14 +130,18 @@ class SYSTEM {
                 }
             }
         }
+
         # Avaible localizations list
         $langs = GetFilesList(SYS.'languages');
         foreach ($langs as $lng) {
             self::$languages[] = basename($lng, '.php');
         }
+
         include_once SYS.'languages'.DS.self::$language.'.php';
+
         self::$language = $LANG['language'];
         self::$locale   = $LANG['locale'];
+
         $cookie = time() + 3600 * 24 * 365 * 5;
         setcookie($cookie_lang, self::$language, $cookie);
         # Check if it is allowed to change website skin and set user or default skin.
@@ -148,6 +157,7 @@ class SYSTEM {
                 }
             }
         }
+
         setcookie($cookie_skin, self::$skin, $cookie);
         if (is_dir(SKINS.self::$skin)) {
             /** User defined skin. */
@@ -156,6 +166,7 @@ class SYSTEM {
     }
 
     /** Set system parameter.
+     *
      * @param  string $param System parameter
      * @param  string $value Value of the system parameter
      * @return void
@@ -165,6 +176,7 @@ class SYSTEM {
     }
 
     /** Get system parameter.
+     *
      * @param  string $param System parameter
      * @return string        Value of the requested parameter
      */
@@ -173,6 +185,7 @@ class SYSTEM {
     }
 
     /** Modules initialization.
+     *
      * @param  boolean $ignore_disabled Init all existing modules
      * @return void
      * @uses array $LANG Website translations
@@ -183,10 +196,12 @@ class SYSTEM {
         if (empty($enabled) || $ignore_disabled) {
             $enabled = array_flip(GetFilesList(MODULES));
         }
+
         $included = [];
         foreach ($enabled as $module => $null) {
             $mod = explode('.', $module, 2);
             if (!in_array($mod[0], $included)) {
+
                 include_once MODULES.$mod[0].DS.'module.php';
                 $included[] = $mod[0];
             }
@@ -199,6 +214,7 @@ class SYSTEM {
      * - main (for full pages);
      * - box (for panels or boxes);
      * - plugin (cannot be showed on any page).
+     *
      * @param  string $module Module name
      * @param  string $title  Module title
      * @param  string $type   Module type
@@ -213,6 +229,7 @@ class SYSTEM {
 
     /** Register RSS feed for module.
      * RSS feed ID is looks like "module@section".
+     *
      * @param  string $section RSS feed ID
      * @param  string $title   RSS feed title
      * @param  string $desc    RSS feed description
@@ -224,6 +241,7 @@ class SYSTEM {
     }
 
     /** Register module for menu link.
+     *
      * @param  string $module Module name
      * @return void
      */
@@ -232,6 +250,7 @@ class SYSTEM {
     }
 
     /** Register module for use in sitemap.
+     *
      * @param  string $module Module name
      * @return void
      */
@@ -240,6 +259,7 @@ class SYSTEM {
     }
 
     /** Register module for search requests.
+     *
      * @param  string $module Module name
      * @return void
      */
@@ -248,6 +268,7 @@ class SYSTEM {
     }
 
     /** Register module for menu link.
+     *
      * @param  string $name Skin name
      * @param  string $skin Skin template
      * @return void
@@ -257,6 +278,7 @@ class SYSTEM {
     }
 
     /** Set the point for output.
+     *
      * @param  type $point Output point name
      * @return void
      */
@@ -280,6 +302,7 @@ class SYSTEM {
     }
 
     /** Show window.
+     *
      * @param  string $title    The title of the output data
      * @param  string $content  The content for use in output
      * @param  string $align    Page data alignment
@@ -316,6 +339,7 @@ class SYSTEM {
     /** Set keywords for requested website page.
      * This description will be used in meta tag.
      * If some words has been set in website configuration (global keywords) the $keywords will be added to them.
+     *
      * @param  string $keywords Page keywords
      * @return void
      */
@@ -325,6 +349,7 @@ class SYSTEM {
 
     /** Set description for requested website page.
      * This description will be used in meta tag.
+     *
      * @param  string $desc Page description
      * @return void
      */
@@ -334,12 +359,14 @@ class SYSTEM {
 
     /** Get website navigation points.
      * If navigation is not exists it will be created.
+     *
      * @return array Website navigation points
      */
     public function getNavigations() {
         if (empty(self::$navigation)) {
             return self::createNavigation();
         }
+
         return self::$navigation;
     }
 
@@ -422,6 +449,7 @@ class SYSTEM {
 
     /** Create main menu for website.
      * The menu will be created only for registered and enabled modules.
+     * 
      * @return boolean The result of operation
      */
     public function createMainMenu() {

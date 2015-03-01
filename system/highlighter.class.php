@@ -2,6 +2,7 @@
 # idxCMS Flat Files Content Management Sysytem
 
 /** HTML and PHP highlighter.
+ *
  * @file      system/highlighter.class.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
@@ -12,35 +13,42 @@
 
 class HIGHLIGHTER extends PARSER {
 
-    /** The results of parsing
+    /** The results of parsing.
      * @var string
      */
-    private $output  = '';
-    /** Text to parse
+    private $output = '';
+
+    /** Text to parse.
      * @var string
      */
-    private $text    = '';
-    /** Start parsing from the begining
+    private $text = '';
+
+    /** Start parsing from the begining.
      * @var integer
      */
     private $current = 0;
-    /** Tag name color
+
+    /** Tag name color.
      * @var string
      */
-    private $tag     = 'color:blue;';
-    /** Tag attribute color
+    private $tag = 'color:blue;';
+
+    /** Tag attribute color.
      * @var string
      */
-    private $attr    = 'color:green;';
-    /** Tag value color
+    private $attr = 'color:green;';
+
+    /** Tag value color.
      * @var string
      */
-    private $value   = 'color:red;';
-    /** php tag color
+    private $value = 'color:red;';
+    
+    /** php tag color.
      * @var string
      */
-    private $php     = 'color:black';
-    /** inline style for comment
+    private $php = 'color:black';
+
+    /** inline style for comment.
      * @var string
      */
     private $comment = 'font-style:italic;color:gray;';
@@ -185,7 +193,7 @@ class HIGHLIGHTER extends PARSER {
         --$this->current;
     }
 
-    /** Hightlight string.
+    /** Hightlights string.
      * @return string Highlighted html
      */
     public function highlight() {

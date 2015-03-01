@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 
-/** Register objects and provide access to their methods.
+/** Registers objects and provides access to their methods.
  * @file      system/cms.class.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
@@ -23,7 +23,7 @@ class CMS {
     /** Prevent to clone object. */
     private function __clone() {}
 
-    /** Create and register the object.
+    /** Creates and registers the object.
      * @param  string $class Class name
      * @return object        Created and initialized object
      */
@@ -32,11 +32,11 @@ class CMS {
         return self::$obj[$class];
     }
 
-    /** Call the object, if object is not set it will be created.
-     * Example:
+    /** Calls the object, if object is not set it will be created.
      * <pre>
-     * $CMS = CMS::call('SYSTEM'); - when it is need to initialize object
-     * CMS::call('SYSTEM')->initModules(); - calling an object method
+     * Examples:
+     *     $CMS = CMS::call('SYSTEM');                - when it is need to initialize object
+     *     $CMS = CMS::call('SYSTEM')->initModules(); - calling an object method
      * </pre>
      * @param  string $class Class name
      * @return object        Existing or created and initialized object
@@ -45,7 +45,7 @@ class CMS {
         return empty(self::$obj[$class]) ? self::register($class) : self::$obj[$class];
     }
 
-    /** Remove the object.
+    /** Removes the object.
      * @param  string $class Class name
      * @return void
      */

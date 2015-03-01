@@ -106,7 +106,7 @@ class PARSER {
         ]);
     }
 
-    /** Parse smiles in text.
+    /** Parses smiles in text.
      * @return string HTML tag with smile image
      */
     private function parseSmiles() {
@@ -132,7 +132,7 @@ class PARSER {
         }
     }
 
-    /** Parse [code]...[/code] bbtag.
+    /** Parses [code]...[/code] bbtag.
      * @return string HTML div block with highlited php code
      */
     function parseCode() {
@@ -147,7 +147,7 @@ class PARSER {
         }
     }
 
-    /** Parse [php]...[/php] bbtag.
+    /** Parses [php]...[/php] bbtag.
      * @return string HTML div block with highlited php code
      */
     private function parsePhp() {
@@ -165,7 +165,7 @@ class PARSER {
         }
     }
 
-    /** Parse [html]...[/html] bbtag.
+    /** Parses [html]...[/html] bbtag.
      * @return string HTML div block with highlited html tags
      */
     private function parseHtml() {
@@ -180,7 +180,7 @@ class PARSER {
         }
     }
 
-    /** Parse [qoute|quote="Who"]...[/qoute] bbtags.
+    /** Parses [qoute|quote="Who"]...[/qoute] bbtags.
      * @return string HTML div block with the quoted text
      */
     private function parseQuote() {
@@ -195,7 +195,7 @@ class PARSER {
         );
     }
 
-    /** Show spoiler with hidden text.
+    /** Shows spoiler with hidden text.
      * @param  array  $matches Array of spoiler parameters
      * @return string          HTML div block with hidden text
      */
@@ -212,7 +212,7 @@ class PARSER {
         }
     }
 
-    /** Parse [img]...[/img] bbtag.
+    /** Parses [img]...[/img] bbtag.
      * @param  string $path Path to images directory
      * @return string       HTML div block with the image
      */
@@ -290,7 +290,7 @@ class PARSER {
         }
     }
 
-    /** Parse [mp3]...[/mp3] bbtag.
+    /** Parses [mp3]...[/mp3] bbtag.
      * @return string HTML block with flash mp3 player
      */
     private function parseMP3() {
@@ -306,7 +306,7 @@ class PARSER {
                 </object>';
     }
 
-    /** Parse [youtube]...[/youtube] bbtag.
+    /** Parses [youtube]...[/youtube] bbtag.
      * @return string HTML block with youtube player
      */
     private function parseYouTube() {
@@ -340,7 +340,7 @@ class PARSER {
         return $this->text;
     }
 
-    /** Parse text.
+    /** Parses text.
      * @param  string $text Text for parsing
      * @param  string $path Path to the images directory
      * @return string       Parsed text

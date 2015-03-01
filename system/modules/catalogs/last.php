@@ -11,10 +11,9 @@ $items = CMS::call('CATALOGS')->getSectionsLastItems($sections);
 if (!empty($items)) {
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'last.tpl');
     ShowWindow(
-        __('Updates'), 
+        __('Updates'),
         $TPL->parse(
             CMS::call('CATALOGS')->getLastItems($items)
         )
     );
 }
-?>

@@ -2,6 +2,7 @@
 # idxCMS Flat Files Content Management Sysytem
 
 /** Galleries initialization.
+ * 
  * @file      system/polls.class.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
@@ -13,12 +14,12 @@ if (!defined('idxCMS')) die();
 
 class POLLS {
 
-    public  $active = [];       # Current poll
-    public  $old    = [];       # Old poll
-    private $cookie = '';
+    public  $active  = [];       # Current poll
+    public  $old     = [];       # Old poll
+    private $_cookie = '';
 
     public function __construct() {
-        $this->cookie = CONFIG::getValue('main', 'cookie');
+        $this->_cookie = CONFIG::getValue('main', 'cookie');
     }
 
     public function getActivePolls() {
@@ -109,7 +110,7 @@ class POLLS {
         }
         $this->active[$poll]['count'][$answer]++;
         $this->active[$poll]['ips'][] = $user;
-        setcookie($this->cookie.'_poll['.$poll.']', $poll, time() + 3600 * 24 * 365 * 5);
+        setcookie($this->_cookie.'_poll['.$poll.']', $poll, time() + 3600 * 24 * 365 * 5);
         return $this->savePolls(TRUE, FALSE);
     }
 
@@ -118,7 +119,7 @@ class POLLS {
         if (in_array($user, $this->active[$poll]['ips'])) {
             return TRUE;
         }
-        if (!empty($_COOKIE[$this->cookie.'_poll']) && is_array($_COOKIE[$this->cookie.'_poll']) && in_array($poll, $_COOKIE[$this->cookie.'_poll'])) {
+        if (!empty($_COOKIE[$this->_cookie.'_poll']) && is_array($_COOKIE[$this->_cookie.'_poll']) && in_array($poll, $_COOKIE[$this->_cookie.'_poll'])) {
             return TRUE;
         }
         return FALSE;

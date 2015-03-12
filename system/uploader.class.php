@@ -13,31 +13,6 @@
 
 class UPLOADER {
 
-    /** Directory for uploaded files.
-     * @var string
-     */
-    private $upload_dir;
-
-    /** Max size for uploading files.
-     * @var integer
-     */
-    private $max_size;
-
-    /** Size of uploading file.
-     * @var integer
-     */
-    private $file_size;
-
-    /** Temorary file.
-     * @var string
-     */
-    private $file_tmp;
-
-    /** Type of the file.
-     * @var string
-     */
-    private $file_type;
-
     /** Allowed types of file for uploading.
      * @var array
      */
@@ -52,7 +27,33 @@ class UPLOADER {
         'audio/mp3'
     ];
 
+    /** Max size for uploading files.
+     * @var integer
+     */
+    private $max_size;
+
+    /** Temorary file.
+     * @var string
+     */
+    private $file_tmp;
+
+    /** Size of uploading file.
+     * @var integer
+     */
+    private $file_size;
+
+    /** Type of the file.
+     * @var string
+     */
+    private $file_type;
+
+    /** Directory for uploaded files.
+     * @var string
+     */
+    private $upload_dir;
+
     /** Class initialization.
+     *
      * @param  string  $upload_dir Directory for uploading of files
      * @param  integer $max_size   Max size for uploading files
      * @return void
@@ -63,6 +64,7 @@ class UPLOADER {
     }
 
     /** Set file parameters.
+     *
      * @param  array $file Array of file parameters
      * @return void
      */

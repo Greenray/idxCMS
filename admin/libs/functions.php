@@ -89,14 +89,14 @@ function GetColor($name = 'idselector', $def_color = '') {
         while ($col_g <= 255) {
             $col_b = 0;
             while ($col_b <= 255) {
-                $red   = dechex($col_r);
-                $green = dechex($col_g);
-                $blue  = dechex($col_b);
-                $color = str_pad($red, 2, '0', STR_PAD_LEFT).''.str_pad($green, 2, '0', STR_PAD_LEFT).''.str_pad($blue, 2, '0', STR_PAD_LEFT);
+                $red     = dechex($col_r);
+                $green   = dechex($col_g);
+                $blue    = dechex($col_b);
+                $color   = str_pad($red, 2, '0', STR_PAD_LEFT).''.str_pad($green, 2, '0', STR_PAD_LEFT).''.str_pad($blue, 2, '0', STR_PAD_LEFT);
                 $output .= '<td height="12px" width="12px" bgcolor="#'.$color.'" onclick="selectColor(\'#'.$color.'\');" style="cursor: pointer;"></td>';
                 $row_return++;
                 if ($row_return === 18) {
-                    $output .= '</tr><tr>';
+                    $output    .= '</tr><tr>';
                     $row_return = 0;
                 }
                 $col_b += 51;
@@ -109,12 +109,12 @@ function GetColor($name = 'idselector', $def_color = '') {
                 <tr>';
     $col = 15;
     while ($col <= 255) {
-        $red   = strtoupper(dechex($col));
-        $green = strtoupper(dechex($col));
-        $blue  = strtoupper(dechex($col));
-        $color = str_pad($red, 2, '0', STR_PAD_LEFT).''.str_pad($green, 2, '0', STR_PAD_LEFT).''.str_pad($blue, 2, '0', STR_PAD_LEFT);
+        $red     = strtoupper(dechex($col));
+        $green   = strtoupper(dechex($col));
+        $blue    = strtoupper(dechex($col));
+        $color   = str_pad($red, 2, '0', STR_PAD_LEFT).''.str_pad($green, 2, '0', STR_PAD_LEFT).''.str_pad($blue, 2, '0', STR_PAD_LEFT);
         $output .= '<td height="12px" width="12px" bgcolor="#'.$color.'" onclick="selectColor(\'#'.$color.'\')" style="cursor: pointer;"></td>';
-        $col += 15;
+        $col    += 15;
     }
     $output .= '</tr>
                </table>
@@ -140,7 +140,7 @@ function SaveSortedSections($obj, $params) {
     $sections = [];
     foreach ($sorted as $section => $values) {
         $new_categories = [];
-        $categories = CMS::call($obj)->getCategories($section);
+        $categories     = CMS::call($obj)->getCategories($section);
         foreach ($values as $i => $id) {
             # Get section and category
             $old = explode('.', $id);
@@ -149,7 +149,7 @@ function SaveSortedSections($obj, $params) {
             } else {
                 $moved = CMS::call($obj)->moveCategory($old[1], $old[0], $section);
                 # Category moved with new ID
-                $new_categories[$moved] = CMS::call($obj)->getCategory($moved);
+                $new_categories[$moved]       = CMS::call($obj)->getCategory($moved);
                 $new_categories[$moved]['id'] = $moved;
             }
         }

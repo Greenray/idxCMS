@@ -7,7 +7,7 @@
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
  * @package   Core
  */
 
@@ -55,7 +55,7 @@ class INDEX {
     }
 
     /** Calculate the new ID of the data for the index file.
-     * 
+     *
      * @param  array   $array For this array we need new ID for the new data
      * @return integer        Calculated ID
      */

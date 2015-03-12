@@ -2,6 +2,7 @@
 # idxCMS Flat Files Content Management Sysytem
 
 /** RSS aggregator.
+ *
  * @file      system/rss_aggregator.class.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
@@ -12,52 +13,53 @@
 
 class RSS_AGGREGATOR {
 
+    /** Date format
+     * @param string $date_format
+     */
+    public $date_format = '';
+
     /** Default encoding
      * @param string $default_cp
      */
     public $default_cp = 'UTF-8';
+
+    /** Channel tags
+     * @param array $channeltags
+     */
+    private $channeltags =['title', 'link', 'desc', 'language', 'copyright', 'managingEditor', 'webMaster', 'lastBuildDate', 'rating', 'docs'];
+
     public $CDATA = 'nochange';
-    public $cp = '';
+    public $cp    = '';
+
+    /** Image tags
+     * @param array $imagetags
+     */
+    private $imagetags = ['title', 'url', 'link', 'width', 'height'];
 
     /** Items limit
      * @param integer $items_limit
      */
     public $items_limit = 0;
 
-    /**
-     * Strip HTML?
+    /** Item tags
+     * @param array $itemtags
+     */
+    private $itemtags = ['title', 'link', 'desc', 'author', 'category', 'comments', 'enclosure', 'guid', 'pubDate', 'source'];
+
+    /** Strip HTML?
      * @param boolean $stripHTML
      */
     public $stripHTML = FALSE;
 
-    /** Date format
-     * @param string $date_format
-     */
-    public $date_format = '';
-
-    /** Channel tags
-     * @param array $channeltags
-     */
-    private $channeltags = array ('title', 'link', 'desc', 'language', 'copyright', 'managingEditor', 'webMaster', 'lastBuildDate', 'rating', 'docs');
-
-    /** Item tags
-     * @param array $itemtags
-     */
-    private $itemtags = array('title', 'link', 'desc', 'author', 'category', 'comments', 'enclosure', 'guid', 'pubDate', 'source');
-
-    /** Image tags
-     * @param array $imagetags
-     */
-    private $imagetags = array('title', 'url', 'link', 'width', 'height');
-
     /** Text input tags
      * @param array $textinputtags
      */
-    private $textinputtags = array('title', 'desc', 'name', 'link');
+    private $textinputtags = ['title', 'desc', 'name', 'link'];
 
-    /** Parse RSS file and returns associative array
+    /** Parse RSS file and returns associative array.
+     *
      * @param  string $rss_url RSS URL
-     * @return array - RSS data
+     * @return array           RSS data
      */
     public function get($rss_url) {
         // If CACHE ENABLED
@@ -94,9 +96,10 @@ class RSS_AGGREGATOR {
     }
 
     /** Modification of preg_match();
+     *
      * @param  string $pattern Pattern
      * @param  string $subject Subject
-     * @return string - Trimed field with index 1 from 'classic' preg_match() array output
+     * @return string          Trimed field with index 1 from 'classic' preg_match() array output
      */
     private function myPregMatch ($pattern, $subject) {
         preg_match($pattern, $subject, $out);        // Start regullar expression
@@ -104,9 +107,9 @@ class RSS_AGGREGATOR {
         if (isset($out[1])) {
             // Process CDATA (if present)
             if ($this->CDATA == 'content') {         // Get CDATA content (without CDATA tag)
-                $out[1] = strtr($out[1], array('<![CDATA['=>'', ']]>'=>''));
+                $out[1] = strtr($out[1], ['<![CDATA['=>'', ']]>'=>'']);
             } elseif ($this->CDATA == 'strip') {     // Strip CDATA
-                $out[1] = strtr($out[1], array('<![CDATA['=>'', ']]>'=>''));
+                $out[1] = strtr($out[1], ['<![CDATA['=>'', ']]>'=>'']);
             }
             // If code page is set convert character encoding to required
             if ($this->cp != '') {
@@ -119,8 +122,9 @@ class RSS_AGGREGATOR {
     }
 
     /** Replace HTML entities.
+     *
      * @param  string $string String
-     * @return string  - Parsed string
+     * @return string         Parsed string
      */
     public function UnHtmlEntities ($string) {
         $trans_tbl = get_html_translation_table(HTML_ENTITIES, ENT_QUOTES);  // Get HTML entities table
@@ -129,9 +133,10 @@ class RSS_AGGREGATOR {
         return strtr($string, $trans_tbl);                                   // Replace entities by values
     }
 
-    /** Parse RSS file
+    /** Parse RSS file.
+     *
      * @param  string $rss_url RSS URL
-     * @return array|boolean - Parsed RSS or FALSE
+     * @return array|boolean   Parsed RSS or FALSE
      */
     private function parse ($rss_url) {
         // Open and load RSS file

@@ -2,6 +2,7 @@
 # idxCMS Flat Files Content Management Sysytem
 
 /** Uploads and resize images.
+ *
  * @file      system/image.class.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
@@ -12,25 +13,15 @@
 
 class IMAGE {
 
-    /** Directory for uploaded files.
-     * @var string
+    /** Allowed image types.
+     * @var array
      */
-    private $upload_dir;
+    private $allowed_types = ['image/gif', 'image/jpeg', 'image/png'];
 
-    /** Max size for uploading files.
+    /** The height of the uploading image.
      * @var integer
      */
-    private $max_size;
-
-    /** The width of the thumbnail.
-     * @var integer
-     */
-    private $thumb_width;
-
-    /** The height of the thumbnail.
-     * @var integer
-     */
-    private $thumb_height;
+    private $image_height;
 
     /** The name of the uploading image.
      * @var string
@@ -42,32 +33,43 @@ class IMAGE {
      */
     private $image_size;
 
-    /** The width of the uploading image.
-     * @var integer
-     */
-    private $image_width;
-
-    /** The height of the uploading image.
-     * @var integer
-     */
-    private $image_height;
-
     /** Name of the temporary image.
      * @var string
      */
     private $image_tmp;
+
+    /** The width of the uploading image.
+     * @var integer
+     */
+    private $image_width;
 
     /** Image type.
      * @param string
      */
     private $image_type;
 
-    /** Allowed image types.
-     * @var array
+    /** Max size for uploading files.
+     * @var integer
      */
-    private $allowed_types = ['image/gif', 'image/jpeg', 'image/png'];
+    private $max_size;
+
+    /** The height of the thumbnail.
+     * @var integer
+     */
+    private $thumb_height;
+
+    /** The width of the thumbnail.
+     * @var integer
+     */
+    private $thumb_width;
+
+    /** Directory for uploaded files.
+     * @var string
+     */
+    private $upload_dir;
 
     /** Class initialization.
+     *
      * @param  string  $upload_dir   Name of the upload directory
      * @param  integer $max_size     Image max size
      * @param  integer $thumb_width  Thumbnail width
@@ -82,6 +84,7 @@ class IMAGE {
     }
 
     /** Set image parameters.
+     *
      * @param  array $image Image parameters
      * @param  array $info  Imege mime type
      * @return void
@@ -97,6 +100,7 @@ class IMAGE {
     }
 
     /** Check if image is valid.
+     *
      * @return boolean   TRUE if image is valid
      * @throws Exception Your file is not allowed or is corrupted
      * @throws Exception File is too large
@@ -112,6 +116,7 @@ class IMAGE {
     }
 
     /** Checks if the file is acceptable and uploads it to upload directory.
+     *
      * @param  array $image   Image parameters
      * @return string|boolean Image name or FALSE
      */
@@ -142,6 +147,7 @@ class IMAGE {
     }
 
     /** Generate thumbnail.
+     *
      * @param  string $file Image name
      * @return boolean      TRUE if oparation is successful
      */
@@ -173,6 +179,7 @@ class IMAGE {
     }
 
     /** Generate icon.
+     * 
      * @param  string $name Icon name
      * @return boolean      TRUE if oparation is successful
      */

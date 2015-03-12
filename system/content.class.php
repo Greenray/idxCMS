@@ -26,7 +26,7 @@ class CONTENT extends INDEX {
     /** Sections of the content of the carrent module.
      * @var array
      */
-    protected $sections = array();
+    protected $sections = [];
 
     /** ID of the current section.
      * @var string

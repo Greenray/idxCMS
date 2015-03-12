@@ -3,6 +3,7 @@
 
 /** Forum.
  * Module registration and internal functions.
+ *
  * @file      system/modules/forum/module.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
@@ -13,13 +14,14 @@
 
 if (!defined('idxCMS')) die();
 
-/** Forum data store. */
+/** Data storage for forum */
 define('FORUM', CONTENT.'forum'.DS);
 
 require SYS.'forum.class.php';
 
 /** Sort of array.
- * @param  array $array Array to sort
+ *
+ * @param  array $array Link to array to sort
  * @return array        Sorted array
  */
 function ArraySort(&$array) {
@@ -35,6 +37,7 @@ function ArraySort(&$array) {
 
 /** ArraySort callback.
  * String comparison.
+ *
  * @param  array   $a Fist array to compare
  * @param  array   $b Second array to compare (Default NULL)
  * @return boolean    The result of operation
@@ -42,7 +45,7 @@ function ArraySort(&$array) {
 function ArraySortFunc($a, $b = NULL) {
     static $keys;
     if ($b === NULL) {
-        return $keys = $a;
+        return $a;
     }
     foreach ($keys as $key) {
         if (@$key[0] == '!') {

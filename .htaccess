@@ -1,1 +1,15 @@
+DirectoryIndex index.php
+Options -Indexes
+<Files "\.(html)$">
+    Order Deny,Allow
+    Deny from all
+</Files>
+<Files "\.(htm)$">
+    Order Deny,Allow
+    Deny from all
+</Files>
+<Files "\.(shtml)$">
+    Order Deny,Allow
+    Deny from all
+</Files>
 deny from all

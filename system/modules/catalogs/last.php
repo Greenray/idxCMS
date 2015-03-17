@@ -1,19 +1,18 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE FORUM - LAST TOPICS
+# idxCMS Flat Files Content Management Sysytem
+# Module Catalogs
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
 
 $sections = CMS::call('CATALOGS')->getSections();
-$items = CMS::call('CATALOGS')->getSectionsLastItems($sections);
+$items    = CMS::call('CATALOGS')->getSectionsLastItems($sections);
 
 if (!empty($items)) {
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'last.tpl');
     ShowWindow(
         __('Updates'),
-        $TPL->parse(
-            CMS::call('CATALOGS')->getLastItems($items)
-        )
+        $TPL->parse(CMS::call('CATALOGS')->getLastItems($items))
     );
 }

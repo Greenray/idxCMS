@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE CATALOGS - FULL ITEM TEMPLATE
+# idxCMS Flat Files Content Management Sysytem
+# Module Catalogs
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
 
@@ -12,9 +13,7 @@ die();?>
         <span class="date">{date}</span>
     </div>
     <div class="title"><h1>{title}</h1></div>
-    <div class="text justify">
-        {text}
-    </div>
+    <div class="text justify">{text}</div>
     [if=song]
         <div class="center" style="margin:10px 0;">
             <object type="application/x-shockwave-flash" data="{TOOLS}scmp3player.swf" id="mp3player1" width="{width}" height="{height}">
@@ -41,9 +40,7 @@ die();?>
     [if=site]
         <div class="center"><hr /><a href="{link}&amp;go=1" target="_blank">[__Go]</a></div>
         <div class="info">
-            <span class="author center">
-                [__Posted by]: <a href="{MODULE}user&amp;user={author}">{nick}</a><br />[__Copyright]: &copy; {copyright}
-            </span>
+            <span class="author center">[__Posted by]: <a href="{MODULE}user&amp;user={author}">{nick}</a><br />[__Copyright]: &copy; {copyright}</span>
             <span class="admin">[__Transitions]: {clicks}</span>
         </div>
     [endif]

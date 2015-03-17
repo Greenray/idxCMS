@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE POSTS - NEWS
+# idxCMS Flat Files Content Management Sysytem
+# Module Posts
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
 
@@ -12,4 +13,3 @@ if (!empty($output)) {
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'last.tpl');
     ShowWindow(__('Last news'), $TPL->parse($output));
 }
-?>

@@ -1,14 +1,8 @@
 <?php
-# idxCMS: Flat Files Content Management System
-
-/** Editor and images browser and uploader.
- * @file      tools/editor.php
- * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
- * @package   Tools
- */
+# idxCMS Flat Files Content Management Sysytem
+# Editor
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS') || !USER::loggedIn()) die();
 
@@ -85,9 +79,7 @@ if (!empty($REQUEST['image']['name'])) {
                 </div>
             </div>
             <div id="close">
-                <form method="post" action="">
-                    <input type="button" onclick="window.close();" value="<?php echo __('Close');?>" />
-                </form>
+                <form method="post" action=""><input type="button" onclick="window.close();" value="<?php echo __('Close');?>" /></form>
             </div>
 <?php } else {
           if (!empty($REQUEST['text'])) {
@@ -120,9 +112,7 @@ if (!empty($REQUEST['image']['name'])) {
                 </div>
             </div>
             <div id="close">
-                <form method="post" action="">
-                    <input type="button" onclick="window.close();" value="<?php echo __('Close');?>" />
-                </form>
+                <form method="post" action=""><input type="button" onclick="window.close();" value="<?php echo __('Close');?>" /></form>
             </div>
     <?php }
 } ?>

@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE FORUM - LIST OF TOPICS IN CATEGORY TEMPLATE
+# idxCMS Flat Files Content Management Sysytem
+# Module Forum
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
 
@@ -24,7 +25,7 @@ die();?>
             [ifelse=topic[last_link]]
                 <td><a href="{topic[last_link]}">{topic[short]}</a></td>
             [else]
-                <td></td>
+                <td>&nbsp;</td>
             [endelse]
             <td class="center">{topic[nick]}</td>
             <td class="center">{topic[date]}</td>

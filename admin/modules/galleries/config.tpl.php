@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - GALLERIES - CONFIGURATION TEMPLATE
+# idxCMS Flat Files Content Management Sysytem
+# Administration - Galleries
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
 <div class="module">[__Options]</div>
@@ -35,7 +36,7 @@ die();?>
             <tr class="odd">
                 <td>[__Number of latest elements]</td>
                 <td colspan="2"><input type="text" name="last" value="{last}" size="4" class="text" /></td>
-            </tr>          
+            </tr>
         </table>
         <p class="center"><input type="submit" name="save" value="[__Save]" class="submit" /></p>
     </form>

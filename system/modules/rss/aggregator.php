@@ -1,12 +1,13 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# RSS AGGREGATOR
+# idxCMS Flat Files Content Management Sysytem
+# Module RSS
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
 
 $rss_cfg = CONFIG::getSection('rss-aggregator');
-$rss = new RSS_AGGREGATOR();
+$rss     = new RSS_AGGREGATOR();
 $rss->cache_time  = $rss_cfg['cache-time'];
 $rss->cache_dir   = CONTENT.'rss-cache';
 $rss->items_limit = CONFIG::getValue('main', 'last');
@@ -39,4 +40,3 @@ if (!empty($rss_cfg['feeds'])) {
         }
     }
 }
-?>

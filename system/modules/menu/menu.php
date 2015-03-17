@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE MENU
+# idxCMS Flat Files Content Management Sysytem
+# Module Menu
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
 
@@ -32,4 +33,3 @@ foreach($data as $module => $menu) {
 
 $output .= '</ul></div>';
 ShowWindow(__('Menu'), $output);
-?>

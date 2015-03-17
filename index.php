@@ -3,11 +3,12 @@
 # Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
-/** The core of the content management system.
+/* The core of the content management system.
+ *
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
  * @package   Core
  */
 
@@ -17,6 +18,7 @@ ini_set('default_charset', 'UTF-8');    # PHP >= 5.6.0, empty for PHP < 5.6.0
 mb_internal_encoding('UTF-8');
 setlocale(LC_CTYPE, ['ru_RU.UTF-8', 'ru_UA.UTF-8', 'by_BY.UTF-8', 'en_US.UTF-8', 'en_GB.UTF-8']);
 setlocale(LC_ALL,   ['ru_RU.UTF-8', 'ru_UA.UTF-8', 'by_BY.UTF-8', 'en_US.UTF-8', 'en_GB.UTF-8']);
+
 if (date_default_timezone_set(date_default_timezone_get()) === FALSE) {
     date_default_timezone_set('UTC');
 }
@@ -169,7 +171,7 @@ if (!empty($REQUEST['logout'])) {
     Redirect('index');
 }
 
-/** Requested module. */
+# Requested module
 $MODULE = empty($REQUEST['module']) ? 'index' : basename($REQUEST['module']);
 switch($MODULE) {
 
@@ -277,11 +279,9 @@ switch($MODULE) {
 
         # Get requested or default module.
         $mod = explode('.', $MODULE, 2);
-        if (empty(SYSTEM::$modules[$MODULE]) || !file_exists(MODULES.$mod[0].DS.end($mod).'.php')) {
-            include_once MODULES.'index'.DS.'index.php';
-        } else {
-            include_once MODULES.$mod[0].DS.end($mod).'.php';
-        }
+        if (empty(SYSTEM::$modules[$MODULE]) || !file_exists(MODULES.$mod[0].DS.end($mod).'.php'))
+             include_once MODULES.'index'.DS.'index.php';
+        else include_once MODULES.$mod[0].DS.end($mod).'.php';
 
         $skin = SYSTEM::get('skin');
 

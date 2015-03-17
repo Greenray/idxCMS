@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - MINICHAT - INITIALIZATION
+# idxCMS Flat Files Content Management Sysytem
+# Administration - Minichat
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN')) die();
 
@@ -18,4 +19,3 @@ switch (SYSTEM::get('locale')) {
 }
 $MODULES[$module][0] = __('Minichat');
 $MODULES[$module][1]['config'] = __('Minichat');
-?>

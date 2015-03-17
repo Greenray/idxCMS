@@ -1,15 +1,9 @@
 <?php
-/**
- * @file      system/modules/aphorisms/aphorisms.tpl.php
- * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- *            https://github.com/Greenray/idxCMS/system/cms.class.php>
- * @copyright (c) 2011 - 2015 Victor Nabatov\n
- *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
- */
+# idxCMS Flat Files Content Management Sysytem
+# Module Aphorizms
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
-/** Module APORISMS - template */
 die();?>
 
 <script type="text/javascript" src="{TOOLS}jquery.ui.min.js"></script>
@@ -28,8 +22,7 @@ die();?>
                         req = false;
                     }
                 }
-                if (!req && typeof XMLHttpRequest !== 'undefined')
-                    req = new XMLHttpRequest();
+                if (!req && typeof XMLHttpRequest !== 'undefined') req = new XMLHttpRequest();
                 return req;
             }
             function getData(url) {
@@ -54,10 +47,6 @@ die();?>
 </script>
 <div id="flipbox" class="center">{text}</div>
 <div id="flippad" class="center">
-    <a href="#" rel="rl" rev="transparent" title="[__Previous]">
-        <img src="{ICONS}arrow-left.png" width="16" height="16" alt="[__Previous]" />
-    </a>
-    <a href="#" rel="lr" rev="transparent" title="[__Next]">
-        <img src="{ICONS}arrow-right.png" width="16" height="16" alt="[__Next]" />
-    </a>
+    <a href="#" rel="rl" rev="transparent" title="[__Previous]"><img src="{ICONS}arrow-left.png" width="16" height="16" alt="[__Previous]" /></a>
+    <a href="#" rel="lr" rev="transparent" title="[__Next]"><img src="{ICONS}arrow-right.png" width="16" height="16" alt="[__Next]" /></a>
 </div>

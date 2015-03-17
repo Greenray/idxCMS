@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - USERS
+# idxCMS Flat Files Content Management Sysytem
+# Administration - User
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
 
@@ -41,4 +42,3 @@ $config += CONFIG::getSection('feedback');
 
 $TPL = new TEMPLATE(dirname(__FILE__).DS.'config.tpl');
 echo $TPL->parse($config);
-?>

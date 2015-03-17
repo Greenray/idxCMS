@@ -1,20 +1,12 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
-
-/** Rate system for comments and replays.
- * Module registration and internal functions.
- * @file      system/modules/posts/module.php
- * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
- * @package   Rate
- */
+# Module Rate
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
 
-/**
- * Rate publication.
+/** Rate publication.
  * @param  string  $user           User name
  * @param  string  $act            Action: up|down rate
  * @param  string  $id             Post ID
@@ -50,8 +42,7 @@ function RateComment($user, $act, $id) {
     return FALSE;
 }
 
-/**
- * Get rate for publication.
+/** Get rate for publication.
  * @param  string $for  Publication ID
  * @param  string $item Item
  * @return array        Rate data
@@ -66,8 +57,7 @@ function GetRate($for, &$item) {
     return GetUnserialized($item);
 }
 
-/**
- * Show rate for publication.
+/** Show rate for publication.
  * @param  string $for Publication ID
  * @return string      Parsed rate results
  */

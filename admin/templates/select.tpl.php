@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - APHORISMA - SELECT FILE TEMPLATE
+# idxCMS Flat Files Content Management Sysytem
+# Administration
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
 
@@ -13,9 +14,7 @@ die();?>
                 <td>[__Select file]</td>
                 <td colspan="2">
                     <select name="selected" style="width:200px">
-                        [foreach=select.id.name]
-                            <option value="{name}">{name}</option>
-                        [endforeach.select]
+                        [foreach=select.id.name]<option value="{name}">{name}</option>[endforeach.select]
                     </select>
                 </td>
             </tr>

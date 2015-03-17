@@ -1,23 +1,14 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
-
-/** Catalogs.
- * 
- * @file      system/modules/catalogs/catalogs.php
- * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
- * @package   Catalogs
- */
+# Module Catalogs
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
 
 $sections = CMS::call('CATALOGS')->getSections();
 
-if ($sections === FALSE) {
-    Redirect('catalogs');
-}
+if ($sections === FALSE) Redirect('catalogs');
 
 if (empty($sections)) {
     ShowWindow(__('Catalogs'), __('Database is empty'), 'center');

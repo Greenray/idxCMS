@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MINICHAT TEMPLATE
+# idxCMS Flat Files Content Management Sysytem
+# Module Minichat
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
 
@@ -94,10 +95,8 @@ die();?>
 [ifelse=allow_post]
     <div class="post-comment center">
         <form id="post" name="post" method="post" action="" onsubmit="return checkForm(this);">
-                <textarea id="mctext" name="mctext" rows="5">{mctext}</textarea>
-                [if=not_admin]
-                    [__Max message length] [<script type="text/javascript">displayLimit("", "mctext", '{message-length}')</script>] [__symbols]
-                [endif]
+            <textarea id="mctext" name="mctext" rows="5">{mctext}</textarea>
+            [if=not_admin][__Max message length] [<script type="text/javascript">displayLimit("", "mctext", '{message-length}')</script>] [__symbols][endif]
             <p class="center"><input type="submit" name="save" value="[__Save]" class="submit" /></p>
         </form>
     </div>

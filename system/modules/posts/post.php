@@ -1,14 +1,13 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE POSTS
+# idxCMS Flat Files Content Management Sysytem
+# Module Posts
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
 
 # Only registered users can post
-if (!USER::loggedIn()) {
-    Redirect('posts');
-}
+if (!USER::loggedIn()) Redirect('posts');
 
 $sections = CMS::call('POSTS')->getSections();
 
@@ -19,12 +18,8 @@ if (!CMS::call('USER')->checkRoot()) {
 } else {
     $section  = FILTER::get('REQUEST', 'section');
     $category = FILTER::get('REQUEST', 'category');
-    if (empty($section)) {
-        $section  = 'drafts';
-    }
-    if (empty($category)) {
-        $category = '1';
-    }
+    if (empty($section))  $section  = 'drafts';
+    if (empty($category)) $category = '1';
 }
 
 $post = FILTER::get('REQUEST', 'item');

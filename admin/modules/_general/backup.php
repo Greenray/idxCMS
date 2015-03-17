@@ -1,15 +1,18 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - BACKUP
+# idxCMS Flat Files Content Management Sysytem
+# Administration - Backup
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
 
 if (!empty($REQUEST['backup'])) {
     if (!empty($REQUEST['dir'])) {
-        $exclude_files = array('arj','avi','bzip','bzip2','gz','gzip','mp3','mov','mpeg','rar','tar','wmv','zip');  /**< Disallowed files */
-        $backup = BACKUPS.'backup_'.date('H-i-s_d.m.Y').'.tar.gz';                                                  /**< Backup file name */
-        $PHAR = new PharData($backup);                                                                              /**< Initialize backup */
+        $exclude_files = array('arj','avi','bzip','bzip2','gz','gzip','mp3','mov','mpeg','rar','tar','wmv','zip');
+
+        # Backup file name
+        $backup = BACKUPS.'backup_'.date('H-i-s_d.m.Y').'.tar.gz';
+        $PHAR = new PharData($backup);
 
         foreach($REQUEST['dir'] as $dir) {
             try {

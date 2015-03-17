@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - LOGS TEMPLATE
+# idxCMS Flat Files Content Management Sysytem
+# Administration - Statistic
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
 
@@ -33,9 +34,7 @@ die();?>
                 [each=month]
                     <tr class="odd">
                         <td>{month[date]}</td>
-                        <td>
-                            <input type="radio" name="browse" value="{month[log]}"> [__Select]
-                        </td>
+                        <td><input type="radio" name="browse" value="{month[log]}"> [__Select]</td>
                     </tr>
                 [endeach.month]
             </table>

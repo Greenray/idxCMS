@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# GUESTBOOK TEMPLATE
+# idxCMS Flat Files Content Management Sysytem
+# Module Guestbook
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
 
@@ -33,9 +34,7 @@ die();?>
                 [endif]
             </span>
         </div>
-        <div class="text justify">
-            {text}
-        </div>
+        <div class="text justify">{text}</div>
     </div>
     <div class="menu">
         [if=ban]<a href="{ban}&amp;action=ban&amp;host={ip}" title="[__Ban]">[ {ip} ]</a>[endif]

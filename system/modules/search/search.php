@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE SEARCH
+# idxCMS Flat Files Content Management Sysytem
+# Module Search
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
 
@@ -51,9 +52,7 @@ if (USER::loggedIn() || $config['allow-guest']) {
                             }
                         }
                         $founded[$word] = $result;
-                        if (!empty($founded[$word])) {
-                            $common = array_merge($common, $founded[$word]);
-                        }
+                        if (!empty($founded[$word])) $common = array_merge($common, $founded[$word]);
                     }
                 }
             } else {

@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 1.03
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - CATALOGS - LINK TEMPLATE
+# idxCMS Flat Files Content Management Sysytem
+# Administration - Catalogs
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
 <script type="text/javascript">

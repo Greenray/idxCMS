@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION  POSTS - CATEGORIES
+# idxCMS Flat Files Content Management Sysytem
+# Administration - Posts
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN')) die();
 
@@ -42,9 +43,7 @@ if (CMS::call('USER')->checkRoot()) {
     if (!empty($content)) {
         $output['system']['drafts']['categories'][1]['posts'] = TRUE;
     }
-} else {
-    unset($output['system']['drafts']['categories'][1]);
-}
+} else unset($output['system']['drafts']['categories'][1]);
 
 $output['system']['drafts']['categories'][2]['desc']  = CMS::call('PARSER')->parseText($output['system']['drafts']['categories'][2]['desc']);
 $output['system']['drafts']['categories'][2]['class'] = 'even';
@@ -113,7 +112,7 @@ if (!empty($REQUEST['edit'])) {
         $category['section'] = $section;
         $category['bbCodes'] = CMS::call('PARSER')->showBbcodesPanel('form.desc');
         $category['header']  = __('Edit');
-        
+
         $TPL = new TEMPLATE(dirname(__FILE__).DS.'category.tpl');
         echo $TPL->parse($category);
     }

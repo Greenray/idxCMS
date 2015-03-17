@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# Module BANNERS - TEMPLATE
+# idxCMS Flat Files Content Management Sysytem
+# Module Banners
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
 <script type="text/javascript" src="{TOOLS}jquery.mousewheel.js"></script>

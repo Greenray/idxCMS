@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE SITEMAP
+# idxCMS Flat Files Content Management Sysytem
+# Module Sitemap
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
 
@@ -9,7 +10,7 @@ $data   = GetUnserialized(CONTENT.'menu');
 $points = array_keys($data);
 $access = USER::getUser('access');
 
-$TPL = new TEMPLATE(dirname(__FILE__).DS.'sitemap.tpl');
+$TPL    = new TEMPLATE(dirname(__FILE__).DS.'sitemap.tpl');
 $output = '<div id="section"><ul class="level1">';
 
 foreach($data as $module => $menu) {
@@ -20,7 +21,6 @@ foreach($data as $module => $menu) {
             } else {
                 if (!empty($section['categories'])) {
                     foreach ($section['categories'] as $key => $category) {
-
                         if ($category['access'] > $access) {
                             unset($menu['sections'][$id]['categories'][$key]);
                         }
@@ -34,4 +34,3 @@ foreach($data as $module => $menu) {
 
 $output .= '</ul></div>';
 ShowWindow(__('Sitemap'), $output);
-?>

@@ -1,7 +1,8 @@
 <?php
-# idxCMS Development vesion
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE GALLERIES - RANDOM IMAGE TEMPLATE
+# idxCMS Flat Files Content Management Sysytem
+# Module Galleries
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
 

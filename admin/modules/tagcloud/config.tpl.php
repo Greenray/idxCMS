@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - TAGCLOUD - CONFIGURATION TEMPLATE
+# idxCMS Flat Files Content Management Sysytem
+# Administration - Tagcloud
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
 

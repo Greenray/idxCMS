@@ -1,14 +1,8 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
-
-/** Flash and text tagcloud.
- * @file      system/modules/tagcloud/tagcloud.php
- * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
- * @package   Tagcloud
- */
+# Module Tagcloud
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
 
@@ -20,9 +14,7 @@ if (!empty($tc['color'])) {
     for ($i = 0; $i < 11; $i++) {
         $colors[$i] = $tc['color'];
     }
-} else {
-    $colors = array('0xff0000','0x0000ff','0x00ff00','0xffff00','0xff00ff','0xff9900','0x808080','0x993300','0x00ffff','0x0f0f0f','0x6699ff');
-}
+} else $colors = array('0xff0000','0x0000ff','0x00ff00','0xffff00','0xff00ff','0xff9900','0x808080','0x993300','0x00ffff','0x0f0f0f','0x6699ff');
 
 # Colors for highlighting tags
 if (!empty($tc['hicolor'])) {
@@ -30,9 +22,7 @@ if (!empty($tc['hicolor'])) {
     for ($i = 0; $i < 11; $i++) {
         $hicolors[$i] = $tc['hicolor'];
     }
-} else {
-    $hicolors = array('0xff9900','0x808080','0x0000ff','0x00ff00','0xffff00','0x6699ff','0xff00ff','0x00ffff','0x993300','0xff0000','0x0f0f0f');
-}
+} else $hicolors = array('0xff9900','0x808080','0x0000ff','0x00ff00','0xffff00','0x6699ff','0xff00ff','0x00ffff','0x993300','0xff0000','0x0f0f0f');
 
 $tc['search'] = '';
 $tc['search_txt'] = '';
@@ -46,19 +36,16 @@ foreach ($search as $allowed) {
     }
 }
 
-if (empty($tc['wmode'])) {
-    $tc['wmode'] = '';
-} else {
-    $tc['bgcolor'] = '';
-}
+if (empty($tc['wmode']))
+     $tc['wmode']   = '';
+else $tc['bgcolor'] = '';
 
 $tags = PrepareTags();
 
 if (!empty($tags)) {
     $tags_amount = sizeof($tags);
-    if ($tc['tags'] < $tags_amount) {
-        $tags_amount = $tc['tags'];     # Number of tags to show in tagcloud
-    }
+    if ($tc['tags'] < $tags_amount) $tags_amount = $tc['tags'];     # Number of tags to show in tagcloud
+
     $tags = array_slice($tags, 0, $tags_amount, TRUE);
     uasort($tags, 'scmp');
     $tags_cloud = [];

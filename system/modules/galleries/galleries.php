@@ -1,22 +1,14 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
-
-/** Galleries.
- * @file      system/modules/galleries/galleries.php
- * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
- * @package   Galleries
- */
+# Module Galleries
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
 
 $sections = CMS::call('GALLERIES')->getSections();
 
-if ($sections === FALSE) {
-    Redirect('galleries');
-}
+if ($sections === FALSE) Redirect('galleries');
 
 if (empty($sections)) {
     ShowWindow(__('Galleries'), __('Database is empty'), 'center');
@@ -65,9 +57,7 @@ if (empty($sections)) {
                                     ShowWindow(__('Edit'), $TPL->parse($output));
                                 }
                             }
-                        } else {
-                            ShowError(__('Comments are not allowed'));
-                        }
+                        } else ShowError(__('Comments are not allowed'));
                         break;
 
                     case 'delete':
@@ -80,23 +70,17 @@ if (empty($sections)) {
                         break;
 
                     case 'close':
-                        if (CMS::call('USER')->checkRoot()) {
-                            CMS::call('GALLERIES')->setValue($item, 'opened', FALSE);
-                        }
+                        if (CMS::call('USER')->checkRoot()) CMS::call('GALLERIES')->setValue($item, 'opened', FALSE);
                         break;
 
                     case 'open':
-                        if (CMS::call('USER')->checkRoot()) {
-                            CMS::call('GALLERIES')->setValue($item, 'opened', TRUE);
-                        }
+                        if (CMS::call('USER')->checkRoot()) CMS::call('GALLERIES')->setValue($item, 'opened', TRUE);
                         break;
 
                     case 'ban':
-                        if (USER::moderator('galleries')) {
-                            CMS::call('FILTER')->ban();
-                        }
+                        if (USER::moderator('galleries'))   CMS::call('FILTER')->ban();
                         break;
-                        
+
                     default:
                         Redirect('galleries', $section, $category, $item);
                         break;

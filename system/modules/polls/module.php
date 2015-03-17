@@ -1,15 +1,9 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
+# Module Minichat
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
-/** Polls.
- * Module registration.
- * @file      system/modules/polls/module.php
- * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011-2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
- * @package   Polls
- */
 if (!defined('idxCMS')) die();
 
 require SYS.'polls.class.php';

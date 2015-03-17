@@ -1,9 +1,11 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE USER - PROFILE VIEW
+# idxCMS Flat Files Content Management Sysytem
+# Module User
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
+
 <table class="std">
     <tr class="even"><th colspan="2"><img src="{avatar}" hspace="5" vspace="5" alt="[__Avatar]" /></th></tr>
     <tr class="even"><th>[__Username]</th><td>{username}</td></tr>
@@ -22,7 +24,5 @@ die();?>
     <tr class="even"><th>[__Country]</th><td>{country}</td></tr>
     <tr class="even"><th>[__City]</th><td>{city}</td></tr>
     [if=blocked]<tr class="even"><th>[__Blocked]</th><td>{blocked}</td></tr>[endif]
-    [if=allow_pm]
-        <tr class="even"><td colspan="2"><p class="center"><a href="{MODULE}user.pm&amp;for={username}">[__Private message]</a></p></td></tr>
-    [endif]
+    [if=allow_pm]<tr class="even"><td colspan="2"><p class="center"><a href="{MODULE}user.pm&amp;for={username}">[__Private message]</a></p></td></tr>[endif]
 </table>

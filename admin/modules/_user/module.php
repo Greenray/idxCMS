@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - USERS, MESSAGE for USERS, FEEDBACK, BANS
+# idxCMS Flat Files Content Management Sysytem
+# Administration - User
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN')) die();
 
@@ -11,4 +12,3 @@ $MODULES[$module][1]['profile']  = __('User');
 $MODULES[$module][1]['bans']     = __('Bans');
 $MODULES[$module][1]['feedback'] = __('Feedback');
 $MODULES[$module][1]['message']  = __('Administrative message for users');
-?>

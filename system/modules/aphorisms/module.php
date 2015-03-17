@@ -1,21 +1,17 @@
 <?php
-/**
- * @file      system/modules/aphorisms/module.php
- * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- *            <https://github.com/Greenray/idxCMS/system/modules/aphorisms/module.php>
- * @copyright (c) 2011 - 2015 Victor Nabatov\n
- *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
- */
+# idxCMS Flat Files Content Management Sysytem
+# Module Aphorizms
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
+
+# Aphorisms database is a simple text file.
+# One string is one aphorism.
+# Aphorisms are displayed randomly.
+# Each locale has its file named as "locale".txt
 
 if (!defined('idxCMS')) die();
 
-/**
- * const: APHORISMS
- * 
- * Aphorizms data store
- */
+/** Aphorizms data store */
 define('APHORISMS', CONTENT.'aphorisms'.DS);
 
 switch (SYSTEM::get('locale')) {

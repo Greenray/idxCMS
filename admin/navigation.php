@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - NAVIGATION PANEL
+# idxCMS Flat Files Content Management Sysytem
+# Administration
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN') || !USER::loggedIn()) die();?>
 
@@ -85,11 +86,9 @@ if (!defined('idxADMIN') || !USER::loggedIn()) die();?>
                         $menu = '';
                         $navigation = GetUnserialized(CONTENT.'menu');
                         foreach ($navigation as $k => $item) {
-                            if (!empty($item['icon'])) {
-                                $menu .= '<li><a href="'.$item['link'].'" target="_top"><img src="'.$item['icon'].'" width="16" height="16" alt="" />'.$item['name'].'</a></li>';
-                            } else {
-                                $menu .= '<li><a href="'.$item['link'].'" target="_top">'.$item['name'].'</a></li>';
-                            }
+                            if (!empty($item['icon']))
+                                 $menu .= '<li><a href="'.$item['link'].'" target="_top"><img src="'.$item['icon'].'" width="16" height="16" alt="" />'.$item['name'].'</a></li>';
+                            else $menu .= '<li><a href="'.$item['link'].'" target="_top">'.$item['name'].'</a></li>';
                         }
                         echo $menu;?>
                     </ul>

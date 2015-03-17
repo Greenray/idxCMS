@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE POSTS - CALENDAR
+# idxCMS Flat Files Content Management Sysytem
+# Module Posts
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
 
@@ -19,18 +20,14 @@ if (!empty($REQUEST['cal-year'])) {
     if (($year >= 2000) && ($year <= $current_year)) {
         $selected_year = $year;
     }
-} else {
-    $selected_year = $current_year;
-}
+} else  $selected_year = $current_year;
 
 if (!empty($REQUEST['cal-month'])) {
     $month = (int) $REQUEST['cal-month'];
     if (($month >= 1) && ($month <= 12)) {
         $selected_month = $month;
     }
-} else {
-    $selected_month = (int) FormatTime('n', $today);
-}
+} else  $selected_month = (int) FormatTime('n', $today);
 
 $CALENDAR = new CALENDAR($selected_month, $selected_year, $LANG['datetime']);
 $sections = CMS::call('POSTS')->getSections();
@@ -62,4 +59,3 @@ if (($selected_year === $current_year) && ($selected_month === $current_month)) 
 $TPL = new TEMPLATE(dirname(__FILE__).DS.'calendar.tpl');
 ShowWindow(__('Posts calendar'), $TPL->parse($CALENDAR->create($current_year, $selected_year, $selected_month)));
 unset($CALENDAR);
-?>

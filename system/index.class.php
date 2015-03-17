@@ -23,11 +23,7 @@ class INDEX {
     /** Class initialization. */
     protected function __construct() {}
 
-    /** Prevent to clone object. */
-    protected function __clone() {}
-
     /** Sets the name of the serialized file.
-     *
      * @param  string $name Name of the index file
      * @return void
      */
@@ -36,7 +32,6 @@ class INDEX {
     }
 
     /** Gets the data from the index file.
-     *
      * @param  string $path Path to index file
      * @return array        Unserialised content of the index file
      */
@@ -45,7 +40,6 @@ class INDEX {
     }
 
     /** Writes the index file with serialization of data.
-     *
      * @param  string  $path  Path to index file
      * @param  array   $array Data for saving
      * @return boolean        The result of the operation

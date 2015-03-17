@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - CATALOGS - ITEMS
+# idxCMS Flat Files Content Management Sysytem
+# Administration - Catalogs
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN')) die();
 
@@ -17,11 +18,9 @@ if (!empty($REQUEST['save'])) {
     # Check if admin decided to move post
     if ($category !== $REQUEST['new_category']) {
         if (!empty($REQUEST['item'])) {
-            # Topic exists, so move it
-            $item = CMS::call('CATALOGS')->moveItem($REQUEST['item'], $section, $REQUEST['new_category']);
-        } else {
-            $item = '';     # Nothing to move, so add new
-        }
+             # Topic exists, so move it
+             $item = CMS::call('CATALOGS')->moveItem($REQUEST['item'], $section, $REQUEST['new_category']);
+        else $item = '';     # Nothing to move, so add new
         $category = $REQUEST['new_category'];
     } else {
         $item = FILTER::get('REQUEST', 'item');

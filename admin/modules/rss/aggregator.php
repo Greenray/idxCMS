@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - RSS AGGREGATOR
+# idxCMS Flat Files Content Management Sysytem
+# Administration - RSS
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
 
@@ -22,4 +23,3 @@ $config = CONFIG::getSection('rss-aggregator');
 $config['feeds'] = empty($config['feeds']) ? '' : implode(LF, $config['feeds']);
 $TPL = new TEMPLATE(dirname(__FILE__).DS.'rss-aggregator.tpl');
 echo $TPL->parse($config);
-?>

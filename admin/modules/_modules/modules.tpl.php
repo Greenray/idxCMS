@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - MODULES TEMPLATE
+# idxCMS Flat Files Content Management Sysytem
+# Administration - Modules
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
 <div class="module">[__Modules]</div>
@@ -19,7 +20,9 @@ die();?>
                 [else]
                     <tr class="odd">
                         <td colspan="2">{modules[title]}</td>
-                        <td class="center"><label><input type="checkbox" name="enable[{modules[module]}]" value="1" [if=module[enabled]]checked="checked"[endif] /> [__Enable]</label></td>
+                        <td class="center">
+                            <label><input type="checkbox" name="enable[{modules[module]}]" value="1" [if=module[enabled]]checked="checked"[endif] /> [__Enable]</label>
+                        </td>
                     </tr>
                 [endelse]
                 [each=modules[ext]]

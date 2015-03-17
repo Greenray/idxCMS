@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE POSTS - POST FORM
+# idxCMS Flat Files Content Management Sysytem
+# Module Posts
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
 
@@ -69,9 +70,7 @@ die();?>
                     <td class="label">[__Select section]</td>
                     <td>
                         <select name="new_section" onChange="setCategories(this.selectedIndex)">
-                            [each=sections]
-                                <option value="{sections[id]}" [if=sections[selected]]selected="selected"[endif]>{sections[title]}</option>
-                            [endeach.sections]
+                            [each=sections]<option value="{sections[id]}" [if=sections[selected]]selected="selected"[endif]>{sections[title]}</option>[endeach.sections]
                         </select>
                     </td>
                 [else]

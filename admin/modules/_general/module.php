@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - GENERAL CONFIGURATION, BACKUP and FILEMANAGER
+# idxCMS Flat Files Content Management Sysytem
+# Administration - General
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN')) die();
 

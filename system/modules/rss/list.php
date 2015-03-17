@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE RSS - RSS LIST
+# idxCMS Flat Files Content Management Sysytem
+# Module RSS
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
 
@@ -28,4 +29,3 @@ if (CONFIG::getValue('enabled', 'rss')) {
 } else {
     ShowWindow(__('RSS feeds'), __('RSS feeds are off'));
 }
-?>

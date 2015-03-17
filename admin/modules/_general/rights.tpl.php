@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - FILEMANAGER - RIGHTS TEMPLATE
+# idxCMS Flat Files Content Management Sysytem
+# Administration - Rights
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
 <fieldset>
@@ -33,9 +34,7 @@ die();?>
         </tr>
     </table>
     <p align="center">
-        [if=dir]
-            <input type="checkbox" name="recursively" value="1" /> [__Recursively]<br />
-        [endif]
+        [if=dir]<input type="checkbox" name="recursively" value="1" /> [__Recursively]<br />[endif]
         <input type="hidden" name="file" value="{file}" />
         <input type="submit" name="save" value="[__Save]" class="submit" />
         <input type="reset" value="[__Reset]" class="submit" />

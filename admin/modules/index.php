@@ -1,13 +1,8 @@
 <?php
-/**
- * @file      admin/modules/index.php
- * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- *            <https://github.com/Greenray/idxCMS/admin/modules/index.php>
- * @copyright (c) 2011 - 2015 Victor Nabatov\n
- *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
- */
+# idxCMS Flat Files Content Management Sysytem
+# Administration - Index
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN')) die();
 if (!USER::loggedIn()) die();
@@ -30,30 +25,24 @@ $output['host']   = php_uname('n');
 $output['rights'] = USER::getUserRights();
 
 if (CMS::call('USER')->checkRoot()) {
-    $output['file_uploads'] = ini_get('file_uploads');
-    $output['file_uploads'] = empty($output['file_uploads']) ? 'Off' : 'On';
+    $output['file_uploads']        = ini_get('file_uploads');
+    $output['file_uploads']        = empty($output['file_uploads']) ? 'Off' : 'On';
     $output['upload_max_filesize'] = ini_get('upload_max_filesize');
-    $output['smtp'] = ini_get('SMTP');
-    $output['display_errors'] = ini_get('display_errors');
-    $output['display_errors'] = empty($output['display_errors']) ? 'Off' : 'On';
+
+    $output['display_errors']      = ini_get('display_errors');
+    $output['display_errors']      = empty($output['display_errors']) ? 'Off' : 'On';
+
     $output['admin']  = TRUE;
     $output['rights'] = __('You have all rights on this site');
     $output['posts']  = format_size(get_dir_size(POSTS));
-    if (isset(SYSTEM::$modules['catalogs'])) {
-        $output['catalogs']  = format_size(get_dir_size(CATALOGS));
-    }
-    if (isset(SYSTEM::$modules['galleries'])) {
-        $output['galleries'] = format_size(get_dir_size(GALLERIES));
-    }
-    if (isset(SYSTEM::$modules['forum'])) {
-        $output['forum']     = format_size(get_dir_size(FORUM));
-    }
-    if (isset(SYSTEM::$modules['aphorisms'])) {
-        $output['aphorisms'] = format_size(get_dir_size(APHORISMS));
-    }
-    if (isset(SYSTEM::$modules['banners'])) {
-        $output['banners']   = format_size(get_dir_size(BANNERS));
-    }
+    $output['smtp']   = ini_get('SMTP');
+
+    if (isset(SYSTEM::$modules['catalogs']))  $output['catalogs']  = format_size(get_dir_size(CATALOGS));
+    if (isset(SYSTEM::$modules['galleries'])) $output['galleries'] = format_size(get_dir_size(GALLERIES));
+    if (isset(SYSTEM::$modules['forum']))     $output['forum']     = format_size(get_dir_size(FORUM));
+    if (isset(SYSTEM::$modules['aphorisms'])) $output['aphorisms'] = format_size(get_dir_size(APHORISMS));
+    if (isset(SYSTEM::$modules['banners']))   $output['banners']   = format_size(get_dir_size(BANNERS));
+
     $output['users']     = '('.sizeof(GetFilesList(USERS)).') '.format_size(get_dir_size(USERS));
     $output['pm']        = format_size(get_dir_size(PM_DATA));
     $output['avatars']   = format_size(get_dir_size(AVATARS));

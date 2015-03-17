@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - BACKUP TEMPLATE
+# idxCMS Flat Files Content Management Sysytem
+# Administration - Backup
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
 
@@ -45,11 +46,7 @@ die();?>
             <tr class="odd">
                 <td>{name}</td>
                 <td class="right">{size}</td>
-                <td class="center">
-                    <label>
-                        <input type="checkbox" name="dir[]" value="{name}" /> [__Select]
-                    </label>
-                </td>
+                <td class="center"><label><input type="checkbox" name="dir[]" value="{name}" /> [__Select]</label></td>
             </tr>
             [endforeach.dirs]
         </table>

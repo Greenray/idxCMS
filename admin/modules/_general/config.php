@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - GENERAL CONFIGURATION
+# idxCMS Flat Files Content Management Sysytem
+# Administration - Config
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
 
@@ -13,9 +14,8 @@ if (!empty($REQUEST['save'])) {
         if ($config['url']{strlen($config['url']) - 1} !== DS) {
             $config['url'] .= DS;
         }
-    } else {
-        $config['url'] = '';
-    }
+    } else $config['url'] = '';
+
     $config['description'] = !empty($REQUEST['description']) ? $REQUEST['description'] : 'Система управления сайтом idxCMS';
     $config['copyright']   = !empty($REQUEST['copyright'])   ? $REQUEST['copyright']   : 'Greenray 2014';
     $config['slogan']      = !empty($REQUEST['slogan'])      ? $REQUEST['slogan']      : 'Пока не треснешь как следует, ничего не заработает (В.В.Путин)';
@@ -35,9 +35,8 @@ if (!empty($REQUEST['save'])) {
                 $config['skins'] .= ','.$skin;
             }
         }
-    } else {
-        CMS::call('CONFIG')->setSection('output.Default', []);
-    }
+    } else CMS::call('CONFIG')->setSection('output.Default', []);
+
     $config['lang']         = empty($REQUEST['lang'])         ? 'russian' : $REQUEST['lang'];
     $config['allow-skin']   = empty($REQUEST['allow-skin'])   ? ''        : '1';
     $config['allow-lang']   = empty($REQUEST['allow-lang'])   ? ''        : '1';

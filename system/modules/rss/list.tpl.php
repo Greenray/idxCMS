@@ -1,18 +1,16 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE RSS FEEDS LIST - TEMPLATE
+# idxCMS Flat Files Content Management Sysytem
+# Module RSS
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
+
 <div id="section">
     <ul class="level1">
         [each=feed]
             <li class="level1 parent">
-                <div class="bg">
-                    <a class="level1" href="{MODULE}rss&amp;feed={feed[module]}">
-                        <span class="title">{feed[feed]}</span>
-                    </a>
-                </div>
+                <div class="bg"><a class="level1" href="{MODULE}rss&amp;feed={feed[module]}"><span class="title">{feed[feed]}</span> </a></div>
                 <div class="sub">
                      <ul class="level2">
                         [each=feed[categories]]

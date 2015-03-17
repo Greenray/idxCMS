@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - TAGCLOUD - CONFIGURATION
+# idxCMS Flat Files Content Management Sysytem
+# Administration - Tagcloud
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
 
@@ -12,11 +13,9 @@ function GetKeywords($words, $config, &$target) {
         $value = trim($value);             # Let's bite off superfluous blanks.
         # Check for the resolved length of a keyword.
         if ((mb_strlen($value) >= $config['query-min']) && (mb_strlen($value) <= $config['query-max'])) {
-            if (!empty($target[$value])) {
-                $target[$value]++;        # Existing tag.
-            } else {
-                $target[$value] = 1;      # New tag.
-            }
+            if (!empty($target[$value]))
+                 $target[$value]++;        # Existing tag.
+            else $target[$value] = 1;      # New tag.
         }
     }
 }
@@ -91,11 +90,9 @@ if (isset($init)) {
         /*
         * @todo Make selection
         */
-        if (CONFIG::getValue('enabled', 'files')) {
-            $result = CreateTags(TRUE, TRUE);
-        } else {
-            $result = CreateTags(TRUE);
-        }
+        if (CONFIG::getValue('enabled', 'files'))
+             $result = CreateTags(TRUE, TRUE);
+        else $result = CreateTags(TRUE);
         if ($result === FALSE) {
             ShowMessage('Cannot save file');
         }

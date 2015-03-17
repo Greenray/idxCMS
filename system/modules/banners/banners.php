@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# Module BANNERS
+# idxCMS Flat Files Content Management Sysytem
+# Module Banners
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
 
@@ -15,4 +16,3 @@ if (!empty($banners)) {
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'banners.tpl');
     ShowWindow(__('Banners'), $TPL->parse($output));
 }
-?>

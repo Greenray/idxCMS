@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# BELORUSSIAN LOCALIZATION
+# idxCMS Flat Files Content Management Sysytem
+# Translation
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 $LANG['language'] = 'belorussian';
 $LANG['locale']   = 'by';

@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - STATISTIC, LOGS, KEYWORDS
+# idxCMS Flat Files Content Management Sysytem
+# Administration - Statistic
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN')) die();
 
@@ -10,4 +11,4 @@ $MODULES[$module][1]['config']    = __('Configuration');
 $MODULES[$module][1]['statistic'] = __('Site statistic');
 $MODULES[$module][1]['logs']      = __('Control logs');
 $MODULES[$module][1]['keywords']  = __('Keywords');
-?>
+

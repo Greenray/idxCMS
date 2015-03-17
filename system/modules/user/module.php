@@ -1,15 +1,8 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
-
-/** Private messages.
- * Module registration and internal functions.
- * @file      system/modules/user/module.php
- * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
- * @package   Users
- */
+# Module User
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
 
@@ -37,11 +30,9 @@ function CreateUserLink($user, $nick) {
  * @return string       Avatar image with full path
  */
 function GetAvatar($user) {
-    if (file_exists(AVATARS.$user.'.png')) {
-        return AVATARS.$user.'.png';
-    } else {
-        return AVATARS.'noavatar.gif';
-    }
+    if (file_exists(AVATARS.$user.'.png'))
+         return AVATARS.$user.'.png';
+    else return AVATARS.'noavatar.gif';
 }
 
 SYSTEM::registerModule('user', 'User', 'main', 'system');

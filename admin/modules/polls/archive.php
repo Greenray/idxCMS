@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - POLLS - ARCHIVE
+# idxCMS Flat Files Content Management Sysytem
+# Administration - Polls
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
 
@@ -9,11 +10,9 @@ $POLLS = new POLLS();
 $archived = $POLLS->getArchivedPolls();
 
 if (!empty($REQUEST['remove'])) {
-    if (!$POLLS->removePollFromArchive($REQUEST['poll'])) {
-        ShowMessage($POLLS->gerError);
-    } else {
-        ShowMessage(__('Poll removed'));
-    }
+    if (!$POLLS->removePollFromArchive($REQUEST['poll']))
+         ShowMessage($POLLS->gerError);
+    else ShowMessage(__('Poll removed'));
 }
 
 $archived = $POLLS->getArchivedPolls();
@@ -49,4 +48,3 @@ if (!empty($archived)) {
 } else {
     ShowMessage(__('Database is empty'));
 }
-?>

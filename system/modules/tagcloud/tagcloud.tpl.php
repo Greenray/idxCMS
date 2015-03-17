@@ -1,15 +1,8 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
-
-/** Flash and text tagcloud.
- * Module template.
- * @file      system/modules/tagcloud/tagcloud.tpl.php
- * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
- * @package   Tagcloud
- */
+# Module Tagcloud
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 # SWFObject v1.4: Flash Player detection and embed - http://blog.deconcept.com/swfobject/
 # SWFObject is (c) 2006 Geoff Stearns and is released under the MIT License: http://www.opensource.org/licenses/mit-license.php
@@ -184,9 +177,7 @@ die();?>
     var FlashObject = deconcept.SWFObject; // for backwards compatibility
     var SWFObject = deconcept.SWFObject;
 </script>
-<div id="flashcontent" class="center">
-    {tags_txt}
-</div>
+<div id="flashcontent" class="center">{tags_txt}</div>
 <script type="text/javascript">
     var so = new SWFObject("{TOOLS}tagcloud.swf", "tagcloud", "{width}", "{height}", "7", "{bgcolor}");
     so.addParam("wmode", "{wmode}");

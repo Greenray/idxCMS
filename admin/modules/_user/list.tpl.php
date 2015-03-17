@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - USERS LIST
+# idxCMS Flat Files Content Management Sysytem
+# Administration - User
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
 
@@ -9,9 +10,7 @@ die();?>
 <fieldset>
     <form name="config" method="post" action="">
         <table class="std">
-            <tr class="odd">
-                <td colspan="3" class="center">[__Do not delete user, just block him to keep the structure of site]</td>
-            </tr>
+            <tr class="odd"><td colspan="3" class="center">[__Do not delete user, just block him to keep the structure of site]</td></tr>
             <tr>
                 <th style="width:20%">[__Login]</th>
                 <th style="width:20%">[__Nick]</th>

@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE MINICHAT - INITIALIZATION
+# idxCMS Flat Files Content Management Sysytem
+# Module Minichat
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
 
@@ -19,4 +20,3 @@ switch (SYSTEM::get('locale')) {
 
 SYSTEM::registerModule('minichat', 'Minichat', 'box');
 USER::setSystemRights(array('minichat' => __('Minichat').': '.__('Moderator')));
-?>

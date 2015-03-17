@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - POLLS - ARCHIVE TEMPLATE
+# idxCMS Flat Files Content Management Sysytem
+# Administration - Polls
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
 <div class="module">[__Polls]</div>
@@ -16,16 +17,16 @@ die();?>
                         <td class="question" colspan="2">{answers[answer]}</td>
                         <td style="width:200px;">{answers[voices]}%</td>
                     </tr>
-                <tr>
-                    <td colspan="3">
-                        <table class="graph" cellspacing="0" cellpadding="0">
-                            <tr>
-                                <td width="{answers[voices]}%" height="5" style="white-space:nowrap;background:{answers[color]};"></td>
-                                <td height="5"></td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
+                    <tr>
+                        <td colspan="3">
+                            <table class="graph" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td width="{answers[voices]}%" height="5" style="white-space:nowrap;background:{answers[color]};"></td>
+                                    <td height="5"></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
                 [endeach.polls[answers]]
                 <tr><td class="odd center" colspan="3">[__Total votes]: {polls[total]}</td></tr>
             </table>

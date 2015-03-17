@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - FILEMANAGER
+# idxCMS Flat Files Content Management Sysytem
+# Administration - Filemanager
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
 
@@ -138,11 +139,9 @@ foreach ($elements as $key => $file) {
     } else {
         $path_parts = pathinfo($path.$file);
         if (empty($path_parts['extension'])) {
-            if (!CheckSerialized($path.$file)) {
-                $output['elements'][$key]['edit'] = $url.'&amp;path='.$path.'&amp;edit='.$file;
-            } else {
-                $output['elements'][$key]['empty'] = TRUE;
-            }
+            if (!CheckSerialized($path.$file))
+                 $output['elements'][$key]['edit'] = $url.'&amp;path='.$path.'&amp;edit='.$file;
+            else $output['elements'][$key]['empty'] = TRUE;
         } else {
             preg_match('/[^.]+\.[^.]+$/', $path_parts['basename'], $matches);
             if ($matches[0] === 'tar.gz') {
@@ -155,7 +154,6 @@ foreach ($elements as $key => $file) {
                 $output['elements'][$key]['empty'] = TRUE;
             }
         }
-//        $output['elements'][$key]['alert'] = 'onClick="if(confirm(\''.__('Delete this file?').'\')) document.location.href = \''.$url.'&amp;path='.$path.'&amp;delete='.$file.'\'"';
         $output['elements'][$key]['style'] = 'row1';
     }
     $output['elements'][$key]['rights'] = GetRights($path.$file);
@@ -208,4 +206,3 @@ if (!empty($REQUEST['edit'])) {
         echo $TPL->parse($output);
     }
 }
-?>

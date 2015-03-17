@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - GALLARIES - INITIALIZATION
+# idxCMS Flat Files Content Management Sysytem
+# Administration - Galleries
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN')) die();
 
@@ -20,4 +21,3 @@ $MODULES[$module][0] = __('Galleries');
 $MODULES[$module][1]['config']     = __('Configuration');
 $MODULES[$module][1]['sections']   = __('Sections');
 $MODULES[$module][1]['categories'] = __('Categories');
-?>

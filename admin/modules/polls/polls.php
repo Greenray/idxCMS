@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - POLLS
+# idxCMS Flat Files Content Management Sysytem
+# Administration - Polls
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
 
@@ -41,14 +42,11 @@ foreach ($opened as $id => $poll) {
         $data['answers'][$i]['answer'] = $answer;
         $data['answers'][$i]['count']  = $poll['count'][$i];
         $data['answers'][$i]['voices'] = $poll['voices'][$i];
-        if ($poll['voices'][$i] === 0) {
+        if ($poll['voices'][$i] === 0)
              $data['answers'][$i]['color'] = 'transparent';
-        } else {
-            $data['answers'][$i]['color'] = $colors[$i];
-        }
+        else $data['answers'][$i]['color'] = $colors[$i];
     }
     $data['total'] = $poll['total'];
     $output['polls'][] = $data;
 }
 echo $TPL->parse($output);
-?>

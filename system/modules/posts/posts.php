@@ -1,26 +1,16 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
-
-/** Publications.
- * @file      system/modules/posts/posts.php
- * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
- * @package   Posts
- */
+# Module Posts
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
 
 $sections = CMS::call('POSTS')->getSections();
 
-if ($sections === FALSE) {
-    Redirect('posts');
-}
+if ($sections === FALSE) Redirect('posts');
 
-if (!empty($sections['drafts'])) {
-    unset($sections['drafts']);
-}
+if (!empty($sections['drafts'])) unset($sections['drafts']);
 
 if (empty($sections)) {
     ShowWindow(__('Posts'), __('Database is empty'), 'center');

@@ -1,14 +1,8 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
-
-/** Forum.
- * @file      system/modules/forum/forum.php
- * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
- * @package   Forum
- */
+# Module Forum
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
 

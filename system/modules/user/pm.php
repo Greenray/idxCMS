@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE USER - PRIVATE MESSAGES
+# idxCMS Flat Files Content Management Sysytem
+# Module User
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
 
@@ -12,12 +13,11 @@ if (!USER::loggedIn()) {
 } elseif (!empty($REQUEST['save'])) {
     # Send message
     $PM = new MESSAGE(PM_DATA, USER::getUser('username'));
-    if ($PM->sendPrivateMessage($REQUEST['for']) !== FALSE) {
-        ShowWindow(__('Private messages'), __('Message sent'), 'center');
-    } else {
-        ShowError('Cannot send message');
-    }
+    if ($PM->sendPrivateMessage($REQUEST['for']) !== FALSE)
+         ShowWindow(__('Private messages'), __('Message sent'), 'center');
+    else ShowError('Cannot send message');
     unset($PM);
+
 } elseif (!empty($REQUEST['for'])) {
     # Post new message
     if ($REQUEST['for'] === USER::getUser('username')) {

@@ -2,6 +2,7 @@
 # idxCMS: Flat Files Content Management System
 
 /** Captcha.
+ *
  * @file      tools/captcha.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>

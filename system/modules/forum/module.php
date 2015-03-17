@@ -1,16 +1,8 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
-
-/** Forum.
- * Module registration and internal functions.
- *
- * @file      system/modules/forum/module.php
- * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011-2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
- * @package   Forum
- */
+# Module Forum
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
 
@@ -20,7 +12,6 @@ define('FORUM', CONTENT.'forum'.DS);
 require SYS.'forum.class.php';
 
 /** Sort of array.
- *
  * @param  array $array Link to array to sort
  * @return array        Sorted array
  */
@@ -37,7 +28,6 @@ function ArraySort(&$array) {
 
 /** ArraySort callback.
  * String comparison.
- *
  * @param  array   $a Fist array to compare
  * @param  array   $b Second array to compare (Default NULL)
  * @return boolean    The result of operation

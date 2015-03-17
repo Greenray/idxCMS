@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE BANNERS - INITIALIZATION
+# idxCMS Flat Files Content Management Sysytem
+# Module Banners
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
 
@@ -19,5 +20,6 @@ switch (SYSTEM::get('locale')) {
         $LANG['def']['Banners'] = 'Банеры';
         break;
 }
+
 # Register module as box
 SYSTEM::registerModule('banners', 'Banners', 'box');

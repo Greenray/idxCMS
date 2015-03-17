@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - POSTS
+# idxCMS Flat Files Content Management Sysytem
+# Administration - Posts
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN')) die();
 
@@ -27,9 +28,7 @@ if (!empty($REQUEST['save'])) {
         } else {
             $post = '';     # Nothing to move, so add new
         }
-    } else {
-        $post = $item;      # It's edited post
-    }
+    } else $post = $item;   # It's edited post
 
     $categories = CMS::call('POSTS')->getCategories($new_section);
     $content    = CMS::call('POSTS')->getContent($new_category);
@@ -62,11 +61,9 @@ if (!empty($REQUEST['save'])) {
 if ((empty($section) && empty($category)) || !empty($REQUEST['new']) || !empty($post)) {
     if (empty($section)) {
         $section = 'drafts';
-        if (CMS::call('USER')->checkRoot()) {
-            $category = 1;
-        } else {
-            $category = 2;
-        }
+        if (CMS::call('USER')->checkRoot())
+             $category = 1;
+        else $category = 2;
     }
 
     $output = [];
@@ -122,7 +119,7 @@ if ((empty($section) && empty($category)) || !empty($REQUEST['new']) || !empty($
     $output['categories'][$output['category_id']]['selected'] = TRUE;
     $output['bbCodes_desc'] = CMS::call('PARSER')->showBbcodesPanel('post.desc');
     $output['bbCodes_text'] = CMS::call('PARSER')->showBbcodesPanel('post.text');
-    
+
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'post.tpl');
     echo $TPL->parse($output);
 

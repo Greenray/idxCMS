@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - POSTS - CATEGORIES TEMPLATE
+# idxCMS Flat Files Content Management Sysytem
+# Administration - Posts
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
 
@@ -49,12 +50,8 @@ die();?>
         <div id="drag">
             <table id="sortable">
                 [each=sections]
-                    <tr>
-                        <td colspan="7" class="mark header"><div id="{sections[id]}" class="group">{sections[title]}</div></td>
-                    </tr>
-                    <tr style="line-height:2px;height:2px;">
-                        <td colspan="7" style="border:0;">&nbsp;</td>
-                    </tr>
+                    <tr><td colspan="7" class="mark header"><div id="{sections[id]}" class="group">{sections[title]}</div></td></tr>
+                    <tr style="line-height:2px;height:2px;"><td colspan="7" style="border:0;">&nbsp;</td></tr>
                     [each=sections[categories]]
                         <tr class="{categories[class]}">
                             <td class="rowhandler">

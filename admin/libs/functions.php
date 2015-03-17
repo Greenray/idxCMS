@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - FUNCTIONS
+# idxCMS Flat Files Content Management Sysytem
+# Administration
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 /** Backups data store */
 define('BACKUPS', CONTENT.'backups'.DS);

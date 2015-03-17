@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - PROFILES
+# idxCMS Flat Files Content Management Sysytem
+# Administration - User
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
 
@@ -19,9 +20,7 @@ if (FILTER::get('REQUEST', 'login')) {
                 $rights = '*';
             } else {
                 $rights = '';
-                if (!empty($tmp[1])) {
-                    $rights = implode(' ', $tmp[1]);
-                }
+                if (!empty($tmp[1])) $rights = implode(' ', $tmp[1]);
             }
             USER::changeProfileField($tmp[0], 'rights', $rights);
             USER::changeProfileField($tmp[0], 'access', $level);
@@ -163,13 +162,11 @@ if (!empty($edit) && ($userdata = USER::getUserData($edit))) {
     }
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'list.tpl');
     echo $TPL->parse($output);
+
     # Pagination
-    if ($count > $perpage) {
-        echo Pagination($count, $perpage, $page, MODULE.'admin&amp;id=_user.profile&amp;search='.$search);
-    }
+    if ($count > $perpage) echo Pagination($count, $perpage, $page, MODULE.'admin&amp;id=_user.profile&amp;search='.$search);
 } else {
     $output['search'] = empty($search) ? '*' : $search;
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'search.tpl');
     echo $TPL->parse($output);
 }
-?>

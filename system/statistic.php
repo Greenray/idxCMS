@@ -2,6 +2,7 @@
 # idxCMS Flat Files Content Management Sysytem
 
 /** Site ststistic - registers a visitы to the website by visitors, users, bots and spiders.
+ *
  * @file      system/statistic.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
@@ -13,12 +14,13 @@
 if (!defined('idxCMS')) die();
 
 /** Extracts keywords from the user`s query.
+ *
  * @param  string $url User`s URL
  * @return mixed       Decoded keywords or FALSE
  */
 function ExtractKeyword($url) {
 
-    /** Searching queries mask */
+    # Searching queries mask
     $search_queries = [
         'a-counter' => 'sub_data', 'about'  => 'terms',  'alice'     => 'qs',
         'alltheweb' => 'q',        'altavista' => 'q',   'aol'       => 'encquery',
@@ -49,6 +51,7 @@ function ExtractKeyword($url) {
 }
 
 /** Detect bad bots.
+ *
  * @param  string $agent $_SERVER['HTTP_USER_AGENT']
  * @return boolean       Is bad bot detected?
  */
@@ -63,12 +66,13 @@ function DetectBadBot($agent) {
 }
 
 /** Detect spiders.
+ * 
  * @param  string $agent $_SERVER['HTTP_USER_AGENT']
  * @return boolean       Is spider detected?
  */
 function DetectSpider($agent) {
 
-    /** List of spider engines. */
+    # List of spider engines
     $engines = [
         '110search','12move',
         'a-counter','abcdatos','acoon','aesop','alexa','alkaline','allesklar','almaden','altavista','aport','appie','arachnoidea','architext','archiver','artabus',
@@ -109,7 +113,6 @@ function DetectSpider($agent) {
     return FALSE;
 }
 
-# Save counter data.
 $agent   = $_SERVER['HTTP_USER_AGENT']; # Header from the current request, if there is one
 $ip      = $_SERVER['REMOTE_ADDR'];     # User`s IP address
 $referer = $_SERVER['HTTP_REFERER'];    # The page which referred the user agent, if there is one
@@ -122,37 +125,35 @@ if (DetectBadBot($agent)) {
     die();
 }
 
-$config = CONFIG::getSection('statistic'); # Statistic configuration
-$time = time();                            # Current time
+$config = CONFIG::getSection('statistic');
+$time = time();
 
 if (DetectSpider($agent)) {
+
     # Detect and register of searching bot.
     $spiders = GetUnserialized(CONTENT.'spiders');
     if (empty($spiders)) {
         $spiders['total'] = 1;
         $spiders['today'] = 1;
-        if (!empty($config['spider-ip'])) {
-            $spiders['ip'][$ip] = 1;
-        }
-        if (!empty($config['spider-ua'])) {
-            $spiders['ua'][$agent] = 1;
-        }
+
+        if (!empty($config['spider-ip'])) $spiders['ip'][$ip] = 1;
+        if (!empty($config['spider-ua'])) $spiders['ua'][$agent] = 1;
+
         $spiders['update'] = $time;
         file_put_contents(CONTENT.'spiders', serialize($spiders), LOCK_EX);
     } else {
         if (empty($spiders['ip'][$ip])) {
+
             if ($spiders['update'] < mktime(0, 0, 0, date('n'), date('j'), date('Y'))) {
                 $spiders['today'] = 1;
             } else {
                 $spiders['today'] = $spiders['today'] + 1;
             }
             $spiders['total'] = $spiders['total'] + 1;
-            if (!empty($config['spider-ip'])) {
-                $spiders['ip'][$ip] = empty($spiders['ip'][$ip]) ? 1 : $spiders['ip'][$ip] + 1;
-            }
-            if (!empty($config['spider-ua'])) {
-                $spiders['ua'][$agent] = empty($spiders['ua'][$agent]) ? 1 : $spiders['ua'][$agent] + 1;
-            }
+
+            if (!empty($config['spider-ip'])) $spiders['ip'][$ip]    = empty($spiders['ip'][$ip])    ? 1 : $spiders['ip'][$ip]    + 1;
+            if (!empty($config['spider-ua'])) $spiders['ua'][$agent] = empty($spiders['ua'][$agent]) ? 1 : $spiders['ua'][$agent] + 1;
+
             $spiders['update'] = $time;
             file_put_contents(CONTENT.'spiders', serialize($spiders), LOCK_EX);
         }
@@ -167,9 +168,7 @@ if (DetectSpider($agent)) {
         $stats['hosts']   = [];
         $stats['users']   = [];
         $stats['online']  = [];
-        if (!empty($config['user-ua'])) {
-            $stats['ua'][$agent] = 1;
-        }
+        if (!empty($config['user-ua'])) $stats['ua'][$agent] = 1;
         $stats['update'] = $time;
         file_put_contents(CONTENT.'stats', serialize($stats), LOCK_EX);
     } else {
@@ -177,6 +176,7 @@ if (DetectSpider($agent)) {
             $stats['hosts'] = [];
             $stats['users'] = [];
         }
+
         if (empty($stats['ip'][$ip])) {
             $stats['total'] = $stats['total'] + 1;
             $stats['ip'][$ip] = 1;
@@ -184,9 +184,9 @@ if (DetectSpider($agent)) {
             $stats['ip'][$ip] = $stats['ip'][$ip] + 1;
         }
         $stats['hosts'][$ip] = $time;
-        if (!empty($config['user-ua'])) {
-            $stats['ua'][$agent] = empty($stats['ua'][$agent]) ? 1 : $stats['ua'][$agent] + 1;
-        }
+
+        if (!empty($config['user-ua'])) $stats['ua'][$agent] = empty($stats['ua'][$agent]) ? 1 : $stats['ua'][$agent] + 1;
+
         if (!empty($referer)) {
             if (($ref = parse_url($referer)) !== FALSE) {
                 if (!empty($ref['host'])) {
@@ -215,10 +215,13 @@ if (DetectSpider($agent)) {
     $stats['update'] = $time;   # Set the time of the last ststistic data update
 
     file_put_contents(CONTENT.'stats', serialize($stats), LOCK_EX);
-    $keyword = ExtractKeyword($referer);                            # Keyword from $_SERVER['HTTP_REFERER']
+
+    # Keyword from $_SERVER['HTTP_REFERER']
+    $keyword = ExtractKeyword($referer);
 
     if (!empty($keyword)) {
         $file = (file_exists(CONTENT.'keywords')) ? file_get_contents(CONTENT.'keywords') : '';
+
         # Save bot|keyword|page
         file_put_contents(CONTENT.'keywords', $file.$keyword."|".$page.LF, LOCK_EX);
     }

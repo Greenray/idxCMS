@@ -1,13 +1,8 @@
 <?php
-/**
- * @file      admin/modules/_modules/output.php
- * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- *            <https://github.com/Greenray/idxCMS/admin/modules/_modules/output.php>
- * @copyright (c) 2011 - 2015 Victor Nabatov\n
- *            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n
- *            <http://creativecommons.org/licenses/by-nc-sa/3.0/>
- */
+# idxCMS Flat Files Content Management Sysytem
+# Administration - Modules
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
 
@@ -40,15 +35,13 @@ if (!empty($REQUEST['save'])) {
 if (!empty($REQUEST['selected'])) {
     $panel = CONFIG::getSection('output.'.$REQUEST['selected']); /**< Modules layout for specified skin */
     include SKINS.$REQUEST['selected'].DS.'skin.php';  # Layout definition
-    $active = []; /**< Active modules */
-    $unused = []; /**< Unused modules */
+    $active = [];
+    $unused = [];
 
     foreach ($panel as $point => $list) {
-        if (!empty($SKIN[$point])) {
+        if (!empty($SKIN[$point]))
              $active[DS.$point] = $SKIN[$point];
-        } else {
-            $active[DS.$point] = __('Page').': '.SYSTEM::$modules[$point]['title'];
-        }
+        else $active[DS.$point] = __('Page').': '.SYSTEM::$modules[$point]['title'];
         foreach ($list as $i => $box) {
             $key = '>'.$box;
             while (array_key_exists($key, $active)) {

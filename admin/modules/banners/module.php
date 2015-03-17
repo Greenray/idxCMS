@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - BANNERS - INITIALIZATION
+# idxCMS Flat Files Content Management Sysytem
+# Administration - Aphorizms
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN')) die();
 
@@ -24,4 +25,3 @@ switch (SYSTEM::get('locale')) {
 }
 $MODULES[$module][0] = __('Banners');
 $MODULES[$module][1]['banners'] = __('Banners');
-?>

@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - HEADER
+# idxCMS Flat Files Content Management Sysytem
+# Administration
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN') || !USER::loggedIn()) die();?>
 
@@ -18,6 +19,6 @@ if (!defined('idxADMIN') || !USER::loggedIn()) die();?>
     </style>
 </head>
 <body>
-<div class="header" style="padding:0 0 0 180px"><h1><?php echo __('Content Management System idxCMS')?></h1></div>
+    <div class="header" style="padding:0 0 0 180px"><h1><?php echo __('Content Management System idxCMS')?></h1></div>
 </body>
 </html>

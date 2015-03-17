@@ -1,17 +1,8 @@
 <?php
-/**
- * @file      system/modules/user/panel.tpl.php
- * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
- */
-
-/**
- * Module User.
- * panel.tpl.php - Login panel template.
- * @package User
- */
+# idxCMS Flat Files Content Management Sysytem
+# Module User
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
 

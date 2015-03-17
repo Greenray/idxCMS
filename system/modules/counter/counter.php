@@ -1,15 +1,16 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE COUNTER
+# idxCMS Flat Files Content Management Sysytem
+# Module Counter
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
 
-$stats = GetUnserialized(CONTENT.'stats');          # Statistic datafile 
+$stats = GetUnserialized(CONTENT.'stats');          # Statistic datafile
 $stats['registered'] = sizeof(GetFilesList(USERS)); # Number of regisered users
-$stats['visitors'] = sizeof($stats['online']);      # Nubmer of visitors online
+$stats['visitors']   = sizeof($stats['online']);    # Nubmer of visitors online
 $guests = 0;                                        # Number of guests online
-$stats['loggedin'] = '';                            # Names of registered users online
+$stats['loggedin']   = '';                          # Names of registered users online
 
 foreach ($stats['online'] as $ip => $data) {
     if ($data['name'] === 'guest') {
@@ -25,4 +26,3 @@ $stats['regonline']  = $stats['visitors'] - $guests;                         # N
 
 $TPL = new TEMPLATE(dirname(__FILE__).DS.'counter.tpl');
 ShowWindow(__('Counter'), $TPL->parse($stats));
-?>

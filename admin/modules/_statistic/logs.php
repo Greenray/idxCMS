@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# ADMINISTRATION - LOGS
+# idxCMS Flat Files Content Management Sysytem
+# Administration - Statistic
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
 
@@ -35,6 +36,7 @@ if (!empty($REQUEST['day']) && !empty($REQUEST['viewlog'])) {
     echo $TPL->parse($output);
 
 } elseif (!empty($REQUEST['month']) && !empty($REQUEST['browse'])) {
+
     # Viewing the archive for the month
     $browse = basename($REQUEST['browse']);
     if (is_readable(LOGS.$browse)) {

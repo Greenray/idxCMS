@@ -1,11 +1,10 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# MODULE NAVIGATION - TEMPLATE
+# idxCMS Flat Files Content Management Sysytem
+# Module Menu
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
 <ul class="links">
-    [each=points]
-        <li><img src="{points[icon]}" width="16" height="16" alt="" /><a href="{points[link]}">{points[name]}</a></li>
-    [endeach.points]
+    [each=points]<li><img src="{points[icon]}" width="16" height="16" alt="" /><a href="{points[link]}">{points[name]}</a></li>[endeach.points]
 </ul>

@@ -2,11 +2,12 @@
 # idxCMS Flat Files Content Management Sysytem
 
 /** Registers objects and provides access to their methods.
+ *
  * @file      system/cms.class.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
  * @package   Core
  */
 
@@ -24,6 +25,7 @@ class CMS {
     private function __clone() {}
 
     /** Creates and registers the object.
+     *
      * @param  string $class Class name
      * @return object        Created and initialized object
      */
@@ -33,11 +35,13 @@ class CMS {
     }
 
     /** Calls the object, if object is not set it will be created.
+     *
      * <pre>
      * Examples:
      *     $CMS = CMS::call('SYSTEM');                - when it is need to initialize object
      *     $CMS = CMS::call('SYSTEM')->initModules(); - calling an object method
      * </pre>
+     *
      * @param  string $class Class name
      * @return object        Existing or created and initialized object
      */
@@ -46,6 +50,7 @@ class CMS {
     }
 
     /** Removes the object.
+     *
      * @param  string $class Class name
      * @return void
      */

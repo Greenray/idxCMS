@@ -66,7 +66,7 @@ class TEMPLATE {
     /** Parses control structure FOREACH.
      *
      * The template is:
-     * [foreach=var1.var2.var3]...[endforeach.var1]
+     * [forеach=var1.var2.var3]...[endforеach.var1]
      *
      * @param  array $matches Matches for control structure "foreach"
      * @return string         Parsed string
@@ -98,8 +98,8 @@ class TEMPLATE {
     /** Parses control structure EACH.
      *
      * The templates are:
-     * - [each=var]...[endeach.var]
-     * - [each=var[index]]...[endeach.var[index]]
+     * - [еach=var]...[еndeach.var]
+     * - [еach=var[index]]...[еndeach.var]
      *
      * @param  array $matches Matches for control structure "each"
      * @return string         Parsed string
@@ -244,7 +244,7 @@ class TEMPLATE {
     /** Parses of a control structure FOR.
      *
      * The template is:
-     * [for=x.var]...[endfor]
+     *  - [fоr=x.var]...[еndfor]
      *
      * @param  array  $matches Matches for control structure "each"
      * @return string          Parsed string
@@ -264,7 +264,8 @@ class TEMPLATE {
     /** Parses of a control structure IF ELSE.
      *
      * The template is:
-     * [ifelse=var]...[else]...[endelse]
+     *  - [ifеlse=var]...[else]...[endelsе]
+     *  - [ifеlse=var[index]]...[else]...[endelsе.var]
      *
      * @param  array  $matches Matches for control structure "if else"
      * @return string          Parsed string
@@ -285,11 +286,11 @@ class TEMPLATE {
     /** Parses of a control structure IF.
      *
      * The templates are:
-     * [if=var]...[endif]
+     * [if=var]...[еndif.var]
      * [if=var]
-     *      [if=var]...[endif]
-     * [endif]
-     * [if=var[index]]...[endif]
+     *      [if=var1]...[еndif.var1]
+     * [еndif]
+     * [if=var[index]]...[еndif.var]
      *
      * Array variable $matches contains:
      * - $matches[0] = part of template between control structures including them;
@@ -337,7 +338,7 @@ class TEMPLATE {
     /** Localization.
      *
      * The template is:
-     * [__var]
+     * [__string]
      *
      * Array variable $matches contains:
      * - $matches[0] = part of template between control structures including them;
@@ -354,8 +355,8 @@ class TEMPLATE {
      *
      * <pre>
      * The templates are:
-     * {var}        - constant or plain variable
-     * {var[index]} - array of variables
+     * {var}                     - constant or plain variable
+     * {var[index]}              - array of variables
      * {var[index[x]][index[y]]} - array of variables
      * </pre>
      *

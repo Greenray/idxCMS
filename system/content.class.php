@@ -75,7 +75,6 @@ class CONTENT extends INDEX {
                 }
             }
         }
-
         return $this->sections;
     }
 
@@ -85,9 +84,7 @@ class CONTENT extends INDEX {
      * @return array      Section data
      */
     public function getSection($id) {
-        if (empty($this->sections[$id])) {
-            return FALSE;
-        }
+        if (empty($this->sections[$id])) return FALSE;
 
         $this->section = $id;
         return $this->sections[$id];
@@ -119,7 +116,6 @@ class CONTENT extends INDEX {
                 }
             }
         }
-
         return $result;
     }
 
@@ -153,7 +149,6 @@ class CONTENT extends INDEX {
             }
             $result['categories'][] = $category;
         }
-
         return $result;
     }
 
@@ -257,7 +252,6 @@ class CONTENT extends INDEX {
                 }
             }
         }
-
         return $categories;
     }
 
@@ -404,7 +398,6 @@ class CONTENT extends INDEX {
                 [35, 35, 'mime' => 'image/png']
             );
         }
-
         return $IMAGE->generateIcon();
     }
 
@@ -486,7 +479,6 @@ class CONTENT extends INDEX {
                 }
             }
         }
-
         return $item;
     }
 
@@ -624,7 +616,6 @@ class CONTENT extends INDEX {
         if (empty($this->content[$id])) {
             return FALSE;
         }
-
         $this->content[$id][$field]++;
 
         return $this->saveIndex($this->sections[$this->section]['categories'][$this->category]['path'], $this->content);
@@ -643,7 +634,6 @@ class CONTENT extends INDEX {
                 $result[$category.'.'.$key] = $item[$param];
             }
         }
-
         return $result;
     }
 
@@ -664,7 +654,6 @@ class CONTENT extends INDEX {
         if ($limit) {
             return array_slice($result, -$limit, $limit, TRUE);
         }
-
         return $result;
     }
 
@@ -686,7 +675,6 @@ class CONTENT extends INDEX {
             $item['date'] = FormatTime('d F Y', $item['time']);
             $result['items'][] = $item;
         }
-
         return $result;
     }
 
@@ -707,7 +695,6 @@ class CONTENT extends INDEX {
                 $result[$time] = $id.'.'.$key;      # Value is section.category.post
             }
         }
-
         return $result;
     }
 
@@ -731,7 +718,6 @@ class CONTENT extends INDEX {
                 $result['items'][] = $item;
             }
         }
-
         return $result;
     }
 
@@ -747,7 +733,6 @@ class CONTENT extends INDEX {
         }
 
         $this->comments = $this->getIndex($this->sections[$this->section]['categories'][$this->category]['path'].$item.DS);
-
         return $this->comments;
     }
 
@@ -802,7 +787,6 @@ class CONTENT extends INDEX {
         } else {
             $comment['rate_color'] = 'green';
         }
-
         return $comment;
     }
 
@@ -915,7 +899,6 @@ class CONTENT extends INDEX {
         unset($this->comments[$id]);
 
         $path = $this->sections[$this->section]['categories'][$this->category]['path'];
-
         if (!empty($this->comments)) {
             $this->content[$this->item]['comments']--;
             if ($this->saveIndex($path.$this->item.DS, $this->comments) === FALSE) {

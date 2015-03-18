@@ -16,7 +16,7 @@
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
  * @package   Core
  */
 
@@ -33,7 +33,8 @@ class CONFIG {
     private static $config = [];
 
     /** Class initialization.
-     * Sest config filename, reads and parses config data.
+     * Sets config filename, reads and parses config data.
+     *
      * @return void
      */
     public function __construct() {
@@ -41,11 +42,9 @@ class CONFIG {
         self::$config = parse_ini_file(self::$ini, TRUE);
     }
 
-    /** Prevent to clone object. */
-    private function __clone() {}
-    
     /** Creates the configuration section.
      * Sets the parameters and their values in the specified config section.
+     *
      * @param  string $section Name of the config section
      * @param  array  $values  Config "parameter = value" for the current section
      * @return void
@@ -55,6 +54,7 @@ class CONFIG {
     }
 
     /** Gets parameters with their values from the specified config section.
+     *
      * @param  string $section Name of the config section
      * @return array           Config parameters = values for the current section or empty array
      */
@@ -63,6 +63,7 @@ class CONFIG {
     }
 
     /** Removes specified config section.
+     *
      * @param  string $section Name of the config section
      * @return void
      */
@@ -71,6 +72,7 @@ class CONFIG {
     }
 
     /** Sets the parameter with its value for the specified config section.
+     *
      * @param  string $section Name of the config section
      * @param  string $param   Name of the config parameter
      * @param  mixed  $value   Value of the specified parameter
@@ -81,6 +83,7 @@ class CONFIG {
     }
 
     /** Gets the parameter with its value from the specified config section.
+     *
      * @param  string $section Name of the config section
      * @param  string $param   Name of the config parameter
      * @return array|FALSE     Value of the specified parameter
@@ -91,6 +94,7 @@ class CONFIG {
 
     /** Creates and saves the config file.
      * It can create sections with parameters and sections where parameter is an array.
+     * 
      * @return boolean The result of the operation
      */
     public function save() {

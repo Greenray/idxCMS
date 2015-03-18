@@ -42,7 +42,7 @@ final class FILTER {
      */
     private function cleanValue($value) {
         $value = trim($value);
-        // Check for magic quotes and remove them if necessary
+        # Check for magic quotes and remove them if necessary
         if (function_exists('get_magic_quotes_gpc') && !get_magic_quotes_gpc()) {
             $value = preg_replace('(\\\(["\'/]))im', '$1', $value);
         }
@@ -53,6 +53,7 @@ final class FILTER {
     }
 
     /** Clean variables.
+     *
      * @param  array $vars Input array of parameters
      * @return array       Filtered values of parameters
      */
@@ -74,6 +75,7 @@ final class FILTER {
 
     /** Detect intrusion, clean and unset $_POST, $_GET, $_FILES and $_COOKIE.
      * The result are two variables: $REQUEST and $COOKIE.
+     * 
      * @return void
      */
     public function sanitaze() {

@@ -77,6 +77,7 @@ class UPLOADER {
     }
 
     /** Check the file.
+     *
      * @return boolean   TRUE if the file is valid
      * @throws Exception Your file is not allowed or is corrupted
      * @throws Exception File is too large
@@ -92,6 +93,7 @@ class UPLOADER {
     }
 
     /** Check if the file is acceptable and upload it to upload directory.
+     * 
      * @param  array $file Data from global variable $_FILES
      * @return array       Name of file and file size
      * @throws Exception   Error of file uploading

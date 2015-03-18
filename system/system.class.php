@@ -7,7 +7,7 @@
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
  * @package   Core
  */
 
@@ -366,7 +366,6 @@ class SYSTEM {
         if (empty(self::$navigation)) {
             return self::createNavigation();
         }
-
         return self::$navigation;
     }
 
@@ -449,7 +448,7 @@ class SYSTEM {
 
     /** Create main menu for website.
      * The menu will be created only for registered and enabled modules.
-     * 
+     *
      * @return boolean The result of operation
      */
     public function createMainMenu() {

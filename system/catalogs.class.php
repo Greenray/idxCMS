@@ -7,7 +7,7 @@
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011-2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
  * @package   Catalogs
  */
 
@@ -100,7 +100,6 @@ class CATALOGS extends CONTENT {
             (file_put_contents($path.$id.DS.$this->text, $text, LOCK_EX) === FALSE)) {
             throw new Exception('Cannot save file');
         }
-
         parent::saveContent($this->content);
         Sitemap();
     }
@@ -134,7 +133,6 @@ class CATALOGS extends CONTENT {
         if (!empty($comment['rateid'])) {
             $comment['rateid'] = $this->section.'.'.$this->category.'.'.$this->item.'.'.$id;
         }
-
         return $comment;
     }
 }

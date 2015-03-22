@@ -4,7 +4,6 @@
 # TEMPLATE FOR ITEM PRINTING
 
 die();?>
-
 <!DOCTYPE html>
 <head>
     <title>{title} - [__Version for printer]</title>

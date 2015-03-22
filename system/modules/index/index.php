@@ -22,19 +22,16 @@ if (!empty(SYSTEM::$modules[$module])) {
     SYSTEM::set('pagename', __('Index'));
     SYSTEM::setPageDescription(__('Index'));
     $sections = CMS::call('POSTS')->getSections();
-    if (!empty($sections['drafts'])) {
-        unset($sections['drafts']);
-    }
-    if (!empty($sections['archive'])) {
-        unset($sections['archive']);
-    }
+
+    if (!empty($sections['drafts']))  unset($sections['drafts']);
+    if (!empty($sections['archive'])) unset($sections['archive']);
+
     if (empty($sections)) {
         ShowWindow(__('Index'), __('Database is empty'), 'center');
     } else {
         # The section "news" isn't necessary to us - for "news" we have another module
-        if (!empty($sections['news'])) {
-            unset($sections['news']);
-        }
+        if (!empty($sections['news'])) unset($sections['news']);
+
         # Don't show system section '#drats'
         $TPL = new TEMPLATE(dirname(__FILE__).DS.'default.tpl');
         $i = 0;

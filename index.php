@@ -35,11 +35,11 @@ error_reporting(-1);
 
 /** Set error handler.
  * Handles php errors and writes info into the /content/logs/idxerror.log.
- * @param  integer $num  Error number.
- * @param  string  $msg  Error message.
- * @param  string  $file Name of the file where the error was generated.
- * @param  integer $line Line number where the error was generated.
- * @return void
+ * @param  integer $num   Error number.
+ * @param  string  $msg   Error message.
+ * @param  string  $file  Name of the file where the error was generated.
+ * @param  integer $line  Line number where the error was generated.
+ * @return string  $error Error message
  */
 function idxErrorHandler($num, $msg, $file, $line) {
     $type = [

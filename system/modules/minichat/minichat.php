@@ -27,9 +27,11 @@ if (!empty($REQUEST['mctext']) && !empty($REQUEST['save'])) {
                     $MC->removeMessage($id);
                 }
                 break;
+
             case 'ban':
                 CMS::call('FILTER')->ban();
                 break;
+
             default:
                 Redirect('index');
                 break;

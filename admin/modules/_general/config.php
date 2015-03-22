@@ -20,11 +20,11 @@ if (!empty($REQUEST['save'])) {
     $config['copyright']   = !empty($REQUEST['copyright'])   ? $REQUEST['copyright']   : 'Greenray 2014';
     $config['slogan']      = !empty($REQUEST['slogan'])      ? $REQUEST['slogan']      : 'Пока не треснешь как следует, ничего не заработает (В.В.Путин)';
     $config['cookie']      = !empty($REQUEST['cookie'])      ? $REQUEST['cookie']      : 'idxCMS';
-    if (empty($REQUEST['keywords'])) {
-        $config['keywords'] = 'idxCMS,CMS,opensource,php';
-    } else {
-        $config['keywords'] = preg_replace('/\s/', '', $REQUEST['keywords']);
-    }
+
+    if (empty($REQUEST['keywords']))
+         $config['keywords'] = 'idxCMS,CMS,opensource,php';
+    else $config['keywords'] = preg_replace('/\s/', '', $REQUEST['keywords']);
+
     $config['index-module'] = empty($REQUEST['index-module']) ? 'default' : $REQUEST['index-module'];
     $config['skin']         = empty($REQUEST['skin'])         ? 'Default' : $REQUEST['skin'];
     $config['skins'] = 'Default';

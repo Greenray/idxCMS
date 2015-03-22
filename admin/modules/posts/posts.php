@@ -22,12 +22,11 @@ $content    = CMS::call('POSTS')->getContent($category);
 if (!empty($REQUEST['save'])) {
     # Check if admin decided to move post
     if (($section !== $new_section) || ($category !== $new_category)) {
-        if (!empty($item)) {
+        if (!empty($item))
             # Post exists, so move it
-            $post = CMS::call('POSTS')->moveItem($item, $new_section, $new_category);
-        } else {
-            $post = '';     # Nothing to move, so add new
-        }
+             $post = CMS::call('POSTS')->moveItem($item, $new_section, $new_category);
+        else $post = '';     # Nothing to move, so add new
+
     } else $post = $item;   # It's edited post
 
     $categories = CMS::call('POSTS')->getCategories($new_section);

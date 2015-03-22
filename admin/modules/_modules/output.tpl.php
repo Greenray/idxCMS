@@ -5,7 +5,6 @@
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
-
 <div class="module">[__Output management]</div>
 <script>
     function CheckString(inputString, needle, startingIndex) {
@@ -172,12 +171,8 @@ die();?>
         if (object.selectedIndex !== -1) {
             var selIndexes = new Array();
             selIndexes = GetSelectedIndexes(object);
-            if (direction === 'up') {
-                ShiftObjectUp(object, selIndexes);
-            }
-            if (direction === 'down') {
-                ShiftObjectDown(object, selIndexes);
-            }
+            if (direction === 'up')   ShiftObjectUp(object, selIndexes);
+            if (direction === 'down') ShiftObjectDown(object, selIndexes);
         }
         section = 0;
         return;

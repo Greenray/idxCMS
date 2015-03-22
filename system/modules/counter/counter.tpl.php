@@ -5,7 +5,6 @@
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
-
 <table class="counter">
     <tr>
         <td>[__Total users]</td>
@@ -16,9 +15,7 @@ die();?>
         <td>{todayusers}</td>
     </tr>
     <tr><td colspan="2">[__Online] - {visitors} ({regonline} [__registered])</td></tr>
-    [if=regonline]
-        <tr><td colspan="2">{loggedin}</td></tr>
-    [endif]
+    [if=regonline]<tr><td colspan="2">{loggedin}</td></tr>[endif]
     <tr>
         <td>[__Today hosts]</td>
         <td>{todayhosts}</td>

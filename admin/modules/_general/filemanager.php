@@ -193,11 +193,9 @@ if (!empty($REQUEST['edit'])) {
         }
     } else {
         if (in_array($path_parts['extension'], $allowed)) {
-            if ($path_parts['extension'] === 'gz') {
-                $output['content'] = gzfile_get_contents($path.$REQUEST['edit']);
-            } else {
-                $output['content'] = file_get_contents($path.$REQUEST['edit']);
-            }
+            if ($path_parts['extension'] === 'gz')
+                 $output['content'] = gzfile_get_contents($path.$REQUEST['edit']);
+            else $output['content'] = file_get_contents($path.$REQUEST['edit']);
         }
     }
     $output['name'] = $REQUEST['edit'];

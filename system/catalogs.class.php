@@ -22,7 +22,6 @@ class CATALOGS extends CONTENT {
     }
 
     /** Сохраняет элемент каталога в базу и корректирует карту сайта.
-     *
      * @param  integer $id ID элемента
      * @throws Exception Нет заголовка, описания, нечего грузить или нет прав на запись
      * @return void
@@ -105,7 +104,6 @@ class CATALOGS extends CONTENT {
     }
 
     /** Загрузка файла на сервер.
-     *
      * @param  integer $id   ID файла
      * @param  array   $file Массив данных $_FILES
      * @throws Exception Если нечего грузить
@@ -123,7 +121,6 @@ class CATALOGS extends CONTENT {
     }
 
     /** Получает комментарий к элементу каталога.
-     *
      * @var integer $id   ID комментария
      * @var integer $page Номер страницы комментариев
      * @return array      Комментарий и его атрибуты (в т.ч. текущий рейтинг комментария)

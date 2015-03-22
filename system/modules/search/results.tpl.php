@@ -5,7 +5,6 @@
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
-
 <div class="results">
     <div class="center"><b>[__Search results]: {count} [__coincidence]</b></div>
     <ul class="level1">

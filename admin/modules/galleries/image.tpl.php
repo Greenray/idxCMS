@@ -40,18 +40,16 @@ die();?>
                 <td colspan="3">
             [endelse]
                     <select name="new_category">
-                        [each=categories]
-                            <option value="{categories[id]}" [if=categories[selected]]selected="selected"[endif]>{categories[title]}</option>
-                        [endeach.categories]
+                        [each=categories]<option value="{categories[id]}" [if=categories[selected]]selected="selected"[endif]>{categories[title]}</option>[endeach.categories]
                     </select>
                 </td>
             </tr>
             [if=image]
-            <tr class="odd">
-                <td>[__Image]</td>
-                <td colspan="2" class="center"><input type="hidden" name="item" value="{id}" /><b><img src="{image}.jpg" alt="IMAGE" /></b></td>
-                <td>{name}</td>
-            </tr>
+                <tr class="odd">
+                    <td>[__Image]</td>
+                    <td colspan="2" class="center"><input type="hidden" name="item" value="{id}" /><b><img src="{image}.jpg" alt="IMAGE" /></b></td>
+                    <td>{name}</td>
+                </tr>
             [endif]
             <tr class="odd">
                 <td>[__Upload]</td>

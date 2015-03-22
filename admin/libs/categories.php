@@ -17,7 +17,7 @@ try {
         CMS::call($obj)->saveCategory();
     } else {
         if (!empty($REQUEST['delete'])) {
-            $category = explode('.', $REQUEST['delete']);
+            $category   = explode('.', $REQUEST['delete']);
             $categories = CMS::call($obj)->getCategories($category[0]);
             CMS::call($obj)->removeCategory($category[1]);
         }
@@ -26,6 +26,7 @@ try {
     ShowMessage(__($error->getMessage()));
 }
 
+# Initialize again because of sorted sections
 $sections = CMS::call($obj)->getSections();
 
 if (!empty($sections)) {
@@ -48,9 +49,7 @@ if (!empty($sections)) {
                 $output['sections'][$id]['categories'][$key]['class'] = $class;
                 $class = ($class === 'odd') ? 'even' : 'odd';
             }
-        } else {
-            $output['sections'][$id]['categories'] = [];
-        }
+        } else $output['sections'][$id]['categories'] = [];
     }
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'categories.tpl');
     echo $TPL->parse($output);      # Existing categories

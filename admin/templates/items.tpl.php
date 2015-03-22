@@ -5,20 +5,13 @@
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
-
 <div class="module">[__Topics]</div>
 <fieldset>
     <form name="topics" method="post" action="">
         <table class="std">
             <tr class="even">
-                <td>
-                    <input type="hidden" name="section" value="{section_id}" />
-                    [__Section]: <b>{section_title}</b>
-                </td>
-                <td colspan="8">
-                    <input type="hidden" name="category" value="{category_id}" />
-                    [__Category]: <b>{category_title}</b>
-                </td>
+                <td><input type="hidden" name="section" value="{section_id}" />[__Section]: <b>{section_title}</b></td>
+                <td colspan="8"><input type="hidden" name="category" value="{category_id}" />[__Category]: <b>{category_title}</b></td>
             </tr>
             <tr>
                 <th class="title">[__Title]</th>

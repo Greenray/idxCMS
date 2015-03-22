@@ -3,13 +3,14 @@
 
 /** Processing of configuration.
  * idxCMS config file is look like this:
- *
  * <pre>
- * [main]                    - Section
- * title = "idxCMS"          - Parameter = "Value"
- * 0[] = "index"             - Parameter = "Value" (parameter is an array)
- * [output.Default]          - Section (combined)
- * left[] = "posts.calendar" - Parameter = "Value" (value is combined)
+ *   [main]                    - Section
+ *   title  = "idxCMS"         - Parameter   = "Value"
+ *   name   = "flat.CMS"       - Parameter   = "Value" (value is combined)
+ *   0[]    = "index"       b  - Parameter[] = "Value" (parameter is array)
+ *   [output.Default]          - Section (combined)
+ *   left[] = "posts.calendar" - Parameter[] = "Value" (parameter is array and value is combined)
+ *   and so on
  * </pre>
  *
  * @file      system/config.class.php
@@ -34,17 +35,15 @@ class CONFIG {
 
     /** Class initialization.
      * Sets config filename, reads and parses config data.
-     *
      * @return void
      */
     public function __construct() {
-        self::$ini = CONTENT.self::$ini;
+        self::$ini    = CONTENT.self::$ini;
         self::$config = parse_ini_file(self::$ini, TRUE);
     }
 
     /** Creates the configuration section.
      * Sets the parameters and their values in the specified config section.
-     *
      * @param  string $section Name of the config section
      * @param  array  $values  Config "parameter = value" for the current section
      * @return void
@@ -54,7 +53,6 @@ class CONFIG {
     }
 
     /** Gets parameters with their values from the specified config section.
-     *
      * @param  string $section Name of the config section
      * @return array           Config parameters = values for the current section or empty array
      */
@@ -63,7 +61,6 @@ class CONFIG {
     }
 
     /** Removes specified config section.
-     *
      * @param  string $section Name of the config section
      * @return void
      */
@@ -72,7 +69,6 @@ class CONFIG {
     }
 
     /** Sets the parameter with its value for the specified config section.
-     *
      * @param  string $section Name of the config section
      * @param  string $param   Name of the config parameter
      * @param  mixed  $value   Value of the specified parameter
@@ -83,7 +79,6 @@ class CONFIG {
     }
 
     /** Gets the parameter with its value from the specified config section.
-     *
      * @param  string $section Name of the config section
      * @param  string $param   Name of the config parameter
      * @return array|FALSE     Value of the specified parameter
@@ -94,7 +89,6 @@ class CONFIG {
 
     /** Creates and saves the config file.
      * It can create sections with parameters and sections where parameter is an array.
-     * 
      * @return boolean The result of the operation
      */
     public function save() {

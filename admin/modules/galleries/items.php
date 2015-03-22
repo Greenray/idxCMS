@@ -17,12 +17,11 @@ $content    = CMS::call('GALLERIES')->getContent($category);
 if (!empty($REQUEST['save'])) {
     # Check if admin decided to move item
     if ($category !== $REQUEST['new_category']) {
-        if (!empty($REQUEST['item'])) {
+        if (!empty($REQUEST['item']))
             # Item exists, so move it
-            $item = CMS::call('GALLERIES')->moveItem($REQUEST['item'], $section, $REQUEST['new_category']);
-        } else {
-            $item = '';     # Nothing to move, so add new
-        }
+             $item = CMS::call('GALLERIES')->moveItem($REQUEST['item'], $section, $REQUEST['new_category']);
+        else $item = '';     # Nothing to move, so add new
+
         $category = $REQUEST['new_category'];
     } else {
         $item = FILTER::get('REQUEST', 'item');

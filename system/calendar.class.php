@@ -30,7 +30,6 @@ class CALENDAR {
     private $temp = [];
 
     /** Class initialization.
-     *
      * @param  integer $month    Month
      * @param  integer $year     Year
      * @param  integer $datetime Time
@@ -44,7 +43,6 @@ class CALENDAR {
     }
 
     /** Assigns event to calendar.
-     *
      * @param  integer $day  Date
      * @param  string  $link Link to existing post
      * @return void
@@ -54,7 +52,6 @@ class CALENDAR {
     }
 
     /** Highlights current date.
-     *
      * @param  integer $day   Date
      * @param  string  $style Style for highlighting
      * @return void
@@ -64,7 +61,6 @@ class CALENDAR {
     }
 
     /** Creates calendar.
-     *
      * @param  integer $current_year   Current year
      * @param  integer $selected_year  Selected year
      * @param  integer $selected_month Selected month

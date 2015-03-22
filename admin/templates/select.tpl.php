@@ -5,7 +5,6 @@
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
-
 <div class="module">{title}</div>
 <fieldset>
     <form name="config" method="post" action="">
@@ -14,7 +13,7 @@ die();?>
                 <td>[__Select file]</td>
                 <td colspan="2">
                     <select name="selected" style="width:200px">
-                        [foreach=select.id.name]<option value="{name}">{name}</option>[endforeach.select]
+                    [foreach=select.id.name]<option value="{name}">{name}</option>[endforeach.select]
                     </select>
                 </td>
             </tr>

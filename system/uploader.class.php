@@ -7,7 +7,7 @@
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0>
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
  * @package   Core
  */
 
@@ -93,7 +93,7 @@ class UPLOADER {
     }
 
     /** Check if the file is acceptable and upload it to upload directory.
-     * 
+     *
      * @param  array $file Data from global variable $_FILES
      * @return array       Name of file and file size
      * @throws Exception   Error of file uploading

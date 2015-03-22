@@ -5,7 +5,6 @@
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
-
 <div class="module">[__Filemanager]</div>
 <fieldset>
     <table class="std">
@@ -20,11 +19,11 @@ die();?>
         [if=back]<tr><td colspan="7"><a href="{back}">..</a></td></tr>[endif]
         [each=elements]
             <tr>
-                [ifelse=elements[link]]
-                    <td class="{elements[style]}"><a href="{elements[link]}">{elements[file]}</a></td>
-                [else]
-                    <td class="{elements[style]}">{elements[file]}</td>
-                [endelse]
+            [ifelse=elements[link]]
+                <td class="{elements[style]}"><a href="{elements[link]}">{elements[file]}</a></td>
+            [else]
+                <td class="{elements[style]}">{elements[file]}</td>
+            [endelse]
                 <td class="{elements[style]} right">{elements[size]}</td>
                 <td class="{elements[style]} center">{elements[date]}</td>
                 <td class="{elements[style]} center">{elements[time]}</td>

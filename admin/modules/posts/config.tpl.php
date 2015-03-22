@@ -5,7 +5,6 @@
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
-
 <div class="module">[__Options]</div>
 <fieldset>
     <form name="config" method="post" action="">

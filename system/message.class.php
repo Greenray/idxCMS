@@ -3,24 +3,34 @@
 
 /** Private messages.
  * Module registration and internal functions.
+ *
  * @file      system/message.class.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
  * @package   Users
  */
 
 class MESSAGE extends INDEX {
 
-    /** Path to datafile */
+    /** Path to datafile.
+     * @var string
+     */
     private $path = '';
-    /** Messsages */
+
+    /** Messsages.
+     * @var array
+     */
     private $messages = [];
-    /** Messages configuration */
+
+    /** Messages configuration.
+     * @var array
+     */
     private $config = [];
 
     /** Class initialization.
+     *
      * @param  string $path Path to messages file
      * @param  string $file Name of messges file
      * @return void
@@ -29,23 +39,19 @@ class MESSAGE extends INDEX {
         parent::__construct();
         $this->path = $path;
         $this->setIndex($file);
-        if ($this->path === CONTENT) {
-            $this->config = CONFIG::getSection($this->index);
-        } else {
-            $this->config = CONFIG::getSection('pm');
-        }
+        if ($this->path === CONTENT)
+             $this->config = CONFIG::getSection($this->index);
+        else $this->config = CONFIG::getSection('pm');
         $this->messages = self::getIndex($this->path);
     }
 
     /** Get messages.
+     *
      * @param  string $from
      * @return array - Messages
      */
     public function getMessages($from = '') {
-        if (empty($from)) {
-            return $this->messages;
-        }
-        return $this->messages[$from];
+        return (empty($from)) ? $this->messages : $this->messages[$from];
     }
 
     /** Check for new messages.
@@ -66,6 +72,7 @@ class MESSAGE extends INDEX {
     }
 
     /** Check that the user does not send an empty message.
+     *
      * @param  string $text Message text
      * @return string $text Message text with allowed length
      * @throws Exception 'Text is empty'
@@ -80,18 +87,17 @@ class MESSAGE extends INDEX {
     }
 
     public function sendMessage($text) {
-        $text = self::checkText($text);
+        $text    = self::checkText($text);
         $message = [];
         $message['author'] = USER::getUser('username');
         $message['nick']   = USER::getUser('nickname');
-        $message['text'] = $text;
-        $message['time'] = time();
-        $message['ip']   = CMS::call('USER')->checkRoot() ? '' : $_SERVER['REMOTE_ADDR'];
-        if (empty($this->messages)) {
-            $this->messages[1] = $message;
-        } else {
-            $this->messages[]  = $message;
-        }
+        $message['text']   = $text;
+        $message['time']   = time();
+        $message['ip']     = CMS::call('USER')->checkRoot() ? '' : $_SERVER['REMOTE_ADDR'];
+        if (empty($this->messages))
+             $this->messages[1] = $message;
+        else $this->messages[]  = $message;
+
         # Correct database size
         $this->messages = array_slice($this->messages, -$this->config['db-size'] + 1, $this->config['db-size'], TRUE);
         return $this->saveIndex($this->path, $this->messages);
@@ -134,11 +140,10 @@ class MESSAGE extends INDEX {
         }
         # Save message in Outbox
         unset($message['new']);
-        if (empty($this->messages['outbox'])) {
-            $this->messages['outbox'][1] = $message;
-        } else {
-            $this->messages['outbox'][]  = $message;
-        }
+        if (empty($this->messages['outbox']))
+             $this->messages['outbox'][1] = $message;
+        else $this->messages['outbox'][]  = $message;
+
         # Correct database size
         $this->messages['outbox'] = array_slice($this->messages['outbox'], -$this->config['db-size'] + 1, $this->config['db-size'], TRUE);
         return $this->saveIndex($this->path, $this->messages);
@@ -161,11 +166,10 @@ class MESSAGE extends INDEX {
         $message['text'] = $text;
         $message['time'] = time();
         $message['ip']   = $_SERVER['REMOTE_ADDR'];
-        if (empty($this->messages)) {
-            $this->messages[1] = $message;
-        } else {
-            $this->messages[]  = $message;
-        }
+        if (empty($this->messages))
+             $this->messages[1] = $message;
+        else $this->messages[]  = $message;
+
         # Correct database size
         $this->messages = array_slice($this->messages, -$this->config['db-size'] + 1, $this->config['db-size'], TRUE);
         return $this->saveIndex($this->path, $this->messages);

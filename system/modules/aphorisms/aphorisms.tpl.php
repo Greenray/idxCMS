@@ -5,7 +5,6 @@
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
-
 <script type="text/javascript" src="{TOOLS}jquery.ui.min.js"></script>
 <script type="text/javascript" src="{TOOLS}jquery.flip.js"></script>
 <script type="text/javascript">

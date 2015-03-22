@@ -5,7 +5,6 @@
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
-
 <div class="search-error">
     <center>
         [__Error]: <strong>{find}</strong><br />

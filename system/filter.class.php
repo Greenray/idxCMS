@@ -7,7 +7,7 @@
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
  * @package   Core
  */
 
@@ -75,7 +75,7 @@ final class FILTER {
 
     /** Detect intrusion, clean and unset $_POST, $_GET, $_FILES and $_COOKIE.
      * The result are two variables: $REQUEST and $COOKIE.
-     * 
+     *
      * @return void
      */
     public function sanitaze() {
@@ -145,8 +145,7 @@ final class FILTER {
     }
 
     /** Intrusion detection.
-     *
-     * In current it cfn detect:
+     * In current it can detect:
      *  - bad words in $_SERVER;
      *  - malicious URL requests;
      *  - banned IP or cookie.

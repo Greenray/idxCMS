@@ -5,7 +5,6 @@
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
-
 <script>
     var curselectorinput;
     function selectColor(color) {
@@ -43,7 +42,6 @@ die();?>
 </script>
 <div class="module">[__Tagcloud]</div>
 <fieldset>
-
     <form name="config" method="post" action="">
         <table class="std">
             <tr><th colspan="3">[__General options]</th></tr>
@@ -116,6 +114,7 @@ die();?>
                     <td class="center"><input type="text" name="key[]" value="{key}" /></td>
                     <td class="center"><input type="hidden" name="value[]" value="{tag}" />{tag}</td>
                     <td class="center"> + </td>
+                </tr>
             [endforeach.used]
             [foreach=unused.key.tag]
                 <tr class="odd">

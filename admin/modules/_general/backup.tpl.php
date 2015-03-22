@@ -5,7 +5,6 @@
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
-
 <div class="module">[__Backup]</div>
 <fieldset>
     <form name="form" method="post" action="">
@@ -43,11 +42,11 @@ die();?>
                 <th>[__Actions]</th>
             </tr>
             [foreach=dirs.name.size]
-            <tr class="odd">
-                <td>{name}</td>
-                <td class="right">{size}</td>
-                <td class="center"><label><input type="checkbox" name="dir[]" value="{name}" /> [__Select]</label></td>
-            </tr>
+                <tr class="odd">
+                    <td>{name}</td>
+                    <td class="right">{size}</td>
+                    <td class="center"><label><input type="checkbox" name="dir[]" value="{name}" /> [__Select]</label></td>
+                </tr>
             [endforeach.dirs]
         </table>
         <p align="center">

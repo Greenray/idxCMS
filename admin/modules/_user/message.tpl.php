@@ -5,7 +5,6 @@
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die(); ?>
-
 <fieldset>
     <form name="pm" method="post" action="">
         <table class="std">
@@ -14,7 +13,7 @@ die(); ?>
                 <td>[__Select users]</td>
                 <td>
                     <select name="users[]" size="10" multiple>
-                        [each=users]<option value="{users[name]}">{users[nick]}</option>[endeach.users]
+                    [each=users]<option value="{users[name]}">{users[nick]}</option>[endeach.users]
                     </select>
                 </td>
             </tr>
@@ -37,7 +36,7 @@ die(); ?>
                 <td>[__Select users]</td>
                 <td>
                     <select name="users[]" size="10" multiple>
-                        [each=users]<option value="{users[name]}">{users[nick]}</option>[endeach.users]
+                    [each=users]<option value="{users[name]}">{users[nick]}</option>[endeach.users]
                     </select>
                 </td>
             </tr>

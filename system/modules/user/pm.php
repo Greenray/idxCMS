@@ -124,9 +124,7 @@ if (!USER::loggedIn()) {
                         ShowWindow('', Pagination($count, $perpage, $page, MODULE.'user.pm&amp;mode=inbox'));
                     }
                 }
-            } else {
-                ShowWindow(__('Messages'), __('Database is empty'), 'center');
-            }
+            } else ShowWindow(__('Messages'), __('Database is empty'), 'center');
         }
     } else {
         ShowWindow(

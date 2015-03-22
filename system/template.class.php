@@ -1,13 +1,13 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 
-/** Class TEMPLATE - templates parser.
+/** Templates parser.
  *
  * @file      system/template.class.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
  * @package   Core
  */
 
@@ -39,12 +39,11 @@ class TEMPLATE {
     ];
 
     /** Class initialization.
-     *
      * <pre>
      * There are three templates directories:
-     * - ./skins/CURRENT_SKIN/        - created (modified) templates by site's disigner
-     * - ./system/modules/__MODULE__/ - original module templates
-     * - ./system/templates/          - common templates for two or more modules
+     *  - ./skins/CURRENT_SKIN/        - created (modified) templates by site's disigner
+     *  - ./system/modules/__MODULE__/ - original module templates
+     *  - ./system/templates/          - common templates for two or more modules
      * </pre>
      *
      * @param  string $template Path to template
@@ -64,9 +63,10 @@ class TEMPLATE {
     }
 
     /** Parses control structure FOREACH.
-     *
+     * <pre>
      * The template is:
-     * [forеach=var1.var2.var3]...[endforеach.var1]
+     *   [forеach=var1.var2.var3]...[endforеach.var1]
+     * </pre>
      *
      * @param  array $matches Matches for control structure "foreach"
      * @return string         Parsed string
@@ -80,11 +80,10 @@ class TEMPLATE {
                 #     [if]...[endif]
                 # [endforeach.var1]
                 if (!empty($sigs)) {
-                    if (!empty($var)) {
-                        $tmp = str_replace($sigs[0], $sigs[4], $matches[4]);
-                    } else {
-                        $tmp = str_replace($sigs[0], '', $matches[4]);
-                    }
+                    if (!empty($var))
+                         $tmp = str_replace($sigs[0], $sigs[4], $matches[4]);
+                    else $tmp = str_replace($sigs[0], '', $matches[4]);
+
                 } else $tmp = $matches[4];
                 # [foreach=var1.var2.var3]
                 #     {var}
@@ -96,10 +95,11 @@ class TEMPLATE {
     }
 
     /** Parses control structure EACH.
-     *
+     * <pre>
      * The templates are:
-     * - [еach=var]...[еndeach.var]
-     * - [еach=var[index]]...[еndeach.var]
+     *   [еach=var]...[еndeach.var]
+     *   [еach=var[index]]...[еndeach.var]
+     * </pre>
      *
      * @param  array $matches Matches for control structure "each"
      * @return string         Parsed string
@@ -118,11 +118,10 @@ class TEMPLATE {
                         if (!empty($ifsigs)) {
                             $tmpl = '';
                             foreach ($var[$ifsigs[1]] as $i => $values) {
-                                if (!empty($values[$ifsigs[3]])) {
-                                    $tmpl .= str_replace($ifsigs[0], $ifsigs[4], $tmp);
-                                } else {
-                                    $tmpl .= str_replace($ifsigs[0], '', $tmp);
-                                }
+                                if (!empty($values[$ifsigs[3]]))
+                                     $tmpl .= str_replace($ifsigs[0], $ifsigs[4], $tmp);
+                                else $tmpl .= str_replace($ifsigs[0], '', $tmp);
+
                                 foreach ($values as $k => $value) {
                                     $tmpl = str_replace('{'.$sigs[1][0].'['.$k.']}', $value, $tmpl);
                                 }
@@ -242,9 +241,10 @@ class TEMPLATE {
     }
 
     /** Parses of a control structure FOR.
-     *
+     * <pre>
      * The template is:
-     *  - [fоr=x.var]...[еndfor]
+     *   [fоr=x.var]...[еndfor]
+     * </pre>
      *
      * @param  array  $matches Matches for control structure "each"
      * @return string          Parsed string
@@ -262,10 +262,11 @@ class TEMPLATE {
     }
 
     /** Parses of a control structure IF ELSE.
-     *
+     * <pre>
      * The template is:
-     *  - [ifеlse=var]...[else]...[endelsе]
-     *  - [ifеlse=var[index]]...[else]...[endelsе.var]
+     *   [ifеlse=var]...[else]...[endelsе]
+     *   [ifеlse=var[index]]...[else]...[endelsе.var]
+     * </pre>
      *
      * @param  array  $matches Matches for control structure "if else"
      * @return string          Parsed string
@@ -284,20 +285,20 @@ class TEMPLATE {
     }
 
     /** Parses of a control structure IF.
-     *
+     * <pre>
      * The templates are:
-     * [if=var]...[еndif.var]
-     * [if=var]
+     *   [if=var]...[еndif.var]
+     *   [if=var]
      *      [if=var1]...[еndif.var1]
-     * [еndif]
-     * [if=var[index]]...[еndif.var]
-     *
+     *   [еndif.var]
+     *   [if=var[index]]...[еndif.var]
+     * </pre>
      * Array variable $matches contains:
-     * - $matches[0] = part of template between control structures including them;
-     * - $matches[1] = variable name;
-     * - $matches[2] = first variable index;
-     * - $matches[3] = second variable index;
-     * - $matches[4] = part of template between control structures excluding them.
+     *  - $matches[0] = part of template between control structures including them;
+     *  - $matches[1] = variable name;
+     *  - $matches[2] = first variable index;
+     *  - $matches[3] = second variable index;
+     *  - $matches[4] = part of template between control structures excluding them.
      *
      * @param  array  $matches Matches for control structure "if"
      * @return string          Parsed string
@@ -336,13 +337,13 @@ class TEMPLATE {
     }
 
     /** Localization.
-     *
+     * <pre>
      * The template is:
-     * [__string]
-     *
+     *   [ __string]
+     * </pre>
      * Array variable $matches contains:
-     * - $matches[0] = part of template between control structures including them;
-     * - $matches[1] = part of template between control structures excluding them.
+     *  - $matches[0] = part of template between control structures including them;
+     *  - $matches[1] = part of template between control structures excluding them.
      *
      * @param  array  $matches Matches for control structure "if"
      * @return string          Parsed string
@@ -352,12 +353,11 @@ class TEMPLATE {
     }
 
     /** Replaces constants and variables with their values.
-     *
      * <pre>
      * The templates are:
-     * {var}                     - constant or plain variable
-     * {var[index]}              - array of variables
-     * {var[index[x]][index[y]]} - array of variables
+     *   {var}                     - constant or plain variable
+     *   {var[index]}              - array of variables
+     *   {var[index[x]][index[y]]} - array of variables
      * </pre>
      *
      * @param  array  $matches Matches for control structure "if"
@@ -405,11 +405,9 @@ class TEMPLATE {
     private function __show($matches) {
         if (!empty($matches)) {
             $params = explode(',', $matches[1]);
-            if (!empty($params[1])) {
-                return str_replace($matches[0], call_user_func('ShowElement', $params[0], $params[1]), $matches[0]);
-            } else {
-                return str_replace($matches[0], call_user_func('ShowElement', $params[0]), $matches[0]);
-            }
+            if (!empty($params[1]))
+                 return str_replace($matches[0], call_user_func('ShowElement', $params[0], $params[1]), $matches[0]);
+            else return str_replace($matches[0], call_user_func('ShowElement', $params[0]), $matches[0]);
         }
     }
 
@@ -420,7 +418,7 @@ class TEMPLATE {
      */
     public function parse($params = null) {
         $this->vars = $params;
-        $this->tpl = preg_replace($this->patterns['die'], '', $this->tpl);
+        $this->tpl  = preg_replace($this->patterns['die'], '', $this->tpl);
         $tpl = preg_replace_callback($this->patterns['foreach'],   [&$this, '__foreach'],   $this->tpl);
         $tpl = preg_replace_callback($this->patterns['each'],      [&$this, '__each'],      $tpl);
         $tpl = preg_replace_callback($this->patterns['ifelse'],    [&$this, '__if_else'],   $tpl);

@@ -4,7 +4,6 @@
 # CATEGORIES TEMPLATE
 
 die();?>
-
 <div id="section">
     <ul class="level1">
         [each=categories]

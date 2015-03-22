@@ -27,9 +27,7 @@ if (!empty($REQUEST['backup'])) {
                 ShowMessage(__($error->getMessage()));
             }
         }
-    } else {
-        ShowMessage(__('Nothing selected'));
-    }
+    } else ShowMessage(__('Nothing selected'));
 }
 
 if (!empty($REQUEST['delete']) && !empty($REQUEST['file'])) {

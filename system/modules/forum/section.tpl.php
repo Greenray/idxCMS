@@ -5,7 +5,6 @@
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
-
 <table id="std">
     <tr>
         <th colspan="2">[__Title]</th>

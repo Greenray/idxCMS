@@ -5,7 +5,6 @@
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
-
 <div class="comment">
     <a name="{id}"></a>
     <div class="content">
@@ -20,11 +19,7 @@ die();?>
             </div>
             <div class="info">
                 {time}
-                <span class="menu">
-                    <a href="{MODULE}user&amp;user={author}" title="[__Profile]">
-                        <img src="{ICONS}profile.png" width="16" height="16" alt="[__Profile]" />
-                    </a>
-                </span>
+                <span class="menu"><a href="{MODULE}user&amp;user={author}" title="[__Profile]"><img src="{ICONS}profile.png" width="16" height="16" alt="[__Profile]" /></a></span>
             </div>
             <div class="text justify">{text}</div>
         </div>

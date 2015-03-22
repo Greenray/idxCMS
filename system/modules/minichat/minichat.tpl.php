@@ -5,7 +5,6 @@
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
-
 [if=not_admin]
     <script type="text/javascript">
         var ns6 = document.getElementById && !document.all;

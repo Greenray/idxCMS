@@ -80,21 +80,15 @@ if (empty($sections)) {
                         break;
 
                     case 'close':
-                        if (CMS::call('USER')->checkRoot()) {
-                            CMS::call('POSTS')->setValue($post, 'opened', FALSE);
-                        }
+                        if (CMS::call('USER')->checkRoot()) CMS::call('POSTS')->setValue($post, 'opened', FALSE);
                         break;
 
                     case 'open':
-                        if (CMS::call('USER')->checkRoot()) {
-                            CMS::call('POSTS')->setValue($post, 'opened', TRUE);
-                        }
+                        if (CMS::call('USER')->checkRoot()) CMS::call('POSTS')->setValue($post, 'opened', TRUE);
                         break;
 
                     case 'ban':
-                        if (USER::moderator('posts')) {
-                            CMS::call('FILTER')->ban();
-                        }
+                        if (USER::moderator('posts')) CMS::call('FILTER')->ban();
                         break;
 
                     default:
@@ -108,14 +102,12 @@ if (empty($sections)) {
         SYSTEM::set('pagename', $post['title']);
         SYSTEM::setPageDescription($post['title']);
         SYSTEM::setPageKeywords($post['keywords']);
+
         $perpage = intval(CONFIG::getValue('posts', 'comments-per-page'));
-        if (!empty($comment)) {
-            $page = ceil(intval($comment / $perpage));
-        } elseif (!empty($result)) {
-            $page = ceil(intval($result / $perpage));
-        } else {
-            $page = intval(FILTER::get('REQUEST', 'page'));
-        }
+        if     (!empty($comment)) $page = ceil(intval($comment / $perpage));
+        elseif (!empty($result))  $page = ceil(intval($result / $perpage));
+        else                      $page = intval(FILTER::get('REQUEST', 'page'));
+
         # Don't show post, if number of comments > per page
         if ($page < 2) {
             # Show post with full text
@@ -125,6 +117,7 @@ if (empty($sections)) {
         }
         # Show comments
         ShowComments('POSTS', $post, $page, $perpage, dirname(__FILE__).DS);
+
     } elseif (!empty($category) && !empty($section)) {
         # Show posts from category
         $categories = CMS::call('POSTS')->getCategories($section);
@@ -157,6 +150,7 @@ if (empty($sections)) {
                 ShowWindow('', Pagination($count, $perpage, $page, $categories[$category]['link']));
             }
         } else ShowWindow($categories[$category]['title'], __('Database is empty'), 'center');
+
     } elseif (!empty($section)) {
         # Show section with allowed categories and last items
         $output = CMS::call('POSTS')->showSection($section);
@@ -188,11 +182,10 @@ if (empty($sections)) {
                 }
             }
         }
-        if (!empty($output)) {
-            ShowWindow(__('Search results'), $output);
-        } else {
-            ShowWindow(__('Search results'), __('Nothing founded'), 'center');
-        }
+        if (!empty($output))
+             ShowWindow(__('Search results'), $output);
+        else ShowWindow(__('Search results'), __('Nothing founded'), 'center');
+
     } else {
         # Show allowed sections with allowed categories
         $output = CMS::call('POSTS')->showSections();

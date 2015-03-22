@@ -49,11 +49,9 @@ function RateComment($user, $act, $id) {
  */
 function GetRate($for, &$item) {
     $item = explode('.', $for);
-    if (!empty($item[3])) {
-        $item = CONTENT.$item[0].DS.$item[1].DS.$item[2].DS.$item[3].DS.'rate';
-    } else {
-        $item = CONTENT.$item[0].DS.$item[1].DS.$item[2].DS.'rate';
-    }
+    if (!empty($item[3]))
+         $item = CONTENT.$item[0].DS.$item[1].DS.$item[2].DS.$item[3].DS.'rate';
+    else $item = CONTENT.$item[0].DS.$item[1].DS.$item[2].DS.'rate';
     return GetUnserialized($item);
 }
 

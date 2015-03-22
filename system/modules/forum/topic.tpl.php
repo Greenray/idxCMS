@@ -5,7 +5,6 @@
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
-
 <div class="topic">
     <div class="content">
         <div class="title"><h1>{title}</h1></div>

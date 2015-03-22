@@ -10,11 +10,9 @@ function StatisticClean($file, $field = '') {
     $stat = [];
     if (!empty($field)) {
         $stat = GetUnserialized($file);
-        if (is_array($stat[$field])) {
+        if (is_array($stat[$field]))
              $stat[$field] = [];
-        } else {
-            $stat[$field] = 0;
-        }
+        else $stat[$field] = 0;
     }
     return file_put_contents($file, serialize($stat), LOCK_EX);
 }

@@ -5,7 +5,6 @@
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
-
 <script type="text/javascript" src="{TOOLS}redips.drag.js"></script>
 <script type="text/javascript" src="{TOOLS}drag.js"></script>
 <div class="module">[__Navigation panel]</div>
@@ -29,9 +28,7 @@ die();?>
                         </td>
                         <td style="width:17%;">
                             <select name="icons[]">
-                                [each=links[icons]]
-                                    <option value="{icons[id]}" [if=icons[selected]]selected="selected"[endif]>{icons[id]}</option>
-                                [endeach.links[icons]]
+                                [each=links[icons]]<option value="{icons[id]}" [if=icons[selected]]selected="selected"[endif]>{icons[id]}</option>[endeach.links[icons]]
                             </select>
                         </td>
                     </tr>

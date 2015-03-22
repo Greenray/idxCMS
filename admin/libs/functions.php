@@ -27,9 +27,7 @@ function get_dir_size($dir) {
                 if (($file !== '.') AND ($file !== '..')) {
                    $size += get_dir_size($dir.$file.DS);
                 }
-            } else {
-                $size += filesize($dir.$file);
-            }
+            } else $size += filesize($dir.$file);
         }
         closedir($dh);
     }
@@ -38,11 +36,9 @@ function get_dir_size($dir) {
 
 function in_array_recursive($needle, $haystack) {
     foreach ($haystack as $value) {
-        if (is_array($value)) {
-            return in_array_recursive($needle, $value);
-        } else {
-            return in_array($needle, $haystack);
-        }
+        if (is_array($value))
+             return in_array_recursive($needle, $value);
+        else return in_array($needle, $haystack);
     }
 }
 

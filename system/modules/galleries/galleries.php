@@ -91,14 +91,12 @@ if (empty($sections)) {
         SYSTEM::set('pagename', $item['title']);
         SYSTEM::setPageDescription($item['title']);
         SYSTEM::setPageKeywords($item['keywords']);
+
         $perpage = (int) CONFIG::getValue('galleries', 'comments-per-page');
-        if (!empty($comment)) {
-             $page = ceil((int)$comment / $perpage);
-        } elseif (!empty($result)) {
-            $page = ceil((int)$result / $perpage);
-        } else {
-            $page = (int) FILTER::get('REQUEST', 'page');
-        }
+        if     (!empty($comment)) $page = ceil((int)$comment / $perpage);
+        elseif (!empty($result))  $page = ceil((int)$result / $perpage);
+        else                      $page = (int) FILTER::get('REQUEST', 'page');
+
         # Don't show image, if number of comments > per page
         if ($page < 2) {
             # Show image with full text
@@ -164,6 +162,7 @@ if (empty($sections)) {
                 ShowWindow('', Pagination($count, $perpage, $page, $categories[$category]['link']));
             }
         } else ShowWindow($categories[$category]['title'], __('Database is empty'), 'center');
+
     } elseif (!empty($section)) {
         # Show section with allowed categories and last items
         $output = CMS::call('GALLERIES')->showSection($section);

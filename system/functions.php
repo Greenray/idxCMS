@@ -1,15 +1,8 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
-
-/** System functions libruary.
- *
- * @file      system/functions.php
- * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
- * @package   Core
- */
+# System functions
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 # FILES and DIRECTORIES
 
@@ -275,16 +268,13 @@ function UnifyBr($text) {
     return str_replace(["\r\n", "\n\r", "\r"], LF, $text);
 }
 
-/**
-* @todo Comment
-* @param string $string	...
-* @return
-*/
+/** Checks if the string has onle latin symbols.
+ *
+ * @param  string $string String to check
+ * @return string|boolean Checked string or FALSE if it has not only latin symbols
+ */
 function OnlyLatin($string) {
-    if (empty($string) || preg_replace("/[\d\w]+/i", '', $string) != '') {
-        return FALSE;
-    }
-    return $string;
+    return (empty($string) || preg_replace("/[\d\w]+/i", '', $string) != '') ? FALSE : $string;
 }
 
 # DATE and TIME
@@ -371,6 +361,7 @@ function AdvancedPagination($total, $current, $last) {
     $pages['last']     = $last;
     $pages['pages']    = [];
     $show = 5;                  # Number of page links to show
+    #
     # At the beginning
     if ($current == 1) {
         if ($pages['next'] == $current) {
@@ -384,6 +375,7 @@ function AdvancedPagination($total, $current, $last) {
         }
         return $pages;
     }
+
     # At the end
     if ($current == $last) {
         $start = $last - $show;
@@ -395,6 +387,7 @@ function AdvancedPagination($total, $current, $last) {
         }
         return $pages;
     }
+
     # In the middle
     $start = $current - $show;
     if (($total > 5) && ($current > 3)) $start = $current - 3;
@@ -427,11 +420,9 @@ function Pagination($total, $perpage, $current, $link) {
     if ($numpages > 1) {
         $result .= '<div id="pagination">
                         <span class="pages">'.__('Pages').': </span>';
-        if ($pages['current'] != $pages['previous']) {
-            $result .= '<a href="'.$link.'&amp;page=1"> &lt;</a>';
-        } else {
-            $result .= '<span class="pages"> &lt; </span>';
-        }
+        if ($pages['current'] != $pages['previous'])
+             $result .= '<a href="'.$link.'&amp;page=1"> &lt;</a>';
+        else $result .= '<span class="pages"> &lt; </span>';
         $count = ($numpages > 5) ? 5 : $numpages;
         for ($i = 0; $i < $count; $i++) {
             if ($pages['pages'][$i] != $pages['current']) {
@@ -500,9 +491,9 @@ function ShowCaptcha($param = '') {
         return '';
     }
     $captcha = empty($param) ? CONFIG::getValue('main', 'captcha') : $param;
-    $code = mt_rand(0, 666);
+    $code    = mt_rand(0, 666);
     if ($captcha === 'Random') {
-        $types   = array('Original', 'Color');
+        $types   = ['Original', 'Color'];
         $captcha = $types[mt_rand(0, 1)]; # Change system CAPTCHA
         $result  = ShowCaptcha($captcha);
         $captcha = 'Random';              # Restore system CAPTCHA
@@ -676,10 +667,10 @@ function Redirect($module, $section = '', $category = '', $post = '', $comment =
     die();
 }
 
-/**
-* @todo Comment
-* @param string $message	...
-* @return
+/** Shows error message.
+*
+* @param  string $message Error message
+* @return string          Formatted error message
 */
 function ShowError($message) {
     return CMS::call('SYSTEM')->defineWindow('Error', $message, 'center');

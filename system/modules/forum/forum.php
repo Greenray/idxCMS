@@ -8,9 +8,7 @@ if (!defined('idxCMS')) die();
 
 $sections = CMS::call('FORUM')->getSections();
 
-if ($sections === FALSE) {
-    Redirect('forum');
-}
+if ($sections === FALSE) Redirect('forum');
 
 if (empty($sections)) {
     ShowWindow(__('Forum'), __('Database is empty'), 'center');
@@ -85,9 +83,7 @@ if (empty($sections)) {
                                     }
                                 }
                             }
-                        } else {
-                            ShowError(__('Topic is closed'));
-                        }
+                        } else ShowError(__('Topic is closed'));
                         break;
                     case 'delete':
                         try {
@@ -104,33 +100,33 @@ if (empty($sections)) {
                             ShowError($error->getMessage());
                         }
                         break;
+
                     case 'close':
-                        if (USER::moderator('forum')) {
-                            CMS::call('FORUM')->setValue($topic, 'opened', FALSE);
-                        }
+                        if (USER::moderator('forum')) CMS::call('FORUM')->setValue($topic, 'opened', FALSE);
                         break;
+
                     case 'open':
-                        if (USER::moderator('forum')) {
-                            CMS::call('FORUM')->setValue($topic, 'opened', TRUE);
-                        }
+                        if (USER::moderator('forum')) CMS::call('FORUM')->setValue($topic, 'opened', TRUE);
                         break;
+
                     case 'pin':
                         if (USER::moderator('forum')) {
                             CMS::call('FORUM')->setValue($topic, 'pinned', 1);
 //                            CMS::call('FORUM')->sortTopics();
                         }
                         break;
+
                     case 'unpin':
                         if (USER::moderator('forum')) {
                             CMS::call('FORUM')->setValue($topic, 'pinned', 0);
 //                            CMS::call('FORUM')->sortTopics();
                         }
                         break;
+
                     case 'ban':
-                        if (USER::moderator('forum')) {
-                            CMS::call('FILTER')->ban();
-                        }
+                        if (USER::moderator('forum')) CMS::call('FILTER')->ban();
                         break;
+
                     default:
                         Redirect('forum', $section, $category, $topic);
                         break;
@@ -143,13 +139,10 @@ if (empty($sections)) {
         SYSTEM::setPageDescription($topic['title']);
 
         $perpage = (int) CONFIG::getValue('forum', 'replies-per-page');
-        if (!empty($reply)) {
-            $page = ceil((int)$reply / $perpage);
-        } elseif (!empty($result)) {
-            $page = ceil((int)$result / $perpage);
-        } else {
-            $page = (int) FILTER::get('REQUEST', 'page');
-        }
+        if     (!empty($reply))  $page = ceil((int)$reply / $perpage);
+        elseif (!empty($result)) $page = ceil((int)$result / $perpage);
+        else                     $page = (int) FILTER::get('REQUEST', 'page');
+
         # Don't show topic, if number of comments > per page
         if ($page < 2) {
             # Show topic
@@ -176,9 +169,8 @@ if (empty($sections)) {
                 if (($author['rights'] === '*') || (USER::getUser('username') === $topic['author'])) {
                     unset($topic['ip']);
                 }
-            } else {
-                unset($topic['ip']);
-            }
+            } else unset($topic['ip']);
+
             if (USER::getUser('username') !== 'guest') {
                 $topic['profile'] = TRUE;
             }
@@ -291,11 +283,10 @@ if (empty($sections)) {
         }
 
         SYSTEM::set('pagename', $section['title']);
-        if (!empty($section['desc'])) {
-            SYSTEM::setPageDescription(__('Forum').' - '.$section['title'].' - '.$section['desc']);
-        } else {
-            SYSTEM::setPageDescription(__('Forum').' - '.$section['title']);
-        }
+        if (!empty($section['desc']))
+             SYSTEM::setPageDescription(__('Forum').' - '.$section['title'].' - '.$section['desc']);
+        else SYSTEM::setPageDescription(__('Forum').' - '.$section['title']);
+
         SYSTEM::setPageKeywords($section['id']);
 
         if (empty($categories)) {
@@ -363,10 +354,8 @@ if (empty($sections)) {
 
         $TPL = new TEMPLATE(dirname(__FILE__).DS.'forum.tpl');
 
-        if (!empty($output)) {
-            ShowWindow(__('Forum'), $TPL->parse($output));
-        } else {
-            ShowWindow(__('Forum'), __('Database is empty'), 'center');
-        }
+        if (!empty($output))
+             ShowWindow(__('Forum'), $TPL->parse($output));
+        else ShowWindow(__('Forum'), __('Database is empty'), 'center');
     }
 }

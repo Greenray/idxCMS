@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 
-/** Polls.
+/** Polls and polls archives.
  *
  * @file      system/polls.class.php
  * @version   2.3

@@ -1,16 +1,8 @@
 <?php
-/**
- * @file      skins/Default/main.tpl.php
- * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
- */
-
-/**
- * main.tpl.php - Skin Default: main template.
- * @package Skins
- */
+# idxCMS Flat Files Content Management Sysytem
+# Skin Default: main template
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();?>
 
@@ -54,11 +46,9 @@ if (!defined('idxCMS')) die();?>
     <script type="text/javascript" src='{TOOLS}message.js'></script>
     <script type="text/javascript">
         function ShowHide(obj) {
-            if (obj === 'none') {
-                return 'inline';
-            } else {
-                return 'none';
-            }
+            if (obj === 'none')
+                 return 'inline';
+            else return 'none';
         }
         function ShowAlert(msg, title) {
             dhtmlx.modalbox({
@@ -78,11 +68,7 @@ if (!defined('idxCMS')) die();?>
             <ul>
                 <li><a href="{MODULE}user.feedback">[__Feedback]</a></li>
                 <li><a href="{MODULE}sitemap">[__Sitemap]</a></li>
-                <li>
-                    <a href="{MODULE}rss.list" title="Subscribe to RSS feeds">
-                        <img src="{ICONS}rss.png" height="24" width="24" alt="RSS" />
-                    </a>
-                </li>
+                <li><a href="{MODULE}rss.list" title="Subscribe to RSS feeds"><img src="{ICONS}rss.png" height="24" width="24" alt="RSS" /></a></li>
             </ul>
         </div>
         <div id="top-navigation">

@@ -4,7 +4,6 @@
 # BBCODES PANEL
 
 die();?>
-
 <div class="bbcodes center">
     <script>
         var clientPC = navigator.userAgent.toLowerCase();
@@ -506,12 +505,8 @@ die();?>
         </div>
         <div id="link_{area}" unselectable="on" class="bbtools none">
             <input type="hidden" id="type_{area}" value="" />
-            <div class="link_text">
-                [__Link] (URL): <input type="text" id="url_{area}" size="50" value="" />
-            </div>
-            <div id="label_{area}" class="link_text none"">
-                [__Text]: <input type="text" id="txt_{area}" size="50" value="" />
-            </div>
+            <div class="link_text">[__Link] (URL): <input type="text" id="url_{area}" size="50" value="" /></div>
+            <div id="label_{area}" class="link_text none"">[__Text]: <input type="text" id="txt_{area}" size="50" value="" /></div>
             <p>
                 <input type="button" onclick="InsertLink('{area}');HideDialog('link_{area}');" value="[__Insert]" />
                 <input type="button" onclick="HideDialog('link_{area}');" value="[__Cancel]" />
@@ -530,13 +525,13 @@ die();?>
         [__Choose color or enter a] <a href="http://en.wikipedia.org/wiki/Web_colors" target="_blank">[__color name]</a>
         <br clear=all />
         <table cellspacing="1" cellpadding="0" width="480">
-            [each=colors]
-                <tr>
-                    [each=colors[colors]]
-                        <td style="background:#{colors[color]};height:12px;width:12px;" onmouseover="ViewColor('#{colors[color]}', '{area}');" onclick="SetColor('#{colors[color]}', '{area}');"></td>
-                    [endeach.colors[colors]]
-                </tr>
-            [endeach.colors]
+        [each=colors]
+            <tr>
+            [each=colors[colors]]
+                <td style="background:#{colors[color]};height:12px;width:12px;" onmouseover="ViewColor('#{colors[color]}', '{area}');" onclick="SetColor('#{colors[color]}', '{area}');"></td>
+            [endeach.colors[colors]]
+            </tr>
+        [endeach.colors]
         </table>
     </div>
     <div id="smiles_{area}" unselectable="on" class="bbtools none">

@@ -13,11 +13,7 @@ die();?>
         <tr>
             <th colspan="2">
                 <div class="center">
-                    <p>
-                        <a href="#ref" onclick="document.getElementById('ref').style.display=ShowHide(document.getElementById('ref').style.display)">
-                           [__Referers]
-                        </a>
-                    </p>
+                    <p><a href="#ref" onclick="document.getElementById('ref').style.display=ShowHide(document.getElementById('ref').style.display)">[__Referers]</a></p>
                 </div>
                 <div id="ref" class="none">
                     <table class="std">
@@ -34,11 +30,7 @@ die();?>
         <tr>
             <th colspan="2">
                 <div class="center">
-                    <p>
-                        <a href="#ua" onclick="document.getElementById('ua').style.display=ShowHide(document.getElementById('ua').style.display)">
-                           [__Browsers]
-                        </a>
-                    </p>
+                    <p><a href="#ua" onclick="document.getElementById('ua').style.display=ShowHide(document.getElementById('ua').style.display)">[__Browsers]</a></p>
                 </div>
                 <div id="ua" class="none">
                     <table class="std">
@@ -53,19 +45,11 @@ die();?>
             </th>
         </tr>
         <tr><th colspan="2">[__Today hosts]</th></tr>
-        [foreach=hosts.host.time]
-            <tr class="odd"><td>{host}</td><td>{time}</td></tr>
-        [endforeach.hosts]
+        [foreach=hosts.host.time]<tr class="odd"><td>{host}</td><td>{time}</td></tr>[endforeach.hosts]
         <tr class="odd"><td colspan="2">[foreach=users.key.user]{user} [endforeach.users]</td></tr>
         <tr>
             <th colspan="2">
-                <div class="center">
-                    <p>
-                        <a href="#ip" onclick="document.getElementById('ip').style.display=ShowHide(document.getElementById('ip').style.display)">
-                           [__IP]
-                        </a>
-                    </p>
-                </div>
+                <div class="center"><p><a href="#ip" onclick="document.getElementById('ip').style.display=ShowHide(document.getElementById('ip').style.display)">[__IP]</a></p></div>
                 <div id="ip" class="none">
                     <table class="std">
                     [foreach=ip.host.count]
@@ -95,11 +79,7 @@ die();?>
         <tr>
             <th colspan="2">
                 <div class="center">
-                    <p>
-                        <a href="#sua" onclick="document.getElementById('sua').style.display=ShowHide(document.getElementById('sua').style.display)">
-                           [__User agents]
-                        </a>
-                    </p>
+                    <p><a href="#sua" onclick="document.getElementById('sua').style.display=ShowHide(document.getElementById('sua').style.display)">[__User agents]</a></p>
                 </div>
                 <div id="sua" class="none">
                     <table class="std">
@@ -116,11 +96,7 @@ die();?>
         <tr>
             <th colspan="2">
                 <div class="center">
-                    <p>
-                        <a href="#sip" onclick="document.getElementById('sip').style.display=ShowHide(document.getElementById('sip').style.display)">
-                           [__Spiders IP]
-                        </a>
-                    </p>
+                    <p><a href="#sip" onclick="document.getElementById('sip').style.display=ShowHide(document.getElementById('sip').style.display)">[__Spiders IP]</a></p>
                 </div>
                 <div id="sip" class="none">
                     <table class="std">

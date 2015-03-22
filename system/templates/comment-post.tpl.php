@@ -4,7 +4,6 @@
 # COMMENT POST TEMPLATE
 
 die();?>
-
 [if=comment-length]
     <script type="text/javascript">
         var ns6 = document.getElementById && !document.all;
@@ -46,9 +45,7 @@ die();?>
 <script type="text/javascript">
     function checkForm(form) {
         var text = form.text.value;
-        [if=captcha]
-            var capt = form.captcheckout.value;
-        [endif]
+        [if=captcha]var capt = form.captcheckout.value;[endif]
         if (text == '') {
             ShowAlert('[__Enter a code]', '[__Error]');
             return false;
@@ -68,9 +65,7 @@ die();?>
         <fieldset>
             <legend>[__Text]</legend>
             <textarea id="text" name="text" cols="20" rows="7">{text}</textarea>
-            [if=not_admin]
-                <div>[__Max message length] [<script type="text/javascript">displayLimit("", "text", '{comment-length}')</script>] [__symbols]<div>
-            [endif]
+            [if=not_admin]<div>[__Max message length] [<script type="text/javascript">displayLimit("", "text", '{comment-length}')</script>] [__symbols]<div>[endif]
         </fieldset>
         <p class="center">
             [if=for]<input type="hidden" name="for" value="{for}" />[endif]

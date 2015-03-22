@@ -35,7 +35,6 @@ class CMS {
     }
 
     /** Calls the object, if object is not set it will be created.
-     *
      * <pre>
      * Examples:
      *     $CMS = CMS::call('SYSTEM');                - when it is need to initialize object

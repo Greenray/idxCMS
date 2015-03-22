@@ -5,7 +5,6 @@
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
-
 <script type="text/javascript">
     function checkTopicForm(form) {
         var title = form.title.value;

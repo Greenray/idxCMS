@@ -69,9 +69,7 @@ if (empty($sections)) {
                                     ShowWindow(__('Edit'), $TPL->parse($output));
                                 }
                             }
-                        } else {
-                            ShowError(__('Comments are not allowed'));
-                        }
+                        } else ShowError(__('Comments are not allowed'));
                         break;
 
                     case 'delete':
@@ -111,14 +109,12 @@ if (empty($sections)) {
         SYSTEM::set('pagename', $item['title']);
         SYSTEM::setPageDescription($item['title']);
         SYSTEM::setPageKeywords($item['keywords']);
+
         $perpage = (int) CONFIG::getValue('catalogs', 'comments-per-page');
-        if (!empty($comment)) {
-            $page = ceil((int)$comment / $perpage);
-        } elseif (!empty($result)) {
-            $page = ceil((int)$result / $perpage);
-        } else {
-            $page = (int) FILTER::get('REQUEST', 'page');
-        }
+        if    (!empty($comment)) $page = ceil((int)$comment / $perpage);
+        elseif (!empty($result)) $page = ceil((int)$result / $perpage);
+        else                     $page = (int) FILTER::get('REQUEST', 'page');
+
         # Don't show post, if number of comments > per page
         if ($page < 2) {
             # Show post with full text
@@ -165,9 +161,8 @@ if (empty($sections)) {
             if ($count > $perpage) {
                 ShowWindow('', Pagination($count, $perpage, $page, $categories[$category]['link']));
             }
-        } else {
-            ShowWindow($categories[$category]['title'], __('Database is empty'), 'center');
-        }
+        } else ShowWindow($categories[$category]['title'], __('Database is empty'), 'center');
+
     } elseif (!empty($section)) {
         # Show section with allowed categories and last items
         $output = CMS::call('CATALOGS')->showSection($section);

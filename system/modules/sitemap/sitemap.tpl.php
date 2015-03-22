@@ -5,7 +5,6 @@
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
-
 <li class="level1 parent">
     <a class="level1 parent" href="{link}">
         <span class="bg">

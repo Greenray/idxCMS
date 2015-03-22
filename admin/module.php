@@ -25,11 +25,9 @@ if (!defined('idxADMIN') || !USER::loggedIn()) die();?>
     <script type="text/javascript" src="<?php echo TOOLS?>message.js"></script>
     <script type="text/javascript">
         function ShowHide(obj) {
-            if (obj === 'none') {
-                return 'inline';
-            } else {
-                return 'none';
-            }
+            if (obj === 'none')
+                 return 'inline';
+            else return 'none';
         }
     </script>
 </head>

@@ -23,6 +23,6 @@ if (!defined('idxADMIN') || !USER::loggedIn()) die();?>
     </style>
 </head>
 <body>
-<div id="footer"><?php echo IDX_POWERED.' '.IDX_COPYRIGHT;?></div>
+    <div id="footer"><?php echo IDX_POWERED.' '.IDX_COPYRIGHT;?></div>
 </body>
 </html>

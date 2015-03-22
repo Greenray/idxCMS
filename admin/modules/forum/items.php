@@ -17,12 +17,11 @@ $content    = CMS::call('FORUM')->getContent($category);
 if (!empty($REQUEST['save'])) {
     # Check if admin decided to move post
     if (($section !== $REQUEST['new_section']) || ($category !== $REQUEST['new_category'])) {
-        if (!empty($REQUEST['item'])) {
+        if (!empty($REQUEST['item']))
             # Topic exists, so move it
-            $topic = CMS::call('FORUM')->moveItem($REQUEST['item'], $REQUEST['new_section'], $REQUEST['new_category']);
-        } else {
-            $topic = '';     # Nothing to move, so add new
-        }
+             $topic = CMS::call('FORUM')->moveItem($REQUEST['item'], $REQUEST['new_section'], $REQUEST['new_category']);
+        else $topic = '';     # Nothing to move, so add new
+
         $section  = $REQUEST['new_section'];
         $category = $REQUEST['new_category'];
     } else {

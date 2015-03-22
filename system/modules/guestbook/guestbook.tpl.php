@@ -5,7 +5,6 @@
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
-
 <div class="comment">
     <a name="{id}"></a>
     <div class="content">
@@ -24,24 +23,20 @@ die();?>
         <div class="info">
             <span class="date">{date}</span>
             <span class="menu">
-                [if=user]
-                    <a href="{MODULE}user&amp;user={author}" title="[__Profile]">
-                        <img src="{ICONS}profile.png" width="16" height="16" alt="[__Profile]" />
-                    </a>
-                    <a href="{MODULE}user.pm&amp;for={author}" title="[__Private message]">
-                        <img src="{ICONS}user-pm.png" width="16" height="16" alt="" />
-                    </a>
-                [endif]
+            [if=user]
+                <a href="{MODULE}user&amp;user={author}" title="[__Profile]"><img src="{ICONS}profile.png" width="16" height="16" alt="[__Profile]" /></a>
+                <a href="{MODULE}user.pm&amp;for={author}" title="[__Private message]"><img src="{ICONS}user-pm.png" width="16" height="16" alt="" /></a>
+            [endif]
             </span>
         </div>
         <div class="text justify">{text}</div>
     </div>
     <div class="menu">
-        [if=ban]<a href="{ban}&amp;action=ban&amp;host={ip}" title="[__Ban]">[ {ip} ]</a>[endif]
-        [if=moderator]
-            <a href="{MODULE}guestbook&amp;message={id}&amp;action=edit">[__Edit]</a>
-            <a href="{MODULE}guestbook&amp;message={id}&amp;action=delete">[__Delete]</a>
-        [endif]
+    [if=ban]<a href="{ban}&amp;action=ban&amp;host={ip}" title="[__Ban]">[ {ip} ]</a>[endif]
+    [if=moderator]
+        <a href="{MODULE}guestbook&amp;message={id}&amp;action=edit">[__Edit]</a>
+        <a href="{MODULE}guestbook&amp;message={id}&amp;action=delete">[__Delete]</a>
+    [endif]
     </div>
 </div>
 <div class="clear"></div>

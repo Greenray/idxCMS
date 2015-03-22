@@ -13,11 +13,9 @@ $guests = 0;                                        # Number of guests online
 $stats['loggedin']   = '';                          # Names of registered users online
 
 foreach ($stats['online'] as $ip => $data) {
-    if ($data['name'] === 'guest') {
-        ++$guests;
-    } else {
-        $stats['loggedin'] .= CreateUserLink($data['name'], $data['nick']).' ';
-    }
+    if ($data['name'] === 'guest')
+         ++$guests;
+    else $stats['loggedin'] .= CreateUserLink($data['name'], $data['nick']).' ';
 }
 
 $stats['todayusers'] = empty($stats['users']) ? 0 : sizeof($stats['users']);

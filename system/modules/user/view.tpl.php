@@ -5,7 +5,6 @@
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
-
 <table class="std">
     <tr class="even"><th colspan="2"><img src="{avatar}" hspace="5" vspace="5" alt="[__Avatar]" /></th></tr>
     <tr class="even"><th>[__Username]</th><td>{username}</td></tr>

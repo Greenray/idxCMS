@@ -18,10 +18,10 @@ if (!empty($REQUEST['remove'])) {
 $archived = $POLLS->getArchivedPolls();
 
 if (!empty($archived)) {
-    $colors = array(
+    $colors = [
         'red',   'yellow', 'blue', 'green',  'purple', 'aqua',
         'gray', 'olive',  'teal', 'white', 'black'
-    );
+    ];
     $data   = [];
     $output = '';
     foreach ($archived as $id => $poll) {
@@ -34,13 +34,11 @@ if (!empty($archived)) {
             $data['answers'][$i]['answer'] = $poll['answers'][$i];
             $data['answers'][$i]['count']  = $poll['count'][$i];
             $data['answers'][$i]['voices'] = $poll['voices'][$i];
-            if ($poll['voices'][$i] === 0) {
-                $data['answers'][$i]['color'] = 'transparent';
-            } else {
-                $data['answers'][$i]['color'] = $colors[$i-1];
-            }
+            if ($poll['voices'][$i] === 0)
+                 $data['answers'][$i]['color'] = 'transparent';
+            else $data['answers'][$i]['color'] = $colors[$i-1];
         }
-        $data['total'] = $poll['total'];
+        $data['total']     = $poll['total'];
         $output['polls'][] = $data;
     }
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'archive.tpl');

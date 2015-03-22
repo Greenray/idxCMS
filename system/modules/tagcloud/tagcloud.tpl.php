@@ -9,7 +9,6 @@
 # **SWFObject is the SWF embed script formarly known as FlashObject. The name was changed for legal reasons.
 
 die();?>
-
 <script>
     if (typeof deconcept == "undefined") {var deconcept = new Object();}
     if (typeof deconcept.util == "undefined") {deconcept.util = new Object();}

@@ -2,11 +2,12 @@
 # idxCMS Flat Files Content Management Sysytem
 
 /** BBCODES parser.
+ *
  * @file      system/parser.class.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
  * @package   Core
  */
 
@@ -71,6 +72,7 @@ class PARSER {
     }
 
     /** bbCodes panel for the specified textarea.
+     *
      * @param  string  $textarea  Textarea ID
      * @param  boolean $moderator Is user an admin or moderator?
      * @param  string  $dir       Current directory
@@ -196,6 +198,7 @@ class PARSER {
     }
 
     /** Shows spoiler with hidden text.
+     *
      * @param  array  $matches Array of spoiler parameters
      * @return string          HTML div block with hidden text
      */
@@ -213,6 +216,7 @@ class PARSER {
     }
 
     /** Parses [img]...[/img] bbtag.
+     *
      * @param  string $path Path to images directory
      * @return string       HTML div block with the image
      */
@@ -320,6 +324,7 @@ class PARSER {
     }
 
     /** Main parser.
+     *
      * @param  string $text Text for parsing
      * @param  string $path Path of images directory
      * @return string       Parsed text
@@ -341,6 +346,7 @@ class PARSER {
     }
 
     /** Parses text.
+     * 
      * @param  string $text Text for parsing
      * @param  string $path Path to the images directory
      * @return string       Parsed text

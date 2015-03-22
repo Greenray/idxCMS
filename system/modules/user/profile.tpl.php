@@ -5,7 +5,6 @@
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
-
 <script type="text/javascript">
     function checkUserForm(form) {
         var captcha = form.captcheckout.value;
@@ -22,14 +21,8 @@ die();?>
         <tr class="even">
             <td colspan="3" class="center">
                 <img src="{avatar}" hspace="5" vspace="5" alt="" />
-                <p>
-                    <a href="#avatar" onclick="document.getElementById('shdesc').style.display=ShowHide(document.getElementById('shdesc').style.display)">
-                        [__Avatar]
-                    </a>
-                </p>
-                <div id="shdesc" class="none">
-                    <div class="avatar"><input type="file" name="avatar" value="" class="submit" /></div>
-                </div>
+                <p><a href="#avatar" onclick="document.getElementById('shdesc').style.display=ShowHide(document.getElementById('shdesc').style.display)">[__Avatar]</a></p>
+                <div id="shdesc" class="none"><div class="avatar"><input type="file" name="avatar" value="" class="submit" /></div></div>
             </td>
         </tr>
         <tr class="even">

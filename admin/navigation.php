@@ -57,18 +57,12 @@ if (!defined('idxADMIN') || !USER::loggedIn()) die();?>
                         getAgn[x].className = getAgn[x].className.replace('unclick', '');
                         getAgn[x].className = getAgn[x].className.replace('click', 'unclick');
                     }
-                    if ((this.className.indexOf('unclick')) != -1) {
-                        this.className = this.className.replace('unclick', '');;
-                    } else {
-                        this.className += ' click';
-                    }
+                    if ((this.className.indexOf('unclick')) != -1)
+                         this.className = this.className.replace('unclick', '');;
+                    else this.className += ' click';
                 };
-                getEls[i].onmouseover=function() {
-                    this.className += ' hover';
-                };
-                getEls[i].onmouseout = function() {
-                    this.className = this.className.replace('hover', '');
-                };
+                getEls[i].onmouseover=function()  this.className += ' hover';
+                getEls[i].onmouseout = function() this.className = this.className.replace('hover', '');
             }
         };
     </script>

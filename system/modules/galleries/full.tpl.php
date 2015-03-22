@@ -5,7 +5,6 @@
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
-
 <div class="post">
     <div class="info">
         [if=rateid]<div id="rate{rateid}">{rate}</div>[endif]

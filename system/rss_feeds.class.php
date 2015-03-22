@@ -2,11 +2,12 @@
 # idxCMS Flat Files Content Management Sysytem
 
 /** Process rss feeds.
+ *
  * @file      system/rss_feeds.class.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
  * @package   RSS
  */
 
@@ -47,7 +48,8 @@ class RSS_FEEDS {
      */
     public $items = [];
 
-    /**Class initialization
+    /**Class initialization.
+     *
      * @param  string $title       RSS feed title
      * @param  string $description RSS feed description
      * @return void
@@ -61,7 +63,8 @@ class RSS_FEEDS {
         $this->generator   = 'idxCMS '.IDX_VERSION;
     }
 
-    /** Add item to the RSS feed
+    /** Adds item to the RSS feed.
+     *
      * @param  string $item Item text fo the RSS feed
      * @return void
      */
@@ -72,7 +75,7 @@ class RSS_FEEDS {
         $this->items[] = array($item['title'], $item['desc'], $item['link'], $item['time']);
     }
 
-    /** Add new feed
+    /** Adds new feed.
      * @return string - XML document
      */
     public function addFeed() {
@@ -98,7 +101,7 @@ class RSS_FEEDS {
         return $result;
     }
 
-    /** Show RSS feed
+    /** Shows RSS feed.
      * @return string - XML document
      */
     public function showFeed() {
@@ -110,7 +113,8 @@ class RSS_FEEDS {
         return $result;
     }
 
-    /** Get RSS feed
+    /** Gets RSS feed.
+     *
      * @param string $feed RSS feed
      * @return void
      */

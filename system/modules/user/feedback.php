@@ -38,9 +38,8 @@ if (!empty($message)) {
             } else {
                 ShowError(__('Text is empty'));
             }
-        } else {
-            ShowError(__('Subject is empty'));
-        }
+        } else  ShowError(__('Subject is empty'));
+
     } else {
         try {
             CheckCaptcha();
@@ -59,15 +58,10 @@ if (!empty($message)) {
                         } else {
                             ShowError(__('Text is empty'));
                         }
-                    } else {
-                        ShowError(__('Subject is empty'));
-                    }
-                } else {
-                    ShowError(__('Error in email address'));
-                }
-            } else {
-                ShowError(__('What is your name?'));
-            }
+                    } else ShowError(__('Subject is empty'));
+                } else ShowError(__('Error in email address'));
+            } else ShowError(__('What is your name?'));
+
         } catch (Exception $error) {
             ShowError(__($error->getMessage()));
         }

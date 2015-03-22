@@ -11,11 +11,9 @@ if (!empty($REQUEST['day']) && !empty($REQUEST['viewlog'])) {
     $output = '';
     foreach ($REQUEST['viewlog'] as $logfile) {
         $logfile = basename($logfile);
-        if (substr($logfile, -3) == '.gz') {
-            $contents = gzfile_get_contents(LOGS.$logfile);
-        } else {
-            $contents = file_get_contents(LOGS.$logfile);
-        }
+        if (substr($logfile, -3) == '.gz')
+             $contents = gzfile_get_contents(LOGS.$logfile);
+        else $contents = file_get_contents(LOGS.$logfile);
         $output .= CMS::call('PARSER')->parseText('[quote='.$logfile.']'.$contents.'[/quote]');
     }
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'log.tpl');

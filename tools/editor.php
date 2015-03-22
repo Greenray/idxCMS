@@ -78,9 +78,7 @@ if (!empty($REQUEST['image']['name'])) {
                     </fieldset>
                 </div>
             </div>
-            <div id="close">
-                <form method="post" action=""><input type="button" onclick="window.close();" value="<?php echo __('Close');?>" /></form>
-            </div>
+            <div id="close"><form method="post" action=""><input type="button" onclick="window.close();" value="<?php echo __('Close');?>" /></form></div>
 <?php } else {
           if (!empty($REQUEST['text'])) {
             $title = empty($REQUEST['title']) ? '' : $REQUEST['title'];
@@ -111,9 +109,7 @@ if (!empty($REQUEST['image']['name'])) {
                     </fieldset>
                 </div>
             </div>
-            <div id="close">
-                <form method="post" action=""><input type="button" onclick="window.close();" value="<?php echo __('Close');?>" /></form>
-            </div>
+            <div id="close"><form method="post" action=""><input type="button" onclick="window.close();" value="<?php echo __('Close');?>" /></form></div>
     <?php }
 } ?>
 </body>

@@ -2,11 +2,12 @@
 # idxCMS Flat Files Content Management Sysytem
 
 /** Logging.
+ *
  * @file      system/log.class.php
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
  * @package   Core
  */
 
@@ -16,6 +17,7 @@ class LOG {
     public function __construct() {}
 
     /** Write error message into log file.
+     *
      * @param  string $message Error message
      * @param  string $info    Additioinal info
      * @return boolean FALSE
@@ -26,6 +28,7 @@ class LOG {
     }
 
     /** Register users logins into log file.
+     *
      * @param  string  $type    Message type
      * @param  string  $user    Username
      * @param  string  $message Message
@@ -33,16 +36,15 @@ class LOG {
      */
     public static function logPut($type, $user, $message) {
         $entry = date('d-m-Y H:i:s', time()).' '.$type.' ';
-        if (!empty($user)) {
-            $entry .= '('.$user.' from '.$_SERVER['REMOTE_ADDR'].') '.$message.LF;
-        } else {
-            $entry .= $message.LF;
-        }
+        if (!empty($user))
+             $entry .= '('.$user.' from '.$_SERVER['REMOTE_ADDR'].') '.$message.LF;
+        else $entry .= $message.LF;
         gzfile_put_contents(LOGS.date('Y-m-d', time()).'.log.gz', $entry, 'a');
         return FALSE;
     }
 
     /** Сreate tar archive of logs for the month.
+     * 
      * @param  string  $title       Filename
      * @param  integer $day         Date
      * @param  integer $month       Month

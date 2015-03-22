@@ -5,7 +5,6 @@
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
-
 <div class="module">[__Logs]</div>
 <fieldset>
     <form name="day" method="post" action="">

@@ -19,6 +19,6 @@ die();?>
 </script>
 <div id="banner" class="horinaja">
     <ul>
-        [each=banner]<li>{banner[text]}</li>[endeach.banner]
+    [each=banner]<li>{banner[text]}</li>[endeach.banner]
     </ul>
 </div>

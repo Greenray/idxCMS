@@ -54,8 +54,7 @@ if (!empty($REQUEST['save'])) {
                 break;
 
             case 'ban':
-                if (USER::moderator('guestbook'))
-                    CMS::call('FILTER')->ban();
+                if (USER::moderator('guestbook')) CMS::call('FILTER')->ban();
                 break;
 
             default:
@@ -99,11 +98,9 @@ if (!empty($messages)) {
             if (USER::moderator('guestbook', $messages[$ids[$i]])) {
                 $messages[$ids[$i]]['moderator'] = TRUE;
                 if (!empty($messages[$ids[$i]]['ip'])) {
-                    if ($page < 2) {
-                        $messages[$ids[$i]]['ban'] = MODULE.'guestbook';
-                    } else {
-                        $messages[$ids[$i]]['ban'] = MODULE.'guestbook'.PAGE.$page;
-                    }
+                    if ($page < 2)
+                         $messages[$ids[$i]]['ban'] = MODULE.'guestbook';
+                    else $messages[$ids[$i]]['ban'] = MODULE.'guestbook'.PAGE.$page;
                 }
             }
             $output .= $TPL->parse($messages[$ids[$i]]);
@@ -113,9 +110,8 @@ if (!empty($messages)) {
     if ($count > $perpage) {
         ShowWindow('', Pagination($count, $perpage, $page, MODULE.'guestbook'));
     }
-} else {
-    ShowWindow(__('Guestbook'), __('Database is empty'), 'center');
-}
+} else  ShowWindow(__('Guestbook'), __('Database is empty'), 'center');
+
 unset($GB);
 
 # Show post form

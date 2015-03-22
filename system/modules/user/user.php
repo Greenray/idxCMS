@@ -12,6 +12,7 @@ if (!empty($REQUEST['save'])) {
     if (!USER::loggedIn()) {
         if (!empty($REQUEST['act'])) {
             if ($REQUEST['act'] === 'register') {
+
                 # Registration of a new user
                 try {
                     CheckCaptcha();
@@ -65,16 +66,14 @@ if (!empty($REQUEST['save'])) {
                                     unset($FEEDBACK);
                                     $message = 'Your request was sent to Administrator';
                                 } else {
-                                        $message = 'Your request was sent to your email';
+                                    $message = 'Your request was sent to your email';
                                 }
                                 unset($REQUEST);
                                 ShowWindow(__('Password recovery'), __($message), 'center');
-                            } else {
-                                CMS::call('LOG')->logError('Error in email');
-                            }
-                        } else {
-                            CMS::call('LOG')->logError('Error in username');
-                        }
+
+                            } else CMS::call('LOG')->logError('Error in email');
+                        } else CMS::call('LOG')->logError('Error in username');
+
                     } catch (Exception $error) {
                         ShowError(__($error->getMessage()));
                     }
@@ -84,6 +83,7 @@ if (!empty($REQUEST['save'])) {
     } else {
         if (USER::loggedIn()) {
             if (!empty($REQUEST['profile'])) {
+
                 # Update profile
                 SYSTEM::set('pagename', __('My profile'));
                 if (!empty($REQUEST['current_password'])) {
@@ -107,12 +107,8 @@ if (!empty($REQUEST['save'])) {
                         } catch (Exception $error) {
                             ShowError(__($error->getMessage()));
                         }
-                    } else {
-                        ShowError(__('Invalid password'));
-                    }
-                } else {
-                    ShowError(__('Invalid password'));
-                }
+                    } else ShowError(__('Invalid password'));
+                } else ShowError(__('Invalid password'));
             }
         }
     }
@@ -149,13 +145,10 @@ if (!USER::loggedIn()) {
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'greeting.tpl');
             ShowWindow(__('Greeting'), $TPL->parse());
 
-        } else {
-            Redirect('index');
-        }
+        } else Redirect('index');
+
     } else {
-        if (!empty($REQUEST['user'])) {
-            Redirect('user&act=register');
-        }
+        if (!empty($REQUEST['user'])) Redirect('user&act=register');
     }
 } elseif (USER::loggedIn()) {
     if (!empty($REQUEST['user'])) {
@@ -169,6 +162,7 @@ if (!USER::loggedIn()) {
                 unset($user['blocked']);
             }
             unset($user['rights']);
+
             if (USER::getUser('username') !== $REQUEST['user']) {
                 $user['allow_pm'] = TRUE;
             }
@@ -192,9 +186,7 @@ if (!USER::loggedIn()) {
                 foreach ($user_rights as $right => $right_desc) {
                     $user['rights'] .= $right_desc.'<br />';
                 }
-            } else {
-                $user['rights'] = __('You are the registered user');
-            }
+            } else $user['rights'] = __('You are the registered user');
         } else {
             $user['admin'] = TRUE;
         }

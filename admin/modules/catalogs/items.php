@@ -17,7 +17,7 @@ $content    = CMS::call('CATALOGS')->getContent($category);
 if (!empty($REQUEST['save'])) {
     # Check if admin decided to move post
     if ($category !== $REQUEST['new_category']) {
-        if (!empty($REQUEST['item'])) {
+        if (!empty($REQUEST['item']))
              # Topic exists, so move it
              $item = CMS::call('CATALOGS')->moveItem($REQUEST['item'], $section, $REQUEST['new_category']);
         else $item = '';     # Nothing to move, so add new

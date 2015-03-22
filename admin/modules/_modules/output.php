@@ -60,11 +60,8 @@ if (!empty($REQUEST['selected'])) {
 
     foreach (SYSTEM::$modules as $id => $module) {
         if (!isset($active[DS.$id]) && !isset($active['>'.$id])) {
-            if ($module['type'] === 'main') {
-                $unused[DS.$id] = __('Page').': '.$module['title'];
-            } elseif ($module['type'] === 'box') {
-                $unused['>'.$id] = __('Box').': '.$module['title'];
-            }
+            if     ($module['type'] === 'main') $unused[DS.$id] = __('Page').': '.$module['title'];
+            elseif ($module['type'] === 'box')  $unused['>'.$id] = __('Box').': '.$module['title'];
         }
     }
 

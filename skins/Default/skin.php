@@ -1,7 +1,8 @@
 <?php
-# idxCMS version 2.3
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# SKIN DEFAULT - LAYOUT DEFINITION
+# idxCMS Flat Files Content Management Sysytem
+# Layout definition
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
 
@@ -14,9 +15,7 @@ $SKIN['boxes']       = __('Boxes');
 
 $tpl = '
 <div class="{class}">
-    [if=title]
-        <div class="title center">{title}</div>
-    [endif]
+    [if=title]<div class="title center">{title}</div>[endif]
     <div class="content {align}">
         {content}
     </div>

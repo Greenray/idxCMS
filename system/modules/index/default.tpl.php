@@ -5,11 +5,10 @@
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
-
 <div id="tabs-{tab}">
     <div class="tabs">
         <ul class="tabs">
-            [each=posts]<li><a class="" href="#{posts[tab]}">{posts[tab_date]}</a></li>[endeach.posts]
+        [each=posts]<li><a class="" href="#{posts[tab]}">{posts[tab_date]}</a></li>[endeach.posts]
         </ul>
         [each=posts]
             <div id="{posts[tab]}" class="tab_content">

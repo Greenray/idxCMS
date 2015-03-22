@@ -11,7 +11,6 @@
  * Adapted for idxCMS by Greenray
  */
 die();?>
-
 <script type="text/javascript">
 function TextareaDecorator(textarea, parser) {
     /* INIT */
@@ -59,11 +58,9 @@ function TextareaDecorator(textarea, parser) {
     api.output = output;
     api.update = function() {
         var input = textarea.value;
-        if (input) {
-            color(input, output, parser);
-        } else {
-            output.innerHTML = '';                // clear the display
-        }
+        if (input)
+             color(input, output, parser);
+        else output.innerHTML = '';                // clear the display
     };
     // detect all changes to the textarea, including keyboard input, cut/copy/paste, drag & drop, etc
     if (textarea.addEventListener) {

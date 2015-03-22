@@ -294,11 +294,9 @@ class SYSTEM {
     * @return
     */
     public static function defineWindow($title, $content, $align = 'left') {
-        if (self::$current_point == '__MAIN__') {
-            self::$output['main'][] = [$title, $content, $align];
-        } else {
-            self::$output[self::$current_point][] = [$title, $content, $align];
-        }
+        if (self::$current_point == '__MAIN__')
+             self::$output['main'][] = [$title, $content, $align];
+        else self::$output[self::$current_point][] = [$title, $content, $align];
     }
 
     /** Show window.

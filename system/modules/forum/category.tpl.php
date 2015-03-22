@@ -5,7 +5,6 @@
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
-
 <table id="std">
     <tr>
         <th colspan="2">[__Title]</th>
@@ -38,12 +37,4 @@ die();?>
         </tr>
     [endeach.topic]
 </table>
-<div>
-[if=post_allowed]
-    <p class="right">
-        <form name="form" method="post" action="">
-            <input type="submit" name="new" value="[__New topic]" class="submit" />
-        </form>
-    </p>
-[endif]
-</div>
+[if=post_allowed]<div><p class="right"><form name="form" method="post" action=""><input type="submit" name="new" value="[__New topic]" class="submit" /></form></p></div>[endif]

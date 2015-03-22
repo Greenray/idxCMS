@@ -5,7 +5,6 @@
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
-
 [ifelse=loggedin]
     <div class="center"><strong>[__Hello], {user}!</strong></div>
     <div class="user_panel">
@@ -85,9 +84,7 @@ die();?>
                         <input type="password" name="password" id="password" placeholder="[__Password]" class="showpassword" />
                     </p>
                     <p class="dhtmlx_popup_controls">
-                        <div class='dhtmlx_popup_button'>
-                            <div><input type="submit" name="login" value="[__Log in]" class="popup_input" /></div>
-                        </div>
+                        <div class='dhtmlx_popup_button'><div><input type="submit" name="login" value="[__Log in]" class="popup_input" /></div></div>
                     </p>
                     <a class="close" href="#"></a>
                 </form>

@@ -132,9 +132,8 @@ class USER {
             self::saveUserData($user, $userdata);
             CMS::call('LOG')->logPut('Note', self::$user['username'], 'Logged in as '.$user);
             return TRUE;
-        } else {
-            return CMS::call('LOG')->logPut('Note', self::$user['username'], 'Attempt to log in as '.$user);
-        }
+
+        } else return CMS::call('LOG')->logPut('Note', self::$user['username'], 'Attempt to log in as '.$user);
     }
 
     /** Check if user already logged in.
@@ -238,28 +237,23 @@ class USER {
     public function updateUser($username, $nickname, $userdata) {
         $username = basename($username);
         $nickname = basename($nickname);
-        if (!file_exists(USERS.$username)) {
-            throw new Exception('Invalid username');
-        }
-        if (!$this->checkUserName($nickname, 'Nick')) {
-            throw new Exception(__('Invalid nickname'));
-        }
+
+        if (!file_exists(USERS.$username))            throw new Exception('Invalid username');
+        if (!$this->checkUserName($nickname, 'Nick')) throw new Exception(__('Invalid nickname'));
+
         $email = FILTER::get('REQUEST', 'email');
-        if (!CMS::call('FILTER')->validEmail($email)) {
-            throw new Exception('Invalid email');
-        }
+        if (!CMS::call('FILTER')->validEmail($email)) throw new Exception('Invalid email');
+
         $user = self::getUserData($username);
-        if ($user === FALSE) {
-            throw new Exception('Cannot get userdata');
-        }
+        if ($user === FALSE) throw new Exception('Cannot get userdata');
+
         $password = FILTER::get('REQUEST', 'password');
         $confirm  = FILTER::get('REQUEST', 'confirm');
         if (!empty($password) && !empty($confirm)) {
-            if (!$this->checkPassword($password, $confirm)) {
-                throw new Exception('Invalid password');
-            } else {
-                $password = md5($password);
-            }
+            if (!$this->checkPassword($password, $confirm))
+                 throw new Exception('Invalid password');
+            else $password = md5($password);
+
         } else $password = $user['password'];
 
         # Also we must set a md5 hash of user's password to userdata
@@ -296,7 +290,7 @@ class USER {
         if ($value === '+')     $profile[$field]++;
         elseif ($value === '-') $profile[$field]--;
         else                    $profile[$field] = $value;
-        
+
         return self::saveUserData($user, $profile);
     }
 
@@ -419,9 +413,8 @@ class USER {
                     $rights[$right] = self::$system_rights[$right];
                 }
             }
-        } else {
-            $root = TRUE;
-        }
+        } else $root = TRUE;
+
         return $rights;
     }
 
@@ -475,12 +468,9 @@ class USER {
     * @return
     */
     public function checkUser($username, $password, $hash, &$userdata) {
-        if (!$this->checkUserName($username, 'Name')) {
-            return FALSE;
-        }
-        if (!file_exists(USERS.$username)) {
-            return FALSE;
-        }
+        if (!$this->checkUserName($username, 'Name')) return FALSE;
+        if (!file_exists(USERS.$username))            return FALSE;
+
         $userdata = self::getUserData($username);
 
         # If userdata is invalid we must exit with error

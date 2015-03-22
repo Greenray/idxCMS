@@ -5,7 +5,6 @@
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
-
 <table class="calendar">
     <tr><th colspan="7">{month}</th></tr>
     <tr>{header}</tr>

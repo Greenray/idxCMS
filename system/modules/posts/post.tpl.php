@@ -5,7 +5,6 @@
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
-
 <script type="text/javascript">
     var ids = new Array({ids});
     var titles = new Array({titles});
@@ -84,9 +83,7 @@ die();?>
                     <td class="label">[__Select category]</td>
                     <td>
                         <select name="new_category">
-                            [each=categories]
-                                <option value="{categories[id]}" [if=categories[selected]]selected="selected"[endif]>{categories[title]}</option>
-                            [endeach.categories]
+                            [each=categories]<option value="{categories[id]}" [if=categories[selected]]selected="selected"[endif]>{categories[title]}</option>[endeach.categories]
                         </select>
                     </td>
                 [else]
@@ -125,9 +122,7 @@ die();?>
             </tr>
             [ifelse=admin]
                 <tr class="odd">
-                    <td>[__Comments]: <input type="checkbox" name="opened" value="1" id="opened" [if=opened]checked="checked"[endif] />
-                        <label for="opened"> [__Allow]</label>
-                    </td>
+                    <td>[__Comments]: <input type="checkbox" name="opened" value="1" id="opened" [if=opened]checked="checked"[endif] /><label for="opened"> [__Allow]</label></td>
                     <td colspan="3" >&nbsp;</td>
                 </tr>
             [else]

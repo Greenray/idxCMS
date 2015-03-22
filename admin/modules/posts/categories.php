@@ -74,9 +74,7 @@ if (!empty($sections)) {
                 $output['sections'][$id]['categories'][$key]['class'] = $class;
                 $class = ($class === 'odd') ? 'even' : 'odd';
             }
-        } else {
-            $output['sections'][$id]['categories'] = [];
-        }
+        } else $output['sections'][$id]['categories'] = [];
     }
 }
 

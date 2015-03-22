@@ -4,7 +4,6 @@
 # SHOT ITEM DESCRIPTION TEMPLATE
 
 die();?>
-
 <div class="post">
     <div class="date">{date}</div>
     [if=rateid]<div id="rate{rateid}" class="main_rate">{rate}</div>[endif]

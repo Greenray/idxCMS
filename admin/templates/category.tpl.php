@@ -5,7 +5,6 @@
 # Copyright (c) 2011 - 2015 Victor NabatovE
 
 die();?>
-
 <script type="text/javascript">
     function checkForm(form) {
         var title = form.title.value;
@@ -43,11 +42,7 @@ die();?>
                     <input type="hidden" name="category" value="{id}"/>
                     <b>{section[title]}</b>
                 [else]
-                    <select name="section">
-                    [each=sections]
-                        <option value="{sections[id]}">{sections[title]}</option>
-                    [endeach.sections]
-                    </select>
+                    <select name="section">[each=sections]<option value="{sections[id]}">{sections[title]}</option>[endeach.sections]</select>
                 [endelse]
                 </td>
             </tr>

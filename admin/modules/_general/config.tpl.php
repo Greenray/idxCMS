@@ -5,7 +5,6 @@
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
-
 <script>
     var curselectorinput;
     function selectColor(color) {
@@ -88,9 +87,7 @@ die();?>
                 <td>[__Module on index page]</td>
                 <td colspan="2">
                     <select name="index-module">
-                        [each=modules]
-                            <option value="{modules[module]}" [if=modules[selected]]selected="selected"[endif]>{modules[title]}</option>
-                        [endeach.modules]
+                        [each=modules]<option value="{modules[module]}" [if=modules[selected]]selected="selected"[endif]>{modules[title]}</option>[endeach.modules]
                     </select>
                 </td>
             </tr>
@@ -98,13 +95,9 @@ die();?>
                 <td>[__Default skin]</td>
                 <td colspan="2">
                     <select name="skin">
-                        [each=skins]
-                            <option value="{skins[skin]}" [if=skins[selected]]selected="selected"[endif]>{skins[skin]}</option>
-                        [endeach.skins]
+                    [each=skins]<option value="{skins[skin]}" [if=skins[selected]]selected="selected"[endif]>{skins[skin]}</option>[endeach.skins]
                     </select>
-                    [each=skins]
-                        <input type="hidden" name="skins[]" value="{skins[skin]}" />
-                    [endeach.skins]
+                    [each=skins]<input type="hidden" name="skins[]" value="{skins[skin]}" />[endeach.skins]
                 </td>
             </tr>
             <tr class="odd">
@@ -115,9 +108,7 @@ die();?>
                 <td>[__Default language]</td>
                 <td colspan="2">
                     <select name="lang">
-                        [each=langs]
-                            <option value="{langs[lang]}" [if=langs[selected]]selected="selected"[endif]>{langs[lang]}</option>
-                        [endeach.langs]
+                    [each=langs]<option value="{langs[lang]}" [if=langs[selected]]selected="selected"[endif]>{langs[lang]}</option>[endeach.langs]
                     </select>
                 </td>
             </tr>
@@ -133,9 +124,7 @@ die();?>
                 <td>[__Default timezone]</td>
                 <td colspan="2">
                     <select name="tz">
-                        [each=tz]
-                            <option value="{tz[tz]}" [if=tz[selected]]selected="selected"[endif]>{tz[title]}</option>
-                        [endeach.tz]
+                    [each=tz]<option value="{tz[tz]}" [if=tz[selected]]selected="selected"[endif]>{tz[title]}</option>[endeach.tz]
                     </select>
                 </td>
             </tr>
@@ -143,9 +132,7 @@ die();?>
                 <td>[__CAPTCHA system]</td>
                 <td colspan="2">
                     <select name="captcha">
-                        [each=captcha]
-                            <option value="{captcha[captcha]}" [if=captcha[selected]]selected="selected"[endif]>{captcha[captcha]}</option>
-                        [endeach.captcha]
+                    [each=captcha]<option value="{captcha[captcha]}" [if=captcha[selected]]selected="selected"[endif]>{captcha[captcha]}</option>[endeach.captcha]
                     </select>
                 </td>
             </tr>

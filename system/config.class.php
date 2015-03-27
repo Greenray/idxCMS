@@ -7,7 +7,7 @@
  *   [main]                    - Section
  *   title  = "idxCMS"         - Parameter   = "Value"
  *   name   = "flat.CMS"       - Parameter   = "Value" (value is combined)
- *   0[]    = "index"       b  - Parameter[] = "Value" (parameter is array)
+ *   0[]    = "index"          - Parameter[] = "Value" (parameter is array)
  *   [output.Default]          - Section (combined)
  *   left[] = "posts.calendar" - Parameter[] = "Value" (parameter is array and value is combined)
  *   and so on

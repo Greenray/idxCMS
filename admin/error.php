@@ -4,18 +4,12 @@
 # Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
-if (!defined('idxCMS')) die();?>
+if (!defined('idxCMS')) die();
 
-<!DOCTYPE html>
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <meta http-equiv="content-language" content="<?php echo SYSTEM::get('locale');?>" />
-    <link href="<?php echo ADMIN?>style.css" rel="stylesheet" type="text/css" media="screen" />
-</head>
-<body>
-<table class="message center">
-    <tr><td class="module row2"><?php echo $message[0]?></td></tr>
-    <tr><td class="row2" style="padding:0 10px 10px 10px;"><?php echo $message[1]?></td></tr>
-</table>
-</body>
-</html>
+$output = [];
+$output['locale']   = SYSTEM::get('locale');
+$output['message1'] = $message[0];
+$output['message2'] = $message[1];
+
+$TPL = new TEMPLATE(ADMINTEMPLATES.'error.tpl');
+echo $TPL->parse($output);

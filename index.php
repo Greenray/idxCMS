@@ -207,7 +207,7 @@ switch($MODULE) {
         /** Libruaries for administration panel. */
         define('ADMINLIBS', ADMIN.'libs'.DS);
         /** Templates for administration panel. */
-        define('TEMPLATES', ADMIN.'templates'.DS);
+        define('ADMINTEMPLATES', ADMIN.'templates'.DS);
 
         require_once ADMINLIBS.'functions.php';
         include_once ADMIN.'languages'.DS.SYSTEM::get('language').'.php';  # Localization.

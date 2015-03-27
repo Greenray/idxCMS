@@ -102,11 +102,10 @@ class CALENDAR {
             $inc = 0;
             for ($i = $showed; $i < ($showed + 7) && ($i <= $this->temp['num_of_days']) && ($position <= 7); $i++) {
                 $class = 'event';
-                if (empty($this->events[$i])) {
-                    $class = 'usual';
-                } else {
-                    $calendar[$string]['dates'][$i]['events'] = $this->events[$i];
-                }
+                if (empty($this->events[$i]))
+                     $class = 'usual';
+                else $calendar[$string]['dates'][$i]['events'] = $this->events[$i];
+
                 if (!empty($this->today[$i]) && ($current_year === $selected_year)) {
                     $class .= ' special';
                 }

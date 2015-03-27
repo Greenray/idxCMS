@@ -51,15 +51,10 @@ class TEMPLATE {
      */
     public function __construct($template) {
         $tpl = basename($template);
-        if (file_exists(CURRENT_SKIN.$tpl.'.php')) {
-            $this->tpl = file_get_contents(CURRENT_SKIN.$tpl.'.php');
-        } elseif (file_exists(TEMPLATES.$tpl.'.php')) {
-            $this->tpl = file_get_contents(TEMPLATES.$tpl.'.php');
-        } elseif (file_exists($template.'.php')) {
-            $this->tpl = file_get_contents($template.'.php');
-        } else {
-            $this->tpl = $template;
-        }
+        if     (file_exists(CURRENT_SKIN.$tpl.'.php')) $this->tpl = file_get_contents(CURRENT_SKIN.$tpl.'.php');
+        elseif (file_exists(TEMPLATES.$tpl.'.php'))    $this->tpl = file_get_contents(TEMPLATES.$tpl.'.php');
+        elseif (file_exists($template.'.php'))         $this->tpl = file_get_contents($template.'.php');
+        else                                           $this->tpl = $template;
     }
 
     /** Parses control structure FOREACH.
@@ -83,8 +78,7 @@ class TEMPLATE {
                     if (!empty($var))
                          $tmp = str_replace($sigs[0], $sigs[4], $matches[4]);
                     else $tmp = str_replace($sigs[0], '', $matches[4]);
-
-                } else $tmp = $matches[4];
+                } else   $tmp = $matches[4];
                 # [foreach=var1.var2.var3]
                 #     {var}
                 # [endforeach.var1]
@@ -136,11 +130,9 @@ class TEMPLATE {
                             $tmpl = '';
                             if (!empty($var[$ifsigs[1]])) {
                                 foreach ($var[$ifsigs[1]] as $i => $values) {
-                                    if (!empty($values[$ifsigs[3]])) {
-                                        $tmpl .= str_replace($ifsigs[0], $ifsigs[4], $tmp);
-                                    } else {
-                                        $tmpl .= str_replace($ifsigs[0], $ifsigs[5], $tmp);
-                                    }
+                                    if (!empty($values[$ifsigs[3]]))
+                                         $tmpl .= str_replace($ifsigs[0], $ifsigs[4], $tmp);
+                                    else $tmpl .= str_replace($ifsigs[0], $ifsigs[5], $tmp);
                                     # [each=var[index]]
                                     #     [ifelse=var]
                                     #         {var[index]}
@@ -179,11 +171,9 @@ class TEMPLATE {
                     preg_match_all($this->patterns['if'], $tpl, $sigs);
                     if (!empty($sigs)) {
                         foreach ($sigs[1] as $k => $idx) {
-                            if (!empty($var[$sigs[3][$k]])) {
-                                $tpl = str_replace($sigs[0][$k], $sigs[4][$k], $tpl);
-                            } else {
-                                $tpl = str_replace($sigs[0][$k], '', $tpl);
-                            }
+                            if (!empty($var[$sigs[3][$k]]))
+                                 $tpl = str_replace($sigs[0][$k], $sigs[4][$k], $tpl);
+                            else $tpl = str_replace($sigs[0][$k], '', $tpl);
                         }
                     }
                     # [each=var[index]]
@@ -193,11 +183,9 @@ class TEMPLATE {
                     if (!empty($sigs)) {
                         foreach ($sigs[1] as $k => $idx) {
                             $val = SearchValueInArray($sigs[3][$k], $var);
-                            if (!empty($var[$sigs[3][$k]]) || !empty($val)) {
-                                $tpl = str_replace($sigs[0][$k], $sigs[4][$k], $tpl);
-                            } else {
-                                $tpl = str_replace($sigs[0][$k], $sigs[5][$k], $tpl);
-                            }
+                            if (!empty($var[$sigs[3][$k]]) || !empty($val))
+                                 $tpl = str_replace($sigs[0][$k], $sigs[4][$k], $tpl);
+                            else $tpl = str_replace($sigs[0][$k], $sigs[5][$k], $tpl);
                         }
                     }
                     # [each=var[index]]

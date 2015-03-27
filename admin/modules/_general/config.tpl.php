@@ -95,7 +95,7 @@ die();?>
                 <td>[__Default skin]</td>
                 <td colspan="2">
                     <select name="skin">
-                    [each=skins]<option value="{skins[skin]}" [if=skins[selected]]selected="selected"[endif]>{skins[skin]}</option>[endeach.skins]
+                        [each=skins]<option value="{skins[skin]}" [if=skins[selected]]selected="selected"[endif]>{skins[skin]}</option>[endeach.skins]
                     </select>
                     [each=skins]<input type="hidden" name="skins[]" value="{skins[skin]}" />[endeach.skins]
                 </td>
@@ -108,7 +108,7 @@ die();?>
                 <td>[__Default language]</td>
                 <td colspan="2">
                     <select name="lang">
-                    [each=langs]<option value="{langs[lang]}" [if=langs[selected]]selected="selected"[endif]>{langs[lang]}</option>[endeach.langs]
+                        [each=langs]<option value="{langs[lang]}" [if=langs[selected]]selected="selected"[endif]>{langs[lang]}</option>[endeach.langs]
                     </select>
                 </td>
             </tr>
@@ -124,7 +124,7 @@ die();?>
                 <td>[__Default timezone]</td>
                 <td colspan="2">
                     <select name="tz">
-                    [each=tz]<option value="{tz[tz]}" [if=tz[selected]]selected="selected"[endif]>{tz[title]}</option>[endeach.tz]
+                        [each=tz]<option value="{tz[tz]}" [if=tz[selected]]selected="selected"[endif]>{tz[title]}</option>[endeach.tz]
                     </select>
                 </td>
             </tr>
@@ -132,7 +132,7 @@ die();?>
                 <td>[__CAPTCHA system]</td>
                 <td colspan="2">
                     <select name="captcha">
-                    [each=captcha]<option value="{captcha[captcha]}" [if=captcha[selected]]selected="selected"[endif]>{captcha[captcha]}</option>[endeach.captcha]
+                        [each=captcha]<option value="{captcha[captcha]}" [if=captcha[selected]]selected="selected"[endif]>{captcha[captcha]}</option>[endeach.captcha]
                     </select>
                 </td>
             </tr>

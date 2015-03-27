@@ -25,7 +25,7 @@ if (!empty($REQUEST['image']['name'])) {
             <title>idxCMS version <?php echo IDX_VERSION.' - '.__('Images browser');?></title>
             <style type="text/css">
                 <!--
-                body     { background:#4e889d; color:black; font:normal 10px arial, helvetica, verdana, sans-serif; margin:0; padding:0 }
+                body     { background:#4e889d; color:black; font:normal 10px arial,verdana,sans-serif; margin:0; padding:0 }
                 #caption { font-size:10px; height:40px; margin:0; padding:0 }
                 #close   { width:100%; margin:5px; text-align:center; position:absolute; bottom:0 }
                 #files   { background:#e2e2e2; width:30%; overflow:auto }
@@ -87,7 +87,7 @@ if (!empty($REQUEST['image']['name'])) {
             <title>idxCMS version <?php echo IDX_VERSION.' - '.__('Article preview');?></title>
             <style type="text/css">
                 <!--
-                body      { background:#4e889d; color:black; font:normal 0.8em arial,helvetica,verdana,sans-serif; margin:0; padding:0 }
+                body      { background:#4e889d; color:black; font:normal 0.8em arial,verdana,sans-serif; margin:0; padding:0 }
                 h1        { font-size:1.2em; font-weight:normal; line-height:22px; margin:0 0 10px }
                 #close    { width:100%; margin:5px; text-align:center; position:relative; bottom:0 }
                 #preview  { background:white; width:100%; min-height:500px }

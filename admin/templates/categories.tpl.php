@@ -27,9 +27,7 @@ die();?>
                     [each=sections[categories]]
                         <tr class="{categories[class]}">
                             <td class="rowhandler">
-                                <div id="{sections[id]}.{categories[id]}" class="drag row">
-                                    <img src="{ICONS}move.png" width="16" height="16" alt="[__Move]" />
-                                </div>
+                                <div id="{sections[id]}.{categories[id]}" class="drag row"><img src="{ICONS}move.png" width="16" height="16" alt="[__Move]" /></div>
                             </td>
                             <td class="id center">{categories[id]}</td>
                             <td class="icon center"><img src="{categories[path]}icon.png" width="35" height="35" alt="icon" /></td>

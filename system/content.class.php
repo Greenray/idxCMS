@@ -97,9 +97,7 @@ class CONTENT extends INDEX {
         SYSTEM::setPageDescription(SYSTEM::$modules[$this->module]['title'].' - '.__('Sections'));
         $result   = [];
         $sections = $this->sections;
-        if (isset($sections['drafts'])) {
-            unset($sections['drafts']);
-        }
+        if (isset($sections['drafts'])) unset($sections['drafts']);
 
         foreach ($sections as $id => $section) {
             # Get only allowed categories for user
@@ -161,14 +159,10 @@ class CONTENT extends INDEX {
      */
     public function saveSection() {
         $id = OnlyLatin(FILTER::get('REQUEST', 'section'));
-        if ($id === FALSE) {
-            throw new Exception('Invalid ID');
-        }
+        if ($id === FALSE)    throw new Exception('Invalid ID');
 
         $title = FILTER::get('REQUEST', 'title');
-        if ($title === FALSE) {
-            throw new Exception('Title is empty');
-        }
+        if ($title === FALSE) throw new Exception('Title is empty');
 
         if (!is_dir($this->container.$id)) {
             if (mkdir($this->container.$id, 0777) === FALSE) {
@@ -223,7 +217,6 @@ class CONTENT extends INDEX {
         if (empty($this->sections[$id])) {
             throw new Exception('Invalid ID');
         }
-
         unset($this->sections[$id]);
 
         if (($this->saveIndex($this->container, $this->sections) === FALSE) ||
@@ -335,13 +328,8 @@ class CONTENT extends INDEX {
      * @return integer|boolean ID of the new category or FALSE
      */
     public function moveCategory($id, $source, $dest) {
-        if (empty($this->sections[$source])) {
-            return FALSE;
-        }
-
-        if (empty($this->sections[$source]['categories'][$id])) {
-            return FALSE;
-        }
+        if (empty($this->sections[$source])) return FALSE;
+        if (empty($this->sections[$source]['categories'][$id])) return FALSE;
 
         $new = $this->newId($this->sections[$dest]['categories']);
 
@@ -487,14 +475,10 @@ class CONTENT extends INDEX {
      */
     public function saveItem($id) {
         $title = FILTER::get('REQUEST', 'title');
-        if ($title === FALSE) {
-            throw new Exception('Title is empty');
-        }
+        if ($title === FALSE) throw new Exception('Title is empty');
 
         $text = FILTER::get('REQUEST', 'text');
-        if (empty($text)) {
-            throw new Exception('Text is empty');
-        }
+        if (empty($text))     throw new Exception('Text is empty');
 
         $item = $this->sections[$this->section]['categories'][$this->category]['path'].$id;
         if (empty($id)) {
@@ -506,9 +490,7 @@ class CONTENT extends INDEX {
                 }
             }
 
-            if (mkdir($item, 0777) === FALSE) {
-                throw new Exception('Cannot create '.$item);
-            }
+            if (mkdir($item, 0777) === FALSE) throw new Exception('Cannot create '.$item);
 
             $this->content[$id]['id']       = (int)$id;
             $this->content[$id]['author']   = USER::getUser('username');
@@ -588,7 +570,6 @@ class CONTENT extends INDEX {
         if (empty($this->content[$id])) {
             throw new Exception('Invalid ID');
         }
-
         $path = $this->sections[$this->section]['categories'][$this->category]['path'];
 
         unset($this->content[$id]);
@@ -596,7 +577,6 @@ class CONTENT extends INDEX {
         if (($this->saveIndex($path, $this->content) === FALSE) || (DeleteTree($path.$id) === false)) {
             throw new Exception('Cannot remove item');
         }
-
         Sitemap();
     }
 
@@ -692,10 +672,9 @@ class CONTENT extends INDEX {
         return $result;
     }
 
-    /**
-    * @todo Comment
-    * @param string $format	...
-    * @return
+    /** Gets the last items from category
+    * @param  string $format The parameter for formatting posts time
+    * @return array          List of lst items
     */
     public function getCategoryLastItems($format) {
         $items  = array_flip($this->getStat('time'));
@@ -715,10 +694,9 @@ class CONTENT extends INDEX {
         return $result;
     }
 
-    /**
-    * @todo Comment
-    * @param string $item	...
-    * @return
+    /** Gets comments.
+    * @param  integer $item	Item ID
+    * @return array         All comments to current article or topic
     */
     public function getComments($item) {
         $this->item = $item;
@@ -730,11 +708,10 @@ class CONTENT extends INDEX {
         return $this->comments;
     }
 
-    /**
-    * @todo Comment
-    * @param string $id	...
-    * @param string $page	...
-    * @return
+    /** Gets comment.
+    * @param  string $id   Comment ID
+    * @param  string $page Page number
+    * @return array        Comment data
     */
     public function getComment($id, $page) {
         if (empty($this->comments[$id])) {
@@ -772,13 +749,10 @@ class CONTENT extends INDEX {
         if (CONFIG::getValue('enabled', 'rate') && $user !== 'guest') {
             $comment['rateid'] = $this->module.'.'.$this->section.'.'.$this->category.'.'.$this->item.'.'.$id;
         }
-        if ($comment['rate'] < 0) {
-            $comment['rate_color'] = 'red';
-        } elseif ($comment['rate'] === 0) {
-            $comment['rate_color'] = 'black';
-        } else {
-            $comment['rate_color'] = 'green';
-        }
+        if     ($comment['rate'] < 0)   $comment['rate_color'] = 'red';
+        elseif ($comment['rate'] === 0) $comment['rate_color'] = 'black';
+        else                            $comment['rate_color'] = 'green';
+
         return $comment;
     }
 
@@ -788,7 +762,6 @@ class CONTENT extends INDEX {
     public function getLastComment() {
         $last = array_pop($this->comments);
         array_push($this->comments, $last);
-
         return $last;
     }
 
@@ -801,14 +774,10 @@ class CONTENT extends INDEX {
      * @return array                           List of comments related to article or topic
      */
     public function newComment($item, $text) {
-        if (empty($this->content[$item])) {
-            throw new Exception('Invalid ID');
-        }
+        if (empty($this->content[$item])) throw new Exception('Invalid ID');
 
         $text = trim($text);
-        if (empty($text)) {
-            throw new Exception('Text is empty');
-        }
+        if (empty($text)) throw new Exception('Text is empty');
 
         $path = $this->sections[$this->section]['categories'][$this->category]['path'];
         $id = $this->newId($this->comments);
@@ -823,9 +792,7 @@ class CONTENT extends INDEX {
         $this->saveIndex($path.$item.DS, $this->comments);
         $this->content[$item]['comments']++;
 
-        if ($this->saveIndex($path, $this->content) === FALSE) {
-            throw new Exception('Cannot save comment');
-        }
+        if ($this->saveIndex($path, $this->content) === FALSE) throw new Exception('Cannot save comment');
 
         return $this->content[$item]['comments'];
     }
@@ -836,22 +803,12 @@ class CONTENT extends INDEX {
      * @return array        Comment data
      */
     public function saveComment($id, $item) {
-        if (!USER::loggedIn()) {
-            throw new Exception('You are not logged in!');
-        }
-
-        if (empty($this->content[$item])) {
-            throw new Exception('Invalid ID');
-        }
-
-        if (empty($this->content[$item]['opened'])) {
-            throw new Exception('Comments are not allowed');
-        }
+        if (!USER::loggedIn())                      throw new Exception('You are not logged in!');
+        if (empty($this->content[$item]))           throw new Exception('Invalid ID');
+        if (empty($this->content[$item]['opened'])) throw new Exception('Comments are not allowed');
 
         $text = FILTER::get('REQUEST', 'text');
-        if (empty($text)) {
-            throw new Exception('Text is empty');
-        }
+        if (empty($text)) throw new Exception('Text is empty');
 
         if (empty($id)) {
             $this->newComment($item, $text);
@@ -868,7 +825,6 @@ class CONTENT extends INDEX {
             USER::changeProfileField(USER::getUser('username'), 'comments', '+');
         }
         FILTER::remove('REQUEST', 'text');
-
         return $this->content[$item]['comments'];
     }
 
@@ -877,13 +833,8 @@ class CONTENT extends INDEX {
      * @return array       Comments for current post
      */
     public function removeComment($id) {
-        if (empty($this->comments[$id])) {
-            throw new Exception('Invalid ID');
-        }
-
-        if (!USER::moderator($this->module, $this->comments[$id])) {
-            throw new Exception('Cannot remove comment');
-        }
+        if (empty($this->comments[$id])) throw new Exception('Invalid ID');
+        if (!USER::moderator($this->module, $this->comments[$id])) throw new Exception('Cannot remove comment');
 
         unset($this->comments[$id]);
 

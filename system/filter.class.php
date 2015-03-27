@@ -34,9 +34,8 @@ final class FILTER {
     /** Prevent to clone object. */
     public function __clone() {}
 
-    /** Clean all parameters and their values of the request array and
+    /** Cleans all parameters and their values of the request array and
      * transforme them into the internal encoding of the system = UTF-8.
-     *
      * @param  array  $value Input array of parameters
      * @return string        Filered parameters
      */
@@ -52,8 +51,7 @@ final class FILTER {
         return UnifyBr($value);
     }
 
-    /** Clean variables.
-     *
+    /** Cleans variables.
      * @param  array $vars Input array of parameters
      * @return array       Filtered values of parameters
      */
@@ -73,9 +71,8 @@ final class FILTER {
         return $result;
     }
 
-    /** Detect intrusion, clean and unset $_POST, $_GET, $_FILES and $_COOKIE.
+    /** Detects intrusion, clean and unset $_POST, $_GET, $_FILES and $_COOKIE.
      * The result are two variables: $REQUEST and $COOKIE.
-     *
      * @return void
      */
     public function sanitaze() {
@@ -88,8 +85,7 @@ final class FILTER {
         self::$COOKIE  = $COOKIE;
     }
 
-    /** Get all filtered parameter of the specified type.
-     *
+    /** Gets all filtered parameter of the specified type.
      * @param  string $type Type of parameter
      * @return array        Array of filtered parameters of the specified type
      */
@@ -97,8 +93,7 @@ final class FILTER {
         return self::$$type;
     }
 
-    /** Get specified filtered parameter.
-     *
+    /** Gets specified filtered parameter.
      * @param  string $type   Type of parameter
      * @param  string $param  Name of parameter
      * @return array|string Parameter values or empty string
@@ -111,8 +106,7 @@ final class FILTER {
         return '';
     }
 
-    /** Remove filtered parameter.
-     *
+    /** Removes filtered parameter.
      * @param  string $type  Type of parameter
      * @param  string $param Name of parameter
      * @return void
@@ -124,7 +118,6 @@ final class FILTER {
     }
 
     /** Email validation.
-     *
      * @param  string  $email Email address
      * @return boolean        The result of operation
      */
@@ -132,10 +125,8 @@ final class FILTER {
         return preg_match('/^([a-zA-Z0-9\!\#\$\%\&\'\*\+\-\/\=\?\^\_\`\{\|\}\~]+(\.[a-zA-Z0-9\!\#\$\%\&\'\*\+\-\/\=\?\^\_\`\{\|\}\~]+)*)@((([a-z]([-a-z0-9]*[a-z0-9])?)|(#[0-9]+)|(\[((([01]?[0-9]{0,2})|(2(([0-4][0-9])|(5[0-5]))))\.){3}(([01]?[0-9]{0,2})|(2(([0-4][0-9])|(5[0-5]))))\]))\.)*(([a-z]([-a-z0-9]*[a-z0-9])?)|(#[0-9]+)|(\[((([01]?[0-9]{0,2})|(2(([0-4][0-9])|(5[0-5]))))\.){3}(([01]?[0-9]{0,2})|(2(([0-4][0-9])|(5[0-5]))))\]))$/', $email) ? TRUE : FALSE;
     }
 
-    /** Ban user.
-     *
+    /** Bans user.
      * @return boolean The result of operation
-     * @todo Log the result
      */
     public function ban() {
         $bans = file_exists(CONTENT.'bans') ? file_get_contents(CONTENT.'bans') : '';
@@ -150,7 +141,6 @@ final class FILTER {
      *  - malicious URL requests;
      *  - banned IP or cookie.
      * If the intrusion will be detected this event will be logged and the system will die.
-     *
      * @return void
      */
     private function ids() {

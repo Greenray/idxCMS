@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration - User
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
@@ -26,7 +26,9 @@ if (FILTER::get('REQUEST', 'login')) {
             USER::changeProfileField($tmp[0], 'access', $level);
             ShowMessage('Rights changed');
         }
-    } else ShowMessage('Invalid password');
+    } else {
+        ShowMessage('Invalid password');
+    }
 }
 
 if (!empty($REQUEST['act'])) {

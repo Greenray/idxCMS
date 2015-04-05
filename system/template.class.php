@@ -1,9 +1,10 @@
 <?php
+# idxCMS Flat Files Content Management Sysytem
+
 /** Templates parser.
  *
- * @program   idxCMS: Flat Files Content Management Sysytem
  * @file      system/template.class.php
- * @version   2.4
+ * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2015 Victor Nabatov
  * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
@@ -27,11 +28,11 @@ class TEMPLATE {
      */
     private $patterns = [
         'die'       => "#<\?php(.*?)\?>#is",
-        'each'      => "#\[each=(.*?)\](.*?)\[\/each.\\1\]#is",
-        'foreach'   => "#\[foreach=([\w\_\-]*).([\w\_\-]*).([\w\_\-]*)\](.*?)\[\/foreach.\\1\]#is",
-        'for'       => "#\[for=(.*?)\](.*?)\[\/for\]#is",
-        'if'        => "#\[if=(.*?)(|\[(.*?)\])\](.*?)\[\/if\]#is",
-        'ifelse'    => "#\[ifelse=(.*?)(|\[(.*?)\])\](.*?)\[else\](.*?)\[\/else\]#is",
+        'each'      => "#\[each=(.*?)\](.*?)\[endeach.\\1\]#is",
+        'foreach'   => "#\[foreach=([\w\_\-]*).([\w\_\-]*).([\w\_\-]*)\](.*?)\[endforeach.\\1\]#is",
+        'for'       => "#\[for=(.*?)\](.*?)\[endfor\]#is",
+        'if'        => "#\[if=(.*?)(|\[(.*?)\])\](.*?)\[endif\]#is",
+        'ifelse'    => "#\[ifelse=(.*?)(|\[(.*?)\])\](.*?)\[else\](.*?)\[endelse\]#is",
         'translate' => "#\[__(.*?)\]#is",
         'value'     => "#\{([\-\#\w]+)(|\[(.*?)\])\}#is",
         'show'      => "#\[show=(.*?)\]#is"
@@ -59,7 +60,7 @@ class TEMPLATE {
     /** Parses control structure FOREACH.
      * <pre>
      * The template is:
-     *   [forеach=var1.var2.var3]...[/forеach.var1]
+     *   [forеach=var1.var2.var3]...[endforеach.var1]
      * </pre>
      *
      * @param  array $matches Matches for control structure "foreach"
@@ -71,8 +72,8 @@ class TEMPLATE {
             foreach ($this->vars[$matches[1]] as $key => $var) {
                 preg_match($this->patterns['if'], $matches[4], $sigs);
                 # [foreach=var1.var2.var3]
-                #     [if]...[/if]
-                # [/foreach.var1]
+                #     [if]...[endif]
+                # [endforeach.var1]
                 if (!empty($sigs)) {
                     if (!empty($var))
                          $tmp = str_replace($sigs[0], $sigs[4], $matches[4]);
@@ -80,7 +81,7 @@ class TEMPLATE {
                 } else   $tmp = $matches[4];
                 # [foreach=var1.var2.var3]
                 #     {var}
-                # [/foreach.var1]
+                # [endforeach.var1]
                 $temp .= str_replace(['{'.$matches[2].'}', '{'.$matches[3].'}'], [$key, $var], $tmp);
             }
         }
@@ -103,8 +104,8 @@ class TEMPLATE {
             foreach ($this->vars[$matches[1]] as $key => $var) {
                 $tpl = $matches[2];
                 if (is_array($var)) {
-                    # [each=var[index]]...[/each.var[index]]
-                    preg_match_all('#\[each='.$matches[1].'\[(.*)\]\](.*?)\[\/each.'.$matches[1].'\[\\1\]\]#is', $tpl, $sigs);
+                    # [each=var[index]]...[endeach.var[index]]
+                    preg_match_all('#\[each='.$matches[1].'\[(.*)\]\](.*?)\[endeach.'.$matches[1].'\[\\1\]\]#is', $tpl, $sigs);
                     if (!empty($sigs[0])) {
                         $tmp = $sigs[2][0];
                         preg_match($this->patterns['if'], $tmp, $ifsigs);
@@ -122,8 +123,8 @@ class TEMPLATE {
                             $tpl = str_replace($sigs[0][0], $tmpl, $tpl);
                         }
                         # [each=var[index]]
-                        #     [ifelse=var]...[/else]
-                        # [/each.var[index]]
+                        #     [ifelse=var]...[endelse]
+                        # [endeach.var[index]]
                         preg_match($this->patterns['ifelse'], $tmp, $ifsigs);
                         if (!empty($ifsigs)) {
                             $tmpl = '';
@@ -135,8 +136,8 @@ class TEMPLATE {
                                     # [each=var[index]]
                                     #     [ifelse=var]
                                     #         {var[index]}
-                                    #     [/else]
-                                    # [/each.var[index]]
+                                    #     [endelse]
+                                    # [endeach.var[index]]
                                     foreach ($values as $k => $value) {
                                         $tmpl = str_replace('{'.$sigs[1][0].'['.$k.']}', $value, $tmpl);
                                     }
@@ -146,7 +147,7 @@ class TEMPLATE {
                         }
                         # [each=var[index]]
                         #     {var[index]}
-                        # [/each.var[index]]
+                        # [endeach.var[index]]
                         preg_match_all('#\{'.$sigs[1][0].'\[(.*?)\]\}#is', $tmp, $subsigs);
                         $tmpl = '';
                         if (!empty($var[$sigs[1][0]])) {
@@ -165,8 +166,8 @@ class TEMPLATE {
                         }
                     }
                     # [each=var[index]]
-                    #     [if=var]...[/if]
-                    # [/each.var[index]]
+                    #     [if=var]...[endif]
+                    # [endeach.var[index]]
                     preg_match_all($this->patterns['if'], $tpl, $sigs);
                     if (!empty($sigs)) {
                         foreach ($sigs[1] as $k => $idx) {
@@ -176,8 +177,8 @@ class TEMPLATE {
                         }
                     }
                     # [each=var[index]]
-                    #     [ifelse=var]...[/else]
-                    # [/each.var[index]]
+                    #     [ifelse=var]...[endelse]
+                    # [endeach.var[index]]
                     preg_match_all($this->patterns['ifelse'], $tpl, $sigs);
                     if (!empty($sigs)) {
                         foreach ($sigs[1] as $k => $idx) {
@@ -189,7 +190,7 @@ class TEMPLATE {
                     }
                     # [each=var[index]]
                     #     {var[index][subindex]}
-                    # [/each.var[index]]
+                    # [endeach.var[index]]
                     preg_match_all('/\{'.$matches[1].'\[(.*)\]\[(.*)\]\}/U', $tpl, $sigs);
                     if (!empty($sigs)) {
                         foreach($sigs[1] as $k => $idx) {
@@ -206,7 +207,7 @@ class TEMPLATE {
                     }
                     # [each=var[index]]
                     #     {var[index]}
-                    # [/each.var[index]]
+                    # [endeach.var[index]]
                     preg_match_all('/\{'.$matches[1].'(|\[(.*)\])\}/U', $tpl, $sigs);
                     if (!empty($sigs)) {
                         foreach($sigs[2] as $k => $idx) {
@@ -219,7 +220,7 @@ class TEMPLATE {
                 } else {
                     # [each=var[index]]
                     #     {var}
-                    # [/each.var[index]]
+                    # [endeach.var[index]]
                     $temp .= str_replace('{'.$matches[1].'}', $var, $tpl);   # Parsing of structure {var}
                 }
             }
@@ -251,8 +252,8 @@ class TEMPLATE {
     /** Parses of a control structure IF ELSE.
      * <pre>
      * The template is:
-     *   [ifеlse=var]...[else]...[/elsе]
-     *   [ifеlse=var[index]]...[else]...[/elsе.var]
+     *   [ifеlse=var]...[else]...[endelsе]
+     *   [ifеlse=var[index]]...[else]...[endelsе.var]
      * </pre>
      *
      * @param  array  $matches Matches for control structure "if else"
@@ -280,14 +281,12 @@ class TEMPLATE {
      *   [еndif.var]
      *   [if=var[index]]...[еndif.var]
      * </pre>
-     * <pre>
      * Array variable $matches contains:
      *  - $matches[0] = part of template between control structures including them;
      *  - $matches[1] = variable name;
      *  - $matches[2] = first variable index;
      *  - $matches[3] = second variable index;
      *  - $matches[4] = part of template between control structures excluding them.
-     * </pre>
      *
      * @param  array  $matches Matches for control structure "if"
      * @return string          Parsed string
@@ -297,8 +296,8 @@ class TEMPLATE {
             return str_replace($matches[0], '', $matches[0]);
         }
         # [if=var]
-        #     [if=var]...[/if]
-        # [/if]
+        #     [if=var]...[endif]
+        # [endif]
         if (!empty($matches[3])) {
             $var = SearchValueInArray($matches[3], $this->vars[$matches[1]]);
             if (empty($var)) {
@@ -306,7 +305,7 @@ class TEMPLATE {
             }
         }
         if (is_array($this->vars[$matches[1]])) {
-            # [if=var]...{var[index]}...[/if]
+            # [if=var]...{var[index]}...[endif]
             preg_match_all('/\{'.$matches[1].'(|\[(.*)\])\}/U', $matches[4], $sigs);
             if (!empty($sigs)) {
                 foreach ($sigs[2] as $key => $value) {
@@ -330,11 +329,9 @@ class TEMPLATE {
      * The template is:
      *   [ __string]
      * </pre>
-     * <pre>
      * Array variable $matches contains:
      *  - $matches[0] = part of template between control structures including them;
      *  - $matches[1] = part of template between control structures excluding them.
-     * </pre>
      *
      * @param  array  $matches Matches for control structure "if"
      * @return string          Parsed string

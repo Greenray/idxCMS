@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Module Guestbook
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
@@ -10,11 +10,9 @@ switch (SYSTEM::get('locale')) {
     case 'ru':
         $LANG['def']['Guestbook'] = 'Гостевая книга';
         break;
-
     case 'ua':
         $LANG['def']['Guestbook'] = 'Гостьова книга';
         break;
-
     case 'by':
         $LANG['def']['Guestbook'] = 'Гасцявая кніга';
         break;

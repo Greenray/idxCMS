@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration - User
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -26,7 +26,7 @@ die();?>
                     <label><input type="radio" name="act" value="delete.{user[username]}" /> [__Delete]</label>
                 </td>
             </tr>
-            [/each.user]
+            [endeach.user]
         </table>
         <p class="center"><input type="submit" name="submit" value="[__Submit]" class="submit" /></p>
     </form>

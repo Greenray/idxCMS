@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Module Index
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
@@ -18,7 +18,6 @@ $module = CONFIG::getValue('main', 'index-module');
 
 if (!empty(SYSTEM::$modules[$module])) {
     include_once MODULES.$module.DS.$module.'.php';    # Load main module
-
 } else {
     SYSTEM::set('pagename', __('Index'));
     SYSTEM::setPageDescription(__('Index'));
@@ -35,7 +34,7 @@ if (!empty(SYSTEM::$modules[$module])) {
 
         # Don't show system section '#drats'
         $TPL = new TEMPLATE(dirname(__FILE__).DS.'default.tpl');
-        $i   = 0;
+        $i = 0;
         $output = '';
         foreach ($sections as $id => $section) {
             $categories = CMS::call('POSTS')->getCategories($id);
@@ -63,7 +62,6 @@ if (!empty(SYSTEM::$modules[$module])) {
             }
         }
         unset($post);
-
         if (!empty($output)) {
             $_SESSION['tabs'] = $i;
             ShowWindow(__('Index'), $output);

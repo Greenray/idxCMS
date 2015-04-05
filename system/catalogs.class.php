@@ -1,9 +1,10 @@
 <?php
+# idxCMS Flat Files Content Management Sysytem
+
 /** Работа с каталогами (файлов, ссылок и т.п.)
  *
- * @program   idxCMS: Flat Files Content Management Sysytem
  * @file      system/catalogs.class.php
- * @version   2.4
+ * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011-2015 Victor Nabatov
  * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License

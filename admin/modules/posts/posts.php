@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration - Posts
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN')) die();
@@ -23,7 +23,7 @@ if (!empty($REQUEST['save'])) {
     # Check if admin decided to move post
     if (($section !== $new_section) || ($category !== $new_category)) {
         if (!empty($item))
-             # Post exists, so move it
+            # Post exists, so move it
              $post = CMS::call('POSTS')->moveItem($item, $new_section, $new_category);
         else $post = '';     # Nothing to move, so add new
 
@@ -36,7 +36,6 @@ if (!empty($REQUEST['save'])) {
         CMS::call('POSTS')->saveItem($post);
         USER::changeProfileField(USER::getUser('username'), 'posts', '+');
         unset($REQUEST['new']);
-
     } catch (Exception $error) {
         ShowMessage(__($error->getMessage()));
     }
@@ -109,11 +108,11 @@ if ((empty($section) && empty($category)) || !empty($REQUEST['new']) || !empty($
         $output['opened']   = empty($REQUEST['opened'])   ? $post['opened']   : $REQUEST['opened'];
     } else {
         $output['item']     = '';
-        $output['title']    = empty($REQUEST['title'])    ? '' : $REQUEST['title'];
-        $output['keywords'] = empty($REQUEST['keywords']) ? '' : $REQUEST['keywords'];
-        $output['desc']     = empty($REQUEST['desc'])     ? '' : $REQUEST['desc'];
-        $output['text']     = empty($REQUEST['text'])     ? '' : $REQUEST['text'];
-        $output['opened']   = empty($REQUEST['opened'])   ? 1  : $REQUEST['opened'];
+        $output['title']    = $REQUEST['title'];
+        $output['keywords'] = $REQUEST['keywords'];
+        $output['desc']     = $REQUEST['desc'];
+        $output['text']     = $REQUEST['text'];
+        $output['opened']   = empty($REQUEST['opened']) ? 1 : $REQUEST['opened'];
     }
     $output['sections'][$output['section_id']]['selected']    = TRUE;
     $output['categories'][$output['category_id']]['selected'] = TRUE;

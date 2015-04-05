@@ -1,11 +1,11 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
-# Administration - Statistics
-# Version   2.4
+# Administration - Statistic
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
-<div class="module">[__Site statistics]</div>
+<div class="module">[__Site statistic]</div>
 <fieldset>
     <table class="std">
         <tr class="odd"><td>[__Total hosts]</td><td>{total_hosts}</td></tr>
@@ -22,7 +22,7 @@ die();?>
                             <td class="stat left">{host}</td>
                             <td class="stat">{count}</td>
                         </tr>
-                    [/foreach.ref]
+                    [endforeach.ref]
                     </table>
                 </div>
             </th>
@@ -39,14 +39,14 @@ die();?>
                             <td class="stat left">{agent}</td>
                             <td class="stat">{count}</td>
                         </tr>
-                    [/foreach.ua]
+                    [endforeach.ua]
                     </table>
                 </div>
             </th>
         </tr>
         <tr><th colspan="2">[__Today hosts]</th></tr>
-        [foreach=hosts.host.time]<tr class="odd"><td>{host}</td><td>{time}</td></tr>[/foreach.hosts]
-        <tr class="odd"><td colspan="2">[foreach=users.key.user]{user} [/foreach.users]</td></tr>
+        [foreach=hosts.host.time]<tr class="odd"><td>{host}</td><td>{time}</td></tr>[endforeach.hosts]
+        <tr class="odd"><td colspan="2">[foreach=users.key.user]{user} [endforeach.users]</td></tr>
         <tr>
             <th colspan="2">
                 <div class="center"><p><a href="#ip" onclick="document.getElementById('ip').style.display=ShowHide(document.getElementById('ip').style.display)">[__IP]</a></p></div>
@@ -57,7 +57,7 @@ die();?>
                             <td class="stat left">{host}</td>
                             <td class="stat">{count}</td>
                         </tr>
-                    [/foreach.ip]
+                    [endforeach.ip]
                     </table>
                 </div>
             </th>
@@ -88,7 +88,7 @@ die();?>
                             <td class="stat left">{name}</td>
                             <td class="stat">{count}</td>
                         </tr>
-                    [/foreach.sua]
+                    [endforeach.sua]
                     </table>
                 </div>
             </th>
@@ -105,7 +105,7 @@ die();?>
                             <td class="stat left">{ip}</td>
                             <td class="stat">{count}</td>
                         </tr>
-                    [/foreach.sip]
+                    [endforeach.sip]
                     </table>
                 </div>
             </th>

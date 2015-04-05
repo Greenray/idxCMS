@@ -69,8 +69,8 @@
                     <a href="{ROOT}" target="_top">... [__site index]</a>
                     <ul>
                     [each=menu]
-                        <li><a href="{menu[link]}" target="_top">[if=menu[icon]]<img src="{menu[icon]}" width="16" height="16" alt="" />[/if]{menu[name]}</a></li>
-                    [/each.menu]
+                        <li><a href="{menu[link]}" target="_top">[if=menu[icon]]<img src="{menu[icon]}" width="16" height="16" alt="" />[endif]{menu[name]}</a></li>
+                    [endeach.menu]
                     </ul>
                 </li>
                 <li><a href="{MODULE}admin" target="main"> ... [__admin index]</a></li>
@@ -83,12 +83,12 @@
                     <ul>
                     [each=modules[module]]
                         <li><a href="{MODULE}admin&amp;id={module[category]}.{module[module]}" target="main">{module[title]}</a></li>
-                    [/each.modules[module]]
+                    [endeach.modules[module]]
                     </ul>
                 </li>
-            [/if]
-            [if=nomodule]<li>&#0187; <a href="{MODULE}admin&amp;id={module[category]}.index';?>" target="main" class="th">{module[name]}</a></li>[/if]
-        [/each.modules]
+            [endif]
+            [if=nomodule]<li>&#0187; <a href="{MODULE}admin&amp;id={module[category]}.index';?>" target="main" class="th">{module[name]}</a></li>[endif]
+        [endeach.modules]
     </ul>
 </div>
 </body>

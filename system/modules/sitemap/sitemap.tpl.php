@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Module Sitemap
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -13,7 +13,7 @@ die();?>
                 <span class="subtitle">{desc}</span>
             [else]
                 {name}
-            [/else]
+            [endelse]
         </span>
     </a>
     [ifelse=sections]
@@ -38,12 +38,12 @@ die();?>
                                                 <span class="subtitle">{categories[desc]}</span>
                                             </a>
                                         </li>
-                                    [/each.sections[categories]]
+                                    [endeach.sections[categories]]
                                 </ul>
                             </div>
-                        [/if]
+                        [endif]
                     </li>
-                [/each.sections]
+                [endeach.sections]
             </ul>
         </div>
     [else]
@@ -58,9 +58,9 @@ die();?>
                                 <span class="subtitle">{categories[desc]}</span>
                             </a>
                         </li>
-                    [/each.categories]
+                    [endeach.categories]
                 </ul>
             </div>
-        [/if]
-    [/else]
+        [endif]
+    [endelse]
 </li>

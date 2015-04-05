@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN') || !USER::loggedIn()) die();
@@ -9,5 +9,5 @@ if (!defined('idxADMIN') || !USER::loggedIn()) die();
 $output = [];
 $output['locale'] = SYSTEM::get('locale');
 
-$TPL = new TEMPLATE(TEMPLATES.'header.tpl');
+$TPL = new TEMPLATE(ADMINTEMPLATES.'header.tpl');
 echo $TPL->parse($output);

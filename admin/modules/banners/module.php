@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration - Aphorizms
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN')) die();
@@ -12,13 +12,11 @@ switch (SYSTEM::get('locale')) {
         $LANG['def']['Banners editing'] = 'Редактирование банеров';
         $LANG['def']['New banner'] = 'Новый банер';
         break;
-
     case 'ua':
         $LANG['def']['Banner code'] = 'Код банера';
         $LANG['def']['Banners editing'] = 'Редагування банеров';
         $LANG['def']['New banner'] = 'Новий банер';
         break;
-    
     case 'by':
         $LANG['def']['Banner code'] = 'Код банера';
         $LANG['def']['Banners editing'] = 'Рэдагаванне банераў';

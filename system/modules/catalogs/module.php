@@ -1,16 +1,12 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Module Catalogs
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
 
-/** Data storage for catalogs.
- * It is identical to data storage for posts.
- *
- * @package Catalogs
- */
+/** Catalogs data store */
 define('CATALOGS', CONTENT.'catalogs'.DS);
 
 require SYS.'catalogs.class.php';

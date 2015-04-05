@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration - Posts
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -53,10 +53,10 @@ die();?>
                                         <img src="{ICONS}delete.png" width="16" height="16" alt="[__Delete]" />
                                     </button>
                                 </span>
-                            [/if]
+                            [endif]
                         </td>
                     </tr>
-                [/each.sections]
+                [endeach.sections]
             </table>
         </div>
         <p class="center">

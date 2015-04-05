@@ -1,5 +1,5 @@
 <?php
-# idxCMS version   2.4
+# idxCMS version 2.3
 # Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # BBCODES PANEL
 
@@ -452,7 +452,7 @@ die();?>
             <button type="button" class="bbbutton" onclick="AddUrl('email','{area}');">
                 <img src="{bbimg}email.gif" name="email" title="[__Email]" width="20" height="20" alt="" />
             </button>
-        [/if]
+        [endif]
         <button type="button" class="bbbutton" onclick="CreateBBTag('[code]','[/code]','{area}');">
             <img src="{bbimg}code.gif" name="code" title="[__Code]" width="20" height="20" alt="" />
         </button>
@@ -478,7 +478,7 @@ die();?>
             <button type="button" class="bbbutton" onclick="CreateBBTag('[youtube]','[/youtube]','{area}');">
                 <img src="{bbimg}youtube.gif" name="youtube" title="[__YouTube]" width="20" height="20" alt="" />
             </button>
-        [/if]
+        [endif]
         <button type="button" class="bbbutton" onclick="ShowForm('smiles_{area}');">
             <img src="{bbimg}smiles.gif" name="smiles" title="[__Smiles]" width="20" height="20" alt="" />
         </button>
@@ -486,7 +486,7 @@ die();?>
             <button type="button" class="bbbutton" onclick="CreateBBTag('[note]','[/note]','{area}');">
                 <img src="{bbimg}note.png" name="note" title="[__Note]" width="20" height="20" alt="" />
             </button>
-        [/if]
+        [endif]
         <button type="button" class="bbbutton" onclick="RemoveBBTag('{area}');">
             <img src="{bbimg}cleanup.gif" name="remove" title="[__Remove BBcodes]" width="20" height="20" alt="" />
         </button>
@@ -512,7 +512,7 @@ die();?>
                 <input type="button" onclick="HideDialog('link_{area}');" value="[__Cancel]" />
             </p>
         </div>
-    [/if]
+    [endif]
     <div id="color_{area}" unselectable="on" class="bbtools none">
         <input type="hidden" id="cmd_{area}" value="" />
         <div style="background:black;padding:1px;height:22px;width:125px;float:left;">
@@ -529,12 +529,12 @@ die();?>
             <tr>
             [each=colors[colors]]
                 <td style="background:#{colors[color]};height:12px;width:12px;" onmouseover="ViewColor('#{colors[color]}', '{area}');" onclick="SetColor('#{colors[color]}', '{area}');"></td>
-            [/each.colors[colors]]
+            [endeach.colors[colors]]
             </tr>
-        [/each.colors]
+        [endeach.colors]
         </table>
     </div>
     <div id="smiles_{area}" unselectable="on" class="bbtools none">
-        [each=smile]<img src="{SMILES}{smile}.gif" alt="{smile}" onclick="SetSmile('[{smile}]','{area}');HideDialog('smiles_{area}');" />[/each.smile]
+        [each=smile]<img src="{SMILES}{smile}.gif" alt="{smile}" onclick="SetSmile('[{smile}]','{area}');HideDialog('smiles_{area}');" />[endeach.smile]
     </div>
 </div>

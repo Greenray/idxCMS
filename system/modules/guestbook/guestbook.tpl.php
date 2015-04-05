@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Module Guestbook
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -14,11 +14,11 @@ die();?>
                 <strong><a href="javascript:InsertText(document.forms['post-comment'].elements['text'], '[b]{nick}![/b]' + '\n');">{nick}</a></strong><br />
             [else]
                 {nick}<br />
-            [/else]
-            [if=status]{status}<br />[/if]
-            [if=stars][__Rate]: {stars}<br />[/if]
-            [if=country]{country}<br />[/if]
-            [if=city]{city}[/if]
+            [endelse]
+            [if=status]{status}<br />[endif]
+            [if=stars][__Rate]: {stars}<br />[endif]
+            [if=country]{country}<br />[endif]
+            [if=city]{city}[endif]
         </div>
         <div class="info">
             <span class="date">{date}</span>
@@ -26,17 +26,17 @@ die();?>
             [if=user]
                 <a href="{MODULE}user&amp;user={author}" title="[__Profile]"><img src="{ICONS}profile.png" width="16" height="16" alt="[__Profile]" /></a>
                 <a href="{MODULE}user.pm&amp;for={author}" title="[__Private message]"><img src="{ICONS}user-pm.png" width="16" height="16" alt="" /></a>
-            [/if]
+            [endif]
             </span>
         </div>
         <div class="text justify">{text}</div>
     </div>
     <div class="menu">
-    [if=ban]<a href="{ban}&amp;action=ban&amp;host={ip}" title="[__Ban]">[ {ip} ]</a>[/if]
+    [if=ban]<a href="{ban}&amp;action=ban&amp;host={ip}" title="[__Ban]">[ {ip} ]</a>[endif]
     [if=moderator]
         <a href="{MODULE}guestbook&amp;message={id}&amp;action=edit">[__Edit]</a>
         <a href="{MODULE}guestbook&amp;message={id}&amp;action=delete">[__Delete]</a>
-    [/if]
+    [endif]
     </div>
 </div>
 <div class="clear"></div>

@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Module User
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
@@ -27,14 +27,16 @@ if (!USER::loggedIn()) {
         $TPL = new TEMPLATE(dirname(__FILE__).DS.'comment-post.tpl');
         ShowWindow(
             __('Private message'),
-            $TPL->parse([
-                'action'         => '',
-                'nickname'       => $user['nickname'],
-                'text'           => FILTER::get('REQUEST', 'text'),
-                'comment-length' => CMS::call('USER')->checkRoot() ? '' : CONFIG::getValue('pm', 'message-length'),
-                'bbcodes'        => CMS::call('PARSER')->showBbcodesPanel('comment.text'),
-                'for'            => $REQUEST['for']
-            ])
+            $TPL->parse(
+                array(
+                    'action'         => '',
+                    'nickname'       => $user['nickname'],
+                    'text'           => FILTER::get('REQUEST', 'text'),
+                    'comment-length' => CMS::call('USER')->checkRoot() ? '' : CONFIG::getValue('pm', 'message-length'),
+                    'bbcodes'        => CMS::call('PARSER')->showBbcodesPanel('comment.text'),
+                    'for'            => $REQUEST['for']
+                )
+            )
         );
     }
 } else {

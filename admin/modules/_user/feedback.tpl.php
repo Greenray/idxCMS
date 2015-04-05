@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration - User
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -16,7 +16,7 @@ die();?>
                     <td>{messages[text]}</td>
                     <td><input type="checkbox" name="delete[]" value="{messages[id]}" />[__Delete]</td>
                 </tr>
-            [/each.messages]
+            [endeach.messages]
         </table>
         <p class="center"><input type="submit" name="submit" value="[__Submit]" class="submit" /></p>
     </form>

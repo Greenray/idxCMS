@@ -1,10 +1,11 @@
 <?php
+# idxCMS Flat Files Content Management Sysytem
+
 /** Calendar of news and publications.
  * This calendar gives a possibility to search of news and posts by date.
  *
- * @program   idxCMS: Flat Files Content Management Sysytem
  * @file      system/calendar.class.php
- * @version   2.4
+ * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2015 Victor Nabatov
  * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
@@ -29,7 +30,6 @@ class CALENDAR {
     private $temp = [];
 
     /** Class initialization.
-     *
      * @param  integer $month    Month
      * @param  integer $year     Year
      * @param  integer $datetime Time
@@ -43,7 +43,6 @@ class CALENDAR {
     }
 
     /** Assigns event to calendar.
-     *
      * @param  integer $day  Date
      * @param  string  $link Link to existing post
      * @return void
@@ -53,7 +52,6 @@ class CALENDAR {
     }
 
     /** Highlights current date.
-     *
      * @param  integer $day   Date
      * @param  string  $style Style for highlighting
      * @return void
@@ -63,7 +61,6 @@ class CALENDAR {
     }
 
     /** Creates calendar.
-     *
      * @param  integer $current_year   Current year
      * @param  integer $selected_year  Selected year
      * @param  integer $selected_month Selected month

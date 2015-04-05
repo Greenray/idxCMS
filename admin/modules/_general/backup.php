@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration - Backup
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
@@ -46,11 +46,11 @@ foreach ($files as $file) {
     $output['files'][$file] = filesize(BACKUPS.$file);
 }
 
-$output['total'] = FormatSize(GetDirSize(BACKUPS));
+$output['total'] = format_size(get_dir_size(BACKUPS));
 $dirs  = AdvScanDir(CONTENT, '', 'dir', FALSE, array('temp'));
 
 foreach ($dirs as $dir) {
-    $output['dirs'][$dir] = FormatSize(GetDirSize(CONTENT.$dir.DS));
+    $output['dirs'][$dir] = format_size(get_dir_size(CONTENT.$dir.DS));
 }
 
 $TPL = new TEMPLATE(dirname(__FILE__).DS.'backup.tpl');

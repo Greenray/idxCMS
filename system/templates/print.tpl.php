@@ -1,5 +1,5 @@
 <?php
-# idxCMS version   2.4
+# idxCMS version 2.3
 # Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # TEMPLATE FOR ITEM PRINTING
 
@@ -24,8 +24,8 @@ die();?>
             [each=reps]
                 <tr><td colspan="3" class="left"><p>[__Author]: <strong>{nick}</strong></p></td></tr>
                 <tr><td colspan="3" align="justify">{text}<hr /></td></tr>
-            [/each=reps]
-        [/if]
+            [endeach=reps]
+        [endif]
         <tr>
             <td class="left">{site}</td>
             <td class="center"><small>&copy; {copyright}</small></td>

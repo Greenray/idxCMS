@@ -1,20 +1,12 @@
 <?php
-/** Module USERS - initialization.
- *
- * @program   idxCMS: Flat Files Content Management Sysytem
- * @program   idxCMS: Flat Files Content Management Sysytem
- * @file      admin/modules/_statistics/statistics.php
- * @version   2.4
- * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011-2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
- * @package   Statistics
- */
+# idxCMS Flat Files Content Management Sysytem
+# Administration - Statistic
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
 
-
-function StatClean($file, $field = '') {
+function StatisticClean($file, $field = '') {
     $stat = [];
     if (!empty($field)) {
         $stat = GetUnserialized($file);
@@ -25,12 +17,12 @@ function StatClean($file, $field = '') {
     return file_put_contents($file, serialize($stat), LOCK_EX);
 }
 
-if (!empty($REQUEST['cleanrefs']))    StatClean(CONTENT.'stats', 'ref');
-if (!empty($REQUEST['cleanua']))      StatClean(CONTENT.'stats', 'ua');
-if (!empty($REQUEST['cleanstats']))   StatClean(CONTENT.'stats');
-if (!empty($REQUEST['cleanagents']))  StatClean(CONTENT.'spiders', 'ua');
-if (!empty($REQUEST['cleansip']))     StatClean(CONTENT.'spiders', 'ip');
-if (!empty($REQUEST['cleanspiders'])) StatClean(CONTENT.'spiders');
+if (!empty($REQUEST['cleanrefs']))    StatisticClean(CONTENT.'stats', 'ref');
+if (!empty($REQUEST['cleanua']))      StatisticClean(CONTENT.'stats', 'ua');
+if (!empty($REQUEST['cleanstats']))   StatisticClean(CONTENT.'stats');
+if (!empty($REQUEST['cleanagents']))  StatisticClean(CONTENT.'spiders', 'ua');
+if (!empty($REQUEST['cleansip']))     StatisticClean(CONTENT.'spiders', 'ip');
+if (!empty($REQUEST['cleanspiders'])) StatisticClean(CONTENT.'spiders');
 
 $stats = GetUnserialized(CONTENT.'stats');
 $output = [];
@@ -75,6 +67,6 @@ if (!empty($spiders)) {
 }
 
 if (!empty($output)) {
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'statistics.tpl');
+    $TPL = new TEMPLATE(dirname(__FILE__).DS.'statistic.tpl');
     echo $TPL->parse($output);
 }

@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Module Counter
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -15,7 +15,7 @@ die();?>
         <td>{todayusers}</td>
     </tr>
     <tr><td colspan="2">[__Online] - {visitors} ({regonline} [__registered])</td></tr>
-    [if=regonline]<tr><td colspan="2">{loggedin}</td></tr>[/if]
+    [if=regonline]<tr><td colspan="2">{loggedin}</td></tr>[endif]
     <tr>
         <td>[__Today hosts]</td>
         <td>{todayhosts}</td>

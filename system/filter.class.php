@@ -1,9 +1,10 @@
 <?php
+# idxCMS Flat Files Content Management Sysytem
+
 /** Clean parameters $_REQUEST, $_FILES, $_COOKIE, detect intrusions and ban unwanted visitors.
  *
- * @program   idxCMS: Flat Files Content Management Sysytem
  * @file      system/filter.class.php
- * @version   2.4
+ * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2015 Victor Nabatov
  * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License

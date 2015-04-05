@@ -1,45 +1,31 @@
 <?php
-/** Functions for the section of the administration.
- *
- * @program   idxCMS: Flat Files Content Management Sysytem
- * @file      admin/libs/functions.php
- * @version   2.4
- * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011-2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
- * @package   Administration
- */
+# idxCMS Flat Files Content Management Sysytem
+# Administration
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
-if (!defined('idxADMIN')) die();
-
-/** Data storage for backups. */
+/** Backups data store */
 define('BACKUPS', CONTENT.'backups'.DS);
 
-/** Formats the value of the size of file.
- *
- * @param  integer $i Size of file
- * @return string     Formatted size file
- */
-function FormatSize($i) {
+function format_size($i) {
     if     (floor($i / 1073741824) > 0) return sprintf("%.2f Gb", $i / (1024 * 1024 * 1024));
     elseif (floor($i / 1048576) > 0)    return sprintf("%.2f Mb", $i / (1024 * 1024));
     elseif (floor($i / 1024) > 0)       return sprintf("%.2f Kb", $i / 1024);
     elseif ($i < 1024)                  return $i.' '.__('byte(s)');
 }
 
+
 /** Get size of the directory with subdirectiries.
- * This function is recursive.
- *
  * @param  string $dir The name of the main directory
  * @return integer - The size of scanned directory
  */
-function GetDirSize($dir) {
+function get_dir_size($dir) {
     $size = 0;
     if (($dh = opendir($dir)) !== FALSE) {
         while (($file = readdir($dh)) !== FALSE) {
             if (is_dir($dir.$file)) {
                 if (($file !== '.') AND ($file !== '..')) {
-                   $size += GetDirSize($dir.$file.DS);
+                   $size += get_dir_size($dir.$file.DS);
                 }
             } else $size += filesize($dir.$file);
         }
@@ -48,8 +34,15 @@ function GetDirSize($dir) {
     return $size;
 }
 
-/** Shows specified translated message with additional information.
- *
+function in_array_recursive($needle, $haystack) {
+    foreach ($haystack as $value) {
+        if (is_array($value))
+             return in_array_recursive($needle, $value);
+        else return in_array($needle, $haystack);
+    }
+}
+
+/** Show specified translated message with additional information.
  *  @param  string $message Specified message.
  *  @param  string $info    Additional information.
  *  @return string          Formatted html table.

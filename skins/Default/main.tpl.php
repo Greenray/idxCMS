@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Skin Default: main template
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();?>
@@ -34,7 +34,7 @@ if (!defined('idxCMS')) die();?>
                 }
             });
         </script>
-    [/if]
+    [endif]
     <link rel="stylesheet" type="text/css" href="{TOOLS}colorbox/colorbox.css" media="screen">
     <script type="text/javascript" src="{TOOLS}colorbox/jquery.colorbox.js"></script>
     <script type="text/javascript">

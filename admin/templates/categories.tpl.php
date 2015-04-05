@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -45,17 +45,17 @@ die();?>
                                     <button type="submit" name="delete" value="{sections[id]}.{categories[id]}" title="[__Delete]">
                                         <img src="{ICONS}delete.png" width="16" height="16" alt="[__Delete]" />
                                     </button>
-                                [/if]
+                                [endif]
                             </td>
                         </tr>
-                    [/each.sections[categories]]
-                [/each.sections]
+                    [endeach.sections[categories]]
+                [endeach.sections]
             </table>
         </div>
         <div id="result"></div>
         <p class="center">
             <input type="submit" name="new" value="[__New category]" class="submit" />
-            [if=sections]<input type="submit" name="action" value="[__Save]" onclick="save()" class="submit" />[/if]
+            [if=sections]<input type="submit" name="action" value="[__Save]" onclick="save()" class="submit" />[endif]
         </p>
     </form>
 </fieldset>

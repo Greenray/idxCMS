@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
-# Administration - Statistics
-# Version   2.4
+# Administration - Statistic
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
@@ -14,7 +14,6 @@ if (!empty($REQUEST['day']) && !empty($REQUEST['viewlog'])) {
         if (substr($logfile, -3) == '.gz')
              $contents = gzfile_get_contents(LOGS.$logfile);
         else $contents = file_get_contents(LOGS.$logfile);
-
         $output .= CMS::call('PARSER')->parseText('[quote='.$logfile.']'.$contents.'[/quote]');
     }
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'log.tpl');
@@ -31,7 +30,6 @@ if (!empty($REQUEST['day']) && !empty($REQUEST['viewlog'])) {
             $output['text'] .= CMS::call('PARSER')->parseText('[quote='.$logfile.']'.$contents.'[/quote]');
         }
     }
-
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'log.tpl');
     echo $TPL->parse($output);
 
@@ -87,7 +85,6 @@ if (!empty($REQUEST['day']) && !empty($REQUEST['viewlog'])) {
             $output['day'][$key]['date'] = $matches[1];
             $output['day'][$key]['log']  = $log_entry;
         }
-
         if (preg_match("/^((.*?)-(.*?))\.tar(|.gz)$/i", $log_entry, $matches)) {
             $output['month'][$key]['date'] = $matches[1];
             $output['month'][$key]['log']  = $log_entry;

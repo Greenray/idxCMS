@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Module Banners
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -19,6 +19,6 @@ die();?>
 </script>
 <div id="banner" class="horinaja">
     <ul>
-    [each=banner]<li>{banner[text]}</li>[/each.banner]
+    [each=banner]<li>{banner[text]}</li>[endeach.banner]
     </ul>
 </div>

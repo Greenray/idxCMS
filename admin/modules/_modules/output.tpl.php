@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration - Modules
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -223,7 +223,7 @@ die();?>
             <tr>
                 <td class="center" style="width:45%;padding:0">
                     <select name="active[]" size="30" style="width:100%" multiple>
-                        [foreach=active.key.desc]<option value="{key}">{desc}</option>[/foreach.active]
+                        [foreach=active.key.desc]<option value="{key}">{desc}</option>[endforeach.active]
                     </select>
                 </td>
                 <td class="center" style="width:10%;">
@@ -232,7 +232,7 @@ die();?>
                 </td>
                 <td class="center" style="width:45%;padding:0">
                     <select name="unused[]" size="30" style="width:100%" multiple>
-                        [foreach=unused.key.desc]<option value="{key}">{desc}</option>[/foreach.unused]
+                        [foreach=unused.key.desc]<option value="{key}">{desc}</option>[endforeach.unused]
                     </select>
                 </td>
             </tr>

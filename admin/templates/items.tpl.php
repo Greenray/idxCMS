@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -21,16 +21,16 @@ die();?>
                     <th>[__File]</th>
                     <th>[__Size]</th>
                     <th>[__Downloads]</th>
-                [/if]
+                [endif]
                 [if=items[song]]
                     <th>[__File]</th>
                     <th>[__Size]</th>
                     <th>[__Downloads]</th>
-                [/if]
+                [endif]
                 [if=items[site]]
                     <th>[__Site URL]</th>
                     <th>[__Transitions]</th>
-                [/if]
+                [endif]
                 <th>[__Views]</th>
                 <th>[__Comments]</th>
                 <th class="actions">[__Actions]</th>
@@ -44,16 +44,16 @@ die();?>
                         <td>{items[file]}</td>
                         <td class="right">{items[size]}</td>
                         <td class="center">{items[downloads]}</td>
-                    [/if]
+                    [endif]
                     [if=items[song]]
                         <td>{items[song]}</td>
                         <td class="right">{items[size]}</td>
                         <td class="center">{items[downloads]}</td>
-                    [/if]
+                    [endif]
                     [if=items[site]]
                         <td class="left">{items[site]}</td>
                         <td class="center">{items[clicks]}</td>
-                    [/if]
+                    [endif]
                     <td class="center">{items[views]}</td>
                     <td class="center">{items[comments]}</td>
                     <td class="actions center">
@@ -68,7 +68,7 @@ die();?>
                         </button>
                     </td>
                 </tr>
-            [/each.items]
+            [endeach.items]
         </table>
         <p class="center"><input type="submit" name="new" value="[__New post]" class="submit" /></p>
     </form>

@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration - Index
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN')) die();
@@ -34,26 +34,26 @@ if (CMS::call('USER')->checkRoot()) {
 
     $output['admin']  = TRUE;
     $output['rights'] = __('You have all rights on this site');
-    $output['posts']  = FormatSize(GetDirSize(POSTS));
+    $output['posts']  = format_size(get_dir_size(POSTS));
     $output['smtp']   = ini_get('SMTP');
 
-    if (isset(SYSTEM::$modules['catalogs']))  $output['catalogs']  = FormatSize(GetDirSize(CATALOGS));
-    if (isset(SYSTEM::$modules['galleries'])) $output['galleries'] = FormatSize(GetDirSize(GALLERIES));
-    if (isset(SYSTEM::$modules['forum']))     $output['forum']     = FormatSize(GetDirSize(FORUM));
-    if (isset(SYSTEM::$modules['aphorisms'])) $output['aphorisms'] = FormatSize(GetDirSize(APHORISMS));
-    if (isset(SYSTEM::$modules['banners']))   $output['banners']   = FormatSize(GetDirSize(BANNERS));
+    if (isset(SYSTEM::$modules['catalogs']))  $output['catalogs']  = format_size(get_dir_size(CATALOGS));
+    if (isset(SYSTEM::$modules['galleries'])) $output['galleries'] = format_size(get_dir_size(GALLERIES));
+    if (isset(SYSTEM::$modules['forum']))     $output['forum']     = format_size(get_dir_size(FORUM));
+    if (isset(SYSTEM::$modules['aphorisms'])) $output['aphorisms'] = format_size(get_dir_size(APHORISMS));
+    if (isset(SYSTEM::$modules['banners']))   $output['banners']   = format_size(get_dir_size(BANNERS));
 
-    $output['users']      = '('.sizeof(GetFilesList(USERS)).') '.FormatSize(GetDirSize(USERS));
-    $output['pm']         = FormatSize(GetDirSize(PM_DATA));
-    $output['avatars']    = FormatSize(GetDirSize(AVATARS));
-    $output['statistics'] = FormatSize(filesize(CONTENT.'stats'));
-    $output['bots']       = FormatSize(filesize(CONTENT.'spiders'));
-    $output['keywords']   = FormatSize(filesize(CONTENT.'keywords'));
-    $output['logs']       = FormatSize(GetDirSize(LOGS));
-    $output['backups']    = FormatSize(GetDirSize(BACKUPS));
+    $output['users']     = '('.sizeof(GetFilesList(USERS)).') '.format_size(get_dir_size(USERS));
+    $output['pm']        = format_size(get_dir_size(PM_DATA));
+    $output['avatars']   = format_size(get_dir_size(AVATARS));
+    $output['statistic'] = format_size(filesize(CONTENT.'stats'));
+    $output['bots']      = format_size(filesize(CONTENT.'spiders'));
+    $output['keywords']  = format_size(filesize(CONTENT.'keywords'));
+    $output['logs']      = format_size(get_dir_size(LOGS));
+    $output['backups']   = format_size(get_dir_size(BACKUPS));
     $FEEDBACK = new MESSAGE(CONTENT, 'feedback');
-    $output['feedback']   = '<strong>'.sizeof($FEEDBACK->getMessages()).'</strong>';
-    $output['temp']       = FormatSize(GetDirSize(TEMP));
+    $output['feedback']  = '<strong>'.sizeof($FEEDBACK->getMessages()).'</strong>';
+    $output['temp']      = format_size(get_dir_size(TEMP));
 }
 
 # Checking, whether there are articles expecting publications
@@ -84,10 +84,10 @@ $tpl = '
             <tr class="odd"><td><a href="{MODULE}admin&id=_user.profile">[__Users profiles]</a></td><td>{users}</td></tr>
             <tr class="odd"><td><a href="{MODULE}admin&id=_user.message">[__Private messages]</a></td><td>{pm}</td></tr>
             <tr class="odd"><td>[__Avatars]</td><td>{avatars}</td></tr>
-            <tr class="odd"><td><a href="{MODULE}admin&id=_statistics.statistics">[__Site statistics]</a></td><td>{statistics}</td></tr>
-            <tr class="odd"><td><a href="{MODULE}admin&id=_statistics.statistics">[__Search bots]</a></td><td>{bots}</td></tr>
-            <tr class="odd"><td><a href="{MODULE}admin&id=_statistics.keywords">[__Keywords]</a></td><td>{keywords}</td></tr>
-            <tr class="odd"><td><a href="{MODULE}admin&id=_statistics.logs">[__Logs]</a></td><td>{logs}</td></tr>
+            <tr class="odd"><td><a href="{MODULE}admin&id=_statistic.statistic">[__Site statistic]</a></td><td>{statistic}</td></tr>
+            <tr class="odd"><td><a href="{MODULE}admin&id=_statistic.statistic">[__Search bots]</a></td><td>{bots}</td></tr>
+            <tr class="odd"><td><a href="{MODULE}admin&id=_statistic.keywords">[__Keywords]</a></td><td>{keywords}</td></tr>
+            <tr class="odd"><td><a href="{MODULE}admin&id=_statistic.logs">[__Logs]</a></td><td>{logs}</td></tr>
             <tr class="odd"><td><a href="{MODULE}admin&id=_general.backup">[__Backups]</a></td><td>{backups}</td></tr>
             <tr class="odd"><td><a href="{MODULE}admin&id=posts.categories">[__Posts awaits moderation]</a></td><td>{wait}</td></tr>
             <tr class="odd"><td><a href="{MODULE}admin&id=_user.feedback">[__Feedback requests]</a></td><td>{feedback}</td></tr>
@@ -97,7 +97,7 @@ $tpl = '
             <tr class="odd"><td>[__Max file size]</td><td>{upload_max_filesize}</td></tr>
             <tr class="odd"><td>SMTP</td><td>{smtp}</td></tr>
             <tr class="odd"><td>[__Display errors]</td><td>{display_errors}</td></tr>
-        [/if]
+        [endif]
     </table>
 </fieldset>';
 

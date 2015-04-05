@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor NabatovE
 
 die();?>
@@ -42,8 +42,8 @@ die();?>
                     <input type="hidden" name="category" value="{id}"/>
                     <b>{section[title]}</b>
                 [else]
-                    <select name="section">[each=sections]<option value="{sections[id]}">{sections[title]}</option>[/each.sections]</select>
-                [/else]
+                    <select name="section">[each=sections]<option value="{sections[id]}">{sections[title]}</option>[endeach.sections]</select>
+                [endelse]
                 </td>
             </tr>
             <tr>
@@ -68,7 +68,7 @@ die();?>
                     <td><input type="file" name="icon" size="60" value=""/></td>
             [else]
                     <td><input type="file" name="icon" size="60" value=""/></td>
-            [/else]
+            [endelse]
                 <td class="help">[__Required fields have a yellow background]</td>
             </tr>
         </table>

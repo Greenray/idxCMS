@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration - Posts
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -39,11 +39,11 @@ die();?>
                                     <a href="./?module=admin&amp;id=posts.posts&amp;section={system[id]}&amp;category={categories[id]}">
                                         <img src="{ICONS}posts.png" width="16" height="16" alt="[__Posts]" />
                                     </a>
-                                [/if]
+                                [endif]
                             </td>
                         </tr>
-                    [/each.system[categories]]
-                [/each.system]
+                    [endeach.system[categories]]
+                [endeach.system]
             </table>
         </div>
         <div id="drag">
@@ -73,17 +73,17 @@ die();?>
                                     <button type="submit" name="delete" value="{sections[id]}.{categories[id]}" title="[__Delete]">
                                         <img src="{ICONS}delete.png" width="16" height="16" alt="[__Delete]" />
                                     </button>
-                                [/else]
+                                [endelse]
                             </td>
                         </tr>
-                    [/each.sections[categories]]
-                [/each.sections]
+                    [endeach.sections[categories]]
+                [endeach.sections]
             </table>
         </div>
         <div id="result"></div>
         <p class="center">
             <input type="submit" name="new" value="[__New category]" class="submit" />
-            [if=sections]<input type="submit" name="action" value="[__Save]" onclick="save()" class="submit" />[/if]
+            [if=sections]<input type="submit" name="action" value="[__Save]" onclick="save()" class="submit" />[endif]
             <button formaction="{MODULE}admin&amp;id=posts.posts&amp;new=1" class="submit">[__Post]</button>
         </p>
     </form>

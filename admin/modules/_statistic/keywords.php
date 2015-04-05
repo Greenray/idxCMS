@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
-# Administration - Statistics
-# Version   2.4
+# Administration - Statistic
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
@@ -41,6 +41,4 @@ if (!empty($REQUEST['clean'])) {
 if (!empty($output)) {
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'keywords.tpl');
     echo $TPL->parse($output);
-} else {
-    ShowMessage('Database is empty');
 }

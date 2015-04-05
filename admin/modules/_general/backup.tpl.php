@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration - Backup
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -23,7 +23,7 @@ die();?>
                         <a href="{BACKUPS}{name}"> [__Download]</a>
                     </td>
                 </tr>
-            [/foreach.files]
+            [endforeach.files]
         </table>
         <p align="center">[__Total]: <span class="special">{total}</span></p>
         <p align="center">
@@ -47,7 +47,7 @@ die();?>
                     <td class="right">{size}</td>
                     <td class="center"><label><input type="checkbox" name="dir[]" value="{name}" /> [__Select]</label></td>
                 </tr>
-            [/foreach.dirs]
+            [endforeach.dirs]
         </table>
         <p align="center">
             <input type="hidden" name="backup" value="1" />

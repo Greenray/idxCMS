@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Module Minichat
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -24,7 +24,7 @@ die();?>
                         </table>
                     </td>
                 </tr>
-            [/each.answers]
+            [endeach.answers]
             <tr><td colspan="2" class="center">[__Total votes]: {total}</td></tr>
         </table>
     [else]
@@ -37,10 +37,10 @@ die();?>
                         <td><input type="radio" name="answer" value="{answers[id]}" /></td>
                         <td>{answers[answer]}</td>
                     </tr>
-                [/each.answers]
+                [endeach.answers]
             </table>
             <p class="center"><input type="submit" name="save" value="[__Submit]" class="submit" /></p>
         </form>
-    [/else]
+    [endelse]
     <div class="center"><a href="{MODULE}polls.archive">[__Polls archive]</a></div>
 </div>

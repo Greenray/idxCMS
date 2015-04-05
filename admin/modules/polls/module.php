@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration - Polls
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN')) die();
@@ -13,14 +13,12 @@ switch (SYSTEM::get('locale')) {
         $LANG['def']['Question'] = 'Вопрос';
         $LANG['def']['Stop'] = 'Остановить';
         break;
-
     case 'ua':
         $LANG['def']['Answers'] = 'Відповіді';
         $LANG['def']['New poll'] = 'Нове голосування';
         $LANG['def']['Question'] = 'Питання';
         $LANG['def']['Stop'] = 'Зупинити';
         break;
-
     case 'by':
         $LANG['def']['Answers'] = 'Адказы';
         $LANG['def']['New poll'] = 'Новае галасаванне';

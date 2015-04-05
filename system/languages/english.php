@@ -1,13 +1,13 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Translation
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 $LANG['language'] = 'english';
 $LANG['locale'] = 'en';
 $LANG['encoding'] = 'UTF-8';
-# Timezones
+// Timezones
 $LANG['tz']['-12'] = 'GMT-12 Line of change of date';
 $LANG['tz']['-11'] = 'GMT-11 Samoa';
 $LANG['tz']['-10'] = 'GMT-10 Hawaii';
@@ -35,7 +35,7 @@ $LANG['tz']['11'] = 'GMT 11 Vladivostok';
 $LANG['tz']['12'] = 'GMT 12 Magadan';
 $LANG['tz']['13'] = 'GMT 13 Tonga';
 $LANG['tz']['14'] = 'GMT 14 Kiribati';
-# Date localization
+// Date localization
 $LANG['datetime']['Sunday'] = 'Sunday';
 $LANG['datetime']['Monday'] = 'Monday';
 $LANG['datetime']['Tuesday'] = 'Tuesday';

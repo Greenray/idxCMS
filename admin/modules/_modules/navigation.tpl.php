@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration - Modules
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -28,11 +28,11 @@ die();?>
                         </td>
                         <td style="width:17%;">
                             <select name="icons[]">
-                                [each=links[icons]]<option value="{icons[id]}" [if=icons[selected]]selected="selected"[/if]>{icons[id]}</option>[/each.links[icons]]
+                                [each=links[icons]]<option value="{icons[id]}" [if=icons[selected]]selected="selected"[endif]>{icons[id]}</option>[endeach.links[icons]]
                             </select>
                         </td>
                     </tr>
-                [/each.links]
+                [endeach.links]
             </table>
         </div>
         <p class="center"><input type="submit" name="save" value="[__Save]" class="submit" /></p>

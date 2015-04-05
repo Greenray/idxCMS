@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Module User
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
@@ -132,7 +132,6 @@ if (!USER::loggedIn()) {
             $user['country'] = empty($REQUEST['fields']['country']) ? '' : $REQUEST['fields']['country'];
             $user['city']    = empty($REQUEST['fields']['city'])    ? '' : $REQUEST['fields']['city'];
             $user['captcha'] = ShowCaptcha();
-            
             SYSTEM::set('pagename', __('Registration'));
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'registration.tpl');
             ShowWindow(__('Registration'), $TPL->parse($user));
@@ -140,7 +139,7 @@ if (!USER::loggedIn()) {
         } elseif ($REQUEST['act'] === 'password_request') {
             SYSTEM::set('pagename', __('Password recovery'));
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'restore-password.tpl');
-            ShowWindow(__('Password recovery'), $TPL->parse(['captcha' => ShowCaptcha()]));
+            ShowWindow(__('Password recovery'), $TPL->parse(array('captcha' => ShowCaptcha())));
 
         } elseif ($just_reg) {
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'greeting.tpl');

@@ -1,5 +1,5 @@
 <?php
-# idxCMS version   2.4
+# idxCMS version 2.3
 # Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # CATEGORIES TEMPLATE
 
@@ -27,8 +27,8 @@ die();?>
                             </li>
                         </ul>
                     </div>
-                [/if]
+                [endif]
             </li>
-        [/each.categories]
+        [endeach.categories]
     </ul>
 </div>

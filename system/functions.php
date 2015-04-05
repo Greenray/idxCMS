@@ -1,14 +1,8 @@
 <?php
-/** System functions.
- *
- * @program   idxCMS: Flat Files Content Management Sysytem
- * @file      system/functions.php
- * @version   2.4
- * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
- * @package   Core
- */
+# idxCMS Flat Files Content Management Sysytem
+# System functions
+# Version 2.3
+# Copyright (c) 2011 - 2015 Victor Nabatov
 
 # FILES and DIRECTORIES
 
@@ -50,11 +44,11 @@ function AdvScanDir($directory, $mask = '', $type = 'all', $filter = FALSE, $exc
     return $dir;
 }
 
-/** Gets list of files from the specified directory.
- *
- * @param  string $directory Directory to seach
- * @param  string $except	 Files to exclude from the results list
- * @return array             List of files from the specified directory
+/**
+ * @todo Comment
+ * @param string $directory	...
+ * @param string $except	...
+ * @return
  */
 function GetFilesList($directory, $except = []) {
     $exclude = array_unique(array_merge(['.', '..', '.htaccess', 'index.html'], $except));

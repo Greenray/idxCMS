@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Module User
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -15,7 +15,7 @@ die();?>
                         <img src="{ICONS}admin.png" width="16" height="16" alt="" />
                         <a href="{MODULE}admin&amp;id=main">[__Administration]</a>
                     </li>
-                [/if]
+                [endif]
                 <li>
                     <img src="{ICONS}post.png" width="16" height="16" alt="" />
                     <a href="{MODULE}posts.post">[__Post]</a>
@@ -26,8 +26,8 @@ die();?>
                 </li>
                 <li>
                     <img src="{ICONS}messages.png" width="16" height="16" alt="" />
-                    <a href="{MODULE}user.pm[if=mess_new]&amp;mode=inbox[/if]" title="{mess_info}">
-                        [__Messages] [if=mess_new]<strong>({mess_new})</strong>[/if]
+                    <a href="{MODULE}user.pm[if=mess_new]&amp;mode=inbox[endif]" title="{mess_info}">
+                        [__Messages] [if=mess_new]<strong>({mess_new})</strong>[endif]
                     </a>
                 </li>
             </ul>
@@ -98,26 +98,6 @@ die();?>
             </li>
         </ul>
     </div>
-[/else]
-[if=allow_skins]
-    <div class="center">
-        <form name="skin_select" method="post" action="">
-            <select name="skin" style="width:90%;" onchange="document.forms['skin_select'].submit()" title="[__Skin]">
-            [each=select_skin]
-                <option value="{select_skin[point]}"[if=select_skin[selected]] selected="selected"[/if]>{select_skin[title]}</option>
-            [/each.select_skin]
-            </select>
-        </form>
-    </div>
-[/if]
-[if=allow_langs]
-    <div class="center">
-        <form name="lang_select" method="post" action="">
-            <select name="language" style="width:90%;" onchange="document.forms['lang_select'].submit()" title="[__Language]">
-            [each=select_lang]
-                <option value="{select_lang[point]}"[if=select_lang[selected]] selected="selected"[/if]>{select_lang[title]}</option>
-            [/each.select_lang]
-            </select>
-        </form>
-    </div>
-[/if]
+[endelse]
+[if=allow_skins]<div class="center"><form name="skin_select" method="post" action="">{select_skin}</form></div>[endif]
+[if=allow_langs]<div class="center"><form name="lang_select" method="post" action="">{select_lang}</form></div>[endif]

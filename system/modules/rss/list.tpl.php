@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Module RSS
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -18,11 +18,11 @@ die();?>
                                 <span class="title">{categories[title]}</span>
                                 <span class="subtitle">{categories[desc]}</span>
                             </li>
-                        [/each.feed[categories]]
+                        [endeach.feed[categories]]
                     </ul>
                 </div>
                 <hr />
             </li>
-        [/each.feed]
+        [endeach.feed]
     </ul>
 </div>

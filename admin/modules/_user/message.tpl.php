@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration - User
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die(); ?>
@@ -13,7 +13,7 @@ die(); ?>
                 <td>[__Select users]</td>
                 <td>
                     <select name="users[]" size="10" multiple>
-                        [each=users]<option value="{users[name]}">{users[nick]}</option>[/each.users]
+                        [each=users]<option value="{users[name]}">{users[nick]}</option>[endeach.users]
                     </select>
                 </td>
             </tr>
@@ -36,7 +36,7 @@ die(); ?>
                 <td>[__Select users]</td>
                 <td>
                     <select name="users[]" size="10" multiple>
-                        [each=users]<option value="{users[name]}">{users[nick]}</option>[/each.users]
+                        [each=users]<option value="{users[name]}">{users[nick]}</option>[endeach.users]
                     </select>
                 </td>
             </tr>

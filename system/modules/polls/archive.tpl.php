@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Module Minichat
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -22,6 +22,6 @@ die();?>
                 </table>
             </td>
         </tr>
-    [/each.answers]
+    [endeach.answers]
     <tr><td class="odd center" colspan="2">[__Total votes]: {total}</td></tr>
 </table>

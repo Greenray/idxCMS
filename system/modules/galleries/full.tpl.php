@@ -1,13 +1,13 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Module Galleries
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
 <div class="post">
     <div class="info">
-        [if=rateid]<div id="rate{rateid}">{rate}</div>[/if]
+        [if=rateid]<div id="rate{rateid}">{rate}</div>[endif]
         <div class="date">[__Category]: <a href="{MODULE}galleries{SECTION}{section}{CATEGORY}{category}">{category_title}</a></div>
         <span class="date">{date}</span>
     </div>

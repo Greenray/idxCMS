@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Module Forum
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -19,7 +19,7 @@ die();?>
             <td class="left">{categories[desc]}</td>
             <td class="center" style="width:40px">{categories[topics]}</td>
         </tr>
-    [/each.categories]
+    [endeach.categories]
 </table>
 <table>
     <tr>

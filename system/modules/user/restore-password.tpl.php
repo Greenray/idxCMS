@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Module User
-# Version   2.4
+# Version 2.3
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -28,7 +28,7 @@ die();?>
                 ShowAlert('[__Enter a code]', '[__Error]');
                 return false;
             }
-        [/if]
+        [endif]
         return true;
     }
 </script>

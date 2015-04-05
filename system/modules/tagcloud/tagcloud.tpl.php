@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Module Tagcloud
-# Version 2.3
+# Version 2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 # SWFObject v1.4: Flash Player detection and embed - http://blog.deconcept.com/swfobject/

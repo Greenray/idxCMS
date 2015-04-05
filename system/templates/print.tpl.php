@@ -1,5 +1,5 @@
 <?php
-# idxCMS version 2.3
+# idxCMS version 2.4
 # Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # TEMPLATE FOR ITEM PRINTING
 

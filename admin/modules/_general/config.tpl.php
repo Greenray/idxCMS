@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration - Config
-# Version 2.3
+# Version 2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>

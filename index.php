@@ -1,11 +1,11 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
-# Version 2.3
+# Version 2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 /* The core of the content management system.
  *
- * @version   2.3
+ * @version   2.4
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2015 Victor Nabatov
  * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
@@ -114,7 +114,7 @@ define('PAGE',     '&amp;page=');
 # idxCMS version
 
 /** Version of the system. */
-define('IDX_VERSION', '2.3');
+define('IDX_VERSION', '2.4');
 /** Copyright. */
 define('IDX_COPYRIGHT', '&copy; 2011 - 2015 Greenray');
 /** Message about system generator. */

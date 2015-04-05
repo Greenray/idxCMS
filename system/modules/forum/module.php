@@ -1,19 +1,28 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Forum
-# Version 2.3
-# Copyright (c) 2011 - 2015 Victor Nabatov
+/** Module FORUM - initialization.
+ *
+ * @program   idxCMS: Flat Files Content Management Sysytem
+ * @file      system/modules/forum/module.php
+ * @version   2.4
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ * @package   Forum
+ */
 
 if (!defined('idxCMS')) die();
 
-/** Data storage for forum */
+/** Data storage for the forum.
+ * It is identical to data storage for posts.
+ */
 define('FORUM', CONTENT.'forum'.DS);
 
 require SYS.'forum.class.php';
 
 /** Sort of array.
- * @param  array $array Link to array to sort
- * @return array        Sorted array
+ *
+ * @param   array $array Referense to array to sort
+ * @return  array        Sorted array
  */
 function ArraySort(&$array) {
     $keys = [];
@@ -26,8 +35,9 @@ function ArraySort(&$array) {
     uasort($array, "ArraySortFunc");
 }
 
-/** ArraySort callback.
- * String comparison.
+/** ArraySort callback function.
+ * Data comparison.
+ *
  * @param  array   $a Fist array to compare
  * @param  array   $b Second array to compare (Default NULL)
  * @return boolean    The result of operation
@@ -58,7 +68,6 @@ switch (SYSTEM::get('locale')) {
         $LANG['def']['New topic'] = 'Новая тема';
         $LANG['def']['Pin'] = 'Прикрепить';
         $LANG['def']['Reply'] = 'Ответ';
-//        $LANG['def']['Replies'] = 'Ответы';
         $LANG['def']['Reply editing'] = 'Редактирование ответа';
         $LANG['def']['Topic'] = 'Тема';
         $LANG['def']['Topics'] = 'Темы';
@@ -71,7 +80,6 @@ switch (SYSTEM::get('locale')) {
         $LANG['def']['New topic'] = 'Нова тема';
         $LANG['def']['Pin'] = 'Прикріпити';
         $LANG['def']['Reply'] = 'Відповідь';
-//        $LANG['def']['Replies'] = 'Відповіді';
         $LANG['def']['Reply editing'] = 'Редагування відповіді';
         $LANG['def']['Topic'] = 'Тема';
         $LANG['def']['Topics'] = 'Теми';
@@ -84,7 +92,6 @@ switch (SYSTEM::get('locale')) {
         $LANG['def']['New topic'] = 'Новая тэма';
         $LANG['def']['Pin'] = 'Прымацаваць';
         $LANG['def']['Reply'] = 'Адказ';
-//        $LANG['def']['Replies'] = 'Адказы';
         $LANG['def']['Reply editing'] = 'Рэдагаванне адказу';
         $LANG['def']['Topic'] = 'Тэма';
         $LANG['def']['Topics'] = 'Тэмы';

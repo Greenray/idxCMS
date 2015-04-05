@@ -1,17 +1,19 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Module Aphorizms
-# Version 2.3
+# Version   2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
-
-# Aphorisms database is a simple text file.
-# One string is one aphorism.
-# Aphorisms are displayed randomly.
-# Each locale has its file named as "locale".txt
 
 if (!defined('idxCMS')) die();
 
-/** Aphorizms data store */
+/** Aphorisms database.
+ * This is a simple text file.
+ * One string is one aphorism.
+ * Aphorisms are displayed randomly.
+ * Each locale has its file named as "locale".txt
+ *
+ * @package Aphorisms
+ */
 define('APHORISMS', CONTENT.'aphorisms'.DS);
 
 switch (SYSTEM::get('locale')) {
@@ -20,11 +22,13 @@ switch (SYSTEM::get('locale')) {
         $LANG['def']['Next']      = 'Следующий';
         $LANG['def']['Previous']  = 'Предыдущий';
         break;
+
     case 'ua':
         $LANG['def']['Aphorisms'] = 'Афоризми';
         $LANG['def']['Next']      = 'Наступний';
         $LANG['def']['Previous']  = 'Попередній';
         break;
+
     case 'by':
         $LANG['def']['Aphorisms'] = 'Афарызмы';
         $LANG['def']['Next']      = 'Наступны';

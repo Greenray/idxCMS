@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration - User
-# Version 2.3
+# Version   2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -77,7 +77,7 @@ die();?>
             </tr>
             <tr class="odd">
                 <td class="right">[__Blocked]</td>
-                <td colspan="2" class="left"><input type="checkbox" name="blocked" value="1" [if=blocked] checked="checked" [endif] /></td>
+                <td colspan="2" class="left"><input type="checkbox" name="blocked" value="1" [if=blocked] checked="checked" [/if] /></td>
             </tr>
             <tr class="even">
                 <td>[__Password]</td>

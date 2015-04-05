@@ -1,12 +1,20 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Module Posts
-# Version 2.3
+# Version   2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
 
-/** Data store for articles and news */
+/** Data storage for articles and news.
+ * Article is a plain text file with bbcodes or html tags.
+ * Service information, as well as the structure of the database is stored in the file "index".
+ * Each article has a separate directory, where in addition to the text are graphics
+ * illustrations to text, comments and ratings.
+ *
+ *
+ * @package Posts
+ */
 define('POSTS', CONTENT.'posts'.DS);
 
 require SYS.'posts.class.php';

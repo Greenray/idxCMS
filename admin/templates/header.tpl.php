@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>[__Header]</title>
+    <title>{header}</title>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta http-equiv="content-language" content="{locale}" />
     <style type="text/css">

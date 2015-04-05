@@ -1,10 +1,9 @@
 <?php
-# idxCMS: Flat Files Content Management System
-
 /** Captcha.
  *
+ * @program   idxCMS: Flat Files Content Management Sysytem
  * @file      tools/captcha.php
- * @version   2.3
+ * @version   2.4
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2015 Victor Nabatov
  * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
@@ -16,6 +15,7 @@ class CAPTCHA {
     /** Creates Captcha.
      * It takes one of two images (b$w or color), form code from 5...8 symbols, then split code into two parts.
      * So the captcha is different for every time.
+     *
      * @param  string $code Alpha-numeric code for captcha
      * @return void
      */
@@ -32,14 +32,17 @@ class CAPTCHA {
                 imagestring($image, 5, 20, 8, $fh_code, $color);
                 imagestring($image, 5, 45, 2, $sh_code, $color);
                 break;
+
             case 6:
                 imagestring($image, 5, 17, 2, $fh_code, $color);
                 imagestring($image, 5, 43, 8, $sh_code, $color);
                 break;
+
             case 7:
                 imagestring($image, 5, 15, 8, $fh_code, $color);
                 imagestring($image, 5, 41, 2, $sh_code, $color);
                 break;
+
             case 8:
                 imagestring($image, 5, 11, 2, $fh_code, $color);
                 imagestring($image, 5, 36, 8, $sh_code, $color);

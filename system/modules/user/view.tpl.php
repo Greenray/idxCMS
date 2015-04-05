@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Module User
-# Version 2.3
+# Version   2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -10,7 +10,7 @@ die();?>
     <tr class="even"><th>[__Username]</th><td>{username}</td></tr>
     <tr class="even"><th>[__Nick]</th><td>{nickname}</td></tr>
     <tr class="even"><th>[__Personal status]</th><td>{status}</td></tr>
-    [if=stars]<tr class="even"><th>[__Rate]</th><td>{stars}</td></tr>[endif]
+    [if=stars]<tr class="even"><th>[__Rate]</th><td>{stars}</td></tr>[/if]
     <tr class="even"><th>[__Registration]</th><td>{regdate}</td></tr>
     <tr class="even"><th>[__Last visit]</th><td>{lastvisit}</td></tr>
     <tr class="even"><th>[__Visits]</th><td>{visits}</td></tr>
@@ -22,6 +22,6 @@ die();?>
     <tr class="even"><th>[__Website]</th><td>{website}</td></tr>
     <tr class="even"><th>[__Country]</th><td>{country}</td></tr>
     <tr class="even"><th>[__City]</th><td>{city}</td></tr>
-    [if=blocked]<tr class="even"><th>[__Blocked]</th><td>{blocked}</td></tr>[endif]
-    [if=allow_pm]<tr class="even"><td colspan="2"><p class="center"><a href="{MODULE}user.pm&amp;for={username}">[__Private message]</a></p></td></tr>[endif]
+    [if=blocked]<tr class="even"><th>[__Blocked]</th><td>{blocked}</td></tr>[/if]
+    [if=allow_pm]<tr class="even"><td colspan="2"><p class="center"><a href="{MODULE}user.pm&amp;for={username}">[__Private message]</a></p></td></tr>[/if]
 </table>

@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration
-# Version 2.3
+# Version   2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN') || !USER::loggedIn()) die();
@@ -31,5 +31,5 @@ foreach($MODULES as $category => $data) {
         }
     }
 }
-$TPL = new TEMPLATE(ADMINTEMPLATES.'navigation.tpl');
+$TPL = new TEMPLATE(TEMPLATES.'navigation.tpl');
 echo $TPL->parse($output);

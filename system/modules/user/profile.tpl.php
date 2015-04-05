@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Module User
-# Version 2.3
+# Version   2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -51,7 +51,7 @@ die();?>
                 <td colspan="2" class="left">[__You have all rights on this site]</td>
             [else]
                 <td colspan="2" class="left">{rights}</td>
-            [endelse]
+            [/else]
         </tr>
         <tr class="even">
             <th>[__Current password]</th>
@@ -130,7 +130,7 @@ die();?>
         </tr>
     </table>
     <p class="center">
-        [if=captcha]{captcha}[endif]
+        [if=captcha]{captcha}[/if]
         <input type="submit" name="save" value="[__Save]" class="submit" />
     </p>
 </form>

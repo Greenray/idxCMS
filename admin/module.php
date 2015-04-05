@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration
-# Version 2.3
+# Version   2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN') || !USER::loggedIn()) die();?>
@@ -35,11 +35,9 @@ if (!defined('idxADMIN') || !USER::loggedIn()) die();?>
     <div style="padding:2px;">
        <?php
         # Activate module
-        if (file_exists(ADMIN.'modules'.DS.$id.'.php')) {
-            include ADMIN.'modules'.DS.$id.'.php';
-        } elseif (file_exists(ADMINLIBS.$action.'.php')) {
-            include ADMINLIBS.$action.'.php';
-        } else {
+        if (file_exists(ADMIN.'modules'.DS.$id.'.php'))  include ADMIN.'modules'.DS.$id.'.php';
+        elseif (file_exists(ADMINLIBS.$action.'.php'))   include ADMINLIBS.$action.'.php';
+        else {
             $message = __('Module not found').': '.$id;
             include ADMIN.'error.php';
         }

@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Module User
-# Version 2.3
+# Version   2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -12,10 +12,10 @@ die();?>
             <div class="author center">
                 <img src="{avatar}" hspace="5" vspace="5" alt="" /><br />
                 {nick}<br />
-                [if=status]{status}<br />[endif]
-                [if=stars][__Rate]: {stars}<br />[endif]
-                [if=country]{country}<br />[endif]
-                [if=city]{city}[endif]
+                [if=status]{status}<br />[/if]
+                [if=stars][__Rate]: {stars}<br />[/if]
+                [if=country]{country}<br />[/if]
+                [if=city]{city}[/if]
             </div>
             <div class="info">
                 {time}
@@ -36,13 +36,13 @@ die();?>
                     <input type="hidden" name="re" value="{id}" />
                     <button type="submit" name="reply" value="{author}" class="submit">[__Reply]</button>
                 </form>
-            [endif]
+            [/if]
         [else]
             <div class="author center">
                 <img src="{avatar}" hspace="5" vspace="5" alt="" /><br />
                 {nick}
-                [if=country]<br />{country}[endif]
-                [if=city]<br />{city}[endif]
+                [if=country]<br />{country}[/if]
+                [if=city]<br />{city}[/if]
             </div>
             <div class="date">{time}</div>
             <div class="text justify">{text}</div>
@@ -52,7 +52,7 @@ die();?>
                     <button type="submit" name="remove" value="{id}" class="submit">[__Delete]</button>
                 </form>
             </div>
-        [endelse]
+        [/else]
     </div>
 </div>
 <div class="clear"></div>

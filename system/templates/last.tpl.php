@@ -1,5 +1,5 @@
 <?php
-# idxCMS version 2.3
+# idxCMS version   2.4
 # Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # LAST ITEMS TEMPLATE
 
@@ -12,10 +12,10 @@ die();?>
             <a href="{items[link]}">{items[title]}</a><br />
             <span class="info">
                 [__Views]: {items[views]}
-                [if=items[comments]][__Comments]: <a href="{items[link]}{COMMENT}{items[comments]}">{items[comments]}</a>[endif]
+                [if=items[comments]][__Comments]: <a href="{items[link]}{COMMENT}{items[comments]}">{items[comments]}</a>[/if]
             </span>
         </li>
         <hr>
-    [endeach.items]
+    [/each.items]
     </ul>
 </div>

@@ -1,10 +1,9 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-
 /** Processing content: articles, topics, comments and replies.
  *
+ * @program   idxCMS: Flat Files Content Management Sysytem
  * @file      system/content.class.php
- * @version   2.3
+ * @version   2.4
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011-2015 Victor Nabatov
  * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
@@ -519,13 +518,6 @@ class CONTENT extends INDEX {
         return $id;
     }
 
-    /**
-    * @todo Comment
-    * @param string $id	...
-    * @param string $section	...
-    * @param string $category	...
-    * @return integer ID of the new item
-    */
     public function moveItem($id, $section, $category) {
         $item = $this->content[$id];
         $old_section  = $this->section;
@@ -550,22 +542,12 @@ class CONTENT extends INDEX {
         return $new;
     }
 
-    /**
-    * @todo Comment
-    * @param string $content	...
-    * @return
-    */
     public function saveContent($content) {
         if ($this->saveIndex($this->sections[$this->section]['categories'][$this->category]['path'], $content) === FALSE) {
             throw new Exception('Cannot save content');
         }
     }
 
-    /**
-    * @todo Comment
-    * @param string $id	...
-    * @return
-    */
     public function removeItem($id) {
         if (empty($this->content[$id])) {
             throw new Exception('Invalid ID');
@@ -580,12 +562,6 @@ class CONTENT extends INDEX {
         Sitemap();
     }
 
-    /**
-    * @todo Comment
-    * @param string $id	...
-    * @param string $field	...
-    * @return
-    */
     public function incCount($id, $field) {
         if (empty($this->content[$id])) {
             return FALSE;
@@ -595,11 +571,6 @@ class CONTENT extends INDEX {
         return $this->saveIndex($this->sections[$this->section]['categories'][$this->category]['path'], $this->content);
     }
 
-    /**
-    * @todo Comment
-    * @param string $param	...
-    * @return
-    */
     public function getStat($param) {
         $result = [];
         foreach ($this->sections[$this->section]['categories'] as $category => $data) {
@@ -611,14 +582,6 @@ class CONTENT extends INDEX {
         return $result;
     }
 
-    /**
-    * @todo Comment
-    * @param string $category	...
-    * @param string $param	...
-    * @param string $last	... (défaut : TRUE)
-    * @param string $limit	... (défaut : '')
-    * @return
-    */
     public function getCategoryStat($category, $param, $last = TRUE, $limit = '') {
         $result = [];
         self::getContent($category);
@@ -631,11 +594,6 @@ class CONTENT extends INDEX {
         return $result;
     }
 
-    /**
-    * @todo Comment
-    * @param string $items	...
-    * @return
-    */
     public function getLastItems($items) {
         krsort($items);
         $items  = array_slice($items, 0, (int) CONFIG::getValue('main', 'last'), TRUE);

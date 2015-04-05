@@ -1,5 +1,5 @@
 <?php
-# idxCMS version 2.3
+# idxCMS version   2.4
 # Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # COMMENT POST TEMPLATE
 
@@ -41,11 +41,11 @@ die();?>
             }
         }
     </script>
-[endif]
+[/if]
 <script type="text/javascript">
     function checkForm(form) {
         var text = form.text.value;
-        [if=captcha]var capt = form.captcheckout.value;[endif]
+        [if=captcha]var capt = form.captcheckout.value;[/if]
         if (text == '') {
             ShowAlert('[__Enter a code]', '[__Error]');
             return false;
@@ -55,7 +55,7 @@ die();?>
                 ShowAlert('[__Enter a code]', '[__Error]');
                 return false;
             }
-        [endif]
+        [/if]
         return true;
     }
 </script>
@@ -65,11 +65,11 @@ die();?>
         <fieldset>
             <legend>[__Text]</legend>
             <textarea id="text" name="text" cols="20" rows="7">{text}</textarea>
-            [if=not_admin]<div>[__Max message length] [<script type="text/javascript">displayLimit("", "text", '{comment-length}')</script>] [__symbols]<div>[endif]
+            [if=not_admin]<div>[__Max message length] [<script type="text/javascript">displayLimit("", "text", '{comment-length}')</script>] [__symbols]<div>[/if]
         </fieldset>
         <p class="center">
-            [if=for]<input type="hidden" name="for" value="{for}" />[endif]
-            [if=captcha]{captcha}[endif]
+            [if=for]<input type="hidden" name="for" value="{for}" />[/if]
+            [if=captcha]{captcha}[/if]
             <input type="submit" name="save" value="[__Save]" class="submit" />
         </p>
     </form>

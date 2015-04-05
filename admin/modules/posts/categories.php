@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration - Posts
-# Version 2.3
+# Version   2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN')) die();
@@ -83,16 +83,14 @@ echo $TPL->parse($output);
 
 if (!empty($REQUEST['new'])) {
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'category.tpl');
-    echo $TPL->parse(
-        array(
-            'title'    => FILTER::get('REQUEST', 'title'),
-            'desc'     => FILTER::get('REQUEST', 'desc'),
-            'access'   => (int) FILTER::get('REQUEST', 'access'),
-            'sections' => $choice,
-            'bbCodes'  => CMS::call('PARSER')->showBbcodesPanel('form.desc'),
-            'header'   => __('New category')
-        )
-    );
+    echo $TPL->parse([
+        'title'    => FILTER::get('REQUEST', 'title'),
+        'desc'     => FILTER::get('REQUEST', 'desc'),
+        'access'   => (int) FILTER::get('REQUEST', 'access'),
+        'sections' => $choice,
+        'bbCodes'  => CMS::call('PARSER')->showBbcodesPanel('form.desc'),
+        'header'   => __('New category')
+    ]);
 }
 
 # Edit category

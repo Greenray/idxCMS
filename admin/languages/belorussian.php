@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration - Translation
-# Version 2.3
+# Version   2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 $LANG['def']['Access'] = 'Доступ';
@@ -141,7 +141,7 @@ $LANG['def']['Show selected'] = 'Паказаць выбраныя';
 $LANG['def']['Show welcome message'] = 'Паказваць прывітанне';
 $LANG['def']['Site configuration'] = 'Настройка сайта';
 $LANG['def']['site index'] = 'да сайта';
-$LANG['def']['Site statistic'] = 'Статыстыка сайта';
+$LANG['def']['Site statistics'] = 'Статыстыка сайта';
 $LANG['def']['Site title'] = 'Загаловак сайта';
 $LANG['def']['Site URL'] = 'URL сайта';
 $LANG['def']['Slider color'] = 'Колер слайдара';

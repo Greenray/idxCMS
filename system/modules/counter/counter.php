@@ -1,12 +1,12 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Module Counter
-# Version 2.3
+# Version   2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
 
-$stats = GetUnserialized(CONTENT.'stats');          # Statistic datafile
+$stats = GetUnserialized(CONTENT.'stats');          # Statistics datafile
 $stats['registered'] = sizeof(GetFilesList(USERS)); # Number of regisered users
 $stats['visitors']   = sizeof($stats['online']);    # Nubmer of visitors online
 $guests = 0;                                        # Number of guests online

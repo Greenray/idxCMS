@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration - Forum
-# Version 2.3
+# Version   2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN')) die();
@@ -18,7 +18,7 @@ if (!empty($REQUEST['save'])) {
     # Check if admin decided to move post
     if (($section !== $REQUEST['new_section']) || ($category !== $REQUEST['new_category'])) {
         if (!empty($REQUEST['item']))
-            # Topic exists, so move it
+             # Topic exists, so move it
              $topic = CMS::call('FORUM')->moveItem($REQUEST['item'], $REQUEST['new_section'], $REQUEST['new_category']);
         else $topic = '';     # Nothing to move, so add new
 
@@ -98,6 +98,7 @@ if (!empty($REQUEST['new']) || !empty($topic)) {
     $output['sections'][$output['section_id']]['selected']    = TRUE;
     $output['categories'][$output['category_id']]['selected'] = TRUE;
     $output['bbCodes_text'] = CMS::call('PARSER')->showBbcodesPanel('topic.text');
+
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'topic.tpl');
     echo $TPL->parse($output);
 

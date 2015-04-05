@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration - Polls
-# Version 2.3
+# Version   2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -27,7 +27,7 @@ die();?>
                             </table>
                         </td>
                     </tr>
-                [endeach.polls[answers]]
+                [/each.polls[answers]]
                 <tr><td class="odd center" colspan="3">[__Total votes]: {polls[total]}</td></tr>
             </table>
             <p align="center">
@@ -35,7 +35,7 @@ die();?>
                 <input type="submit" name="delete" value="[__Delete]" class="submit" />
             </p>
         </form>
-    [endeach.polls]
+    [/each.polls]
     <form name="poll" method="post" action="">
         <table class="std">
             <tr><th colspan="3">[__New poll]</th></tr>

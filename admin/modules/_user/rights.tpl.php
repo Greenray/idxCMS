@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration - User
-# Version 2.3
+# Version   2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -16,14 +16,14 @@ die();?>
             </tr>
             <tr class="odd">
                 <td>[__Administrator]</td>
-                <td><input type="checkbox" name="root" value="{admin}" [if=admin]checked="checked"[endif] /></td>
+                <td><input type="checkbox" name="root" value="{admin}" [if=admin]checked="checked"[/if] /></td>
             </tr>
             [each=rights]
                 <tr class="odd">
                     <td>{rights[desc]}</td>
-                    <td><input type="checkbox" name="rights[]" value="{rights[right]}" [if=rights[set]]checked="checked"[endif] /></td>
+                    <td><input type="checkbox" name="rights[]" value="{rights[right]}" [if=rights[set]]checked="checked"[/if] /></td>
                 </tr>
-            [endeach.rights]
+            [/each.rights]
         </table>
         <p class="center">
             <input type="hidden" name="user" value="{user}" />

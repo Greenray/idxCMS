@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Module Aphorizms
-# Version 2.3
+# Version   2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
@@ -16,5 +16,5 @@ if (!empty(FILTER::get('REQUEST', 'flip'))) {
     echo $aph[array_rand($aph, 1)].'$';
 } else {
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'aphorisms.tpl');
-    ShowWindow(__('Aphorisms'), $TPL->parse(array('text' => $aph[array_rand($aph, 1)])));
+    ShowWindow(__('Aphorisms'), $TPL->parse(['text' => $aph[array_rand($aph, 1)]]));
 }

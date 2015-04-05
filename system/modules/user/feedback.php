@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Module User
-# Version 2.3
+# Version   2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
@@ -20,6 +20,7 @@ if (!empty($message)) {
         ShowWindow('', __('Message sent'), 'center');
         unset($REQUEST);
         unset($FEEDBACK);
+
     } catch (Exception $error) {
         ShowError(__($error->getMessage()));
     }

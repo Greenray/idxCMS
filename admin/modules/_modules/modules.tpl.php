@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration - Modules
-# Version 2.3
+# Version   2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -21,10 +21,10 @@ die();?>
                     <tr class="odd">
                         <td colspan="2">{modules[title]}</td>
                         <td class="center">
-                            <label><input type="checkbox" name="enable[{modules[module]}]" value="1" [if=module[enabled]]checked="checked"[endif] /> [__Enable]</label>
+                            <label><input type="checkbox" name="enable[{modules[module]}]" value="1" [if=module[enabled]]checked="checked"[/if] /> [__Enable]</label>
                         </td>
                     </tr>
-                [endelse]
+                [/else]
                 [each=modules[ext]]
                     <tr class="{ext[class]}">
                         <td>&emsp;&mdash; {ext[title]}</td>
@@ -36,10 +36,10 @@ die();?>
                             <td class="center">
                                 <label><input type="checkbox" name="enable[{ext[module]}]" value="1" {ext[checked]} /> [__Enable]</label>
                             </td>
-                        [endelse]
+                        [/else]
                     </tr>
-                [endeach.modules[ext]]
-            [endeach.modules]
+                [/each.modules[ext]]
+            [/each.modules]
         </table>
         <p class="center"><input type="submit" name="save" value="[__Save]" class="submit" /></p>
     </form>

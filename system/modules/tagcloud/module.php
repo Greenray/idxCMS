@@ -1,14 +1,21 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Tagcloud
-# Version 2.3
-# Copyright (c) 2011 - 2015 Victor Nabatov
+/** Module TAGCLOUD - initialization.
+ *
+ * @program   idxCMS: Flat Files Content Management Sysytem
+ * @file      system/modules/tagcloud/module.php
+ * @version   2.4
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ * @package   Tagcloud
+ */
 
 if (!defined('idxCMS')) die();
 
 /** Transformation of an array: key <=> value.
- * @param  array $array Array to invert
- * @return array        Inverted array
+ *
+ * @param   array $array Array to invert
+ * @return  array        Inverted array
  */
 function ArrayInvert($array) {
     $result = [];
@@ -22,8 +29,9 @@ function ArrayInvert($array) {
 }
 
 /** Transformation of a two-dimensional array into one-dimensional with restoration of reference values of keys.
- * @param  array $array Array to transform
- * @return array        The result of transformation
+ *
+ * @param   array $array Array to transform
+ * @return  array        The result of transformation
  */
 function ArrayNormalize($array) {
     $result = [];
@@ -36,7 +44,8 @@ function ArrayNormalize($array) {
 }
 
 /** Preparing tags for tagcloud.
- * @return array Array of tags for the tagcloud
+ *
+ * @return  array Array of tags for the tagcloud
  */
 function PrepareTags() {
     $tags = GetUnserialized(CONTENT.'tags');
@@ -49,9 +58,10 @@ function PrepareTags() {
 }
 
 /** Callback function for tags sorting
- * @param  string  $a First tag for comparing
- * @param  string  $b Second tag for comparing
- * @return integer    The result of operation
+ *
+ * @param   string  $a First tag for comparing
+ * @param   string  $b Second tag for comparing
+ * @return  integer    The result of operation
  */
 function scmp($a, $b) {
     return mt_rand(-1, 1);

@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Module Search
-# Version 2.3
+# Version   2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -16,9 +16,9 @@ die();?>
                         <span class="subtitle">{result[text]}</span>
                     </div>
                 </li>
-            [endeach.result]
+            [/each.result]
         [else]
             <div class="center"><em>[__Nothing founded]</em></div>
-        [endelse]
+        [/else]
     </ul>
 </div>

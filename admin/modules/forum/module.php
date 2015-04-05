@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration - Forum
-# Version 2.3
+# Version   2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN')) die();
@@ -12,11 +12,13 @@ switch (SYSTEM::get('locale')) {
         $LANG['def']['Replies per page'] = 'Ответов на страницу';
         $LANG['def']['Topics per page']  = 'Тем на страницу';
         break;
+
     case 'ua':
         $LANG['def']['Max reply length'] = 'Max розмір відповіді';
         $LANG['def']['Replies per page'] = 'Відповідей на сторінку';
         $LANG['def']['Topics per page']  = 'Тем на сторінку';
         break;
+
     case 'by':
         $LANG['def']['Max reply length'] = 'Max памер адказу';
         $LANG['def']['Replies per page'] = 'Адказаў на старонку';

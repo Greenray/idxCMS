@@ -1,54 +1,10 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration - Tagcloud
-# Version 2.3
+# Version   2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
-
-# Keywords array creation.
-function GetKeywords($words, $config, &$target) {
-    $keywords = explode(',', $words);   # Keywords are written through a comma.
-    foreach ($keywords as $k => $value) {
-        $value = trim($value);             # Let's bite off superfluous blanks.
-        # Check for the resolved length of a keyword.
-        if ((mb_strlen($value) >= $config['query-min']) && (mb_strlen($value) <= $config['query-max'])) {
-            if (!empty($target[$value]))
-                 $target[$value]++;        # Existing tag.
-            else $target[$value] = 1;      # New tag.
-        }
-    }
-}
-
-function CreateTags($posts = TRUE, $files = FALSE) {
-    $config   = CONFIG::getSection('search');
-    $tags     = [];
-    $keywords = CONFIG::getValue('main', 'keywords');
-    GetKeywords($keywords, $config, $tags);
-    $modules = array('posts','forum','catalogs','galleries');
-    $enabled = CONFIG::getSection('enabled');
-    foreach($modules as $module) {
-        if (array_key_exists($module, $enabled)) {
-            $obj = strtoupper($module);
-            $sections = CMS::call($obj)->getSections();
-            if (!empty($sections['drafts'])) {
-                unset($sections['drafts']);
-            }
-            foreach ($sections as $id => $section) {
-                $categories = CMS::call($obj)->getCategories($id);
-                foreach ($categories as $key => $category) {
-                    $content = CMS::call($obj)->getContent($key);
-                    foreach ($content as $i => $post) {
-                        if (!empty($post['keywords'])) {
-                            GetKeywords($post['keywords'], $config, $tags);
-                        }
-                    }
-                }
-            }
-        }
-    }
-    return file_put_contents(CONTENT.'tags', serialize($tags));
-}
 
 $config = CONFIG::getSection('tagcloud');
 
@@ -86,20 +42,18 @@ if (isset($init)) {
             ShowMessage('Cannot save file');
         }
     }
+
     if (!empty($REQUEST['create'])) {
-        /*
-        * @todo Make selection
-        */
-        if (CONFIG::getValue('enabled', 'files'))
-             $result = CreateTags(TRUE, TRUE);
-        else $result = CreateTags(TRUE);
+        $result = CreateTags();
         if ($result === FALSE) {
             ShowMessage('Cannot save file');
         }
     }
+
     if ($config['distr'] === 'false') {
         unset($config['distr']);
     }
+
     $search_ini = CONFIG::getSection('search');
     if (!empty($REQUEST['edit'])) {
         $tags = [];
@@ -112,10 +66,12 @@ if (isset($init)) {
                 }
             }
         }
+
         if (!file_put_contents(CONTENT.'tags', serialize($tags))) {
             ShowMessage('Cannot save file');
         }
     }
+    
     $create_tags = 0;
     $config['bgcolor'] = GetColor("bgcolor", $config['bgcolor']);
     $config['color']   = GetColor("color",$config['color']);
@@ -127,6 +83,7 @@ if (isset($init)) {
     }
     $config['used']   = array_slice($tags, 0, $tags_amount, TRUE);
     $config['unused'] = array_slice($tags, $tags_amount, -1, TRUE);
+
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'config.tpl');
     echo $TPL->parse($config);
 }

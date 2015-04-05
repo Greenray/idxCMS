@@ -1,10 +1,9 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-
 /** Site ststistic - registers a visitы to the website by visitors, users, bots and spiders.
  *
- * @file      system/statistic.php
- * @version   2.3
+ * @program   idxCMS: Flat Files Content Management Sysytem
+ * @file      system/statistics.php
+ * @version   2.4
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2015 Victor Nabatov
  * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
@@ -66,7 +65,7 @@ function DetectBadBot($agent) {
 }
 
 /** Detect spiders.
- * 
+ *
  * @param  string $agent $_SERVER['HTTP_USER_AGENT']
  * @return boolean       Is spider detected?
  */
@@ -125,7 +124,7 @@ if (DetectBadBot($agent)) {
     die();
 }
 
-$config = CONFIG::getSection('statistic');
+$config = CONFIG::getSection('statistics');
 $time = time();
 
 if (DetectSpider($agent)) {
@@ -160,7 +159,7 @@ if (DetectSpider($agent)) {
     }
 } else {
     $user  = USER::getUser();                   # User profile
-    $stats = GetUnserialized(CONTENT.'stats');  # Statistic data storage
+    $stats = GetUnserialized(CONTENT.'stats');  # Data storage for ststistics
     if (empty($stats)) {
         $stats['total']   = 1;
         $stats['today']   = 1;

@@ -1,26 +1,24 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Version 2.3
-# Copyright (c) 2011 - 2015 Victor Nabatov
-
-/* The core of the content management system.
+/** The core of the content management system.
  *
- * @version   2.3
+ * @program   idxCMS: Flat Files Content Management Sysytem
+ * @file      index.php
+ * @version   2.4
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2015 Victor Nabatov
  * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
  * @package   Core
  */
 
-ini_set('phar.readonly', 0);            # Allow phar to work with phars.
-ini_set('display_errors', 1);           # Allow to log php errors.
 ini_set('default_charset', 'UTF-8');    # PHP >= 5.6.0, empty for PHP < 5.6.0
+ini_set('display_errors', 1);           # Allow to log php errors.
+ini_set('phar.readonly',  0);           # Allow phar to work with phars.
 mb_internal_encoding('UTF-8');
 setlocale(LC_CTYPE, ['ru_RU.UTF-8', 'ru_UA.UTF-8', 'by_BY.UTF-8', 'en_US.UTF-8', 'en_GB.UTF-8']);
 setlocale(LC_ALL,   ['ru_RU.UTF-8', 'ru_UA.UTF-8', 'by_BY.UTF-8', 'en_US.UTF-8', 'en_GB.UTF-8']);
 
 if (date_default_timezone_set(date_default_timezone_get()) === FALSE) {
-    date_default_timezone_set('UTC');
+    date_default_timezone_set('Europe/Moscow');
 }
 
 # Unset any globals created by register_globals being turned ON
@@ -34,12 +32,13 @@ unset($global);
 error_reporting(-1);
 
 /** Set error handler.
- * Handles php errors and writes info into the /content/logs/idxerror.log.
- * @param  integer $num   Error number.
- * @param  string  $msg   Error message.
- * @param  string  $file  Name of the file where the error was generated.
- * @param  integer $line  Line number where the error was generated.
- * @return string  $error Error message
+ * Handles php errors and writes info into the "/content/logs/idxerror.log".
+ *
+ * @param   integer $num   Error number.
+ * @param   string  $msg   Error message.
+ * @param   string  $file  Name of the file where the error was generated.
+ * @param   integer $line  Line number where the error was generated.
+ * @return  string  Error message
  */
 function idxErrorHandler($num, $msg, $file, $line) {
     $type = [
@@ -83,7 +82,7 @@ define('SYS',     ROOT.'system'.DS);
 define('TOOLS',   ROOT.'tools'.DS);
 /** Path to the CMS modules. */
 define('MODULES', SYS.'modules'.DS);
-/** Logs data store. */
+/** Data storage for log files. */
 define('LOGS',    CONTENT.'logs'.DS);
 /** Temporary directory. */
 define('TEMP',    CONTENT.'temp'.DS);
@@ -114,7 +113,7 @@ define('PAGE',     '&amp;page=');
 # idxCMS version
 
 /** Version of the system. */
-define('IDX_VERSION', '2.3');
+define('IDX_VERSION', '2.4');
 /** Copyright. */
 define('IDX_COPYRIGHT', '&copy; 2011 - 2015 Greenray');
 /** Message about system generator. */
@@ -207,7 +206,7 @@ switch($MODULE) {
         /** Libruaries for administration panel. */
         define('ADMINLIBS', ADMIN.'libs'.DS);
         /** Templates for administration panel. */
-        define('ADMINTEMPLATES', ADMIN.'templates'.DS);
+        define('TEMPLATES', ADMIN.'templates'.DS);
 
         require_once ADMINLIBS.'functions.php';
         include_once ADMIN.'languages'.DS.SYSTEM::get('language').'.php';  # Localization.
@@ -267,7 +266,7 @@ switch($MODULE) {
         break;
 
     default:
-        include_once SYS.'statistic.php';
+        include_once SYS.'statistics.php';
 
         /** System templates. */
         define('TEMPLATES', SYS.'templates'.DS);

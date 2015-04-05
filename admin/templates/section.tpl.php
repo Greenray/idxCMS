@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration
-# Version 2.3
+# Version   2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -54,7 +54,7 @@ die();?>
                 [else]
                     <td><input type="text" name="section" value="" id="section" size="30" class="required" required="required" /></td>
                     <td class="help">[__Only latin characters, digits and symbol "_"]</td>
-                [endelse]
+                [/else]
                 </tr>
             <tr>
                 <td class="label">[__Title]</td>

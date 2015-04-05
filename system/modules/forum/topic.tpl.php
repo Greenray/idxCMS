@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Module Forum
-# Version 2.3
+# Version   2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -20,15 +20,15 @@ die();?>
                             <img src="{ICONS}user-pm.png" width="16" height="16" class="tip" alt="[__Private message]" />
                         </a>
                     </span>
-                [endif]
+                [/if]
             </div>
             <div class="author center">
                 <img src="{avatar}" hspace="5" vspace="5" alt="" /><br />
                 <strong><a href="javascript:InsertText(document.forms['comment'].elements['text'], '[b]{nick}![/b]' + '\n');">{nick}</a></strong><br />
-                [if=status]{status}<br />[endif]
-                [if=stars][__Rate]: {stars}<br />[endif]
-                [if=country]{country}<br />[endif]
-                [if=city]{city}[endif]
+                [if=status]{status}<br />[/if]
+                [if=stars][__Rate]: {stars}<br />[/if]
+                [if=country]{country}<br />[/if]
+                [if=city]{city}[/if]
             </div>
             <div class="text justify">{text}</div>
         </div>
@@ -40,7 +40,7 @@ die();?>
                 <button formaction="{link}&amp;action={action}" class="submit">{command}</button>
             </form>
         </div>
-    [endif]
+    [/if]
     [if=moderator]
         <div class="menu">
             <form name="topic" method="post" action="">
@@ -48,14 +48,14 @@ die();?>
                 <button formaction="{link}&amp;action=delete" class="submit">[__Delete]</button>
             </form>
         </div>
-    [endif]
+    [/if]
     [if=ip]
         <div class="menu">
             <form name="topic" method="post" action="">
                 <button formaction="{link}&amp;action=ban&amp;host={ip}" class="submit">{ip}</button>
             </form>
         </div>
-    [endif]
+    [/if]
 </div>
 <div class="clear"></div>
 

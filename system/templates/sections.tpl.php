@@ -1,5 +1,5 @@
 <?php
-# idxCMS version 2.3
+# idxCMS version   2.4
 # Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # SECTIONS TEMPLATE
 
@@ -26,11 +26,11 @@ die();?>
                                 <span class="subtitle">{categories[desc]}</span>
                             </a>
                         </li>
-                    [endeach.sections[categories]]
+                    [/each.sections[categories]]
                     </ul>
                 </div>
-            [endif]
+            [/if]
         </li>
-    [endeach.sections]
+    [/each.sections]
     </ul>
 </div>

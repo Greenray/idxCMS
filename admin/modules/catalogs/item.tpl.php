@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration - Catalogs
-# Version 2.3
+# Version   2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -38,9 +38,9 @@ die();?>
             [else]
                 <td>[__Select category]</td>
                 <td colspan="3">
-            [endelse]
+            [/else]
                     <select name="new_category">
-                        [each=categories]<option value="{categories[id]}" [if=categories[selected]]selected="selected"[endif]>{categories[title]}</option>[endeach.categories]
+                        [each=categories]<option value="{categories[id]}" [if=categories[selected]]selected="selected"[/if]>{categories[title]}</option>[/each.categories]
                     </select>
                 </td>
             </tr>
@@ -51,7 +51,7 @@ die();?>
                     <td>[__Size]</td>
                     <td>{size} [__bytes]</td>
                 </tr>
-            [endif]
+            [/if]
             [if=song]
                 <tr class="odd">
                     <td>[__File]</td>
@@ -59,7 +59,7 @@ die();?>
                     <td>[__Size]</td>
                     <td>{size} [__bytes]</td>
                 </tr>
-            [endif]
+            [/if]
             <tr class="odd">
                 <td>[__Upload]</td>
                 <td colspan="3"><input type="file" name="file" value="" size="80" class="text" /></td>
@@ -97,7 +97,7 @@ die();?>
             <tr class="odd">
                 <td>[__Comments]</td>
                 <td colspan="3">
-                    <input type="checkbox" name="opened" value="1" [if=opened]checked="checked"[endif] />
+                    <input type="checkbox" name="opened" value="1" [if=opened]checked="checked"[/if] />
                     <label for="opened"> [__Allow]</label>
                 </td>
             </tr>

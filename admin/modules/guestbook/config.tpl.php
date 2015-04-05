@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration - Guestbook
-# Version 2.3
+# Version   2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -23,7 +23,7 @@ die();?>
             </tr>
             <tr class="odd">
                 <td>[__Allow guests to post]</td>
-                <td colspan="2"><input type="checkbox" name="allow-guests-post" value="1" [if=allow-guests-post]checked="checked"[endif] /></td>
+                <td colspan="2"><input type="checkbox" name="allow-guests-post" value="1" [if=allow-guests-post]checked="checked"[/if] /></td>
             </tr>
         </table>
         <p class="center"><input type="submit" name="save" value="[__Save]" class="submit" /></p>

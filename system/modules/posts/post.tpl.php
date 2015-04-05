@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Module Posts
-# Version 2.3
+# Version   2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -57,7 +57,7 @@ die();?>
 [else]
     <div class="center">[__Post]</div>
     <div class="center">[__Your article will be published after premoderation]</div>
-[endelse]
+[/else]
 <form name="editor" method="post" action="" onsubmit="return checkPost(this);">
     <fieldset>
     <legend>{header}</legend>
@@ -69,12 +69,12 @@ die();?>
                     <td class="label">[__Select section]</td>
                     <td>
                         <select name="new_section" onChange="setCategories(this.selectedIndex)">
-                            [each=sections]<option value="{sections[id]}" [if=sections[selected]]selected="selected"[endif]>{sections[title]}</option>[endeach.sections]
+                            [each=sections]<option value="{sections[id]}" [if=sections[selected]]selected="selected"[/if]>{sections[title]}</option>[/each.sections]
                         </select>
                     </td>
                 [else]
                     <td colspan="3"><b>{section_title}</b></td>
-                [endelse]
+                [/else]
             </tr>
             <tr class="odd">
                 <td class="label">[__Category]</td>
@@ -83,12 +83,12 @@ die();?>
                     <td class="label">[__Select category]</td>
                     <td>
                         <select name="new_category">
-                            [each=categories]<option value="{categories[id]}" [if=categories[selected]]selected="selected"[endif]>{categories[title]}</option>[endeach.categories]
+                            [each=categories]<option value="{categories[id]}" [if=categories[selected]]selected="selected"[/if]>{categories[title]}</option>[/each.categories]
                         </select>
                     </td>
                 [else]
                     <td colspan="3"><b>{category_title}</b></td>
-                [endelse]
+                [/else]
             </tr>
             <tr class="odd">
                 <td class="label">[__Title]</td>
@@ -122,12 +122,12 @@ die();?>
             </tr>
             [ifelse=admin]
                 <tr class="odd">
-                    <td>[__Comments]: <input type="checkbox" name="opened" value="1" id="opened" [if=opened]checked="checked"[endif] /><label for="opened"> [__Allow]</label></td>
+                    <td>[__Comments]: <input type="checkbox" name="opened" value="1" id="opened" [if=opened]checked="checked"[/if] /><label for="opened"> [__Allow]</label></td>
                     <td colspan="3" >&nbsp;</td>
                 </tr>
             [else]
                 <input type="hidden" name="opened" value="1" />
-            [endelse]
+            [/else]
         </table>
         <p class="center">
             <input type="hidden" name="item" value="{item}" />

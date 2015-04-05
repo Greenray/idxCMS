@@ -1,10 +1,9 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-
 /** Read and save database files.
  *
+ * @program   idxCMS: Flat Files Content Management Sysytem
  * @file      system/index.class.php
- * @version   2.3
+ * @version   2.4
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2015 Victor Nabatov
  * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
@@ -42,7 +41,7 @@ class INDEX {
     }
 
     /** Writes the index file with serialization of data.
-     * 
+     *
      * @param  string  $path  Path to index file
      * @param  array   $array Data for saving
      * @return boolean        The result of the operation

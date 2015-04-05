@@ -1,14 +1,13 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-
 /** Users and their profiles.
  *
+ * @program   idxCMS: Flat Files Content Management Sysytem
  * @file      system/user.class.php
- * @version   2.3
+ * @version   2.4
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2015 Victor Nabatov
  * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
- * @package   Core
+ * @package   Users
  */
 
 class USER {

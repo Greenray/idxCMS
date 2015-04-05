@@ -1,5 +1,5 @@
 <?php
-# idxCMS version 2.3
+# idxCMS version   2.4
 # Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # COMMENT TEMPLATE
 
@@ -16,18 +16,18 @@ die();?>
             </span>
         [else]
             <span class="{rate_color}" style="float:right;padding:0 26px 0 0;">{rate}</span>
-        [endelse]
+        [/else]
         <div class="author center">
             <img src="{avatar}" hspace="5" vspace="5" alt="" /><br />
             [ifelse=opened]
                 <strong><a href="javascript:InsertText(document.forms['post-comment'].elements['text'], '[b]{nick}![/b]' + '\n');">{nick}</a></strong><br />
             [else]
                 {nick}<br />
-            [endelse]
-            [if=status]{status}<br />[endif]
-            [if=stars][__Rate]: {stars}<br />[endif]
-            [if=city]{city}[endif]
-            [if=country]{country}<br />[endif]
+            [/else]
+            [if=status]{status}<br />[/if]
+            [if=stars][__Rate]: {stars}<br />[/if]
+            [if=city]{city}[/if]
+            [if=country]{country}<br />[/if]
         </div>
         <div class="text justify">{text}</div>
     </div>
@@ -36,7 +36,7 @@ die();?>
             <a href="{MODULE}user&amp;user={author}" title="[__Profile]"><img src="{ICONS}profile.png" width="16" height="16" class="tip" alt="[__Profile]" /></a>
             <a href="{MODULE}user.pm&amp;for={author}" class="tip" title="[__Private message]"><img src="{ICONS}user-pm.png" width="16" height="16" alt="" /></a>
         </span>
-    [endif]
+    [/if]
     [if=moderator]
         <div class="menu">
             <form name="topic" method="post" action="">
@@ -44,11 +44,11 @@ die();?>
                 <button formaction="{link}{COMMENT}{id}&amp;action=delete" class="submit">[__Delete]</button>
             </form>
         </div>
-    [endif]
+    [/if]
     [if=ban]
         <div class="menu">
             <form name="topic" method="post" action=""><button formaction="{link}{COMMENT}{id}&amp;action=ban&amp;host={ip}" class="submit">{ip}</button></form>
         </div>
-    [endif]
+    [/if]
 </div>
 <div class="clear"></div>

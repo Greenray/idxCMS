@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Module Minichat
-# Version 2.3
+# Version   2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -42,13 +42,13 @@ die();?>
             }
         }
     </script>
-[endif]
+[/if]
 <script type="text/javascript">
     function checkForm(form) {
         var text = form.mctext.value;
         [if=captcha]
             var capt = form.captcheckout.value;
-        [endif]
+        [/if]
         if (text === '') {
             ShowAlert('[__Enter a text]', '[__Error]');
             return false;
@@ -58,7 +58,7 @@ die();?>
                 ShowAlert('[__Enter a code]', '[__Error]');
                 return false;
             }
-        [endif]
+        [/if]
         return true;
     }
 </script>
@@ -76,7 +76,7 @@ die();?>
                         </button>
                     </form>
                 </span>
-            [endif]
+            [/if]
             [if=msg[ip]]
                 <span class="menu">
                     <form name="minichat" method="post" action="">
@@ -86,18 +86,18 @@ die();?>
                         </button>
                     </form>
                 </span>
-            [endif]
+            [/if]
         </div>
         <div class="text justify">{msg[text]}</div>
     </div>
-[endeach.msg]
+[/each.msg]
 [ifelse=allow_post]
     <div class="post-comment center">
         <form id="post" name="post" method="post" action="" onsubmit="return checkForm(this);">
             <textarea id="mctext" name="mctext" rows="5">{mctext}</textarea>
-            [if=not_admin][__Max message length] [<script type="text/javascript">displayLimit("", "mctext", '{message-length}')</script>] [__symbols][endif]
+            [if=not_admin][__Max message length] [<script type="text/javascript">displayLimit("", "mctext", '{message-length}')</script>] [__symbols][/if]
             <p class="center"><input type="submit" name="save" value="[__Save]" class="submit" /></p>
         </form>
     </div>
 [else]
-[endelse]
+[/else]

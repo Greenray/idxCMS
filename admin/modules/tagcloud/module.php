@@ -1,10 +1,69 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - Tagcloud
-# Version 2.3
-# Copyright (c) 2011 - 2015 Victor Nabatov
+/** Module TAGCLOUD - initialization.
+ *
+ * @program   idxCMS: Flat Files Content Management Sysytem
+ * @file      admin/modules/_general/filemanager.php
+ * @version   2.4
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ * @package   Tagcloud
+ */
 
-if (!defined('idxADMIN')) die();
+/** Keywords array creation.
+ *
+ * @param  string $words  Comma separated list of keywords
+ * @param  array  $config Permitted word Min/Max length of keyword
+ * @param  array  $target Referense to target array
+ * @return array          Target array
+ */
+function GetKeywords($words, $config, &$target) {
+    $keywords = explode(',', $words);
+    foreach ($keywords as $k => $value) {
+        $value = trim($value);
+        # Check for the resolved length of a keyword.
+        if ((mb_strlen($value) >= $config['query-min']) && (mb_strlen($value) <= $config['query-max'])) {
+            if (!empty($target[$value]))
+                 $target[$value]++;        # Existing tag.
+            else $target[$value] = 1;      # New tag.
+        }
+    }
+}
+
+/** Creates array of tags.
+ * All disabled modules will be excluded from the array and also section "Drafts" from module 'Posts".
+ *
+ * @return array Array of tags
+ */
+function CreateTags() {
+    $config   = CONFIG::getSection('search');
+    $tags     = [];
+    $keywords = CONFIG::getValue('main', 'keywords');
+    GetKeywords($keywords, $config, $tags);
+    $modules = ['posts','forum','catalogs','galleries'];
+    $enabled = CONFIG::getSection('enabled');
+    foreach($modules as $module) {
+        if (array_key_exists($module, $enabled)) {
+            $obj = strtoupper($module);
+            $sections = CMS::call($obj)->getSections();
+            if (!empty($sections['drafts'])) {
+                unset($sections['drafts']);
+            }
+            foreach ($sections as $id => $section) {
+                $categories = CMS::call($obj)->getCategories($id);
+                foreach ($categories as $key => $category) {
+                    $content = CMS::call($obj)->getContent($key);
+                    foreach ($content as $i => $post) {
+                        if (!empty($post['keywords'])) {
+                            GetKeywords($post['keywords'], $config, $tags);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return file_put_contents(CONTENT.'tags', serialize($tags));
+}
 
 switch (SYSTEM::get('locale')) {
     case 'ru':

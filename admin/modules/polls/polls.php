@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration - Polls
-# Version 2.3
+# Version   2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
@@ -25,10 +25,10 @@ try {
 }
 
 $opened = $POLLS->getActivePolls();
-$colors = array(
+$colors = [
     'red',  'yellow', 'blue', 'green', 'purple', 'aqua',
     'gray', 'olive',  'teal', 'white', 'black'
-);
+];
 $data   = [];
 $output = [];
 $TPL    = new TEMPLATE(dirname(__FILE__).DS.'polls.tpl');

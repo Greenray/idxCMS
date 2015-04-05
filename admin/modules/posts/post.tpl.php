@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Administration - Posts
-# Version 2.3
+# Version   2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -33,7 +33,7 @@ die();?>
             }
         }
     }
-//    setCategories(document.forms['post'].elements['new_section'].selectedIndex);
+//  setCategories(document.forms['post'].elements['new_section'].selectedIndex);
     function checkPost(form) {
         var title = form.title.value;
         var text = form.text.value;
@@ -63,7 +63,7 @@ die();?>
                 <td class="label"style="width:150px" >[__Select section]</td>
                 <td>
                     <select name="new_section" onChange="setCategories(this.selectedIndex)">
-                        [each=sections]<option value="{sections[id]}" [if=sections[selected]]selected="selected"[endif]>{sections[title]}</option>[endeach.sections]
+                        [each=sections]<option value="{sections[id]}" [if=sections[selected]]selected="selected"[/if]>{sections[title]}</option>[/each.sections]
                     </select>
                 </td>
             </tr>
@@ -73,7 +73,7 @@ die();?>
                 <td>[__Select category]</td>
                 <td>
                     <select name="new_category">
-                        [each=categories]<option value="{categories[id]}" [if=categories[selected]]selected="selected"[endif]>{categories[title]}</option>[endeach.categories]
+                        [each=categories]<option value="{categories[id]}" [if=categories[selected]]selected="selected"[/if]>{categories[title]}</option>[/each.categories]
                     </select>
                 </td>
             </tr>
@@ -88,11 +88,7 @@ die();?>
             <tr>
                 <td colspan="4">
                     <div class="center">
-                        <p>
-                            <a href="#post" onclick="document.getElementById('shdesc').style.display=ShowHide(document.getElementById('shdesc').style.display)">
-                                [__Description]
-                            </a>
-                        </p>
+                        <p><a href="#post" onclick="document.getElementById('shdesc').style.display=ShowHide(document.getElementById('shdesc').style.display)">[__Description]</a></p>
                     </div>
                     <div id="shdesc" class="none">
                         <div>{bbCodes_desc}</div>
@@ -106,7 +102,7 @@ die();?>
             <tr class="odd">
                 <td>[__Comments]</td>
                 <td colspan="3">
-                    <input type="checkbox" name="opened" value="1" [if=opened]checked="checked"[endif] />
+                    <input type="checkbox" name="opened" value="1" [if=opened]checked="checked"[/if] />
                     <label for="opened"> [__Allow]</label>
                 </td>
             </tr>

@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
 # Module Forum
-# Version 2.3
+# Version   2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
@@ -40,10 +40,10 @@ die();?>
                 </div>
             [else]
                 <input type="hidden" name="opened" value="1" />
-            [endelse]
+            [/else]
         </fieldset>
         <p class="center">
-            [if=new]<input type="hidden" name="new" value="1" />[endif]
+            [if=new]<input type="hidden" name="new" value="1" />[/if]
             <input type="submit" name="save" value="[__Save]" class="submit" />
         </p>
   </form>

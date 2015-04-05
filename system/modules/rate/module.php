@@ -1,12 +1,19 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Rate
-# Version 2.3
-# Copyright (c) 2011 - 2015 Victor Nabatov
+/** Module Rate - initialization.
+ *
+ * @program   idxCMS: Flat Files Content Management Sysytem
+ * @file      system/modules/rate/module.php
+ * @version   2.4
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+ * @package   Rate
+ */
 
 if (!defined('idxCMS')) die();
 
 /** Rate publication.
+ *
  * @param  string  $user           User name
  * @param  string  $act            Action: up|down rate
  * @param  string  $id             Post ID
@@ -43,9 +50,10 @@ function RateComment($user, $act, $id) {
 }
 
 /** Get rate for publication.
- * @param  string $for  Publication ID
- * @param  string $item Item
- * @return array        Rate data
+ *
+ * @param   string $for  Publication ID
+ * @param   string $item Item
+ * @return  array        Rate data
  */
 function GetRate($for, &$item) {
     $item = explode('.', $for);
@@ -56,8 +64,9 @@ function GetRate($for, &$item) {
 }
 
 /** Show rate for publication.
- * @param  string $for Publication ID
- * @return string      Parsed rate results
+ *
+ * @param   string $for Publication ID
+ * @return  string      Parsed rate results
  */
 function ShowRate($for) {
     $value  = 0;

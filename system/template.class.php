@@ -44,9 +44,9 @@ class TEMPLATE {
      */
     public function __construct($template) {
         $tpl = basename($template);
-        if     (file_exists(CURRENT_SKIN.$tpl.'.php')) $this->tpl = file_get_contents(CURRENT_SKIN.$tpl.'.php');
+        if     (file_exists($template.'.php'))         $this->tpl = file_get_contents($template.'.php');
+        elseif (file_exists(CURRENT_SKIN.$tpl.'.php')) $this->tpl = file_get_contents(CURRENT_SKIN.$tpl.'.php');
         elseif (file_exists(TEMPLATES.$tpl.'.php'))    $this->tpl = file_get_contents(TEMPLATES.$tpl.'.php');
-        elseif (file_exists($template.'.php'))         $this->tpl = file_get_contents($template.'.php');
         else                                           $this->tpl = $template;
     }
 

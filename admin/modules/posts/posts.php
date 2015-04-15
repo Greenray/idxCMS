@@ -23,11 +23,11 @@ if (!empty($REQUEST['save'])) {
     # Check if admin decided to move post
     if (($section !== $new_section) || ($category !== $new_category)) {
         if (!empty($item))
-            # Post exists, so move it
+             # Post exists, so move it
              $post = CMS::call('POSTS')->moveItem($item, $new_section, $new_category);
         else $post = '';     # Nothing to move, so add new
 
-    } else $post = $item;   # It's edited post
+    } else $post = $item;    # It's edited post
 
     $categories = CMS::call('POSTS')->getCategories($new_section);
     $content    = CMS::call('POSTS')->getContent($new_category);
@@ -36,6 +36,7 @@ if (!empty($REQUEST['save'])) {
         CMS::call('POSTS')->saveItem($post);
         USER::changeProfileField(USER::getUser('username'), 'posts', '+');
         unset($REQUEST['new']);
+
     } catch (Exception $error) {
         ShowMessage(__($error->getMessage()));
     }
@@ -103,16 +104,16 @@ if ((empty($section) && empty($category)) || !empty($REQUEST['new']) || !empty($
         $output['item']     = $post['id'];
         $output['title']    = empty($REQUEST['title'])    ? $post['title']    : $REQUEST['title'];
         $output['keywords'] = empty($REQUEST['keywords']) ? $post['keywords'] : $REQUEST['keywords'];
-        $output['desc']     = empty($REQUEST['des'])      ? $post['desc']     : $REQUEST['desc'];
+        $output['desc']     = empty($REQUEST['desc'])     ? $post['desc']     : $REQUEST['desc'];
         $output['text']     = empty($REQUEST['text'])     ? $post['text']     : $REQUEST['text'];
         $output['opened']   = empty($REQUEST['opened'])   ? $post['opened']   : $REQUEST['opened'];
     } else {
         $output['item']     = '';
-        $output['title']    = $REQUEST['title'];
-        $output['keywords'] = $REQUEST['keywords'];
-        $output['desc']     = $REQUEST['desc'];
-        $output['text']     = $REQUEST['text'];
-        $output['opened']   = empty($REQUEST['opened']) ? 1 : $REQUEST['opened'];
+        $output['title']    = empty($REQUEST['title'])    ? '' : $REQUEST['title'];
+        $output['keywords'] = empty($REQUEST['keywords']) ? '' : $REQUEST['keywords'];
+        $output['desc']     = empty($REQUEST['desc'])     ? '' : $REQUEST['desc'];
+        $output['text']     = empty($REQUEST['text'])     ? '' : $REQUEST['text'];
+        $output['opened']   = empty($REQUEST['opened'])   ? 1  : $REQUEST['opened'];
     }
     $output['sections'][$output['section_id']]['selected']    = TRUE;
     $output['categories'][$output['category_id']]['selected'] = TRUE;

@@ -16,9 +16,11 @@ $sections = CMS::call('POSTS')->getSections();
 try {
     if (!empty($REQUEST['p'])) {
         SaveSortedSections('POSTS', $REQUEST['p']);
+
     } elseif (!empty($REQUEST['save'])) {
         $categories = CMS::call('POSTS')->getCategories($REQUEST['section']);
         CMS::call('POSTS')->saveCategory();
+
     } else {
         if (!empty($REQUEST['delete'])) {
             $category = explode('.', $REQUEST['delete']);
@@ -59,7 +61,7 @@ $choice = [];
 if (!empty($sections)) {
     $output['sections'] = $sections;
     foreach ($sections as $id => $section) {
-        $choice[$id]['id'] = $id;
+        $choice[$id]['id']    = $id;
         $choice[$id]['title'] = $section['title'];
         $categories = CMS::call('POSTS')->getCategories($id);
         if (!empty($categories)) {

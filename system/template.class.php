@@ -22,8 +22,8 @@ class TEMPLATE {
     private $patterns = [
         'die'       => "#<\?php(.*?)\?>#is",
         'each'      => "#\[each=(.*?)\](.*?)\[\/each.\\1\]#is",
-        'foreach'   => "#\[foreach=([\w\_\-]*).([\w\_\-]*).([\w\_\-]*)\](.*?)\[\/foreach.\\1\]#is",
         'for'       => "#\[for=(.*?)\](.*?)\[\/for\]#is",
+        'foreach'   => "#\[foreach=([\w\_\-]*).([\w\_\-]*).([\w\_\-]*)\](.*?)\[\/foreach.\\1\]#is",
         'if'        => "#\[if=(.*?)(|\[(.*?)\])\](.*?)\[\/if\]#is",
         'ifelse'    => "#\[ifelse=(.*?)(|\[(.*?)\])\](.*?)\[else\](.*?)\[\/else\]#is",
         'translate' => "#\[__(.*?)\]#is",

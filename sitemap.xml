@@ -2,23 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
 		<loc>http://shark/idxCMS/?module=index</loc>
-		<lastmod>2015-04-15</lastmod>
+		<lastmod>2015-04-16</lastmod>
 		<changefreq>weekly</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>http://shark/idxCMS/?module=posts</loc>
-		<lastmod>2015-04-15</lastmod>
+		<lastmod>2015-04-16</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>http://shark/idxCMS/?module=posts&amp;section=articles</loc>
-		<lastmod>2015-04-15</lastmod>
+		<lastmod>2015-04-16</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>http://shark/idxCMS/?module=posts&amp;section=articles&amp;category=1</loc>
-		<lastmod>2015-04-15</lastmod>
+		<lastmod>2015-04-16</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
@@ -31,27 +31,27 @@
 	</url>
 	<url>
 		<loc>http://shark/idxCMS/?module=posts&amp;section=news</loc>
-		<lastmod>2015-04-15</lastmod>
+		<lastmod>2015-04-16</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>http://shark/idxCMS/?module=catalogs</loc>
-		<lastmod>2015-04-15</lastmod>
+		<lastmod>2015-04-16</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>http://shark/idxCMS/?module=catalogs&amp;section=files</loc>
-		<lastmod>2015-04-15</lastmod>
+		<lastmod>2015-04-16</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>http://shark/idxCMS/?module=catalogs&amp;section=links</loc>
-		<lastmod>2015-04-15</lastmod>
+		<lastmod>2015-04-16</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>http://shark/idxCMS/?module=catalogs&amp;section=links&amp;category=1</loc>
-		<lastmod>2015-04-15</lastmod>
+		<lastmod>2015-04-16</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
@@ -60,17 +60,17 @@
 	</url>
 	<url>
 		<loc>http://shark/idxCMS/?module=forum</loc>
-		<lastmod>2015-04-15</lastmod>
+		<lastmod>2015-04-16</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>http://shark/idxCMS/?module=forum&amp;section=Linux</loc>
-		<lastmod>2015-04-15</lastmod>
+		<lastmod>2015-04-16</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>http://shark/idxCMS/?module=forum&amp;section=Linux&amp;category=1</loc>
-		<lastmod>2015-04-15</lastmod>
+		<lastmod>2015-04-16</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
@@ -91,12 +91,12 @@
 	</url>
 	<url>
 		<loc>http://shark/idxCMS/?module=forum&amp;section=Windows</loc>
-		<lastmod>2015-04-15</lastmod>
+		<lastmod>2015-04-16</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>http://shark/idxCMS/?module=forum&amp;section=Windows&amp;category=1</loc>
-		<lastmod>2015-04-15</lastmod>
+		<lastmod>2015-04-16</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
@@ -117,17 +117,17 @@
 	</url>
 	<url>
 		<loc>http://shark/idxCMS/?module=galleries</loc>
-		<lastmod>2015-04-15</lastmod>
+		<lastmod>2015-04-16</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>http://shark/idxCMS/?module=galleries&amp;section=test</loc>
-		<lastmod>2015-04-15</lastmod>
+		<lastmod>2015-04-16</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>http://shark/idxCMS/?module=galleries&amp;section=test&amp;category=1</loc>
-		<lastmod>2015-04-15</lastmod>
+		<lastmod>2015-04-16</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>

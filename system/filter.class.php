@@ -38,7 +38,6 @@ final class FILTER {
         if (function_exists('get_magic_quotes_gpc') && !get_magic_quotes_gpc()) {
             $value = preg_replace('(\\\(["\'/]))im', '$1', $value);
         }
-        $encode = mb_convert_variables(mb_internal_encoding(), "ASCII,Windows-1251,UTF-8", $value);
         $value = strip_tags($value);
         $value = stripslashes($value);
         return UnifyBr($value);

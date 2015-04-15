@@ -53,10 +53,10 @@ die();?>
                                         <img src="{ICONS}delete.png" width="16" height="16" alt="[__Delete]" />
                                     </button>
                                 </span>
-                            [endif]
+                            [/if]
                         </td>
                     </tr>
-                [endeach.sections]
+                [/each.sections]
             </table>
         </div>
         <p class="center">

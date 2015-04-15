@@ -1,63 +1,48 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-
 /** Users and their profiles.
  *
+ * @program   idxCMS: Flat Files Content Management Sysytem
  * @file      system/user.class.php
  * @version   2.4
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2015 Victor Nabatov
  * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
- * @package   Core
+ * @package   User
+ * @overview  Users and their profiles.
+ *            Processes information about registration, visits and user activity.
  */
 
 class USER {
 
-    /** User profile fields.
-     * @var array
-     */
-    private static $user_fields = [
-        'username', 'nickname', 'password', 'email', 'tz', 'access', 'rights', 'status', 'stars', 'regdate', 'visits',
-        'lastvisit','posts', 'comments', 'topics', 'replies', 'blocked', 'icq', 'website', 'country', 'city', 'last_prr'
-    ];
+    /** @var string Cookie with user nick */
+    private static $cookie_nick = '';
 
-    /** Disallowed names for registration.
-     * @var array
-     */
+    /** @var string Cookie with user name */
+    private static $cookie_user = '';
+
+    /** @var array Disallowed names for registration */
     private static $disallowed_names = [
         'administrator', 'false', 'guest', 'idxcms', 'moderator', 'noavatar', 'null', 'root',
         'superuser', 'supervisor', 'sponsor', 'system', 'test', 'true', 'unknown', 'user'
     ];
 
-    /** User`s profile.
-     * @var array
-     */
+    /** @var boolean Is user logged in? */
+    public static $logged_in = FALSE;
+
+    /** @var array System rights */
+    public static $system_rights = [];
+
+    /** @var boolean Is user admin? */
+    public static $root = FALSE;
+
+    /** @var array User's profile */
     private static $user = [];
 
-    /** Is user logged in?
-     * @var boolean
-     */
-    private static $logged_in = FALSE;
-
-    /** Cookie with user name.
-     * @var string
-     */
-    private static $cookie_user = '';
-
-    /** Cookie with user nick.
-     * @var string
-     */
-    private static $cookie_nick = '';
-
-    /** System rights.
-     * @var array
-     */
-    private static $system_rights = [];
-
-    /** Is user admin?
-     * @var boolean
-     */
-    private static $root = FALSE;
+    /** @var array User profile fields */
+    private static $user_fields = [
+        'username', 'nickname', 'password', 'email', 'tz', 'access', 'rights', 'status', 'stars', 'regdate', 'visits',
+        'lastvisit','posts', 'comments', 'topics', 'replies', 'blocked', 'icq', 'website', 'country', 'city', 'last_prr'
+    ];
 
     /** Class initialization. */
     public function __construct() {
@@ -74,7 +59,7 @@ class USER {
         self::$cookie_nick = CONFIG::getValue('main', 'cookie').'_nick';
     }
 
-    /** Initialize user and load his profile.
+    /** Initializes user and load his profile.
      * @return boolean TRUE if user is logged in
      */
     public function initUser() {
@@ -101,7 +86,115 @@ class USER {
         return TRUE;
     }
 
-    /** Remove cookie.
+    /** Checks if user have the right to access.
+     * @param  string $object Object: secton, category, article an so on
+     * @return boolean        The result of operation
+     */
+    public static function checkAccess($object) {
+        return ((int) $object['access'] <= self::$user['access']) ? TRUE : FALSE;
+    }
+
+    /** Checks password.
+     * @param  string  $password Password
+     * @param  string  $confirm  Password confirm
+     * @return boolean           The result of operation
+     */
+    private function checkPassword($password, $confirm) {
+        if (empty($password) || empty($confirm) || $password !== $confirm) {
+            return CMS::call('LOG')->logError('Passwords are not equal');
+        }
+        return TRUE;
+    }
+
+    /** Check the user's rights.
+     * @param  string $right    Right description
+     * @param  string $user     Username (default = '')
+     * @param  array  $userdata User's profile (default = [])
+     * @return boolean          User is admin or has specified right
+     */
+    public static function checkRight($right, $user = '', $userdata = []) {
+        $rights = self::getUserRights($user, $root, $userdata);
+        if ($rights === FALSE) {
+            return FALSE;
+        }
+        return $root || !empty($rights[$right]);
+    }
+
+    /** Checks user's data and validates his data file.
+     * @param  string $username Username
+     * @param  string $password Password
+     * @param  string $hash	 Password hash
+     * @param  array  $userdata Profile data
+     * @return boolean|array     User's profile or the result of operation
+     */
+    public function checkUser($username, $password, $hash, &$userdata) {
+        if (!$this->checkUserName($username, 'Name')) return FALSE;
+        if (!file_exists(USERS.$username))            return FALSE;
+
+        $userdata = self::getUserData($username);
+
+        # If userdata is invalid we must exit with error
+        if (empty($userdata)) {
+            return CMS::call('LOG')->logError('Invalid login or password');
+        }
+
+        # If password is invalid - exit with error
+        if ((!$hash && (md5($password) !== $userdata['password'])) || ($hash && ($password !== $userdata['password']))) {
+            return CMS::call('LOG')->logError('Invalid login or password');
+        }
+        if (!empty($userdata['blocked'])) {
+            return CMS::call('LOG')->logPut('Note', $username, 'Attempt to log in. This account has been blocked by administrator');
+        }
+        return TRUE;
+    }
+
+    /** Checks user name or nick.
+     * @param  string  $name User name or nick
+     * @param  string  $type Type: "Name" or "Nick"
+     * @return boolean       The result
+     */
+    private function checkUserName($name, $type) {
+        if (!empty($name)) {
+            if (!in_array(strtolower($name), self::$disallowed_names)) {
+                if ($type === 'Name') {
+                    if (OnlyLatin($name)) {
+                        return TRUE;
+                    }
+                } else {
+                    if ($type === 'Nick') {
+                        if (mb_strlen($name, 'UTF-8') <= CONFIG::getValue('user', 'nick-length')) {
+                            return TRUE;
+                        }
+                    }
+                }
+            }
+        }
+        return FALSE;
+    }
+
+    /** Changes the value of the specified fiels in user's profile.
+     * @param  string $user	Username
+     * @param  string $field	Fieldname
+     * @param  string $value	Value of the field
+     * @return boolean       The result of operation
+     */
+    public static function changeProfileField($user, $field, $value) {
+        if ($user === self::$user['username']) {
+            $profile = self::$user;
+        } else {
+            $profile = self::getUserData($user);
+            if (empty($profile)) {
+                throw new Exception('Cannot get userdata');
+            }
+        }
+        if ($value === '+')     $profile[$field]++;
+        elseif ($value === '-') $profile[$field]--;
+        else                    $profile[$field] = $value;
+
+        return self::saveUserData($user, $profile);
+    }
+
+    /** Removes cookie.
      * @return boolean FALSE
      */
     private function clearCookie() {
@@ -111,10 +204,85 @@ class USER {
         return FALSE;
     }
 
-    /** Check user's data and log in him.
+    /** Gets user's profile or value of the specified field.
+     * @param  string $field	Fieldname (défaut : '')
+     * @return array|string  User's profile or fielddata
+     */
+    public static function getUser($field = '') {
+        return empty($field) ? self::$user : self::$user[$field];
+    }
+
+    /** Gets user's profile.
+     * @param  string $name Username
+     * @return array  User's profile
+     */
+    public static function getUserData($name) {
+        if ($name === self::$user['username']) {
+            return self::$user;
+        }
+        $user = [];
+        if (file_exists(USERS.$name)) {
+            $data = file(USERS.$name, FILE_IGNORE_NEW_LINES);
+            $user = array_combine(self::$user_fields, $data);
+        }
+        return $user;
+    }
+
+    /** Gets the list of registered users with their profiles.
+     * @param  string $mask Mask to seach user in database (défaut : '*')
+     * @return array        List of registered users with their profiles
+     */
+    public function getUsersList($mask = '*') {
+        $return = [];
+        $users  = AdvScanDir(USERS, $mask);
+        foreach ($users as $user) {
+            $return[] = self::getUserData($user);
+        }
+        return $return;
+    }
+
+    /** Gets user rights.
+     * @param  string $user     Username               (defaut : '')
+     * @param  string $root	   Reference to root flag (defaut : '')
+     * @param  string $userdata Reference to userdata  (defaut : '')
+     * @return boolean | array FALSE or list of user rights
+     */
+    public static function getUserRights($user = '', &$root = '', &$userdata = '') {
+        $rights = [];
+        $root   = FALSE;
+        if (empty($user)) {
+            $userdata = self::$user;
+        } else {
+            $userdata = self::getUserData($user);
+            if (empty($userdata)) {
+                return FALSE;
+            }
+        }
+        if ($userdata['rights'] !== '*') {
+            if (!empty($userdata['rights'])) {
+                $user_rights = explode(' ', $userdata['rights']);
+                foreach ($user_rights as $right) {
+                    $rights[$right] = self::$system_rights[$right];
+                }
+            }
+        } else $root = TRUE;
+
+        return $rights;
+    }
+
+    /** Sets userdata if login is successful.
+     * @param array $user Userdata
+     */
+    private function loginSuccess($user) {
+        self::$user      = $user;
+        self::$logged_in = TRUE;
+        self::$root      = $user['rights'] === '*';
+    }
+
+    /** Checks user's data and log in him.
      * @return boolean TRUE if user successfully logged in
      */
-    function logInUser() {
+    public function logInUser() {
         $user = basename(FILTER::get('REQUEST', 'username'));
         if (($user === 'guest') || self::$logged_in) {
             return CMS::call('LOG')->logPut('Note', self::$user['username'], 'Attempted to log in as '.$user);
@@ -136,33 +304,51 @@ class USER {
         } else return CMS::call('LOG')->logPut('Note', self::$user['username'], 'Attempt to log in as '.$user);
     }
 
-    /** Check if user already logged in.
-     * @return boolean The result
+    /** Logout user.
+     * Clean session and cookie parameters and set default guest data.
      */
-    public static function loggedIn() {
-        return self::$logged_in;
+    public function logOutUser() {
+        if (self::$logged_in) {
+            self::$logged_in = FALSE;
+            CMS::call('LOG')->logPut('Note', self::$user['username'], 'Logged out');
+            $_SESSION['user'] = '';
+            $_SESSION['pass'] = '';
+            setcookie(self::$cookie_user, '', time() - 3600);
+            setcookie(self::$cookie_nick, '', time() - 3600);
+            self::$user = [
+                'username' => 'guest',
+                'nickname' => __('Guest'),
+                'status'   => 'Passer-by',
+                'rights'   => '',
+                'tz'       => CONFIG::getValue('main', 'tz'),
+                'access'   => 0
+            ];
+        }
     }
 
-    /** Set userdata if login is successful.
-     *
-     * @param  array $user Userdata
-     * @return void
+    /** Checks if user has right to edit or remove the article, topic, comment or replay.
+     * @param  string  $module Module (ex. articles, forum, etc.)
+     * @param  integer $item   Item ID
+     * @return boolean         The result of right checking
      */
-    private function loginSuccess($user) {
-        self::$user      = $user;
-        self::$logged_in = TRUE;
-        self::$root      = $user['rights'] === '*';
+    public static function moderator($module, $item = '') {
+        if (self::$user['username'] === 'guest') {
+            return FALSE;
+        }
+        if (!empty($item)) {
+            return self::checkRight($module) || ((self::$user['username'] === $item['author']) && ((time() - $item['time']) < 300));
+        }
+        return self::checkRight($module);
     }
 
-    /** Add new user to user's database.
-     *
-     * @return boolean TRUE if registration is successful
+    /** Adds new user to user's database.
      * @throws Exception 'Invalid username'
      * @throws Exception 'Invalid nickname'
      * @throws Exception 'Invalid password'
      * @throws Exception 'User with this username already exists'
      * @throws Exception 'Invalid email'
      * @throws Exception 'Cannot save profile'
+     * @return boolean TRUE if registration is successful
      */
     public function registerUser() {
         $username = basename(FILTER::get('REQUEST', 'user'));
@@ -222,17 +408,33 @@ class USER {
         throw new Exception('Cannot save profile');
     }
 
-    /** Update userdata.
-     *
+    /** Sets system rights.
+     * @param  array $rights The the set of rights
+     */
+    public static function setSystemRights($rights) {
+        self::$system_rights = array_merge(self::$system_rights, $rights);
+    }
+
+    /** Saves user profile.
+     * @param  string $user     User name
+     * @param  array  $userdata User profile
+     * @return boolean          The result
+     */
+    public static function saveUserData($user, $userdata) {
+        $result = implode(LF, array_values($userdata));
+        return file_put_contents(USERS.$user, $result, LOCK_EX);
+    }
+
+    /** Updates userdata in user's profile after editing.
      * @param  string $username Username
      * @param  string $nickname Nickname
      * @param  array  $userdata Userdata
-     * @return boolean TRUE if update is successful
      * @throws Exception 'Invalid username'
      * @throws Exception 'Invalid nickname'
      * @throws Exception 'Invalid password'
      * @throws Exception 'Invalid email'
      * @throws Exception 'Cannot save profile'
+     * @return boolean TRUE if update is successful
      */
     public function updateUser($username, $nickname, $userdata) {
         $username = basename($username);
@@ -269,263 +471,5 @@ class USER {
         }
         CMS::call('LOG')->logError('Cannot save profile '.$username);
         throw new Exception('Cannot save profile');
-    }
-
-    /**
-    * @todo Comment
-    * @param string $user	...
-    * @param string $field	...
-    * @param string $value	...
-    * @return
-    */
-    public static function changeProfileField($user, $field, $value) {
-        if ($user === self::$user['username']) {
-            $profile = self::$user;
-        } else {
-            $profile = self::getUserData($user);
-            if (empty($profile)) {
-                throw new Exception('Cannot get userdata');
-            }
-        }
-        if ($value === '+')     $profile[$field]++;
-        elseif ($value === '-') $profile[$field]--;
-        else                    $profile[$field] = $value;
-
-        return self::saveUserData($user, $profile);
-    }
-
-    /**
-    * @todo Comment
-    * @param string $field	... (défaut : '')
-    * @return
-    */
-    public static function getUser($field = '') {
-        return empty($field) ? self::$user : self::$user[$field];
-    }
-
-    /**
-    * @todo Comment
-    * @param string $name	...
-    * @return
-    */
-    public static function getUserData($name) {
-        if ($name === self::$user['username']) {
-            return self::$user;
-        }
-        $user = [];
-        if (file_exists(USERS.$name)) {
-            $data = file(USERS.$name, FILE_IGNORE_NEW_LINES);
-            $user = array_combine(self::$user_fields, $data);
-        }
-        return $user;
-    }
-
-    /**
-    * @todo Comment
-    * @param string $mask	... (défaut : '*')
-    * @param string $field	... (défaut : '')
-    * @return
-    */
-    public function getUsersList($mask = '*', $field = '') {
-        $return = [];
-        $users  = AdvScanDir(USERS, $mask);
-        foreach ($users as $user) {
-            $data = self::getUserData($user);
-            if (!empty($field) && !empty($data[$field]))
-                 $return[$data[$field]] = $data;
-            else $return[] = $data;
-        }
-        return $return;
-    }
-
-    /** Save user profile.
-     *
-     * @param  string $user     User name
-     * @param  array  $userdata User profile
-     * @return boolean          The result
-     */
-    public static function saveUserData($user, $userdata) {
-        $result = implode(LF, array_values($userdata));
-        return file_put_contents(USERS.$user, $result, LOCK_EX);
-    }
-
-    /** Logout user.
-    * Clean session and cookie parameters and set default guest data.
-    * @return void
-    */
-    public function logOutUser() {
-        if (self::$logged_in) {
-            self::$logged_in = FALSE;
-            CMS::call('LOG')->logPut('Note', self::$user['username'], 'Logged out');
-            $_SESSION['user'] = '';
-            $_SESSION['pass'] = '';
-            setcookie(self::$cookie_user, '', time() - 3600);
-            setcookie(self::$cookie_nick, '', time() - 3600);
-            self::$user = [
-                'username' => 'guest',
-                'nickname' => __('Guest'),
-                'status'   => 'Passer-by',
-                'rights'   => '',
-                'tz'       => CONFIG::getValue('main', 'tz'),
-                'access'   => 0
-            ];
-        }
-    }
-
-    /** Set system rights.
-     *
-    * @param  array $rights The the set of rights
-    * @return void
-    */
-    public static function setSystemRights($rights) {
-        self::$system_rights = array_merge(self::$system_rights, $rights);
-    }
-
-    /** Get system rightsю
-    * @return array System rights
-    */
-    public static function getSystemRights() {
-        return self::$system_rights;
-    }
-
-    /** Get user rights.
-     *
-    * @param  string $user     Username               (defaut : '')
-    * @param  string $root	   Reference to root flag (defaut : '')
-    * @param  string $userdata Reference to userdata  (defaut : '')
-    * @return boolean | array FALSE or list of user rights
-    */
-    public static function getUserRights($user = '', &$root = '', &$userdata = '') {
-        $rights = [];
-        $root   = FALSE;
-        if (empty($user)) {
-            $userdata = self::$user;
-        } else {
-            $userdata = self::getUserData($user);
-            if (empty($userdata)) {
-                return FALSE;
-            }
-        }
-        if ($userdata['rights'] !== '*') {
-            if (!empty($userdata['rights'])) {
-                $user_rights = explode(' ', $userdata['rights']);
-                foreach ($user_rights as $right) {
-                    $rights[$right] = self::$system_rights[$right];
-                }
-            }
-        } else $root = TRUE;
-
-        return $rights;
-    }
-
-    /** Check if user have the right to access.
-     *
-    * @param  string $object Object: secton, category, article an so on
-    * @return boolean        The result of operation
-    */
-    public static function checkAccess($object) {
-        return ((int) $object['access'] <= self::$user['access']) ? TRUE : FALSE;
-    }
-
-    /** Check password.
-     *
-     * @param  string  $password Password
-     * @param  string  $confirm  Password confirm
-     * @return boolean           The result of operation
-     */
-    private function checkPassword($password, $confirm) {
-        if (empty($password) || empty($confirm) || $password !== $confirm) {
-            return CMS::call('LOG')->logError('Passwords are not equal');
-        }
-        return TRUE;
-    }
-
-    /**
-    * @todo Correct $userdata.
-    */
-    public static function checkRight($right, $user = '', $userdata = '') {
-        $rights = self::getUserRights($user, $root, $userdata);
-        if ($rights === FALSE) {
-            return FALSE;
-        }
-        return $root || !empty($rights[$right]);
-    }
-
-    /** Check if user is website admin.
-     * @return boolean The result
-     */
-    public static function checkRoot() {
-        return self::$root;
-    }
-
-    /** Check user's data and validate his data file.
-     *
-    * @todo Comment
-    * @param string $username	...
-    * @param string $password	...
-    * @param string $hash	...
-    * @param string $userdata	...
-    * @return
-    */
-    public function checkUser($username, $password, $hash, &$userdata) {
-        if (!$this->checkUserName($username, 'Name')) return FALSE;
-        if (!file_exists(USERS.$username))            return FALSE;
-
-        $userdata = self::getUserData($username);
-
-        # If userdata is invalid we must exit with error
-        if (empty($userdata)) {
-            return CMS::call('LOG')->logError('Invalid login or password');
-        }
-
-        # If password is invalid - exit with error
-        if ((!$hash && (md5($password) !== $userdata['password'])) || ($hash && ($password !== $userdata['password']))) {
-            return CMS::call('LOG')->logError('Invalid login or password');
-        }
-        if (!empty($userdata['blocked'])) {
-            return CMS::call('LOG')->logPut('Note', $username, 'Attempt to log in. This account has been blocked by administrator');
-        }
-        return TRUE;
-    }
-
-    /** Check user name or nick.
-     *
-     * @param  string  $name User name or nick
-     * @param  string  $type Type: "Name" or "Nick"
-     * @return boolean       The result
-     */
-    private function checkUserName($name, $type) {
-        if (!empty($name)) {
-            if (!in_array(strtolower($name), self::$disallowed_names)) {
-                if ($type === 'Name') {
-                    if (OnlyLatin($name)) {
-                        return TRUE;
-                    }
-                } else {
-                    if ($type === 'Nick') {
-                        if (mb_strlen($name, 'UTF-8') <= CONFIG::getValue('user', 'nick-length')) {
-                            return TRUE;
-                        }
-                    }
-                }
-            }
-        }
-        return FALSE;
-    }
-
-    /** Check if user has right to edit or remove the article, topic, comment or replay.
-     *
-     * @param  string  $module Module (ex. articles, forum, etc.)
-     * @param  integer $item   Item ID
-     * @return boolean         The result of right checking
-     */
-    public static function moderator($module, $item = '') {
-        if (self::$user['username'] === 'guest') {
-            return FALSE;
-        }
-        if (!empty($item)) {
-            return self::checkRight($module) || ((self::$user['username'] === $item['author']) && ((time() - $item['time']) < 300));
-        }
-        return self::checkRight($module);
     }
 }

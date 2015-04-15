@@ -8,7 +8,7 @@ if (!defined('idxCMS')) die();
 
 $config = CONFIG::getSection('search');
 
-if (USER::loggedIn() || $config['allow-guest']) {
+if (USER::$logged_in || $config['allow-guest']) {
     if (!empty($REQUEST['search'])) {
         $items = explode(" ", $REQUEST['search']);
         $TPL = new TEMPLATE(dirname(__FILE__).DS.'results.tpl');
@@ -24,9 +24,8 @@ if (USER::loggedIn() || $config['allow-guest']) {
                 foreach($searchs as $module) {
                     $obj = strtoupper($module);
                     $sections = CMS::call($obj)->getSections();
-                    if (!empty($sections['drafts'])) {
-                        unset($sections['drafts']);
-                    }
+                    unset($sections['drafts']);
+
                     $result = [];
                     if (!empty($sections)) {
                         foreach ($sections as $id => $section) {
@@ -57,11 +56,11 @@ if (USER::loggedIn() || $config['allow-guest']) {
                 }
             } else {
                 $output .= $ERR->parse(
-                     array(
+                    [
                         'min'  => $config['query-min'],
                         'max'  => $config['query-max'],
                         'find' => $word
-                    )
+                    ]
                 );
             }
         }

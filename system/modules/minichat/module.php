@@ -19,4 +19,4 @@ switch (SYSTEM::get('locale')) {
 }
 
 SYSTEM::registerModule('minichat', 'Minichat', 'box');
-USER::setSystemRights(array('minichat' => __('Minichat').': '.__('Moderator')));
+USER::setSystemRights(['minichat' => __('Minichat').': '.__('Moderator')]);

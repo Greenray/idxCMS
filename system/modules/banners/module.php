@@ -1,12 +1,20 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Banners
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+/** Banners.
+ *
+ * @program   idxCMS: Flat Files Content Management Sysytem
+ * @file      system/modules/banners/module.php
+ * @version   2.4
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+ * @package   Banners
+ * @overview  Displays banners or any other pre-prepared text.
+ *            Banner is a plain file with bbcodes.
+ */
 
 if (!defined('idxCMS')) die();
 
-/**Banners data store */
+/** Data storage fo banners */
 define('BANNERS', CONTENT.'banners'.DS);
 
 switch (SYSTEM::get('locale')) {

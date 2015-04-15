@@ -1,10 +1,10 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
-# Administration - Statistic
+# Administration - Statistics
 # Version 2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
-if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
+if (!defined('idxADMIN') || !USER::$root) die();
 
 if (!empty($REQUEST['day']) && !empty($REQUEST['viewlog'])) {
     # Viewing of daily log file
@@ -17,7 +17,7 @@ if (!empty($REQUEST['day']) && !empty($REQUEST['viewlog'])) {
         $output .= CMS::call('PARSER')->parseText('[quote='.$logfile.']'.$contents.'[/quote]');
     }
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'log.tpl');
-    echo $TPL->parse(array('text' => $output));
+    echo $TPL->parse(['text' => $output]);
 
 } elseif (!empty($REQUEST['archive']) && !empty($REQUEST['viewlog'])) {
     # Viewing of monthly log archive

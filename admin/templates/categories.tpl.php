@@ -45,17 +45,17 @@ die();?>
                                     <button type="submit" name="delete" value="{sections[id]}.{categories[id]}" title="[__Delete]">
                                         <img src="{ICONS}delete.png" width="16" height="16" alt="[__Delete]" />
                                     </button>
-                                [endif]
+                                [/if]
                             </td>
                         </tr>
-                    [endeach.sections[categories]]
-                [endeach.sections]
+                    [/each.sections[categories]]
+                [/each.sections]
             </table>
         </div>
         <div id="result"></div>
         <p class="center">
             <input type="submit" name="new" value="[__New category]" class="submit" />
-            [if=sections]<input type="submit" name="action" value="[__Save]" onclick="save()" class="submit" />[endif]
+            [if=sections]<input type="submit" name="action" value="[__Save]" onclick="save()" class="submit" />[/if]
         </p>
     </form>
 </fieldset>

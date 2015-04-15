@@ -15,7 +15,7 @@ die();?>
                     <td><textarea id="{banner[id]}" name="text[]" cols="80" rows="10">{banner[text]}</textarea></td>
                     <td class="banner">{banner[view]}</td>
                 </tr>
-            [endeach.banner]
+            [/each.banner]
         </table>
         <p class="center"><input type="submit" name="save" value="[__Save]" class="submit" /></p>
     </form>

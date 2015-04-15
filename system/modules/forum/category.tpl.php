@@ -18,14 +18,14 @@ die();?>
         <tr>
             <td class="center" style="width:20px"><img src="{ICONS}{topic[flag]}.png" width="16" height="16" alt="" /></td>
             <td>
-                [if=topic[pinned]]<img src="{ICONS}pinned.png" width="16" height="16" alt="Pinned" />&nbsp;[endif]
+                [if=topic[pinned]]<img src="{ICONS}pinned.png" width="16" height="16" alt="Pinned" />&nbsp;[/if]
                 <a href="{topic[link]}">{topic[title]}</a>
             </td>
             [ifelse=topic[last_link]]
                 <td><a href="{topic[last_link]}">{topic[short]}</a></td>
             [else]
                 <td>&nbsp;</td>
-            [endelse]
+            [/else]
             <td class="center">{topic[nick]}</td>
             <td class="center">{topic[date]}</td>
             <td class="center">{topic[views]}</td>
@@ -33,8 +33,8 @@ die();?>
                 <td class="center"><a href="{topic[last_link]}">{topic[comments]}</a></td>
             [else]
                 <td class="center"> - </td>
-            [endelse]
+            [/else]
         </tr>
-    [endeach.topic]
+    [/each.topic]
 </table>
-[if=post_allowed]<div><p class="right"><form name="form" method="post" action=""><input type="submit" name="new" value="[__New topic]" class="submit" /></form></p></div>[endif]
+[if=post_allowed]<div><p class="right"><form name="form" method="post" action=""><input type="submit" name="new" value="[__New topic]" class="submit" /></form></p></div>[/if]

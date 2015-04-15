@@ -9,12 +9,11 @@ if (!defined('idxCMS')) die();
 $section  = FILTER::get('REQUEST', 'section');
 $category = FILTER::get('REQUEST', 'category');
 $post     = FILTER::get('REQUEST', 'item');
-
 $sections = CMS::call('POSTS')->getSections();
 
 if ($sections === FALSE) Redirect('posts');
 
-if (!empty($sections['drafts'])) unset($sections['drafts']);
+unset($sections['drafts']);
 
 if (empty($sections)) {
     ShowWindow(__('Posts'), __('Database is empty'), 'center');

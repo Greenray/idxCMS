@@ -71,7 +71,7 @@ die();?>
             </tr>
             <tr class="odd">
                 <td>[__Flash-object transparency]</td>
-                <td colspan="2"><input type="checkbox" name="wmode" value="1" [if=wmode]checked="checked"[endif] /></td>
+                <td colspan="2"><input type="checkbox" name="wmode" value="1" [if=wmode]checked="checked"[/if] /></td>
             </tr>
             <tr class="odd">
                 <td>[__Rotation speed of the sphere]</td>
@@ -90,7 +90,7 @@ die();?>
             </tr>
             <tr class="odd">
                 <td>[__Placing of references on sphere]</td>
-                <td><input type="checkbox" name="distr" value="1" [if=distr]checked="checked"[endif] /></td>
+                <td><input type="checkbox" name="distr" value="1" [if=distr]checked="checked"[/if] /></td>
                 <td>[__To place labels in regular intervals on the sphere area, differently - in a random way]</td>
             </tr>
         </table>
@@ -115,14 +115,14 @@ die();?>
                     <td class="center"><input type="hidden" name="value[]" value="{tag}" />{tag}</td>
                     <td class="center"> + </td>
                 </tr>
-            [endforeach.used]
+            [/foreach.used]
             [foreach=unused.key.tag]
                 <tr class="odd">
                     <td class="center"><input type="text" name="key[]" value="{key}" /></td>
                     <td class="center"><input type="hidden" name="value[]" value="{tag}" />{tag}</td>
                     <td class="center"> - </td>
                 </tr>
-            [endforeach.unused]
+            [/foreach.unused]
         </table>
         <p class="center"><input type="submit" name="edit" value="[__Save]" class="submit" /></p>
     </form>

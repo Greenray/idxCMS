@@ -32,7 +32,7 @@ if (!empty($REQUEST['cal-month'])) {
 $CALENDAR = new CALENDAR($selected_month, $selected_year, $LANG['datetime']);
 $sections = CMS::call('POSTS')->getSections();
 
-if (!empty($sections['drafts'])) unset($sections['drafts']);
+unset($sections['drafts']);
 foreach ($sections as $section => $data) {
     CMS::call('POSTS')->getCategories($section);
     $list = CMS::call('POSTS')->getStat('time');

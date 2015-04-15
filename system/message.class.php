@@ -1,39 +1,30 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-
 /** Private messages.
  * Module registration and internal functions.
  *
+ * @program   idxCMS: Flat Files Content Management Sysytem
  * @file      system/message.class.php
  * @version   2.4
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2015 Victor Nabatov
  * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
- * @package   Users
+ * @package   User
  */
 
 class MESSAGE extends INDEX {
 
-    /** Path to datafile.
-     * @var string
-     */
-    private $path = '';
-
-    /** Messsages.
-     * @var array
-     */
-    private $messages = [];
-
-    /** Messages configuration.
-     * @var array
-     */
+    /** @var array Messages configuration */
     private $config = [];
 
+    /** @var array Messsages */
+    private $messages = [];
+
+    /** @var string Path to datafile */
+    private $path = '';
+
     /** Class initialization.
-     *
-     * @param  string $path Path to messages file
-     * @param  string $file Name of messges file
-     * @return void
+     * @param string $path Path to messages file
+     * @param string $file Name of messges file
      */
     public function __construct($path, $file) {
         parent::__construct();
@@ -45,17 +36,8 @@ class MESSAGE extends INDEX {
         $this->messages = self::getIndex($this->path);
     }
 
-    /** Get messages.
-     *
-     * @param  string $from
-     * @return array - Messages
-     */
-    public function getMessages($from = '') {
-        return (empty($from)) ? $this->messages : $this->messages[$from];
-    }
-
-    /** Check for new messages.
-     * @return array - Number of new messages and info about last new message
+    /** Checks for new messages.
+     * @return array Number of new messages and info about last new message
      */
     public function checkNewMessages() {
         $new  = 0;
@@ -68,14 +50,13 @@ class MESSAGE extends INDEX {
                 }
             }
         }
-        return array($new, $hint);
+        return [$new, $hint];
     }
 
-    /** Check that the user does not send an empty message.
-     *
+    /** Checks that the user does not send an empty message.
      * @param  string $text Message text
      * @return string $text Message text with allowed length
-     * @throws Exception 'Text is empty'
+     * @throws Exception "Text is empty"
      */
     private function checkText($text) {
         $text = trim($text);
@@ -86,6 +67,81 @@ class MESSAGE extends INDEX {
         return $text;
     }
 
+    /** Gets messages.
+     * @param  string $from Sender
+     * @return array Messages
+     */
+    public function getMessages($from = '') {
+        return (empty($from)) ? $this->messages : $this->messages[$from];
+    }
+
+    /** Removes message.
+     * @param  integer $id   ID of the message
+     * @param  string  $from Sender
+     * @return boolean The result of operation
+     */
+    public function removeMessage($id, $from = '') {
+        if (empty($from)) {
+            if (!empty($this->messages[$id])) {
+                unset($this->messages[$id]);
+            }
+        } else {
+            if (!empty($this->messages[$from][$id])) {
+                unset($this->messages[$from][$id]);
+            }
+        }
+        return $this->saveIndex($this->path, $this->messages);
+    }
+
+    /** Saves message.
+     * @param  integer $id   Message ID
+     * @param  string  $text Message text
+     * @throws Exception "Invalid ID"
+     * @return boolean The result of operation
+     */
+    public function saveMessage($id, $text) {
+        if (empty($this->messages[$id])) {
+            throw new Exception('Invalid ID');
+        }
+        $text = self::checkText($text);
+        $this->messages[$id]['text'] = $text;
+        return $this->saveIndex($this->path, $this->messages);
+    }
+
+    /** Sends message to administrator.
+     * @param  string    $text  Message text
+     * @param  string    $email User's email address
+     * @throws Exception "Invalid email"
+     * @return type
+     */
+    public function sendFeedback($text, $email = '') {
+        $text = self::checkText($text);
+        $message = [];
+        $message['author'] = USER::getUser('username');
+        $message['nick']   = USER::getUser('nickname');
+        if (empty($email)) {
+            $message['mail'] = '';
+        } else {
+            if (!CMS::call('FILTER')->validEmail($email))
+                 throw new Exception('Invalid email');
+            else $message['mail'] = $email;
+        }
+        $message['text'] = $text;
+        $message['time'] = time();
+        $message['ip']   = $_SERVER['REMOTE_ADDR'];
+        if (empty($this->messages))
+             $this->messages[1] = $message;
+        else $this->messages[]  = $message;
+
+        # Correct database size to allowed value
+        $this->messages = array_slice($this->messages, -$this->config['db-size'] + 1, $this->config['db-size'], TRUE);
+        return $this->saveIndex($this->path, $this->messages);
+    }
+
+    /** Sends message.
+     * @param  string $text Message text
+     * @return boolean The result of operation
+     */
     public function sendMessage($text) {
         $text    = self::checkText($text);
         $message = [];
@@ -93,7 +149,7 @@ class MESSAGE extends INDEX {
         $message['nick']   = USER::getUser('nickname');
         $message['text']   = $text;
         $message['time']   = time();
-        $message['ip']     = CMS::call('USER')->checkRoot() ? '' : $_SERVER['REMOTE_ADDR'];
+        $message['ip']     = USER::$root ? '' : $_SERVER['REMOTE_ADDR'];
         if (empty($this->messages))
              $this->messages[1] = $message;
         else $this->messages[]  = $message;
@@ -103,6 +159,12 @@ class MESSAGE extends INDEX {
         return $this->saveIndex($this->path, $this->messages);
     }
 
+    /** Sends private message.
+     * @param  string    $for Addressee
+     * @throws Exception "Invalid email"
+     * @throws Exception "Cannot send message"
+     * @return boolean The result of operation
+     */
     public function sendPrivateMessage($for) {
         $text = self::checkText($REQUEST['text']);
         if (!file_exists(USERS.$for)) {
@@ -149,56 +211,8 @@ class MESSAGE extends INDEX {
         return $this->saveIndex($this->path, $this->messages);
     }
 
-    public function sendFeedback($text, $email = '') {
-        $text = self::checkText($text);
-        $message = [];
-        $message['author'] = USER::getUser('username');
-        $message['nick']   = USER::getUser('nickname');
-        if (empty($email)) {
-            $message['mail'] = '';
-        } else {
-            if (!CMS::call('FILTER')->validEmail($email)) {
-                throw new Exception('Invalid email');
-            } else {
-                $message['mail'] = $email;
-            }
-        }
-        $message['text'] = $text;
-        $message['time'] = time();
-        $message['ip']   = $_SERVER['REMOTE_ADDR'];
-        if (empty($this->messages))
-             $this->messages[1] = $message;
-        else $this->messages[]  = $message;
-
-        # Correct database size
-        $this->messages = array_slice($this->messages, -$this->config['db-size'] + 1, $this->config['db-size'], TRUE);
-        return $this->saveIndex($this->path, $this->messages);
-    }
-
-    public function saveMessage($id, $text) {
-        if (empty($this->messages[$id])) {
-            throw new Exception('Invalid ID');
-        }
-        $text = self::checkText($text);
-        $this->messages[$id]['text'] = $text;
-        return $this->saveIndex($this->path, $this->messages);
-    }
-
-    public function removeMessage($id, $from = '') {
-        if (empty($from)) {
-            if (!empty($this->messages[$id])) {
-                unset($this->messages[$id]);
-            }
-        } else {
-            if (!empty($this->messages[$from][$id])) {
-                unset($this->messages[$from][$id]);
-            }
-        }
-        return $this->saveIndex($this->path, $this->messages);
-    }
-
-    /** Mark all messages as read.
-     * @return boolean - The result of operation
+    /** Marks all messages as read.
+     * @return boolean The result of operation
      */
     public function setAllNoNew() {
         if (!empty($this->messages['inbox'])) {

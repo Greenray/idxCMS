@@ -21,16 +21,16 @@ die();?>
                     <th>[__File]</th>
                     <th>[__Size]</th>
                     <th>[__Downloads]</th>
-                [endif]
+                [/if]
                 [if=items[song]]
                     <th>[__File]</th>
                     <th>[__Size]</th>
                     <th>[__Downloads]</th>
-                [endif]
+                [/if]
                 [if=items[site]]
                     <th>[__Site URL]</th>
                     <th>[__Transitions]</th>
-                [endif]
+                [/if]
                 <th>[__Views]</th>
                 <th>[__Comments]</th>
                 <th class="actions">[__Actions]</th>
@@ -44,16 +44,16 @@ die();?>
                         <td>{items[file]}</td>
                         <td class="right">{items[size]}</td>
                         <td class="center">{items[downloads]}</td>
-                    [endif]
+                    [/if]
                     [if=items[song]]
                         <td>{items[song]}</td>
                         <td class="right">{items[size]}</td>
                         <td class="center">{items[downloads]}</td>
-                    [endif]
+                    [/if]
                     [if=items[site]]
                         <td class="left">{items[site]}</td>
                         <td class="center">{items[clicks]}</td>
-                    [endif]
+                    [/if]
                     <td class="center">{items[views]}</td>
                     <td class="center">{items[comments]}</td>
                     <td class="actions center">
@@ -68,7 +68,7 @@ die();?>
                         </button>
                     </td>
                 </tr>
-            [endeach.items]
+            [/each.items]
         </table>
         <p class="center"><input type="submit" name="new" value="[__New post]" class="submit" /></p>
     </form>

@@ -1,13 +1,25 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+/** Functions for administration of the system.
+ *
+ * @program   idxCMS: Flat Files Content Management Sysytem
+ * @file      admin/libs/functions.php
+ * @version   2.4
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+ * @package   Administration
+ * @overview  Administration of the system.
+ *            Includes possibilities for configuring the system, managing users, modules, creating and editing content.
+ */
 
-/** Backups data store */
+/** Data storage for backups. */
 define('BACKUPS', CONTENT.'backups'.DS);
 
-function format_size($i) {
+/** Formats the presentation's file size
+ * @param  integer $i Size value
+ * @return string     Formatted size value
+ */
+function FormatSize($i) {
     if     (floor($i / 1073741824) > 0) return sprintf("%.2f Gb", $i / (1024 * 1024 * 1024));
     elseif (floor($i / 1048576) > 0)    return sprintf("%.2f Mb", $i / (1024 * 1024));
     elseif (floor($i / 1024) > 0)       return sprintf("%.2f Kb", $i / 1024);
@@ -15,17 +27,17 @@ function format_size($i) {
 }
 
 
-/** Get size of the directory with subdirectiries.
+/** Gets size of the directory with subdirectiries.
  * @param  string $dir The name of the main directory
- * @return integer - The size of scanned directory
+ * @return integer     The size of scanned directory
  */
-function get_dir_size($dir) {
+function GetDirSize($dir) {
     $size = 0;
     if (($dh = opendir($dir)) !== FALSE) {
         while (($file = readdir($dh)) !== FALSE) {
             if (is_dir($dir.$file)) {
                 if (($file !== '.') AND ($file !== '..')) {
-                   $size += get_dir_size($dir.$file.DS);
+                   $size += GetDirSize($dir.$file.DS);
                 }
             } else $size += filesize($dir.$file);
         }
@@ -34,15 +46,21 @@ function get_dir_size($dir) {
     return $size;
 }
 
-function in_array_recursive($needle, $haystack) {
+/** Checs if the variable exists in array.
+ * This function is recursive.
+ * @param  mixed $needle   Value to search
+ * @param  array $haystack Array to search
+ * @return boolean         The result of operation
+ */
+function InArrayRecursive($needle, $haystack) {
     foreach ($haystack as $value) {
         if (is_array($value))
-             return in_array_recursive($needle, $value);
+             return InArrayRecursive($needle, $value);
         else return in_array($needle, $haystack);
     }
 }
 
-/** Show specified translated message with additional information.
+/** Shows specified translated message with additional information.
  *  @param  string $message Specified message.
  *  @param  string $info    Additional information.
  *  @return string          Formatted html table.
@@ -53,6 +71,10 @@ function ShowMessage($message, $info = '') {
           </table>';
 }
 
+/** Login form administrator.
+ *
+ * @return string Login form for administrator
+ */
 function LoginForm() {
     return '<form name="login" method="post" action="">
                 <table>
@@ -69,58 +91,63 @@ function LoginForm() {
             </form>';
 }
 
+/** Displays a color selection.
+ * @param  string $name      ID for the input field
+ * @param  string $def_color Default color
+ * @return string            Color selection form
+ */
 function GetColor($name = 'idselector', $def_color = '') {
-    $output = '
-    <div id="colorselector" class="none" style="background:white;border:2px solid black;position:absolute;width:300px;z-index:10">
-        <table class="colortable">
-            <tr><td colspan="18"><p align="center">'.__('Choose color').'</p></td></tr>
-            <tr>';
     $col_r = 0;
     $col_g = 0;
     $col_b = 0;
     $row_return   = 0;
     $block_return = 0;
+    $output = [];
+    $i = 0;
     while ($col_r <= 255) {
         $col_g = 0;
         $block_return++;
         while ($col_g <= 255) {
             $col_b = 0;
             while ($col_b <= 255) {
-                $red     = dechex($col_r);
-                $green   = dechex($col_g);
-                $blue    = dechex($col_b);
-                $color   = str_pad($red, 2, '0', STR_PAD_LEFT).''.str_pad($green, 2, '0', STR_PAD_LEFT).''.str_pad($blue, 2, '0', STR_PAD_LEFT);
-                $output .= '<td height="12px" width="12px" bgcolor="#'.$color.'" onclick="selectColor(\'#'.$color.'\');" style="cursor: pointer;"></td>';
+                $red   = dechex($col_r);
+                $green = dechex($col_g);
+                $blue  = dechex($col_b);
+                $color = str_pad($red, 2, '0', STR_PAD_LEFT).''.str_pad($green, 2, '0', STR_PAD_LEFT).''.str_pad($blue, 2, '0', STR_PAD_LEFT);
+                $output['color'][$i]['color'] = $color;
                 $row_return++;
                 if ($row_return === 18) {
-                    $output    .= '</tr><tr>';
                     $row_return = 0;
+                    $output['color'][$i]['tr'] = TRUE;
                 }
                 $col_b += 51;
+                $i++;
             }
             $col_g += 51;
         }
         $col_r += 51;
     }
-    $output .= '<tr><td colspan="18"><p align="center">'.__('Gradation of grey color').'</p></td></tr>
-                <tr>';
     $col = 15;
     while ($col <= 255) {
-        $red     = strtoupper(dechex($col));
-        $green   = strtoupper(dechex($col));
-        $blue    = strtoupper(dechex($col));
-        $color   = str_pad($red, 2, '0', STR_PAD_LEFT).''.str_pad($green, 2, '0', STR_PAD_LEFT).''.str_pad($blue, 2, '0', STR_PAD_LEFT);
-        $output .= '<td height="12px" width="12px" bgcolor="#'.$color.'" onclick="selectColor(\'#'.$color.'\')" style="cursor: pointer;"></td>';
-        $col    += 15;
+        $red   = strtoupper(dechex($col));
+        $green = strtoupper(dechex($col));
+        $blue  = strtoupper(dechex($col));
+        $color = str_pad($red, 2, '0', STR_PAD_LEFT).''.str_pad($green, 2, '0', STR_PAD_LEFT).''.str_pad($blue, 2, '0', STR_PAD_LEFT);
+        $output['gray'][$col]['gray'] = $color;
+        $col += 15;
     }
-    $output .= '</tr>
-               </table>
-              </div>';
-    return '<input class="texte" type="text" id="'.$name.'" name="'.$name.'" size="8" maxlength="8" value="'.$def_color.'" />
-            <input id="'.$name.'btn" name="'.$name.'btn" type="button" value="" onclick="openColorSelector(\''.$name.'\', event)" style="padding:0 5px;background:'.$def_color.'" />'.
-            $output;
+
+    $output['name']      = $name;
+    $output['def_color'] = $def_color;
+    $TPL = new TEMPLATE(dirname(__FILE__).DS.'colors.tpl');
+    return $TPL->parse($output);
 }
 
+/** Saves sorteg sections with categories.
+ * @param  object $obj    Object (posts, forum, etc...)
+ * @param  array  $params Sections data
+ * @return boolean        The result of operation
+ */
 function SaveSortedSections($obj, $params) {
     $params = explode('&', $params);
     $sorted = [];

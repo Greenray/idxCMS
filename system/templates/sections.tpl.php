@@ -26,11 +26,11 @@ die();?>
                                 <span class="subtitle">{categories[desc]}</span>
                             </a>
                         </li>
-                    [endeach.sections[categories]]
+                    [/each.sections[categories]]
                     </ul>
                 </div>
-            [endif]
+            [/if]
         </li>
-    [endeach.sections]
+    [/each.sections]
     </ul>
 </div>

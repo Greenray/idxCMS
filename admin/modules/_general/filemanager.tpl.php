@@ -16,25 +16,25 @@ die();?>
             <th>[__Rights]</th>
             <th class="actions" colspan="2">[__Actions]</th>
         </tr>
-        [if=back]<tr><td colspan="7"><a href="{back}">..</a></td></tr>[endif]
+        [if=back]<tr><td colspan="7"><a href="{back}">..</a></td></tr>[/if]
         [each=elements]
             <tr>
             [ifelse=elements[link]]
                 <td class="{elements[style]}"><a href="{elements[link]}">{elements[file]}</a></td>
             [else]
                 <td class="{elements[style]}">{elements[file]}</td>
-            [endelse]
+            [/else]
                 <td class="{elements[style]} right">{elements[size]}</td>
                 <td class="{elements[style]} center">{elements[date]}</td>
                 <td class="{elements[style]} center">{elements[time]}</td>
                 <td class="{elements[style]}"><a href="{elements[rights_edit]}">{elements[rights]}</a></td>
-                [if=elements[download]]<td class="{elements[style]} center"><a href="{BACKUPS}{elements[file]}"> [__Download]</a></td>[endif]
-                [if=elements[edit]]<td class="{elements[style]} center"><a href="{elements[edit]}">[__Edit]</a></td>[endif]
-                [if=elements[view]]<td class="{elements[style]} center"><a class="cbox" href="{elements[view]}">[__View]</a></td>[endif]
-                [if=elements[empty]]<td class="{elements[style]} center"></td>[endif]
+                [if=elements[download]]<td class="{elements[style]} center"><a href="{BACKUPS}{elements[file]}"> [__Download]</a></td>[/if]
+                [if=elements[edit]]<td class="{elements[style]} center"><a href="{elements[edit]}">[__Edit]</a></td>[/if]
+                [if=elements[view]]<td class="{elements[style]} center"><a class="cbox" href="{elements[view]}">[__View]</a></td>[/if]
+                [if=elements[empty]]<td class="{elements[style]} center"></td>[/if]
                 <td class="{elements[style]} center"><a href="{elements[delete]}">[__Delete]</a></td>
             </tr>
-        [endeach.elements]
+        [/each.elements]
     </table>
     <table class="std">
         <tr>

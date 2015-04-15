@@ -34,7 +34,7 @@ if (!defined('idxCMS')) die();?>
                 }
             });
         </script>
-    [endif]
+    [/if]
     <link rel="stylesheet" type="text/css" href="{TOOLS}colorbox/colorbox.css" media="screen">
     <script type="text/javascript" src="{TOOLS}colorbox/jquery.colorbox.js"></script>
     <script type="text/javascript">

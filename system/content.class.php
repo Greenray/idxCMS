@@ -1,8 +1,22 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-
 /** Processing content: articles, topics, comments and replies.
+ * The structure of the posts database:
+ * <pre>
+ * content                 - The main directory of the website content
+ *     - posts             - The main directory of posts
+ *       index             - The index file of the module "Posts"
+ *       -- articles       - Section of posts
+ *          --- 1          - Directory fo category
+ *              icon.png   - icon for category
+ *              index      - Index file for category and it content
+ *              ---- 1     - Directory for article
+ *                   index - Comments for article
+ *                   desc  - Short description of the article
+ *                   text  - Full text
+ *                   rate  - Comments rates
+ * </pre>
  *
+ * @program   idxCMS: Flat Files Content Management Sysytem
  * @file      system/content.class.php
  * @version   2.4
  * @author    Victor Nabatov <greenray.spb@gmail.com>
@@ -13,58 +27,39 @@
 
 class CONTENT extends INDEX {
 
-    /** Current module which use this class.
-     * @var string
-     */
-    protected $module = '';
 
-    /** The name of current module.
-     * @var string
-     */
-    protected $container = '';
-
-    /** Sections of the content of the carrent module.
-     * @var array
-     */
-    protected $sections = [];
-
-    /** ID of the current section.
-     * @var string
-     */
-    protected $section = '';
-
-    /** ID of the current category.
-     * @var integer
-     */
+    /** @var integer ID of the current category */
     protected $category;
 
-    /** Coontent of the current category.
-     * @var array
-     */
-    protected $content = [];
-
-    /** Filename of the item with full text.
-     * @var string
-     */
-    protected $text = 'text';
-
-    /** Filename of the item with short description.
-     * @var string
-     */
-    protected $desc = 'desc';
-
-    /** ID of the article, topic, image and so on.
-     * @var integer
-     */
-    protected $item;
-
-    /** Comments for article, topic, image and so on.
-     * @var array
-     */
+    /** @var array Comments for article, topic, image and so on */
     protected $comments = [];
 
+    /** @var string Current module */
+    protected $container = '';
+
+    /** @var array Content of the current category */
+    protected $content = [];
+
+    /** @var string Filename of the item with short description */
+    protected $desc = 'desc';
+
+    /** @var integer ID of the article, topic, image and so on */
+    protected $item;
+
+    /** @var string Current module which uses this class */
+    protected $module = '';
+
+    /** @var string ID of the current section */
+    protected $section = '';
+
+    /** @var array Sections of the carrent module */
+    protected $sections = [];
+
+    /** @var string Item filename with full text */
+    protected $text = 'text';
+
     /** Gets module sections data.
-     * @return array Sections allowed for current user
+     * @return array Sections whict are allowed for current user
      */
     public function getSections() {
         if (empty($this->sections)) {
@@ -97,7 +92,7 @@ class CONTENT extends INDEX {
         SYSTEM::setPageDescription(SYSTEM::$modules[$this->module]['title'].' - '.__('Sections'));
         $result   = [];
         $sections = $this->sections;
-        if (isset($sections['drafts'])) unset($sections['drafts']);
+        unset($sections['drafts']);
 
         foreach ($sections as $id => $section) {
             # Get only allowed categories for user
@@ -152,9 +147,9 @@ class CONTENT extends INDEX {
     /** Saves section.
      * If parameter $id is not set, a new section will be created.
      * This function corrects website sitemap.
-     * @throws Exception 'Invalid ID'          - Invalid ID, Empty ID or includes incorrect symbols
-     * @throws Exception 'Title is empty'      - Section tilte is not set
-     * @throws Exception 'Cannot save section' - Cannot create directory for section or save section index file
+     * @throws Exception "Invalid ID"          - Empty ID or includes incorrect symbols
+     * @throws Exception "Title is empty"
+     * @throws Exception "Cannot save section" - Cannot create directory for section or save section index file
      * @return boolean                         The result of operation
      */
     public function saveSection() {
@@ -191,8 +186,7 @@ class CONTENT extends INDEX {
 
     /** Saves all sections.
      * @param  array $sections Sections data
-     * @throws Exception 'Cannot save sections' - Cannot save section index file
-     * @return void
+     * @throws Exception "Cannot save sections"
      */
     public function saveSections($sections) {
         $new = [];
@@ -209,8 +203,8 @@ class CONTENT extends INDEX {
      * If parameter $id is not set, a new section will be created.
      * This function corrects website sitemap.
      * @param  string    $id                     Section name
-     * @throws Exception 'Invalid ID'            - ID is invalid or is empty
-     * @throws Exception 'Cannot remove section' - Cannot delete the section directory tree
+     * @throws Exception "Invalid ID"            - ID is invalid or is empty
+     * @throws Exception "Cannot remove section"
      * @return boolean                           The result of operation
      */
     public function removeSection($id) {
@@ -263,8 +257,8 @@ class CONTENT extends INDEX {
 
     /** Saves category, if parameter $id is not set, a new category will be created.
      * This function corrects website sitemap.
-     * @throws Exception 'Title is empty'         - Category title is empty
-     * @throws Exception 'Cannot create category' - Cannot create category directory or save index file
+     * @throws Exception "Title is empty"
+     * @throws Exception "Cannot create category" - Cannot create category directory or save index file
      * @return boolean                            The result
      */
     public function saveCategory() {
@@ -311,8 +305,7 @@ class CONTENT extends INDEX {
     /** Saves all categories from requested section.
      * @param  string    $section    Section name
      * @param  array     $categories Categories data
-     * @throws Exception 'Cannot save categories' - Cannot save index file
-     * @return void
+     * @throws Exception "Cannot save categories"
      */
     public function saveCategories($section, $categories) {
         $this->sections[$section]['categories'] = $categories;
@@ -333,7 +326,7 @@ class CONTENT extends INDEX {
 
         $new = $this->newId($this->sections[$dest]['categories']);
 
-        CopyTree($this->sections[$source]['path'].$id, $this->sections[$dest]['path'].$new);
+        $this->copyTree($this->sections[$source]['path'].$id, $this->sections[$dest]['path'].$new);
         DeleteTree($this->sections[$source]['path'].$id);
 
         $this->sections[$dest]['categories'][$new] = $this->sections[$source]['categories'][$id];
@@ -349,7 +342,7 @@ class CONTENT extends INDEX {
     /** Removes category.
      * This function corrects website sitemap.
      * @param  integer   $id Category ID
-     * @throws Exception 'Cannot remove category' - Cannot remove category directory tree or save index file
+     * @throws Exception "Cannot remove category" - Cannot remove category directory tree or save index file
      * @return boolean   The result
      */
     public function removeCategory($id) {
@@ -438,7 +431,7 @@ class CONTENT extends INDEX {
                 }
                 if (!empty($item['text'])) {
                     $item['text'] = CMS::call('PARSER')->parseText($item['text'], $path);
-                    if (CMS::call('USER')->checkRoot()) {
+                    if (USER::$root) {
                         $item['admin'] = TRUE;
                         if (!empty($item['opened'])) {
                             $item['command'] = __('Close');
@@ -467,31 +460,32 @@ class CONTENT extends INDEX {
     /** Saves post or topic.
      * This function corrects website sitemap.
      * @param  integer    $id                 Item ID
-     * @throws Exception 'Title is empty'     - Title is empty or has wrong symbols
-     * @throws Exception 'Text is empty'      - Text is empty
-     * @throws Exception 'Cannot remove item' - No access rights
-     * @throws Exception 'Cannot create item' - Cannot create data directory for item
+     * @throws Exception "Title is empty"     - Title is empty or has wrong symbols
+     * @throws Exception "Text is empty"
+     * @throws Exception "Cannot create item" - No access rights
      * @return integer                        ID of the saved item
      */
     public function saveItem($id) {
         $title = FILTER::get('REQUEST', 'title');
-        if ($title === FALSE) throw new Exception('Title is empty');
-
+        if ($title === FALSE) {
+            throw new Exception('Title is empty');
+        }
         $text = FILTER::get('REQUEST', 'text');
-        if (empty($text))     throw new Exception('Text is empty');
-
-        $item = $this->sections[$this->section]['categories'][$this->category]['path'].$id;
+        if (empty($text)) {
+            throw new Exception('Text is empty');
+        }
+        $path  = $this->sections[$this->section]['categories'][$this->category]['path'];
+        $file  = FILTER::get('REQUEST', 'file');
+        $image = FILTER::get('REQUEST', 'image');
         if (empty($id)) {
             $id = $this->newId($this->content);
-            $item = $item.$id;
+            $item = $path.$id;
             if (is_dir($item)) {
-                if (!DeleteTree($item)) {
-                    throw new Exception('Cannot remove '.$item);
-                }
+                DeleteTree($item);
             }
-
-            if (mkdir($item, 0777) === FALSE) throw new Exception('Cannot create '.$item);
-
+            if (mkdir($path.$id, 0777) === FALSE) {
+                throw new Exception('Cannot create '.$item);
+            }
             $this->content[$id]['id']       = (int)$id;
             $this->content[$id]['author']   = USER::getUser('username');
             $this->content[$id]['nick']     = USER::getUser('nickname');
@@ -499,33 +493,51 @@ class CONTENT extends INDEX {
             $this->content[$id]['views']    = 0;
             $this->content[$id]['comments'] = 0;
         }
-
+        if (!empty($file)) {
+            try {
+                $uploaded = CMS::call('CATALOGS')->uploadFile($id, $file);
+            } catch (Exception $error) {
+                throw new Exception(__($error->getMessage()));
+            }
+            $this->content[$id]['file']      = $uploaded[0];
+            $this->content[$id]['size']      = (int) $uploaded[1];
+            $this->content[$id]['downloads'] = 0;
+            $this->content[$id]['copyright'] = FILTER::get('REQUEST', 'copyright');
+        } else {
+            if (!empty($image)) {
+                try {
+                    $uploaded = CMS::call('GALLERIES')->uploadImage($id, $image);
+                } catch (Exception $error) {
+                    throw new Exception(__($error->getMessage()));
+                }
+                $this->content[$id]['image']     = $uploaded;
+                $this->content[$id]['copyright'] = FILTER::get('REQUEST', 'copyright');
+            }
+        }
         $this->content[$id]['title']    = $title;
-        $this->content[$id]['keywords'] = preg_replace("/,[\s]+/", ',', FILTER::get('REQUEST', 'keywords'));
+        $this->content[$id]['keywords'] = FILTER::get('REQUEST', 'keywords');
         $this->content[$id]['opened']   = (bool) FILTER::get('REQUEST', 'opened');
-
         $desc = FILTER::get('REQUEST', 'desc');
         if (empty($desc)) {
-            $desc = CutText($text, CONFIG::getValue('posts', 'description-length'));
+            $desc = $this->cutText($text, CONFIG::getValue('galleries', 'description-length'));
         }
         if ((file_put_contents($item.DS.$this->desc, $desc, LOCK_EX) === FALSE) ||
             (file_put_contents($item.DS.$this->text, $text, LOCK_EX) === FALSE)) {
-            throw new Exception('Cannot save item');
+            throw new Exception('Cannot save file');
         }
-
         self::saveContent($this->content);
         Sitemap();
 
         return $id;
     }
 
-    /**
-    * @todo Comment
-    * @param string $id	...
-    * @param string $section	...
-    * @param string $category	...
-    * @return integer ID of the new item
-    */
+    /** Moves iten to another section/category or category.
+     * @param  integer   $id       Item ID
+     * @param  string    $section  Section name
+     * @param  integer   $category Category ID
+     * @throws Exception "Cannot move item"
+     * @return integer             ID of the new item
+     */
     public function moveItem($id, $section, $category) {
         $item = $this->content[$id];
         $old_section  = $this->section;
@@ -535,7 +547,7 @@ class CONTENT extends INDEX {
         $new    = $this->newId($this->content);
         $source = $this->sections[$old_section]['categories'][$old_category]['path'];
         $dest   = $this->sections[$section]['categories'][$category]['path'];
-        if (CopyTree($source.$id, $dest.$new) === FALSE) {
+        if ($this->copyTree($source.$id, $dest.$new) === FALSE) {
             rmdir($dest.$new);
             throw new Exception('Cannot move item');
         }
@@ -546,26 +558,26 @@ class CONTENT extends INDEX {
         $this->section = $old_section;
         self::getContent($old_category);
         self::removeItem($item['id']);
-
         return $new;
     }
 
-    /**
-    * @todo Comment
-    * @param string $content	...
-    * @return
-    */
+    /** Saves content.
+     * @param  array     $content Content to save
+     * @throws Exception 'Cannot save content'
+     * @return void
+     */
     public function saveContent($content) {
         if ($this->saveIndex($this->sections[$this->section]['categories'][$this->category]['path'], $content) === FALSE) {
             throw new Exception('Cannot save content');
         }
     }
 
-    /**
-    * @todo Comment
-    * @param string $id	...
-    * @return
-    */
+    /** Removes item from database.
+     * @param  integer   $id Item ID
+     * @throws Exception "Invalid ID"
+     * @throws Exception "Cannot remove item"
+     * @return boolean The result of operation
+     */
     public function removeItem($id) {
         if (empty($this->content[$id])) {
             throw new Exception('Invalid ID');
@@ -580,12 +592,11 @@ class CONTENT extends INDEX {
         Sitemap();
     }
 
-    /**
-    * @todo Comment
-    * @param string $id	...
-    * @param string $field	...
-    * @return
-    */
+    /** Increments one of counts: views, downloads and clicks.
+     * @param  integer $id    Item ID
+     * @param  string  $field Fieldname
+     * @return                The result of operation
+     */
     public function incCount($id, $field) {
         if (empty($this->content[$id])) {
             return FALSE;
@@ -611,31 +622,11 @@ class CONTENT extends INDEX {
         return $result;
     }
 
-    /**
-    * @todo Comment
-    * @param string $category	...
-    * @param string $param	...
-    * @param string $last	... (défaut : TRUE)
-    * @param string $limit	... (défaut : '')
-    * @return
-    */
-    public function getCategoryStat($category, $param, $last = TRUE, $limit = '') {
-        $result = [];
-        self::getContent($category);
-        foreach ($this->content as $key => $item) {
-            $result[$key] = $item[$param];
-        }
-        if ($limit) {
-            return array_slice($result, -$limit, $limit, TRUE);
-        }
-        return $result;
-    }
-
-    /**
-    * @todo Comment
-    * @param string $items	...
-    * @return
-    */
+    /** Gets list of the latest items (posts, catalog's items? etc.).
+     * The number of the latest items specified in configuration.
+     * @param  array $items Full list of items
+     * @return array        List of latest items
+     */
     public function getLastItems($items) {
         krsort($items);
         $items  = array_slice($items, 0, (int) CONFIG::getValue('main', 'last'), TRUE);
@@ -652,11 +643,11 @@ class CONTENT extends INDEX {
         return $result;
     }
 
-    /**
-    * @todo Comment
-    * @param string $sections	... (défaut : '')
-    * @return
-    */
+    /** Gets list of the latest items from specified sections.
+     * The number of the latest items specified in configuration.
+     * @param  array $sections List of sections (défaut : '')
+     * @return array           List of latest items
+     */
     public function getSectionsLastItems($sections = '') {
         $result = [];
         if (empty($sections)) {
@@ -672,10 +663,11 @@ class CONTENT extends INDEX {
         return $result;
     }
 
-    /** Gets the last items from category
-    * @param  string $format The parameter for formatting posts time
-    * @return array          List of lst items
-    */
+    /** Gets the last items from category.
+     * The number of the latest items specified in configuration.
+     * @param  string $format The parameter for formatting posts time
+     * @return array          List of latest items
+     */
     public function getCategoryLastItems($format) {
         $items  = array_flip($this->getStat('time'));
         krsort($items);
@@ -695,9 +687,9 @@ class CONTENT extends INDEX {
     }
 
     /** Gets comments.
-    * @param  integer $item	Item ID
-    * @return array         All comments to current article or topic
-    */
+     * @param  integer $item Item ID
+     * @return array         All comments to current article or topic
+     */
     public function getComments($item) {
         $this->item = $item;
         if (!empty($this->comments)) {
@@ -709,10 +701,10 @@ class CONTENT extends INDEX {
     }
 
     /** Gets comment.
-    * @param  string $id   Comment ID
-    * @param  string $page Page number
-    * @return array        Comment data
-    */
+     * @param  string $id   Comment ID
+     * @param  string $page Page number
+     * @return array        Comment data
+     */
     public function getComment($id, $page) {
         if (empty($this->comments[$id])) {
             return FALSE;
@@ -736,7 +728,7 @@ class CONTENT extends INDEX {
             if (($user !== 'guest') && ($user !== $comment['author'])) {
                 $comment['opened'] = TRUE;
             }
-            if (CMS::call('USER')->checkRoot() || (($author['rights'] !== '*') && USER::moderator($this->module, $this->comments[$id]))) {
+            if (USER::$root || (($author['rights'] !== '*') && USER::moderator($this->module, $this->comments[$id]))) {
                 $comment['moderator'] = TRUE;
                 $comment['link'] = $this->sections[$this->section]['categories'][$this->category]['link'].ITEM.$this->item;
                 if (!empty($comment['ip'])) {
@@ -768,17 +760,19 @@ class CONTENT extends INDEX {
     /** Saves new comment or reply.
      * @param  integer   $item                 ID of the article or reply
      * @param  string    $text                 Comment text
-     * @throws Exception 'Invalid ID'          - Invalid ID of the article or topic
-     * @throws Exception 'Text is empty'       - An attempt to write an empty article or topic
-     * @throws Exception 'Cannot save comment' - File system error or user have no rights to post
+     * @throws Exception "Invalid ID"          - Invalid ID of the article or topic
+     * @throws Exception "Text is empty"       - An attempt to write an empty article or topic
+     * @throws Exception "Cannot save comment" - File system error or user have no rights to post
      * @return array                           List of comments related to article or topic
      */
     public function newComment($item, $text) {
-        if (empty($this->content[$item])) throw new Exception('Invalid ID');
-
+        if (empty($this->content[$item])) {
+            throw new Exception('Invalid ID');
+        }
         $text = trim($text);
-        if (empty($text)) throw new Exception('Text is empty');
-
+        if (empty($text)) {
+            throw new Exception('Text is empty');
+        }
         $path = $this->sections[$this->section]['categories'][$this->category]['path'];
         $id = $this->newId($this->comments);
 
@@ -792,8 +786,9 @@ class CONTENT extends INDEX {
         $this->saveIndex($path.$item.DS, $this->comments);
         $this->content[$item]['comments']++;
 
-        if ($this->saveIndex($path, $this->content) === FALSE) throw new Exception('Cannot save comment');
-
+        if ($this->saveIndex($path, $this->content) === FALSE) {
+            throw new Exception('Cannot save comment');
+        }
         return $this->content[$item]['comments'];
     }
 
@@ -803,13 +798,14 @@ class CONTENT extends INDEX {
      * @return array        Comment data
      */
     public function saveComment($id, $item) {
-        if (!USER::loggedIn())                      throw new Exception('You are not logged in!');
+        if (!USER::$logged_in)                       throw new Exception('You are not logged in!');
         if (empty($this->content[$item]))           throw new Exception('Invalid ID');
         if (empty($this->content[$item]['opened'])) throw new Exception('Comments are not allowed');
 
         $text = FILTER::get('REQUEST', 'text');
-        if (empty($text)) throw new Exception('Text is empty');
-
+        if (empty($text)) {
+            throw new Exception('Text is empty');
+        }
         if (empty($id)) {
             $this->newComment($item, $text);
         } else {
@@ -834,8 +830,9 @@ class CONTENT extends INDEX {
      */
     public function removeComment($id) {
         if (empty($this->comments[$id])) throw new Exception('Invalid ID');
-        if (!USER::moderator($this->module, $this->comments[$id])) throw new Exception('Cannot remove comment');
-
+        if (!USER::moderator($this->module, $this->comments[$id])) {
+            throw new Exception('Cannot remove comment');
+        }
         unset($this->comments[$id]);
 
         $path = $this->sections[$this->section]['categories'][$this->category]['path'];
@@ -853,5 +850,43 @@ class CONTENT extends INDEX {
             throw new Exception('Cannot remove comment');
         }
         return $this->content[$this->item]['comments'];
+    }
+
+    /** Truncates a text to a predetermined value.
+     * @param  string  $text   Text to truncate
+     * @param  integer $length New length of text
+     * @return string          Truncated string
+     */
+    protected function cutText($text, $length) {
+        if ((mb_strlen($text, 'UTF-8') - 1) < (int) $length) {
+            return $text;
+        }
+        if (mb_strpos($text, '.', $length)) {
+            return mb_substr($text, 0, $length, 'UTF-8').'...';
+        }
+    }
+    /** Recursively copy a directory and its contents.
+     * This function is recursive.
+     * @param  string  $source Sourse directory
+     * @param  string  $dest   Destination directory
+     * @return boolean        The result of operation
+     */
+    private function copyTree($source, $dest) {
+        if (is_file($source)) {
+            return copy($source, $dest);
+        }
+        if (!is_dir($dest)) {
+            mkdir($dest, 0777);
+            chmod($dest, 0777);
+        }
+        $dir = dir($source);
+        while (($element = $dir->read()) !== FALSE) {
+            if (($element == '.') || ($element == '..')) {
+                continue;
+            }
+            $this->copyTree($source.DS.$element, $dest.DS.$element);
+        }
+        $dir->close();
+        return TRUE;
     }
 }

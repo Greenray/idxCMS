@@ -4,7 +4,7 @@
 # Version 2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
-if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
+if (!defined('idxADMIN') || !USER::$root) die();
 
 $POLLS = new POLLS();
 $archived = $POLLS->getArchivedPolls();
@@ -43,6 +43,7 @@ if (!empty($archived)) {
     }
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'archive.tpl');
     echo($TPL->parse($output));
+
 } else {
     ShowMessage(__('Database is empty'));
 }

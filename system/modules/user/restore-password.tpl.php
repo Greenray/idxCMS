@@ -7,28 +7,21 @@
 die();?>
 <script type="text/javascript">
     function checkForm(form) {
-        var name = form.name.value;
-        if (name === '') {
+        if (form.name.value === '') {
             ShowAlert('[__Enter your name]', '[__Error]');
             return false;
         }
         var emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-        var email = form.email.value;
-        if (email === '') {
-            ShowAlert('[__Enter your email]', '[__Error]');
-            return false;
-        }
-        if (!email.match(emailRegex)) {
-            ShowAlert('[__Invalid email]', '[__Error]');
+        if ((form.email.value === '') || !email.match(emailRegex)) {
+            ShowAlert('[__rror in the email]', '[__Error]');
             return false;
         }
         [if=captcha]
-            var capt = form.captcheckout.value;
-            if (capt === '') {
+            if (form.captcheckout.value === '') {
                 ShowAlert('[__Enter a code]', '[__Error]');
                 return false;
             }
-        [endif]
+        [/if]
         return true;
     }
 </script>

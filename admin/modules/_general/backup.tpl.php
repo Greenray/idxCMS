@@ -23,7 +23,7 @@ die();?>
                         <a href="{BACKUPS}{name}"> [__Download]</a>
                     </td>
                 </tr>
-            [endforeach.files]
+            [/foreach.files]
         </table>
         <p align="center">[__Total]: <span class="special">{total}</span></p>
         <p align="center">
@@ -47,7 +47,7 @@ die();?>
                     <td class="right">{size}</td>
                     <td class="center"><label><input type="checkbox" name="dir[]" value="{name}" /> [__Select]</label></td>
                 </tr>
-            [endforeach.dirs]
+            [/foreach.dirs]
         </table>
         <p align="center">
             <input type="hidden" name="backup" value="1" />

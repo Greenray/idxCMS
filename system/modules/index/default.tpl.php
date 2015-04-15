@@ -8,7 +8,7 @@ die();?>
 <div id="tabs-{tab}">
     <div class="tabs">
         <ul class="tabs">
-        [each=posts]<li><a class="" href="#{posts[tab]}">{posts[tab_date]}</a></li>[endeach.posts]
+        [each=posts]<li><a class="" href="#{posts[tab]}">{posts[tab_date]}</a></li>[/each.posts]
         </ul>
         [each=posts]
             <div id="{posts[tab]}" class="tab_content">
@@ -21,16 +21,16 @@ die();?>
                 <div class="info">
                     <span class="author center">[__Posted by]: <a href="{MODULE}user&amp;user={posts[author]}">{posts[nick]}</a></span>
                     <span class="more">
-                        <a href="{posts[link]}">[__Read more...] [if=posts[views]][{posts[views]}][endif]</a>
+                        <a href="{posts[link]}">[__Read more...] [if=posts[views]][{posts[views]}][/if]</a>
                         [ifelse=posts[comment]]
                             <a href="{posts[comment]}">[__Comments] [{posts[comments]}]</a>
                         [else]
                             <a href="{posts[link]}">[__Comments]</a>
-                        [endelse]
+                        [/else]
                     </span>
                 </div>
             </div>
-        [endeach.posts]
+        [/each.posts]
     </div>
 </div>
 <div class="clear"></div>

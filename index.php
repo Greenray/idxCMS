@@ -1,15 +1,13 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
-
-/* The core of the content management system.
+/** The core of the content management system.
  *
+ * @program   idxCMS: Flat Files Content Management Sysytem
  * @version   2.4
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2015 Victor Nabatov
  * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
  * @package   Core
+ * @overview  The core of the system.
  */
 
 ini_set('phar.readonly', 0);            # Allow phar to work with phars.
@@ -83,7 +81,7 @@ define('SYS',     ROOT.'system'.DS);
 define('TOOLS',   ROOT.'tools'.DS);
 /** Path to the CMS modules. */
 define('MODULES', SYS.'modules'.DS);
-/** Logs data store. */
+/** Data storage for logs. */
 define('LOGS',    CONTENT.'logs'.DS);
 /** Temporary directory. */
 define('TEMP',    CONTENT.'temp'.DS);
@@ -207,12 +205,12 @@ switch($MODULE) {
         /** Libruaries for administration panel. */
         define('ADMINLIBS', ADMIN.'libs'.DS);
         /** Templates for administration panel. */
-        define('ADMINTEMPLATES', ADMIN.'templates'.DS);
+        define('TEMPLATES', ADMIN.'templates'.DS);
 
         require_once ADMINLIBS.'functions.php';
         include_once ADMIN.'languages'.DS.SYSTEM::get('language').'.php';  # Localization.
 
-        if (CMS::call('USER')->checkRoot()) {
+        if (USER::$root) {
             $modules = AdvScanDir(ADMIN.'modules', '', 'dir');
             $MODULES = [];
 
@@ -267,7 +265,7 @@ switch($MODULE) {
         break;
 
     default:
-        include_once SYS.'statistic.php';
+        include_once SYS.'statistics.php';
 
         /** System templates. */
         define('TEMPLATES', SYS.'templates'.DS);

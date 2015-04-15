@@ -77,7 +77,7 @@ die();?>
             </tr>
             <tr class="odd">
                 <td class="right">[__Blocked]</td>
-                <td colspan="2" class="left"><input type="checkbox" name="blocked" value="1" [if=blocked] checked="checked" [endif] /></td>
+                <td colspan="2" class="left"><input type="checkbox" name="blocked" value="1" [if=blocked] checked="checked" [/if] /></td>
             </tr>
             <tr class="even">
                 <td>[__Password]</td>

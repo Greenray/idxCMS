@@ -7,24 +7,16 @@
 die();?>
 <script type="text/javascript">
     function checkForm(form) {
-        var title = form.title.value;
-        var access = form.access.value;
+        var title     = form.title.value;
+        var access    = form.access.value;
         var textRegex = new RegExp(/<\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[^'">\s]+))?)+\s*|\s*)\/?>/gim);
-        var numRegex = /^[0-9]{1}$/;
-        if (title === '') {
-            ShowAlert('[__Enter a title]', '[__Error]');
+        var numRegex  = /^[0-9]{1}$/;
+        if (title === '' || !title.match(textRegex)) {
+            ShowAlert('[__Error in the title]', '[__Error]');
             return false;
         }
-        if (title.match(textRegex)) {
-            ShowAlert('[__Invalid symbols]', '[__Error]');
-            return false;
-        }
-        if (access === '') {
-            ShowAlert('[__Enter a value of access level]', '[__Error]');
-            return false;
-        }
-        if (!access.match(numRegex)) {
-            ShowAlert('[__Enter a value of access level]', '[__Error]');
+        if ((access === '') || !access.match(numRegex) || (access < 0) || (access > 9)) {
+            ShowAlert('[__Error in value of the access level]', '[__Error]');
             return false;
         }
         return true;
@@ -42,8 +34,8 @@ die();?>
                     <input type="hidden" name="category" value="{id}"/>
                     <b>{section[title]}</b>
                 [else]
-                    <select name="section">[each=sections]<option value="{sections[id]}">{sections[title]}</option>[endeach.sections]</select>
-                [endelse]
+                    <select name="section">[each=sections]<option value="{sections[id]}">{sections[title]}</option>[/each.sections]</select>
+                [/else]
                 </td>
             </tr>
             <tr>
@@ -68,7 +60,7 @@ die();?>
                     <td><input type="file" name="icon" size="60" value=""/></td>
             [else]
                     <td><input type="file" name="icon" size="60" value=""/></td>
-            [endelse]
+            [/else]
                 <td class="help">[__Required fields have a yellow background]</td>
             </tr>
         </table>

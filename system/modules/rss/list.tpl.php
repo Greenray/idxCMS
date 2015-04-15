@@ -18,11 +18,11 @@ die();?>
                                 <span class="title">{categories[title]}</span>
                                 <span class="subtitle">{categories[desc]}</span>
                             </li>
-                        [endeach.feed[categories]]
+                        [/each.feed[categories]]
                     </ul>
                 </div>
                 <hr />
             </li>
-        [endeach.feed]
+        [/each.feed]
     </ul>
 </div>

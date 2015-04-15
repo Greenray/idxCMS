@@ -1,8 +1,7 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-
 /** Process rss feeds.
  *
+ * @program   idxCMS: Flat Files Content Management Sysytem
  * @file      system/rss_feeds.class.php
  * @version   2.4
  * @author    Victor Nabatov <greenray.spb@gmail.com>
@@ -13,46 +12,30 @@
 
 class RSS_FEEDS {
 
-    /** RSS feed title
-     * @param string
-     */
+    /** @param string RSS feed title */
     public $title = '';
 
-    /** RSS feed URL
-     * @param string
-     */
+    /** @param string RSS feed URL */
     public $url = '';
 
-    /** RSS feed description
-     * @param string
-     */
+    /** @param string RSS feed description */
     public $description = '';
 
-    /** RSS feed language
-     * @param string
-     */
+    /** @param string RSS feed language */
     public $language = '';
 
-    /** RSS feed copyright
-     * @param string
-     */
+    /** @param string RSS feed copyright */
     public $copyright = '';
 
-    /** RSS feed generator
-     * @param string
-     */
+    /** @param string RSS feed generator */
     public $generator = '';
 
-    /** RSS feed items
-     * @param array
-     */
+    /** @param array RSS feed items */
     public $items = [];
 
-    /**Class initialization.
-     *
+    /** Class initialization.
      * @param  string $title       RSS feed title
      * @param  string $description RSS feed description
-     * @return void
      */
     public function __construct($title, $description) {
         $this->title       = $title;
@@ -64,15 +47,13 @@ class RSS_FEEDS {
     }
 
     /** Adds item to the RSS feed.
-     *
      * @param  string $item Item text fo the RSS feed
-     * @return void
      */
     public function addItem($item) {
         if (empty($item['desc'])) {
             $item['desc'] = $item['text'];
         }
-        $this->items[] = array($item['title'], $item['desc'], $item['link'], $item['time']);
+        $this->items[] = [$item['title'], $item['desc'], $item['link'], $item['time']];
     }
 
     /** Adds new feed.
@@ -114,9 +95,7 @@ class RSS_FEEDS {
     }
 
     /** Gets RSS feed.
-     *
      * @param string $feed RSS feed
-     * @return void
      */
     public function getFeed($feed) {
         list($module, $section) = explode('@', $feed);

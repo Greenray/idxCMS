@@ -7,4 +7,4 @@
 if (!defined('idxCMS')) die();
 
 $TPL = new TEMPLATE(dirname(__FILE__).DS.'navigation.tpl');
-ShowWindow(__('Navigation'), $TPL->parse(array('points' => CMS::call('SYSTEM')->getNavigation())));
+ShowWindow(__('Navigation'), $TPL->parse(['points' => CMS::call('SYSTEM')->getNavigation()]));

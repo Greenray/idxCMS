@@ -1,8 +1,7 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-
 /** Clean parameters $_REQUEST, $_FILES, $_COOKIE, detect intrusions and ban unwanted visitors.
  *
+ * @program   idxCMS: Flat Files Content Management Sysytem
  * @file      system/filter.class.php
  * @version   2.4
  * @author    Victor Nabatov <greenray.spb@gmail.com>
@@ -13,19 +12,13 @@
 
 final class FILTER {
 
-    /** Array of filtered $_POST, $_GET and $_FILES parameters.
-     * @var array
-     */
+    /** @var array Array of filtered $_POST, $_GET and $_FILES parameters */
     private static $REQUEST = [];
 
-    /** Array of filtered $_COOKIE parameters.
-     * @var array
-     */
+    /** @var array Array of filtered $_COOKIE parameters */
     private static $COOKIE = [];
 
-    /** Array of parameters types.
-     * @var array
-     */
+    /** @var array Array of parameters types */
     private static $types = ['REQUEST', 'FILES', 'COOKIE'];
 
     /** Class initialization. */
@@ -73,7 +66,6 @@ final class FILTER {
 
     /** Detects intrusion, clean and unset $_POST, $_GET, $_FILES and $_COOKIE.
      * The result are two variables: $REQUEST and $COOKIE.
-     * @return void
      */
     public function sanitaze() {
         $this->ids();
@@ -94,9 +86,9 @@ final class FILTER {
     }
 
     /** Gets specified filtered parameter.
-     * @param  string $type   Type of parameter
-     * @param  string $param  Name of parameter
-     * @return array|string Parameter values or empty string
+     * @param  string $type  Type of parameter
+     * @param  string $param Name of parameter
+     * @return array|string  Parameter values or empty string
      */
     public static function get($type, $param) {
         if (array_key_exists($param, self::$$type)) {
@@ -109,7 +101,6 @@ final class FILTER {
     /** Removes filtered parameter.
      * @param  string $type  Type of parameter
      * @param  string $param Name of parameter
-     * @return void
      */
     public static function remove($type, $param) {
         if (array_key_exists($param, self::$$type)) {
@@ -141,7 +132,6 @@ final class FILTER {
      *  - malicious URL requests;
      *  - banned IP or cookie.
      * If the intrusion will be detected this event will be logged and the system will die.
-     * @return void
      */
     private function ids() {
         # Bad words in $_SERVER

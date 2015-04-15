@@ -1,12 +1,20 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Catalogs
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+/** Catalogs of files, links, etc.
+ *
+ * @program   idxCMS: Flat Files Content Management Sysytem
+ * @file      system/modules/catalogs/module.php
+ * @version   2.4
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+ * @package   Catalogs
+ * @overview  Catalogs of files, links, etc.
+ *            Catalogs database is similar to posts database.
+ */
 
 if (!defined('idxCMS')) die();
 
-/** Catalogs data store */
+/** Data storage for catalogs */
 define('CATALOGS', CONTENT.'catalogs'.DS);
 
 require SYS.'catalogs.class.php';
@@ -49,7 +57,7 @@ switch (SYSTEM::get('locale')) {
 
 SYSTEM::registerModule('catalogs', 'Catalogs', 'main');
 SYSTEM::registerModule('catalogs.last', 'Updates', 'box');
-USER::setSystemRights(array('catalogs' => __('Catalogs').': '.__('Moderator')));
+USER::setSystemRights(['catalogs' => __('Catalogs').': '.__('Moderator')]);
 SYSTEM::registerMainMenu('catalogs');
 SYSTEM::registerSiteMap('catalogs');
 SYSTEM::registerSearch('catalogs');

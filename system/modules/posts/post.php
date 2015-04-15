@@ -7,11 +7,11 @@
 if (!defined('idxCMS')) die();
 
 # Only registered users can post
-if (!USER::loggedIn()) Redirect('posts');
+if (!USER::$logged_in) Redirect('posts');
 
 $sections = CMS::call('POSTS')->getSections();
 
-if (!CMS::call('USER')->checkRoot()) {
+if (!USER::$root) {
     # User cannot post without Admin's moderation
     $section  = 'drafts';
     $category = 2;
@@ -57,7 +57,7 @@ if (!empty($REQUEST['save'])) {
     }
 }
 
-if (CMS::call('USER')->checkRoot()) {
+if (USER::$root) {
     $output = [];
     $choice = [];
     $list_i = [];
@@ -102,7 +102,7 @@ $output['text']     = FILTER::get('REQUEST', 'text');
 $opened = FILTER::get('REQUEST', 'opened');
 $output['opened']   = empty($opened) ? TRUE : $opened;
 
-if (FILTER::get('REQUEST', 'edit') && CMS::call('USER')->checkRoot()) {
+if (FILTER::get('REQUEST', 'edit') && USER::$root) {
     $content = CMS::call('POSTS')->getContent($category);
     $post    = CMS::call('POSTS')->getItem($post, 'full', FALSE);
     $output['item']     = $post['id'];

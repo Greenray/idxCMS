@@ -45,7 +45,7 @@ if (empty($sections)) {
                         if (!empty($content[$topic]['opened'])) {
                             if (empty($reply)) {
                                 # Edit topic
-                                if (USER::loggedIn()) {
+                                if (USER::$logged_in) {
                                     if (!empty($REQUEST['save'])) {
                                         try {
                                             $topic = CMS::call('FORUM')->saveTopic($topic);
@@ -199,7 +199,7 @@ if (empty($sections)) {
 
         if (!empty($REQUEST['new'])) {
             # New topic
-            if (USER::loggedIn()) {
+            if (USER::$logged_in) {
                 if (!empty($REQUEST['save'])) {
                     try {
                         $result = CMS::call('FORUM')->saveTopic();
@@ -214,13 +214,13 @@ if (empty($sections)) {
                 ShowWindow(
                     __('New topic'),
                     $TPL->parse(
-                        array(
+                        [
                             'new'       => TRUE,
                             'title'     => FILTER::get('REQUEST', 'title'),
                             'text'      => FILTER::get('REQUEST', 'text'),
                             'moderator' => USER::moderator('forum'),
                             'bbCodes'   => CMS::call('PARSER')->showBbcodesPanel('topic.text')
-                        )
+                        ]
                     )
                 );
             } else {
@@ -228,7 +228,7 @@ if (empty($sections)) {
             }
         } elseif (empty($content)) {
             $output = '';
-            if (USER::loggedIn()) {
+            if (USER::$logged_in) {
                 $output['post_allowed'] = TRUE;
             }
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'category.tpl');
@@ -264,7 +264,7 @@ if (empty($sections)) {
                     } else $output['topic'][$ids[$i]]['flag'] = 'open';
                 }
             }
-            if (USER::loggedIn()) {
+            if (USER::$logged_in) {
                 $output['post_allowed'] = TRUE;
             }
             ArraySort($output['topic'],'!pinned','!time');

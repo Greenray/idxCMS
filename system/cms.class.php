@@ -1,8 +1,7 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-
 /** Registers objects and provides access to their methods.
  *
+ * @program   idxCMS: Flat Files Content Management Sysytem
  * @file      system/cms.class.php
  * @version   2.4
  * @author    Victor Nabatov <greenray.spb@gmail.com>
@@ -13,9 +12,7 @@
 
 class CMS {
 
-    /** Registered objects.
-     * @var array
-     */
+    /** @var array Registered objects */
     private static $obj = [];
 
     /** Class initialization. */
@@ -25,7 +22,6 @@ class CMS {
     private function __clone() {}
 
     /** Creates and registers the object.
-     *
      * @param  string $class Class name
      * @return object        Created and initialized object
      */
@@ -49,9 +45,7 @@ class CMS {
     }
 
     /** Removes the object.
-     *
-     * @param  string $class Class name
-     * @return void
+     * @param string $class Class name
      */
     public static function remove($class) {
         if (isset(self::$obj[$class])) {

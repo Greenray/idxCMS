@@ -1,12 +1,24 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - Statistic
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+/** Statistics: view and manage.
+ *
+ * @program   idxCMS: Flat Files Content Management Sysytem
+ * @file      admin/modules/_statistics/statistics.php
+ * @version   2.4
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+ * @package   Statistics
+ */
 
-if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
+if (!defined('idxADMIN') || !USER::$root) die();
 
-function StatisticClean($file, $field = '') {
+/** Cleans website statistics.
+ *
+ * @param  string  $file  Name of the file with data
+ * @param  string  $field Name of the datafield
+ * @return boolean The result of operation
+ */
+function StatisticsClean($file, $field = '') {
     $stat = [];
     if (!empty($field)) {
         $stat = GetUnserialized($file);
@@ -17,12 +29,12 @@ function StatisticClean($file, $field = '') {
     return file_put_contents($file, serialize($stat), LOCK_EX);
 }
 
-if (!empty($REQUEST['cleanrefs']))    StatisticClean(CONTENT.'stats', 'ref');
-if (!empty($REQUEST['cleanua']))      StatisticClean(CONTENT.'stats', 'ua');
-if (!empty($REQUEST['cleanstats']))   StatisticClean(CONTENT.'stats');
-if (!empty($REQUEST['cleanagents']))  StatisticClean(CONTENT.'spiders', 'ua');
-if (!empty($REQUEST['cleansip']))     StatisticClean(CONTENT.'spiders', 'ip');
-if (!empty($REQUEST['cleanspiders'])) StatisticClean(CONTENT.'spiders');
+if (!empty($REQUEST['cleanrefs']))    StatisticsClean(CONTENT.'stats', 'ref');
+if (!empty($REQUEST['cleanua']))      StatisticsClean(CONTENT.'stats', 'ua');
+if (!empty($REQUEST['cleanstats']))   StatisticsClean(CONTENT.'stats');
+if (!empty($REQUEST['cleanagents']))  StatisticsClean(CONTENT.'spiders', 'ua');
+if (!empty($REQUEST['cleansip']))     StatisticsClean(CONTENT.'spiders', 'ip');
+if (!empty($REQUEST['cleanspiders'])) StatisticsClean(CONTENT.'spiders');
 
 $stats = GetUnserialized(CONTENT.'stats');
 $output = [];
@@ -67,6 +79,6 @@ if (!empty($spiders)) {
 }
 
 if (!empty($output)) {
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'statistic.tpl');
+    $TPL = new TEMPLATE(dirname(__FILE__).DS.'statistics.tpl');
     echo $TPL->parse($output);
 }

@@ -1,8 +1,7 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-
 /** Processing content: articles and comments.
  *
+ * @program   idxCMS: Flat Files Content Management Sysytem
  * @file      system/posts.class.php
  * @version   2.4
  * @author    Victor Nabatov <greenray.spb@gmail.com>

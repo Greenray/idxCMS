@@ -256,4 +256,3 @@ $LANG['def']['You are the registered user'] = 'Вы зарегистрирова
 $LANG['def']['You cannot send message to yourself'] = 'Нельзя посылать сообщения самому себе';
 $LANG['def']['You have all rights on this site'] = 'У Вас полный доступ к сайту';
 $LANG['def']['Your request was sent to Administrator'] = 'Ваш запрос отправлен Администратору';
-?>

@@ -1,8 +1,7 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-
 /** System, modules, users and templates initialization.
  *
+ * @program   idxCMS: Flat Files Content Management Sysytem
  * @file      system/system.class.php
  * @version   2.4
  * @author    Victor Nabatov <greenray.spb@gmail.com>
@@ -12,42 +11,6 @@
  */
 
 class SYSTEM {
-
-    /** Website URL.
-     * This one may be configured by website administrator or detected automaticaly.
-     * @var string
-     */
-    private static $url = '';
-
-    /** User language.
-     * @var string
-     */
-    private static $language = '';
-
-    /** Available website translations.
-     * @var string
-     */
-    private static $languages = [];
-
-    /** Current locale.
-     * @var string
-     */
-    private static $locale = '';
-
-    /** Current skin.
-     * @var string
-     */
-    private static $skin = 'Default';
-
-    /** Website skins.
-     * @var array
-     */
-    public static  $skins = [];
-
-    /** CMS modules.
-     * @var array
-     */
-    public static  $modules = [];
 
     /** Array of the output points.
      * Currently there are six points:
@@ -62,49 +25,55 @@ class SYSTEM {
      */
     public static  $current_point = '';
 
-    /** Array of generated output data.
-     * @var array
-     */
-    public static  $output = [];
-
-    /** Website RSS feeds.
-     * @var array
-     */
+    /** @var array Website RSS feeds */
     private static $feeds = [];
 
-    /** Array of navigation pint of the website.
-     * @var array
-     */
-    private static $navigation = [];
+    /** @var string User language */
+    private static $language = '';
 
-    /** Website menu.
-     * @var array
-     */
+    /** @var string Available website translations */
+    private static $languages = [];
+
+    /** @var string Current locale */
+    private static $locale = '';
+
+    /** @var array Website menu */
     private static $menu = [];
 
-    /** Name of the current page.
-     * @var string
-     */
-    private static $pagename = '';
-
-    /** Website map.
-     * @var array
-     */
-    private static $sitemap = [];
-
-    /** Search words from user request.
-     * @var array
-     */
-    private static $search = [];
-
-    /** Website meta.
-     * @var array
-     */
+    /** @var array Website meta */
     private static $meta = [];
 
-    /** Class initialization.
-     *
-     * @return void
+    /** @var array CMS modules */
+    public static  $modules = [];
+
+    /** @var array Array of navigation pint of the website */
+    private static $navigation = [];
+
+    /** @var array Array of generated output data */
+    public static  $output = [];
+
+    /** @var string Name of the current page */
+    private static $pagename = '';
+
+    /** @var array Search words from user request */
+    private static $search = [];
+
+    /** @var array Website map */
+    private static $sitemap = [];
+
+    /** @var string Current skin */
+    private static $skin = 'Default';
+
+    /** @var array Website skins */
+    public static  $skins = [];
+
+    /** Website URL.
+     * This one may be configured by website administrator or detected automaticaly.
+     * @var string
+     */
+    private static $url = '';
+
+    /** Initialization of the system.
      * @uses $LANG Website translations
      */
     public function __construct() {
@@ -165,18 +134,101 @@ class SYSTEM {
         }
     }
 
-    /** Set system parameter.
-     *
-     * @param  string $param System parameter
-     * @param  string $value Value of the system parameter
-     * @return void
+    /** Creates main menu for website.
+     * The menu will be created only for registered and enabled modules.
+     * @return boolean The result of operation
      */
-    public static function set($param, $value) {
-        self::$$param = $value;
+    public function createMainMenu() {
+        $enabled = CONFIG::getSection('enabled');
+        $menu  = [];
+        $menu['index']['module'] = 'index';
+        $menu['index']['link']   = MODULE.'index';
+        $menu['index']['name']   = __('Index');
+        $menu['index']['desc']   = '';
+        $menu['index']['icon']   = ICONS.'index.png';
+        $menu['index']['width']  = mb_strlen($menu['index']['name'], 'UTF-8') * 7;
+        $width = mb_strlen($menu['index']['desc'], 'UTF-8') * 7;
+        $menu['index']['width'] = ($menu['index']['width'] > $width) ? $menu['index']['width'] : $width;
+
+        foreach (self::$modules as $module => $data) {
+            if (in_array($module, self::$menu) && array_key_exists($module, $enabled)) {
+                $obj = strtoupper($module);
+                $point = [];
+                $point[$module]['module'] = $module;
+                $point[$module]['link']   = MODULE.$module;
+                $point[$module]['name']   = SYSTEM::$modules[$module]['title'];
+                $point[$module]['desc']   = '';
+                $point[$module]['icon']   = ICONS.$module.'.png';
+
+                if (class_exists($obj)) {
+                    $point[$module]['sections'] = CMS::call($obj)->getSections();
+                    unset($point[$module]['sections']['drafts']);
+                    $point[$module]['width']  = mb_strlen($point[$module]['name'], 'UTF-8') * 7;
+                    $width = mb_strlen($point[$module]['desc'], 'UTF-8') * 7;
+                    $point[$module]['width'] = ($point[$module]['width'] > $width) ? $point[$module]['width'] : $width;
+                    foreach ($point[$module]['sections'] as $id => $section) {
+                        $point[$module]['sections'][$id]['desc'] = CMS::call('PARSER')->parseText($section['desc']);
+                        foreach ($section['categories'] as $key => $category) {
+                            $point[$module]['sections'][$id]['categories'][$key]['desc'] = CMS::call('PARSER')->parseText($category['desc']);
+                        }
+                    }
+                }
+
+                if (!empty($point)) {
+                    $menu = array_merge($menu, $point);
+                    if (!empty($point[$module]['name'])) {
+                        $menu[$module]['width'] = mb_strlen($menu[$module]['name'], 'UTF-8') * 7;
+                        $width = mb_strlen($menu[$module]['desc'], 'UTF-8') * 7;
+                        $menu[$module]['width'] = ($menu[$module]['width'] > $width) ? $menu[$module]['width'] : $width;
+                        if (!empty($point[$module]['sections'])) {
+                            foreach($point[$module]['sections'] as $id => $section) {
+                                $width = mb_strlen($section['title'], 'UTF-8') * 7 + 55;
+                                $menu[$module]['sections'][$id]['width'] = $width;
+                                $menu[$module]['width'] = ($menu[$module]['width'] > $width) ? $menu[$module]['width'] : $width;
+                                $width = mb_strlen($section['desc'], 'UTF-8') * 7 + 55;
+                                $menu[$module]['width'] = ($menu[$module]['width'] > $width) ? $menu[$module]['width'] : $width;
+                                if (!empty($section['categories'])) {
+                                    foreach($section['categories'] as $key => $category) {
+                                        $width = mb_strlen($category['title'], 'UTF-8') * 7 + 55;
+                                        $menu[$module]['categories'][$id]['width'] = $width;
+                                        $menu[$module]['width'] = ($menu[$module]['width'] > $width) ? $menu[$module]['width'] : $width;
+                                        $width = mb_strlen($category['desc'], 'UTF-8') * 7 + 55;
+                                        $menu[$module]['width'] = ($menu[$module]['width'] > $width) ? $menu[$module]['width'] : $width;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (!empty($point[$module]['categories'])) {
+                            foreach($point[$module]['categories'] as $id => $category) {
+                                $width = mb_strlen($category['title'], 'UTF-8') * 7 + 55;
+                                $menu[$module]['categories'][$id]['width'] = $width;
+                                $menu[$module]['width'] = ($menu[$module]['width'] > $width) ? $menu[$module]['width'] : $width;
+                                $width = mb_strlen($category['desc'], 'UTF-8') * 7 + 55;
+                                $menu[$module]['width'] = ($menu[$module]['width'] > $width) ? $menu[$module]['width'] : $width;
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+        file_put_contents(CONTENT.'menu', serialize($menu));
     }
 
-    /** Get system parameter.
-     *
+    /** Prepare data for output.
+     * @param  string $title   Window title
+     * @param  string $content Content for output
+     * @param  string $align   Content alignment (défaut : "left")
+     * @return
+     */
+    public static function defineWindow($title, $content, $align = 'left') {
+        if (self::$current_point == '__MAIN__')
+             self::$output['main'][] = [$title, $content, $align];
+        else self::$output[self::$current_point][] = [$title, $content, $align];
+    }
+
+    /** Gets system parameter.
      * @param  string $param System parameter
      * @return string        Value of the requested parameter
      */
@@ -184,190 +236,7 @@ class SYSTEM {
         return self::$$param;
     }
 
-    /** Modules initialization.
-     *
-     * @param  boolean $ignore_disabled Init all existing modules
-     * @return void
-     * @uses array $LANG Website translations
-     */
-    public function initModules($ignore_disabled = FALSE) {
-        global $LANG;
-        $enabled = CONFIG::getSection('enabled');
-        if (empty($enabled) || $ignore_disabled) {
-            $enabled = array_flip(GetFilesList(MODULES));
-        }
-
-        $included = [];
-        foreach ($enabled as $module => $null) {
-            $mod = explode('.', $module, 2);
-            if (!in_array($mod[0], $included)) {
-
-                include_once MODULES.$mod[0].DS.'module.php';
-                $included[] = $mod[0];
-            }
-        }
-    }
-
-    /** Register module.
-     * Used for classify modules by type. There are three types:
-     * - system (cannot be excluded);
-     * - main (for full pages);
-     * - box (for panels or boxes);
-     * - plugin (cannot be showed on any page).
-     *
-     * @param  string $module Module name
-     * @param  string $title  Module title
-     * @param  string $type   Module type
-     * @param  string $system
-     * @return void
-     */
-    public static function registerModule($module, $title, $type, $system = '') {
-        self::$modules[$module]['title']  = __($title);
-        self::$modules[$module]['type']   = $type;
-        self::$modules[$module]['system'] = $system;
-    }
-
-    /** Register RSS feed for module.
-     * RSS feed ID is looks like "module@section".
-     *
-     * @param  string $section RSS feed ID
-     * @param  string $title   RSS feed title
-     * @param  string $desc    RSS feed description
-     * @param  string $module  Module name
-     * @return void
-     */
-    public static function registerFeed($section, $title, $desc, $module = '') {
-        self::$feeds[$section] = array(__($title), __($desc), $module);
-    }
-
-    /** Register module for menu link.
-     *
-     * @param  string $module Module name
-     * @return void
-     */
-    public static function registerMainMenu($module) {
-        self::$menu[] = $module;
-    }
-
-    /** Register module for use in sitemap.
-     *
-     * @param  string $module Module name
-     * @return void
-     */
-    public static function registerSiteMap($module) {
-        self::$sitemap[] = $module;
-    }
-
-    /** Register module for search requests.
-     *
-     * @param  string $module Module name
-     * @return void
-     */
-    public static function registerSearch($module) {
-        self::$search[] = $module;
-    }
-
-    /** Register module for menu link.
-     *
-     * @param  string $name Skin name
-     * @param  string $skin Skin template
-     * @return void
-     */
-    public static function registerSkin($name, $skin) {
-        self::$skins[$name] = $skin;
-    }
-
-    /** Set the point for output.
-     *
-     * @param  type $point Output point name
-     * @return void
-     */
-    public static function setCurrentPoint($point) {
-        self::$current_point = $point;
-    }
-
-    /**
-    * @todo Comment
-    * @param string $title	...
-    * @param string $content	...
-    * @param string $align	... (défaut : 'left')
-    * @return
-    */
-    public static function defineWindow($title, $content, $align = 'left') {
-        if (self::$current_point == '__MAIN__')
-             self::$output['main'][] = [$title, $content, $align];
-        else self::$output[self::$current_point][] = [$title, $content, $align];
-    }
-
-    /** Show window.
-     *
-     * @param  string $title    The title of the output data
-     * @param  string $content  The content for use in output
-     * @param  string $align    Page data alignment
-     * @param  string $template Name of the template for use in output
-     * @return string           Website page
-     */
-    public static function showWindow($title, $content, $align, $template) {
-        if (($title === '__NOWINDOW__') || ($template === 'empty')) {
-            return $content;
-        } elseif ($title === 'Error') {
-            /** @todo SYSTEM::$skins['error'] - ? */
-            $TPL = new TEMPLATE(SYSTEM::$skins['error']);
-            return $TPL->parse(
-                array(
-                    'title'   => __('Error'),
-                    'content' => $content,
-                    'align'   => 'center',
-                    'class'   => 'error'
-                )
-            );
-        } else {
-            $TPL = new TEMPLATE(SYSTEM::$skins[$template]);
-            return $TPL->parse(
-                array(
-                    'title'   => $title,
-                    'content' => $content,
-                    'align'   => $align,
-                    'class'   => $template
-                )
-            );
-        }
-    }
-
-    /** Set keywords for requested website page.
-     * This description will be used in meta tag.
-     * If some words has been set in website configuration (global keywords) the $keywords will be added to them.
-     *
-     * @param  string $keywords Page keywords
-     * @return void
-     */
-    public static function setPageKeywords($keywords) {
-        self::$meta['keywords'] = empty(self::$meta['keywords']) ? $keywords : self::$meta['keywords'].','.$keywords;
-    }
-
-    /** Set description for requested website page.
-     * This description will be used in meta tag.
-     *
-     * @param  string $desc Page description
-     * @return void
-     */
-    public static function setPageDescription($desc) {
-        self::$meta['desc'] = $desc;
-    }
-
-    /** Get website navigation points.
-     * If navigation is not exists it will be created.
-     *
-     * @return array Website navigation points
-     */
-    public function getNavigations() {
-        if (empty(self::$navigation)) {
-            return self::createNavigation();
-        }
-        return self::$navigation;
-    }
-
-    /** Create site navigation.
+    /** Creates site navigation.
      * @return array Website navigation points
      */
     public static function getNavigation() {
@@ -381,9 +250,8 @@ class SYSTEM {
                     $obj = strtoupper($module);
                     if (class_exists($obj)) {
                         $sections = CMS::call($obj)->getSections();
-                        if (!empty($sections['drafts'])) {
-                            unset($sections['drafts']);
-                        }
+                        unset($sections['drafts']);
+
                         if (!empty($sections)) {
                             $data = explode(DS, $path, 3);
                             switch (sizeof($data)) {
@@ -444,86 +312,161 @@ class SYSTEM {
         return self::$navigation;
     }
 
-    /** Create main menu for website.
-     * The menu will be created only for registered and enabled modules.
-     *
-     * @return boolean The result of operation
+    /** Gets website navigation points.
+     * If navigation is not exists it will be created.
+     * @return array Website navigation points
      */
-    public function createMainMenu() {
+    public function getNavigations() {
+        if (empty(self::$navigation)) {
+            return self::createNavigation();
+        }
+        return self::$navigation;
+    }
+
+    /** Modules initialization.
+     * @param boolean $ignore_disabled Init all existing modules
+     * @uses array    $LANG Website translations
+     */
+    public function initModules($ignore_disabled = FALSE) {
+        global $LANG;
         $enabled = CONFIG::getSection('enabled');
-        $menu  = [];
-        $menu['index']['module'] = 'index';
-        $menu['index']['link']   = MODULE.'index';
-        $menu['index']['name']   = __('Index');
-        $menu['index']['desc']   = '';
-        $menu['index']['icon']   = ICONS.'index.png';
-        $menu['index']['width']  = mb_strlen($menu['index']['name'], 'UTF-8') * 7;
-        $width = mb_strlen($menu['index']['desc'], 'UTF-8') * 7;
-        $menu['index']['width'] = ($menu['index']['width'] > $width) ? $menu['index']['width'] : $width;
+        if (empty($enabled) || $ignore_disabled) {
+            $enabled = array_flip(GetFilesList(MODULES));
+        }
 
-        foreach (self::$modules as $module => $data) {
-            if (in_array($module, self::$menu) && array_key_exists($module, $enabled)) {
-                $obj = strtoupper($module);
-                $point = [];
-                $point[$module]['module'] = $module;
-                $point[$module]['link']   = MODULE.$module;
-                $point[$module]['name']   = SYSTEM::$modules[$module]['title'];
-                $point[$module]['desc']   = '';
-                $point[$module]['icon']   = ICONS.$module.'.png';
+        $included = [];
+        foreach ($enabled as $module => $null) {
+            $mod = explode('.', $module, 2);
+            if (!in_array($mod[0], $included)) {
 
-                if (class_exists($obj)) {
-                    $point[$module]['sections'] = CMS::call($obj)->getSections();
-                    if (!empty($point[$module]['sections']['drafts'])) unset($point[$module]['sections']['drafts']);
-                    $point[$module]['width']  = mb_strlen($point[$module]['name'], 'UTF-8') * 7;
-                    $width = mb_strlen($point[$module]['desc'], 'UTF-8') * 7;
-                    $point[$module]['width'] = ($point[$module]['width'] > $width) ? $point[$module]['width'] : $width;
-                    foreach ($point[$module]['sections'] as $id => $section) {
-                        $point[$module]['sections'][$id]['desc'] = CMS::call('PARSER')->parseText($section['desc']);
-                        foreach ($section['categories'] as $key => $category) {
-                            $point[$module]['sections'][$id]['categories'][$key]['desc'] = CMS::call('PARSER')->parseText($category['desc']);
-                        }
-                    }
-                }
-
-                if (!empty($point)) {
-                    $menu = array_merge($menu, $point);
-                    if (!empty($point[$module]['name'])) {
-                        $menu[$module]['width'] = mb_strlen($menu[$module]['name'], 'UTF-8') * 7;
-                        $width = mb_strlen($menu[$module]['desc'], 'UTF-8') * 7;
-                        $menu[$module]['width'] = ($menu[$module]['width'] > $width) ? $menu[$module]['width'] : $width;
-                        if (!empty($point[$module]['sections'])) {
-                            foreach($point[$module]['sections'] as $id => $section) {
-                                $width = mb_strlen($section['title'], 'UTF-8') * 7 + 55;
-                                $menu[$module]['sections'][$id]['width'] = $width;
-                                $menu[$module]['width'] = ($menu[$module]['width'] > $width) ? $menu[$module]['width'] : $width;
-                                $width = mb_strlen($section['desc'], 'UTF-8') * 7 + 55;
-                                $menu[$module]['width'] = ($menu[$module]['width'] > $width) ? $menu[$module]['width'] : $width;
-                                if (!empty($section['categories'])) {
-                                    foreach($section['categories'] as $key => $category) {
-                                        $width = mb_strlen($category['title'], 'UTF-8') * 7 + 55;
-                                        $menu[$module]['categories'][$id]['width'] = $width;
-                                        $menu[$module]['width'] = ($menu[$module]['width'] > $width) ? $menu[$module]['width'] : $width;
-                                        $width = mb_strlen($category['desc'], 'UTF-8') * 7 + 55;
-                                        $menu[$module]['width'] = ($menu[$module]['width'] > $width) ? $menu[$module]['width'] : $width;
-                                    }
-                                }
-                            }
-                        }
-
-                        if (!empty($point[$module]['categories'])) {
-                            foreach($point[$module]['categories'] as $id => $category) {
-                                $width = mb_strlen($category['title'], 'UTF-8') * 7 + 55;
-                                $menu[$module]['categories'][$id]['width'] = $width;
-                                $menu[$module]['width'] = ($menu[$module]['width'] > $width) ? $menu[$module]['width'] : $width;
-                                $width = mb_strlen($category['desc'], 'UTF-8') * 7 + 55;
-                                $menu[$module]['width'] = ($menu[$module]['width'] > $width) ? $menu[$module]['width'] : $width;
-                            }
-                        }
-                    }
-
-                }
+                include_once MODULES.$mod[0].DS.'module.php';
+                $included[] = $mod[0];
             }
         }
-        file_put_contents(CONTENT.'menu', serialize($menu));
+    }
+
+    /** Registers RSS feed for module.
+     * RSS feed ID is looks like "module@section".
+     * @param string $section RSS feed ID
+     * @param string $title   RSS feed title
+     * @param string $desc    RSS feed description
+     * @param string $module  Module name
+     */
+    public static function registerFeed($section, $title, $desc, $module = '') {
+        self::$feeds[$section] = [__($title), __($desc), $module];
+    }
+
+    /** Registers module for menu link.
+     * @param string $module Module name
+     */
+    public static function registerMainMenu($module) {
+        self::$menu[] = $module;
+    }
+
+    /** Registers module.
+     * Used for classify modules by type. There are three types:
+     * - system (cannot be excluded);
+     * - main (for full pages);
+     * - box (for panels or boxes);
+     * - plugin (cannot be showed on any page).
+     *
+     * @param string $module Module name
+     * @param string $title  Module title
+     * @param string $type   Module type
+     * @param string $system
+     */
+    public static function registerModule($module, $title, $type, $system = '') {
+        self::$modules[$module]['title']  = __($title);
+        self::$modules[$module]['type']   = $type;
+        self::$modules[$module]['system'] = $system;
+    }
+
+    /** Registers module for search requests.
+     * @param string $module Module name
+     */
+    public static function registerSearch($module) {
+        self::$search[] = $module;
+    }
+
+    /** Registers module for use in sitemap.
+     * @param string $module Module name
+     */
+    public static function registerSiteMap($module) {
+        self::$sitemap[] = $module;
+    }
+
+    /** Registers module for menu link.
+     * @param string $name Skin name
+     * @param string $skin Skin template
+     */
+    public static function registerSkin($name, $skin) {
+        self::$skins[$name] = $skin;
+    }
+
+    /** Sets system parameter.
+     * @param string $param System parameter
+     * @param string $value Value of the system parameter
+     */
+    public static function set($param, $value) {
+        self::$$param = $value;
+    }
+
+    /** Sets the point for output.
+     * @param type $point Output point name
+     */
+    public static function setCurrentPoint($point) {
+        self::$current_point = $point;
+    }
+
+    /** Shows window.
+     *
+     * @param  string $title    The title of the output data
+     * @param  string $content  The content for use in output
+     * @param  string $align    Page data alignment
+     * @param  string $template Name of the template for use in output
+     * @return string           Website page
+     */
+    public static function showWindow($title, $content, $align, $template) {
+        if (($title === '__NOWINDOW__') || ($template === 'empty')) {
+            return $content;
+        } elseif ($title === 'Error') {
+            /** @todo SYSTEM::$skins['error'] - ? */
+            $TPL = new TEMPLATE(SYSTEM::$skins['error']);
+            return $TPL->parse(
+                [
+                    'title'   => __('Error'),
+                    'content' => $content,
+                    'align'   => 'center',
+                    'class'   => 'error'
+                ]
+            );
+        } else {
+            $TPL = new TEMPLATE(SYSTEM::$skins[$template]);
+            return $TPL->parse(
+                [
+                    'title'   => $title,
+                    'content' => $content,
+                    'align'   => $align,
+                    'class'   => $template
+                ]
+            );
+        }
+    }
+
+    /** Sets keywords for requested website page.
+     * This description will be used in meta tag.
+     * If some words has been set in website configuration (global keywords) the $keywords will be added to them.
+     * @param string $keywords Page keywords
+     */
+    public static function setPageKeywords($keywords) {
+        self::$meta['keywords'] = empty(self::$meta['keywords']) ? $keywords : self::$meta['keywords'].','.$keywords;
+    }
+
+    /** Sets description for requested website page.
+     * This description will be used in meta tag.
+     * @param string $desc Page description
+     */
+    public static function setPageDescription($desc) {
+        self::$meta['desc'] = $desc;
     }
 }

@@ -4,7 +4,7 @@
 # Version 2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
-if (!defined('idxADMIN') || !USER::loggedIn()) die();
+if (!defined('idxADMIN') || !USER::$logged_in) die();
 
 $output = [];
 $output['locale'] = SYSTEM::get('locale');
@@ -31,5 +31,5 @@ foreach($MODULES as $category => $data) {
         }
     }
 }
-$TPL = new TEMPLATE(ADMINTEMPLATES.'navigation.tpl');
+$TPL = new TEMPLATE(TEMPLATES.'navigation.tpl');
 echo $TPL->parse($output);

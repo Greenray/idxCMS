@@ -1,14 +1,14 @@
 <?php
-# idxCMS: Flat Files Content Management System
-
 /** Captcha.
  *
+ * @program   idxCMS: Flat Files Content Management Sysytem
  * @file      tools/captcha.php
  * @version   2.4
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2015 Victor Nabatov
  * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
  * @package   Tools
+ * @overview  Captcha, text editor and javascripts.
  */
 
 class CAPTCHA {
@@ -17,7 +17,6 @@ class CAPTCHA {
      * It takes one of two images (b$w or color), form code from 5...8 symbols, then split code into two parts.
      * So the captcha is different for every time.
      * @param  string $code Alpha-numeric code for captcha
-     * @return void
      */
     public function CAPTCHA($code) {
         $images  = ['captcha.png', 'captcha_color.png'];

@@ -14,7 +14,8 @@ if (!empty(FILTER::get('REQUEST', 'flip'))) {
 
     # Processing of command "flip"
     echo $aph[array_rand($aph, 1)].'$';
+
 } else {
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'aphorisms.tpl');
-    ShowWindow(__('Aphorisms'), $TPL->parse(array('text' => $aph[array_rand($aph, 1)])));
+    ShowWindow(__('Aphorisms'), $TPL->parse(['text' => $aph[array_rand($aph, 1)]]));
 }

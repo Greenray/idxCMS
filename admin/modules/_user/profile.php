@@ -4,7 +4,7 @@
 # Version 2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
-if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
+if (!defined('idxADMIN') || !USER::$root) die();
 
 # Check admin's rights
 if (FILTER::get('REQUEST', 'login')) {
@@ -38,15 +38,19 @@ if (!empty($REQUEST['act'])) {
             case 'profile':
                 $edit = $action[1];
                 break;
+
             case 'rights':
                 $username = $action[1];
                 break;
+
             case 'block':
                 USER::changeProfileField($action[1], 'blocked', TRUE);
                 break;
+
             case 'unblock':
                 USER::changeProfileField($action[1], 'blocked', FALSE);
                 break;
+
             case 'delete':
                 unlink(USERS.basename($action[1]));
                 unlink(PM_DATA.basename($action[1]));
@@ -81,14 +85,12 @@ if (FILTER::get('REQUEST', 'save')) {
             $level  = FILTER::get('REQUEST', 'level');
             file_put_contents(
                 TEMP.'rights.dat',
-                serialize(
-                    array(
-                        0 => $user,
-                        1 => empty($rights) ? [] : $rights,
-                        2 => FILTER::get('REQUEST', 'root'),
-                        3 => empty($level) ? 1 : $level
-                    )
-                )
+                serialize([
+                    0 => $user,
+                    1 => empty($rights) ? [] : $rights,
+                    2 => FILTER::get('REQUEST', 'root'),
+                    3 => empty($level) ? 1 : $level
+                ])
             );
             $message  = __('Identification');
             $message .= LoginForm();
@@ -126,7 +128,7 @@ if (!empty($edit) && ($userdata = USER::getUserData($edit))) {
         $output['nick']   = $user['nickname'];
         $output['admin']  = $root;
         $output['access'] = $user['access'];
-        $system_rights    = USER::getSystemRights();
+        $system_rights    = USER::$system_rights;
         if (!$root) {
             foreach ($system_rights as $id => $desc) {
                 $output['rights'][$id]['right'] = $id;

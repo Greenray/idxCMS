@@ -1,14 +1,14 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-
 /** Polls and polls archives.
  *
+ * @program   idxCMS: Flat Files Content Management Sysytem
  * @file      system/polls.class.php
  * @version   2.4
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011-2015 Victor Nabatov
  * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
  * @package   Polls
+ * @overview  Polls and polls archives.
  */
 if (!defined('idxCMS')) die();
 
@@ -104,7 +104,7 @@ class POLLS {
         if (!isset($this->active[$poll]['answers'][$answer])) {
             throw new Exception('This answer does not exists in this poll');
         }
-        $user = USER::loggedIn() ? USER::getUser('username') : $_SERVER['REMOTE_ADDR'];
+        $user = USER::$logged_in ? USER::getUser('username') : $_SERVER['REMOTE_ADDR'];
         if ($this->isVotedInPoll($poll)) {
             throw new Exception('You already voted in this poll');
         }
@@ -115,7 +115,7 @@ class POLLS {
     }
 
     public function isVotedInPoll($poll) {
-        $user = USER::loggedIn() ? USER::getUser('username') : $_SERVER['REMOTE_ADDR'];
+        $user = USER::$logged_in ? USER::getUser('username') : $_SERVER['REMOTE_ADDR'];
         if (in_array($user, $this->active[$poll]['ips'])) {
             return TRUE;
         }
@@ -126,7 +126,7 @@ class POLLS {
     }
 
     public function showPolls($polls, $tpl) {
-        $colors = array('red', 'yellow', 'blue', 'green', 'purple', 'aqua', 'gray', 'teal', 'white', 'black');
+        $colors = ['red', 'yellow', 'blue', 'green', 'purple', 'aqua', 'gray', 'teal', 'white', 'black'];
         $result = [];
         $output = '';
         foreach ($polls as $id => $poll) {

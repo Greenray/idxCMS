@@ -4,7 +4,7 @@
 # Version 2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
-if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
+if (!defined('idxADMIN') || !USER::$root) die();
 
 if (!empty($REQUEST['ban'])) {
     $bans = [];
@@ -26,4 +26,4 @@ if (!$bans = file(CONTENT.'bans', FILE_IGNORE_NEW_LINES)) {
 }
 
 $TPL = new TEMPLATE(dirname(__FILE__).DS.'bans.tpl');
-echo $TPL->parse(array('ban' => $bans));
+echo $TPL->parse(['ban' => $bans]);

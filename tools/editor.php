@@ -4,7 +4,7 @@
 # Version 2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
-if (!defined('idxCMS') || !USER::loggedIn()) die();
+if (!defined('idxCMS') || !USER::$logged_in) die();
 
 if (!empty($REQUEST['image']['name'])) {
     try {

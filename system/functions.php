@@ -1,13 +1,17 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# System functions
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+/**
+ * @program   idxCMS: Flat Files Content Management Sysytem
+ * @file      system/functions.php
+ * @version   2.4
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+ * @package   Core
+ */
 
 # FILES and DIRECTORIES
 
-/** Recursively get list of file from directory.
- *
+/** Recursively gets list of file from directory.
  * @param  string  $directory Directory for parsing
  * @param  string  $mask      Files mask
  * @param  string  $type      Files type: file or directory
@@ -44,11 +48,25 @@ function AdvScanDir($directory, $mask = '', $type = 'all', $filter = FALSE, $exc
     return $dir;
 }
 
-/**
- * @todo Comment
- * @param string $directory	...
- * @param string $except	...
- * @return
+/** Removes files and directories recursively.
+ * @param  string  $object    Directory to remove
+ * @param  boolean $recursive Remove recursively? (défaut : TRUE)
+ * @return boolean            The result of operation
+ */
+function DeleteTree($object, $recursive = TRUE) {
+    if ($recursive && is_dir($object)) {
+        $els = GetFilesList($object);
+        foreach ($els as $el) {
+            DeleteTree($object.DS.$el, $recursive);
+        }
+    }
+    return (is_dir($object)) ? rmdir($object) : unlink($object);
+}
+
+/** Gets the list of files from the specified directory.
+ * @param  string $directory Name of the directory
+ * @param  array  $except	 The list of files to exclude from the result
+ * @return array             The list of files from the specified directory
  */
 function GetFilesList($directory, $except = []) {
     $exclude = array_unique(array_merge(['.', '..', '.htaccess', 'index.html'], $except));
@@ -62,93 +80,11 @@ function GetFilesList($directory, $except = []) {
     return $result;
 }
 
-/** Recursively copy a folder and its contents.
- *
- * @param  string $source Sourse directory
- * @param  string $dest   Destination directory
- * @return boolean        The result of operation
- */
-function CopyTree($source, $dest) {
-    if (is_file($source)) {
-        return copy($source, $dest);
-    }
-    if (!is_dir($dest)) {
-        mkdir($dest, 0777);
-        chmod($dest, 0777);
-    }
-    $dir = dir($source);
-    while (($element = $dir->read()) !== FALSE) {
-        if (($element == '.') || ($element == '..')) {
-            continue;
-        }
-        CopyTree($source.DS.$element, $dest.DS.$element);
-    }
-    $dir->close();
-    return TRUE;
-}
-
-/** Remove files and directories recursively.
- *
-* @param  string  $object    Directory to remove
-* @param  boolean $recursive Remove recursively? (défaut : TRUE)
-* @return boolean            The result of operation
-*/
-function DeleteTree($object, $recursive = TRUE) {
-    if ($recursive && is_dir($object)) {
-        $els = GetFilesList($object);
-        foreach ($els as $el) {
-            DeleteTree($object.DS.$el, $recursive);
-        }
-    }
-    return (is_dir($object)) ? rmdir($object) : unlink($object);
-}
-
-/** Get content of gziped file.
- *
-* @param  string $file Name of the file
-* @return mixed        The content of file
-*/
-function gzfile_get_contents($file) {
-    if (!$file = gzfile($file)) {
-        return FALSE;
-    }
-    if (!$file = implode('', $file)) {
-        return FALSE;
-    }
-    return $file;
-}
-
-/** Write data to gziped file.
- *
-* @param  string  $file Filename
-* @param  string  $text Data to gzip
-* @param  string  $mode Write mode (défaut : 'w+')
-* @return boolean       The result of operation
-*/
-function gzfile_put_contents($file, $text, $mode = 'w+') {
-    if (($fp = @fopen($file.'.lock', 'w+')) === FALSE) {
-        return FALSE;
-    }
-    fwrite($fp, 'lock');
-    fclose($fp);
-    if (($fp = gzopen($file, $mode)) === FALSE) {
-        return FALSE;
-    }
-    if (!empty($text) && !gzwrite($fp, $text)) {
-        gzclose($fp);
-        return FALSE;
-    }
-    gzclose($fp);
-    unlink($file.'.lock');
-    return TRUE;
-}
-
-/** Get unserialized data.
+/** Gets unserialized data.
  * This function can automatically restore broken data.
- *
-* @param  string $file Filename
-* @return array        Unserialized data
-*/
+ * @param  string $file Filename
+ * @return array        Unserialized data
+ */
 function GetUnserialized($file) {
     $data = [];
     if (file_exists($file)) {
@@ -170,52 +106,69 @@ function GetUnserialized($file) {
     return $data;
 }
 
-# ARRAY
-
-/** Recursive search of the value in a multidimensional array.
- *
- * @param  mixed $needle   The desired value
- * @param  array $haystack Array to search
- * @return mixed           The value of the key
+/** Gets content of gziped file.
+ * @param  string $file Name of the file
+ * @return mixed        The content of file
  */
-function SearchValueInArray($needle, $haystack) {
-    $result = '';
-    foreach ($haystack as $key => $value) {
-        if ($needle == $key) {
-            $result = $value;
-        }
-        if (is_array($value)) {
-            $result = SearchValueInArray($needle, $value);
-        }
+function gzfile_get_contents($file) {
+    if (!$file = gzfile($file)) {
+        return FALSE;
     }
-    return $result;
+    if (!$file = implode('', $file)) {
+        return FALSE;
+    }
+    return $file;
 }
 
-/** Recursive search of the key in a multidimensional array.
- *
- * @param  mixed $needle   The desired value
- * @param  array $haystack Array to search
- * @return mixed           The key of the value
+/** Writes data to gziped file.
+ * @param  string  $file Filename
+ * @param  string  $text Data to gzip
+ * @param  string  $mode Write mode (défaut : 'w+')
+ * @return boolean       The result of operation
  */
-function SearchKeyInArray($needle, $haystack) {
-    $result = '';
-    foreach ($haystack as $key => $value) {
-        if (is_array($value)) {
-            $result = SearchKeyInArray($needle, $value);
-        } else {
-            if ($needle == $value) {
-                $result = $key;
-            }
-        }
+function gzfile_put_contents($file, $text, $mode = 'w+') {
+    if (($fp = @fopen($file.'.lock', 'w+')) === FALSE) {
+        return FALSE;
     }
-    return $result;
+    fwrite($fp, 'lock');
+    fclose($fp);
+    if (($fp = gzopen($file, $mode)) === FALSE) {
+        return FALSE;
+    }
+    if (!empty($text) && !gzwrite($fp, $text)) {
+        gzclose($fp);
+        return FALSE;
+    }
+    gzclose($fp);
+    unlink($file.'.lock');
+    return TRUE;
 }
 
-/**
-* @todo Comment
-* @param string $num_chars	...
-* @return
-*/
+# TEXT
+
+/** String localization.
+ * Currently, the system supports foure languages: English, Russian, Belarusian, and Ukrainian.
+ * @global array  $LANG   Array of language strings
+ * @param  string $string String to be translated
+ * @return string         Nhfyslated string
+ */
+function __($string) {
+    global $LANG;
+    return empty($LANG['def'][$string]) ? $string : $LANG['def'][$string];
+}
+
+/** Checks if the string has onle latin symbols.
+ * @param  string $string String to check
+ * @return string|boolean Checked string or FALSE if it has not only latin symbols
+ */
+function OnlyLatin($string) {
+    return (empty($string) || preg_replace("/[\d\w]+/i", '', $string) != '') ? FALSE : $string;
+}
+
+/** Generates random string.
+ * @param  integer $num_chars The lenght of string to generate
+ * @return string             Generated string
+ */
 function RandomString($num_chars) {
     $chars = [
         'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
@@ -230,61 +183,21 @@ function RandomString($num_chars) {
     return $result;
 }
 
-# TEXT
-
-/** String localization.
- * Currently, the system supports foure languages: English, Russian, Belarusian, and Ukrainian.
- *
- * @global array  $LANG   Array of language strings
- * @param  string $string String to be translated
- * @return string         Nhfyslated string
+/** Converts line endings.
+ * @param  string $text Text to parse
+ * @return string       Parsed text
  */
-function __($string) {
-    global $LANG;
-    return empty($LANG['def'][$string]) ? $string : $LANG['def'][$string];
-}
-
-/**
-* @todo Comment
-* @param string $text	...
-* @param string $length	...
-* @return
-*/
-function CutText($text, $length) {
-    if ((mb_strlen($text, 'UTF-8') - 1) < $length) {
-        return $text;
-    }
-    if (mb_strpos($text, '.', $length)) {
-        return mb_substr($text, 0, $length, 'UTF-8').'...';
-    }
-}
-
-/**
-* @todo Comment
-* @param string $text	...
-* @return
-*/
 function UnifyBr($text) {
     return str_replace(["\r\n", "\n\r", "\r"], LF, $text);
 }
 
-/** Checks if the string has onle latin symbols.
- *
- * @param  string $string String to check
- * @return string|boolean Checked string or FALSE if it has not only latin symbols
- */
-function OnlyLatin($string) {
-    return (empty($string) || preg_replace("/[\d\w]+/i", '', $string) != '') ? FALSE : $string;
-}
-
 # DATE and TIME
 
-/**
-* @todo Comment
-* @param string $format	...
-* @param string $date	...
-* @return
-*/
+/** Formats date and time according to user's timezone.
+ * @param  string $format Format
+ * @param  string $date	  Date
+ * @return string         Formatted date/time
+ */
 function FormatTime($format, $date) {
     global $LANG;
     $translate = [];
@@ -299,27 +212,9 @@ function FormatTime($format, $date) {
     return empty($translate) ? gmdate($format, $date + (3600 * $tz)) : strtr(gmdate($format, $date + (3600 * $tz)), $translate);
 }
 
-/** Return localised date from string generated by date().
- *
-* @todo Comment
-* @param string $string	...
-* @return
-*/
-function LocaliseDate($string) {
-    global $LANG;
-    $translate = [];
-    if ($LANG['language'] !== 'english') {
-        foreach($LANG['datetime'] as $match => $replace) {
-            $translate[$match] = $replace;
-        }
-    }
-    return empty($translate) ? $string : strtr($string, $translate);
-}
-
 # MAIL
 
-/** Send email.
- *
+/** Sends email.
  * @param  string  $to     The recipient
  * @param  string  $from   Sender address
  * @param  string  $sender The sender
@@ -459,8 +354,7 @@ function GetPagination($page, $perpage, $count) {
     return $result;
 }
 
-/** Select of time zone.
- *
+/** Selects the time zone.
  * @param  string $name    Time zone
  * @param  array  $points  List of time zones
  * @param  string $default The default time zone
@@ -475,7 +369,7 @@ function SelectTimeZone($name, $points, $default) {
     return $result;
 }
 
-/** Show captcha.
+/** Shows captcha.
  * There are three different options:
  * - original: black an white;
  * - color: with colored background;
@@ -487,7 +381,7 @@ function SelectTimeZone($name, $points, $default) {
  * @return string        Captcha image and input field for captcha code
  */
 function ShowCaptcha($param = '') {
-    if (USER::loggedIn()) {
+    if (USER::$logged_in) {
         return '';
     }
     $captcha = empty($param) ? CONFIG::getValue('main', 'captcha') : $param;
@@ -504,12 +398,12 @@ function ShowCaptcha($param = '') {
             <input type="text" name="captcheckout" id="captcheckout" value="" size="10" class="required" />';
 }
 
-/**
-* @todo Comment
-* @return
-*/
+/** Checks captcha code.
+ * @return boolean The result of operation
+ * @throws Exeption 'Invalid captcha code'
+ */
 function CheckCaptcha() {
-    if (USER::loggedIn()) {
+    if (USER::$logged_in) {
         return TRUE;
     }
     if (!empty($_SESSION['code-length'])) {
@@ -520,124 +414,6 @@ function CheckCaptcha() {
         }
     }
     throw new Exception('Invalid captcha code');
-}
-
-/** @todo Move functions.php -> ShowElement() to the template.class */
-function ShowElement($element, $parameters = '') {
-    $output = '';
-    switch($element) {
-
-        case 'point':
-            list($point, $template) = explode('@', $parameters);
-            if (!empty(SYSTEM::$output[$point])) {
-                foreach (SYSTEM::$output[$point] as $i => $module) {
-                    $output .= CMS::call('SYSTEM')->showWindow(
-                        $module[0],
-                        $module[1],
-                        $module[2],
-                        $template
-                    );
-                }
-            }
-            if (empty(SYSTEM::$output[$point]) && ($point !== 'up-center') && ($point !== 'down-center')) {
-                if (!empty(SYSTEM::$output['left'])) {
-                    foreach (SYSTEM::$output['left'] as $i => $module) {
-                        $output .= CMS::call('SYSTEM')->showWindow(
-                            $module[0],
-                            $module[1],
-                            $module[2],
-                            $template
-                        );
-                    }
-                }
-            }
-            return $output;
-
-        case 'box':
-            list($module, $template) = explode('@', $parameters);
-            if (!empty(SYSTEM::$output['boxes'])) {
-                foreach (SYSTEM::$output['boxes'] as $i => $box) {
-                    if ($box[0] === SYSTEM::$modules[$module]['title']) {
-                        $output .= CMS::call('SYSTEM')->showWindow(
-                            $box[0],
-                            $box[1],
-                            $box[2],
-                            $template
-                        );
-                    }
-                }
-            }
-            return $output;
-
-        case 'main':
-            if (!empty(SYSTEM::$output['main'])) {
-                foreach (SYSTEM::$output['main'] as $module) {
-                    $output .= CMS::call('SYSTEM')->showWindow(
-                        $module[0],
-                        $module[1],
-                        $module[2],
-                        substr(strstr($parameters, '@'), 1)
-                    );
-                }
-            }
-            return $output;
-
-        case 'title':
-            $title = CONFIG::getValue('main', 'title');
-            $pagename = SYSTEM::get('pagename');
-            if (!empty($pagename)) {
-                $title = $title.' - '.$pagename;
-            }
-            return $title;
-
-        case 'meta':
-            $output = '';
-            $meta = SYSTEM::get('meta');
-            $desc = CONFIG::getValue('main', 'description');
-            if (!empty($meta['desc'])) {
-                $desc .= ' - '.$meta['desc'];
-            }
-            $output .= '<meta name="description" content="'.$desc.'" />'.LF;
-            $keywords = CONFIG::getValue('main', 'keywords');
-            if (!empty($meta['keywords'])) {
-                $words    = $keywords.','.$meta['keywords'];
-                $keywords = explode(',', $words);
-                $words    = array_unique($keywords);
-                $keywords = implode(',', $words);
-            }
-            $output .= '<meta name="keywords" content="'.$keywords.'" />'.LF;
-            $output .= file_get_contents(CONTENT.'meta');
-            if (CONFIG::getValue('enabled', 'rss')) {
-                $feeds = SYSTEM::get('feeds');
-                foreach ($feeds as $module => $d) {
-                    $output .= '<link href="'.MODULE.'rss&m='.$module.'" rel="alternate" type="application/xml" title="RSS '.$d[0].'" />'.LF;
-                }
-            }
-            return $output;
-
-        case 'copyright':
-            if ($parameters) {
-                $TPL = new TEMPLATE('copyright.tpl');
-                return CMS::call('SYSTEM')->showWindow('__NOWINDOW__', $TPL->parse());
-            } else {
-                return IDX_POWERED.'<br />'.IDX_COPYRIGHT;
-            }
-            break;
-
-        case 'error':
-            $error = '';
-            if (file_exists(LOGS.'error.log')) {
-                $errors = file(LOGS.'error.log', FILE_IGNORE_NEW_LINES);
-                foreach($errors as $message) {
-                    $error .= $message.'<br />';
-                }
-                unlink(LOGS.'error.log');
-            }
-            if (!empty($error)) {
-                return CMS::call('SYSTEM')->showWindow('Error', $error, 'center', 'error');
-            }
-        break;
-    }
 }
 
 /**
@@ -668,25 +444,29 @@ function Redirect($module, $section = '', $category = '', $post = '', $comment =
 }
 
 /** Shows error message.
-*
-* @param  string $message Error message
-* @return string          Formatted error message
-*/
+ * @param  string $message Error message
+ * @return string          Formatted error message
+ */
 function ShowError($message) {
     return CMS::call('SYSTEM')->defineWindow('Error', $message, 'center');
 }
 
-/**
-* @todo Comment
-* @param string $title	...
-* @param string $content	...
-* @param string $align	... (défaut : 'left')
-* @return
-*/
+/** Shows block with content in the page.
+ * @param  string $title   Title of the block
+ * @param  string $content Content of the block
+ * @param  string $align   Align of the content (défaut : 'left')
+ */
 function ShowWindow($title, $content, $align = 'left') {
     return CMS::call('SYSTEM')->defineWindow($title, $content, $align);
 }
 
+/** Shows comments.
+ * @param object  $obj     Name of the object
+ * @param integer $item    ID of the item
+ * @param integer $page    Number of page
+ * @param integer $perpage Elements on the page
+ * @param stringe $path    Path to the template of the page
+ */
 function ShowComments($obj, $item, $page, $perpage, $path) {
     $comments = CMS::call($obj)->getComments($item['id']);
     if (!empty($comments)) {
@@ -703,7 +483,7 @@ function ShowComments($obj, $item, $page, $perpage, $path) {
             ShowWindow('', Pagination($count, $perpage, $page, $item['link']));
         }
     }
-    if (USER::loggedIn()) {
+    if (USER::$logged_in) {
         if (!empty($item['opened'])) {
             # Form to post comment
             $TPL = new TEMPLATE($path.'comment-post.tpl');
@@ -711,7 +491,7 @@ function ShowComments($obj, $item, $page, $perpage, $path) {
                 __('Comment'),
                 $TPL->parse([
                     'nickname'       => USER::getUser('nickname'),
-                    'not_admin'      => !CMS::call('USER')->checkRoot(),
+                    'not_admin'      => !USER::$root,
                     'text'           => FILTER::get('REQUEST', 'text'),
                     'action'         => $item['link'],
                     'bbcodes'        => CMS::call('PARSER')->showBbcodesPanel('comment.text'),
@@ -722,10 +502,7 @@ function ShowComments($obj, $item, $page, $perpage, $path) {
     }
 }
 
-/**
-* @todo Comment
-* @return
-*/
+/** Creates sitemap. */
 function Sitemap() {
     $time     = FormatTime('Y-m-d', time());
     $url      = SYSTEM::get('url');
@@ -747,6 +524,7 @@ function Sitemap() {
             $obj = strtoupper($module);
             $sections = CMS::call($obj)->getSections();
             unset($sections['drafts']);
+
             foreach ($sections as $id => $section) {
                 $categories = CMS::call($obj)->getCategories($id);
                 if (!empty($categories)) {

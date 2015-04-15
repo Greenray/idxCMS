@@ -4,11 +4,11 @@
 # Version 2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
-if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
+if (!defined('idxADMIN') || !USER::$root) die();
 
 if (!empty($REQUEST['backup'])) {
     if (!empty($REQUEST['dir'])) {
-        $exclude_files = array('arj','avi','bzip','bzip2','gz','gzip','mp3','mov','mpeg','rar','tar','wmv','zip');
+        $exclude_files =['arj','avi','bzip','bzip2','gz','gzip','mp3','mov','mpeg','rar','tar','wmv','zip'];
 
         # Backup file name
         $backup = BACKUPS.'backup_'.date('H-i-s_d.m.Y').'.tar.gz';
@@ -46,11 +46,11 @@ foreach ($files as $file) {
     $output['files'][$file] = filesize(BACKUPS.$file);
 }
 
-$output['total'] = format_size(get_dir_size(BACKUPS));
-$dirs  = AdvScanDir(CONTENT, '', 'dir', FALSE, array('temp'));
+$output['total'] = FormatSize(GetDirSize(BACKUPS));
+$dirs  = AdvScanDir(CONTENT, '', 'dir', FALSE, ['temp']);
 
 foreach ($dirs as $dir) {
-    $output['dirs'][$dir] = format_size(get_dir_size(CONTENT.$dir.DS));
+    $output['dirs'][$dir] = FormatSize(GetDirSize(CONTENT.$dir.DS));
 }
 
 $TPL = new TEMPLATE(dirname(__FILE__).DS.'backup.tpl');

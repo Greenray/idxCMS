@@ -22,6 +22,6 @@ die();?>
                 </table>
             </td>
         </tr>
-    [endeach.answers]
+    [/each.answers]
     <tr><td class="odd center" colspan="2">[__Total votes]: {total}</td></tr>
 </table>

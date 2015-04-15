@@ -1,8 +1,13 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Tagcloud
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+/**
+ * @program   idxCMS: Flat Files Content Management Sysytem
+ * @file      system/modules/tagcloud/module.php
+ * @version   2.4
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+ * @package   Tagcloud
+ */
 
 if (!defined('idxCMS')) die();
 
@@ -36,7 +41,7 @@ function ArrayNormalize($array) {
 }
 
 /** Preparing tags for tagcloud.
- * @return array Array of tags for the tagcloud
+ * @return array Tags for the tagcloud
  */
 function PrepareTags() {
     $tags = GetUnserialized(CONTENT.'tags');

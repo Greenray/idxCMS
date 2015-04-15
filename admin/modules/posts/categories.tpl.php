@@ -39,11 +39,11 @@ die();?>
                                     <a href="./?module=admin&amp;id=posts.posts&amp;section={system[id]}&amp;category={categories[id]}">
                                         <img src="{ICONS}posts.png" width="16" height="16" alt="[__Posts]" />
                                     </a>
-                                [endif]
+                                [/if]
                             </td>
                         </tr>
-                    [endeach.system[categories]]
-                [endeach.system]
+                    [/each.system[categories]]
+                [/each.system]
             </table>
         </div>
         <div id="drag">
@@ -73,17 +73,17 @@ die();?>
                                     <button type="submit" name="delete" value="{sections[id]}.{categories[id]}" title="[__Delete]">
                                         <img src="{ICONS}delete.png" width="16" height="16" alt="[__Delete]" />
                                     </button>
-                                [endelse]
+                                [/else]
                             </td>
                         </tr>
-                    [endeach.sections[categories]]
-                [endeach.sections]
+                    [/each.sections[categories]]
+                [/each.sections]
             </table>
         </div>
         <div id="result"></div>
         <p class="center">
             <input type="submit" name="new" value="[__New category]" class="submit" />
-            [if=sections]<input type="submit" name="action" value="[__Save]" onclick="save()" class="submit" />[endif]
+            [if=sections]<input type="submit" name="action" value="[__Save]" onclick="save()" class="submit" />[/if]
             <button formaction="{MODULE}admin&amp;id=posts.posts&amp;new=1" class="submit">[__Post]</button>
         </p>
     </form>

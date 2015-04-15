@@ -9,7 +9,7 @@ if (!defined('idxCMS')) die();
 $just_reg = FALSE;
 
 if (!empty($REQUEST['save'])) {
-    if (!USER::loggedIn()) {
+    if (!USER::$logged_in) {
         if (!empty($REQUEST['act'])) {
             if ($REQUEST['act'] === 'register') {
 
@@ -81,7 +81,7 @@ if (!empty($REQUEST['save'])) {
             }
         }
     } else {
-        if (USER::loggedIn()) {
+        if (USER::$logged_in) {
             if (!empty($REQUEST['profile'])) {
 
                 # Update profile
@@ -115,7 +115,7 @@ if (!empty($REQUEST['save'])) {
 }
 
 # INTERFACE
-if (!USER::loggedIn()) {
+if (!USER::$logged_in) {
     if (!empty($REQUEST['act'])) {
 
         if (($REQUEST['act'] === 'register') && !$just_reg) {
@@ -139,7 +139,7 @@ if (!USER::loggedIn()) {
         } elseif ($REQUEST['act'] === 'password_request') {
             SYSTEM::set('pagename', __('Password recovery'));
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'restore-password.tpl');
-            ShowWindow(__('Password recovery'), $TPL->parse(array('captcha' => ShowCaptcha())));
+            ShowWindow(__('Password recovery'), $TPL->parse(['captcha' => ShowCaptcha()]));
 
         } elseif ($just_reg) {
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'greeting.tpl');
@@ -150,7 +150,7 @@ if (!USER::loggedIn()) {
     } else {
         if (!empty($REQUEST['user'])) Redirect('user&act=register');
     }
-} elseif (USER::loggedIn()) {
+} elseif (USER::$logged_in) {
     if (!empty($REQUEST['user'])) {
         $user = USER::getUserData($REQUEST['user']);
         if (!empty($user)) {

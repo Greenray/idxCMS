@@ -1,57 +1,20 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-
 /** Site ststistic - registers a visitы to the website by visitors, users, bots and spiders.
  *
- * @file      system/statistic.php
+ * @program   idxCMS: Flat Files Content Management Sysytem
+ * @file      system/statistics.php
  * @version   2.4
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2015 Victor Nabatov
  * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
- * @package   Core
+ * @package   Statistics
+ * @overview  Website statistics.
+ *            It registers visitors, bots, spiders, their IP addresses, keywords, search queries.
  */
 
 if (!defined('idxCMS')) die();
 
-/** Extracts keywords from the user`s query.
- *
- * @param  string $url User`s URL
- * @return mixed       Decoded keywords or FALSE
- */
-function ExtractKeyword($url) {
-
-    # Searching queries mask
-    $search_queries = [
-        'a-counter' => 'sub_data', 'about'  => 'terms',  'alice'     => 'qs',
-        'alltheweb' => 'q',        'altavista' => 'q',   'aol'       => 'encquery',
-        'aol'       => 'q',        'aol'    => 'query',  'aport'     => 'r',
-        'ask'       => 'q',        'baidu'  => 'wd',     'bigmir'    => 'q',
-        'club-internet' => 'q',    'cnn'    => 'query',  'gigablast' => 'q',
-        'google'    => 'q',        'i.ua'   => 'q',      'live'      => 'q',
-        'looksmart' => 'qt',       'lycos'  => 'query',  'mail.ru'   => 'q',
-        'mama'      => 'query',    'mamma'  => 'query',  'meta.ua'   => 'q',
-        'msn'       => 'q',        'najdi'  => 'q',      'netscape'  => 'query',
-        'netsprint' => 'q',        'pchome' => 'q',      'rambler'   => 'words',
-        'search'    => 'q',        'seznam' => 'q',      'szukacz'   => 'q',
-        'szukaj'    => 'qt',       'szukaj' => 'szukaj', 'virgilio'  => 'qs',
-        'voila'     => 'rdata',    'yahoo'  => 'p',      'yam'       => 'k',
-        'yandex'    => 'text'
-    ];
-    $components = parse_url($url);
-    if (isset($components['query'])) {
-        $query_items = [];
-        parse_str($components['query'], $query_items);
-        foreach ($search_queries as $engine => $param) {
-            if (strpos($components['host'], $engine) !== FALSE && !empty($query_items[$param])) {
-                return $engine."|".urldecode($query_items[$param]);
-            }
-        }
-    }
-    return FALSE;
-}
-
-/** Detect bad bots.
- *
+/** Detects bad bots.
  * @param  string $agent $_SERVER['HTTP_USER_AGENT']
  * @return boolean       Is bad bot detected?
  */
@@ -65,8 +28,7 @@ function DetectBadBot($agent) {
     return FALSE;
 }
 
-/** Detect spiders.
- * 
+/** Detects spiders.
  * @param  string $agent $_SERVER['HTTP_USER_AGENT']
  * @return boolean       Is spider detected?
  */
@@ -113,6 +75,42 @@ function DetectSpider($agent) {
     return FALSE;
 }
 
+/** Extracts keywords from the user`s query.
+ * @param  string $url User`s URL
+ * @return mixed       Decoded keywords or FALSE
+ */
+function ExtractKeyword($url) {
+
+    # Searching queries mask
+    $search_queries = [
+        'a-counter' => 'sub_data', 'about'  => 'terms',  'alice'     => 'qs',
+        'alltheweb' => 'q',        'altavista' => 'q',   'aol'       => 'encquery',
+        'aol'       => 'q',        'aol'    => 'query',  'aport'     => 'r',
+        'ask'       => 'q',        'baidu'  => 'wd',     'bigmir'    => 'q',
+        'club-internet' => 'q',    'cnn'    => 'query',  'gigablast' => 'q',
+        'google'    => 'q',        'i.ua'   => 'q',      'live'      => 'q',
+        'looksmart' => 'qt',       'lycos'  => 'query',  'mail.ru'   => 'q',
+        'mama'      => 'query',    'mamma'  => 'query',  'meta.ua'   => 'q',
+        'msn'       => 'q',        'najdi'  => 'q',      'netscape'  => 'query',
+        'netsprint' => 'q',        'pchome' => 'q',      'rambler'   => 'words',
+        'search'    => 'q',        'seznam' => 'q',      'szukacz'   => 'q',
+        'szukaj'    => 'qt',       'szukaj' => 'szukaj', 'virgilio'  => 'qs',
+        'voila'     => 'rdata',    'yahoo'  => 'p',      'yam'       => 'k',
+        'yandex'    => 'text'
+    ];
+    $components = parse_url($url);
+    if (isset($components['query'])) {
+        $query_items = [];
+        parse_str($components['query'], $query_items);
+        foreach ($search_queries as $engine => $param) {
+            if (strpos($components['host'], $engine) !== FALSE && !empty($query_items[$param])) {
+                return $engine."|".urldecode($query_items[$param]);
+            }
+        }
+    }
+    return FALSE;
+}
+
 $agent   = $_SERVER['HTTP_USER_AGENT']; # Header from the current request, if there is one
 $ip      = $_SERVER['REMOTE_ADDR'];     # User`s IP address
 $referer = $_SERVER['HTTP_REFERER'];    # The page which referred the user agent, if there is one
@@ -125,7 +123,7 @@ if (DetectBadBot($agent)) {
     die();
 }
 
-$config = CONFIG::getSection('statistic');
+$config = CONFIG::getSection('statistics');
 $time = time();
 
 if (DetectSpider($agent)) {
@@ -160,7 +158,7 @@ if (DetectSpider($agent)) {
     }
 } else {
     $user  = USER::getUser();                   # User profile
-    $stats = GetUnserialized(CONTENT.'stats');  # Statistic data storage
+    $stats = GetUnserialized(CONTENT.'stats');  # Statistics data storage
     if (empty($stats)) {
         $stats['total']   = 1;
         $stats['today']   = 1;

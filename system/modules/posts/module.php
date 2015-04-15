@@ -1,13 +1,68 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Posts
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+/** Module "Posts" - articles and news.
+ *
+ * @program   idxCMS: F lat Files Content Management Sysytem
+ * @file      system/modules/posts/module.php
+ * @version   2.4
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+ * @package   Posts
+ * @overview  Articles and news which cfn be posted by registered users.
+ *            The structure of the posts database:
+ * <pre>
+ * Sections index:
+ * array(
+ *   "section"
+ *    array(
+ *        "id"     - section ID
+ *        "title"  - section title
+ *        "desc"   - section description
+ *        "access" - access level
+ *        "link"   - link to section
+ *        "path"   - path to section
+ *        "categories"  - section categories
+ *         array(
+ *             "id"     - category ID
+ *             "title"  - category title
+ *             "desc"   - category description
+ *             "access" - access level
+ *             "link"   - link to category
+ *             "path"   - path ro category
+ *         )
+ *    )
+ * )
+ *
+ * Articles index:
+ * array(
+ *   "id"       - article ID
+ *   "author"   - autor name
+ *   "nick"     - author nicname
+ *   "time"     - post time
+ *   "views"    - number of views
+ *   "comments" - article comments
+ *   "title"    - article title
+ *   "keywords" - article keywords
+ *   "opened"   - is comments allowed?
+ * )
+ *
+ * Comments index:
+ * array(
+ *   "id"       - comment ID
+ *   "author"   - autor name
+ *   "nick"     - author nicname
+ *   "time"     - post time
+ *   "text"     - comment text
+ *   "ip"       - comment IP address
+ *   "rate"     - comment rate
+ * )
+ * </pre>
+ */
 
 if (!defined('idxCMS')) die();
 
-/** Data store for articles and news */
-define('POSTS', CONTENT.'posts'.DS);
+/** Data storage for articles and news */
+ define('POSTS', CONTENT.'posts'.DS);
 
 require SYS.'posts.class.php';
 require SYS.'calendar.class.php';
@@ -21,14 +76,14 @@ SYSTEM::registerModule('posts.print',    'Version for printer', 'plugin');
 SYSTEM::registerSearch('posts');
 SYSTEM::registerSiteMap('posts');
 SYSTEM::registerMainMenu('posts');
-USER::setSystemRights(array('posts' => __('Posts').': '.__('Moderator')));
+USER::setSystemRights(['posts' => __('Posts').': '.__('Moderator')]);
 
 $sections =  CMS::call('POSTS')->getSections();
 
 if (!empty($sections)) {
     # Register RSS feeds for posts sections (ex. drafts).
-    if (!empty($sections['drafts']))  unset($sections['drafts']);
-    if (!empty($sections['archive'])) unset($sections['archive']);
+    unset($sections['drafts']);
+
     foreach ($sections as $id => $section) {
         if ($section['access'] === 0) {
             SYSTEM::registerFeed(

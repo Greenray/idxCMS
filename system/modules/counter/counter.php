@@ -6,16 +6,16 @@
 
 if (!defined('idxCMS')) die();
 
-$stats = GetUnserialized(CONTENT.'stats');          # Statistic datafile
+$stats = GetUnserialized(CONTENT.'stats');          # Statistics datafile
 $stats['registered'] = sizeof(GetFilesList(USERS)); # Number of regisered users
 $stats['visitors']   = sizeof($stats['online']);    # Nubmer of visitors online
 $guests = 0;                                        # Number of guests online
-$stats['loggedin']   = '';                          # Names of registered users online
+$stats['logged_in']   = '';                          # Names of registered users online
 
 foreach ($stats['online'] as $ip => $data) {
     if ($data['name'] === 'guest')
          ++$guests;
-    else $stats['loggedin'] .= CreateUserLink($data['name'], $data['nick']).' ';
+    else $stats['logged_in'] .= CreateUserLink($data['name'], $data['nick']).' ';
 }
 
 $stats['todayusers'] = empty($stats['users']) ? 0 : sizeof($stats['users']);

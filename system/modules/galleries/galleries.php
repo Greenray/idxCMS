@@ -70,11 +70,11 @@ if (empty($sections)) {
                         break;
 
                     case 'close':
-                        if (CMS::call('USER')->checkRoot()) CMS::call('GALLERIES')->setValue($item, 'opened', FALSE);
+                        if (USER::$root) CMS::call('GALLERIES')->setValue($item, 'opened', FALSE);
                         break;
 
                     case 'open':
-                        if (CMS::call('USER')->checkRoot()) CMS::call('GALLERIES')->setValue($item, 'opened', TRUE);
+                        if (USER::$root) CMS::call('GALLERIES')->setValue($item, 'opened', TRUE);
                         break;
 
                     case 'ban':
@@ -143,12 +143,12 @@ if (empty($sections)) {
                 SYSTEM::setPageKeywords($item['keywords']);
                 $images[] = $item;
                 if (($i === 2) || ($i === 5)) {
-                    $output .= $TPL->parse(array('images' => $images));
+                    $output .= $TPL->parse(['images' => $images]);
                     $images = [];
                 }
                 ++$showed;
             }
-            $output .= $TPL->parse(array('images' => $images));
+            $output .= $TPL->parse(['images' => $images]);
             if ($showed !== $perpage) {
                 for ($showed; $showed < $perpage; $showed++) {
                     $images[] = [];
@@ -168,9 +168,11 @@ if (empty($sections)) {
         $output = CMS::call('GALLERIES')->showSection($section);
         if ($output === FALSE) {
             Redirect('galleries');
+
         } elseif (!empty($output['categories'])) {
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'categories.tpl');
             ShowWindow($output['title'], $TPL->parse($output));
+
         } else {
             ShowWindow($output['title'], __('Database is empty'), 'center');
         }
@@ -179,7 +181,8 @@ if (empty($sections)) {
         $output = CMS::call('GALLERIES')->showSections();
         if (!empty($output)) {
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'sections.tpl');
-            ShowWindow(__('Galleries'), $TPL->parse(array('sections' => $output)));
+            ShowWindow(__('Galleries'), $TPL->parse(['sections' => $output]));
+
         } else {
             ShowWindow(__('Galleries'), __('Database is empty'), 'center');
         }

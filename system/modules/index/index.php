@@ -6,11 +6,11 @@
 
 if (!defined('idxCMS')) die();
 
-if (!USER::loggedIn() && CONFIG::getValue('main', 'welcome')) {
+if (!USER::$logged_in && CONFIG::getValue('main', 'welcome')) {
     if (file_exists(CONTENT.'intro')) {
         $intro = file_get_contents(CONTENT.'intro');
-        $TPL = new TEMPLATE(dirname(__FILE__).DS.'intro.tpl');
-        ShowWindow(__('You are welcome!'), $TPL->parse(array('intro' => $intro)));
+        $TPL   = new TEMPLATE(dirname(__FILE__).DS.'intro.tpl');
+        ShowWindow(__('You are welcome!'), $TPL->parse(['intro' => $intro]));
     }
 }
 
@@ -22,9 +22,7 @@ if (!empty(SYSTEM::$modules[$module])) {
     SYSTEM::set('pagename', __('Index'));
     SYSTEM::setPageDescription(__('Index'));
     $sections = CMS::call('POSTS')->getSections();
-
-    if (!empty($sections['drafts']))  unset($sections['drafts']);
-    if (!empty($sections['archive'])) unset($sections['archive']);
+    unset($sections['drafts']);
 
     if (empty($sections)) {
         ShowWindow(__('Index'), __('Database is empty'), 'center');
@@ -34,7 +32,7 @@ if (!empty(SYSTEM::$modules[$module])) {
 
         # Don't show system section '#drats'
         $TPL = new TEMPLATE(dirname(__FILE__).DS.'default.tpl');
-        $i = 0;
+        $i   = 0;
         $output = '';
         foreach ($sections as $id => $section) {
             $categories = CMS::call('POSTS')->getCategories($id);

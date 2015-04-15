@@ -1,14 +1,24 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - Filemanager
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+/** Filemanager.
+ *
+ * @program   idxCMS: Flat Files Content Management Sysytem
+ * @file      admin/modules/_general/filemeneger.php
+ * @version   2.4
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+ * @package   Administration
+ */
 
-if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
+if (!defined('idxADMIN') || !USER::$root) die();
 
+/** Translates the string value of the access rights of a file into a numeric value.
+ * @param  string $mode String value of the access rights of a file
+ * @return string       Numeric value of the access rights of a file
+ */
 function ConvertRightsString($mode) {
     $mode = str_pad($mode, 9, '-');
-    $mode = strtr($mode, array('-'=>'0', 'r'=>'4', 'w'=>'2', 'x'=>'1'));
+    $mode = strtr($mode, ['-'=>'0', 'r'=>'4', 'w'=>'2', 'x'=>'1']);
     $newmode  = '0';
     $newmode .= $mode[0] + $mode[1] + $mode[2];
     $newmode .= $mode[3] + $mode[4] + $mode[5];
@@ -16,6 +26,11 @@ function ConvertRightsString($mode) {
     return $newmode;
 }
 
+/** Gets value of the access rights of a file.
+ * @param  string  $file File to check rights
+ * @param  boolean $if   Check special values
+ * @return string        File info
+ */
 function GetRights($file, $if = FALSE) {
     $perms = fileperms($file);
     $info = '';
@@ -44,6 +59,11 @@ function GetRights($file, $if = FALSE) {
     return $info;
 }
 
+/** Sets access rights of a file.
+ * @param  string  $file  File to set rights
+ * @param  value   $value Rights value
+ * @return boolean        The result of operation
+ */
 function SetRights($file, $value, $recursive = FALSE) {
     $result = chmod($file, $value);
     if (is_dir($file) && $recursive) {
@@ -55,6 +75,11 @@ function SetRights($file, $value, $recursive = FALSE) {
     return $result;
 }
 
+/** Checks if file is serialized.
+ * @param  string  $file    Filename
+ * @param  string  $content Content of file
+ * @return boolean|string   Unserialized content of file or FALSE
+ */
 function CheckSerialized($file, &$content = '') {
     if (file_exists($file)) {
         $content = file_get_contents($file);
@@ -66,8 +91,8 @@ function CheckSerialized($file, &$content = '') {
     return FALSE;
 }
 
-$allowed = array('php','js','ini','log','gz','txt','html','css','xml');
-$images  = array('gif', 'jpeg', 'jpg', 'png');
+$allowed = ['php','js','ini','log','gz','txt','html','css','xml'];
+$images  = ['gif', 'jpeg', 'jpg', 'png'];
 
 $path   = empty($REQUEST['path']) ? realpath('.').DS : $REQUEST['path'];
 $path   = str_replace('\\', '/', $path);
@@ -78,13 +103,9 @@ if (!empty($REQUEST['save'])) {
     if (!empty($REQUEST['edit'])) {
         $path_parts = pathinfo($path.$REQUEST['edit']);
         if (empty($path_parts['extension'])) {
-            if (!CheckSerialized($path.$file)) {
-                file_put_contents($path.$REQUEST['edit'], $REQUEST['content']);
-            }
+            if (!CheckSerialized($path.$file))                file_put_contents($path.$REQUEST['edit'], $REQUEST['content']);
         } else {
-            if (in_array($path_parts['extension'], $allowed)) {
-                file_put_contents($path.$REQUEST['edit'], $REQUEST['content']);
-            }
+            if (in_array($path_parts['extension'], $allowed)) file_put_contents($path.$REQUEST['edit'], $REQUEST['content']);
         }
         unset($REQUEST['edit']);
     } elseif (!empty($REQUEST['rights'])) {
@@ -110,13 +131,9 @@ if (!empty($REQUEST['save'])) {
         }
     }
 } elseif(!empty($REQUEST['delete'])) {
-    if (!DeleteTree($path.$REQUEST['delete'])) {
-        ShowMessage('Cannot delete file or directory');
-    }
+    if (!DeleteTree($path.$REQUEST['delete'])) ShowMessage('Cannot delete file or directory');
 } elseif (!empty($REQUEST['mkdir'])) {
-    if (!mkdir($path.$REQUEST['dirname'])) {
-        ShowMessage('Cannot make directory');
-    }
+    if (!mkdir($path.$REQUEST['dirname']))     ShowMessage('Cannot make directory');
 }
 
 $output = [];
@@ -144,15 +161,11 @@ foreach ($elements as $key => $file) {
             else $output['elements'][$key]['empty'] = TRUE;
         } else {
             preg_match('/[^.]+\.[^.]+$/', $path_parts['basename'], $matches);
-            if ($matches[0] === 'tar.gz') {
-                $output['elements'][$key]['download'] = TRUE;
-            } elseif (in_array($path_parts['extension'], $allowed) && (substr($path_parts['basename'], -6) !== 'min.js')) {
-                $output['elements'][$key]['edit'] = $url.'&amp;path='.$path.'&amp;edit='.$file;
-            } elseif (in_array($path_parts['extension'], $images)) {
-                $output['elements'][$key]['view'] = ROOT.str_replace(realpath('.').DS, '', $path).$file;
-            } else {
-                $output['elements'][$key]['empty'] = TRUE;
-            }
+            if ($matches[0] === 'tar.gz')                        $output['elements'][$key]['download'] = TRUE;
+            elseif (in_array($path_parts['extension'], $allowed) && (substr($path_parts['basename'], -6) !== 'min.js'))
+                                                                 $output['elements'][$key]['edit'] = $url.'&amp;path='.$path.'&amp;edit='.$file;
+            elseif (in_array($path_parts['extension'], $images)) $output['elements'][$key]['view'] = ROOT.str_replace(realpath('.').DS, '', $path).$file;
+            else                                                 $output['elements'][$key]['empty'] = TRUE;
         }
         $output['elements'][$key]['style'] = 'row1';
     }

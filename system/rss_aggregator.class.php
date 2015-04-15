@@ -1,63 +1,46 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-
 /** RSS aggregator.
  *
+ * @program   idxCMS: Flat Files Content Management Sysytem
  * @file      system/rss_aggregator.class.php
  * @version   2.4
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011 - 2015 Victor Nabatov
  * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
  * @package   RSS
+ * @overview  RSS aggregator and website RSS feeds.
  */
 
 class RSS_AGGREGATOR {
 
-    /** Date format
-     * @param string $date_format
-     */
+    /** @param string $date_format Date format */
     public $date_format = '';
 
-    /** Default encoding
-     * @param string $default_cp
-     */
+    /** @param string $default_cp Default encoding */
     public $default_cp = 'UTF-8';
 
-    /** Channel tags
-     * @param array $channeltags
-     */
+    /** @param array $channeltags Channel tags */
     private $channeltags =['title', 'link', 'desc', 'language', 'copyright', 'managingEditor', 'webMaster', 'lastBuildDate', 'rating', 'docs'];
 
     public $CDATA = 'nochange';
     public $cp    = '';
 
-    /** Image tags
-     * @param array $imagetags
-     */
+    /** @param array $imagetags Image tags */
     private $imagetags = ['title', 'url', 'link', 'width', 'height'];
 
-    /** Items limit
-     * @param integer $items_limit
-     */
+    /** @param integer $items_limit Items limit */
     public $items_limit = 0;
 
-    /** Item tags
-     * @param array $itemtags
-     */
+    /** @param array $itemtags Item tags */
     private $itemtags = ['title', 'link', 'desc', 'author', 'category', 'comments', 'enclosure', 'guid', 'pubDate', 'source'];
 
-    /** Strip HTML?
-     * @param boolean $stripHTML
-     */
+    /** @param boolean $stripHTML Strip HTML? */
     public $stripHTML = FALSE;
 
-    /** Text input tags
-     * @param array $textinputtags
-     */
+    /** @param array $textinputtags Text input tags */
     private $textinputtags = ['title', 'desc', 'name', 'link'];
 
     /** Parses RSS file and returns associative array.
-     *
      * @param  string $rss_url RSS URL
      * @return array           RSS data
      */
@@ -96,7 +79,6 @@ class RSS_AGGREGATOR {
     }
 
     /** Modification of preg_match();.
-     *
      * @param  string $pattern Pattern
      * @param  string $subject Subject
      * @return string          Trimed field with index 1 from 'classic' preg_match() array output
@@ -122,19 +104,17 @@ class RSS_AGGREGATOR {
     }
 
     /** Replaces HTML entities.
-     *
      * @param  string $string String
      * @return string         Parsed string
      */
     public function UnHtmlEntities ($string) {
         $trans_tbl = get_html_translation_table(HTML_ENTITIES, ENT_QUOTES);  # Get HTML entities table
         $trans_tbl = array_flip($trans_tbl);                                 # Flip keys<==>values
-        $trans_tbl += array('&apos;' => "'");                                # Add support for &apos; entity (missing in HTML_ENTITIES)
+        $trans_tbl += ['&apos;' => "'"];                                     # Add support for &apos; entity (missing in HTML_ENTITIES)
         return strtr($string, $trans_tbl);                                   # Replace entities by values
     }
 
     /** Parses RSS file.
-     *
      * @param  string $rss_url RSS URL
      * @return array|boolean   Parsed RSS or FALSE
      */

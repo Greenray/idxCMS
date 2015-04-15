@@ -11,7 +11,7 @@ $messages = $MC->getMessages();
 
 if (!empty($REQUEST['mctext']) && !empty($REQUEST['save'])) {
     try {
-        if (USER::loggedIn()) {
+        if (USER::$logged_in) {
             $MC->sendMessage($REQUEST['mctext']);
         }
         FILTER::remove('REQUEST', 'mctext');
@@ -64,10 +64,10 @@ if (!empty($messages)) {
 unset($MC);
 
 # Show post form
-if (USER::loggedIn()) {
+if (USER::$logged_in) {
     $output['mctext'] = FILTER::get('REQUEST', 'mctext');
     $output['allow_post'] = TRUE;
-    if (!CMS::call('USER')->checkRoot()) {
+    if (!USER::$root) {
         $output['not_admin'] = TRUE;
         $output['message-length'] = CONFIG::getValue('minichat', 'message-length');
     }

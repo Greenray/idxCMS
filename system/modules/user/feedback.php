@@ -24,7 +24,7 @@ if (!empty($message)) {
         ShowError(__($error->getMessage()));
     }
 } elseif (!empty($REQUEST['new_letter'])) {
-    if (USER::loggedIn()) {
+    if (USER::$logged_in) {
         if (!empty($REQUEST['subject'])) {
             if (!empty($REQUEST['letter'])) {
                 SendMail(
@@ -70,7 +70,7 @@ if (!empty($message)) {
 
 $output = [];
 
-if (!USER::loggedIn()) {
+if (!USER::$logged_in) {
     $output['email']   = empty($REQUEST['email']) ? __('Enter your e-mail') : $REQUEST['email'];
     $output['captcha'] = ShowCaptcha();
 }

@@ -4,7 +4,7 @@
 # Version 2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
-if (!defined('idxADMIN') || !USER::loggedIn()) die();?>
+if (!defined('idxADMIN') || !USER::$logged_in) die();?>
 
 <!DOCTYPE html>
 <head>

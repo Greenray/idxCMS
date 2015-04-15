@@ -1,6 +1,6 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem
-# Administration - Statistic
+# Administration - Statistics
 # Version 2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
@@ -15,7 +15,7 @@ die();?>
                     <td>{day[date]}</td>
                     <td><input type="checkbox" name="viewlog[]" value="{day[log]}"> [__Select]</td>
                 </tr>
-            [endeach.day]
+            [/each.day]
         </table>
         <p align="center">
 [ifelse=archive]
@@ -35,10 +35,10 @@ die();?>
                         <td>{month[date]}</td>
                         <td><input type="radio" name="browse" value="{month[log]}"> [__Select]</td>
                     </tr>
-                [endeach.month]
+                [/each.month]
             </table>
             <p align="center">
-[endelse]
+[/else]
                 <input type="submit" name="month" value="[__Show selected]" class="submit" />
         </p>
     </form>

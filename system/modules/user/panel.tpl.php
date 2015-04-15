@@ -5,7 +5,7 @@
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
 die();?>
-[ifelse=loggedin]
+[ifelse=logged_in]
     <div class="center"><strong>[__Hello], {user}!</strong></div>
     <div class="user_panel">
         <form method="post" action="">
@@ -15,7 +15,7 @@ die();?>
                         <img src="{ICONS}admin.png" width="16" height="16" alt="" />
                         <a href="{MODULE}admin&amp;id=main">[__Administration]</a>
                     </li>
-                [endif]
+                [/if]
                 <li>
                     <img src="{ICONS}post.png" width="16" height="16" alt="" />
                     <a href="{MODULE}posts.post">[__Post]</a>
@@ -26,8 +26,8 @@ die();?>
                 </li>
                 <li>
                     <img src="{ICONS}messages.png" width="16" height="16" alt="" />
-                    <a href="{MODULE}user.pm[if=mess_new]&amp;mode=inbox[endif]" title="{mess_info}">
-                        [__Messages] [if=mess_new]<strong>({mess_new})</strong>[endif]
+                    <a href="{MODULE}user.pm[if=mess_new]&amp;mode=inbox[/if]" title="{mess_info}">
+                        [__Messages] [if=mess_new]<strong>({mess_new})</strong>[/if]
                     </a>
                 </li>
             </ul>
@@ -98,6 +98,6 @@ die();?>
             </li>
         </ul>
     </div>
-[endelse]
-[if=allow_skins]<div class="center"><form name="skin_select" method="post" action="">{select_skin}</form></div>[endif]
-[if=allow_langs]<div class="center"><form name="lang_select" method="post" action="">{select_lang}</form></div>[endif]
+[/else]
+[if=allow_skins]<div class="center"><form name="skin_select" method="post" action="">{select_skin}</form></div>[/if]
+[if=allow_langs]<div class="center"><form name="lang_select" method="post" action="">{select_lang}</form></div>[/if]

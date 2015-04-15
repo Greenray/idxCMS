@@ -29,7 +29,7 @@ if (isset($init)) {
         $config['images-per-page']    = empty($REQUEST['images-per-page'])    ? 10   : (int) $REQUEST['images-per-page'];
         $config['comments-per-page']  = empty($REQUEST['comments-per-page'])  ? 10   : (int) $REQUEST['comments-per-page'];
         $config['random'] = empty($REQUEST['random']) ? 1 : (int) $REQUEST['random'];
-        $config['last'] = empty($REQUEST['last']) ? 1 : (int) $REQUEST['last'];
+        $config['last']   = empty($REQUEST['last'])   ? 1 : (int) $REQUEST['last'];
         CMS::call('CONFIG')->setSection('galleries', $config);
         if (!CMS::call('CONFIG')->save()) {
             ShowMessage('Cannot save file');

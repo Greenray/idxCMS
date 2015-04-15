@@ -7,10 +7,7 @@
 if (!defined('idxCMS')) die();
 
 $sections = CMS::call('POSTS')->getSections();
-
-if (!empty($sections['drafts']))  unset($sections['drafts']);
-if (!empty($sections['archive'])) unset($sections['archive']);
-if (!empty($sections['news']))    unset($sections['news']);
+unset($sections['drafts']);
 
 # Get last posts
 $posts = CMS::call('POSTS')->getSectionsLastItems($sections);

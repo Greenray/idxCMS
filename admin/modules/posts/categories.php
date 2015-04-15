@@ -36,7 +36,7 @@ $output = [];
 $output['system']['drafts'] = $sections['drafts'];
 $output['system']['drafts']['categories'] = CMS::call('POSTS')->getCategories('drafts');
 
-if (CMS::call('USER')->checkRoot()) {
+if (USER::$root) {
     $output['system']['drafts']['categories'][1]['desc']  = CMS::call('PARSER')->parseText($output['system']['drafts']['categories'][1]['desc']);
     $output['system']['drafts']['categories'][1]['class'] = 'odd';
     $content = CMS::call('POSTS')->getContent(1);
@@ -83,16 +83,14 @@ echo $TPL->parse($output);
 
 if (!empty($REQUEST['new'])) {
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'category.tpl');
-    echo $TPL->parse(
-        array(
-            'title'    => FILTER::get('REQUEST', 'title'),
-            'desc'     => FILTER::get('REQUEST', 'desc'),
-            'access'   => (int) FILTER::get('REQUEST', 'access'),
-            'sections' => $choice,
-            'bbCodes'  => CMS::call('PARSER')->showBbcodesPanel('form.desc'),
-            'header'   => __('New category')
-        )
-    );
+echo $TPL->parse([
+        'title'    => FILTER::get('REQUEST', 'title'),
+        'desc'     => FILTER::get('REQUEST', 'desc'),
+        'access'   => (int) FILTER::get('REQUEST', 'access'),
+        'sections' => $choice,
+        'bbCodes'  => CMS::call('PARSER')->showBbcodesPanel('form.desc'),
+        'header'   => __('New category')
+    ]);
 }
 
 # Edit category

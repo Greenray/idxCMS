@@ -8,7 +8,7 @@ if (!defined('idxCMS')) die();
 
 SYSTEM::set('pagename', __('Private messages'));
 
-if (!USER::loggedIn()) {
+if (!USER::$logged_in) {
     ShowError(__('You are not logged in!'));
 } elseif (!empty($REQUEST['save'])) {
     # Send message
@@ -27,16 +27,14 @@ if (!USER::loggedIn()) {
         $TPL = new TEMPLATE(dirname(__FILE__).DS.'comment-post.tpl');
         ShowWindow(
             __('Private message'),
-            $TPL->parse(
-                array(
-                    'action'         => '',
-                    'nickname'       => $user['nickname'],
-                    'text'           => FILTER::get('REQUEST', 'text'),
-                    'comment-length' => CMS::call('USER')->checkRoot() ? '' : CONFIG::getValue('pm', 'message-length'),
-                    'bbcodes'        => CMS::call('PARSER')->showBbcodesPanel('comment.text'),
-                    'for'            => $REQUEST['for']
-                )
-            )
+            $TPL->parse([
+                'action'         => '',
+                'nickname'       => $user['nickname'],
+                'text'           => FILTER::get('REQUEST', 'text'),
+                'comment-length' => USER::$root ? '' : CONFIG::getValue('pm', 'message-length'),
+                'bbcodes'        => CMS::call('PARSER')->showBbcodesPanel('comment.text'),
+                'for'            => $REQUEST['for']
+            ])
         );
     }
 } else {
@@ -80,16 +78,14 @@ if (!USER::loggedIn()) {
                     $TPL = new TEMPLATE(dirname(__FILE__).DS.'comment-post.tpl');
                     ShowWindow(
                         __('Reply'),
-                        $TPL->parse(
-                            array(
-                                'action'         => '',
-                                'nickname'       => $user['nickname'],
-                                'text'           => empty($REQUEST['text']) ? '[quote]'.$messages[$REQUEST['re']]['text'].'[/quote]' : $REQUEST['text'],
-                                'comment-length' => CMS::call('USER')->checkRoot() ? '' : CONFIG::getValue('pm', 'message-length'),
-                                'bbcodes'        => CMS::call('PARSER')->showBbcodesPanel('comment.text'),
-                                'for'            => $REQUEST['reply']
-                            )
-                        )
+                        $TPL->parse([
+                            'action'         => '',
+                            'nickname'       => $user['nickname'],
+                            'text'           => empty($REQUEST['text']) ? '[quote]'.$messages[$REQUEST['re']]['text'].'[/quote]' : $REQUEST['text'],
+                            'comment-length' => USER::$root ? '' : CONFIG::getValue('pm', 'message-length'),
+                            'bbcodes'        => CMS::call('PARSER')->showBbcodesPanel('comment.text'),
+                            'for'            => $REQUEST['reply']
+                        ])
                     );
                 } else {
                     $PM->setAllNoNew();

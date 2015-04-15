@@ -63,7 +63,7 @@ die();?>
                 <td class="label"style="width:150px" >[__Select section]</td>
                 <td>
                     <select name="new_section" onChange="setCategories(this.selectedIndex)">
-                        [each=sections]<option value="{sections[id]}" [if=sections[selected]]selected="selected"[endif]>{sections[title]}</option>[endeach.sections]
+                        [each=sections]<option value="{sections[id]}" [if=sections[selected]]selected="selected"[/if]>{sections[title]}</option>[/each.sections]
                     </select>
                 </td>
             </tr>
@@ -73,7 +73,7 @@ die();?>
                 <td>[__Select category]</td>
                 <td>
                     <select name="new_category">
-                        [each=categories]<option value="{categories[id]}" [if=categories[selected]]selected="selected"[endif]>{categories[title]}</option>[endeach.categories]
+                        [each=categories]<option value="{categories[id]}" [if=categories[selected]]selected="selected"[/if]>{categories[title]}</option>[/each.categories]
                     </select>
                 </td>
             </tr>
@@ -106,7 +106,7 @@ die();?>
             <tr class="odd">
                 <td>[__Comments]</td>
                 <td colspan="3">
-                    <input type="checkbox" name="opened" value="1" [if=opened]checked="checked"[endif] />
+                    <input type="checkbox" name="opened" value="1" [if=opened]checked="checked"[/if] />
                     <label for="opened"> [__Allow]</label>
                 </td>
             </tr>

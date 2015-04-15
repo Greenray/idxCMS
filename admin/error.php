@@ -11,5 +11,5 @@ $output['locale']   = SYSTEM::get('locale');
 $output['message1'] = $message[0];
 $output['message2'] = $message[1];
 
-$TPL = new TEMPLATE(ADMINTEMPLATES.'error.tpl');
+$TPL = new TEMPLATE(TEMPLATES.'error.tpl');
 echo $TPL->parse($output);

@@ -10,7 +10,7 @@ $sections = CMS::call('POSTS')->getSections();
 
 if ($sections === FALSE) Redirect('posts');
 
-if (!empty($sections['drafts'])) unset($sections['drafts']);
+unset($sections['drafts']);
 
 if (empty($sections)) {
     ShowWindow(__('Posts'), __('Database is empty'), 'center');
@@ -80,11 +80,11 @@ if (empty($sections)) {
                         break;
 
                     case 'close':
-                        if (CMS::call('USER')->checkRoot()) CMS::call('POSTS')->setValue($post, 'opened', FALSE);
+                        if (USER::$root) CMS::call('POSTS')->setValue($post, 'opened', FALSE);
                         break;
 
                     case 'open':
-                        if (CMS::call('USER')->checkRoot()) CMS::call('POSTS')->setValue($post, 'opened', TRUE);
+                        if (USER::$root) CMS::call('POSTS')->setValue($post, 'opened', TRUE);
                         break;
 
                     case 'ban':
@@ -191,7 +191,7 @@ if (empty($sections)) {
         $output = CMS::call('POSTS')->showSections();
         if (!empty($output)) {
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'sections.tpl');
-            ShowWindow(__('Posts'), $TPL->parse(array('sections' => $output)));
+            ShowWindow(__('Posts'), $TPL->parse(['sections' => $output]));
         } else {
             ShowWindow(__('Posts'), __('Database is empty'), 'center');
         }

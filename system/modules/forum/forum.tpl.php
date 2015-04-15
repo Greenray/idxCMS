@@ -20,8 +20,8 @@ die();?>
                 <td class="left">{categories[desc]}</td>
                 <td class="right" style="width:40px">{categories[topics]}</td>
             </tr>
-        [endeach.sections[categories]]
-    [endeach.sections]
+        [/each.sections[categories]]
+    [/each.sections]
 </table>
 <table>
     <tr>

@@ -16,7 +16,7 @@ die();?>
                     <td>{messages[text]}</td>
                     <td><input type="checkbox" name="delete[]" value="{messages[id]}" />[__Delete]</td>
                 </tr>
-            [endeach.messages]
+            [/each.messages]
         </table>
         <p class="center"><input type="submit" name="submit" value="[__Submit]" class="submit" /></p>
     </form>

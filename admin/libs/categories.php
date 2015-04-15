@@ -12,9 +12,11 @@ $sections = CMS::call($obj)->getSections();
 try {
     if (!empty($REQUEST['p'])) {
         SaveSortedSections($obj, $REQUEST['p']);
+
     } elseif (!empty($REQUEST['save'])) {
         $categories = CMS::call($obj)->getCategories($REQUEST['section']);
         CMS::call($obj)->saveCategory();
+
     } else {
         if (!empty($REQUEST['delete'])) {
             $category   = explode('.', $REQUEST['delete']);
@@ -35,7 +37,7 @@ if (!empty($sections)) {
     $output['module']   = $module;
     $output['sections'] = $sections;
     foreach ($sections as $id => $section) {
-        $choice[$id]['id'] = $id;
+        $choice[$id]['id']    = $id;
         $choice[$id]['title'] = $section['title'];
         $categories = CMS::call($obj)->getCategories($id);
         if (!empty($categories)) {
@@ -51,9 +53,13 @@ if (!empty($sections)) {
             }
         } else $output['sections'][$id]['categories'] = [];
     }
+
+    # Show existing section and categories
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'categories.tpl');
-    echo $TPL->parse($output);      # Existing categories
+    echo $TPL->parse($output);
+
     if (!empty($REQUEST['edit'])) {
+        # Edit category
         $param    = explode('.', $REQUEST['edit']);
         $section  = CMS::call($obj)->getSection($param[0]);
         $category = CMS::call($obj)->getCategory($param[1]);
@@ -64,25 +70,26 @@ if (!empty($sections)) {
             $category['section'] = $section;
             $category['bbCodes'] = CMS::call('PARSER')->showBbcodesPanel('form.desc');
             $category['header']  = __('Edit');
+
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'category.tpl');
             echo $TPL->parse($category);
+
         } else {
             header('Location: '.MODULE.'admin&id='.$module.'.categories');
             die();
         }
     } else {
+        # Create new category
         if (!empty($REQUEST['new'])) {
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'category.tpl');
-            echo $TPL->parse(
-                array(
-                    'title'    => $REQUEST['title'],
-                    'desc'     => $REQUEST['desc'],
-                    'access'   => (int) $REQUEST['access'],
-                    'sections' => $choice,
-                    'bbCodes'  => CMS::call('PARSER')->showBbcodesPanel('form.desc'),
-                    'header'   => __('New category')
-                )
-            );
+            echo $TPL->parse([
+                'title'    => empty($REQUEST['title'])  ? '' : $REQUEST['title'],
+                'desc'     => empty($REQUEST['desc'])   ? '' : $REQUEST['desc'],
+                'access'   => empty($REQUEST['access']) ? 0  : (int)$REQUEST['access'],
+                'sections' => $choice,
+                'bbCodes'  => CMS::call('PARSER')->showBbcodesPanel('form.desc'),
+                'header'   => __('New category')
+            ]);
         }
     }
 } else {

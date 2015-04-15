@@ -13,7 +13,7 @@ die();?>
                 <td>[__Select file]</td>
                 <td colspan="2">
                     <select name="selected" style="width:200px">
-                        [foreach=select.id.name]<option value="{name}">{name}</option>[endforeach.select]
+                        [foreach=select.id.name]<option value="{name}">{name}</option>[/foreach.select]
                     </select>
                 </td>
             </tr>

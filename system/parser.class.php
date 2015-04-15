@@ -1,8 +1,7 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-
 /** BBCODES parser.
  *
+ * @program   idxCMS: Flat Files Content Management Sysytem
  * @file      system/parser.class.php
  * @version   2.4
  * @author    Victor Nabatov <greenray.spb@gmail.com>
@@ -13,19 +12,13 @@
 
 class PARSER {
 
-    /** Text to parse.
-     * @var string
-     */
+    /** @var string Text to parse */
     private $text = '';
 
-    /** Temorary variable for code processing.
-     * @var array
-     */
+    /** @var array Temorary variable for code processing */
     private $temp = [];
 
-    /** Array of regexp.
-     * @var array
-     */
+    /** @var array Array of regexp */
     private $regexp = [];
 
     /** Class initialization. */
@@ -72,7 +65,6 @@ class PARSER {
     }
 
     /** bbCodes panel for the specified textarea.
-     *
      * @param  string  $textarea  Textarea ID
      * @param  boolean $moderator Is user an admin or moderator?
      * @param  string  $dir       Current directory
@@ -98,7 +90,7 @@ class PARSER {
         $TPL = new TEMPLATE(SYS.'templates'.DS.'bbcodes-panel.tpl');
         return $TPL->parse([
             'moderator' => $moderator,
-            'full'      => USER::loggedIn(),
+            'full'      => USER::$logged_in,
             'bbimg'     => IMAGES.'bbcodes'.DS,
             'form'      => $area[0],
             'area'      => $area[1],
@@ -109,7 +101,7 @@ class PARSER {
     }
 
     /** Parses smiles in text.
-     * @return string HTML tag with smile image
+     * @return string
      */
     private function parseSmiles() {
         preg_match_all("#\[(.*?)\]#is", $this->text, $matches);
@@ -135,14 +127,14 @@ class PARSER {
     }
 
     /** Parses [code]...[/code] bbtag.
-     * @return string HTML div block with highlited php code
+     * @return string
      */
     function parseCode() {
         preg_match_all("#[\s\n\r]*\[code\][\n\r]*(.*?)[\s\n\r]*\[/code\][\s\n\r]*#is", $this->text, $matches);
         if (!empty($matches)) {
             foreach ($matches[1] as $i => $code) {
                 $code = preg_replace("#[\n\r]+#", '', highlight_string(strtr($code, array_flip(get_html_translation_table(HTML_SPECIALCHARS, ENT_QUOTES))), TRUE));
-                $tmp = '$:'.RandomString(6).':$';
+                $tmp  = '$:'.RandomString(6).':$';
                 $this->temp[$tmp] = '<div class="codetext">'.$code.'</div>';
                 $this->text = str_replace($matches[0][$i], $tmp, $this->text);
             }
@@ -150,7 +142,7 @@ class PARSER {
     }
 
     /** Parses [php]...[/php] bbtag.
-     * @return string HTML div block with highlited php code
+     * @return string
      */
     private function parsePhp() {
         preg_match_all("#[\s\n\r]*\[php\][\n\r]*(.*?)[\s\n\r]*\[/php\][\s\n\r]*#is", $this->text, $matches);
@@ -160,7 +152,7 @@ class PARSER {
                     $code = '<?php'.LF.$code.LF.'?>';
                 }
                 $code = preg_replace("#[\n\r]+#", '', highlight_string(strtr($code, array_flip(get_html_translation_table(HTML_SPECIALCHARS, ENT_QUOTES))), TRUE));
-                $tmp = '$:'.RandomString(6).':$';
+                $tmp  = '$:'.RandomString(6).':$';
                 $this->temp[$tmp] = '<div class="codephp">'.$code.'</div>';
                 $this->text = str_replace($matches[0][$i], $tmp, $this->text);
             }
@@ -168,7 +160,7 @@ class PARSER {
     }
 
     /** Parses [html]...[/html] bbtag.
-     * @return string HTML div block with highlited html tags
+     * @return string
      */
     private function parseHtml() {
         preg_match_all("#[\s\n\r]*\[html\][\n\r]*(.*?)[\s\n\r]*\[/html\][\s\n\r]*#is", $this->text, $matches);
@@ -183,7 +175,7 @@ class PARSER {
     }
 
     /** Parses [qoute|quote="Who"]...[/qoute] bbtags.
-     * @return string HTML div block with the quoted text
+     * @return string
      */
     private function parseQuote() {
         $this->text = preg_replace(
@@ -198,7 +190,6 @@ class PARSER {
     }
 
     /** Shows spoiler with hidden text.
-     *
      * @param  array  $matches Array of spoiler parameters
      * @return string          HTML div block with hidden text
      */
@@ -216,7 +207,6 @@ class PARSER {
     }
 
     /** Parses [img]...[/img] bbtag.
-     *
      * @param  string $path Path to images directory
      * @return string       HTML div block with the image
      */
@@ -224,78 +214,71 @@ class PARSER {
         preg_match_all("#\[img\][\s\n\r]*([^ \"\n\r\t<]*?)[\s\n\r]*\[/img\]#is", $this->text, $matches);
         if (!empty($matches)) {
             foreach ($matches[1] as $k => $picture) {
-                $image = basename($picture);
-                $width = CONFIG::getValue('main', 'thumb-width');
-                $height = CONFIG::getValue('main', 'thumb-height');
-                $zoom = '';
+                $image    = basename($picture);
+                $width    = CONFIG::getValue('main', 'thumb-width');
+                $height   = CONFIG::getValue('main', 'thumb-height');
+                $zoom     = '';
                 $external = '';
                 $internal = '';
                 if ($picture !== $image) {
                     # Parsing of an old image.
                     $parts = explode(DS, $picture);
                     if ($parts[0] !== 'http:') {
-                        if (file_exists($picture.'.jpg')) {
-                            $zoom = $picture;
-                        } else {
-                            $internal = $picture;
-                        }
-                    } else
-                        $external = $picture;
+                        if (file_exists($picture.'.jpg'))
+                             $zoom     = $picture;
+                        else $internal = $picture;
+
+                    } else $external = $picture;
                 } else {
                     if (file_exists(TEMP.$picture)) {
+
                         # Uploaded image
                         if (empty($path)) {
+
                             # Uploaded image for preview
                             $internal = TEMP.$picture;
                         } else {
+
                             # Uploaded image for saving of text
                             $zoom = $path.$picture;
                             rename(TEMP.$picture, $zoom);
                             rename(TEMP.$picture.'.jpg', $zoom.'.jpg');
                         }
                     } elseif (file_exists(CONTENT.'images'.DS.$picture)) {
+
                         # Common images
                         $internal = CONTENT.'images'.DS.$picture;
                     } else {
                         if (file_exists($path.$picture)) {
-                            if (file_exists($path.$picture.'.jpg')) {
-                                $zoom = $path.$picture;
-                            } else {
-                                $internal = $path.$picture;
-                            }
+                            if (file_exists($path.$picture.'.jpg'))
+                                 $zoom     = $path.$picture;
+                            else $internal = $path.$picture;
                         }
                     }
                 }
                 if (!empty($zoom)) {
                     $size = getimagesize($zoom.'.jpg');
-                    if ($size !== FALSE) {
-                        $output = '<a class="cbox" href="'.$zoom.'">' .
-                                '<img src="'.$zoom.'.jpg" '.$size[3].' hspace="10" vspace="10" alt="" />' .
-                                '</a>';
-                    } else {
-                        $output = '<a class="cbox" href="'.$zoom.'">' .
-                                '<img src="'.$zoom.'.jpg" width="'.$width.'" height="'.$height.'" hspace="10" vspace="10" alt="" />' .
-                                '</a>';
-                    }
+                    if ($size !== FALSE)
+                         $output = '<a class="cbox" href="'.$zoom.'"><img src="'.$zoom.'.jpg" '.$size[3].' hspace="10" vspace="10" alt="" /></a>';
+                    else $output = '<a class="cbox" href="'.$zoom.'"><img src="'.$zoom.'.jpg" width="'.$width.'" height="'.$height.'" hspace="10" vspace="10" alt="" /></a>';
+
                 } elseif (!empty($external)) {
                     $output = '<img src="'.$external.'" hspace="10" vspace="10" alt="" />';
                 } elseif (!empty($internal)) {
                     $size = getimagesize($internal);
-                    if ($size !== FALSE) {
-                        $output = '<img src="'.$internal.'" '.$size[3].' hspace="10" vspace="10" alt="" />';
-                    } else {
-                        $output = '[Image not found]';
-                    }
-                } else {
-                    $output = '[Image not found]';
-                }
+                    if ($size !== FALSE)
+                         $output = '<img src="'.$internal.'" '.$size[3].' hspace="10" vspace="10" alt="" />';
+                    else $output = '[Image not found]';
+
+                } else $output = '[Image not found]';
+
                 $this->text = str_replace($matches[0][$k], $output, $this->text);
             }
         }
     }
 
     /** Parses [mp3]...[/mp3] bbtag.
-     * @return string HTML block with flash mp3 player
+     * @return string
      */
     private function parseMP3() {
         $player = CONFIG::getSection('audio');
@@ -311,10 +294,10 @@ class PARSER {
     }
 
     /** Parses [youtube]...[/youtube] bbtag.
-     * @return string HTML block with youtube player
+     * @return string
      */
     private function parseYouTube() {
-        $width = CONFIG::getValue('video', 'width');
+        $width  = CONFIG::getValue('video', 'width');
         $height = CONFIG::getValue('video', 'height');
         return '<object width="'.$width.'" height="'.$height.'">
                     <param name="movie" value="http://www.youtube.com/v/\\1"></param>
@@ -324,7 +307,6 @@ class PARSER {
     }
 
     /** Main parser.
-     *
      * @param  string $text Text for parsing
      * @param  string $path Path of images directory
      * @return string       Parsed text
@@ -346,7 +328,6 @@ class PARSER {
     }
 
     /** Parses text.
-     * 
      * @param  string $text Text for parsing
      * @param  string $path Path to the images directory
      * @return string       Parsed text
@@ -356,7 +337,7 @@ class PARSER {
         if (empty($text)) {
             return '';
         }
-        if (!CMS::call('USER')->checkRoot()) {
+        if (!USER::$root) {
             $text = htmlspecialchars($text);
         }
         return $this->parse($text, $path);

@@ -1,8 +1,7 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-
 /** Templates parser.
  *
+ * @program   idxCMS: Flat Files Content Management Sysytem
  * @file      system/template.class.php
  * @version   2.4
  * @author    Victor Nabatov <greenray.spb@gmail.com>
@@ -13,26 +12,20 @@
 
 class TEMPLATE {
 
-    /** Template variables.
-     * @var array
-     */
+    /** @var array Template variables */
     private $vars = [];
 
-    /** Temlate name.
-     * @var string
-     */
+    /** @var string Temlate name */
     private $tpl = '';
 
-    /** Template patterns.
-     * @var array
-     */
+    /** @var array Template patterns */
     private $patterns = [
         'die'       => "#<\?php(.*?)\?>#is",
-        'each'      => "#\[each=(.*?)\](.*?)\[endeach.\\1\]#is",
-        'foreach'   => "#\[foreach=([\w\_\-]*).([\w\_\-]*).([\w\_\-]*)\](.*?)\[endforeach.\\1\]#is",
-        'for'       => "#\[for=(.*?)\](.*?)\[endfor\]#is",
-        'if'        => "#\[if=(.*?)(|\[(.*?)\])\](.*?)\[endif\]#is",
-        'ifelse'    => "#\[ifelse=(.*?)(|\[(.*?)\])\](.*?)\[else\](.*?)\[endelse\]#is",
+        'each'      => "#\[each=(.*?)\](.*?)\[\/each.\\1\]#is",
+        'foreach'   => "#\[foreach=([\w\_\-]*).([\w\_\-]*).([\w\_\-]*)\](.*?)\[\/foreach.\\1\]#is",
+        'for'       => "#\[for=(.*?)\](.*?)\[\/for\]#is",
+        'if'        => "#\[if=(.*?)(|\[(.*?)\])\](.*?)\[\/if\]#is",
+        'ifelse'    => "#\[ifelse=(.*?)(|\[(.*?)\])\](.*?)\[else\](.*?)\[\/else\]#is",
         'translate' => "#\[__(.*?)\]#is",
         'value'     => "#\{([\-\#\w]+)(|\[(.*?)\])\}#is",
         'show'      => "#\[show=(.*?)\]#is"
@@ -57,37 +50,6 @@ class TEMPLATE {
         else                                           $this->tpl = $template;
     }
 
-    /** Parses control structure FOREACH.
-     * <pre>
-     * The template is:
-     *   [forеach=var1.var2.var3]...[endforеach.var1]
-     * </pre>
-     *
-     * @param  array $matches Matches for control structure "foreach"
-     * @return string         Parsed string
-     */
-    private function __foreach($matches) {
-        $temp = '';
-        if (!empty($this->vars[$matches[1]])) {
-            foreach ($this->vars[$matches[1]] as $key => $var) {
-                preg_match($this->patterns['if'], $matches[4], $sigs);
-                # [foreach=var1.var2.var3]
-                #     [if]...[endif]
-                # [endforeach.var1]
-                if (!empty($sigs)) {
-                    if (!empty($var))
-                         $tmp = str_replace($sigs[0], $sigs[4], $matches[4]);
-                    else $tmp = str_replace($sigs[0], '', $matches[4]);
-                } else   $tmp = $matches[4];
-                # [foreach=var1.var2.var3]
-                #     {var}
-                # [endforeach.var1]
-                $temp .= str_replace(['{'.$matches[2].'}', '{'.$matches[3].'}'], [$key, $var], $tmp);
-            }
-        }
-        return str_replace($matches[0], $temp, $matches[0]);
-    }
-
     /** Parses control structure EACH.
      * <pre>
      * The templates are:
@@ -104,8 +66,8 @@ class TEMPLATE {
             foreach ($this->vars[$matches[1]] as $key => $var) {
                 $tpl = $matches[2];
                 if (is_array($var)) {
-                    # [each=var[index]]...[endeach.var[index]]
-                    preg_match_all('#\[each='.$matches[1].'\[(.*)\]\](.*?)\[endeach.'.$matches[1].'\[\\1\]\]#is', $tpl, $sigs);
+                    # [each=var[index]]...[/each.var[index]]
+                    preg_match_all('#\[each='.$matches[1].'\[(.*)\]\](.*?)\[/each.'.$matches[1].'\[\\1\]\]#is', $tpl, $sigs);
                     if (!empty($sigs[0])) {
                         $tmp = $sigs[2][0];
                         preg_match($this->patterns['if'], $tmp, $ifsigs);
@@ -123,8 +85,8 @@ class TEMPLATE {
                             $tpl = str_replace($sigs[0][0], $tmpl, $tpl);
                         }
                         # [each=var[index]]
-                        #     [ifelse=var]...[endelse]
-                        # [endeach.var[index]]
+                        #     [ifelse=var]...[/else]
+                        # [/each.var[index]]
                         preg_match($this->patterns['ifelse'], $tmp, $ifsigs);
                         if (!empty($ifsigs)) {
                             $tmpl = '';
@@ -136,8 +98,8 @@ class TEMPLATE {
                                     # [each=var[index]]
                                     #     [ifelse=var]
                                     #         {var[index]}
-                                    #     [endelse]
-                                    # [endeach.var[index]]
+                                    #     [/else]
+                                    # [/each.var[index]]
                                     foreach ($values as $k => $value) {
                                         $tmpl = str_replace('{'.$sigs[1][0].'['.$k.']}', $value, $tmpl);
                                     }
@@ -147,7 +109,7 @@ class TEMPLATE {
                         }
                         # [each=var[index]]
                         #     {var[index]}
-                        # [endeach.var[index]]
+                        # [/each.var[index]]
                         preg_match_all('#\{'.$sigs[1][0].'\[(.*?)\]\}#is', $tmp, $subsigs);
                         $tmpl = '';
                         if (!empty($var[$sigs[1][0]])) {
@@ -166,8 +128,8 @@ class TEMPLATE {
                         }
                     }
                     # [each=var[index]]
-                    #     [if=var]...[endif]
-                    # [endeach.var[index]]
+                    #     [if=var]...[/if]
+                    # [/each.var[index]]
                     preg_match_all($this->patterns['if'], $tpl, $sigs);
                     if (!empty($sigs)) {
                         foreach ($sigs[1] as $k => $idx) {
@@ -177,12 +139,12 @@ class TEMPLATE {
                         }
                     }
                     # [each=var[index]]
-                    #     [ifelse=var]...[endelse]
-                    # [endeach.var[index]]
+                    #     [ifelse=var]...[/else]
+                    # [/each.var[index]]
                     preg_match_all($this->patterns['ifelse'], $tpl, $sigs);
                     if (!empty($sigs)) {
                         foreach ($sigs[1] as $k => $idx) {
-                            $val = SearchValueInArray($sigs[3][$k], $var);
+                            $val = $this->searchValueInArray($sigs[3][$k], $var);
                             if (!empty($var[$sigs[3][$k]]) || !empty($val))
                                  $tpl = str_replace($sigs[0][$k], $sigs[4][$k], $tpl);
                             else $tpl = str_replace($sigs[0][$k], $sigs[5][$k], $tpl);
@@ -190,7 +152,7 @@ class TEMPLATE {
                     }
                     # [each=var[index]]
                     #     {var[index][subindex]}
-                    # [endeach.var[index]]
+                    # [/each.var[index]]
                     preg_match_all('/\{'.$matches[1].'\[(.*)\]\[(.*)\]\}/U', $tpl, $sigs);
                     if (!empty($sigs)) {
                         foreach($sigs[1] as $k => $idx) {
@@ -207,7 +169,7 @@ class TEMPLATE {
                     }
                     # [each=var[index]]
                     #     {var[index]}
-                    # [endeach.var[index]]
+                    # [/each.var[index]]
                     preg_match_all('/\{'.$matches[1].'(|\[(.*)\])\}/U', $tpl, $sigs);
                     if (!empty($sigs)) {
                         foreach($sigs[2] as $k => $idx) {
@@ -220,7 +182,7 @@ class TEMPLATE {
                 } else {
                     # [each=var[index]]
                     #     {var}
-                    # [endeach.var[index]]
+                    # [/each.var[index]]
                     $temp .= str_replace('{'.$matches[1].'}', $var, $tpl);   # Parsing of structure {var}
                 }
             }
@@ -249,27 +211,35 @@ class TEMPLATE {
         return str_replace($matches[0], $result, $matches[0]);
     }
 
-    /** Parses of a control structure IF ELSE.
+    /** Parses control structure FOREACH.
      * <pre>
      * The template is:
-     *   [ifеlse=var]...[else]...[endelsе]
-     *   [ifеlse=var[index]]...[else]...[endelsе.var]
+     *   [forеach=var1.var2.var3]...[/forеach.var1]
      * </pre>
      *
-     * @param  array  $matches Matches for control structure "if else"
-     * @return string          Parsed string
+     * @param  array $matches Matches for control structure "foreach"
+     * @return string         Parsed string
      */
-    private function __if_else($matches) {
-        if (empty($this->vars[$matches[1]])) {
-            return str_replace($matches[0], $matches[5], $matches[0]);
-        }
-        if (!empty($matches[3])) {
-            $var = SearchValueInArray($matches[3], $this->vars[$matches[1]]);
-            if (empty($var)) {
-                return str_replace($matches[0], $matches[5], $matches[0]);
+    private function __foreach($matches) {
+        $temp = '';
+        if (!empty($this->vars[$matches[1]])) {
+            foreach ($this->vars[$matches[1]] as $key => $var) {
+                preg_match($this->patterns['if'], $matches[4], $sigs);
+                # [foreach=var1.var2.var3]
+                #     [if]...[/if]
+                # [/foreach.var1]
+                if (!empty($sigs)) {
+                    if (!empty($var))
+                         $tmp = str_replace($sigs[0], $sigs[4], $matches[4]);
+                    else $tmp = str_replace($sigs[0], '', $matches[4]);
+                } else   $tmp = $matches[4];
+                # [foreach=var1.var2.var3]
+                #     {var}
+                # [/foreach.var1]
+                $temp .= str_replace(['{'.$matches[2].'}', '{'.$matches[3].'}'], [$key, $var], $tmp);
             }
         }
-        return str_replace($matches[0], $matches[4], $matches[0]);
+        return str_replace($matches[0], $temp, $matches[0]);
     }
 
     /** Parses of a control structure IF.
@@ -296,16 +266,16 @@ class TEMPLATE {
             return str_replace($matches[0], '', $matches[0]);
         }
         # [if=var]
-        #     [if=var]...[endif]
-        # [endif]
+        #     [if=var]...[/if]
+        # [/if]
         if (!empty($matches[3])) {
-            $var = SearchValueInArray($matches[3], $this->vars[$matches[1]]);
+            $var = $this->searchValueInArray($matches[3], $this->vars[$matches[1]]);
             if (empty($var)) {
                 return str_replace($matches[0], '', $matches[0]);
             }
         }
         if (is_array($this->vars[$matches[1]])) {
-            # [if=var]...{var[index]}...[endif]
+            # [if=var]...{var[index]}...[/if]
             preg_match_all('/\{'.$matches[1].'(|\[(.*)\])\}/U', $matches[4], $sigs);
             if (!empty($sigs)) {
                 foreach ($sigs[2] as $key => $value) {
@@ -322,6 +292,42 @@ class TEMPLATE {
             }
         }
         return str_replace($matches[0], $matches[4], $matches[0]);
+    }
+
+    /** Parses of a control structure IF ELSE.
+     * <pre>
+     * The template is:
+     *   [ifеlse=var]...[else]...[/elsе]
+     *   [ifеlse=var[index]]...[else]...[/elsе.var]
+     * </pre>
+     *
+     * @param  array  $matches Matches for control structure "if else"
+     * @return string          Parsed string
+     */
+    private function __if_else($matches) {
+        if (empty($this->vars[$matches[1]])) {
+            return str_replace($matches[0], $matches[5], $matches[0]);
+        }
+        if (!empty($matches[3])) {
+            $var = $this->searchValueInArray($matches[3], $this->vars[$matches[1]]);
+            if (empty($var)) {
+                return str_replace($matches[0], $matches[5], $matches[0]);
+            }
+        }
+        return str_replace($matches[0], $matches[4], $matches[0]);
+    }
+
+    /** Shows element.
+     * @param  array  $matches Matches for parse
+     * @return string          Parsed string
+     */
+    private function __show($matches) {
+        if (!empty($matches)) {
+            $params = explode(',', $matches[1]);
+            if (!empty($params[1]))
+                 return str_replace($matches[0], call_user_func([$this, 'showElement'], $params[0], $params[1]), $matches[0]);
+            else return str_replace($matches[0], call_user_func([$this, 'showElement'], $params[0]), $matches[0]);
+        }
     }
 
     /** Localization.
@@ -385,22 +391,147 @@ class TEMPLATE {
         return $matches[0];
     }
 
-    /** Shows element.
-     *
-     * @param  array  $matches Matches for parse
-     * @return string          Parsed string
+    /** Recursively searches of the value in a multidimensional array.
+     * @param  mixed $needle   The desired value
+     * @param  array $haystack Array to search
+     * @return mixed           The value of the key
      */
-    private function __show($matches) {
-        if (!empty($matches)) {
-            $params = explode(',', $matches[1]);
-            if (!empty($params[1]))
-                 return str_replace($matches[0], call_user_func('ShowElement', $params[0], $params[1]), $matches[0]);
-            else return str_replace($matches[0], call_user_func('ShowElement', $params[0]), $matches[0]);
+    private function searchValueInArray($needle, $haystack) {
+        $result = '';
+        foreach ($haystack as $key => $value) {
+            if ($needle == $key) {
+                $result = $value;
+            }
+            if (is_array($value)) {
+                $result = $this->searchValueInArray($needle, $value);
+            }
+        }
+        return $result;
+    }
+
+    /** Shows the content.
+     * @param  string $element    What to show
+     * @param  string $parameters Parameters - type of the content block
+     * @return string
+     */
+    private function showElement($element, $parameters = '') {
+        $output = '';
+        switch($element) {
+
+            case 'point':
+                list($point, $template) = explode('@', $parameters);
+                if (!empty(SYSTEM::$output[$point])) {
+                    foreach (SYSTEM::$output[$point] as $i => $module) {
+                        $output .= CMS::call('SYSTEM')->showWindow(
+                            $module[0],
+                            $module[1],
+                            $module[2],
+                            $template
+                        );
+                    }
+                }
+                if (empty(SYSTEM::$output[$point]) && ($point !== 'up-center') && ($point !== 'down-center')) {
+                    if (!empty(SYSTEM::$output['left'])) {
+                        foreach (SYSTEM::$output['left'] as $i => $module) {
+                            $output .= CMS::call('SYSTEM')->showWindow(
+                                $module[0],
+                                $module[1],
+                                $module[2],
+                                $template
+                            );
+                        }
+                    }
+                }
+                return $output;
+
+            case 'box':
+                list($module, $template) = explode('@', $parameters);
+                if (!empty(SYSTEM::$output['boxes'])) {
+                    foreach (SYSTEM::$output['boxes'] as $i => $box) {
+                        if ($box[0] === SYSTEM::$modules[$module]['title']) {
+                            $output .= CMS::call('SYSTEM')->showWindow(
+                                $box[0],
+                                $box[1],
+                                $box[2],
+                                $template
+                            );
+                        }
+                    }
+                }
+                return $output;
+
+            case 'main':
+                if (!empty(SYSTEM::$output['main'])) {
+                    foreach (SYSTEM::$output['main'] as $module) {
+                        $output .= CMS::call('SYSTEM')->showWindow(
+                            $module[0],
+                            $module[1],
+                            $module[2],
+                            substr(strstr($parameters, '@'), 1)
+                        );
+                    }
+                }
+                return $output;
+
+            case 'title':
+                $title = CONFIG::getValue('main', 'title');
+                $pagename = SYSTEM::get('pagename');
+                if (!empty($pagename)) {
+                    $title = $title.' - '.$pagename;
+                }
+                return $title;
+
+            case 'meta':
+                $output = '';
+                $meta = SYSTEM::get('meta');
+                $desc = CONFIG::getValue('main', 'description');
+                if (!empty($meta['desc'])) {
+                    $desc .= ' - '.$meta['desc'];
+                }
+                $output .= '<meta name="description" content="'.$desc.'" />'.LF;
+                $keywords = CONFIG::getValue('main', 'keywords');
+                if (!empty($meta['keywords'])) {
+                    $words    = $keywords.','.$meta['keywords'];
+                    $keywords = explode(',', $words);
+                    $words    = array_unique($keywords);
+                    $keywords = implode(',', $words);
+                }
+                $output .= '<meta name="keywords" content="'.$keywords.'" />'.LF;
+                $output .= file_get_contents(CONTENT.'meta');
+                if (CONFIG::getValue('enabled', 'rss')) {
+                    $feeds = SYSTEM::get('feeds');
+                    foreach ($feeds as $module => $d) {
+                        $output .= '<link href="'.MODULE.'rss&m='.$module.'" rel="alternate" type="application/xml" title="RSS '.$d[0].'" />'.LF;
+                    }
+                }
+                return $output;
+
+            case 'copyright':
+                if ($parameters) {
+                    $TPL = new TEMPLATE('copyright.tpl');
+                    return CMS::call('SYSTEM')->showWindow('__NOWINDOW__', $TPL->parse());
+                } else {
+                    return IDX_POWERED.'<br />'.IDX_COPYRIGHT;
+                }
+                break;
+
+            case 'error':
+                $error = '';
+                if (file_exists(LOGS.'error.log')) {
+                    $errors = file(LOGS.'error.log', FILE_IGNORE_NEW_LINES);
+                    foreach($errors as $message) {
+                        $error .= $message.'<br />';
+                    }
+                    unlink(LOGS.'error.log');
+                }
+                if (!empty($error)) {
+                    return CMS::call('SYSTEM')->showWindow('Error', $error, 'center', 'error');
+                }
+            break;
         }
     }
 
     /** Parses template with given variables.
-     *
      * @param  array  $params Template variables
      * @return string         Parsed template
      */

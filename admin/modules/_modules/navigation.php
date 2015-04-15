@@ -4,7 +4,7 @@
 # Version 2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
-if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
+if (!defined('idxADMIN') || !USER::$root) die();
 
 # Save site menu
 if (!empty($REQUEST['save'])) {
@@ -43,12 +43,12 @@ foreach ($links as $key => $values) {
     }
 }
 
-$output['links'][$i] = array(
+$output['links'][$i] = [
     'link' => '',
     'name' => '',
     'desc' => '',
     'icon' => ''
-);
+];
 
 foreach ($icons as $icon) {
     $output['links'][$i]['icons'][]['id'] = $icon;

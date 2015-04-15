@@ -1,8 +1,7 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-
 /** Uploads files.
  *
+ * @program   idxCMS: Flat Files Content Management Sysytem
  * @file      system/uploader.class.php
  * @version   2.4
  * @author    Victor Nabatov <greenray.spb@gmail.com>
@@ -13,9 +12,7 @@
 
 class UPLOADER {
 
-    /** Allowed types of file for uploading.
-     * @var array
-     */
+    /** @var array Allowed types of file for uploading */
     private $allowed_types = [
         'application/zip',
         'application/rar',
@@ -27,84 +24,55 @@ class UPLOADER {
         'audio/mp3'
     ];
 
-    /** Max size for uploading files.
-     * @var integer
-     */
-    private $max_size;
-
-    /** Temorary file.
-     * @var string
-     */
+    /** @var string Temorary file */
     private $file_tmp;
 
-    /** Size of uploading file.
-     * @var integer
-     */
+    /** @var integer Size of uploading file */
     private $file_size;
 
-    /** Type of the file.
-     * @var string
-     */
+    /** @var string Type of the file */
     private $file_type;
 
-    /** Directory for uploaded files.
-     * @var string
-     */
+    /** @var integer Max size for uploading files */
+    private $max_size;
+
+    /** @var string Directory for uploaded files */
     private $upload_dir;
 
     /** Class initialization.
-     *
-     * @param  string  $upload_dir Directory for uploading of files
-     * @param  integer $max_size   Max size for uploading files
-     * @return void
+     * @param string  $upload_dir Directory for uploading of files
+     * @param integer $max_size   Max size for uploading files
      */
     public function __construct($upload_dir, $max_size = '') {
         $this->upload_dir = $upload_dir;
         $this->max_size   = empty($max_size) ? CONFIG::getValue('main', 'file-max-size') : $max_size;
     }
 
-    /** Set file parameters.
-     *
-     * @param  array $file Array of file parameters
-     * @return void
-     */
-    private function setFile($file) {
-        # Letters and numbers are settled only, spaces are replaced with a sign "_",
-        $this->file_name = preg_replace('[^a-z0-9._]', '', str_replace('%20', '_', $file['name']));
-        $this->file_size = $file['size'];
-        $this->file_tmp  = $file['tmp_name'];
-        $this->file_type = $file['type'];
-    }
-
-    /** Check the file.
-     *
-     * @return boolean   TRUE if the file is valid
-     * @throws Exception Your file is not allowed or is corrupted
-     * @throws Exception File is too large
-     */
-    private function checkFile() {
-        if (!in_array($this->file_type, $this->allowed_types)) {
-            throw new Exception('Your file is not allowed or is corrupted');
-        }
-        if ($this->file_size >= $this->max_size) {
-            throw new Exception('File is too large');
-        }
-        return TRUE;
-    }
-
-    /** Check if the file is acceptable and upload it to upload directory.
-     *
+    /** Checks if the file is acceptable and upload it to upload directory.
      * @param  array $file Data from global variable $_FILES
-     * @return array       Name of file and file size
-     * @throws Exception   Error of file uploading
+     * @throws Exception "File is not allowed or is corrupted"
+     * @throws Exception "File is too large"
+     * @throws Exception "Error of file uploading"
+     * @return array Name of file and sizeof the file
      */
     public function upload($file) {
         if ($file['error'] === '0') {
-            $this->setFile($file);
-            $this->checkFile();
+
+            # Letters and numbers are settled only, spaces are replaced with a sign "_",
+            $this->file_name = preg_replace('[^a-z0-9._]', '', str_replace('%20', '_', $file['name']));
+            $this->file_size = $file['size'];
+            $this->file_tmp  = $file['tmp_name'];
+            $this->file_type = $file['type'];
+
+            if (!in_array($this->file_type, $this->allowed_types)) {
+                throw new Exception('File is not allowed or is corrupted');
+            }
+            if ($this->file_size >= $this->max_size) {
+                throw new Exception('File is too large');
+            }
             if (is_uploaded_file($this->file_tmp)) {
                 if (move_uploaded_file($this->file_tmp, $this->upload_dir.$this->file_name)) {
-                    return array($this->file_name, $this->file_size);
+                    return [$this->file_name, $this->file_size];
                 }
             }
         }

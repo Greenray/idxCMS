@@ -40,10 +40,10 @@ die();?>
                 </div>
             [else]
                 <input type="hidden" name="opened" value="1" />
-            [endelse]
+            [/else]
         </fieldset>
         <p class="center">
-            [if=new]<input type="hidden" name="new" value="1" />[endif]
+            [if=new]<input type="hidden" name="new" value="1" />[/if]
             <input type="submit" name="save" value="[__Save]" class="submit" />
         </p>
   </form>

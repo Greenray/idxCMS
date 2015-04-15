@@ -17,7 +17,7 @@ if (!empty($REQUEST['save'])) {
             $GB->saveMessage($id, FILTER::get('REQUEST', 'text'));
             unset($id);
         } else {
-            if (USER::loggedIn() || CONFIG::getValue('guestbook', 'allow-guests-post')) {
+            if (USER::$logged_in || CONFIG::getValue('guestbook', 'allow-guests-post')) {
                 CheckCaptcha();
                 $GB->sendMessage(FILTER::get('REQUEST', 'text'));
             }
@@ -115,20 +115,20 @@ if (!empty($messages)) {
 unset($GB);
 
 # Show post form
-if (USER::loggedIn() || CONFIG::getValue('guestbook', 'allow-guests-post')) {
+if (USER::$logged_in || CONFIG::getValue('guestbook', 'allow-guests-post')) {
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'comment-post.tpl');
     ShowWindow(
         __('Message'),
         $TPL->parse(
-            array(
+            [
                 'nickname'       => USER::getUser('nickname'),
-                'not_admin'      => !CMS::call('USER')->checkRoot(),
+                'not_admin'      => !USER::$root,
                 'text'           => FILTER::get('REQUEST', 'text'),
                 'action'         => MODULE.'guestbook',
                 'comment-length' => CONFIG::getValue('guestbook', 'message-length'),
                 'bbcodes'        => CMS::call('PARSER')->showBbcodesPanel('post-comment.text'),
                 'captcha'        => ShowCaptcha()
-            )
+            ]
         )
     );
 }

@@ -1,6 +1,4 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-
 /** Processing of configuration.
  * idxCMS config file is look like this:
  * <pre>
@@ -13,6 +11,7 @@
  *   and so on
  * </pre>
  *
+ * @program   idxCMS: Flat Files Content Management Sysytem
  * @file      system/config.class.php
  * @version   2.4
  * @author    Victor Nabatov <greenray.spb@gmail.com>
@@ -23,33 +22,18 @@
 
 class CONFIG {
 
-    /** Main Configuration file.
-     * @var string
-     */
+    /** @var string Main Configuration file */
     private static $ini = 'config.ini';
 
-    /** Site configuration data.
-     * @var array
-     */
+    /** @var array Site configuration data */
     private static $config = [];
 
     /** Class initialization.
      * Sets config filename, reads and parses config data.
-     * @return void
      */
     public function __construct() {
         self::$ini    = CONTENT.self::$ini;
         self::$config = parse_ini_file(self::$ini, TRUE);
-    }
-
-    /** Creates the configuration section.
-     * Sets the parameters and their values in the specified config section.
-     * @param  string $section Name of the config section
-     * @param  array  $values  Config "parameter = value" for the current section
-     * @return void
-     */
-    public static function setSection($section, $values) {
-        self::$config[$section] = $values;
     }
 
     /** Gets parameters with their values from the specified config section.
@@ -60,12 +44,22 @@ class CONFIG {
         return empty(self::$config[$section]) ? [] : self::$config[$section];
     }
 
-    /** Removes specified config section.
+    /** Gets the parameter with its value from the specified config section.
      * @param  string $section Name of the config section
-     * @return void
+     * @param  string $param   Name of the config parameter
+     * @return array|FALSE     Value of the specified parameter
      */
-    public static function unsetSection($section) {
-        if (!empty(self::$config[$section])) unset(self::$config[$section]);
+    public static function getValue($section, $param) {
+        return empty(self::$config[$section][$param]) ? FALSE : self::$config[$section][$param];
+    }
+
+    /** Creates the configuration section.
+     * Sets the parameters and their values in the specified config section.
+     * @param  string $section Name of the config section
+     * @param  array  $values  Config "parameter = value" for the current section
+     */
+    public static function setSection($section, $values) {
+        self::$config[$section] = $values;
     }
 
     /** Sets the parameter with its value for the specified config section.
@@ -78,13 +72,11 @@ class CONFIG {
         self::$config[$section][$param] = $value;
     }
 
-    /** Gets the parameter with its value from the specified config section.
+    /** Removes specified config section.
      * @param  string $section Name of the config section
-     * @param  string $param   Name of the config parameter
-     * @return array|FALSE     Value of the specified parameter
      */
-    public static function getValue($section, $param) {
-        return empty(self::$config[$section][$param]) ? FALSE : self::$config[$section][$param];
+    public static function unsetSection($section) {
+        if (!empty(self::$config[$section])) unset(self::$config[$section]);
     }
 
     /** Creates and saves the config file.

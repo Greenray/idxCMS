@@ -12,7 +12,7 @@ $sections = CMS::call($obj)->getSections();
 try {
     if (!empty($REQUEST['action']) && !empty($REQUEST['ids'])) {
         if ($obj === 'POSTS') {
-            $new = array('drafts' => 'drafts');
+            $new = ['drafts' => 'drafts'];
             $ids = array_combine($REQUEST['ids'], $REQUEST['ids']);
             $sec = [];
             $dat = $new + $ids;
@@ -67,6 +67,7 @@ if (!empty($sections)) {
 }
 
 if (!empty($REQUEST['edit'])) {
+    # Edit section
     $section = $sections[$REQUEST['edit']];
     $section['bbCodes'] = CMS::call('PARSER')->showBbcodesPanel('form.desc');
     $section['header']  = __('Edit');
@@ -75,15 +76,14 @@ if (!empty($REQUEST['edit'])) {
 }
 
 if (!empty($REQUEST['new']) || empty($sections)) {
+    # Create new section
     $TPL = new TEMPLATE(dirname(__FILE__).DS.'section.tpl');
-    echo $TPL->parse(
-        array(
-            'section' => $REQUEST['section'],
-            'title'   => $REQUEST['title'],
-            'desc'    => $REQUEST['desc'],
-            'access'  => (int) $REQUEST['access'],
-            'bbCodes' => CMS::call('PARSER')->showBbcodesPanel('form.desc'),
-            'header'  => __('New section')
-        )
-    );
+    echo $TPL->parse([
+        'section' => empty($REQUEST['section']) ? '' : $REQUEST['section'],
+        'title'   => empty($REQUEST['title'])   ? '' : $REQUEST['title'],
+        'desc'    => empty($REQUEST['desc'])    ? '' : $REQUEST['desc'],
+        'access'  => empty($REQUEST['access'])  ? 0  : (int)$REQUEST['access'],
+        'bbCodes' => CMS::call('PARSER')->showBbcodesPanel('form.desc'),
+        'header'  => __('New section')
+    ]);
 }

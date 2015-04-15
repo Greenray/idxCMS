@@ -1,8 +1,7 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-
 /** Read and save database files.
  *
+ * @program   idxCMS: Flat Files Content Management Sysytem
  * @file      system/index.class.php
  * @version   2.4
  * @author    Victor Nabatov <greenray.spb@gmail.com>
@@ -13,27 +12,20 @@
 
 class INDEX {
 
-    const constant = '123456';
-
-    /** Name of the index file.
-     * @var string
-     */
+    /** @var string Name of the index file */
     protected $index = 'index';
 
     /** Class initialization. */
     protected function __construct() {}
 
     /** Sets the name of the serialized file.
-     *
      * @param  string $name Name of the index file
-     * @return void
      */
     protected function setIndex($name) {
         $this->index = $name;
     }
 
     /** Gets the data from the index file.
-     *
      * @param  string $path Path to index file
      * @return array        Unserialised content of the index file
      */
@@ -42,7 +34,6 @@ class INDEX {
     }
 
     /** Writes the index file with serialization of data.
-     * 
      * @param  string  $path  Path to index file
      * @param  array   $array Data for saving
      * @return boolean        The result of the operation
@@ -51,8 +42,7 @@ class INDEX {
         return file_put_contents($path.$this->index, serialize($array), LOCK_EX);
     }
 
-    /** Calculate the new ID of the data for the index file.
-     *
+    /** Calculates the new ID of the data for the index file.
      * @param  array   $array For this array we need new ID for the new data
      * @return integer        Calculated ID
      */

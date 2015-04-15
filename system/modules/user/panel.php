@@ -1,8 +1,13 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module User
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+/**
+ * @program   idxCMS: Flat Files Content Management Sysytem
+ * @file      system/modules/user/module.php
+ * @version   2.4
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+ * @package   User
+ */
 
 if (!defined('idxCMS')) die();
 
@@ -23,16 +28,16 @@ $TPL = new TEMPLATE(dirname(__FILE__).DS.'panel.tpl');
 ShowWindow(
     __('User panel'),
     $TPL->parse(
-        array(
-            'loggedin'    => USER::loggedIn(),
+        [
+            'logged_in'    => USER::$logged_in,
             'user'        => USER::getUser('nickname'),
-            'admin'       => CMS::call('USER')->checkRoot(),
+            'admin'       => USER::$root,
             'mess_new'    => $info[0],
             'mess_info'   => $info[1],
             'allow_skins' => CONFIG::getValue('main', 'allow-skin'),
             'select_skin' => SelectPoint(
                 'skin',
-                AdvScanDir(SKINS, '', 'dir', FALSE, array('images')),
+                AdvScanDir(SKINS, '', 'dir', FALSE, ['images']),
                 SYSTEM::get('skin'),
                 'onchange="document.forms[\'skin_select\'].submit()" title="'.__('Skin').'"'
             ),
@@ -43,6 +48,6 @@ ShowWindow(
                 SYSTEM::get('language'),
                 'onchange="document.forms[\'lang_select\'].submit()" title="'.__('Language').'"'
             )
-        )
+        ]
     )
 );

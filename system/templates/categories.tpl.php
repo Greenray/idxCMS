@@ -27,8 +27,8 @@ die();?>
                             </li>
                         </ul>
                     </div>
-                [endif]
+                [/if]
             </li>
-        [endeach.categories]
+        [/each.categories]
     </ul>
 </div>

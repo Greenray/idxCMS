@@ -6,6 +6,6 @@
 
 if (!defined('idxCMS')) die();
 
-SYSTEM::registerModule('menu', 'Menu', 'box', 'system');
-SYSTEM::registerModule('menu.simple', 'Simple menu', 'box', 'system');
-SYSTEM::registerModule('menu.navigation', 'Navigation', 'box', 'system');
+SYSTEM::registerModule('menu',            'Menu',        'box', 'system');
+SYSTEM::registerModule('menu.simple',     'Simple menu', 'box', 'system');
+SYSTEM::registerModule('menu.navigation', 'Navigation',  'box', 'system');

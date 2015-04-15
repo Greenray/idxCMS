@@ -7,7 +7,7 @@
 die();?>
 <div class="post">
     <div class="info">
-        [if=rateid]<div id="rate{rateid}">{rate}</div>[endif]
+        [if=rateid]<div id="rate{rateid}">{rate}</div>[/if]
         <div class="date">[__Category]: <a href="{MODULE}galleries{SECTION}{section}{CATEGORY}{category}">{category_title}</a></div>
         <span class="date">{date}</span>
     </div>

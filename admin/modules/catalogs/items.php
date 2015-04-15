@@ -81,11 +81,13 @@ if (!empty($REQUEST['new']) || !empty($item)) {
             $output['site'] = empty($item) ? FILTER::get('REQUEST', 'site') : $item['site'];
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'link.tpl');
             break;
+
         default:
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'item.tpl');
             break;
     }
     echo $TPL->parse($output);
+    
 } elseif (!empty($sections[$section])) {
     $categories = CMS::call('CATALOGS')->getCategories($section);
     if (!empty($categories[$category])) {

@@ -1,14 +1,30 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - Tagcloud
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+/** Tagcloud.
+ *
+ * @program   idxCMS: Flat Files Content Management Sysytem
+ * @file      admin/modules/tagcloud/config.php
+ * @version   2.4
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+ * @package   Tagcloud
+ * @overview  Website Tagcloud.
+ *            A visual representation of the keywords on your website.
+ *            Sold in two formats: flash and text. If the flash plugin is unavailable or disabled, the text version will be automatically included.
+ *            Associated with the search module.
+ */
 
-if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
+if (!defined('idxADMIN') || !USER::$root) die();
 
-# Keywords array creation.
+/** Keywords array creation.
+ *
+ * @param  string $words   Comma separated list of keywords
+ * @param  array  $config  Tagcloud configuration
+ * @param  array  &$target The result array
+ * @return array           Tags for tagcloud
+ */
 function GetKeywords($words, $config, &$target) {
-    $keywords = explode(',', $words);   # Keywords are written through a comma.
+    $keywords = explode(',', $words);      # Keywords are written through a comma.
     foreach ($keywords as $k => $value) {
         $value = trim($value);             # Let's bite off superfluous blanks.
         # Check for the resolved length of a keyword.
@@ -25,15 +41,14 @@ function CreateTags($posts = TRUE, $files = FALSE) {
     $tags     = [];
     $keywords = CONFIG::getValue('main', 'keywords');
     GetKeywords($keywords, $config, $tags);
-    $modules = array('posts','forum','catalogs','galleries');
+    $modules = ['posts','forum','catalogs','galleries'];
     $enabled = CONFIG::getSection('enabled');
     foreach($modules as $module) {
         if (array_key_exists($module, $enabled)) {
             $obj = strtoupper($module);
             $sections = CMS::call($obj)->getSections();
-            if (!empty($sections['drafts'])) {
-                unset($sections['drafts']);
-            }
+            unset($sections['drafts']);
+
             foreach ($sections as $id => $section) {
                 $categories = CMS::call($obj)->getCategories($id);
                 foreach ($categories as $key => $category) {

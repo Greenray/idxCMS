@@ -26,7 +26,7 @@ die();?>
                     <label><input type="radio" name="act" value="delete.{user[username]}" /> [__Delete]</label>
                 </td>
             </tr>
-            [endeach.user]
+            [/each.user]
         </table>
         <p class="center"><input type="submit" name="submit" value="[__Submit]" class="submit" /></p>
     </form>

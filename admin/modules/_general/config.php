@@ -4,7 +4,7 @@
 # Version 2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
-if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
+if (!defined('idxADMIN') || !USER::$root) die();
 
 if (!empty($REQUEST['save'])) {
     $config = [];
@@ -14,7 +14,7 @@ if (!empty($REQUEST['save'])) {
         if ($config['url']{strlen($config['url']) - 1} !== DS) {
             $config['url'] .= DS;
         }
-    } else $config['url'] = '';
+    } else  $config['url'] = '';
 
     $config['description'] = !empty($REQUEST['description']) ? $REQUEST['description'] : 'Система управления сайтом idxCMS';
     $config['copyright']   = !empty($REQUEST['copyright'])   ? $REQUEST['copyright']   : 'Greenray 2014';
@@ -64,18 +64,18 @@ if (!empty($REQUEST['save'])) {
     $config = [];
     $config['width']          = empty($REQUEST['width'])          ? 290        : (int) $REQUEST['width'];
     $config['height']         = empty($REQUEST['height'])         ? 24         : (int) $REQUEST['height'];
-    $config['bgcolor']        = empty($REQUEST['bgcolor'])        ? '0x66ff66' : strtr($REQUEST['bgcolor'],        array("#" => "0x"));
-    $config['leftbg']         = empty($REQUEST['leftbg'])         ? '0x969696' : strtr($REQUEST['leftbg'],         array("#" => "0x"));
-    $config['lefticon']       = empty($REQUEST['lefticon'])       ? '0x3333ff' : strtr($REQUEST['lefticon'],       array("#" => "0x"));
-    $config['rightbg']        = empty($REQUEST['rightbg'])        ? '0x394670' : strtr($REQUEST['rightbg'],        array("#" => "0x"));
-    $config['righticon']      = empty($REQUEST['righticon'])      ? '0xffffff' : strtr($REQUEST['righticon'],      array("#" => "0x"));
-    $config['rightbghover']   = empty($REQUEST['rightbghover'])   ? '0xff0000' : strtr($REQUEST['rightbghover'],   array("#" => "0x"));
-    $config['righticonhover'] = empty($REQUEST['righticonhover']) ? '0xffffff' : strtr($REQUEST['righticonhover'], array("#" => "0x"));
-    $config['playertext']     = empty($REQUEST['playertext'])     ? '0x000000' : strtr($REQUEST['playertext'],     array("#" => "0x"));
-    $config['slider']         = empty($REQUEST['slider'])         ? '0xff0000' : strtr($REQUEST['slider'],         array("#" => "0x"));
-    $config['track']          = empty($REQUEST['track'])          ? '0xffffff' : strtr($REQUEST['track'],          array("#" => "0x"));
-    $config['border']         = empty($REQUEST['border'])         ? '0x666666' : strtr($REQUEST['border'],         array("#" => "0x"));
-    $config['loader']         = empty($REQUEST['loader'])         ? '0xffffff' : strtr($REQUEST['loader'],         array("#" => "0x"));
+    $config['bgcolor']        = empty($REQUEST['bgcolor'])        ? '0x66ff66' : strtr($REQUEST['bgcolor'],        ['#' => '0x']);
+    $config['leftbg']         = empty($REQUEST['leftbg'])         ? '0x969696' : strtr($REQUEST['leftbg'],         ['#' => '0x']);
+    $config['lefticon']       = empty($REQUEST['lefticon'])       ? '0x3333ff' : strtr($REQUEST['lefticon'],       ['#' => '0x']);
+    $config['rightbg']        = empty($REQUEST['rightbg'])        ? '0x394670' : strtr($REQUEST['rightbg'],        ['#' => '0x']);
+    $config['righticon']      = empty($REQUEST['righticon'])      ? '0xffffff' : strtr($REQUEST['righticon'],      ['#' => '0x']);
+    $config['rightbghover']   = empty($REQUEST['rightbghover'])   ? '0xff0000' : strtr($REQUEST['rightbghover'],   ['#' => '0x']);
+    $config['righticonhover'] = empty($REQUEST['righticonhover']) ? '0xffffff' : strtr($REQUEST['righticonhover'], ['#' => '0x']);
+    $config['playertext']     = empty($REQUEST['playertext'])     ? '0x000000' : strtr($REQUEST['playertext'],     ['#' => '0x']);
+    $config['slider']         = empty($REQUEST['slider'])         ? '0xff0000' : strtr($REQUEST['slider'],         ['#' => '0x']);
+    $config['track']          = empty($REQUEST['track'])          ? '0xffffff' : strtr($REQUEST['track'],          ['#' => '0x']);
+    $config['border']         = empty($REQUEST['border'])         ? '0x666666' : strtr($REQUEST['border'],         ['#' => '0x']);
+    $config['loader']         = empty($REQUEST['loader'])         ? '0xffffff' : strtr($REQUEST['loader'],         ['#' => '0x']);
     $config['autostart']      = empty($REQUEST['autostart'])      ? '' : '1';
     $config['loop']           = empty($REQUEST['loop'])           ? '' : '1';
     CMS::call('CONFIG')->setSection('audio', $config);
@@ -127,7 +127,7 @@ foreach ($modules as $module => $title) {
 }
 $config['modules'] = $available_modules;
 
-$skins = AdvScanDir(SKINS, '', 'dir', FALSE, array('bbcodes', 'forum', 'icons', 'images', 'smiles'));
+$skins = AdvScanDir(SKINS, '', 'dir', FALSE, ['bbcodes', 'forum', 'icons', 'images', 'smiles']);
 $available_skins = [];
 foreach ($skins as $i => $skin) {
     $available_skins[$i]['skin'] = $skin;
@@ -147,11 +147,11 @@ foreach ($langs as $i => $lang) {
 }
 $config['langs'] = $available_langs;
 
-$captcha = array(
+$captcha = [
     'Original' => 'Original',
     'Color'    => 'Color ',
     'Random'   => 'Random'
-);
+];
 $available_captcha = [];
 foreach ($captcha as $i => $type) {
     $available_captcha[$i]['captcha'] = $type;
@@ -159,8 +159,7 @@ foreach ($captcha as $i => $type) {
         $available_captcha[$i]['selected'] = TRUE;
     }
 }
-$config['captcha'] = $available_captcha;
-
+$config['captcha']   = $available_captcha;
 $config['meta_tags'] = file_get_contents(CONTENT.'meta');
 
 $available_tz = [];
@@ -178,18 +177,18 @@ if (file_exists(CONTENT.'intro')) {
     $config['welcome_msg'] = file_get_contents(CONTENT.'intro');
 }
 
-$config['bgcolor']        = GetColor('bgcolor', strtr($config['bgcolor'], array("0x" => "#")));
-$config['leftbg']         = GetColor('leftbg', strtr($config['leftbg'], array("0x" => "#")));
-$config['lefticon']       = GetColor('lefticon', strtr($config['lefticon'], array("0x" => "#")));
-$config['rightbg']        = GetColor('rightbg', strtr($config['rightbg'], array("0x" => "#")));
-$config['righticon']      = GetColor('righticon', strtr($config['righticon'], array("0x" => "#")));
-$config['rightbghover']   = GetColor('rightbghover', strtr($config['rightbghover'], array("0x" => "#")));
-$config['righticonhover'] = GetColor('righticonhover', strtr($config['righticonhover'], array("0x" => "#")));
-$config['playertext']     = GetColor('playertext', strtr($config['playertext'], array("0x" => "#")));
-$config['slider']         = GetColor('slider', strtr($config['slider'], array("0x" => "#")));
-$config['track']          = GetColor('track', strtr($config['track'], array("0x" => "#")));
-$config['border']         = GetColor('border', strtr($config['border'], array("0x" => "#")));
-$config['loader']         = GetColor('loader', strtr($config['loader'], array("0x" => "#")));
+$config['bgcolor']        = GetColor('bgcolor',        strtr($config['bgcolor'],        ['0x' => '#']));
+$config['leftbg']         = GetColor('leftbg',         strtr($config['leftbg'],         ['0x' => '#']));
+$config['lefticon']       = GetColor('lefticon',       strtr($config['lefticon'],       ['0x' => '#']));
+$config['rightbg']        = GetColor('rightbg',        strtr($config['rightbg'],        ['0x' => '#']));
+$config['righticon']      = GetColor('righticon',      strtr($config['righticon'],      ['0x' => '#']));
+$config['rightbghover']   = GetColor('rightbghover',   strtr($config['rightbghover'],   ['0x' => '#']));
+$config['righticonhover'] = GetColor('righticonhover', strtr($config['righticonhover'], ['0x' => '#']));
+$config['playertext']     = GetColor('playertext',     strtr($config['playertext'],     ['0x' => '#']));
+$config['slider']         = GetColor('slider',         strtr($config['slider'],         ['0x' => '#']));
+$config['track']          = GetColor('track',          strtr($config['track'],          ['0x' => '#']));
+$config['border']         = GetColor('border',         strtr($config['border'],         ['0x' => '#']));
+$config['loader']         = GetColor('loader',         strtr($config['loader'],         ['0x' => '#']));
 
 $TPL = new TEMPLATE(dirname(__FILE__).DS.'config.tpl');
 echo $TPL->parse($config);

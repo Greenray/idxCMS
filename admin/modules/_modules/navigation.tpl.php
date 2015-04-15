@@ -28,11 +28,11 @@ die();?>
                         </td>
                         <td style="width:17%;">
                             <select name="icons[]">
-                                [each=links[icons]]<option value="{icons[id]}" [if=icons[selected]]selected="selected"[endif]>{icons[id]}</option>[endeach.links[icons]]
+                                [each=links[icons]]<option value="{icons[id]}" [if=icons[selected]]selected="selected"[/if]>{icons[id]}</option>[/each.links[icons]]
                             </select>
                         </td>
                     </tr>
-                [endeach.links]
+                [/each.links]
             </table>
         </div>
         <p class="center"><input type="submit" name="save" value="[__Save]" class="submit" /></p>

@@ -1,14 +1,18 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module User
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
-
+/** 
+ * @program   idxCMS: Flat Files Content Management Sysytem
+ * @file      system/modules/user/module.php
+ * @version   2.4
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+ * @package   User
+ */
 if (!defined('idxCMS')) die();
 
-/** Private messages data store */
+/** Data storage for private messages */
 define('PM_DATA', CONTENT.'pm'.DS);
-/** User`s avatars data store */
+/** Data storage for user's avatars */
 define('AVATARS', CONTENT.'avatars'.DS);
 
 require SYS.'message.class.php';
@@ -35,7 +39,7 @@ function GetAvatar($user) {
     else return AVATARS.'noavatar.gif';
 }
 
-SYSTEM::registerModule('user', 'User', 'main', 'system');
-SYSTEM::registerModule('user.panel', 'User panel', 'box', 'system');
-SYSTEM::registerModule('user.pm', 'Private messages', 'main', 'system');
-SYSTEM::registerModule('user.feedback', 'Feedback', 'main', 'system');
+SYSTEM::registerModule('user',          'User',             'main', 'system');
+SYSTEM::registerModule('user.panel',    'User panel',       'box',  'system');
+SYSTEM::registerModule('user.pm',       'Private messages', 'main', 'system');
+SYSTEM::registerModule('user.feedback', 'Feedback',         'main', 'system');

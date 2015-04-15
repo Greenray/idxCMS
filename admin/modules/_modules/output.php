@@ -4,7 +4,7 @@
 # Version 2.4
 # Copyright (c) 2011 - 2015 Victor Nabatov
 
-if (!defined('idxADMIN') || !CMS::call('USER')->checkRoot()) die();
+if (!defined('idxADMIN') || !USER::$root) die();
 
 if (!empty($REQUEST['save'])) {
     # Save configuration
@@ -33,8 +33,8 @@ if (!empty($REQUEST['save'])) {
 
 # INTERFACE
 if (!empty($REQUEST['selected'])) {
-    $panel = CONFIG::getSection('output.'.$REQUEST['selected']); /**< Modules layout for specified skin */
-    include SKINS.$REQUEST['selected'].DS.'skin.php';  # Layout definition
+    $panel = CONFIG::getSection('output.'.$REQUEST['selected']); # Modules layout for specified skin
+    include SKINS.$REQUEST['selected'].DS.'skin.php';            # Layout definition
     $active = [];
     $unused = [];
 

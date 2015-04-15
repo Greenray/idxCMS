@@ -139,7 +139,7 @@ die();?>
             var items = new Array();
             var itemString = '';
             var item = '';
-            while (item === prompt('Enter an item\r\nLeave the box empty or click Cancel\r\nto complete the list', ''))
+            while (item === prompt('Enter an item.\nLeave the box empty or click Cancel to complete the list', ''))
                 items.push('[*]' + item + '[/*]');
             itemString = items.join('');
             itemsize = items.length;
@@ -163,7 +163,7 @@ die();?>
             var items = new Array();
             var itemString = '';
             var item;
-            while (item === prompt('Enter an item\r\nLeave the box empty or click Cancel\r\nto complete the list', ''))
+            while (item === prompt('Enter an item.\nLeave the box empty or click Cancel to complete the list', ''))
                 items.push('[*]' + item + '[/*]');
             itemString = items.join('');
             itemsize   = items.length;
@@ -452,7 +452,7 @@ die();?>
             <button type="button" class="bbbutton" onclick="AddUrl('email','{area}');">
                 <img src="{bbimg}email.gif" name="email" title="[__Email]" width="20" height="20" alt="" />
             </button>
-        [endif]
+        [/if]
         <button type="button" class="bbbutton" onclick="CreateBBTag('[code]','[/code]','{area}');">
             <img src="{bbimg}code.gif" name="code" title="[__Code]" width="20" height="20" alt="" />
         </button>
@@ -478,7 +478,7 @@ die();?>
             <button type="button" class="bbbutton" onclick="CreateBBTag('[youtube]','[/youtube]','{area}');">
                 <img src="{bbimg}youtube.gif" name="youtube" title="[__YouTube]" width="20" height="20" alt="" />
             </button>
-        [endif]
+        [/if]
         <button type="button" class="bbbutton" onclick="ShowForm('smiles_{area}');">
             <img src="{bbimg}smiles.gif" name="smiles" title="[__Smiles]" width="20" height="20" alt="" />
         </button>
@@ -486,7 +486,7 @@ die();?>
             <button type="button" class="bbbutton" onclick="CreateBBTag('[note]','[/note]','{area}');">
                 <img src="{bbimg}note.png" name="note" title="[__Note]" width="20" height="20" alt="" />
             </button>
-        [endif]
+        [/if]
         <button type="button" class="bbbutton" onclick="RemoveBBTag('{area}');">
             <img src="{bbimg}cleanup.gif" name="remove" title="[__Remove BBcodes]" width="20" height="20" alt="" />
         </button>
@@ -512,13 +512,13 @@ die();?>
                 <input type="button" onclick="HideDialog('link_{area}');" value="[__Cancel]" />
             </p>
         </div>
-    [endif]
+    [/if]
     <div id="color_{area}" unselectable="on" class="bbtools none">
         <input type="hidden" id="cmd_{area}" value="" />
-        <div style="background:black;padding:1px;height:22px;width:125px;float:left;">
+        <div style="background:black;margin:0 0 0 20px;padding:1px;height:22px;width:125px;float:left;">
             <div id="preview_{area}" class="red" style="height:100%;width:100%;"></div>
         </div>
-        <input type=text id="clr_val_{area}" value="red" size="17" onpaste="ViewColor('', '{area}');" onblur="ViewColor('', '{area}');" />
+        <input type=text id="clr_val_{area}" value="black" size="17" onpaste="ViewColor('', '{area}');" onblur="ViewColor('', '{area}');" />
         <input type="button" onmouseover="ViewColor('', '{area}');" onclick="SetColor('', '{area}');HideDialog('color_{area}');" value="[__OK]" />
         <input type="button" onclick="HideDialog('color_{area}');" value="[__Cancel]" />
         <br />
@@ -529,12 +529,12 @@ die();?>
             <tr>
             [each=colors[colors]]
                 <td style="background:#{colors[color]};height:12px;width:12px;" onmouseover="ViewColor('#{colors[color]}', '{area}');" onclick="SetColor('#{colors[color]}', '{area}');"></td>
-            [endeach.colors[colors]]
+            [/each.colors[colors]]
             </tr>
-        [endeach.colors]
+        [/each.colors]
         </table>
     </div>
     <div id="smiles_{area}" unselectable="on" class="bbtools none">
-        [each=smile]<img src="{SMILES}{smile}.gif" alt="{smile}" onclick="SetSmile('[{smile}]','{area}');HideDialog('smiles_{area}');" />[endeach.smile]
+        [each=smile]<img src="{SMILES}{smile}.gif" alt="{smile}" onclick="SetSmile('[{smile}]','{area}');HideDialog('smiles_{area}');" />[/each.smile]
     </div>
 </div>

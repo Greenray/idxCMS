@@ -16,9 +16,9 @@ die();?>
                         <span class="subtitle">{result[text]}</span>
                     </div>
                 </li>
-            [endeach.result]
+            [/each.result]
         [else]
             <div class="center"><em>[__Nothing founded]</em></div>
-        [endelse]
+        [/else]
     </ul>
 </div>

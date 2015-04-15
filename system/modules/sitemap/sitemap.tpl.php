@@ -13,7 +13,7 @@ die();?>
                 <span class="subtitle">{desc}</span>
             [else]
                 {name}
-            [endelse]
+            [/else]
         </span>
     </a>
     [ifelse=sections]
@@ -38,12 +38,12 @@ die();?>
                                                 <span class="subtitle">{categories[desc]}</span>
                                             </a>
                                         </li>
-                                    [endeach.sections[categories]]
+                                    [/each.sections[categories]]
                                 </ul>
                             </div>
-                        [endif]
+                        [/if]
                     </li>
-                [endeach.sections]
+                [/each.sections]
             </ul>
         </div>
     [else]
@@ -58,9 +58,9 @@ die();?>
                                 <span class="subtitle">{categories[desc]}</span>
                             </a>
                         </li>
-                    [endeach.categories]
+                    [/each.categories]
                 </ul>
             </div>
-        [endif]
-    [endelse]
+        [/if]
+    [/else]
 </li>

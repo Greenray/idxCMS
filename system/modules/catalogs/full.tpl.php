@@ -7,7 +7,7 @@
 die();?>
 <div class="post">
     <div class="info">
-        [if=rateid]<div id="rate{rateid}">{rate}</div>[endif]
+        [if=rateid]<div id="rate{rateid}">{rate}</div>[/if]
         <div class="date">[__Category]: <a href="{MODULE}catalogs{SECTION}{section}{CATEGORY}{category}">{category_title}</a></div>
         <span class="date">{date}</span>
     </div>
@@ -28,19 +28,19 @@ die();?>
             <span class="author center">[__Posted by]: <a href="{MODULE}user&amp;user={author}">{nick}</a></span>
             <span class="admin"><a href="{link}&amp;get=1" target="_blank">[__Download]</a></span>
         </div>
-    [endif]
+    [/if]
     [if=file]
         <div class="center"><hr />[__Copyright]: &copy; {copyright} | [__Size]: {size} [__bytes] | [__Downloads]: {downloads}</div>
         <div class="info">
             <span class="author center">[__Posted by]: <a href="{MODULE}user&amp;user={author}">{nick}</a></span>
             <span class="admin"><a href="{link}&amp;get=1" target="_blank">[__Download]</a></span>
         </div>
-    [endif]
+    [/if]
     [if=site]
         <div class="center"><hr /><a href="{link}&amp;go=1" target="_blank">[__Go]</a></div>
         <div class="info">
             <span class="author center">[__Posted by]: <a href="{MODULE}user&amp;user={author}">{nick}</a><br />[__Copyright]: &copy; {copyright}</span>
             <span class="admin">[__Transitions]: {clicks}</span>
         </div>
-    [endif]
+    [/if]
 </div>

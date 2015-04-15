@@ -12,10 +12,10 @@ die();?>
             <a href="{items[link]}">{items[title]}</a><br />
             <span class="info">
                 [__Views]: {items[views]}
-                [if=items[comments]][__Comments]: <a href="{items[link]}{COMMENT}{items[comments]}">{items[comments]}</a>[endif]
+                [if=items[comments]][__Comments]: <a href="{items[link]}{COMMENT}{items[comments]}">{items[comments]}</a>[/if]
             </span>
         </li>
         <hr>
-    [endeach.items]
+    [/each.items]
     </ul>
 </div>

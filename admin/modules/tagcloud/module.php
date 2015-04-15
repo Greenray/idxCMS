@@ -15,7 +15,7 @@ switch (SYSTEM::get('locale')) {
         $LANG['def']['For text mode'] = 'Для текстового режима';
         $LANG['def']['Generate a tags file'] = 'Сгенерировать файл тегов';
         $LANG['def']['In an ideal: 3/4 from width'] = 'В идеале: 3/4 от ширины';
-        $LANG['def']['Leave a field empty for a multi-color mode'] = 'Оставьте поле пусты для многоцветного режима';
+        $LANG['def']['Leave a field empty for a multi-color mode'] = 'Оставьте поле пустым для многоцветного режима';
         $LANG['def']['Number of tags'] = 'Число тегов';
         $LANG['def']['Placing of references on sphere'] = 'Размещение ссылок на сфере';
         $LANG['def']['Quantity of mentions'] = 'Частота упоминания';

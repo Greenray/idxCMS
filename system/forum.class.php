@@ -1,12 +1,11 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-
 /** Forum.
  *
+ * @program   idxCMS: Flat Files Content Management Sysytem
  * @file      system/forum.class.php
  * @version   2.4
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011-2015 Victor Nabatov
+ * @copyright (c) 2011 - 2015 Victor Nabatov
  * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
  * @package   Forum
  */
@@ -15,6 +14,7 @@ class FORUM extends CONTENT {
 
     /** Class initialization. */
     public function __construct() {
+        parent::__construct();
         $this->module = 'forum';
         $this->container = FORUM;
     }
@@ -31,15 +31,15 @@ class FORUM extends CONTENT {
 
     /** Saves topic.
      * This function corrects website sitemap.
-     * @param  integer $  id                      Topic ID
-     * @throws Exception 'You are not logged in!' - Title is empty or has wrong symbols
-     * @throws Exception 'Title is empty'         - Title is empty or has wrong symbols
-     * @throws Exception 'Text is empty'          - Text is empty
-     * @throws Exception 'Cannot save topic'      - No access rights or cannot save index file
+     * @param  integer   $id                      Topic ID
+     * @throws Exception 'You are not logged in!' Title is empty or has wrong symbols
+     * @throws Exception 'Title is empty'         Title is empty or has wrong symbols
+     * @throws Exception 'Text is empty'
+     * @throws Exception 'Cannot save topic'      No access rights or cannot save index file
      * @return integer                            ID of the saved topic
      */
     public function saveTopic($id = '') {
-        if (!USER::loggedIn()) {
+        if (!USER::$logged_in) {
             throw new Exception('You are not logged in!');
         }
         $title = FILTER::get('REQUEST', 'title');

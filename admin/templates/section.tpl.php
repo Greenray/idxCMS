@@ -7,33 +7,21 @@
 die();?>
 <script type="text/javascript">
     function checkForm(form) {
-        var section = form.section.value;
-        var title = form.title.value;
-        var access = form.access.value;
+        var section   = form.section.value;
+        var title     = form.title.value;
+        var access    = form.access.value;
         var nameRegex = /^[a-zA-Z0-9_]+(([\_][a-zA-Z0-9])?[a-zA-Z0-9_]*)*$/;
         var textRegex = new RegExp(/<\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[^'">\s]+))?)+\s*|\s*)\/?>/gim);
-        var numRegex = /^[0-8]{1}$/;
-        if (section === '') {
-            ShowAlert('[__Enter a title]', '[__Error]');
+        var numRegex  = /^[0-9]{1}$/;
+        if (section === '' || !section.match(nameRegex)) {
+            ShowAlert('[__Error in section ID]', '[__Error]');
             return false;
         }
-        if (!section.match(nameRegex)) {
-            ShowAlert('[__Invalid symbols]', '[__Error]');
+        if (title === '' || !title.match(textRegex)) {
+            ShowAlert('[__Error in title]', '[__Error]');
             return false;
         }
-        if (title === '') {
-            ShowAlert('[__Enter a title]', '[__Error]');
-            return false;
-        }
-        if (title.match(textRegex)) {
-            ShowAlert('[__Invalid symbols]', '[__Error]');
-            return false;
-        }
-        if (access === '') {
-            ShowAlert('[__Enter a value of access level]', '[__Error]');
-            return false;
-        }
-        if (!access.match(numRegex)) {
+        if ((access === '') || !access.match(numRegex) || (access < 0) || (access > 9)) {
             ShowAlert('[__Enter a value of access level]', '[__Error]');
             return false;
         }
@@ -54,7 +42,7 @@ die();?>
                 [else]
                     <td><input type="text" name="section" value="" id="section" size="30" class="required" required="required" /></td>
                     <td class="help">[__Only latin characters, digits and symbol "_"]</td>
-                [endelse]
+                [/else]
                 </tr>
             <tr>
                 <td class="label">[__Title]</td>

@@ -19,7 +19,7 @@ die();?>
             <td class="left">{categories[desc]}</td>
             <td class="center" style="width:40px">{categories[topics]}</td>
         </tr>
-    [endeach.categories]
+    [/each.categories]
 </table>
 <table>
     <tr>

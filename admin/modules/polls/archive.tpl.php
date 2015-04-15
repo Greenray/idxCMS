@@ -27,10 +27,10 @@ die();?>
                             </table>
                         </td>
                     </tr>
-                [endeach.polls[answers]]
+                [/each.polls[answers]]
                 <tr><td class="odd center" colspan="3">[__Total votes]: {polls[total]}</td></tr>
             </table>
             <p align="center"><input type="submit" name="remove" value="[__Delete]" class="submit" /></p>
         </form>
-    [endeach.polls]
+    [/each.polls]
 </fieldset>

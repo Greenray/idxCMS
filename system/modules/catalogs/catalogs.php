@@ -12,11 +12,13 @@ if ($sections === FALSE) Redirect('catalogs');
 
 if (empty($sections)) {
     ShowWindow(__('Catalogs'), __('Database is empty'), 'center');
+    
 } else {
     $section = FILTER::get('REQUEST', 'section');
     if ($section === FALSE) {
         Redirect('catalogs');      # Wrong section request
     }
+
     $category = (int) FILTER::get('REQUEST', 'category');
     $item     = (int) FILTER::get('REQUEST', 'item');
     if (!empty($item) && !empty($category) && !empty($section)) {
@@ -24,10 +26,12 @@ if (empty($sections)) {
         if ($categories === FALSE) {
             Redirect('catalogs');      # Wrong section request
         }
+
         $content = CMS::call('CATALOGS')->getContent($category);
         if (($content === FALSE) || empty($content[$item])) {
             Redirect('catalogs', $section);        # Wrong category or post request
         }
+
         if (!empty($REQUEST['get'])) {
             # Download file
             CMS::call('CATALOGS')->incCount($item, 'downloads');
@@ -35,11 +39,13 @@ if (empty($sections)) {
             header('Location: '.CATALOGS.$section.DS.$category.DS.$item.DS.$file);
             die();
         }
+
         if (!empty($REQUEST['go'])) {
             CMS::call('CATALOGS')->incCount($item, 'clicks');
             header('Location: '.$content[$item]['site']);
             die();
         }
+
         $comments = CMS::call('CATALOGS')->getComments($item);
         $comment  = (int) FILTER::get('REQUEST', 'comment');
         if (!empty($REQUEST['save'])) {
@@ -82,13 +88,13 @@ if (empty($sections)) {
                         break;
 
                     case 'close':
-                        if (CMS::call('USER')->checkRoot()) {
+                        if (USER::$root) {
                             CMS::call('CATALOGS')->setValue($item, 'opened', FALSE);
                         }
                         break;
 
                     case 'open':
-                        if (CMS::call('USER')->checkRoot()) {
+                        if (USER::$root) {
                             CMS::call('CATALOGS')->setValue($item, 'opened', TRUE);
                         }
                         break;
@@ -111,9 +117,9 @@ if (empty($sections)) {
         SYSTEM::setPageKeywords($item['keywords']);
 
         $perpage = (int) CONFIG::getValue('catalogs', 'comments-per-page');
-        if    (!empty($comment)) $page = ceil((int)$comment / $perpage);
-        elseif (!empty($result)) $page = ceil((int)$result / $perpage);
-        else                     $page = (int) FILTER::get('REQUEST', 'page');
+        if     (!empty($comment)) $page = ceil((int)$comment / $perpage);
+        elseif (!empty($result) ) $page = ceil((int)$result / $perpage);
+        else                      $page = (int) FILTER::get('REQUEST', 'page');
 
         # Don't show post, if number of comments > per page
         if ($page < 2) {
@@ -130,25 +136,28 @@ if (empty($sections)) {
         }
         # Show comments
         ShowComments('CATALOGS', $item, $page, $perpage, dirname(__FILE__).DS);
+
     } elseif (!empty($category) && !empty($section)) {
         # Show items from category
         $categories = CMS::call('CATALOGS')->getCategories($section);
         if ($categories === FALSE) {
             Redirect('catalogs');      # Wrong section request
         }
+
         $content = CMS::call('CATALOGS')->getContent($category);
         if ($content === FALSE) {
             Redirect('catalogs', $section);    # Wrong category request
         }
+
         SYSTEM::set('pagename', $categories[$category]['title']);
         SYSTEM::setPageDescription(__('Catalogs').' - '.$categories[$category]['title']);
         if (!empty($content)) {
             krsort($content);
-            $count = sizeof($content);
-            $keys  = array_keys($content);
-            $page  = (int) FILTER::get('REQUEST', 'page');
+            $count   = sizeof($content);
+            $keys    = array_keys($content);
+            $page    = (int) FILTER::get('REQUEST', 'page');
             $perpage = (int) CONFIG::getValue('catalogs', 'items-per-page');
-            $TPL = new TEMPLATE(dirname(__FILE__).DS.'short.tpl');
+            $TPL     = new TEMPLATE(dirname(__FILE__).DS.'short.tpl');
             $pagination = GetPagination($page, $perpage, $count);
             $output = '';
             for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
@@ -168,6 +177,7 @@ if (empty($sections)) {
         $output = CMS::call('CATALOGS')->showSection($section);
         if ($output === FALSE) {
             Redirect('catalogs');
+
         } elseif (!empty($output['categories'])) {
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'categories.tpl');
             ShowWindow($output['title'], $TPL->parse($output));
@@ -179,7 +189,7 @@ if (empty($sections)) {
         $output = CMS::call('CATALOGS')->showSections();
         if (!empty($output)) {
             $TPL = new TEMPLATE(dirname(__FILE__).DS.'sections.tpl');
-            ShowWindow(__('Catalogs'), $TPL->parse(array('sections' => $output)));
+            ShowWindow(__('Catalogs'), $TPL->parse(['sections' => $output]));
         } else {
             ShowWindow(__('Catalogs'), __('Database is empty'), 'center');
         }

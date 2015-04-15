@@ -60,7 +60,7 @@ if (!empty($REQUEST['save'])) {
 if ((empty($section) && empty($category)) || !empty($REQUEST['new']) || !empty($post)) {
     if (empty($section)) {
         $section = 'drafts';
-        if (CMS::call('USER')->checkRoot())
+        if (USER::$root)
              $category = 1;
         else $category = 2;
     }

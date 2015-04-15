@@ -1,8 +1,16 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Search
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+/** Search the website.
+ *
+ * @program   idxCMS: Flat Files Content Management Sysytem
+ * @file      system/modules/searc/module.php
+ * @version   2.4
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+ * @package   Search
+ * @overview  Search the website.
+ *            Search by key words of the tag cloud or arbitrary text.
+ */
 
 if (!defined('idxCMS')) die();
 

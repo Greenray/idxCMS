@@ -1,8 +1,16 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Forum
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+/** Forum.
+ *
+ * @program   idxCMS: Flat Files Content Management Sysytem
+ * @file      system/modules/forum/module.php
+ * @version   2.4
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2011 - 2015 Victor Nabatov
+ * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+ * @package   Forum
+ * @overview  Website forum.
+ *            Forum database is similar to posts database.
+ */
 
 if (!defined('idxCMS')) die();
 
@@ -11,7 +19,7 @@ define('FORUM', CONTENT.'forum'.DS);
 
 require SYS.'forum.class.php';
 
-/** Sort of array.
+/** Sorts array.
  * @param  array $array Link to array to sort
  * @return array        Sorted array
  */
@@ -94,14 +102,13 @@ switch (SYSTEM::get('locale')) {
 
 SYSTEM::registerModule('forum', 'Forum', 'main');
 SYSTEM::registerModule('forum.last', 'Last topics', 'box');
-USER::setSystemRights(array('forum' => __('Forum').': '.__('Moderator')));
+USER::setSystemRights(['forum' => __('Forum').': '.__('Moderator')]);
 SYSTEM::registerMainMenu('forum');
 SYSTEM::registerSiteMap('forum');
 SYSTEM::registerSearch('forum');
 
 $sections = CMS::call('FORUM')->getSections();
 
-if (!empty($sections['archive'])) unset($sections['archive']);
 foreach ($sections as $id => $section) {
     if ($section['access'] === 0) {
         SYSTEM::registerFeed(

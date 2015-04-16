@@ -28,50 +28,50 @@ class PARSER {
             "#\[align=(\"|&quot;|)(left|right|center|justify)(\"|&quot;|)\](.*?)\[/align(.*?)\]#is" => '<div style="text-align:\\2;">\\4</div>',
             "#\[b\](.*?)\[/b\]#is" => '<b>\\1</b>',
             "#\[bgcolor=(\"|&quot;|)([\#\w]*)(\"|&quot;|)\](.*?)\[/bgcolor(.*?)\]#is" => '<span style="background:\\2">\\4</span>',
-            "#\[color=(\"|&quot;|)([\#\w]*)(\"|&quot;|)\](.*?)\[/color(.*?)\]#is" => '<span style="color:\\2;">\\4</span>',
+            "#\[color=(\"|&quot;|)([\#\w]*)(\"|&quot;|)\](.*?)\[/color(.*?)\]#is"     => '<span style="color:\\2;">\\4</span>',
             "#\[del\](.*?)\[/del\]#is" => '<del>\\1</del>',
-            "#\[email\][\s\n\r]*([a-z0-9&\-_.]+?@[\w\-]+\.([\w\-\.]+\.)?[\w]+)[\s\n\r]*\[/email\]#is" => '<a href="mailto:\\1">\\1</a>',
+            "#\[email\][\s\n\r]*([a-z0-9&\-_.]+?@[\w\-]+\.([\w\-\.]+\.)?[\w]+)[\s\n\r]*\[/email\]#is"             => '<a href="mailto:\\1">\\1</a>',
             "#\[email=(\"|&quot;|)([a-z0-9&\-_.]+?@[\w\-]+\.([\w\-\.]+\.)?[\w]+)(\"|&quot;|)\](.*?)\[/email\]#is" => '<a href="mailto:\\2">\\5</a>',
             "#\[font=(\"|&quot;|)([\#\w]*)(\"|&quot;|)\](.*?)\[/font(.*?)\]#is" => '<span style="font-family:\\2;">\\4</span>',
             "#\[h([0-9])\](.*?)\[/h([Войти0-9])\]#is" => '<h\\1>\\2</h\\3>',
-            "#\[hr\]#is" => '<hr />',
+            "#\[hr\]#is"           => '<hr />',
             "#\[i\](.*?)\[/i\]#is" => '<i>\\1</i>',
             "#\[indent\](.*?)\[/indent\]#is" => '<blockquote>\\1</blockquote>',
             "#\[(left|right|center|justify)\](.*?)\[/\\1\]#is" => '<div style="text-align:\\1;">\\2</div>',
-            "#\[mailto\][\s\n\r]*([a-z0-9&\-_.]+?@[\w\-]+\.([\w\-\.]+\.)?[\w]+)[\s\n\r]*\[/mailto\]#is" => '<a href="mailto:\\1">\\1</a>',
+            "#\[mailto\][\s\n\r]*([a-z0-9&\-_.]+?@[\w\-]+\.([\w\-\.]+\.)?[\w]+)[\s\n\r]*\[/mailto\]#is"             => '<a href="mailto:\\1">\\1</a>',
             "#\[mailto=(\"|&quot;|)([a-z0-9&\-_.]+?@[\w\-]+\.([\w\-\.]+\.)?[\w]+)(\"|&quot;|)\](.*?)\[/mailto\]#is" => '<a href="mailto:\\2">\\5</a>',
-            "#\[mp3\](.*?)\[/mp3\]#is" => $this->parseMP3(),
+            "#\[mp3\](.*?)\[/mp3\]#is"   => $this->parseMP3(),
             "#\[note\](.*?)\[/note\]#is" => '<div class="note">\\1</div>',
             "#\[offtopic\](.*?)\[/offtopic\]#is" => '<small>\\1</small>',
-            "#\[\[ol\]\](.*?)\[/\[ol\]\]#is" => '<ol>\\1</ol>',
-            "#\[p\](.*?)\[/p\]#is" => '<p>\\1</p>',
+            "#\[\[ol\]\](.*?)\[/\[ol\]\]#is"     => '<ol>\\1</ol>',
+            "#\[p\](.*?)\[/p\]#is"     => '<p>\\1</p>',
             "#\[pre\](.*?)\[/pre\]#is" => '<pre>\\1</pre>',
-            "#\[s\](.*?)\[/s\]#is" => '<s>\\1</s>',
+            "#\[s\](.*?)\[/s\]#is"     => '<s>\\1</s>',
             "#\[size=(\"|&quot;|)([0-9]*)(\"|&quot;|)\](.*?)\[/size(.*?)\]#is" => '<span style="font-size:\\2px;">\\4</span>',
             "#\[sub\](.*?)\[/sub\]#is" => '<sub>\\1</sub>',
             "#\[sup\](.*?)\[/sup\]#is" => '<sup>\\1</sup>',
-            "#\[u\](.*?)\[/u\]#is" => '<span style="text-decoration:underline;">\\1</span>',
+            "#\[u\](.*?)\[/u\]#is"     => '<span style="text-decoration:underline;">\\1</span>',
             "#\[\[ul\]\](.*?)\[/\[ul\]\]#is" => '<ul>\\1</ul>',
             "#\[url\][\s\n\r]*(((https?|ftp|ed2k|irc)://)[^ \"\n\r\t\<]*)[\s\n\r]*\[/url\]#is" => '<a href="\\1" target="_blank">\\1</a>',
-            "#\[url\][\s\n\r]*(www\.[^ \"\n\r\t\<]*?)[\s\n\r]*\[/url\]#is" => '<a href="http://\\1" target="_blank">\\1</a>',
-            "#\[url\][\s\n\r]*((ftp)\.[^ \"\n\r\t\<]*?)[\s\n\r]*\[/url\]#is" => '<a href="\\2://\\1" target="_blank">\\1</a>',
-            "#\[url=(\"|&quot;|)([^ \"\n\r\t\<]*?)(\"|&quot;|)\](.*?)\[/url\]#is" => '<a href="\\2">\\4</a>',
+            "#\[url\][\s\n\r]*(www\.[^ \"\n\r\t\<]*?)[\s\n\r]*\[/url\]#is"             => '<a href="http://\\1" target="_blank">\\1</a>',
+            "#\[url\][\s\n\r]*((ftp)\.[^ \"\n\r\t\<]*?)[\s\n\r]*\[/url\]#is"           => '<a href="\\2://\\1" target="_blank">\\1</a>',
+            "#\[url=(\"|&quot;|)([^ \"\n\r\t\<]*?)(\"|&quot;|)\](.*?)\[/url\]#is"      => '<a href="\\2">\\4</a>',
             "#\[url=(\"|&quot;|)(www\.[^ \"\n\r\t\<]*?)(\"|&quot;|)\](.*?)\[/url\]#is" => '<a href="http://\\2" target="_blank">\\4</a>',
             "#\[url=(\"|&quot;|)(((https?|ftp|ed2k|irc)://)[^ \"\n\r\t\<]*?)(\"|&quot;|)(.*?)\](.*?)\[/url\]#is" => '<a href="\\2\\6" target="_blank">\\7</a>',
-            "#\[user\]([\d\w]*?)\[/user\]#is" => '<a href="'.ROOT.'?module=user&user=\\1">\\1</a>',
+            "#\[user\]([\d\w]*?)\[/user\]#is"       => '<a href="'.ROOT.'?module=user&user=\\1">\\1</a>',
             "#\[user=([\d\w]*?)\](.*?)\[/user\]#is" => '<a href="'.ROOT.'?module=user&user=\\1">\\2</a>',
-            "#\[youtube\](.*?)\[/youtube\]#is" => $this->parseYouTube()
+            "#\[youtube\](.*?)\[/youtube\]#is"      => $this->parseYouTube()
         ];
     }
 
     /** bbCodes panel for the specified textarea.
      * @param  string  $textarea  Textarea ID
-     * @param  boolean $moderator Is user an admin or moderator?
-     * @param  string  $dir       Current directory
-     * @return array              bbCodes panel
+     * @param  boolean $moderator Is user an admin or moderator? (default = FALSE)
+     * @param  string  $dir       Current directory (default = "")
+     * @return string             bbCodes panel
      */
     function showBbcodesPanel($textarea, $moderator = FALSE, $dir = '') {
-        $area = explode('.', $textarea);
+        $area   = explode('.', $textarea);
         $smiles = GetFilesList(SMILES);
         foreach ($smiles as $smile) {
             $names[] = basename($smile, '.gif');
@@ -182,10 +182,9 @@ class PARSER {
             "#[\s\n\r]*\[quote\][\s\n\r]*(.*?)[\s\n\r]*\[/quote\][\s\n\r]*#is", '<div class="quotetext">\\1</div>', $this->text
         );
         $this->text = preg_replace(
-            "#[\s\n\r]*\[quote=(\"|\"|)(.*?)(\"|\"|)\][\s\n\r]*(.*?)[\s\n\r]*\[/quote\][\s\n\r]*#is", '<div class="quotetitle">' .
-            '<strong>\\2 :</strong>' .
-            '<div class="quotetext">\\4</div>' .
-            '</div>', $this->text
+            "#[\s\n\r]*\[quote=(\"|\"|)(.*?)(\"|\"|)\][\s\n\r]*(.*?)[\s\n\r]*\[/quote\][\s\n\r]*#is",
+            '<div class="quotetitle"><strong>\\2 :</strong><div class="quotetext">\\4</div></div>',
+            $this->text
         );
     }
 
@@ -198,11 +197,11 @@ class PARSER {
             $id = RandomString(6);
             $title = !empty($matches[3]) ? __('Spoiler').': '.$matches[3] : __('Spoiler').' ('.__('Click to view').')';
             return '<div id="'.RandomString(6).'" class="spoiler">' .
-                    '<a onClick="javascript:document.getElementById(\''.$id.'\').style.display=\'block\';">'.$title.'</a>' .
-                    '</div>' .
-                    '<div id="'.$id.'" class="codetext none">' .
-                    $matches[5] .
-                    '</div>';
+                       '<a onClick="javascript:document.getElementById(\''.$id.'\').style.display=\'block\';">'.$title.'</a>' .
+                   '</div>' .
+                   '<div id="'.$id.'" class="codetext none">' .
+                       $matches[5] .
+                   '</div>';
         }
     }
 
@@ -283,7 +282,7 @@ class PARSER {
     private function parseMP3() {
         $player = CONFIG::getSection('audio');
         $player['autostart'] = empty($player['autostart']) ? 'no' : 'yes';
-        $player['loop'] = empty($player['loop']) ? 'no' : 'yes';
+        $player['loop']      = empty($player['loop']) ? 'no' : 'yes';
         return '<object type="application/x-shockwave-flash" data="'.TOOLS.'scmp3player.swf" id="mp3player1" width="'.$player['width'].'" height="'.$player['height'].'">
                     <param name="movie" value="'.TOOLS.'scmp3player.swf">
                     <param name="FlashVars" value="playerID=1&amp;bg='.$player['bgcolor'].'&amp;leftbg='.$player['leftbg'].'&amp;lefticon='.$player['lefticon'].'&amp;rightbg='.$player['rightbg'].'&amp;rightbghover='.$player['rightbghover'].'&amp;righticon='.$player['righticon'].'&amp;righticonhover='.$player['righticonhover'].'&amp;text='.$player['playertext'].'&amp;slider='.$player['slider'].'&amp;track='.$player['track'].'&amp;border='.$player['border'].'&amp;loader='.$player['loader'].'&amp;loop='.$player['loop'].'&amp;autostart='.$player['autostart'].'&amp;soundFile=\\1">

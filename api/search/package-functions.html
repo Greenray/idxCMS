@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Функции (phpAPI: The PHP Documentation Creator ver. 4.0)</title>
+    <title>Функции (idxCMS: The Flat Files Content Management Sysytem ver. 2.4)</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="generator" content="phpAPI 4.0 (https://github.com/Greenray/phpAPI/)">
     <link rel="stylesheet" type="text/css" href="../style.css">
@@ -10,7 +10,7 @@
 
     <body id="functions" onload="parent.document.title=document.title;">
         <div class="header">
-    <span style="float:right">phpAPI ver. 4.0</span>
+    <span style="float:right">idxCMS ver. 2.4</span>
     
         <ul>
         
@@ -51,93 +51,73 @@
         <tr><th colspan="2" class="title">Функции: общий обзор</th></tr>
         
             <tr>
-                <td class="type w_200">public  void</td>
+                <td class="type w_200">public  array</td>
                 <td class="description">
-                    <p><a href="#FormatFound"><span class="lilac">FormatFound</span></a>(<span class="lilac">mixed</span> <span class="blue">$text</span>, <span class="lilac">mixed</span> <span class="blue">$word</span>, <span class="lilac">mixed</span> <span class="blue">$config</span>)</p>
-                    <p class="description">Описания нет</p>
-                </td>
-            </tr>
-        
-            <tr>
-                <td class="type w_200">public  void</td>
-                <td class="description">
-                    <p><a href="#SearchResult"><span class="lilac">SearchResult</span></a>(<span class="lilac">mixed</span> <span class="blue">$text</span>, <span class="lilac">mixed</span> <span class="blue">$title</span>, <span class="lilac">mixed</span> <span class="blue">$word</span>, <span class="lilac">mixed</span> <span class="blue">$link</span>, <span class="lilac">mixed</span> <span class="blue">&$result</span>)</p>
-                    <p class="description">Search the website.</p>
+                    <p><a href="#SearchResult"><span class="lilac">SearchResult</span></a>(<span class="lilac">string</span> <span class="blue">$text</span>, <span class="lilac">string</span> <span class="blue">$title</span>, <span class="lilac">string</span> <span class="blue">$word</span>, <span class="lilac">string</span> <span class="blue">$link</span>, <span class="lilac">array</span> <span class="blue">&$result</span>)</p>
+                    <p class="description">Creates the array of search results.</p>
                 </td>
             </tr>
         
     </table>
     <h2 id="details_functions">Функции: детали</h2>
     
-        <div class="location">system/modules/search/module.php at line 37</div>
-        <code id="FormatFound" class="signature">public  void <strong>FormatFound</strong> (<span class="lilac">mixed</span> <span class="blue">$text</span>, <span class="lilac">mixed</span> <span class="blue">$word</span>, <span class="lilac">mixed</span> <span class="blue">$config</span>)</code>
+        <div class="location">system/modules/search/module.php at line 25</div>
+        <code id="SearchResult" class="signature">public  array <strong>SearchResult</strong> (<span class="lilac">string</span> <span class="blue">$text</span>, <span class="lilac">string</span> <span class="blue">$title</span>, <span class="lilac">string</span> <span class="blue">$word</span>, <span class="lilac">string</span> <span class="blue">$link</span>, <span class="lilac">array</span> <span class="blue">&$result</span>)</code>
         <div class="details">
-            Описания нет
-            
-        </div>
-        <hr />
-    
-        <div class="location">system/modules/search/module.php at line 17</div>
-        <code id="SearchResult" class="signature">public  void <strong>SearchResult</strong> (<span class="lilac">mixed</span> <span class="blue">$text</span>, <span class="lilac">mixed</span> <span class="blue">$title</span>, <span class="lilac">mixed</span> <span class="blue">$word</span>, <span class="lilac">mixed</span> <span class="blue">$link</span>, <span class="lilac">mixed</span> <span class="blue">&$result</span>)</code>
-        <div class="details">
-            Search the website.
+            Creates the array of search results.
             <div class="finfo">
     <table class="hid">
     
         <tr>
-            <td class="hid left w_100">Program</td>
-            <td class="hid right w_100 lilac">&nbsp;</td>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
             
-                <td class="hid" colspan="2">idxCMS: Flat Files Content Management Sysytem</td>
-            
-        </tr>
-    
-        <tr>
-            <td class="hid left w_100">File</td>
-            <td class="hid right w_100 lilac">&nbsp;</td>
-            
-                <td class="hid" colspan="2">system/modules/searc/module.php</td>
+                <td class="hid blue w_100">$text</td>
+                <td class="hid">The text to search</td>
             
         </tr>
     
         <tr>
-            <td class="hid left w_100">Version</td>
-            <td class="hid right w_100 lilac">&nbsp;</td>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">string</td>
             
-                <td class="hid" colspan="2">2.4</td>
-            
-        </tr>
-    
-        <tr>
-            <td class="hid left w_100">Author</td>
-            <td class="hid right w_100 lilac">&nbsp;</td>
-            
-                <td class="hid" colspan="2">Victor Nabatov &lt;greenray.spb@gmail.com&gt;</td>
+                <td class="hid blue w_100">$title</td>
+                <td class="hid">The title of the item</td>
             
         </tr>
     
         <tr>
-            <td class="hid left w_100">Copyright</td>
-            <td class="hid right w_100 lilac">&nbsp;</td>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">string</td>
             
-                <td class="hid" colspan="2">(c) 2011 - 2015 Victor Nabatov</td>
-            
-        </tr>
-    
-        <tr>
-            <td class="hid left w_100">License</td>
-            <td class="hid right w_100 lilac">&nbsp;</td>
-            
-                <td class="hid" colspan="2">Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License</td>
+                <td class="hid blue w_100">$word</td>
+                <td class="hid">The search word</td>
             
         </tr>
     
         <tr>
-            <td class="hid left w_100">Overview</td>
-            <td class="hid right w_100 lilac">&nbsp;</td>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">string</td>
             
-                <td class="hid" colspan="2">Search the website.
- Search by key words of the tag cloud or arbitrary text.</td>
+                <td class="hid blue w_100">$link</td>
+                <td class="hid">The link to item</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">array</td>
+            
+                <td class="hid blue w_100">&$result</td>
+                <td class="hid">The reference to array of results</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">array</td>
+            
+                <td class="hid" colspan="2">The array of results</td>
             
         </tr>
     
@@ -151,7 +131,7 @@
 
 
         <div class="header">
-    <span style="float:right">phpAPI ver. 4.0</span>
+    <span style="float:right">idxCMS ver. 2.4</span>
     
         <ul>
         

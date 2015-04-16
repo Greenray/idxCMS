@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>API for class FILTER (phpAPI: The PHP Documentation Creator ver. 4.0)</title>
+    <title>API for class FILTER (idxCMS: The Flat Files Content Management Sysytem ver. 2.4)</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="generator" content="phpAPI 4.0 (https://github.com/Greenray/phpAPI/)">
     <link rel="stylesheet" type="text/css" href="../style.css">
@@ -10,7 +10,7 @@
 
     <body id="FILTER" onload="parent.document.title=document.title;">
         <div class="header">
-    <span style="float:right">phpAPI ver. 4.0</span>
+    <span style="float:right">idxCMS ver. 2.4</span>
     
         <ul>
         
@@ -200,7 +200,7 @@
             </tr>
         
             <tr>
-                <td class="type w_200">public static  array|string</td>
+                <td class="type w_200">public static  array|boolean</td>
                 <td class="description">
                     <p><a href="#get"><strong><span class="black">get</span></strong></a> (<span class="lilac">string</span> <span class="blue">$type</span>, <span class="lilac">string</span> <span class="blue">$param</span>)</p>
                     <p class="description">Gets specified filtered parameter.</p>
@@ -313,7 +313,7 @@
         </div>
         <hr />
     
-        <div class="location">system/filter.class.php at line 51</div>
+        <div class="location">system/filter.class.php at line 50</div>
         <code class="signature" id="clear">private  array <strong>clear</strong> (<span class="lilac">array</span> <span class="blue">$vars</span>)</code>
         <div class="details">
             Cleans variables.
@@ -343,7 +343,7 @@
         </div>
         <hr />
     
-        <div class="location">system/filter.class.php at line 70</div>
+        <div class="location">system/filter.class.php at line 69</div>
         <code class="signature" id="sanitaze">public  void <strong>sanitaze</strong> ()</code>
         <div class="details">
             Detects intrusion, clean and unset $_POST, $_GET, $_FILES and $_COOKIE.<br /> The result are two variables: $REQUEST and $COOKIE.
@@ -351,7 +351,7 @@
         </div>
         <hr />
     
-        <div class="location">system/filter.class.php at line 84</div>
+        <div class="location">system/filter.class.php at line 83</div>
         <code class="signature" id="getAll">public static  array <strong>getAll</strong> (<span class="lilac">string</span> <span class="blue">$type</span>)</code>
         <div class="details">
             Gets all filtered parameter of the specified type.
@@ -381,8 +381,8 @@
         </div>
         <hr />
     
-        <div class="location">system/filter.class.php at line 93</div>
-        <code class="signature" id="get">public static  array|string <strong>get</strong> (<span class="lilac">string</span> <span class="blue">$type</span>, <span class="lilac">string</span> <span class="blue">$param</span>)</code>
+        <div class="location">system/filter.class.php at line 92</div>
+        <code class="signature" id="get">public static  array|boolean <strong>get</strong> (<span class="lilac">string</span> <span class="blue">$type</span>, <span class="lilac">string</span> <span class="blue">$param</span>)</code>
         <div class="details">
             Gets specified filtered parameter.
             <div class="finfo">
@@ -408,9 +408,9 @@
     
         <tr>
             <td class="hid left w_100">Return</td>
-            <td class="hid right w_100 lilac">array|string</td>
+            <td class="hid right w_100 lilac">array|boolean</td>
             
-                <td class="hid" colspan="2">Parameter values or empty string</td>
+                <td class="hid" colspan="2">Parameter values or FALSE</td>
             
         </tr>
     
@@ -420,7 +420,7 @@
         </div>
         <hr />
     
-        <div class="location">system/filter.class.php at line 105</div>
+        <div class="location">system/filter.class.php at line 104</div>
         <code class="signature" id="remove">public static  void <strong>remove</strong> (<span class="lilac">string</span> <span class="blue">$type</span>, <span class="lilac">string</span> <span class="blue">$param</span>)</code>
         <div class="details">
             Removes filtered parameter.
@@ -451,7 +451,7 @@
         </div>
         <hr />
     
-        <div class="location">system/filter.class.php at line 115</div>
+        <div class="location">system/filter.class.php at line 114</div>
         <code class="signature" id="validEmail">public  boolean <strong>validEmail</strong> (<span class="lilac">string</span> <span class="blue">$email</span>)</code>
         <div class="details">
             Email validation.
@@ -481,7 +481,7 @@
         </div>
         <hr />
     
-        <div class="location">system/filter.class.php at line 122</div>
+        <div class="location">system/filter.class.php at line 121</div>
         <code class="signature" id="ban">public  boolean <strong>ban</strong> ()</code>
         <div class="details">
             Bans user.
@@ -502,7 +502,7 @@
         </div>
         <hr />
     
-        <div class="location">system/filter.class.php at line 136</div>
+        <div class="location">system/filter.class.php at line 135</div>
         <code class="signature" id="ids">private  void <strong>ids</strong> ()</code>
         <div class="details">
             Intrusion detection.<br /> In current it can detect:<ul><li>bad words in $_SERVER;</li><li>malicious URL requests;</li><li>banned IP or cookie.</li></ul>If the intrusion will be detected this event will be logged and the system will die.
@@ -514,7 +514,7 @@
 
 
         <div class="header">
-    <span style="float:right">phpAPI ver. 4.0</span>
+    <span style="float:right">idxCMS ver. 2.4</span>
     
         <ul>
         

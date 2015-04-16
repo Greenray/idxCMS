@@ -14,101 +14,96 @@
 
 if (!defined('idxCMS')) die();
 
-/** Detects bad bots.
- * @param  string $agent $_SERVER['HTTP_USER_AGENT']
- * @return boolean       Is bad bot detected?
- */
-function DetectBadBot($agent) {
-    $engines = ['email exractor','sitesucker','w3af.sourceforge.net','xpymep'];
-    foreach ($engines as $engine) {
-        if (stristr($agent, $engine)) {
-            return TRUE;
-        }
-    }
-    return FALSE;
-}
+class STATISTICS {
 
-/** Detects spiders.
- * @param  string $agent $_SERVER['HTTP_USER_AGENT']
- * @return boolean       Is spider detected?
- */
-function DetectSpider($agent) {
+    /** Bad bots */
+    public $bots = ['email exractor','sitesucker','w3af.sourceforge.net','xpymep'];
 
-    # List of spider engines
-    $engines = [
-        '110search','12move',
-        'a-counter','abcdatos','acoon','aesop','alexa','alkaline','allesklar','almaden','altavista','aport','appie','arachnoidea','architext','archiver','artabus',
-        'ask','aspdeek','aspseek','asterias','atomz','augurfind','austronaut',
-        'batsch','baidu','bdcindexer','bellnet','bestoftheweb','bigfoot','blitzsuche','boitho','bot','butterfly',
-        'club-internet','cnn','cobion','cortina','crawler',
-        'datafountains','daum','deepnet','digout4u','ditto','dmoz','docomo',
-        'earthcom','ec2linkfinder','echo.com','elsop','estyle','eule','euroseek','excite','ezresult','ezooms',
-        'fast','find','fireball','firefly','fluffy','flunky','freenet','froogle','fujitsu',
-        'galaxy','gazz','gendoor','genieknows','gigablast','google','goto','gulliver',
-        'heritrix','hoppa','hubat','hubater',
-        'ichiro','incywincy','informatch','infoseek','inktomi','internetseer','ip3000','ixquick',
-        'jayde',
-        'kit_fireball',
-        'lachesis','larbin','lexis-nexis','libwww-perl','linkwalker','live','lockstep','looksmart','lycos',
-        'mail','mantraagent','mariner','markwatch','me.dium','mercator','meta','mirago','moget','muscatferret',
-        'najdi','nameprotect','nationaldirectory','nazilla','nbci','netcraft','netmechanic','netsprint','news','ng','nico','northernlight','nutch',
-        'openportal4u','osis-project',
-        'pchome','pinpoint','pompos','portaljuice',
-        'qualigo','quepasacreep',
-        'rabaz','rambler','refer','roach','robozilla','rotondo',
-        'scooter','scoutabout','scrubby','search','seventwentyfour','seznam','sidewinder','singingfish','sitecheck','slurp','spade','spider','steeler','supersnooper',
-        'surfnomore','szuka',
-        'teoma','technoratisnoop','tecnoseek','t-h-u-n-d-e-r-s-t-o-n-e','tivra','toutatis','tracerlock','twiceler','twitturls',
-        'ultraseek',
-        'vagabondo','validator','virgilio',
-        'w8net','walhello','webalta','webbug','webclipping','wespe','wget','whizbang','wholeweb','wiseguys','worldonline','wotbox',
-        'xenu',
-        'yahoo','yam','yandex','yanga','yeti',
-        'zeus','zippy','zyborg'
-    ];
+    /** Searching queries mask */
+    public $search_queries = [
+            'a-counter' => 'sub_data', 'about'  => 'terms',  'alice'     => 'qs',
+            'alltheweb' => 'q',        'altavista' => 'q',   'aol'       => 'encquery',
+            'aol'       => 'q',        'aol'    => 'query',  'aport'     => 'r',
+            'ask'       => 'q',        'baidu'  => 'wd',     'bigmir'    => 'q',
+            'club-internet' => 'q',    'cnn'    => 'query',  'gigablast' => 'q',
+            'google'    => 'q',        'i.ua'   => 'q',      'live'      => 'q',
+            'looksmart' => 'qt',       'lycos'  => 'query',  'mail.ru'   => 'q',
+            'mama'      => 'query',    'mamma'  => 'query',  'meta.ua'   => 'q',
+            'msn'       => 'q',        'najdi'  => 'q',      'netscape'  => 'query',
+            'netsprint' => 'q',        'pchome' => 'q',      'rambler'   => 'words',
+            'search'    => 'q',        'seznam' => 'q',      'szukacz'   => 'q',
+            'szukaj'    => 'qt',       'szukaj' => 'szukaj', 'virgilio'  => 'qs',
+            'voila'     => 'rdata',    'yahoo'  => 'p',      'yam'       => 'k',
+            'yandex'    => 'text'
+        ];
 
-    foreach ($engines as $engine) {
-        if (stristr($agent, $engine)) {
-            return TRUE;
-        }
-    }
-    return FALSE;
-}
+    /** List of spider engines */
+    public $spiders = [
+            '110search','12move',
+            'a-counter','abcdatos','acoon','aesop','alexa','alkaline','allesklar','almaden','altavista','aport','appie','arachnoidea','architext','archiver','artabus',
+            'ask','aspdeek','aspseek','asterias','atomz','augurfind','austronaut',
+            'batsch','baidu','bdcindexer','bellnet','bestoftheweb','bigfoot','blitzsuche','boitho','bot','butterfly',
+            'club-internet','cnn','cobion','cortina','crawler',
+            'datafountains','daum','deepnet','digout4u','ditto','dmoz','docomo',
+            'earthcom','ec2linkfinder','echo.com','elsop','estyle','eule','euroseek','excite','ezresult','ezooms',
+            'fast','find','fireball','firefly','fluffy','flunky','freenet','froogle','fujitsu',
+            'galaxy','gazz','gendoor','genieknows','gigablast','google','goto','gulliver',
+            'heritrix','hoppa','hubat','hubater',
+            'ichiro','incywincy','informatch','infoseek','inktomi','internetseer','ip3000','ixquick',
+            'jayde',
+            'kit_fireball',
+            'lachesis','larbin','lexis-nexis','libwww-perl','linkwalker','live','lockstep','looksmart','lycos',
+            'mail','mantraagent','mariner','markwatch','me.dium','mercator','meta','mirago','moget','muscatferret',
+            'najdi','nameprotect','nationaldirectory','nazilla','nbci','netcraft','netmechanic','netsprint','news','ng','nico','northernlight','nutch',
+            'openportal4u','osis-project',
+            'pchome','pinpoint','pompos','portaljuice',
+            'qualigo','quepasacreep',
+            'rabaz','rambler','refer','roach','robozilla','rotondo',
+            'scooter','scoutabout','scrubby','search','seventwentyfour','seznam','sidewinder','singingfish','sitecheck','slurp','spade','spider','steeler','supersnooper',
+            'surfnomore','szuka',
+            'teoma','technoratisnoop','tecnoseek','t-h-u-n-d-e-r-s-t-o-n-e','tivra','toutatis','tracerlock','twiceler','twitturls',
+            'ultraseek',
+            'vagabondo','validator','virgilio',
+            'w8net','walhello','webalta','webbug','webclipping','wespe','wget','whizbang','wholeweb','wiseguys','worldonline','wotbox',
+            'xenu',
+            'yahoo','yam','yandex','yanga','yeti',
+            'zeus','zippy','zyborg'
+        ];
 
-/** Extracts keywords from the user`s query.
- * @param  string $url User`s URL
- * @return mixed       Decoded keywords or FALSE
- */
-function ExtractKeyword($url) {
+    /** Class initialization */
+    public function __construct() {}
 
-    # Searching queries mask
-    $search_queries = [
-        'a-counter' => 'sub_data', 'about'  => 'terms',  'alice'     => 'qs',
-        'alltheweb' => 'q',        'altavista' => 'q',   'aol'       => 'encquery',
-        'aol'       => 'q',        'aol'    => 'query',  'aport'     => 'r',
-        'ask'       => 'q',        'baidu'  => 'wd',     'bigmir'    => 'q',
-        'club-internet' => 'q',    'cnn'    => 'query',  'gigablast' => 'q',
-        'google'    => 'q',        'i.ua'   => 'q',      'live'      => 'q',
-        'looksmart' => 'qt',       'lycos'  => 'query',  'mail.ru'   => 'q',
-        'mama'      => 'query',    'mamma'  => 'query',  'meta.ua'   => 'q',
-        'msn'       => 'q',        'najdi'  => 'q',      'netscape'  => 'query',
-        'netsprint' => 'q',        'pchome' => 'q',      'rambler'   => 'words',
-        'search'    => 'q',        'seznam' => 'q',      'szukacz'   => 'q',
-        'szukaj'    => 'qt',       'szukaj' => 'szukaj', 'virgilio'  => 'qs',
-        'voila'     => 'rdata',    'yahoo'  => 'p',      'yam'       => 'k',
-        'yandex'    => 'text'
-    ];
-    $components = parse_url($url);
-    if (isset($components['query'])) {
-        $query_items = [];
-        parse_str($components['query'], $query_items);
-        foreach ($search_queries as $engine => $param) {
-            if (strpos($components['host'], $engine) !== FALSE && !empty($query_items[$param])) {
-                return $engine."|".urldecode($query_items[$param]);
+    /** Detects spiders or bad bots.
+     * @param  string $agent  $_SERVER['HTTP_USER_AGENT']
+     * @param  string $object What to search
+     * @return boolean        Is spider or bot detected?
+     */
+    function detect($agent, $object) {
+        foreach ($this->$object as $engine) {
+            if (stristr($agent, $engine)) {
+                return TRUE;
             }
         }
+        return FALSE;
     }
-    return FALSE;
+
+    /** Extracts keywords from the user`s query.
+     * @param  string $url User`s URL
+     * @return mixed       Decoded keywords or FALSE
+     */
+    function extractKeyword($url) {
+        $components = parse_url($url);
+        if (isset($components['query'])) {
+            $query_items = [];
+            parse_str($components['query'], $query_items);
+            foreach ($this->search_queries as $engine => $param) {
+                if (strpos($components['host'], $engine) !== FALSE && !empty($query_items[$param])) {
+                    return $engine."|".urldecode($query_items[$param]);
+                }
+            }
+        }
+        return FALSE;
+    }
 }
 
 $agent   = $_SERVER['HTTP_USER_AGENT']; # Header from the current request, if there is one
@@ -116,7 +111,7 @@ $ip      = $_SERVER['REMOTE_ADDR'];     # User`s IP address
 $referer = $_SERVER['HTTP_REFERER'];    # The page which referred the user agent, if there is one
 $page    = $_SERVER['REQUEST_URI'];     # The URI which was given in order to access site
 
-if (DetectBadBot($agent)) {
+if (CMS::call('STATISTICS')->detect($agent, 'bots')) {
     $bans   = file_get_contents(CONTENT.'bans');
     $result = $bans.$ip.LF;
     file_put_contents(CONTENT.'bans', $result, LOCK_EX);
@@ -126,7 +121,7 @@ if (DetectBadBot($agent)) {
 $config = CONFIG::getSection('statistics');
 $time = time();
 
-if (DetectSpider($agent)) {
+if (CMS::call('STATISTICS')->detect($agent, 'spiders')) {
 
     # Detect and register of searching bot.
     $spiders = GetUnserialized(CONTENT.'spiders');
@@ -134,28 +129,22 @@ if (DetectSpider($agent)) {
         $spiders['total'] = 1;
         $spiders['today'] = 1;
 
-        if (!empty($config['spider-ip'])) $spiders['ip'][$ip] = 1;
+        if (!empty($config['spider-ip'])) $spiders['ip'][$ip]    = 1;
         if (!empty($config['spider-ua'])) $spiders['ua'][$agent] = 1;
 
-        $spiders['update'] = $time;
-        file_put_contents(CONTENT.'spiders', serialize($spiders), LOCK_EX);
     } else {
         if (empty($spiders['ip'][$ip])) {
 
-            if ($spiders['update'] < mktime(0, 0, 0, date('n'), date('j'), date('Y'))) {
-                $spiders['today'] = 1;
-            } else {
-                $spiders['today'] = $spiders['today'] + 1;
-            }
+            $spiders['today'] = $spiders['update'] < mktime(0, 0, 0, date('n'), date('j'), date('Y')) ? 1 : $spiders['today'] + 1;
             $spiders['total'] = $spiders['total'] + 1;
 
             if (!empty($config['spider-ip'])) $spiders['ip'][$ip]    = empty($spiders['ip'][$ip])    ? 1 : $spiders['ip'][$ip]    + 1;
             if (!empty($config['spider-ua'])) $spiders['ua'][$agent] = empty($spiders['ua'][$agent]) ? 1 : $spiders['ua'][$agent] + 1;
-
-            $spiders['update'] = $time;
-            file_put_contents(CONTENT.'spiders', serialize($spiders), LOCK_EX);
         }
     }
+    $spiders['update'] = $time;
+    file_put_contents(CONTENT.'spiders', serialize($spiders), LOCK_EX);
+
 } else {
     $user  = USER::getUser();                   # User profile
     $stats = GetUnserialized(CONTENT.'stats');  # Statistics data storage
@@ -215,7 +204,7 @@ if (DetectSpider($agent)) {
     file_put_contents(CONTENT.'stats', serialize($stats), LOCK_EX);
 
     # Keyword from $_SERVER['HTTP_REFERER']
-    $keyword = ExtractKeyword($referer);
+    $keyword = CMS::call('STATISTICS')->extractKeyword($referer);
 
     if (!empty($keyword)) {
         $file = (file_exists(CONTENT.'keywords')) ? file_get_contents(CONTENT.'keywords') : '';

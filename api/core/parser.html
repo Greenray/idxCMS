@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>API for class PARSER (phpAPI: The PHP Documentation Creator ver. 4.0)</title>
+    <title>API for class PARSER (idxCMS: The Flat Files Content Management Sysytem ver. 2.4)</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="generator" content="phpAPI 4.0 (https://github.com/Greenray/phpAPI/)">
     <link rel="stylesheet" type="text/css" href="../style.css">
@@ -10,7 +10,7 @@
 
     <body id="PARSER" onload="parent.document.title=document.title;">
         <div class="header">
-    <span style="float:right">phpAPI ver. 4.0</span>
+    <span style="float:right">idxCMS ver. 2.4</span>
     
         <ul>
         
@@ -165,7 +165,7 @@
         <tr><th colspan="2">Методы: общий обзор</th></tr>
         
             <tr>
-                <td class="type w_200">public  array</td>
+                <td class="type w_200">public  string</td>
                 <td class="description">
                     <p><a href="#showBbcodesPanel"><strong><span class="black">showBbcodesPanel</span></strong></a> (<span class="lilac">string</span> <span class="blue">$textarea</span>, <span class="lilac">boolean</span> <span class="blue">$moderator</span>, <span class="lilac">string</span> <span class="blue">$dir</span>)</p>
                     <p class="description">bbCodes panel for the specified textarea.</p>
@@ -297,7 +297,7 @@
     <h2 id="details_methods">Методы: детали</h2>
     
         <div class="location">system/parser.class.php at line 73</div>
-        <code class="signature" id="showBbcodesPanel">public  array <strong>showBbcodesPanel</strong> (<span class="lilac">string</span> <span class="blue">$textarea</span>, <span class="lilac">boolean</span> <span class="blue">$moderator</span>, <span class="lilac">string</span> <span class="blue">$dir</span>)</code>
+        <code class="signature" id="showBbcodesPanel">public  string <strong>showBbcodesPanel</strong> (<span class="lilac">string</span> <span class="blue">$textarea</span>, <span class="lilac">boolean</span> <span class="blue">$moderator</span>, <span class="lilac">string</span> <span class="blue">$dir</span>)</code>
         <div class="details">
             bbCodes panel for the specified textarea.
             <div class="finfo">
@@ -317,7 +317,7 @@
             <td class="hid right w_100 lilac">boolean</td>
             
                 <td class="hid blue w_100">$moderator</td>
-                <td class="hid">Is user an admin or moderator?</td>
+                <td class="hid">Is user an admin or moderator? (default = FALSE)</td>
             
         </tr>
     
@@ -326,13 +326,13 @@
             <td class="hid right w_100 lilac">string</td>
             
                 <td class="hid blue w_100">$dir</td>
-                <td class="hid">Current directory</td>
+                <td class="hid">Current directory (default = &quot;&quot;)</td>
             
         </tr>
     
         <tr>
             <td class="hid left w_100">Return</td>
-            <td class="hid right w_100 lilac">array</td>
+            <td class="hid right w_100 lilac">string</td>
             
                 <td class="hid" colspan="2">bbCodes panel</td>
             
@@ -384,7 +384,7 @@
         </div>
         <hr />
     
-        <div class="location">system/parser.class.php at line 196</div>
+        <div class="location">system/parser.class.php at line 195</div>
         <code class="signature" id="parseSpoiler">private  string <strong>parseSpoiler</strong> (<span class="lilac">array</span> <span class="blue">$matches</span>)</code>
         <div class="details">
             Shows spoiler with hidden text.
@@ -414,7 +414,7 @@
         </div>
         <hr />
     
-        <div class="location">system/parser.class.php at line 213</div>
+        <div class="location">system/parser.class.php at line 212</div>
         <code class="signature" id="parseImage">private  string <strong>parseImage</strong> (<span class="lilac">string</span> <span class="blue">$path</span>)</code>
         <div class="details">
             Parses [img]...[/img] bbtag.
@@ -444,7 +444,7 @@
         </div>
         <hr />
     
-        <div class="location">system/parser.class.php at line 283</div>
+        <div class="location">system/parser.class.php at line 282</div>
         <code class="signature" id="parseMP3">private  string <strong>parseMP3</strong> ()</code>
         <div class="details">
             Parses [mp3]...[/mp3] bbtag.
@@ -452,7 +452,7 @@
         </div>
         <hr />
     
-        <div class="location">system/parser.class.php at line 299</div>
+        <div class="location">system/parser.class.php at line 298</div>
         <code class="signature" id="parseYouTube">private  string <strong>parseYouTube</strong> ()</code>
         <div class="details">
             Parses [youtube]...[/youtube] bbtag.
@@ -460,7 +460,7 @@
         </div>
         <hr />
     
-        <div class="location">system/parser.class.php at line 314</div>
+        <div class="location">system/parser.class.php at line 313</div>
         <code class="signature" id="parse">public  string <strong>parse</strong> (<span class="lilac">string</span> <span class="blue">$text</span>, <span class="lilac">string</span> <span class="blue">$path</span>)</code>
         <div class="details">
             Main parser.
@@ -499,7 +499,7 @@
         </div>
         <hr />
     
-        <div class="location">system/parser.class.php at line 335</div>
+        <div class="location">system/parser.class.php at line 334</div>
         <code class="signature" id="parseText">public  string <strong>parseText</strong> (<span class="lilac">string</span> <span class="blue">$text</span>, <span class="lilac">string</span> <span class="blue">$path</span>)</code>
         <div class="details">
             Parses text.
@@ -542,7 +542,7 @@
 
 
         <div class="header">
-    <span style="float:right">phpAPI ver. 4.0</span>
+    <span style="float:right">idxCMS ver. 2.4</span>
     
         <ul>
         

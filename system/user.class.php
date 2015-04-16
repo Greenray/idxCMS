@@ -123,9 +123,9 @@ class USER {
     /** Checks user's data and validates his data file.
      * @param  string $username Username
      * @param  string $password Password
-     * @param  string $hash	 Password hash
+     * @param  string $hash	    Password hash
      * @param  array  $userdata Profile data
-     * @return boolean|array     User's profile or the result of operation
+     * @return boolean|array    User's profile or the result of operation
      */
     public function checkUser($username, $password, $hash, &$userdata) {
         if (!$this->checkUserName($username, 'Name')) return FALSE;
@@ -173,9 +173,9 @@ class USER {
     }
 
     /** Changes the value of the specified fiels in user's profile.
-     * @param  string $user	Username
-     * @param  string $field	Fieldname
-     * @param  string $value	Value of the field
+     * @param  string $user	 Username
+     * @param  string $field Fieldname
+     * @param  string $value Value of the field
      * @return boolean       The result of operation
      */
     public static function changeProfileField($user, $field, $value) {
@@ -228,24 +228,11 @@ class USER {
         return $user;
     }
 
-    /** Gets the list of registered users with their profiles.
-     * @param  string $mask Mask to seach user in database (défaut : '*')
-     * @return array        List of registered users with their profiles
-     */
-    public function getUsersList($mask = '*') {
-        $return = [];
-        $users  = AdvScanDir(USERS, $mask);
-        foreach ($users as $user) {
-            $return[] = self::getUserData($user);
-        }
-        return $return;
-    }
-
     /** Gets user rights.
-     * @param  string $user     Username               (defaut : '')
-     * @param  string $root	   Reference to root flag (defaut : '')
-     * @param  string $userdata Reference to userdata  (defaut : '')
-     * @return boolean | array FALSE or list of user rights
+     * @param  string $user      Username               (defaut : '')
+     * @param  string &$root     Reference to root flag (defaut : '')
+     * @param  string &$userdata Reference to userdata  (defaut : '')
+     * @return boolean|array     FALSE or list of user rights
      */
     public static function getUserRights($user = '', &$root = '', &$userdata = '') {
         $rights = [];
@@ -268,6 +255,19 @@ class USER {
         } else $root = TRUE;
 
         return $rights;
+    }
+
+    /** Gets the list of registered users with their profiles.
+     * @param  string $mask Mask to seach user in database (défaut : '*')
+     * @return array        List of registered users with their profiles
+     */
+    public function getUsersList($mask = '*') {
+        $return = [];
+        $users  = AdvScanDir(USERS, $mask);
+        foreach ($users as $user) {
+            $return[] = self::getUserData($user);
+        }
+        return $return;
     }
 
     /** Sets userdata if login is successful.
@@ -342,12 +342,12 @@ class USER {
     }
 
     /** Adds new user to user's database.
-     * @throws Exception 'Invalid username'
-     * @throws Exception 'Invalid nickname'
-     * @throws Exception 'Invalid password'
-     * @throws Exception 'User with this username already exists'
-     * @throws Exception 'Invalid email'
-     * @throws Exception 'Cannot save profile'
+     * @throws Exception "Invalid username"
+     * @throws Exception "Invalid nickname"
+     * @throws Exception "Invalid password"
+     * @throws Exception "User with this username already exists'
+     * @throws Exception "Invalid email"
+     * @throws Exception "Cannot save profile"
      * @return boolean TRUE if registration is successful
      */
     public function registerUser() {
@@ -409,7 +409,7 @@ class USER {
     }
 
     /** Sets system rights.
-     * @param  array $rights The the set of rights
+     * @param array $rights The the set of rights
      */
     public static function setSystemRights($rights) {
         self::$system_rights = array_merge(self::$system_rights, $rights);
@@ -429,11 +429,11 @@ class USER {
      * @param  string $username Username
      * @param  string $nickname Nickname
      * @param  array  $userdata Userdata
-     * @throws Exception 'Invalid username'
-     * @throws Exception 'Invalid nickname'
-     * @throws Exception 'Invalid password'
-     * @throws Exception 'Invalid email'
-     * @throws Exception 'Cannot save profile'
+     * @throws Exception "Invalid username"
+     * @throws Exception "Invalid nickname"
+     * @throws Exception "Invalid password"
+     * @throws Exception "Invalid email"
+     * @throws Exception "Cannot save profile"
      * @return boolean TRUE if update is successful
      */
     public function updateUser($username, $nickname, $userdata) {

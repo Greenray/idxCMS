@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Функции (phpAPI: The PHP Documentation Creator ver. 4.0)</title>
+    <title>Функции (idxCMS: The Flat Files Content Management Sysytem ver. 2.4)</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="generator" content="phpAPI 4.0 (https://github.com/Greenray/phpAPI/)">
     <link rel="stylesheet" type="text/css" href="../style.css">
@@ -10,7 +10,7 @@
 
     <body id="functions" onload="parent.document.title=document.title;">
         <div class="header">
-    <span style="float:right">phpAPI ver. 4.0</span>
+    <span style="float:right">idxCMS ver. 2.4</span>
     
         <ul>
         
@@ -20,7 +20,7 @@
         
             <li class="active">Function</li>
         
-            <li>Tree</li>
+            <li><a href="../statistics/package-tree.html">Statistics\Tree</a></li>
         
             <li><a href="../deprecated.html">Deprecated</a></li>
         
@@ -53,30 +53,6 @@
             <tr>
                 <td class="type w_200">public  boolean</td>
                 <td class="description">
-                    <p><a href="#DetectBadBot"><span class="lilac">DetectBadBot</span></a>(<span class="lilac">string</span> <span class="blue">$agent</span>)</p>
-                    <p class="description">Detects bad bots.</p>
-                </td>
-            </tr>
-        
-            <tr>
-                <td class="type w_200">public  boolean</td>
-                <td class="description">
-                    <p><a href="#DetectSpider"><span class="lilac">DetectSpider</span></a>(<span class="lilac">string</span> <span class="blue">$agent</span>)</p>
-                    <p class="description">Detects spiders.</p>
-                </td>
-            </tr>
-        
-            <tr>
-                <td class="type w_200">public  mixed</td>
-                <td class="description">
-                    <p><a href="#ExtractKeyword"><span class="lilac">ExtractKeyword</span></a>(<span class="lilac">string</span> <span class="blue">$url</span>)</p>
-                    <p class="description">Extracts keywords from the user`s query.</p>
-                </td>
-            </tr>
-        
-            <tr>
-                <td class="type w_200">public  boolean</td>
-                <td class="description">
                     <p><a href="#StatisticsClean"><span class="lilac">StatisticsClean</span></a>(<span class="lilac">string</span> <span class="blue">$file</span>, <span class="lilac">string</span> <span class="blue">$field</span>)</p>
                     <p class="description">Cleans website statistics.</p>
                 </td>
@@ -84,96 +60,6 @@
         
     </table>
     <h2 id="details_functions">Функции: детали</h2>
-    
-        <div class="location">system/statistics.php at line 21</div>
-        <code id="DetectBadBot" class="signature">public  boolean <strong>DetectBadBot</strong> (<span class="lilac">string</span> <span class="blue">$agent</span>)</code>
-        <div class="details">
-            Detects bad bots.
-            <div class="finfo">
-    <table class="hid">
-    
-        <tr>
-            <td class="hid left w_100">Parameters</td>
-            <td class="hid right w_100 lilac">string</td>
-            
-                <td class="hid blue w_100">$agent</td>
-                <td class="hid">$_SERVER[<span class="red">'HTTP_USER_AGENT'</span>]</td>
-            
-        </tr>
-    
-        <tr>
-            <td class="hid left w_100">Return</td>
-            <td class="hid right w_100 lilac">boolean</td>
-            
-                <td class="hid" colspan="2">Is bad bot detected?</td>
-            
-        </tr>
-    
-    </table>
-</div>
-
-        </div>
-        <hr />
-    
-        <div class="location">system/statistics.php at line 35</div>
-        <code id="DetectSpider" class="signature">public  boolean <strong>DetectSpider</strong> (<span class="lilac">string</span> <span class="blue">$agent</span>)</code>
-        <div class="details">
-            Detects spiders.
-            <div class="finfo">
-    <table class="hid">
-    
-        <tr>
-            <td class="hid left w_100">Parameters</td>
-            <td class="hid right w_100 lilac">string</td>
-            
-                <td class="hid blue w_100">$agent</td>
-                <td class="hid">$_SERVER[<span class="red">'HTTP_USER_AGENT'</span>]</td>
-            
-        </tr>
-    
-        <tr>
-            <td class="hid left w_100">Return</td>
-            <td class="hid right w_100 lilac">boolean</td>
-            
-                <td class="hid" colspan="2">Is spider detected?</td>
-            
-        </tr>
-    
-    </table>
-</div>
-
-        </div>
-        <hr />
-    
-        <div class="location">system/statistics.php at line 82</div>
-        <code id="ExtractKeyword" class="signature">public  mixed <strong>ExtractKeyword</strong> (<span class="lilac">string</span> <span class="blue">$url</span>)</code>
-        <div class="details">
-            Extracts keywords from the user`s query.
-            <div class="finfo">
-    <table class="hid">
-    
-        <tr>
-            <td class="hid left w_100">Parameters</td>
-            <td class="hid right w_100 lilac">string</td>
-            
-                <td class="hid blue w_100">$url</td>
-                <td class="hid">User`s URL</td>
-            
-        </tr>
-    
-        <tr>
-            <td class="hid left w_100">Return</td>
-            <td class="hid right w_100 lilac">mixed</td>
-            
-                <td class="hid" colspan="2">Decoded keywords or FALSE</td>
-            
-        </tr>
-    
-    </table>
-</div>
-
-        </div>
-        <hr />
     
         <div class="location">admin/modules/_statistics/statistics.php at line 21</div>
         <code id="StatisticsClean" class="signature">public  boolean <strong>StatisticsClean</strong> (<span class="lilac">string</span> <span class="blue">$file</span>, <span class="lilac">string</span> <span class="blue">$field</span>)</code>
@@ -218,7 +104,7 @@
 
 
         <div class="header">
-    <span style="float:right">phpAPI ver. 4.0</span>
+    <span style="float:right">idxCMS ver. 2.4</span>
     
         <ul>
         
@@ -228,7 +114,7 @@
         
             <li class="active">Function</li>
         
-            <li>Tree</li>
+            <li><a href="../statistics/package-tree.html">Statistics\Tree</a></li>
         
             <li><a href="../deprecated.html">Deprecated</a></li>
         

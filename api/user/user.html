@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>API for class USER (phpAPI: The PHP Documentation Creator ver. 4.0)</title>
+    <title>API for class USER (idxCMS: The Flat Files Content Management Sysytem ver. 2.4)</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="generator" content="phpAPI 4.0 (https://github.com/Greenray/phpAPI/)">
     <link rel="stylesheet" type="text/css" href="../style.css">
@@ -10,7 +10,7 @@
 
     <body id="USER" onload="parent.document.title=document.title;">
         <div class="header">
-    <span style="float:right">phpAPI ver. 4.0</span>
+    <span style="float:right">idxCMS ver. 2.4</span>
     
         <ul>
         
@@ -289,18 +289,18 @@
             </tr>
         
             <tr>
-                <td class="type w_200">public  array</td>
+                <td class="type w_200">public static  boolean|array</td>
                 <td class="description">
-                    <p><a href="#getUsersList"><strong><span class="black">getUsersList</span></strong></a> (<span class="lilac">string</span> <span class="blue">$mask</span>)</p>
-                    <p class="description">Gets the list of registered users with their profiles.</p>
+                    <p><a href="#getUserRights"><strong><span class="black">getUserRights</span></strong></a> (<span class="lilac">string</span> <span class="blue">$user</span>, <span class="lilac">string</span> <span class="blue">&$root</span>, <span class="lilac">string</span> <span class="blue">&$userdata</span>)</p>
+                    <p class="description">Gets user rights.</p>
                 </td>
             </tr>
         
             <tr>
-                <td class="type w_200">public static  boolean</td>
+                <td class="type w_200">public  array</td>
                 <td class="description">
-                    <p><a href="#getUserRights"><strong><span class="black">getUserRights</span></strong></a> (<span class="lilac">string</span> <span class="blue">$user</span>, <span class="lilac">string</span> <span class="blue">$root</span>, <span class="lilac">string</span> <span class="blue">$userdata</span>, <span class="lilac">string</span> <span class="blue">&$root</span>, <span class="lilac">string</span> <span class="blue">&$userdata</span>)</p>
-                    <p class="description">Gets user rights.</p>
+                    <p><a href="#getUsersList"><strong><span class="black">getUsersList</span></strong></a> (<span class="lilac">string</span> <span class="blue">$mask</span>)</p>
+                    <p class="description">Gets the list of registered users with their profiles.</p>
                 </td>
             </tr>
         
@@ -792,7 +792,55 @@
         </div>
         <hr />
     
-        <div class="location">system/user.class.php at line 229</div>
+        <div class="location">system/user.class.php at line 231</div>
+        <code class="signature" id="getUserRights">public static  boolean|array <strong>getUserRights</strong> (<span class="lilac">string</span> <span class="blue">$user</span>, <span class="lilac">string</span> <span class="blue">&$root</span>, <span class="lilac">string</span> <span class="blue">&$userdata</span>)</code>
+        <div class="details">
+            Gets user rights.
+            <div class="finfo">
+    <table class="hid">
+    
+        <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+            
+                <td class="hid blue w_100">$user</td>
+                <td class="hid">Username (defaut : <span class="red">''</span>)</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">string</td>
+            
+                <td class="hid blue w_100">&$root</td>
+                <td class="hid">Reference to root flag (defaut : <span class="red">''</span>)</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">string</td>
+            
+                <td class="hid blue w_100">&$userdata</td>
+                <td class="hid">Reference to userdata (defaut : <span class="red">''</span>)</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">boolean|array</td>
+            
+                <td class="hid" colspan="2">FALSE or list of user rights</td>
+            
+        </tr>
+    
+    </table>
+</div>
+
+        </div>
+        <hr />
+    
+        <div class="location">system/user.class.php at line 258</div>
         <code class="signature" id="getUsersList">public  array <strong>getUsersList</strong> (<span class="lilac">string</span> <span class="blue">$mask</span>)</code>
         <div class="details">
             Gets the list of registered users with their profiles.
@@ -813,54 +861,6 @@
             <td class="hid right w_100 lilac">array</td>
             
                 <td class="hid" colspan="2">List of registered users with their profiles</td>
-            
-        </tr>
-    
-    </table>
-</div>
-
-        </div>
-        <hr />
-    
-        <div class="location">system/user.class.php at line 244</div>
-        <code class="signature" id="getUserRights">public static  boolean <strong>getUserRights</strong> (<span class="lilac">string</span> <span class="blue">$user</span>, <span class="lilac">string</span> <span class="blue">$root</span>, <span class="lilac">string</span> <span class="blue">$userdata</span>, <span class="lilac">string</span> <span class="blue">&$root</span>, <span class="lilac">string</span> <span class="blue">&$userdata</span>)</code>
-        <div class="details">
-            Gets user rights.
-            <div class="finfo">
-    <table class="hid">
-    
-        <tr>
-            <td class="hid left w_100">Parameters</td>
-            <td class="hid right w_100 lilac">string</td>
-            
-                <td class="hid blue w_100">$user</td>
-                <td class="hid">Username (defaut : <span class="red">''</span>)</td>
-            
-        </tr>
-    
-        <tr>
-            <td class="hid left w_100">&nbsp</td>
-            <td class="hid right w_100 lilac">string</td>
-            
-                <td class="hid blue w_100">$root</td>
-                <td class="hid">Reference to root flag (defaut : <span class="red">''</span>)</td>
-            
-        </tr>
-    
-        <tr>
-            <td class="hid left w_100">&nbsp</td>
-            <td class="hid right w_100 lilac">string</td>
-            
-                <td class="hid blue w_100">$userdata</td>
-                <td class="hid">Reference to userdata (defaut : <span class="red">''</span>)</td>
-            
-        </tr>
-    
-        <tr>
-            <td class="hid left w_100">Return</td>
-            <td class="hid right w_100 lilac">boolean</td>
-            
-                <td class="hid" colspan="2">| array FALSE or list of user rights</td>
             
         </tr>
     
@@ -971,7 +971,7 @@
             <td class="hid left w_100">Throws</td>
             <td class="hid right w_100 lilac">Exception</td>
             
-                <td class="hid" colspan="2"><span class="red">'Invalid username'</span></td>
+                <td class="hid" colspan="2">&quot;Invalid username&quot;</td>
             
         </tr>
     
@@ -979,7 +979,7 @@
             <td class="hid left w_100">&nbsp</td>
             <td class="hid right w_100 lilac">Exception</td>
             
-                <td class="hid" colspan="2"><span class="red">'Invalid nickname'</span></td>
+                <td class="hid" colspan="2">&quot;Invalid nickname&quot;</td>
             
         </tr>
     
@@ -987,7 +987,7 @@
             <td class="hid left w_100">&nbsp</td>
             <td class="hid right w_100 lilac">Exception</td>
             
-                <td class="hid" colspan="2"><span class="red">'Invalid password'</span></td>
+                <td class="hid" colspan="2">&quot;Invalid password&quot;</td>
             
         </tr>
     
@@ -995,7 +995,7 @@
             <td class="hid left w_100">&nbsp</td>
             <td class="hid right w_100 lilac">Exception</td>
             
-                <td class="hid" colspan="2"><span class="red">'User with this username already exists'</span></td>
+                <td class="hid" colspan="2">&quot;User with this username already exists'</td>
             
         </tr>
     
@@ -1003,7 +1003,7 @@
             <td class="hid left w_100">&nbsp</td>
             <td class="hid right w_100 lilac">Exception</td>
             
-                <td class="hid" colspan="2"><span class="red">'Invalid email'</span></td>
+                <td class="hid" colspan="2">&quot;Invalid email&quot;</td>
             
         </tr>
     
@@ -1011,7 +1011,7 @@
             <td class="hid left w_100">&nbsp</td>
             <td class="hid right w_100 lilac">Exception</td>
             
-                <td class="hid" colspan="2"><span class="red">'Cannot save profile'</span></td>
+                <td class="hid" colspan="2">&quot;Cannot save profile&quot;</td>
             
         </tr>
     
@@ -1101,7 +1101,7 @@
             <td class="hid left w_100">Throws</td>
             <td class="hid right w_100 lilac">Exception</td>
             
-                <td class="hid" colspan="2"><span class="red">'Invalid username'</span></td>
+                <td class="hid" colspan="2">&quot;Invalid username&quot;</td>
             
         </tr>
     
@@ -1109,7 +1109,7 @@
             <td class="hid left w_100">&nbsp</td>
             <td class="hid right w_100 lilac">Exception</td>
             
-                <td class="hid" colspan="2"><span class="red">'Invalid nickname'</span></td>
+                <td class="hid" colspan="2">&quot;Invalid nickname&quot;</td>
             
         </tr>
     
@@ -1117,7 +1117,7 @@
             <td class="hid left w_100">&nbsp</td>
             <td class="hid right w_100 lilac">Exception</td>
             
-                <td class="hid" colspan="2"><span class="red">'Invalid password'</span></td>
+                <td class="hid" colspan="2">&quot;Invalid password&quot;</td>
             
         </tr>
     
@@ -1125,7 +1125,7 @@
             <td class="hid left w_100">&nbsp</td>
             <td class="hid right w_100 lilac">Exception</td>
             
-                <td class="hid" colspan="2"><span class="red">'Invalid email'</span></td>
+                <td class="hid" colspan="2">&quot;Invalid email&quot;</td>
             
         </tr>
     
@@ -1133,7 +1133,7 @@
             <td class="hid left w_100">&nbsp</td>
             <td class="hid right w_100 lilac">Exception</td>
             
-                <td class="hid" colspan="2"><span class="red">'Cannot save profile'</span></td>
+                <td class="hid" colspan="2">&quot;Cannot save profile&quot;</td>
             
         </tr>
     
@@ -1155,7 +1155,7 @@
 
 
         <div class="header">
-    <span style="float:right">phpAPI ver. 4.0</span>
+    <span style="float:right">idxCMS ver. 2.4</span>
     
         <ul>
         

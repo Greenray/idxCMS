@@ -1,4 +1,0 @@
-Notice:
-the complexity of array_pop() is O(1). 
-the complexity of array_shift() is O(n).
-array_shift() requires a re-index process on the array, so it has to run over all the elements and index them.

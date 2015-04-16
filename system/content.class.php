@@ -477,8 +477,9 @@ class CONTENT extends INDEX {
         $path  = $this->sections[$this->section]['categories'][$this->category]['path'];
         $file  = FILTER::get('REQUEST', 'file');
         $image = FILTER::get('REQUEST', 'image');
+        $item  = $path.$id;
         if (empty($id)) {
-            $id = $this->newId($this->content);
+            $id   = $this->newId($this->content);
             $item = $path.$id;
             if (is_dir($item)) {
                 DeleteTree($item);

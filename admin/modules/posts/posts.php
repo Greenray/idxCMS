@@ -115,8 +115,8 @@ if ((empty($section) && empty($category)) || !empty($REQUEST['new']) || !empty($
         $output['text']     = empty($REQUEST['text'])     ? '' : $REQUEST['text'];
         $output['opened']   = empty($REQUEST['opened'])   ? 1  : $REQUEST['opened'];
     }
-    $output['sections'][$output['section_id']]['selected']    = TRUE;
-    $output['categories'][$output['category_id']]['selected'] = TRUE;
+    $output['sections'][$section]['selected']    = TRUE;
+    $output['categories'][$category]['selected'] = TRUE;
     $output['bbCodes_desc'] = CMS::call('PARSER')->showBbcodesPanel('post.desc');
     $output['bbCodes_text'] = CMS::call('PARSER')->showBbcodesPanel('post.text');
 

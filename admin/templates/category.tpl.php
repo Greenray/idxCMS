@@ -11,8 +11,8 @@ die();?>
         var access    = form.access.value;
         var textRegex = new RegExp(/<\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[^'">\s]+))?)+\s*|\s*)\/?>/gim);
         var numRegex  = /^[0-9]{1}$/;
-        if (title === '' || !title.match(textRegex)) {
-            ShowAlert('[__Error in the title]', '[__Error]');
+        if (title === '' || title.match(textRegex)) {
+            ShowAlert('[__Error in title]', '[__Error]');
             return false;
         }
         if ((access === '') || !access.match(numRegex) || (access < 0) || (access > 9)) {

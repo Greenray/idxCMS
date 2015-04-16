@@ -6,7 +6,7 @@
 
 die();?>
 <script type="text/javascript">
-    var ids = new Array({ids});
+    var ids    = new Array({ids});
     var titles = new Array({titles});
     function getIds(index) {
         var idsValues = ids[index];
@@ -38,12 +38,8 @@ die();?>
         var title = form.title.value;
         var text = form.text.value;
         var textRegex = new RegExp(/<\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[^'">\s]+))?)+\s*|\s*)\/?>/gim);
-        if (title === '') {
-            ShowAlert('[__Enter a title]', '[__Error]');
-            return false;
-        }
-        if (title.match(textRegex)) {
-            ShowAlert('[__Invalid symbols]', '[__Error]');
+        if (title === '' || title.match(textRegex)) {
+            ShowAlert('[__Error in title]', '[__Error]');
             return false;
         }
         if (text === '') {

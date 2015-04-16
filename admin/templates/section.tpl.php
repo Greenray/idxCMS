@@ -17,7 +17,7 @@ die();?>
             ShowAlert('[__Error in section ID]', '[__Error]');
             return false;
         }
-        if (title === '' || !title.match(textRegex)) {
+        if (title === '' || title.match(textRegex)) {
             ShowAlert('[__Error in title]', '[__Error]');
             return false;
         }

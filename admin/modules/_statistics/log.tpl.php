@@ -8,5 +8,7 @@ die();?>
 <div class="module">[__Logs]</div>
 <fieldset>
     <table class="std"><tr class="odd"><td>{text}</td></tr></table>
-    <form name="month" method="post" action=""><p align="center"><input type="submit" value="[__Back]" class="submit" /></p></form>
+    <form name="month" method="post" action="">
+        <p align="center"><input type="submit" value="[__Back]" class="submit" /></p>
+    </form>
 </fieldset>

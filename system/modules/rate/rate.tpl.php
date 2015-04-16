@@ -6,7 +6,11 @@
 
 die();?>
 <div class="star">
-    <div><ul id="star{item}" {event} class="star"><li id="starCur{item}" class="curr" title="{value}" style="width:{width}px;"></li></ul></div>
+    <div>
+        <ul id="star{item}" {event} class="star">
+            <li id="starCur{item}" class="curr" title="{value}" style="width:{width}px;"></li>
+        </ul>
+    </div>
     <div style="clear: both;" /></div>
     <div class="rates">
         <div id="starVoted{item}" class="voted">{voted}</div>

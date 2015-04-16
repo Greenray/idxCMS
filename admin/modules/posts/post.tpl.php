@@ -59,7 +59,9 @@ die();?>
                 <td class="label"style="width:150px" >[__Select section]</td>
                 <td>
                     <select name="new_section" onChange="setCategories(this.selectedIndex)">
-                        [each=sections]<option value="{sections[id]}" [if=sections[selected]]selected="selected"[/if]>{sections[title]}</option>[/each.sections]
+                        [each=sections]
+                        <option value="{sections[id]}" [if=sections[selected]]selected="selected"[/if]>{sections[title]}</option>
+                        [/each.sections]
                     </select>
                 </td>
             </tr>
@@ -69,7 +71,9 @@ die();?>
                 <td>[__Select category]</td>
                 <td>
                     <select name="new_category">
-                        [each=categories]<option value="{categories[id]}" [if=categories[selected]]selected="selected"[/if]>{categories[title]}</option>[/each.categories]
+                        [each=categories]
+                        <option value="{categories[id]}" [if=categories[selected]]selected="selected"[/if]>{categories[title]}</option>
+                        [/each.categories]
                     </select>
                 </td>
             </tr>

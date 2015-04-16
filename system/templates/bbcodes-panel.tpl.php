@@ -15,7 +15,7 @@ die();?>
         // Show hidden additionsl input field.
         function OpenField(field, area) {
             id = document.getElementById(area);
-            if (!id.selectionEnd || (id.selectionEnd - id.selectionStart == 0))
+            if (!id.selectionEnd || (id.selectionEnd - id.selectionStart === 0))
                 document.getElementById(field + area).style.display = 'block';
         }
         function GetFromDropDown(val, name, area) {
@@ -38,14 +38,14 @@ die();?>
                 preString  = (id.value).substring(0, id.selectionStart);
                 newString  = opener + (id.value).substring(id.selectionStart, id.selectionEnd) + closer;
                 postString = (id.value).substring(id.selectionEnd);
-                id.value = preString + newString + postString;
+                id.value   = preString + newString + postString;
                 id.focus();
             } else {
                 var offset = id.selectionStart;
                 preString  = (id.value).substring(0, offset);
                 newString  = opener + closer;
                 postString = (id.value).substring(offset);
-                id.value = preString + newString + postString;
+                id.value   = preString + newString + postString;
                 id.selectionStart = offset + opener.length;
                 id.selectionEnd   = offset + opener.length;
                 id.focus();
@@ -83,20 +83,20 @@ die();?>
             if (id.selectionEnd && (id.selectionEnd - id.selectionStart > 0))
                  text = (id.value).substring(id.selectionStart, id.selectionEnd);
             else text = document.getElementById('txt_' + area).value;
-            var preString = '';
+            var preString  = '';
             var postString = '';
             if (text) {
                 preString = (id.value).substring(0, id.selectionStart);
                 bb = '[' + type + '=' +link + ']' + text + '[/' + type + ']';
                 postString = (id.value).substring(id.selectionEnd);
-                id.value  = preString + bb + postString;
+                id.value   = preString + bb + postString;
                 id.focus();
                 return;
             } else bb = '[' + type + ']' + link + '[/' + type + ']';
             var offset = id.selectionStart;
             preString  = (id.value).substring(0, offset);
             postString = (id.value).substring(offset);
-            id.value  = preString + bb + postString;
+            id.value   = preString + bb + postString;
             id.selectionStart = offset + opener.length;
             id.selectionEnd   = offset + opener.length;
             id.focus();
@@ -132,17 +132,17 @@ die();?>
         function AddList_nav(type, area) {
             id = document.getElementById(area);
             var offset = id.selectionStart;
-            var minus = 0;
+            var minus  = 0;
             var opener = '[' + type + ']';
             var closer = '[/' + type + ']';
             minus += 1;
             var items = new Array();
             var itemString = '';
-            var item = '';
+            var item  = '';
             while (item === prompt('Enter an item.\nLeave the box empty or click Cancel to complete the list', ''))
                 items.push('[*]' + item + '[/*]');
             itemString = items.join('');
-            itemsize = items.length;
+            itemsize   = items.length;
             minus += itemsize;
             var preString  = (id.value).substring(0, offset);
             var newString  = opener + itemString + closer;
@@ -155,8 +155,8 @@ die();?>
         }
         function AddList_IE(type, area) {
             id = document.getElementById(area);
-            var range = id.createTextRange();
-            var minus = 0;
+            var range  = id.createTextRange();
+            var minus  = 0;
             var opener = '[' + type + ']';
             var closer = '[/' + type + ']';
             minus += 1;
@@ -199,7 +199,7 @@ die();?>
             var offset = id.selectionStart;
             preString  = (id.value).substring(0, offset);
             postString = (id.value).substring(offset);
-            id.value  = preString + tag + postString;
+            id.value   = preString + tag + postString;
             id.focus();
             return;
         }
@@ -207,7 +207,7 @@ die();?>
             var selLength = area.textLength;
             var selStart  = area.selectionStart;
             var selEnd    = area.selectionEnd;
-            if (selEnd == 1 || selEnd == 2) selEnd = selLength;
+            if (selEnd === 1 || selEnd === 2) selEnd = selLength;
             var s1 = (area.value).substring(0, selStart);
             var s2 = (area.value).substring(selStart, selEnd);
             var s3 = (area.value).substring(selEnd, selLength);
@@ -258,14 +258,14 @@ die();?>
             puw = window.open(url, 'popWin', 'menubar=no,toolbar=no,location=no,directories=no,scrollbars=yes,resizable=yes,width=640,height=480,top=100,status=no');
             puw.focus();
         }
-        function InsertImage(area, url, side, border, margin, alt) {
+        function InsertImage(area, url) {
             var dialog = 'image_' + area;
             id = document.getElementById(area);
             if (!url) url = document.getElementById('image_url_' + area).value;
             preString = (id.value).substring(0, id.selectionStart);
             bb = '[img]' + url + '[/img]';
             postString = (id.value).substring(id.selectionEnd);
-            id.value  = preString + bb + postString;
+            id.value   = preString + bb + postString;
             id.focus();
             HideDialog(dialog);
         }
@@ -321,7 +321,7 @@ die();?>
             var id_txt = document.getElementById(area);
             // Fucking browsers standards...
             if (id_txt.value !== undefined)
-                text = id_txt.value;
+                 text = id_txt.value;
             else if (id_txt.innerText !== undefined)
                  text = id_txt.innerText;
             else text = id_txt.textContent;
@@ -526,15 +526,17 @@ die();?>
         <br clear=all />
         <table cellspacing="1" cellpadding="0" width="480">
         [each=colors]
-            <tr>
-            [each=colors[colors]]
-                <td style="background:#{colors[color]};height:12px;width:12px;" onmouseover="ViewColor('#{colors[color]}', '{area}');" onclick="SetColor('#{colors[color]}', '{area}');"></td>
-            [/each.colors[colors]]
-            </tr>
+        <tr>
+        [each=colors[colors]]
+            <td style="background:#{colors[color]};height:12px;width:12px;" onmouseover="ViewColor('#{colors[color]}', '{area}');" onclick="SetColor('#{colors[color]}', '{area}');"></td>
+        [/each.colors[colors]]
+        </tr>
         [/each.colors]
         </table>
     </div>
     <div id="smiles_{area}" unselectable="on" class="bbtools none">
-        [each=smile]<img src="{SMILES}{smile}.gif" alt="{smile}" onclick="SetSmile('[{smile}]','{area}');HideDialog('smiles_{area}');" />[/each.smile]
+        [each=smile]
+        <img src="{SMILES}{smile}.gif" alt="{smile}" onclick="SetSmile('[{smile}]','{area}');HideDialog('smiles_{area}');" />
+        [/each.smile]
     </div>
 </div>

@@ -28,14 +28,8 @@ die();?>
 </script>
 <form id="form" name="form" method="post" action="" onsubmit="return checkForm(this);">
     <table cellpadding="2" cellspacing="1" style="width:100%;">
-        <tr>
-            <td class="right">[__Username]</td>
-            <td class="left"><input type="text" id="name" name="name" /></td>
-        </tr>
-        <tr>
-            <td class="right">[__E-mail]</td>
-            <td class="left"><input type="text" id="email" name="email" style="width:50%" /></td>
-        </tr>
+        <tr><td class="right">[__Username]</td><td class="left"><input type="text" id="name" name="name" /></td></tr>
+        <tr><td class="right">[__E-mail]</td><td class="left"><input type="text" id="email" name="email" style="width:50%" /></td></tr>
         <tr>
             <td class="center" colspan="2">
                 <p>

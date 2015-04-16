@@ -10,12 +10,12 @@ die();?>
     <ul class="level1">
         [ifelse=count]
             [each=result]
-                <li class="level1 parent">
-                    <div class="bg">
-                        <a class="level1" href="{result[link]}">{result[title]}</a>
-                        <span class="subtitle">{result[text]}</span>
-                    </div>
-                </li>
+            <li class="level1 parent">
+                <div class="bg">
+                    <a class="level1" href="{result[link]}">{result[title]}</a>
+                    <span class="subtitle">{result[text]}</span>
+                </div>
+            </li>
             [/each.result]
         [else]
             <div class="center"><em>[__Nothing founded]</em></div>

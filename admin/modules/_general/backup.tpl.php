@@ -15,14 +15,11 @@ die();?>
                 <th>[__Actions]</th>
             </tr>
             [foreach=files.name.size]
-                <tr class="odd">
-                    <td>{name}</td>
-                    <td class="center">{size} [__byte(s)]</td>
-                    <td class="center">
-                        <label><input type="checkbox" name="file[]" value="{name}" /> [__Delete]</label>
-                        <a href="{BACKUPS}{name}"> [__Download]</a>
-                    </td>
-                </tr>
+            <tr class="odd">
+                <td>{name}</td>
+                <td class="center">{size} [__byte(s)]</td>
+                <td class="center"><label><input type="checkbox" name="file[]" value="{name}" /> [__Delete]</label><a href="{BACKUPS}{name}"> [__Download]</a></td>
+            </tr>
             [/foreach.files]
         </table>
         <p align="center">[__Total]: <span class="special">{total}</span></p>
@@ -42,11 +39,11 @@ die();?>
                 <th>[__Actions]</th>
             </tr>
             [foreach=dirs.name.size]
-                <tr class="odd">
-                    <td>{name}</td>
-                    <td class="right">{size}</td>
-                    <td class="center"><label><input type="checkbox" name="dir[]" value="{name}" /> [__Select]</label></td>
-                </tr>
+            <tr class="odd">
+                <td>{name}</td>
+                <td class="right">{size}</td>
+                <td class="center"><label><input type="checkbox" name="dir[]" value="{name}" /> [__Select]</label></td>
+            </tr>
             [/foreach.dirs]
         </table>
         <p align="center">

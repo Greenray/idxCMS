@@ -17,13 +17,13 @@ die();?>
         if (!document.createElement || !document.getElementById) {return;}
         this.DETECT_KEY = _b ? _b : "detectflash";
         this.skipDetect = deconcept.util.getRequestParameter(this.DETECT_KEY);
-        this.params = new Object();
-        this.variables = new Object();
+        this.params     = new Object();
+        this.variables  = new Object();
         this.attributes = new Array();
         if (_1) {this.setAttribute("swf", _1);}
         if (id) {this.setAttribute("id", id);}
-        if (w) {this.setAttribute("width", w);}
-        if (h) {this.setAttribute("height", h);}
+        if (w)  {this.setAttribute("width", w);}
+        if (h)  {this.setAttribute("height", h);}
         if (_5) {this.setAttribute("version", new deconcept.PlayerVersion(_5.toString().split(".")));}
         this.installedVer=deconcept.SWFObjectUtil.getPlayerVersion(this.getAttribute("version"), _7);
         if (c) {this.addParam("bgcolor", c);}
@@ -37,27 +37,13 @@ die();?>
         if (_a) {this.setAttribute("redirectUrl", _a);}
     };
     deconcept.SWFObject.prototype = {
-        setAttribute : function(_e, _f) {
-            this.attributes[_e] = _f;
-        },
-        getAttribute : function(_10) {
-            return this.attributes[_10];
-        },
-        addParam : function(_11, _12) {
-            this.params[_11] = _12;
-        },
-        getParams : function() {
-            return this.params;
-        },
-        addVariable : function(_13, _14) {
-            this.variables[_13] = _14;
-        },
-        getVariable : function(_15) {
-            return this.variables[_15];
-        },
-        getVariables : function() {
-            return this.variables;
-        },
+        setAttribute : function(_e, _f) {this.attributes[_e] = _f;},
+        getAttribute : function(_10) {return this.attributes[_10];},
+        addParam : function(_11, _12) {this.params[_11] = _12;},
+        getParams : function() {return this.params;},
+        addVariable : function(_13, _14) {this.variables[_13] = _14;},
+        getVariable : function(_15) {return this.variables[_15];},
+        getVariables : function() {return this.variables;},
         getVariablePairs : function() {
             var _16 = new Array();
             var key;
@@ -70,9 +56,7 @@ die();?>
         getSWFHTML : function() {
             var _19 = "";
             if (navigator.plugins && navigator.mimeTypes && navigator.mimeTypes.length) {
-                if (this.getAttribute("doExpressInstall")) {
-                    this.addVariable("MMplayerType", "PlugIn");
-                }
+                if (this.getAttribute("doExpressInstall")) {this.addVariable("MMplayerType", "PlugIn");}
                 _19 = "<embed type=\"application/x-shockwave-flash\" src=\"" + this.getAttribute("swf") + "\" width=\"" + this.getAttribute("width") + "\" height=\"" + this.getAttribute("height") + "\"";
                 _19 += " id=\"" + this.getAttribute("id") + "\" name=\"" + this.getAttribute("id") + "\" ";
                 var _1a = this.getParams();
@@ -103,11 +87,11 @@ die();?>
                 }
             }
             if (this.skipDetect || this.getAttribute("doExpressInstall") || this.installedVer.versionIsValid(this.getAttribute("version"))) {
-                var n = (typeof _20 == "string") ? document.getElementById(_20) : _20;
+                var n = (typeof _20 === "string") ? document.getElementById(_20) : _20;
                 n.innerHTML = this.getSWFHTML();
                 return true;
             } else {
-                if (this.getAttribute("redirectUrl") != "") {
+                if (this.getAttribute("redirectUrl") !== "") {
                     document.location.replace(this.getAttribute("redirectUrl"));
                 }
             }
@@ -124,14 +108,14 @@ die();?>
         } else {
             try {
                 var axo = new ActiveXObject("ShockwaveFlash.ShockwaveFlash");
-                for (var i = 3; axo != null; i++) {
+                for (var i = 3; axo !== null; i++) {
                     axo = new ActiveXObject("ShockwaveFlash.ShockwaveFlash." + i);
                     _25 = new deconcept.PlayerVersion([i, 0, 0]);
                 }
             }
             catch(e){}
             if (_23 && _25.major > _23.major) {return _25;}
-            if (!_23 || ((_23.minor != 0 || _23.rev != 0) && _25.major == _23.major) || _25.major !=6 || _24) {
+            if (!_23 || ((_23.minor !== 0 || _23.rev !== 0) && _25.major === _23.major) || _25.major !== 6 || _24) {
                 try {
                     _25 = new deconcept.PlayerVersion(axo.GetVariable("$version").split(" ")[1].split(","));
                 }
@@ -141,7 +125,7 @@ die();?>
         return _25;
     };
     deconcept.PlayerVersion = function(_29) {
-        this.major = parseInt(_29[0]) != null ? parseInt(_29[0]) : 0;
+        this.major = parseInt(_29[0]) !== null ? parseInt(_29[0]) : 0;
         this.minor = parseInt(_29[1]) || 0;
         this.rev   = parseInt(_29[2]) || 0;
     };
@@ -166,7 +150,7 @@ die();?>
             return "";
         }
     };
-    if (Array.prototype.push == null) {
+    if (Array.prototype.push === null) {
         Array.prototype.push = function(_2f) {
             this[this.length] = _2f;
             return this.length;

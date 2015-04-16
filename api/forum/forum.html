@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>API for class FORUM (phpAPI: The PHP Documentation Creator ver. 4.0)</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="phpAPI 4.0 (https://github.com/Greenray/phpAPI/)">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="start" href="../index.html">
+</head>
+
+    <body id="FORUM" onload="parent.document.title=document.title;">
+        <div class="header">
+    <span style="float:right">phpAPI ver. 4.0</span>
+    
+        <ul>
+        
+            <li><a href="../overview-summary.html">Overview</a></li>
+        
+            <li><a href="../forum/package-summary.html">Namespace</a></li>
+        
+            <li class="active">Class</li>
+        
+            <li><a href="../forum/package-tree.html">Forum\Tree</a></li>
+        
+            <li><a href="../deprecated.html">Deprecated</a></li>
+        
+            <li><a href="../todo.html">Todo</a></li>
+        
+            <li><a href="../index-all.html">Index</a></li>
+        
+        </ul>
+    
+</div>
+<div class="small_links">Фреймы: <a href="../index.html" target="_top"> Включить</a> | <a href="../forum/forum.html" target="_top"> Выключить</a></div>
+
+    <div class="small_links">
+        Общий обзор: <a href="#summary_fields">Поля</a> | <a href="#summary_methods">Методы</a> | <a href="#summary_constructor">Конструктор</a>
+        Детали: <a href="#details_fields">Поля</a> | <a href="#details_methods">Методы</a> | <a href="#details_constructor">Конструктор</a>
+    </div>
+
+
+
+
+
+<hr />
+<div class="package">Пространство имен Forum</div>
+<h1>Class FORUM</h1>
+<div id="list">
+    <ul>
+        <li><a href="../core/index.html">INDEX</a><ul><li><a href="../core/content.html">CONTENT</a><ul><li><strong>FORUM</strong></li></ul></li></ul></li>
+    </ul>
+</div>
+
+
+
+<hr />
+<p class="signature">public  class <strong>FORUM</strong> extends <a href="../core/content.html">CONTENT</a></p>
+<div class="comment" id="overview_description">Forum.</div>
+<div class="finfo">
+    <table class="hid">
+    
+        <tr>
+            <td class="hid left w_100">Program</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+            
+                <td class="hid" colspan="2">idxCMS: Flat Files Content Management Sysytem</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">File</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+            
+                <td class="hid" colspan="2">system/forum.class.php</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Version</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+            
+                <td class="hid" colspan="2">2.4</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Author</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+            
+                <td class="hid" colspan="2">Victor Nabatov &lt;greenray.spb@gmail.com&gt;</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Copyright</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+            
+                <td class="hid" colspan="2">(c) 2011 - 2015 Victor Nabatov</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">License</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+            
+                <td class="hid" colspan="2">Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License</td>
+            
+        </tr>
+    
+    </table>
+</div>
+
+
+
+
+    
+        <table class="inherit">
+            <tr><th colspan="2">Поля, унаследованные из Core \ CONTENT</th></tr>
+            <tr><td><a href="../core/content.html#$category../core/content.html#$comments../core/content.html#$container../core/content.html#$content../core/content.html#$desc../core/content.html#$item../core/content.html#$module../core/content.html#$section../core/content.html#$sections../core/content.html#$text">$category, $comments, $container, $content, $desc, $item, $module, $section, $sections, $text</a></td></tr>
+        </table>
+    
+        <table class="inherit">
+            <tr><th colspan="2">Поля, унаследованные из Core \ INDEX</th></tr>
+            <tr><td><a href="../core/index.html#$index">$index</a></td></tr>
+        </table>
+    
+
+
+    <table id="summary_constructor">
+        <tr><th colspan="2">Конструктор: общий обзор</th></tr>
+        <tr>
+            <td class="type w_200">public  void</td>
+            <td class="description">
+                <p><a href="#__construct"><strong><span class="black">__construct</span></strong></a>()</p>
+                <p class="description">Class initialization.</p>
+            </td>
+        </tr>
+    </table>
+
+
+
+    <table id="summary_methods">
+        <tr><th colspan="2">Методы: общий обзор</th></tr>
+        
+            <tr>
+                <td class="type w_200">public  array</td>
+                <td class="description">
+                    <p><a href="#getItem"><strong><span class="black">getItem</span></strong></a> (<span class="lilac">integer</span> <span class="blue">$id</span>, <span class="lilac">string</span> <span class="blue">$type</span>, <span class="lilac">boolean</span> <span class="blue">$parse</span>)</p>
+                    <p class="description">Gets topic.</p>
+                </td>
+            </tr>
+        
+            <tr>
+                <td class="type w_200">public  integer</td>
+                <td class="description">
+                    <p><a href="#saveTopic"><strong><span class="black">saveTopic</span></strong></a> (<span class="lilac">integer</span> <span class="blue">$id</span>)</p>
+                    <p class="description">Saves topic.</p>
+                </td>
+            </tr>
+        
+    </table>
+
+
+    
+        <table class="inherit">
+            <tr><th colspan="2">Методы, унаследованные из Core \ CONTENT</th></tr>
+            <tr><td><a href="../core/content.html#copyTree../core/content.html#cutText../core/content.html#getCategories../core/content.html#getCategory../core/content.html#getCategoryLastItems../core/content.html#getComment../core/content.html#getComments../core/content.html#getContent../core/content.html#getItem../core/content.html#getLastComment../core/content.html#getLastItems../core/content.html#getSection../core/content.html#getSections../core/content.html#getSectionsLastItems../core/content.html#getStat../core/content.html#incCount../core/content.html#moveCategory../core/content.html#moveItem../core/content.html#newComment../core/content.html#removeCategory../core/content.html#removeComment../core/content.html#removeItem../core/content.html#removeSection../core/content.html#saveCategories../core/content.html#saveCategory../core/content.html#saveComment../core/content.html#saveContent../core/content.html#saveItem../core/content.html#saveSection../core/content.html#saveSections../core/content.html#setIcon../core/content.html#showSection../core/content.html#showSections">copyTree, cutText, getCategories, getCategory, getCategoryLastItems, getComment, getComments, getContent, getItem, getLastComment, getLastItems, getSection, getSections, getSectionsLastItems, getStat, incCount, moveCategory, moveItem, newComment, removeCategory, removeComment, removeItem, removeSection, saveCategories, saveCategory, saveComment, saveContent, saveItem, saveSection, saveSections, setIcon, showSection, showSections</a></td></tr>
+        </table>
+    
+        <table class="inherit">
+            <tr><th colspan="2">Методы, унаследованные из Core \ INDEX</th></tr>
+            <tr><td><a href="../core/index.html#__construct../core/index.html#getIndex../core/index.html#newId../core/index.html#saveIndex../core/index.html#setIndex">__construct, getIndex, newId, saveIndex, setIndex</a></td></tr>
+        </table>
+    
+
+
+
+
+    <h2 id="details_constructor">Конструктор: детали</h2>
+    <div class="location">system/forum.class.php at line 16</div>
+    <code class="signature" id="__construct">public  void <strong>__construct</strong>()</code>
+    <div class="details">
+        Class initialization.
+        
+    </div>
+
+
+
+    <h2 id="details_methods">Методы: детали</h2>
+    
+        <div class="location">system/forum.class.php at line 28</div>
+        <code class="signature" id="getItem">public  array <strong>getItem</strong> (<span class="lilac">integer</span> <span class="blue">$id</span>, <span class="lilac">string</span> <span class="blue">$type</span>, <span class="lilac">boolean</span> <span class="blue">$parse</span>)</code>
+        <div class="details">
+            Gets topic.
+            <div class="finfo">
+    <table class="hid">
+    
+        <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">integer</td>
+            
+                <td class="hid blue w_100">$id</td>
+                <td class="hid">Topic ID</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">string</td>
+            
+                <td class="hid blue w_100">$type</td>
+                <td class="hid">Type of item: full text or description (default = <span class="red">''</span>)</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">boolean</td>
+            
+                <td class="hid blue w_100">$parse</td>
+                <td class="hid">Parse text? (default = TRUE)</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">array</td>
+            
+                <td class="hid" colspan="2">Topic data</td>
+            
+        </tr>
+    
+    </table>
+</div>
+
+        </div>
+        <hr />
+    
+        <div class="location">system/forum.class.php at line 41</div>
+        <code class="signature" id="saveTopic">public  integer <strong>saveTopic</strong> (<span class="lilac">integer</span> <span class="blue">$id</span>)</code>
+        <div class="details">
+            Saves topic.<br /> This function corrects website sitemap.
+            <div class="finfo">
+    <table class="hid">
+    
+        <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">integer</td>
+            
+                <td class="hid blue w_100">$id</td>
+                <td class="hid">Topic ID</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Throws</td>
+            <td class="hid right w_100 lilac">Exception</td>
+            
+                <td class="hid" colspan="2"><span class="red">'You are not logged in!'</span> Title is empty or has wrong symbols</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">Exception</td>
+            
+                <td class="hid" colspan="2"><span class="red">'Title is empty'</span> Title is empty or has wrong symbols</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">Exception</td>
+            
+                <td class="hid" colspan="2"><span class="red">'Text is empty'</span></td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">Exception</td>
+            
+                <td class="hid" colspan="2"><span class="red">'Cannot save topic'</span> No access rights or cannot save index file</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">integer</td>
+            
+                <td class="hid" colspan="2">ID of the saved topic</td>
+            
+        </tr>
+    
+    </table>
+</div>
+
+        </div>
+        <hr />
+    
+
+
+
+        <div class="header">
+    <span style="float:right">phpAPI ver. 4.0</span>
+    
+        <ul>
+        
+            <li><a href="../overview-summary.html">Overview</a></li>
+        
+            <li><a href="../forum/package-summary.html">Namespace</a></li>
+        
+            <li class="active">Class</li>
+        
+            <li><a href="../forum/package-tree.html">Forum\Tree</a></li>
+        
+            <li><a href="../deprecated.html">Deprecated</a></li>
+        
+            <li><a href="../todo.html">Todo</a></li>
+        
+            <li><a href="../index-all.html">Index</a></li>
+        
+        </ul>
+    
+</div>
+<div class="small_links">Фреймы: <a href="../index.html" target="_top"> Включить</a> | <a href="../forum/forum.html" target="_top"> Выключить</a></div>
+
+    <div class="small_links">
+        Общий обзор: <a href="#summary_fields">Поля</a> | <a href="#summary_methods">Методы</a> | <a href="#summary_constructor">Конструктор</a>
+        Детали: <a href="#details_fields">Поля</a> | <a href="#details_methods">Методы</a> | <a href="#details_constructor">Конструктор</a>
+    </div>
+
+
+
+
+        <hr />
+    </body>
+
+</html>

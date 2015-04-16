@@ -32,23 +32,25 @@ die();?>
         <div class="text justify">{text}</div>
     </div>
     [if=opened]
-        <span class="menu">
-            <a href="{MODULE}user&amp;user={author}" title="[__Profile]"><img src="{ICONS}profile.png" width="16" height="16" class="tip" alt="[__Profile]" /></a>
-            <a href="{MODULE}user.pm&amp;for={author}" class="tip" title="[__Private message]"><img src="{ICONS}user-pm.png" width="16" height="16" alt="" /></a>
-        </span>
+    <span class="menu">
+        <a href="{MODULE}user&amp;user={author}" title="[__Profile]"><img src="{ICONS}profile.png" width="16" height="16" class="tip" alt="[__Profile]" /></a>
+        <a href="{MODULE}user.pm&amp;for={author}" class="tip" title="[__Private message]"><img src="{ICONS}user-pm.png" width="16" height="16" alt="" /></a>
+    </span>
     [/if]
     [if=moderator]
-        <div class="menu">
-            <form name="topic" method="post" action="">
-                <button formaction="{link}{COMMENT}{id}&amp;action=edit" class="submit">[__Edit]</button>
-                <button formaction="{link}{COMMENT}{id}&amp;action=delete" class="submit">[__Delete]</button>
-            </form>
-        </div>
+    <div class="menu">
+        <form name="topic" method="post" action="">
+            <button formaction="{link}{COMMENT}{id}&amp;action=edit" class="submit">[__Edit]</button>
+            <button formaction="{link}{COMMENT}{id}&amp;action=delete" class="submit">[__Delete]</button>
+        </form>
+    </div>
     [/if]
     [if=ban]
-        <div class="menu">
-            <form name="topic" method="post" action=""><button formaction="{link}{COMMENT}{id}&amp;action=ban&amp;host={ip}" class="submit">{ip}</button></form>
-        </div>
+    <div class="menu">
+        <form name="topic" method="post" action="">
+            <button formaction="{link}{COMMENT}{id}&amp;action=ban&amp;host={ip}" class="submit">{ip}</button>
+        </form>
+    </div>
     [/if]
 </div>
 <div class="clear"></div>

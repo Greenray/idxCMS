@@ -10,20 +10,9 @@ die();?>
     <div class="user_panel">
         <form method="post" action="">
             <ul class="links">
-                [if=admin]
-                    <li>
-                        <img src="{ICONS}admin.png" width="16" height="16" alt="" />
-                        <a href="{MODULE}admin&amp;id=main">[__Administration]</a>
-                    </li>
-                [/if]
-                <li>
-                    <img src="{ICONS}post.png" width="16" height="16" alt="" />
-                    <a href="{MODULE}posts.post">[__Post]</a>
-                </li>
-                <li>
-                    <img src="{ICONS}profile.png" width="16" height="16" alt="" />
-                    <a href="{MODULE}user">[__Profile]</a>
-                </li>
+                [if=admin]<li><img src="{ICONS}admin.png" width="16" height="16" alt="" /><a href="{MODULE}admin&amp;id=main">[__Administration]</a></li>[/if]
+                <li><img src="{ICONS}post.png" width="16" height="16" alt="" /><a href="{MODULE}posts.post">[__Post]</a></li>
+                <li><img src="{ICONS}profile.png" width="16" height="16" alt="" /><a href="{MODULE}user">[__Profile]</a></li>
                 <li>
                     <img src="{ICONS}messages.png" width="16" height="16" alt="" />
                     <a href="{MODULE}user.pm[if=mess_new]&amp;mode=inbox[/if]" title="{mess_info}">
@@ -84,18 +73,14 @@ die();?>
                         <input type="password" name="password" id="password" placeholder="[__Password]" class="showpassword" />
                     </p>
                     <p class="dhtmlx_popup_controls">
-                        <div class='dhtmlx_popup_button'><div><input type="submit" name="login" value="[__Log in]" class="popup_input" /></div></div>
+                        <div class='dhtmlx_popup_button'>
+                            <div><input type="submit" name="login" value="[__Log in]" class="popup_input" /></div>
+                        </div>
                     </p>
                     <a class="close" href="#"></a>
                 </form>
-            <li>
-                <img src="{ICONS}forgetpass.png" width="16" height="16" alt="" />
-                <a href="{MODULE}user&amp;act=password_request">[__Password recovery]</a>
-            </li>
-            <li>
-                <img src="{ICONS}register.png" width="16" height="16" alt="" />
-                <a href="{MODULE}user&amp;act=register">[__Registration]</a>
-            </li>
+            <li><img src="{ICONS}forgetpass.png" width="16" height="16" alt="" /><a href="{MODULE}user&amp;act=password_request">[__Password recovery]</a></li>
+            <li><img src="{ICONS}register.png" width="16" height="16" alt="" /><a href="{MODULE}user&amp;act=register">[__Registration]</a></li>
         </ul>
     </div>
 [/else]

@@ -72,11 +72,26 @@ if (USER::$logged_in || $config['allow-guest']) {
         $pagination = GetPagination($page, $perpage, $results['count']);
         if (!empty($common)) {
             $show = array_slice($common, $pagination['start'], $perpage, TRUE);
-            $i = 1;
+            $i    = 1;
             foreach ($show as $link => $text) {
                 $parts = explode('|', $text);
                 $results['result'][$i]['link']  = $link;
                 $results['result'][$i]['title'] = $parts[1];
+                $strlen = mb_strlen($parts[2]);
+                $real   = mb_substr(stristr($parts[2], $parts[0]), 0, mb_strlen($parts[0]));
+                $start  = 0;
+                $start_ = '';
+                $end_   = '';
+                $temp   = stripos($parts[2], $parts[0]);
+                if ($temp > ($config['block'] / 2)) {
+                    $start  = $temp - ($config['block'] / 2);
+                    $start_ = '...';
+                }
+                if (($strlen - ($config['block'] / 2)) > $temp) {
+                    $strlen = $config['block'] - 1;
+                    $end_   = '...';
+                }
+                $results['result'][$i]['text'] = $start_.str_replace($real, '<u><strong><em>'.$real.'</em></strong></u>', mb_substr($text, $start, $strlen)).$end_;
                 $results['result'][$i]['text']  = FormatFound($parts[2], $parts[0], $config['block']);
                 ++$i;
             }

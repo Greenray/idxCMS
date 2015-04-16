@@ -9,12 +9,12 @@ die();?>
 <fieldset>
     <form name="config" method="post" action="">
         <table class="std">
-            <th colspan="3">[__Users]</th>
+            <tr><th colspan="3">[__Users]</th></tr>
             <tr class="odd">
                 <td>[__Register user browser]</td>
                 <td colspan="2"><input type="checkbox" name="user-ua" value="1" [if=user-ua]checked="checked"[/if] /></td>
             </tr>
-            <th colspan="3">[__Spiders]</th>
+            <tr><th colspan="3">[__Spiders]</th></tr>
             <tr class="odd">
                 <td>[__Register spider IP]</td>
                 <td colspan="2"><input type="checkbox" name="spider-ip" value="1" [if=spider-ip]checked="checked"[/if] /></td>

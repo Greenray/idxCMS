@@ -10,12 +10,7 @@ die();?>
     <table class="std">
         <tr><th colspan="3">[__Rights]</th></td></tr>
         <tr><td class="even center" colspan="3">[ifelse=dir][__Directory][else][__File][/else]: <span class="special">{file}</span></td></tr>
-        <tr>
-            <td class="row1 center">[__Owner]</td>
-            <td class="row1 center">[__Group]</td>
-            <td class="row1 center">[__Other]</td>
-        </tr>
-        <tr>
+        <tr><td class="row1 center">[__Owner]</td><td class="row1 center">[__Group]</td><td class="row1 center">[__Other]</td></tr><tr>
             <td class="center">
                 <input type="checkbox" name="rights[0]" value="r" [if=owner[r]]checked="checked"[/if] /> [__Reading]
                 <input type="checkbox" name="rights[1]" value="w" [if=owner[w]]checked="checked"[/if] /> [__Writing]

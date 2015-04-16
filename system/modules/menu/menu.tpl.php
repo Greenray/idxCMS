@@ -9,12 +9,16 @@ die();?>
     <a href="{link}">{name}</a>
     [ifelse=sections]
         <ul>
-        [each=sections]<li><a href="{sections[link]}" style="width:{sections[width]}px">{sections[title]}</a></li>[/each.sections]
+        [each=sections]
+            <li><a href="{sections[link]}" style="width:{sections[width]}px">{sections[title]}</a></li>
+        [/each.sections]
         </ul>
     [else]
         [if=categories]
             <ul>
-            [each=categories]<li><a href="{categories[link]}">{categories[title]}</a></li>[/each.categories]
+            [each=categories]
+                <li><a href="{categories[link]}">{categories[title]}</a></li>
+            [/each.categories]
             </ul>
         [/if]
     [/else]

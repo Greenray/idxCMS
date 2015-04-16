@@ -19,10 +19,10 @@ die();?>
                 <td><input type="checkbox" name="root" value="{admin}" [if=admin]checked="checked"[/if] /></td>
             </tr>
             [each=rights]
-                <tr class="odd">
-                    <td>{rights[desc]}</td>
-                    <td><input type="checkbox" name="rights[]" value="{rights[right]}" [if=rights[set]]checked="checked"[/if] /></td>
-                </tr>
+            <tr class="odd">
+                <td>{rights[desc]}</td>
+                <td><input type="checkbox" name="rights[]" value="{rights[right]}"[if=rights[set]] checked="checked"[/if] /></td>
+            </tr>
             [/each.rights]
         </table>
         <p class="center">

@@ -14,6 +14,14 @@
 
 if (!defined('idxCMS')) die();
 
+/** Creates the array of search results.
+ * @param  string $text    The text to search
+ * @param  string $title   The title of the item
+ * @param  string $word    The search word
+ * @param  string $link    The link to item
+ * @param  array  &$result The reference to array of results
+ * @return array           The array of results
+ */
 function SearchResult($text, $title, $word, $link, &$result) {
     $word = trim($word);
     if (!empty($word)) {
@@ -31,26 +39,6 @@ function SearchResult($text, $title, $word, $link, &$result) {
             }
         }
     }
-}
-
-# Format output of search results.
-function FormatFound($text, $word, $config) {
-    $strlen = mb_strlen($text);
-    $target = stristr($text, $word);
-    $real   = mb_substr($target, 0, mb_strlen($word));
-    $start  = 0;
-    $start_ = '';
-    $end_   = '';
-    $temp   = stripos($text, $word);
-    if ($temp > ($config / 2)) {
-        $start  = $temp - ($config / 2);
-        $start_ = '...';
-    }
-    if (($strlen - ($config / 2)) > $temp) {
-        $strlen = $config - 1;
-        $end_   = '...';
-    }
-    return $start_.str_replace($real, '<u><strong><em>'.$real.'</em></strong></u>', mb_substr($text, $start, $strlen)).$end_;
 }
 
 SYSTEM::registerModule('search', 'Search', 'box', 'system');

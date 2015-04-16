@@ -10,10 +10,7 @@ die();?>
         <table>
             <tr><th colspan="2" class="center">{question}</th></tr>
             [each=answers]
-                <tr>
-                    <td>{answers[answer]}</td>
-                    <td class="right" style="width:35px">{answers[voices]}%</td>
-                </tr>
+                <tr><td>{answers[answer]}</td><td class="right" style="width:35px">{answers[voices]}%</td></tr>
                 <tr>
                     <td colspan="2">
                         <table cellspacing="0" cellpadding="0">
@@ -33,10 +30,7 @@ die();?>
             <table>
                 <tr><th colspan="2" class="center">{question}</th></tr>
                 [each=answers]
-                    <tr>
-                        <td><input type="radio" name="answer" value="{answers[id]}" /></td>
-                        <td>{answers[answer]}</td>
-                    </tr>
+                    <tr><td><input type="radio" name="answer" value="{answers[id]}" /></td><td>{answers[answer]}</td></tr>
                 [/each.answers]
             </table>
             <p class="center"><input type="submit" name="save" value="[__Submit]" class="submit" /></p>

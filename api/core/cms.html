@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>API for class CMS (phpAPI: The PHP Documentation Creator ver. 4.0)</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="phpAPI 4.0 (https://github.com/Greenray/phpAPI/)">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="start" href="../index.html">
+</head>
+
+    <body id="CMS" onload="parent.document.title=document.title;">
+        <div class="header">
+    <span style="float:right">phpAPI ver. 4.0</span>
+    
+        <ul>
+        
+            <li><a href="../overview-summary.html">Overview</a></li>
+        
+            <li><a href="../core/package-summary.html">Namespace</a></li>
+        
+            <li class="active">Class</li>
+        
+            <li><a href="../core/package-tree.html">Core\Tree</a></li>
+        
+            <li><a href="../deprecated.html">Deprecated</a></li>
+        
+            <li><a href="../todo.html">Todo</a></li>
+        
+            <li><a href="../index-all.html">Index</a></li>
+        
+        </ul>
+    
+</div>
+<div class="small_links">Фреймы: <a href="../index.html" target="_top"> Включить</a> | <a href="../core/cms.html" target="_top"> Выключить</a></div>
+
+    <div class="small_links">
+        Общий обзор: <a href="#summary_fields">Поля</a> | <a href="#summary_methods">Методы</a> | <a href="#summary_constructor">Конструктор</a>
+        Детали: <a href="#details_fields">Поля</a> | <a href="#details_methods">Методы</a> | <a href="#details_constructor">Конструктор</a>
+    </div>
+
+
+
+
+
+<hr />
+<div class="package">Пространство имен Core</div>
+<h1>Class CMS</h1>
+<div id="list">
+    <ul>
+        <li><strong>CMS</strong></li></ul></li>
+    </ul>
+</div>
+
+
+
+<hr />
+<p class="signature">public  class <strong>CMS</strong></p>
+<div class="comment" id="overview_description">Registers objects and provides access to their methods.</div>
+<div class="finfo">
+    <table class="hid">
+    
+        <tr>
+            <td class="hid left w_100">Program</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+            
+                <td class="hid" colspan="2">idxCMS: Flat Files Content Management Sysytem</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">File</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+            
+                <td class="hid" colspan="2">system/cms.class.php</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Version</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+            
+                <td class="hid" colspan="2">2.4</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Author</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+            
+                <td class="hid" colspan="2">Victor Nabatov &lt;greenray.spb@gmail.com&gt;</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Copyright</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+            
+                <td class="hid" colspan="2">(c) 2011 - 2015 Victor Nabatov</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">License</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+            
+                <td class="hid" colspan="2">Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License</td>
+            
+        </tr>
+    
+    </table>
+</div>
+
+
+
+    <table id="summary_fields">
+        <tr><th colspan="2">Поля: общий обзор</th></tr>
+        
+            <tr>
+                <td class="type w_200">private static  array</td>
+                <td class="description">
+                    <pre><a href="#$obj"><span class="green">$obj</span></a> = []</pre>
+                    <p class="description">Registered objects</p>
+                </td>
+            </tr>
+        
+    </table>
+
+
+
+    <table id="summary_constructor">
+        <tr><th colspan="2">Конструктор: общий обзор</th></tr>
+        <tr>
+            <td class="type w_200">private  void</td>
+            <td class="description">
+                <p><a href="#__construct"><strong><span class="black">__construct</span></strong></a>()</p>
+                <p class="description">Class initialization.</p>
+            </td>
+        </tr>
+    </table>
+
+
+
+    <table id="summary_methods">
+        <tr><th colspan="2">Методы: общий обзор</th></tr>
+        
+            <tr>
+                <td class="type w_200">private  void</td>
+                <td class="description">
+                    <p><a href="#__clone"><strong><span class="black">__clone</span></strong></a> ()</p>
+                    <p class="description">Prevent to clone object.</p>
+                </td>
+            </tr>
+        
+            <tr>
+                <td class="type w_200">public static  object</td>
+                <td class="description">
+                    <p><a href="#register"><strong><span class="black">register</span></strong></a> (<span class="lilac">string</span> <span class="blue">$class</span>)</p>
+                    <p class="description">Creates and registers the object.</p>
+                </td>
+            </tr>
+        
+            <tr>
+                <td class="type w_200">public static  object</td>
+                <td class="description">
+                    <p><a href="#call"><strong><span class="black">call</span></strong></a> (<span class="lilac">string</span> <span class="blue">$class</span>)</p>
+                    <p class="description">Calls the object, if object is not set it will be created.</p>
+                </td>
+            </tr>
+        
+            <tr>
+                <td class="type w_200">public static  void</td>
+                <td class="description">
+                    <p><a href="#remove"><strong><span class="black">remove</span></strong></a> (<span class="lilac">string</span> <span class="blue">$class</span>)</p>
+                    <p class="description">Removes the object.</p>
+                </td>
+            </tr>
+        
+    </table>
+
+
+
+
+    <h2 id="details_fields">Поля: детали</h2>
+    
+        <div class="location">system/cms.class.php at line 16</div>
+        <pre class="signature" id="obj">private static array <strong><span class="green">$obj</span></strong> = []</pre>
+        <div class="details">Registered objects</div>
+        <hr />
+    
+
+
+    <h2 id="details_constructor">Конструктор: детали</h2>
+    <div class="location">system/cms.class.php at line 19</div>
+    <code class="signature" id="__construct">private  void <strong>__construct</strong>()</code>
+    <div class="details">
+        Class initialization.
+        
+    </div>
+
+
+
+    <h2 id="details_methods">Методы: детали</h2>
+    
+        <div class="location">system/cms.class.php at line 22</div>
+        <code class="signature" id="__clone">private  void <strong>__clone</strong> ()</code>
+        <div class="details">
+            Prevent to clone object.
+            
+        </div>
+        <hr />
+    
+        <div class="location">system/cms.class.php at line 28</div>
+        <code class="signature" id="register">public static  object <strong>register</strong> (<span class="lilac">string</span> <span class="blue">$class</span>)</code>
+        <div class="details">
+            Creates and registers the object.
+            <div class="finfo">
+    <table class="hid">
+    
+        <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+            
+                <td class="hid blue w_100">$class</td>
+                <td class="hid">Class name</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">object</td>
+            
+                <td class="hid" colspan="2">Created and initialized object</td>
+            
+        </tr>
+    
+    </table>
+</div>
+
+        </div>
+        <hr />
+    
+        <div class="location">system/cms.class.php at line 43</div>
+        <code class="signature" id="call">public static  object <strong>call</strong> (<span class="lilac">string</span> <span class="blue">$class</span>)</code>
+        <div class="details">
+            Calls the object, if object is not set it will be created.<br /> <pre><br /> Examples:<br />     $CMS = CMS::call('SYSTEM');                - when it is need to initialize object<br />     $CMS = CMS::call('SYSTEM')->initModules(); - calling an object method<br /> </pre>
+            <div class="finfo">
+    <table class="hid">
+    
+        <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+            
+                <td class="hid blue w_100">$class</td>
+                <td class="hid">Class name</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">object</td>
+            
+                <td class="hid" colspan="2">Existing or created and initialized object</td>
+            
+        </tr>
+    
+    </table>
+</div>
+
+        </div>
+        <hr />
+    
+        <div class="location">system/cms.class.php at line 50</div>
+        <code class="signature" id="remove">public static  void <strong>remove</strong> (<span class="lilac">string</span> <span class="blue">$class</span>)</code>
+        <div class="details">
+            Removes the object.
+            <div class="finfo">
+    <table class="hid">
+    
+        <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+            
+                <td class="hid blue w_100">$class</td>
+                <td class="hid">Class name</td>
+            
+        </tr>
+    
+    </table>
+</div>
+
+        </div>
+        <hr />
+    
+
+
+
+        <div class="header">
+    <span style="float:right">phpAPI ver. 4.0</span>
+    
+        <ul>
+        
+            <li><a href="../overview-summary.html">Overview</a></li>
+        
+            <li><a href="../core/package-summary.html">Namespace</a></li>
+        
+            <li class="active">Class</li>
+        
+            <li><a href="../core/package-tree.html">Core\Tree</a></li>
+        
+            <li><a href="../deprecated.html">Deprecated</a></li>
+        
+            <li><a href="../todo.html">Todo</a></li>
+        
+            <li><a href="../index-all.html">Index</a></li>
+        
+        </ul>
+    
+</div>
+<div class="small_links">Фреймы: <a href="../index.html" target="_top"> Включить</a> | <a href="../core/cms.html" target="_top"> Выключить</a></div>
+
+    <div class="small_links">
+        Общий обзор: <a href="#summary_fields">Поля</a> | <a href="#summary_methods">Методы</a> | <a href="#summary_constructor">Конструктор</a>
+        Детали: <a href="#details_fields">Поля</a> | <a href="#details_methods">Методы</a> | <a href="#details_constructor">Конструктор</a>
+    </div>
+
+
+
+
+        <hr />
+    </body>
+
+</html>

@@ -10,11 +10,7 @@ die();?>
     <form name="config" method="post" action="">
         <table class="std">
             <tr class="odd"><td colspan="3" class="center">[__Do not delete user, just block him to keep the structure of site]</td></tr>
-            <tr>
-                <th style="width:20%">[__Login]</th>
-                <th style="width:20%">[__Nick]</th>
-                <th style="width:60%">[__Actions]</th>
-            </tr>
+            <tr><th style="width:20%">[__Login]</th><th style="width:20%">[__Nick]</th><th style="width:60%">[__Actions]</th></tr>
             [each=user]
             <tr class="odd">
                 <td>{user[username]}</td>

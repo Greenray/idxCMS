@@ -47,7 +47,9 @@ die();?>
                 <td class="label">[__Select section]</td>
                 <td>
                     <select name="new_section" onChange="setCategories(this.selectedIndex)">
-                        [each=sections]<option value="{sections[id]}" [if=sections[selected]]selected="selected"[/if]>{sections[title]}</option>[/each.sections]
+                        [each=sections]
+                        <option value="{sections[id]}" [if=sections[selected]]selected="selected"[/if]>{sections[title]}</option>
+                        [/each.sections]
                     </select>
                 </td>
             </tr>
@@ -57,13 +59,17 @@ die();?>
                 <td>[__Select category]</td>
                 <td>
                     <select name="new_category">
-                        [each=categories]<option value="{categories[id]}" [if=categories[selected]]selected="selected"[/if]>{categories[title]}</option>[/each.categories]
+                        [each=categories]
+                        <option value="{categories[id]}" [if=categories[selected]]selected="selected"[/if]>{categories[title]}</option>
+                        [/each.categories]
                     </select>
                 </td>
             </tr>
             <tr class="odd">
                 <td>[__Title]</td>
-                <td colspan="3"><input type="text" name="title" value="{title}" size="100" class="required" onfocus="if (this.value == '{title}') {this.value = '';}" onblur="if (this.value == '') {this.value = '{title}';}" required="required" /></td>
+                <td colspan="3">
+                    <input type="text" name="title" value="{title}" size="100" class="required" onfocus="if (this.value == '{title}') {this.value = '';}" onblur="if (this.value == '') {this.value = '{title}';}" required="required" />
+                </td>
             </tr>
             <tr><th colspan="4">[__Text]</th></tr>
             <tr><td colspan="4">{bbCodes_text}</td></tr>
@@ -71,13 +77,13 @@ die();?>
             <tr class="odd">
                 <td>[__Comments]</td>
                 <td colspan="3">
-                    <input type="checkbox" name="opened" value="1" id="opened" [if=opened]checked="checked"[/if] />
+                    <input type="checkbox" name="opened" value="1" id="opened"[if=opened] checked="checked"[/if] />
                     <label for="opened"> [__Allow]</label>
                 </td>
             </tr>
         </table>
-        <input type="hidden" name="item" value="{topic}" />
         <p align="center">
+            <input type="hidden" name="item" value="{topic}" />
             <input type="reset" value="[__Reset]" class="submit" />
             <input type="submit" name="save" value="[__Save]" class="submit" />
         </p>

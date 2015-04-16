@@ -8,10 +8,7 @@ die();?>
 <table class="std">
     <tr><th colspan="2">{question}</th></tr>
     [each=answers]
-        <tr>
-            <td class="question">{answers[answer]}</td>
-            <td class="right" style="width:50px;">{answers[voices]}%</td>
-        </tr>
+        <tr><td class="question">{answers[answer]}</td><td class="right" style="width:50px;">{answers[voices]}%</td></tr>
         <tr>
             <td colspan="2">
                 <table class="graph" cellspacing="0" cellpadding="0">

@@ -110,18 +110,18 @@ die();?>
                 <td class="center">[__Active]? </td>
             </tr>
             [foreach=used.key.tag]
-                <tr class="odd">
-                    <td class="center"><input type="text" name="key[]" value="{key}" /></td>
-                    <td class="center"><input type="hidden" name="value[]" value="{tag}" />{tag}</td>
-                    <td class="center"> + </td>
-                </tr>
+            <tr class="odd">
+                <td class="center"><input type="text" name="key[]" value="{key}" /></td>
+                <td class="center"><input type="hidden" name="value[]" value="{tag}" />{tag}</td>
+                <td class="center"> + </td>
+            </tr>
             [/foreach.used]
             [foreach=unused.key.tag]
-                <tr class="odd">
-                    <td class="center"><input type="text" name="key[]" value="{key}" /></td>
-                    <td class="center"><input type="hidden" name="value[]" value="{tag}" />{tag}</td>
-                    <td class="center"> - </td>
-                </tr>
+            <tr class="odd">
+                <td class="center"><input type="text" name="key[]" value="{key}" /></td>
+                <td class="center"><input type="hidden" name="value[]" value="{tag}" />{tag}</td>
+                <td class="center"> - </td>
+            </tr>
             [/foreach.unused]
         </table>
         <p class="center"><input type="submit" name="edit" value="[__Save]" class="submit" /></p>

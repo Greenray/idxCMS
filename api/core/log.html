@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>API for class LOG (phpAPI: The PHP Documentation Creator ver. 4.0)</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="phpAPI 4.0 (https://github.com/Greenray/phpAPI/)">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="start" href="../index.html">
+</head>
+
+    <body id="LOG" onload="parent.document.title=document.title;">
+        <div class="header">
+    <span style="float:right">phpAPI ver. 4.0</span>
+    
+        <ul>
+        
+            <li><a href="../overview-summary.html">Overview</a></li>
+        
+            <li><a href="../core/package-summary.html">Namespace</a></li>
+        
+            <li class="active">Class</li>
+        
+            <li><a href="../core/package-tree.html">Core\Tree</a></li>
+        
+            <li><a href="../deprecated.html">Deprecated</a></li>
+        
+            <li><a href="../todo.html">Todo</a></li>
+        
+            <li><a href="../index-all.html">Index</a></li>
+        
+        </ul>
+    
+</div>
+<div class="small_links">Фреймы: <a href="../index.html" target="_top"> Включить</a> | <a href="../core/log.html" target="_top"> Выключить</a></div>
+
+    <div class="small_links">
+        Общий обзор: <a href="#summary_fields">Поля</a> | <a href="#summary_methods">Методы</a> | <a href="#summary_constructor">Конструктор</a>
+        Детали: <a href="#details_fields">Поля</a> | <a href="#details_methods">Методы</a> | <a href="#details_constructor">Конструктор</a>
+    </div>
+
+
+
+
+
+<hr />
+<div class="package">Пространство имен Core</div>
+<h1>Class LOG</h1>
+<div id="list">
+    <ul>
+        <li><strong>LOG</strong></li></ul></li>
+    </ul>
+</div>
+
+
+
+<hr />
+<p class="signature">public  class <strong>LOG</strong></p>
+<div class="comment" id="overview_description">Logging.</div>
+<div class="finfo">
+    <table class="hid">
+    
+        <tr>
+            <td class="hid left w_100">Program</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+            
+                <td class="hid" colspan="2">idxCMS: Flat Files Content Management Sysytem</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">File</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+            
+                <td class="hid" colspan="2">system/log.class.php</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Version</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+            
+                <td class="hid" colspan="2">2.4</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Author</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+            
+                <td class="hid" colspan="2">Victor Nabatov &lt;greenray.spb@gmail.com&gt;</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Copyright</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+            
+                <td class="hid" colspan="2">(c) 2011 - 2015 Victor Nabatov</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">License</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+            
+                <td class="hid" colspan="2">Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License</td>
+            
+        </tr>
+    
+    </table>
+</div>
+
+
+
+
+
+    <table id="summary_constructor">
+        <tr><th colspan="2">Конструктор: общий обзор</th></tr>
+        <tr>
+            <td class="type w_200">public  void</td>
+            <td class="description">
+                <p><a href="#__construct"><strong><span class="black">__construct</span></strong></a>()</p>
+                <p class="description">Class initialization.</p>
+            </td>
+        </tr>
+    </table>
+
+
+
+    <table id="summary_methods">
+        <tr><th colspan="2">Методы: общий обзор</th></tr>
+        
+            <tr>
+                <td class="type w_200">public  boolean</td>
+                <td class="description">
+                    <p><a href="#logError"><strong><span class="black">logError</span></strong></a> (<span class="lilac">string</span> <span class="blue">$message</span>, <span class="lilac">string</span> <span class="blue">$info</span>)</p>
+                    <p class="description">Writes error message into log file.</p>
+                </td>
+            </tr>
+        
+            <tr>
+                <td class="type w_200">public static  boolean</td>
+                <td class="description">
+                    <p><a href="#logPut"><strong><span class="black">logPut</span></strong></a> (<span class="lilac">string</span> <span class="blue">$type</span>, <span class="lilac">string</span> <span class="blue">$user</span>, <span class="lilac">string</span> <span class="blue">$message</span>)</p>
+                    <p class="description">Registers users logins into log file.</p>
+                </td>
+            </tr>
+        
+            <tr>
+                <td class="type w_200">public static  boolean</td>
+                <td class="description">
+                    <p><a href="#logMerge"><strong><span class="black">logMerge</span></strong></a> (<span class="lilac">string</span> <span class="blue">$title</span>, <span class="lilac">integer</span> <span class="blue">$day</span>, <span class="lilac">integer</span> <span class="blue">$month</span>, <span class="lilac">integer</span> <span class="blue">$year</span>, <span class="lilac">integer</span> <span class="blue">$first_month</span>, <span class="lilac">integer</span> <span class="blue">$first_year</span>)</p>
+                    <p class="description">Сreates tar archive of logs for the month.</p>
+                </td>
+            </tr>
+        
+            <tr>
+                <td class="type w_200">public static  boolean</td>
+                <td class="description">
+                    <p><a href="#logMergeByMonth"><strong><span class="black">logMergeByMonth</span></strong></a> ()</p>
+                    <p class="description">Prepares daily log files to create a single file per month.</p>
+                </td>
+            </tr>
+        
+    </table>
+
+
+
+
+
+    <h2 id="details_constructor">Конструктор: детали</h2>
+    <div class="location">system/log.class.php at line 16</div>
+    <code class="signature" id="__construct">public  void <strong>__construct</strong>()</code>
+    <div class="details">
+        Class initialization.
+        
+    </div>
+
+
+
+    <h2 id="details_methods">Методы: детали</h2>
+    
+        <div class="location">system/log.class.php at line 23</div>
+        <code class="signature" id="logError">public  boolean <strong>logError</strong> (<span class="lilac">string</span> <span class="blue">$message</span>, <span class="lilac">string</span> <span class="blue">$info</span>)</code>
+        <div class="details">
+            Writes error message into log file.
+            <div class="finfo">
+    <table class="hid">
+    
+        <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+            
+                <td class="hid blue w_100">$message</td>
+                <td class="hid">Error message</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">string</td>
+            
+                <td class="hid blue w_100">$info</td>
+                <td class="hid">Additioinal info</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">boolean</td>
+            
+                <td class="hid" colspan="2">FALSE</td>
+            
+        </tr>
+    
+    </table>
+</div>
+
+        </div>
+        <hr />
+    
+        <div class="location">system/log.class.php at line 34</div>
+        <code class="signature" id="logPut">public static  boolean <strong>logPut</strong> (<span class="lilac">string</span> <span class="blue">$type</span>, <span class="lilac">string</span> <span class="blue">$user</span>, <span class="lilac">string</span> <span class="blue">$message</span>)</code>
+        <div class="details">
+            Registers users logins into log file.
+            <div class="finfo">
+    <table class="hid">
+    
+        <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+            
+                <td class="hid blue w_100">$type</td>
+                <td class="hid">Message type</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">string</td>
+            
+                <td class="hid blue w_100">$user</td>
+                <td class="hid">Username</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">string</td>
+            
+                <td class="hid blue w_100">$message</td>
+                <td class="hid">Message</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">boolean</td>
+            
+                <td class="hid" colspan="2">FALSE</td>
+            
+        </tr>
+    
+    </table>
+</div>
+
+        </div>
+        <hr />
+    
+        <div class="location">system/log.class.php at line 52</div>
+        <code class="signature" id="logMerge">public static  boolean <strong>logMerge</strong> (<span class="lilac">string</span> <span class="blue">$title</span>, <span class="lilac">integer</span> <span class="blue">$day</span>, <span class="lilac">integer</span> <span class="blue">$month</span>, <span class="lilac">integer</span> <span class="blue">$year</span>, <span class="lilac">integer</span> <span class="blue">$first_month</span>, <span class="lilac">integer</span> <span class="blue">$first_year</span>)</code>
+        <div class="details">
+            Сreates tar archive of logs for the month.
+            <div class="finfo">
+    <table class="hid">
+    
+        <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+            
+                <td class="hid blue w_100">$title</td>
+                <td class="hid">Filename</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">integer</td>
+            
+                <td class="hid blue w_100">$day</td>
+                <td class="hid">Date</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">integer</td>
+            
+                <td class="hid blue w_100">$month</td>
+                <td class="hid">Month</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">integer</td>
+            
+                <td class="hid blue w_100">$year</td>
+                <td class="hid">Year</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">integer</td>
+            
+                <td class="hid blue w_100">$first_month</td>
+                <td class="hid">The first month of the year</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">integer</td>
+            
+                <td class="hid blue w_100">$first_year</td>
+                <td class="hid">The first year of the age</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">boolean</td>
+            
+                <td class="hid" colspan="2">TRUE</td>
+            
+        </tr>
+    
+    </table>
+</div>
+
+        </div>
+        <hr />
+    
+        <div class="location">system/log.class.php at line 86</div>
+        <code class="signature" id="logMergeByMonth">public static  boolean <strong>logMergeByMonth</strong> ()</code>
+        <div class="details">
+            Prepares daily log files to create a single file per month.
+            <div class="finfo">
+    <table class="hid">
+    
+        <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">boolean</td>
+            
+                <td class="hid" colspan="2">TRUE</td>
+            
+        </tr>
+    
+    </table>
+</div>
+
+        </div>
+        <hr />
+    
+
+
+
+        <div class="header">
+    <span style="float:right">phpAPI ver. 4.0</span>
+    
+        <ul>
+        
+            <li><a href="../overview-summary.html">Overview</a></li>
+        
+            <li><a href="../core/package-summary.html">Namespace</a></li>
+        
+            <li class="active">Class</li>
+        
+            <li><a href="../core/package-tree.html">Core\Tree</a></li>
+        
+            <li><a href="../deprecated.html">Deprecated</a></li>
+        
+            <li><a href="../todo.html">Todo</a></li>
+        
+            <li><a href="../index-all.html">Index</a></li>
+        
+        </ul>
+    
+</div>
+<div class="small_links">Фреймы: <a href="../index.html" target="_top"> Включить</a> | <a href="../core/log.html" target="_top"> Выключить</a></div>
+
+    <div class="small_links">
+        Общий обзор: <a href="#summary_fields">Поля</a> | <a href="#summary_methods">Методы</a> | <a href="#summary_constructor">Конструктор</a>
+        Детали: <a href="#details_fields">Поля</a> | <a href="#details_methods">Методы</a> | <a href="#details_constructor">Конструктор</a>
+    </div>
+
+
+
+
+        <hr />
+    </body>
+
+</html>

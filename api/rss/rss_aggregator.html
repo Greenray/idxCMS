@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>API for class RSS_AGGREGATOR (phpAPI: The PHP Documentation Creator ver. 4.0)</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="phpAPI 4.0 (https://github.com/Greenray/phpAPI/)">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="start" href="../index.html">
+</head>
+
+    <body id="RSS_AGGREGATOR" onload="parent.document.title=document.title;">
+        <div class="header">
+    <span style="float:right">phpAPI ver. 4.0</span>
+    
+        <ul>
+        
+            <li><a href="../overview-summary.html">Overview</a></li>
+        
+            <li><a href="../rss/package-summary.html">Namespace</a></li>
+        
+            <li class="active">Class</li>
+        
+            <li><a href="../rss/package-tree.html">RSS\Tree</a></li>
+        
+            <li><a href="../deprecated.html">Deprecated</a></li>
+        
+            <li><a href="../todo.html">Todo</a></li>
+        
+            <li><a href="../index-all.html">Index</a></li>
+        
+        </ul>
+    
+</div>
+<div class="small_links">Фреймы: <a href="../index.html" target="_top"> Включить</a> | <a href="../rss/rss_aggregator.html" target="_top"> Выключить</a></div>
+
+    <div class="small_links">
+        Общий обзор: <a href="#summary_fields">Поля</a> | <a href="#summary_methods">Методы</a> | <a href="#summary_constructor">Конструктор</a>
+        Детали: <a href="#details_fields">Поля</a> | <a href="#details_methods">Методы</a> | <a href="#details_constructor">Конструктор</a>
+    </div>
+
+
+
+
+
+<hr />
+<div class="package">Пространство имен RSS</div>
+<h1>Class RSS_AGGREGATOR</h1>
+<div id="list">
+    <ul>
+        <li><strong>RSS_AGGREGATOR</strong></li></ul></li>
+    </ul>
+</div>
+
+
+
+<hr />
+<p class="signature">public  class <strong>RSS_AGGREGATOR</strong></p>
+<div class="comment" id="overview_description">RSS aggregator.</div>
+<div class="finfo">
+    <table class="hid">
+    
+        <tr>
+            <td class="hid left w_100">Program</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+            
+                <td class="hid" colspan="2">idxCMS: Flat Files Content Management Sysytem</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">File</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+            
+                <td class="hid" colspan="2">system/rss_aggregator.class.php</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Version</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+            
+                <td class="hid" colspan="2">2.4</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Author</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+            
+                <td class="hid" colspan="2">Victor Nabatov &lt;greenray.spb@gmail.com&gt;</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Copyright</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+            
+                <td class="hid" colspan="2">(c) 2011 - 2015 Victor Nabatov</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">License</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+            
+                <td class="hid" colspan="2">Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Overview</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+            
+                <td class="hid" colspan="2">RSS aggregator and website RSS feeds.</td>
+            
+        </tr>
+    
+    </table>
+</div>
+
+
+
+    <table id="summary_fields">
+        <tr><th colspan="2">Поля: общий обзор</th></tr>
+        
+            <tr>
+                <td class="type w_200">public  mixed</td>
+                <td class="description">
+                    <pre><a href="#$CDATA"><span class="green">$CDATA</span></a> = <span class="red">'nochange'</span></pre>
+                    <p class="description">Описания нет</p>
+                </td>
+            </tr>
+        
+            <tr>
+                <td class="type w_200">private  mixed</td>
+                <td class="description">
+                    <pre><a href="#$channeltags"><span class="green">$channeltags</span></a> = [<span class="red">'title'</span>, <span class="red">'link'</span>, <span class="red">'desc'</span>, <span class="red">'language'</span>, <span class="red">'copyright'</span>, <span class="red">'managingEditor'</span>, <span class="red">'webMaster'</span>, <span class="red">'lastBuildDate'</span>, <span class="red">'rating'</span>, <span class="red">'docs'</span>]</pre>
+                    <p class="description"></p>
+                </td>
+            </tr>
+        
+            <tr>
+                <td class="type w_200">public  mixed</td>
+                <td class="description">
+                    <pre><a href="#$cp"><span class="green">$cp</span></a> = <span class="red">''</span></pre>
+                    <p class="description">Описания нет</p>
+                </td>
+            </tr>
+        
+            <tr>
+                <td class="type w_200">public  mixed</td>
+                <td class="description">
+                    <pre><a href="#$date_format"><span class="green">$date_format</span></a> = <span class="red">''</span></pre>
+                    <p class="description"></p>
+                </td>
+            </tr>
+        
+            <tr>
+                <td class="type w_200">public  mixed</td>
+                <td class="description">
+                    <pre><a href="#$default_cp"><span class="green">$default_cp</span></a> = <span class="red">'UTF-8'</span></pre>
+                    <p class="description"></p>
+                </td>
+            </tr>
+        
+            <tr>
+                <td class="type w_200">private  mixed</td>
+                <td class="description">
+                    <pre><a href="#$imagetags"><span class="green">$imagetags</span></a> = [<span class="red">'title'</span>, <span class="red">'url'</span>, <span class="red">'link'</span>, <span class="red">'width'</span>, <span class="red">'height'</span>]</pre>
+                    <p class="description"></p>
+                </td>
+            </tr>
+        
+            <tr>
+                <td class="type w_200">public  mixed</td>
+                <td class="description">
+                    <pre><a href="#$items_limit"><span class="green">$items_limit</span></a> = 0</pre>
+                    <p class="description"></p>
+                </td>
+            </tr>
+        
+            <tr>
+                <td class="type w_200">private  mixed</td>
+                <td class="description">
+                    <pre><a href="#$itemtags"><span class="green">$itemtags</span></a> = [<span class="red">'title'</span>, <span class="red">'link'</span>, <span class="red">'desc'</span>, <span class="red">'author'</span>, <span class="red">'category'</span>, <span class="red">'comments'</span>, <span class="red">'enclosure'</span>, <span class="red">'guid'</span>, <span class="red">'pubDate'</span>, <span class="red">'source'</span>]</pre>
+                    <p class="description"></p>
+                </td>
+            </tr>
+        
+            <tr>
+                <td class="type w_200">public  mixed</td>
+                <td class="description">
+                    <pre><a href="#$stripHTML"><span class="green">$stripHTML</span></a> = FALSE</pre>
+                    <p class="description"></p>
+                </td>
+            </tr>
+        
+            <tr>
+                <td class="type w_200">private  mixed</td>
+                <td class="description">
+                    <pre><a href="#$textinputtags"><span class="green">$textinputtags</span></a> = [<span class="red">'title'</span>, <span class="red">'desc'</span>, <span class="red">'name'</span>, <span class="red">'link'</span>]</pre>
+                    <p class="description"></p>
+                </td>
+            </tr>
+        
+    </table>
+
+
+
+
+
+    <table id="summary_methods">
+        <tr><th colspan="2">Методы: общий обзор</th></tr>
+        
+            <tr>
+                <td class="type w_200">public  array</td>
+                <td class="description">
+                    <p><a href="#get"><strong><span class="black">get</span></strong></a> (<span class="lilac">string</span> <span class="blue">$rss_url</span>)</p>
+                    <p class="description">Parses RSS file and returns associative array.</p>
+                </td>
+            </tr>
+        
+            <tr>
+                <td class="type w_200">private  string</td>
+                <td class="description">
+                    <p><a href="#myPregMatch"><strong><span class="black">myPregMatch</span></strong></a> (<span class="lilac">string</span> <span class="blue">$pattern</span>, <span class="lilac">string</span> <span class="blue">$subject</span>)</p>
+                    <p class="description">Modification of preg_match();.</p>
+                </td>
+            </tr>
+        
+            <tr>
+                <td class="type w_200">public  string</td>
+                <td class="description">
+                    <p><a href="#UnHtmlEntities"><strong><span class="black">UnHtmlEntities</span></strong></a> (<span class="lilac">string</span> <span class="blue">$string</span>)</p>
+                    <p class="description">Replaces HTML entities.</p>
+                </td>
+            </tr>
+        
+            <tr>
+                <td class="type w_200">private  array|boolean</td>
+                <td class="description">
+                    <p><a href="#parse"><strong><span class="black">parse</span></strong></a> (<span class="lilac">string</span> <span class="blue">$rss_url</span>)</p>
+                    <p class="description">Parses RSS file.</p>
+                </td>
+            </tr>
+        
+    </table>
+
+
+
+
+    <h2 id="details_fields">Поля: детали</h2>
+    
+        <div class="location">system/rss_aggregator.class.php at line 25</div>
+        <pre class="signature" id="CDATA">public mixed <strong><span class="green">$CDATA</span></strong> = <span class="red">'nochange'</span></pre>
+        <div class="details">Описания нет</div>
+        <hr />
+    
+        <div class="location">system/rss_aggregator.class.php at line 23</div>
+        <pre class="signature" id="channeltags">private mixed <strong><span class="green">$channeltags</span></strong> = [<span class="red">'title'</span>, <span class="red">'link'</span>, <span class="red">'desc'</span>, <span class="red">'language'</span>, <span class="red">'copyright'</span>, <span class="red">'managingEditor'</span>, <span class="red">'webMaster'</span>, <span class="red">'lastBuildDate'</span>, <span class="red">'rating'</span>, <span class="red">'docs'</span>]</pre>
+        <div class="details"></div>
+        <hr />
+    
+        <div class="location">system/rss_aggregator.class.php at line 26</div>
+        <pre class="signature" id="cp">public mixed <strong><span class="green">$cp</span></strong> = <span class="red">''</span></pre>
+        <div class="details">Описания нет</div>
+        <hr />
+    
+        <div class="location">system/rss_aggregator.class.php at line 17</div>
+        <pre class="signature" id="date_format">public mixed <strong><span class="green">$date_format</span></strong> = <span class="red">''</span></pre>
+        <div class="details"></div>
+        <hr />
+    
+        <div class="location">system/rss_aggregator.class.php at line 20</div>
+        <pre class="signature" id="default_cp">public mixed <strong><span class="green">$default_cp</span></strong> = <span class="red">'UTF-8'</span></pre>
+        <div class="details"></div>
+        <hr />
+    
+        <div class="location">system/rss_aggregator.class.php at line 29</div>
+        <pre class="signature" id="imagetags">private mixed <strong><span class="green">$imagetags</span></strong> = [<span class="red">'title'</span>, <span class="red">'url'</span>, <span class="red">'link'</span>, <span class="red">'width'</span>, <span class="red">'height'</span>]</pre>
+        <div class="details"></div>
+        <hr />
+    
+        <div class="location">system/rss_aggregator.class.php at line 32</div>
+        <pre class="signature" id="items_limit">public mixed <strong><span class="green">$items_limit</span></strong> = 0</pre>
+        <div class="details"></div>
+        <hr />
+    
+        <div class="location">system/rss_aggregator.class.php at line 35</div>
+        <pre class="signature" id="itemtags">private mixed <strong><span class="green">$itemtags</span></strong> = [<span class="red">'title'</span>, <span class="red">'link'</span>, <span class="red">'desc'</span>, <span class="red">'author'</span>, <span class="red">'category'</span>, <span class="red">'comments'</span>, <span class="red">'enclosure'</span>, <span class="red">'guid'</span>, <span class="red">'pubDate'</span>, <span class="red">'source'</span>]</pre>
+        <div class="details"></div>
+        <hr />
+    
+        <div class="location">system/rss_aggregator.class.php at line 38</div>
+        <pre class="signature" id="stripHTML">public mixed <strong><span class="green">$stripHTML</span></strong> = FALSE</pre>
+        <div class="details"></div>
+        <hr />
+    
+        <div class="location">system/rss_aggregator.class.php at line 41</div>
+        <pre class="signature" id="textinputtags">private mixed <strong><span class="green">$textinputtags</span></strong> = [<span class="red">'title'</span>, <span class="red">'desc'</span>, <span class="red">'name'</span>, <span class="red">'link'</span>]</pre>
+        <div class="details"></div>
+        <hr />
+    
+
+
+
+
+    <h2 id="details_methods">Методы: детали</h2>
+    
+        <div class="location">system/rss_aggregator.class.php at line 47</div>
+        <code class="signature" id="get">public  array <strong>get</strong> (<span class="lilac">string</span> <span class="blue">$rss_url</span>)</code>
+        <div class="details">
+            Parses RSS file and returns associative array.
+            <div class="finfo">
+    <table class="hid">
+    
+        <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+            
+                <td class="hid blue w_100">$rss_url</td>
+                <td class="hid">RSS URL</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">array</td>
+            
+                <td class="hid" colspan="2">RSS data</td>
+            
+        </tr>
+    
+    </table>
+</div>
+
+        </div>
+        <hr />
+    
+        <div class="location">system/rss_aggregator.class.php at line 86</div>
+        <code class="signature" id="myPregMatch">private  string <strong>myPregMatch</strong> (<span class="lilac">string</span> <span class="blue">$pattern</span>, <span class="lilac">string</span> <span class="blue">$subject</span>)</code>
+        <div class="details">
+            Modification of preg_match();.
+            <div class="finfo">
+    <table class="hid">
+    
+        <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+            
+                <td class="hid blue w_100">$pattern</td>
+                <td class="hid">Pattern</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">string</td>
+            
+                <td class="hid blue w_100">$subject</td>
+                <td class="hid">Subject</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">string</td>
+            
+                <td class="hid" colspan="2">Trimed field with index 1 from <span class="red">'classic'</span> preg_match() array output</td>
+            
+        </tr>
+    
+    </table>
+</div>
+
+        </div>
+        <hr />
+    
+        <div class="location">system/rss_aggregator.class.php at line 110</div>
+        <code class="signature" id="UnHtmlEntities">public  string <strong>UnHtmlEntities</strong> (<span class="lilac">string</span> <span class="blue">$string</span>)</code>
+        <div class="details">
+            Replaces HTML entities.
+            <div class="finfo">
+    <table class="hid">
+    
+        <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+            
+                <td class="hid blue w_100">$string</td>
+                <td class="hid">String</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">string</td>
+            
+                <td class="hid" colspan="2">Parsed string</td>
+            
+        </tr>
+    
+    </table>
+</div>
+
+        </div>
+        <hr />
+    
+        <div class="location">system/rss_aggregator.class.php at line 121</div>
+        <code class="signature" id="parse">private  array|boolean <strong>parse</strong> (<span class="lilac">string</span> <span class="blue">$rss_url</span>)</code>
+        <div class="details">
+            Parses RSS file.
+            <div class="finfo">
+    <table class="hid">
+    
+        <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+            
+                <td class="hid blue w_100">$rss_url</td>
+                <td class="hid">RSS URL</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">array|boolean</td>
+            
+                <td class="hid" colspan="2">Parsed RSS or FALSE</td>
+            
+        </tr>
+    
+    </table>
+</div>
+
+        </div>
+        <hr />
+    
+
+
+
+        <div class="header">
+    <span style="float:right">phpAPI ver. 4.0</span>
+    
+        <ul>
+        
+            <li><a href="../overview-summary.html">Overview</a></li>
+        
+            <li><a href="../rss/package-summary.html">Namespace</a></li>
+        
+            <li class="active">Class</li>
+        
+            <li><a href="../rss/package-tree.html">RSS\Tree</a></li>
+        
+            <li><a href="../deprecated.html">Deprecated</a></li>
+        
+            <li><a href="../todo.html">Todo</a></li>
+        
+            <li><a href="../index-all.html">Index</a></li>
+        
+        </ul>
+    
+</div>
+<div class="small_links">Фреймы: <a href="../index.html" target="_top"> Включить</a> | <a href="../rss/rss_aggregator.html" target="_top"> Выключить</a></div>
+
+    <div class="small_links">
+        Общий обзор: <a href="#summary_fields">Поля</a> | <a href="#summary_methods">Методы</a> | <a href="#summary_constructor">Конструктор</a>
+        Детали: <a href="#details_fields">Поля</a> | <a href="#details_methods">Методы</a> | <a href="#details_constructor">Конструктор</a>
+    </div>
+
+
+
+
+        <hr />
+    </body>
+
+</html>

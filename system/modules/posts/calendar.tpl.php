@@ -19,10 +19,14 @@ die();?>
 </table>
 <form name="calendar center" method="post" action="">
     <select name="cal-month">
-        [each=months]<option value="{months[num]}" [if=months[selected]]selected="selected"[/if]>{months[name]}</option>[/each.months]
+        [each=months]
+            <option value="{months[num]}" [if=months[selected]]selected="selected"[/if]>{months[name]}</option>
+        [/each.months]
     </select>
     <select name="cal-year">
-        [each=years]<option value="{years[year]}" [if=years[selected]]selected="selected"[/if]>{years[year]}</option>[/each.years]
+        [each=years]
+            <option value="{years[year]}" [if=years[selected]]selected="selected"[/if]>{years[year]}</option>
+        [/each.years]
     </select>
     <input type="submit" value="OK" class="submit" />
 </form>

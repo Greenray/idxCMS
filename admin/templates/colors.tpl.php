@@ -10,15 +10,13 @@ die();?>
         <tr><td class="center" colspan="18"><p>[__Choose color]</p></td></tr>
         <tr>
         [each=color]
-            <td style="cursor: pointer; height:12px; width:12px; background:#{color[color]}" onclick="selectColor('#{color[color]}');"></td>
-            [if=color[tr]]</tr><tr>[/if]
+        <td style="cursor: pointer; height:12px; width:12px; background:#{color[color]}" onclick="selectColor('#{color[color]}');"></td>
+        [if=color[tr]]</tr><tr>[/if]
         [/each.color]
         </tr>
         <tr><td class="center" colspan="18"><p>[__Gradation of grey color]</p></td></tr>
         <tr>
-        [each=gray]
-            <td style="cursor: pointer; height:12px; width:12px; background:#{gray[gray]};" onclick="selectColor('#{gray[gray]}')"></td>
-        [/each.gray]
+        [each=gray]<td style="cursor: pointer; height:12px; width:12px; background:#{gray[gray]};" onclick="selectColor('#{gray[gray]}')"></td>[/each.gray]
         </tr>
     </table>
 </div>

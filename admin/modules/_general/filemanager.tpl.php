@@ -18,22 +18,22 @@ die();?>
         </tr>
         [if=back]<tr><td colspan="7"><a href="{back}">..</a></td></tr>[/if]
         [each=elements]
-            <tr>
-            [ifelse=elements[link]]
-                <td class="{elements[style]}"><a href="{elements[link]}">{elements[file]}</a></td>
-            [else]
-                <td class="{elements[style]}">{elements[file]}</td>
-            [/else]
-                <td class="{elements[style]} right">{elements[size]}</td>
-                <td class="{elements[style]} center">{elements[date]}</td>
-                <td class="{elements[style]} center">{elements[time]}</td>
-                <td class="{elements[style]}"><a href="{elements[rights_edit]}">{elements[rights]}</a></td>
-                [if=elements[download]]<td class="{elements[style]} center"><a href="{BACKUPS}{elements[file]}"> [__Download]</a></td>[/if]
-                [if=elements[edit]]<td class="{elements[style]} center"><a href="{elements[edit]}">[__Edit]</a></td>[/if]
-                [if=elements[view]]<td class="{elements[style]} center"><a class="cbox" href="{elements[view]}">[__View]</a></td>[/if]
-                [if=elements[empty]]<td class="{elements[style]} center"></td>[/if]
-                <td class="{elements[style]} center"><a href="{elements[delete]}">[__Delete]</a></td>
-            </tr>
+        <tr>
+        [ifelse=elements[link]]
+            <td class="{elements[style]}"><a href="{elements[link]}">{elements[file]}</a></td>
+        [else]
+            <td class="{elements[style]}">{elements[file]}</td>
+        [/else]
+            <td class="{elements[style]} right">{elements[size]}</td>
+            <td class="{elements[style]} center">{elements[date]}</td>
+            <td class="{elements[style]} center">{elements[time]}</td>
+            <td class="{elements[style]}"><a href="{elements[rights_edit]}">{elements[rights]}</a></td>
+            [if=elements[download]]<td class="{elements[style]} center"><a href="{BACKUPS}{elements[file]}"> [__Download]</a></td>[/if]
+            [if=elements[edit]]<td class="{elements[style]} center"><a href="{elements[edit]}">[__Edit]</a></td>[/if]
+            [if=elements[view]]<td class="{elements[style]} center"><a class="cbox" href="{elements[view]}">[__View]</a></td>[/if]
+            [if=elements[empty]]<td class="{elements[style]} center"></td>[/if]
+            <td class="{elements[style]} center"><a href="{elements[delete]}">[__Delete]</a></td>
+        </tr>
         [/each.elements]
     </table>
     <table class="std">
@@ -54,5 +54,7 @@ die();?>
             </td>
         </tr>
     </table>
-    <div class="center"><p><input type="button" value="[__Back]" onclick="javascript:history.back();" class="submit" /></p></div>
+    <div class="center">
+        <p><input type="button" value="[__Back]" onclick="javascript:history.back();" class="submit" /></p>
+    </div>
 </fieldset>

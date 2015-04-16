@@ -6,11 +6,7 @@
 
 die();?>
 <table id="std">
-    <tr>
-        <th colspan="2">[__Title]</th>
-        <th>[__Description]</th>
-        <th>[__Topics]</th>
-    </tr>
+    <tr><th colspan="2">[__Title]</th><th>[__Description]</th><th>[__Topics]</th></tr>
     <tr><td colspan="4"class="center"><a href="{link}">{title}</a></td></tr>
     [each=categories]
         <tr>

@@ -40,7 +40,9 @@ die();?>
                 <td colspan="3">
             [/else]
                     <select name="new_category">
-                        [each=categories]<option value="{categories[id]}" [if=categories[selected]]selected="selected"[/if]>{categories[title]}</option>[/each.categories]
+                        [each=categories]
+                        <option value="{categories[id]}" [if=categories[selected]]selected="selected"[/if]>{categories[title]}</option>
+                        [/each.categories]
                     </select>
                 </td>
             </tr>
@@ -80,10 +82,7 @@ die();?>
             </tr>
             <tr class="odd">
                 <td>[__Comments]</td>
-                <td colspan="3">
-                    <input type="checkbox" name="opened" value="1" [if=opened]checked="checked"[/if] />
-                    <label for="opened"> [__Allow]</label>
-                </td>
+                <td colspan="3"><input type="checkbox" name="opened" value="1"[if=opened] checked="checked"[/if] /><label for="opened"> [__Allow]</label></td>
             </tr>
         </table>
         <p class="center">

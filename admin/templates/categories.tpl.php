@@ -56,31 +56,31 @@ die();?>
                     <tr><td colspan="8" class="mark header"><div id="{sections[id]}" class="group">{sections[title]}</div></td></tr>
                     <tr style="line-height:2px;height:2px;"><td colspan="7" style="border:0;">&nbsp;</td></tr>
                     [each=sections[categories]]
-                        <tr class="{categories[class]}">
-                            <td class="rowhandler">
-                                <div id="{sections[id]}.{categories[id]}" class="drag row"><img src="{ICONS}move.png" width="16" height="16" alt="[__Move]" /></div>
-                            </td>
-                            <td class="id center">{categories[id]}</td>
-                            <td class="icon center"><img src="{categories[path]}icon.png" width="35" height="35" alt="icon" /></td>
-                            <td class="title">{categories[title]}</td>
-                            <td class="desc">{categories[desc]}</td>
-                            <td class="access center">{categories[access]}</td>
-                            <td class="access center">{categories[items]}</td>
-                            <td class="actions center">
-                                <button type="submit" name="edit" value="{sections[id]}.{categories[id]}" title="[__Edit]">
-                                    <img src="{ICONS}edit.png" width="16" height="16" alt="[__Edit]" />
+                    <tr class="{categories[class]}">
+                        <td class="rowhandler">
+                            <div id="{sections[id]}.{categories[id]}" class="drag row"><img src="{ICONS}move.png" width="16" height="16" alt="[__Move]" /></div>
+                        </td>
+                        <td class="id center">{categories[id]}</td>
+                        <td class="icon center"><img src="{categories[path]}icon.png" width="35" height="35" alt="icon" /></td>
+                        <td class="title">{categories[title]}</td>
+                        <td class="desc">{categories[desc]}</td>
+                        <td class="access center">{categories[access]}</td>
+                        <td class="access center">{categories[items]}</td>
+                        <td class="actions center">
+                            <button type="submit" name="edit" value="{sections[id]}.{categories[id]}" title="[__Edit]">
+                                <img src="{ICONS}edit.png" width="16" height="16" alt="[__Edit]" />
+                            </button>
+                            [ifelse=categories[items]]
+                                <a href="./?module=admin&amp;id={module}.items&amp;section={sections[id]}&amp;category={categories[id]}">
+                                    <img src="{ICONS}posts.png" width="16" height="16" alt="[__Posts]" />
+                                </a>
+                            [else]
+                                <button type="submit" name="delete" value="{sections[id]}.{categories[id]}" title="[__Delete]">
+                                    <img src="{ICONS}delete.png" width="16" height="16" alt="[__Delete]" />
                                 </button>
-                                [ifelse=categories[items]]
-                                    <a href="./?module=admin&amp;id={module}.items&amp;section={sections[id]}&amp;category={categories[id]}">
-                                        <img src="{ICONS}posts.png" width="16" height="16" alt="[__Posts]" />
-                                    </a>
-                                [else]
-                                    <button type="submit" name="delete" value="{sections[id]}.{categories[id]}" title="[__Delete]">
-                                        <img src="{ICONS}delete.png" width="16" height="16" alt="[__Delete]" />
-                                    </button>
-                                [/else]
-                            </td>
-                        </tr>
+                            [/else]
+                        </td>
+                    </tr>
                     [/each.sections[categories]]
                 [/each.sections]
             </table>

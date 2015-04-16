@@ -11,11 +11,8 @@ die();?>
         <table class="std">
             <th colspan="3">[__Messages]</th>
             [each=messages]
-                <tr class="odd"><td colspan="2">{messages[time]} {messages[info]}</td></tr>
-                <tr class="odd">
-                    <td>{messages[text]}</td>
-                    <td><input type="checkbox" name="delete[]" value="{messages[id]}" />[__Delete]</td>
-                </tr>
+            <tr class="odd"><td colspan="2">{messages[time]} {messages[info]}</td></tr>
+            <tr class="odd"><td>{messages[text]}</td><td><input type="checkbox" name="delete[]" value="{messages[id]}" />[__Delete]</td></tr>
             [/each.messages]
         </table>
         <p class="center"><input type="submit" name="submit" value="[__Submit]" class="submit" /></p>

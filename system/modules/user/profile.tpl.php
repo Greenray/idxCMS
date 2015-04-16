@@ -36,7 +36,7 @@ die();?>
         return pwstrength;
     }
     function updatePasswordStrength(pwbox, pwdiv, divorderlist) {
-        var bpb = "" + pwbox.value;
+        var bpb  = "" + pwbox.value;
         var pwstrength = getPasswordStrength(bpb);
         var bars = (parseInt(pwstrength / 10) * 10);
         var pwdivEl = document.getElementById(pwdiv);
@@ -111,26 +111,11 @@ die();?>
                 <div id="shdesc" class="none"><div class="avatar"><input type="file" name="avatar" value="" class="submit" /></div></div>
             </td>
         </tr>
-        <tr class="even">
-            <th style="width:165px;">[__Username]</th>
-            <td class="left" colspan="2">{username}</td>
-        </tr>
-        <tr class="even">
-            <th>[__Nick]</th>
-            <td class="left" colspan="2">{nickname}</td>
-        </tr>
-        <tr class="even">
-            <th>[__Access level]</th>
-            <td colspan="2" class="left">{access}</td>
-        </tr>
-        <tr class="even">
-            <th>[__Personal status]</th>
-            <td colspan="2" class="left">{status}</td>
-        </tr>
-        <tr class="even">
-            <th>[__Rate]</th>
-            <td colspan="2" class="left">{stars}</td>
-        </tr>
+        <tr class="even"><th style="width:165px;">[__Username]</th><td class="left" colspan="2">{username}</td></tr>
+        <tr class="even"><th>[__Nick]</th><td class="left" colspan="2">{nickname}</td></tr>
+        <tr class="even"><th>[__Access level]</th><td colspan="2" class="left">{access}</td></tr>
+        <tr class="even"><th>[__Personal status]</th><td colspan="2" class="left">{status}</td></tr>
+        <tr class="even"><th>[__Rate]</th><td colspan="2" class="left">{stars}</td></tr>
         <tr class="even">
             <th>[__Rights]</th>
             [ifelse=admin]
@@ -159,58 +144,19 @@ die();?>
                 <div id="no" class="none"><font color="#ff0000">[__Passwords are not equal]</font></div>
             </td>
         </tr>
-        <tr class="even">
-            <th>[__E-mail]</th>
-            <td colspan="2" class="left"><input type="text" name="email" id="email" value="{email}" size="35" class="required" /></td>
-        </tr>
-        <tr class="even">
-            <th>[__Time zone]</th>
-            <td colspan="2" class="left">{utz}</td>
-        </tr>
-        <tr class="even">
-            <th>[__ICQ]</th>
-            <td colspan="2" class="left"><input type="text" name="fields[icq]" value="{icq}" size="12" /></td>
-        </tr>
-        <tr class="even">
-            <th>[__Website]</th>
-            <td colspan="2" class="left"><input type="text" name="fields[website]" value="{website}" size="50" /></td>
-        </tr>
-        <tr class="even">
-            <th>[__Country]</th>
-            <td colspan="2" class="left"><input type="text" name="fields[country]" value="{country}" size="25" /></td>
-        </tr>
-        <tr class="even">
-            <th>[__City]</th>
-            <td colspan="2" class="left"><input type="text" name="fields[city]" value="{city}" size="25" /></td>
-        </tr>
-        <tr class="even">
-            <th>[__Registration]</th>
-            <td colspan="2" class="center">{regdate}</td>
-        </tr>
-        <tr class="even">
-            <th>[__Last visit]</th>
-            <td colspan="2" class="center">{lastvisit}</td>
-        </tr>
-        <tr class="even">
-            <th>[__Visits]</th>
-            <td colspan="2" class="center">{visits}</td>
-        </tr>
-        <tr class="even">
-            <th>[__Posts]</th>
-            <td colspan="2" class="center">{posts}</td>
-        </tr>
-        <tr class="even">
-            <th>[__Comments]</th>
-            <td colspan="2" class="center">{comments}</td>
-        </tr>
-        <tr class="even">
-            <th>[__Topics]</th>
-            <td colspan="2" class="center">{topics}</td>
-        </tr>
-        <tr class="even">
-            <th>[__Replies]</th>
-            <td colspan="2" class="center">{replies}</td>
-        </tr>
+        <tr class="even"><th>[__E-mail]</th><td colspan="2" class="left"><input type="text" name="email" id="email" value="{email}" size="35" class="required" /></td></tr>
+        <tr class="even"><th>[__Time zone]</th><td colspan="2" class="left">{utz}</td></tr>
+        <tr class="even"><th>[__ICQ]</th><td colspan="2" class="left"><input type="text" name="fields[icq]" value="{icq}" size="12" /></td></tr>
+        <tr class="even"><th>[__Website]</th><td colspan="2" class="left"><input type="text" name="fields[website]" value="{website}" size="50" /></td></tr>
+        <tr class="even"><th>[__Country]</th><td colspan="2" class="left"><input type="text" name="fields[country]" value="{country}" size="25" /></td></tr>
+        <tr class="even"><th>[__City]</th><td colspan="2" class="left"><input type="text" name="fields[city]" value="{city}" size="25" /></td></tr>
+        <tr class="even"><th>[__Registration]</th><td colspan="2" class="center">{regdate}</td></tr>
+        <tr class="even"><th>[__Last visit]</th><td colspan="2" class="center">{lastvisit}</td></tr>
+        <tr class="even"><th>[__Visits]</th><td colspan="2" class="center">{visits}</td></tr>
+        <tr class="even"><th>[__Posts]</th><td colspan="2" class="center">{posts}</td></tr>
+        <tr class="even"><th>[__Comments]</th><td colspan="2" class="center">{comments}</td></tr>
+        <tr class="even"><th>[__Topics]</th><td colspan="2" class="center">{topics}</td></tr>
+        <tr class="even"><th>[__Replies]</th><td colspan="2" class="center">{replies}</td></tr>
         <tr class="even"><td colspan="3">&nbsp;</td></tr>
     </table>
     <p class="center">

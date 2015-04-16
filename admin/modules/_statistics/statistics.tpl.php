@@ -18,10 +18,7 @@ die();?>
                 <div id="ref" class="none">
                     <table class="std">
                     [foreach=ref.host.count]
-                        <tr class="odd">
-                            <td class="stat left">{host}</td>
-                            <td class="stat">{count}</td>
-                        </tr>
+                        <tr class="odd"><td class="stat left">{host}</td><td class="stat">{count}</td></tr>
                     [/foreach.ref]
                     </table>
                 </div>
@@ -35,17 +32,16 @@ die();?>
                 <div id="ua" class="none">
                     <table class="std">
                     [foreach=ua.agent.count]
-                        <tr class="odd">
-                            <td class="stat left">{agent}</td>
-                            <td class="stat">{count}</td>
-                        </tr>
+                        <tr class="odd"><td class="stat left">{agent}</td><td class="stat">{count}</td></tr>
                     [/foreach.ua]
                     </table>
                 </div>
             </th>
         </tr>
         <tr><th colspan="2">[__Today hosts]</th></tr>
-        [foreach=hosts.host.time]<tr class="odd"><td>{host}</td><td>{time}</td></tr>[/foreach.hosts]
+        [foreach=hosts.host.time]
+        <tr class="odd"><td>{host}</td><td>{time}</td></tr>
+        [/foreach.hosts]
         <tr class="odd"><td colspan="2">[foreach=users.key.user]{user} [/foreach.users]</td></tr>
         <tr>
             <th colspan="2">
@@ -53,10 +49,7 @@ die();?>
                 <div id="ip" class="none">
                     <table class="std">
                     [foreach=ip.host.count]
-                        <tr class="odd">
-                            <td class="stat left">{host}</td>
-                            <td class="stat">{count}</td>
-                        </tr>
+                        <tr class="odd"><td class="stat left">{host}</td><td class="stat">{count}</td></tr>
                     [/foreach.ip]
                     </table>
                 </div>
@@ -84,10 +77,7 @@ die();?>
                 <div id="sua" class="none">
                     <table class="std">
                     [foreach=sua.name.count]
-                        <tr class="odd">
-                            <td class="stat left">{name}</td>
-                            <td class="stat">{count}</td>
-                        </tr>
+                        <tr class="odd"><td class="stat left">{name}</td><td class="stat">{count}</td></tr>
                     [/foreach.sua]
                     </table>
                 </div>
@@ -101,10 +91,7 @@ die();?>
                 <div id="sip" class="none">
                     <table class="std">
                     [foreach=sip.ip.count]
-                        <tr class="odd">
-                            <td class="stat left">{ip}</td>
-                            <td class="stat">{count}</td>
-                        </tr>
+                        <tr class="odd"><td class="stat left">{ip}</td><td class="stat">{count}</td></tr>
                     [/foreach.sip]
                     </table>
                 </div>

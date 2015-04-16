@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>API for class FILTER (phpAPI: The PHP Documentation Creator ver. 4.0)</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="phpAPI 4.0 (https://github.com/Greenray/phpAPI/)">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="start" href="../index.html">
+</head>
+
+    <body id="FILTER" onload="parent.document.title=document.title;">
+        <div class="header">
+    <span style="float:right">phpAPI ver. 4.0</span>
+    
+        <ul>
+        
+            <li><a href="../overview-summary.html">Overview</a></li>
+        
+            <li><a href="../core/package-summary.html">Namespace</a></li>
+        
+            <li class="active">Class</li>
+        
+            <li><a href="../core/package-tree.html">Core\Tree</a></li>
+        
+            <li><a href="../deprecated.html">Deprecated</a></li>
+        
+            <li><a href="../todo.html">Todo</a></li>
+        
+            <li><a href="../index-all.html">Index</a></li>
+        
+        </ul>
+    
+</div>
+<div class="small_links">Фреймы: <a href="../index.html" target="_top"> Включить</a> | <a href="../core/filter.html" target="_top"> Выключить</a></div>
+
+    <div class="small_links">
+        Общий обзор: <a href="#summary_fields">Поля</a> | <a href="#summary_methods">Методы</a> | <a href="#summary_constructor">Конструктор</a>
+        Детали: <a href="#details_fields">Поля</a> | <a href="#details_methods">Методы</a> | <a href="#details_constructor">Конструктор</a>
+    </div>
+
+
+
+
+
+<hr />
+<div class="package">Пространство имен Core</div>
+<h1>Class FILTER</h1>
+<div id="list">
+    <ul>
+        <li><strong>FILTER</strong></li></ul></li>
+    </ul>
+</div>
+
+
+
+<hr />
+<p class="signature">public final  class <strong>FILTER</strong></p>
+<div class="comment" id="overview_description">Clean parameters $_REQUEST, $_FILES, $_COOKIE, detect intrusions and ban unwanted visitors.</div>
+<div class="finfo">
+    <table class="hid">
+    
+        <tr>
+            <td class="hid left w_100">Program</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+            
+                <td class="hid" colspan="2">idxCMS: Flat Files Content Management Sysytem</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">File</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+            
+                <td class="hid" colspan="2">system/filter.class.php</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Version</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+            
+                <td class="hid" colspan="2">2.4</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Author</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+            
+                <td class="hid" colspan="2">Victor Nabatov &lt;greenray.spb@gmail.com&gt;</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Copyright</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+            
+                <td class="hid" colspan="2">(c) 2011 - 2015 Victor Nabatov</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">License</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+            
+                <td class="hid" colspan="2">Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License</td>
+            
+        </tr>
+    
+    </table>
+</div>
+
+
+
+    <table id="summary_fields">
+        <tr><th colspan="2">Поля: общий обзор</th></tr>
+        
+            <tr>
+                <td class="type w_200">private static  array</td>
+                <td class="description">
+                    <pre><a href="#$COOKIE"><span class="green">$COOKIE</span></a> = []</pre>
+                    <p class="description">Array of filtered $_COOKIE parameters</p>
+                </td>
+            </tr>
+        
+            <tr>
+                <td class="type w_200">private static  array</td>
+                <td class="description">
+                    <pre><a href="#$REQUEST"><span class="green">$REQUEST</span></a> = []</pre>
+                    <p class="description">Array of filtered $_POST, $_GET and $_FILES parameters</p>
+                </td>
+            </tr>
+        
+            <tr>
+                <td class="type w_200">private static  array</td>
+                <td class="description">
+                    <pre><a href="#$types"><span class="green">$types</span></a> = [<span class="red">'REQUEST'</span>, <span class="red">'FILES'</span>, <span class="red">'COOKIE'</span>]</pre>
+                    <p class="description">Array of parameters types</p>
+                </td>
+            </tr>
+        
+    </table>
+
+
+
+    <table id="summary_constructor">
+        <tr><th colspan="2">Конструктор: общий обзор</th></tr>
+        <tr>
+            <td class="type w_200">public  void</td>
+            <td class="description">
+                <p><a href="#__construct"><strong><span class="black">__construct</span></strong></a>()</p>
+                <p class="description">Class initialization.</p>
+            </td>
+        </tr>
+    </table>
+
+
+
+    <table id="summary_methods">
+        <tr><th colspan="2">Методы: общий обзор</th></tr>
+        
+            <tr>
+                <td class="type w_200">public  void</td>
+                <td class="description">
+                    <p><a href="#__clone"><strong><span class="black">__clone</span></strong></a> ()</p>
+                    <p class="description">Prevent to clone object.</p>
+                </td>
+            </tr>
+        
+            <tr>
+                <td class="type w_200">private  string</td>
+                <td class="description">
+                    <p><a href="#cleanValue"><strong><span class="black">cleanValue</span></strong></a> (<span class="lilac">array</span> <span class="blue">$value</span>)</p>
+                    <p class="description">Cleans all parameters and their values of the request array and transforme them into the internal encoding of the system = UTF-8.</p>
+                </td>
+            </tr>
+        
+            <tr>
+                <td class="type w_200">private  array</td>
+                <td class="description">
+                    <p><a href="#clear"><strong><span class="black">clear</span></strong></a> (<span class="lilac">array</span> <span class="blue">$vars</span>)</p>
+                    <p class="description">Cleans variables.</p>
+                </td>
+            </tr>
+        
+            <tr>
+                <td class="type w_200">public  void</td>
+                <td class="description">
+                    <p><a href="#sanitaze"><strong><span class="black">sanitaze</span></strong></a> ()</p>
+                    <p class="description">Detects intrusion, clean and unset $_POST, $_GET, $_FILES and $_COOKIE.</p>
+                </td>
+            </tr>
+        
+            <tr>
+                <td class="type w_200">public static  array</td>
+                <td class="description">
+                    <p><a href="#getAll"><strong><span class="black">getAll</span></strong></a> (<span class="lilac">string</span> <span class="blue">$type</span>)</p>
+                    <p class="description">Gets all filtered parameter of the specified type.</p>
+                </td>
+            </tr>
+        
+            <tr>
+                <td class="type w_200">public static  array|string</td>
+                <td class="description">
+                    <p><a href="#get"><strong><span class="black">get</span></strong></a> (<span class="lilac">string</span> <span class="blue">$type</span>, <span class="lilac">string</span> <span class="blue">$param</span>)</p>
+                    <p class="description">Gets specified filtered parameter.</p>
+                </td>
+            </tr>
+        
+            <tr>
+                <td class="type w_200">public static  void</td>
+                <td class="description">
+                    <p><a href="#remove"><strong><span class="black">remove</span></strong></a> (<span class="lilac">string</span> <span class="blue">$type</span>, <span class="lilac">string</span> <span class="blue">$param</span>)</p>
+                    <p class="description">Removes filtered parameter.</p>
+                </td>
+            </tr>
+        
+            <tr>
+                <td class="type w_200">public  boolean</td>
+                <td class="description">
+                    <p><a href="#validEmail"><strong><span class="black">validEmail</span></strong></a> (<span class="lilac">string</span> <span class="blue">$email</span>)</p>
+                    <p class="description">Email validation.</p>
+                </td>
+            </tr>
+        
+            <tr>
+                <td class="type w_200">public  boolean</td>
+                <td class="description">
+                    <p><a href="#ban"><strong><span class="black">ban</span></strong></a> ()</p>
+                    <p class="description">Bans user.</p>
+                </td>
+            </tr>
+        
+            <tr>
+                <td class="type w_200">private  void</td>
+                <td class="description">
+                    <p><a href="#ids"><strong><span class="black">ids</span></strong></a> ()</p>
+                    <p class="description">Intrusion detection.</p>
+                </td>
+            </tr>
+        
+    </table>
+
+
+
+
+    <h2 id="details_fields">Поля: детали</h2>
+    
+        <div class="location">system/filter.class.php at line 19</div>
+        <pre class="signature" id="COOKIE">private static array <strong><span class="green">$COOKIE</span></strong> = []</pre>
+        <div class="details">Array of filtered $_COOKIE parameters</div>
+        <hr />
+    
+        <div class="location">system/filter.class.php at line 16</div>
+        <pre class="signature" id="REQUEST">private static array <strong><span class="green">$REQUEST</span></strong> = []</pre>
+        <div class="details">Array of filtered $_POST, $_GET and $_FILES parameters</div>
+        <hr />
+    
+        <div class="location">system/filter.class.php at line 22</div>
+        <pre class="signature" id="types">private static array <strong><span class="green">$types</span></strong> = [<span class="red">'REQUEST'</span>, <span class="red">'FILES'</span>, <span class="red">'COOKIE'</span>]</pre>
+        <div class="details">Array of parameters types</div>
+        <hr />
+    
+
+
+    <h2 id="details_constructor">Конструктор: детали</h2>
+    <div class="location">system/filter.class.php at line 25</div>
+    <code class="signature" id="__construct">public  void <strong>__construct</strong>()</code>
+    <div class="details">
+        Class initialization.
+        
+    </div>
+
+
+
+    <h2 id="details_methods">Методы: детали</h2>
+    
+        <div class="location">system/filter.class.php at line 28</div>
+        <code class="signature" id="__clone">public  void <strong>__clone</strong> ()</code>
+        <div class="details">
+            Prevent to clone object.
+            
+        </div>
+        <hr />
+    
+        <div class="location">system/filter.class.php at line 35</div>
+        <code class="signature" id="cleanValue">private  string <strong>cleanValue</strong> (<span class="lilac">array</span> <span class="blue">$value</span>)</code>
+        <div class="details">
+            Cleans all parameters and their values of the request array and<br /> transforme them into the internal encoding of the system = UTF-8.
+            <div class="finfo">
+    <table class="hid">
+    
+        <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">array</td>
+            
+                <td class="hid blue w_100">$value</td>
+                <td class="hid">Input array of parameters</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">string</td>
+            
+                <td class="hid" colspan="2">Filered parameters</td>
+            
+        </tr>
+    
+    </table>
+</div>
+
+        </div>
+        <hr />
+    
+        <div class="location">system/filter.class.php at line 51</div>
+        <code class="signature" id="clear">private  array <strong>clear</strong> (<span class="lilac">array</span> <span class="blue">$vars</span>)</code>
+        <div class="details">
+            Cleans variables.
+            <div class="finfo">
+    <table class="hid">
+    
+        <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">array</td>
+            
+                <td class="hid blue w_100">$vars</td>
+                <td class="hid">Input array of parameters</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">array</td>
+            
+                <td class="hid" colspan="2">Filtered values of parameters</td>
+            
+        </tr>
+    
+    </table>
+</div>
+
+        </div>
+        <hr />
+    
+        <div class="location">system/filter.class.php at line 70</div>
+        <code class="signature" id="sanitaze">public  void <strong>sanitaze</strong> ()</code>
+        <div class="details">
+            Detects intrusion, clean and unset $_POST, $_GET, $_FILES and $_COOKIE.<br /> The result are two variables: $REQUEST and $COOKIE.
+            
+        </div>
+        <hr />
+    
+        <div class="location">system/filter.class.php at line 84</div>
+        <code class="signature" id="getAll">public static  array <strong>getAll</strong> (<span class="lilac">string</span> <span class="blue">$type</span>)</code>
+        <div class="details">
+            Gets all filtered parameter of the specified type.
+            <div class="finfo">
+    <table class="hid">
+    
+        <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+            
+                <td class="hid blue w_100">$type</td>
+                <td class="hid">Type of parameter</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">array</td>
+            
+                <td class="hid" colspan="2">Array of filtered parameters of the specified type</td>
+            
+        </tr>
+    
+    </table>
+</div>
+
+        </div>
+        <hr />
+    
+        <div class="location">system/filter.class.php at line 93</div>
+        <code class="signature" id="get">public static  array|string <strong>get</strong> (<span class="lilac">string</span> <span class="blue">$type</span>, <span class="lilac">string</span> <span class="blue">$param</span>)</code>
+        <div class="details">
+            Gets specified filtered parameter.
+            <div class="finfo">
+    <table class="hid">
+    
+        <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+            
+                <td class="hid blue w_100">$type</td>
+                <td class="hid">Type of parameter</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">string</td>
+            
+                <td class="hid blue w_100">$param</td>
+                <td class="hid">Name of parameter</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">array|string</td>
+            
+                <td class="hid" colspan="2">Parameter values or empty string</td>
+            
+        </tr>
+    
+    </table>
+</div>
+
+        </div>
+        <hr />
+    
+        <div class="location">system/filter.class.php at line 105</div>
+        <code class="signature" id="remove">public static  void <strong>remove</strong> (<span class="lilac">string</span> <span class="blue">$type</span>, <span class="lilac">string</span> <span class="blue">$param</span>)</code>
+        <div class="details">
+            Removes filtered parameter.
+            <div class="finfo">
+    <table class="hid">
+    
+        <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+            
+                <td class="hid blue w_100">$type</td>
+                <td class="hid">Type of parameter</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">string</td>
+            
+                <td class="hid blue w_100">$param</td>
+                <td class="hid">Name of parameter</td>
+            
+        </tr>
+    
+    </table>
+</div>
+
+        </div>
+        <hr />
+    
+        <div class="location">system/filter.class.php at line 115</div>
+        <code class="signature" id="validEmail">public  boolean <strong>validEmail</strong> (<span class="lilac">string</span> <span class="blue">$email</span>)</code>
+        <div class="details">
+            Email validation.
+            <div class="finfo">
+    <table class="hid">
+    
+        <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+            
+                <td class="hid blue w_100">$email</td>
+                <td class="hid">Email address</td>
+            
+        </tr>
+    
+        <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">boolean</td>
+            
+                <td class="hid" colspan="2">The result of operation</td>
+            
+        </tr>
+    
+    </table>
+</div>
+
+        </div>
+        <hr />
+    
+        <div class="location">system/filter.class.php at line 122</div>
+        <code class="signature" id="ban">public  boolean <strong>ban</strong> ()</code>
+        <div class="details">
+            Bans user.
+            <div class="finfo">
+    <table class="hid">
+    
+        <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">boolean</td>
+            
+                <td class="hid" colspan="2">The result of operation</td>
+            
+        </tr>
+    
+    </table>
+</div>
+
+        </div>
+        <hr />
+    
+        <div class="location">system/filter.class.php at line 136</div>
+        <code class="signature" id="ids">private  void <strong>ids</strong> ()</code>
+        <div class="details">
+            Intrusion detection.<br /> In current it can detect:<ul><li>bad words in $_SERVER;</li><li>malicious URL requests;</li><li>banned IP or cookie.</li></ul>If the intrusion will be detected this event will be logged and the system will die.
+            
+        </div>
+        <hr />
+    
+
+
+
+        <div class="header">
+    <span style="float:right">phpAPI ver. 4.0</span>
+    
+        <ul>
+        
+            <li><a href="../overview-summary.html">Overview</a></li>
+        
+            <li><a href="../core/package-summary.html">Namespace</a></li>
+        
+            <li class="active">Class</li>
+        
+            <li><a href="../core/package-tree.html">Core\Tree</a></li>
+        
+            <li><a href="../deprecated.html">Deprecated</a></li>
+        
+            <li><a href="../todo.html">Todo</a></li>
+        
+            <li><a href="../index-all.html">Index</a></li>
+        
+        </ul>
+    
+</div>
+<div class="small_links">Фреймы: <a href="../index.html" target="_top"> Включить</a> | <a href="../core/filter.html" target="_top"> Выключить</a></div>
+
+    <div class="small_links">
+        Общий обзор: <a href="#summary_fields">Поля</a> | <a href="#summary_methods">Методы</a> | <a href="#summary_constructor">Конструктор</a>
+        Детали: <a href="#details_fields">Поля</a> | <a href="#details_methods">Методы</a> | <a href="#details_constructor">Конструктор</a>
+    </div>
+
+
+
+
+        <hr />
+    </body>
+
+</html>

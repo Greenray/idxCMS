@@ -9,6 +9,9 @@ if (!defined('idxADMIN')) die();
 $section    = FILTER::get('REQUEST', 'section');
 $category   = FILTER::get('REQUEST', 'category');
 $item       = FILTER::get('REQUEST', 'edit');
+
+$new_category = FILTER::get('REQUEST', 'new_category');
+
 $sections   = CMS::call('CATALOGS')->getSections();
 $categories = CMS::call('CATALOGS')->getCategories($section);
 $content    = CMS::call('CATALOGS')->getContent($category);
@@ -16,12 +19,12 @@ $content    = CMS::call('CATALOGS')->getContent($category);
 # Save new or edited post
 if (!empty($REQUEST['save'])) {
     # Check if admin decided to move post
-    if ($category !== $REQUEST['new_category']) {
+    if ($category !== $new_category) {
         if (!empty($REQUEST['item']))
              # Topic exists, so move it
-             $item = CMS::call('CATALOGS')->moveItem($REQUEST['item'], $section, $REQUEST['new_category']);
+             $item = CMS::call('CATALOGS')->moveItem($REQUEST['item'], $section, $new_category);
         else $item = '';     # Nothing to move, so add new
-        $category = $REQUEST['new_category'];
+        $category = $new_category;
     } else {
         $item = FILTER::get('REQUEST', 'item');
     }
@@ -87,7 +90,7 @@ if (!empty($REQUEST['new']) || !empty($item)) {
             break;
     }
     echo $TPL->parse($output);
-    
+
 } elseif (!empty($sections[$section])) {
     $categories = CMS::call('CATALOGS')->getCategories($section);
     if (!empty($categories[$category])) {

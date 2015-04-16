@@ -11,9 +11,9 @@ die();?>
       if (!startingIndex) startingIndex = 0;
       return inputString.indexOf(needle);
     }
-    is_firefox = CheckString(navigator.userAgent, 'Firefox');
-    is_ie      = CheckString(navigator.userAgent, 'MSIE');
-    is_opera   = CheckString(navigator.userAgent, 'Opera');
+    is_firefox  = CheckString(navigator.userAgent, 'Firefox');
+    is_ie       = CheckString(navigator.userAgent, 'MSIE');
+    is_opera    = CheckString(navigator.userAgent, 'Opera');
     var section = 0;     // Flag of moving of a category entirely
     function GetSelectedIndexes(object) {
         var selectedIndexes = new Array;
@@ -211,10 +211,7 @@ die();?>
 <fieldset>
     <form name="output" method="post" action="" onsubmit="SaveList(document.output.elements['active[]'])">
         <table>
-            <tr class="odd">
-                <td>[__Skin]</td>
-                <td colspan="2"><input type="hidden" name="skin" value="{skin}" />{skin}</td>
-            </tr>
+            <tr class="odd"><td>[__Skin]</td><td colspan="2"><input type="hidden" name="skin" value="{skin}" />{skin}</td></tr>
             <tr>
                 <th class="center" style="width:45%;">[__Included modules]</th>
                 <td style="width:10%">&nbsp;</td>
@@ -223,7 +220,9 @@ die();?>
             <tr>
                 <td class="center" style="width:45%;padding:0">
                     <select name="active[]" size="30" style="width:100%" multiple>
-                        [foreach=active.key.desc]<option value="{key}">{desc}</option>[/foreach.active]
+                        [foreach=active.key.desc]
+                        <option value="{key}">{desc}</option>
+                        [/foreach.active]
                     </select>
                 </td>
                 <td class="center" style="width:10%;">
@@ -232,7 +231,9 @@ die();?>
                 </td>
                 <td class="center" style="width:45%;padding:0">
                     <select name="unused[]" size="30" style="width:100%" multiple>
-                        [foreach=unused.key.desc]<option value="{key}">{desc}</option>[/foreach.unused]
+                        [foreach=unused.key.desc]
+                        <option value="{key}">{desc}</option>
+                        [/foreach.unused]
                     </select>
                 </td>
             </tr>

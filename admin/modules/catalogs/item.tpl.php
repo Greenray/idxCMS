@@ -40,38 +40,31 @@ die();?>
                 <td colspan="3">
             [/else]
                     <select name="new_category">
-                        [each=categories]<option value="{categories[id]}" [if=categories[selected]]selected="selected"[/if]>{categories[title]}</option>[/each.categories]
+                        [each=categories]
+                        <option value="{categories[id]}"[if=categories[selected]] selected="selected"[/if]>{categories[title]}</option>
+                        [/each.categories]
                     </select>
                 </td>
             </tr>
             [if=file]
-                <tr class="odd">
-                    <td>[__File]</td>
-                    <td><input type="hidden" name="item" value="{id}" /><b>{file}</b></td>
-                    <td>[__Size]</td>
-                    <td>{size} [__bytes]</td>
-                </tr>
+            <tr class="odd">
+                <td>[__File]</td>
+                <td><input type="hidden" name="item" value="{id}" /><b>{file}</b></td>
+                <td>[__Size]</td>
+                <td>{size} [__bytes]</td>
+            </tr>
             [/if]
             [if=song]
-                <tr class="odd">
-                    <td>[__File]</td>
-                    <td><input type="hidden" name="item" value="{id}" /><b>{song}</b></td>
-                    <td>[__Size]</td>
-                    <td>{size} [__bytes]</td>
-                </tr>
+            <tr class="odd">
+                <td>[__File]</td>
+                <td><input type="hidden" name="item" value="{id}" /><b>{song}</b></td>
+                <td>[__Size]</td>
+                <td>{size} [__bytes]</td>
+            </tr>
             [/if]
-            <tr class="odd">
-                <td>[__Upload]</td>
-                <td colspan="3"><input type="file" name="file" value="" size="80" class="text" /></td>
-            </tr>
-            <tr class="odd">
-                <td>[__Title]</td>
-                <td colspan="3"><input type="text" name="title" value="{title}" id="title" size="100" class="required" required="required" /></td>
-            </tr>
-            <tr class="odd">
-                <td>[__Keywords]</td>
-                <td colspan="3"><input type="text" name="keywords" value="{keywords}" size="100" class="text" /></td>
-            </tr>
+            <tr class="odd"><td>[__Upload]</td><td colspan="3"><input type="file" name="file" value="" size="80" class="text" /></td></tr>
+            <tr class="odd"><td>[__Title]</td><td colspan="3"><input type="text" name="title" value="{title}" id="title" size="100" class="required" required="required" /></td></tr>
+            <tr class="odd"><td>[__Keywords]</td><td colspan="3"><input type="text" name="keywords" value="{keywords}" size="100" class="text" /></td></tr>
             <tr>
                 <td colspan="4">
                     <div class="center">
@@ -96,10 +89,7 @@ die();?>
             </tr>
             <tr class="odd">
                 <td>[__Comments]</td>
-                <td colspan="3">
-                    <input type="checkbox" name="opened" value="1" [if=opened]checked="checked"[/if] />
-                    <label for="opened"> [__Allow]</label>
-                </td>
+                <td colspan="3"><input type="checkbox" name="opened" value="1"[if=opened] checked="checked"[/if] /><label for="opened"> [__Allow]</label></td>
             </tr>
         </table>
         <p class="center">

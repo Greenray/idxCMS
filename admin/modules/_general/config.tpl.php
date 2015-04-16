@@ -30,7 +30,7 @@ die();?>
             } else {
                 if (document.getElementById) {
                     selecto.left = (e.clientX + window.pageXOffset - 440) + "px";
-                    selecto.top = (e.clientY + window.pageYOffset - 120) + "px";
+                    selecto.top  = (e.clientY + window.pageYOffset - 120) + "px";
                 }
             }
             curselectorinput = o;
@@ -44,7 +44,7 @@ die();?>
 <fieldset>
     <form name="config" method="post" action="">
         <table class="std">
-            <th colspan="3">[__General options]</th>
+            <tr><th colspan="3">[__General options]</th></tr>
             <tr class="odd">
                 <td>[__Site title]</td>
                 <td colspan="2"><input type="text" name="title" value="{title}" size="50" class="text" /></td>
@@ -87,7 +87,9 @@ die();?>
                 <td>[__Module on index page]</td>
                 <td colspan="2">
                     <select name="index-module">
-                        [each=modules]<option value="{modules[module]}" [if=modules[selected]]selected="selected"[/if]>{modules[title]}</option>[/each.modules]
+                        [each=modules]
+                        <option value="{modules[module]}" [if=modules[selected]]selected="selected"[/if]>{modules[title]}</option>
+                        [/each.modules]
                     </select>
                 </td>
             </tr>
@@ -95,9 +97,13 @@ die();?>
                 <td>[__Default skin]</td>
                 <td colspan="2">
                     <select name="skin">
-                        [each=skins]<option value="{skins[skin]}" [if=skins[selected]]selected="selected"[/if]>{skins[skin]}</option>[/each.skins]
+                        [each=skins]
+                        <option value="{skins[skin]}" [if=skins[selected]]selected="selected"[/if]>{skins[skin]}</option>
+                        [/each.skins]
                     </select>
-                    [each=skins]<input type="hidden" name="skins[]" value="{skins[skin]}" />[/each.skins]
+                    [each=skins]
+                    <input type="hidden" name="skins[]" value="{skins[skin]}" />
+                    [/each.skins]
                 </td>
             </tr>
             <tr class="odd">
@@ -108,7 +114,9 @@ die();?>
                 <td>[__Default language]</td>
                 <td colspan="2">
                     <select name="lang">
-                        [each=langs]<option value="{langs[lang]}" [if=langs[selected]]selected="selected"[/if]>{langs[lang]}</option>[/each.langs]
+                        [each=langs]
+                        <option value="{langs[lang]}" [if=langs[selected]]selected="selected"[/if]>{langs[lang]}</option>
+                        [/each.langs]
                     </select>
                 </td>
             </tr>
@@ -124,7 +132,9 @@ die();?>
                 <td>[__Default timezone]</td>
                 <td colspan="2">
                     <select name="tz">
-                        [each=tz]<option value="{tz[tz]}" [if=tz[selected]]selected="selected"[/if]>{tz[title]}</option>[/each.tz]
+                        [each=tz]
+                        <option value="{tz[tz]}" [if=tz[selected]]selected="selected"[/if]>{tz[title]}</option>
+                        [/each.tz]
                     </select>
                 </td>
             </tr>
@@ -132,7 +142,9 @@ die();?>
                 <td>[__CAPTCHA system]</td>
                 <td colspan="2">
                     <select name="captcha">
-                        [each=captcha]<option value="{captcha[captcha]}" [if=captcha[selected]]selected="selected"[/if]>{captcha[captcha]}</option>[/each.captcha]
+                        [each=captcha]
+                        <option value="{captcha[captcha]}" [if=captcha[selected]]selected="selected"[/if]>{captcha[captcha]}</option>
+                        [/each.captcha]
                     </select>
                 </td>
             </tr>

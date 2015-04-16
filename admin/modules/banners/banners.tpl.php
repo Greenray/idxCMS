@@ -10,11 +10,11 @@ die();?>
     <form name="config" method="post" action="">
         <table class="std">
             [each=banner]
-                <tr><td>{banner[bbCodes]}</td><td></td></tr>
-                <tr>
-                    <td><textarea id="{banner[id]}" name="text[]" cols="80" rows="10">{banner[text]}</textarea></td>
-                    <td class="banner">{banner[view]}</td>
-                </tr>
+            <tr><td>{banner[bbCodes]}</td><td></td></tr>
+            <tr>
+                <td><textarea id="{banner[id]}" name="text[]" cols="80" rows="10">{banner[text]}</textarea>
+                </td><td class="banner">{banner[view]}</td>
+            </tr>
             [/each.banner]
         </table>
         <p class="center"><input type="submit" name="save" value="[__Save]" class="submit" /></p>

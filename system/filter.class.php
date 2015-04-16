@@ -87,14 +87,14 @@ final class FILTER {
     /** Gets specified filtered parameter.
      * @param  string $type  Type of parameter
      * @param  string $param Name of parameter
-     * @return array|string  Parameter values or empty string
+     * @return array|boolean Parameter values or FALSE
      */
     public static function get($type, $param) {
         if (array_key_exists($param, self::$$type)) {
             $value = self::$$type;
             return $value[$param];
         }
-        return '';
+        return FALSE;
     }
 
     /** Removes filtered parameter.

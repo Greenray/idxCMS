@@ -6,6 +6,11 @@
 
 if (!defined('idxADMIN')) die();
 
+if (!empty($REQUEST['posts'])) {
+    header('Location: '.MODULE.'admin&id=posts.items');
+    die();
+}
+
 $obj = strtoupper($module);
 $sections = CMS::call($obj)->getSections();
 
@@ -31,9 +36,32 @@ try {
 # Initialize again because of sorted sections
 $sections = CMS::call($obj)->getSections();
 
+$output = [];
+
+if ($obj === 'POSTS') {
+    # Existing categories
+    # We can't delete or move system section, so exlcude it from sorting
+    $output['system']['drafts'] = $sections['drafts'];
+    $output['system']['drafts']['categories'] = CMS::call('POSTS')->getCategories('drafts');
+
+    if (USER::$root) {
+        $output['system']['drafts']['categories'][1]['desc']  = CMS::call('PARSER')->parseText($output['system']['drafts']['categories'][1]['desc']);
+        $output['system']['drafts']['categories'][1]['class'] = 'odd';
+        $content = CMS::call('POSTS')->getContent(1);
+        $output['system']['drafts']['categories'][1]['items'] = !empty($content) ? count($content) : 0;
+
+    } else unset($output['system']['drafts']['categories'][1]);
+
+    $output['system']['drafts']['categories'][2]['desc']  = CMS::call('PARSER')->parseText($output['system']['drafts']['categories'][2]['desc']);
+    $output['system']['drafts']['categories'][2]['class'] = 'even';
+    $content = CMS::call('POSTS')->getContent(2);
+    $output['system']['drafts']['categories'][2]['items'] = !empty($content) ? count($content) : 0;
+
+    unset($sections['drafts']);
+}
+
 if (!empty($sections)) {
     $choice = [];
-    $output = [];
     $output['module']   = $module;
     $output['sections'] = $sections;
     foreach ($sections as $id => $section) {
@@ -41,13 +69,12 @@ if (!empty($sections)) {
         $choice[$id]['title'] = $section['title'];
         $categories = CMS::call($obj)->getCategories($id);
         if (!empty($categories)) {
+            $output['sections'][$id]['categories'] = $categories;
             $class = 'odd';
             foreach ($categories as $key => $category) {
                 $output['sections'][$id]['categories'][$key]['desc'] = CMS::call('PARSER')->parseText($category['desc']);
                 $content = CMS::call($obj)->getContent($key);
-                if (empty($content)) {
-                     $output['sections'][$id]['categories'][$key]['delete'] = TRUE;      # If category is not empty we can't delete it
-                }
+                $output['sections'][$id]['categories'][$key]['items'] = !empty($content) ? count($content) : 0;
                 $output['sections'][$id]['categories'][$key]['class'] = $class;
                 $class = ($class === 'odd') ? 'even' : 'odd';
             }

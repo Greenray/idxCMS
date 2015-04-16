@@ -1,14 +1,10 @@
-/**
+/** Skin Default: main styles.
+ *
  * @file      skins/Default/style.css
  * @version   2.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>\n
  * @copyright (c) 2011 - 2014 Victor Nabatov
  * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
- */
-
-/**
- * style.css - Skin Default: main styles.
- * @package Skins
  */
 
 *, html, li                     { margin: 0; padding: 0 }
@@ -116,15 +112,15 @@ ul                              { margin: 1em 0;	padding: 0 0 0 10px }
 #pagination .active             { background: #fff; color: red; float: left; font-weight: bold; padding: 0 6px }
 #pagination a:link,
 #pagination a:visited           { display: block; float: left; text-decoration: none }
-#pass_title                     { margin: 0 0 0 55px }
+.pass_title                     { margin: 0 0 0 20px; width: 120px }
 .pass_img#progresbar-2-0, .pass_img#passbar-0, .pass_img#progresbar-2-10,
-	.pass_img#passbar-10, .pass_img#progresbar-2-20, .pass_img#passbar-20,
-	.pass_img#progresbar-2-30, .pass_img#passbar-30, .pass_img#progresbar-2-40,
-	.pass_img#passbar-40, .pass_img#progresbar-2-50, .pass_img#passbar-50,
-	.pass_img#progresbar-2-60, .pass_img#passbar-60, .pass_img#progresbar-2-70,
-	.pass_img#passbar-70, .pass_img#progresbar-2-80, .pass_img#passbar-80,
-	.pass_img#progresbar-2-90, .pass_img#passbar-90, .pass_img#progresbar-2-100,
-	.pass_img#passbar-100                       { float: right; height: 7px; margin: 5px 5px 0 0 !important; width: 138px }
+.pass_img#passbar-10, .pass_img#progresbar-2-20, .pass_img#passbar-20,
+.pass_img#progresbar-2-30, .pass_img#passbar-30, .pass_img#progresbar-2-40,
+.pass_img#passbar-40, .pass_img#progresbar-2-50, .pass_img#passbar-50,
+.pass_img#progresbar-2-60, .pass_img#passbar-60, .pass_img#progresbar-2-70,
+.pass_img#passbar-70, .pass_img#progresbar-2-80, .pass_img#passbar-80,
+.pass_img#progresbar-2-90, .pass_img#passbar-90, .pass_img#progresbar-2-100,
+.pass_img#passbar-100                           { float: right; height: 7px; margin: 6px 200px 0 0 !important; width: 138px }
 .pass_img#progresbar-2-0,.pass_img#passbar-0    { background: transparent url(../images/password/pass_0.gif) no-repeat }
 .pass_img#progresbar-2-10, .pass_img#passbar-10 { background: transparent url(../images/password/pass_10.gif) no-repeat }
 .pass_img#progresbar-2-20, .pass_img#passbar-20 { background: transparent url(../images/password/pass_20.gif) no-repeat }
@@ -169,7 +165,7 @@ ul                              { margin: 1em 0;	padding: 0 0 0 10px }
 #section li.level2 .title,
 #section li.level2 .subtitle,
 #section li.level3 .title,
-	#section li.level3 .subtitle    { font-size: 9pt; line-height: 18px; padding: 0 }
+#section li.level3 .subtitle        { font-size: 9pt; line-height: 18px; padding: 0 }
 #section li.level2 .title,
 #section li.level3 .title           { margin: 5px 5px 0 45px }
 #section li.level2 .subtitle,
@@ -634,9 +630,9 @@ table .calendar {
 .quotetitle                         { background: #aabbcc; border: 1px solid #a9b8c2; color: #000; font-size: 8pt; font-style: italic; margin: 5px 0 0; padding: 2px }
 .quotetext                          { background: #fafafa; border: 1px solid #a9b8c2; color: #555; font: italic 9pt monospace, "Courier New", Courier; margin: 0 0 5px;
                                       padding: 5px; overflow: auto }
-.required { background: #fff888; color: red }
+.required   { background: #fff888; color: red }
 
-.results { margin: 10px }
+.results    { margin: 10px }
 .results ul { list-style: none; margin: 0; padding: 0 }
 .results li { margin: 0; padding: 0; position: relative }
 .results a, .results span {
@@ -822,6 +818,7 @@ ol.horinaja_pagination {
 	position: relative;
 	clear: both
 }
-ol.horinaja_pagination li           { display: block; float: left; height: 40px }
-ol.horinaja_pagination li a         { background: transparent; color: #fff; height: 30px; display: block; float: left; font-weight: bold; text-align: center;
+ol.horinaja_pagination li   { display: block; float: left; height: 40px }
+ol.horinaja_pagination li a { background: transparent; color: #fff; height: 30px; display: block; float: left; font-weight: bold; text-align: center;
                                       padding: 10px 0 0 0; cursor: pointer }
+.pl20 { padding-left: 200px }

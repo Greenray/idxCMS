@@ -11,9 +11,10 @@ die();?>
             ShowAlert('[__Enter your name]', '[__Error]');
             return false;
         }
+        var email = form.email.value;
         var emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-        if ((form.email.value === '') || !email.match(emailRegex)) {
-            ShowAlert('[__rror in the email]', '[__Error]');
+        if ((email === '') || !email.match(emailRegex)) {
+            ShowAlert('[__Error in email]', '[__Error]');
             return false;
         }
         [if=captcha]

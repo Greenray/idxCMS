@@ -64,51 +64,43 @@ die();?>
         }
     }
     function checkUserForm(form) {
-        var user = form.user.value;
-        var nick = form.nick.value;
-        var password = form.password.value;
-        var confirm  = form.confirm.value;
-        var email = form.email.value;
-        var captcha = form.captcheckout.value;
-        var userRegex = /^[a-zA-Z0-9_]+(([\_][a-zA-Z0-9])?[a-zA-Z0-9_]*)*$/;
-        var nickRegex = /^[a-zA-Z0-9а-яА-Я_]+(([\_][a-zA-Z0-9а-яА-Я])?[a-zA-Z0-9а-яА-Я_]*)*$/;
+        var user       = form.user.value;
+        var nick       = form.nick.value;
+        var email      = form.email.value;
+        var userRegex  = /^[a-zA-Z0-9_]+(([\_][a-zA-Z0-9])?[a-zA-Z0-9_]*)*$/;
+        var nickRegex  = /^[a-zA-Z0-9а-яА-Я_]+(([\_][a-zA-Z0-9а-яА-Я])?[a-zA-Z0-9а-яА-Я_]*)*$/;
         var emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-        if  (user === '') {
+        if ((user === '') || !user.match(userRegex)) {
             ShowAlert('[__Invalid login]', '[__Error]');
             return false;
         }
-        if (!user.match(userRegex)) {
-            ShowAlert('[__Invalid login]', '[__Error]');
-            return false;
-        }
-        if  (nick === '') {
-            ShowAlert('[__Enter your name]', '[__Error]');
-            return false;
-        }
-        if (!nick.match(nickRegex)) {
+        if ((nick === '') || !nick.match(nickRegex)) {
             ShowAlert('[__Invalid nickname]', '[__Error]');
             return false;
         }
-        if  (password === '') {
+        if (form.password.value === '') {
             ShowAlert('[__Enter your password]', '[__Error]');
             return false;
         }
-        if  (confirm  === '') {
+        if (form.confirm.value  === '') {
             ShowAlert('[__Confirm password]', '[__Error]');
             return false;
         }
-        if  (email === '') {
+        if (form.password.value !== form.confirm.value) {
+            ShowAlert('[__Error in password]', '[__Error]');
+            return false;
+        }
+        if ((email === '') || !email.match(emailRegex)) {
             ShowAlert('[__Invalid email]', '[__Error]');
             return false;
         }
-        if (!email.match(emailRegex)) {
-            ShowAlert('[__Invalid email]', '[__Error]');
-            return false;
-        }
-        if  (captcha === '') {
-            ShowAlert('[__Enter a code]', '[__Error]');
-            return false;
-        }
+        [if=captcha]
+            if  (form.captcheckout.value === '') {
+                ShowAlert('[__Enter a code]', '[__Error]');
+                return false;
+            }
+        [/if]
+        return true;
     }
 </script>
 <div id="content">
@@ -177,7 +169,7 @@ die();?>
                     </p>
                     <p>
                         <label for="website">[__Website]</label>
-                        <input id="website" name="fields[website]" placeholder="e.g. http://www.mewebsite.com" value="{website}" type="text" />
+                        <input id="website" name="fields[website]" placeholder="http://www.mywebsite.com" value="{website}" type="text" />
                     </p>
                     <p class="msg help">[__Required fields have a yellow background]</p>
                 </fieldset>

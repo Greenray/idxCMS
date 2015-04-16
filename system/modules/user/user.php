@@ -150,7 +150,7 @@ if (!USER::$logged_in) {
     } else {
         if (!empty($REQUEST['user'])) Redirect('user&act=register');
     }
-} elseif (USER::$logged_in) {
+} else {
     if (!empty($REQUEST['user'])) {
         $user = USER::getUserData($REQUEST['user']);
         if (!empty($user)) {

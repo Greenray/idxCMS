@@ -1,8 +1,7 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - Polls
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: Polls.
 
 if (!defined('idxADMIN') || !USER::$root) die();
 
@@ -21,7 +20,7 @@ try {
         }
     }
 } catch (Exception $error) {
-    ShowError(__($error->getMessage()));
+    SYSTEM::showError($error->getMessage());
 }
 
 $opened = $POLLS->getActivePolls();
@@ -31,7 +30,6 @@ $colors = [
 ];
 $data   = [];
 $output = [];
-$TPL    = new TEMPLATE(dirname(__FILE__).DS.'polls.tpl');
 
 foreach ($opened as $id => $poll) {
     $data['id'] = $id;
@@ -49,4 +47,7 @@ foreach ($opened as $id => $poll) {
     $data['total'] = $poll['total'];
     $output['polls'][] = $data;
 }
-echo $TPL->parse($output);
+
+$TPL = new TEMPLATE(__DIR__.DS.'polls.tpl');
+$TPL->set($output);
+echo $TPL->parse();

@@ -1,14 +1,16 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - Statistics
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: Log template
 
 die();?>
-<div class="module">[__Logs]</div>
+
+<div class="module">__Logs__</div>
 <fieldset>
-    <table class="std"><tr class="odd"><td>{text}</td></tr></table>
-    <form name="month" method="post" action="">
-        <p align="center"><input type="submit" value="[__Back]" class="submit" /></p>
+    <table class="std">
+        <tr class="light"><td>$text</td></tr>
+    </table>
+    <form name="month" method="post" action="{MODULE}admin&amp;id=logs._statistics" target="main">
+        <p align="center"><input type="submit" value="__Back__" /></p>
     </form>
 </fieldset>

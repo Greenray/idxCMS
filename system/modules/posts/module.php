@@ -1,12 +1,13 @@
 <?php
-/** Module "Posts" - articles and news.
+/**
+ * Module POSTS: articles and news.
  *
- * @program   idxCMS: F lat Files Content Management Sysytem
- * @file      system/modules/posts/module.php
- * @version   2.4
+ * @program   idxCMS: F lat Files Content Management System
+ * @version   3.0
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+ * @copyright (c) 2011 - 2016 Victor Nabatov
+ * @license   Creative Commons — Attribution-NonCommercial-ShareAlike 4.0 International
+ * @file      system/modules/posts/module.php
  * @package   Posts
  * @overview  Articles and news which cfn be posted by registered users.
  *            The structure of the posts database:
@@ -67,21 +68,25 @@ if (!defined('idxCMS')) die();
 require SYS.'posts.class.php';
 require SYS.'calendar.class.php';
 
-SYSTEM::registerModule('posts',          'Posts',          'main', 'system');
-SYSTEM::registerModule('posts.post',     'Posting form',   'main', 'system');
-SYSTEM::registerModule('posts.calendar', 'Posts calendar', 'box',  'system');
-SYSTEM::registerModule('posts.last',     'Last posts',     'box');
-SYSTEM::registerModule('posts.news',     'Last news',      'box');
+SYSTEM::registerModule('posts',          'Posts',               'main', 'system');
+SYSTEM::registerModule('posts.post',     'Posting form',        'main', 'system');
+SYSTEM::registerModule('posts.calendar', 'Posts calendar',      'box',  'system');
+SYSTEM::registerModule('posts.last',     'Last posts',          'box');
+SYSTEM::registerModule('posts.news',     'Last news',           'box');
 SYSTEM::registerModule('posts.print',    'Version for printer', 'plugin');
+
 SYSTEM::registerSearch('posts');
 SYSTEM::registerSiteMap('posts');
 SYSTEM::registerMainMenu('posts');
+
 USER::setSystemRights(['posts' => __('Posts').': '.__('Moderator')]);
 
 $sections =  CMS::call('POSTS')->getSections();
 
 if (!empty($sections)) {
-    # Register RSS feeds for posts sections (ex. drafts).
+    #
+    # Register RSS feeds for posts sections (ex. drafts)
+    #
     unset($sections['drafts']);
 
     foreach ($sections as $id => $section) {

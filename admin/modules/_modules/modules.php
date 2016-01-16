@@ -1,15 +1,14 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - Modules
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: Modules management.
 
 if (!defined('idxADMIN') || !USER::$root) die();
 
 CMS::call('SYSTEM')->initModules(TRUE);
 $registered_modules = SYSTEM::get('modules');
 $enabled = CONFIG::getSection('enabled');
-$unset = $enabled;
+$unset   = $enabled;
 
 if (!empty($REQUEST['enable'])) {
     $enabled = [];
@@ -30,19 +29,19 @@ if (!empty($REQUEST['enable'])) {
         }
         unset($unset[$mod]);
     }
-    CMS::call('CONFIG')->setSection('enabled', $enabled);
-    if (!CMS::call('CONFIG')->save()) {
-         ShowMessage('Cannot save file');
-    }
-    if (!empty($unset)) {
-        foreach($unset as $mod => $axtive) {
-            CMS::call('CONFIG')->unsetSection($mod);
+    try {
+        CMS::call('CONFIG')->setSection('enabled', $enabled);
+        if (!empty($unset)) {
+            foreach($unset as $mod => $active) {
+                CMS::call('CONFIG')->unsetSection($mod);
+            }
         }
-        if (!CMS::call('CONFIG')->save()) {
-            ShowMessage('Cannot save file');
-        }
+        CMS::call('CONFIG')->save();
+        Sitemap();
+
+    } catch (Exception $error) {
+        SYSTEM::showError($error->getMessage());
     }
-    Sitemap();
 }
 
 $output  = [];
@@ -53,47 +52,39 @@ foreach ($registered_modules as $mod => $values) {
     if (strpos($mod, '.')) {
         $id = explode('.', $mod, 2);
         if (in_array($id[0], $modules)) {
-            $output['modules'][$id[0]]['ext'][$mod]['module'] = $mod;
-            $output['modules'][$id[0]]['ext'][$mod]['title']  = $values['title'];
+            $output[$id[0]]['ext'][$mod]['module'] = $mod;
+            $output[$id[0]]['ext'][$mod]['title']  = $values['title'];
             if (!empty($values['system'])) {
-                $output['modules'][$id[0]]['ext'][$mod]['system'] = TRUE;
-                $output['modules'][$id[0]]['ext'][$mod]['class']  = 'even';
+                $output[$id[0]]['ext'][$mod]['system'] = TRUE;
+                $output[$id[0]]['ext'][$mod]['class']  = 'dark';
             } else {
-                $output['modules'][$id[0]]['ext'][$mod]['class'] = 'odd';
+                $output[$id[0]]['ext'][$mod]['class']  = 'light';
             }
             if (!empty($enabled[$mod])) {
-                $output['modules'][$id[0]]['ext'][$mod]['enabled'] = TRUE;
-                $output['modules'][$id[0]]['ext'][$mod]['checked'] = 'checked="checked"';
+                $output[$id[0]]['ext'][$mod]['enabled'] = TRUE;
             }
         } else {
             ++$i;
             $modules[$i] = $mod;
-            $output['modules'][$id[0]]['module'] = $mod;
-            $output['modules'][$id[0]]['title']  = $values['title'];
-            if (!empty($values['system'])) {
-                $output['modules'][$id[0]]['system'] = TRUE;
-            }
-            if (!empty($enabled[$mod])) {
-                $output['modules'][$id[0]]['enabled'] = TRUE;
-            }
-            $output['modules'][$id[0]]['ext'] = [];
+            $output[$id[0]]['module'] = $mod;
+            $output[$id[0]]['title']  = $values['title'];
+            if (!empty($values['system'])) $output[$id[0]]['system']  = TRUE;
+            if (!empty($enabled[$mod]))    $output[$id[0]]['enabled'] = TRUE;
+            $output[$id[0]]['ext'] = [];
         }
     } else {
         if (!in_array($mod, $modules)) {
             ++$i;
             $modules[$i] = $mod;
-            $output['modules'][$mod]['module'] = $mod;
-            $output['modules'][$mod]['title']  = $values['title'];
-            if (!empty($values['system'])) {
-                $output['modules'][$mod]['system'] = TRUE;
-            }
-            if (!empty($enabled[$mod])) {
-                $output['modules'][$mod]['enabled'] = TRUE;
-            }
-            $output['modules'][$mod]['ext'] = [];
+            $output[$mod]['module'] = $mod;
+            $output[$mod]['title']  = $values['title'];
+            if (!empty($values['system'])) $output[$mod]['system']  = TRUE;
+            if (!empty($enabled[$mod]))    $output[$mod]['enabled'] = TRUE;
+            $output[$mod]['ext'] = [];
         }
     }
 }
 
-$TPL = new TEMPLATE(dirname(__FILE__).DS.'modules.tpl');
-echo $TPL->parse($output);
+$TPL = new TEMPLATE(__DIR__.DS.'modules.tpl');
+$TPL->set('modules', $output);
+echo $TPL->parse();

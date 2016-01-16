@@ -1,16 +1,14 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Forum
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Module FORUM: Last topics
 
 if (!defined('idxCMS')) die();
 
-$sections = CMS::call('FORUM')->getSections();
-
-# Get last topics
 $topics = CMS::call('FORUM')->getSectionsLastItems();
+
 if (!empty($topics)) {
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'last.tpl');
-    ShowWindow(__('Last topics'), $TPL->parse(CMS::call('FORUM')->getLastItems($topics)));
+    $TPL = new TEMPLATE(__DIR__.DS.'last.tpl');
+    $TPL->set(CMS::call('FORUM')->getLastItems($topics));
+    SYSTEM::defineWindow('Last topics', $TPL->parse());
 }

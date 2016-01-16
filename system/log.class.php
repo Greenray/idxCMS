@@ -1,21 +1,24 @@
 <?php
-/** Logging.
+/**
+ * Logging.
  *
- * @program   idxCMS: Flat Files Content Management Sysytem
- * @file      system/log.class.php
- * @version   2.4
+ * @program   idxCMS: Flat Files Content Management System
+ * @version   3.0
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+ * @copyright (c) 2011 - 2016 Victor Nabatov
+ * @license   Creative Commons — Attribution-NonCommercial-ShareAlike 4.0 International
+ * @file      system/log.class.php
  * @package   Core
  */
 
 class LOG {
 
-    /** Class initialization. */
+    /** Class initialization */
     public function __construct() {}
 
-    /** Writes error message into log file.
+    /**
+     * Writes error message into log file.
+     *
      * @param  string $message Error message
      * @param  string $info    Additioinal info
      * @return boolean FALSE
@@ -25,7 +28,9 @@ class LOG {
         return FALSE;
     }
 
-    /** Registers users logins into log file.
+    /**
+     * Registers users logins into log file.
+     *
      * @param  string  $type    Message type
      * @param  string  $user    Username
      * @param  string  $message Message
@@ -40,7 +45,9 @@ class LOG {
         return FALSE;
     }
 
-    /** Сreates tar archive of logs for the month.
+    /**
+     * Сreates tar archive of logs for the month.
+     *
      * @param  string  $title       Filename
      * @param  integer $day         Date
      * @param  integer $month       Month
@@ -70,7 +77,7 @@ class LOG {
                 }
                 $PHAR->compress(Phar::GZ);
             } catch (Exception $error) {
-                ShowMessage(__($error->getMessage()));
+                SYSTEM::showError($error->getMessage());
             }
             foreach ($to_merge as $file) {
                     unlink(LOGS.$file);
@@ -80,7 +87,9 @@ class LOG {
         return TRUE;
     }
 
-    /** Prepares daily log files to create a single file per month.
+    /**
+     * Prepares daily log files to create a single file per month.
+     *
      * @return boolean TRUE
      */
     public static function logMergeByMonth() {

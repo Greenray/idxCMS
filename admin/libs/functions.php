@@ -1,21 +1,24 @@
 <?php
-/** Functions for administration of the system.
+/**
+ * Functions for administration of the system.
  *
- * @program   idxCMS: Flat Files Content Management Sysytem
- * @file      admin/libs/functions.php
- * @version   2.4
+ * @program   idxCMS: Flat Files Content Management System
+ * @version   3.0
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+ * @copyright (c) 2011 - 2016 Victor Nabatov
+ * @license   Creative Commons — Attribution-NonCommercial-ShareAlike 4.0 International
+ * @file      admin/libs/functions.php
  * @package   Administration
  * @overview  Administration of the system.
  *            Includes possibilities for configuring the system, managing users, modules, creating and editing content.
  */
 
-/** Data storage for backups. */
+/** Data storage for backups */
 define('BACKUPS', CONTENT.'backups'.DS);
 
-/** Formats the presentation's file size
+/**
+ * Formats the presentation's file size.
+ *
  * @param  integer $i Size value
  * @return string     Formatted size value
  */
@@ -26,28 +29,35 @@ function FormatSize($i) {
     elseif ($i < 1024)                  return $i.' '.__('byte(s)');
 }
 
-
-/** Gets size of the directory with subdirectiries.
+/**
+ * Gets size of the directory with subdirectiries.
+ *
  * @param  string $dir The name of the main directory
  * @return integer     The size of scanned directory
  */
 function GetDirSize($dir) {
     $size = 0;
-    if (($dh = opendir($dir)) !== FALSE) {
-        while (($file = readdir($dh)) !== FALSE) {
+    if ($dh = opendir($dir)) {
+        while ($file = readdir($dh)) {
             if (is_dir($dir.$file)) {
-                if (($file !== '.') AND ($file !== '..')) {
+                if (($file !== '.') && ($file !== '..')) {
                    $size += GetDirSize($dir.$file.DS);
                 }
-            } else $size += filesize($dir.$file);
+            } else {
+                if ($file !== '.htaccess') {
+                    $size += filesize($dir.$file);
+                }
+            }
         }
         closedir($dh);
     }
     return $size;
 }
 
-/** Checs if the variable exists in array.
+/**
+ * Checs if the variable exists in array.
  * This function is recursive.
+ *
  * @param  mixed $needle   Value to search
  * @param  array $haystack Array to search
  * @return boolean         The result of operation
@@ -60,38 +70,33 @@ function InArrayRecursive($needle, $haystack) {
     }
 }
 
-/** Shows specified translated message with additional information.
- *  @param  string $message Specified message.
- *  @param  string $info    Additional information.
- *  @return string          Formatted html table.
- */
-function ShowMessage($message, $info = '') {
-    echo '<table class="message center">
-            <tr><td class="admin_mess">'.__($message).' '.$info.'</td></tr>
-          </table>';
-}
-
-/** Login form administrator.
+/**
+ * Login form administrator.
  *
  * @return string Login form for administrator
+ * @todo   Create the template
  */
 function LoginForm() {
-    return '<form name="login" method="post" action="">
-                <table>
-                    <tr>
-                        <td class="row2">'.__('Username').':</td>
-                        <td class="row2 left"><input type="text" name="username" style="width: 95%;" /></td>
-                    </tr>
-                    <tr>
-                        <td class="row2">'.__('Password').':</td>
-                        <td class="row2 left"><input type="password" name="password" style="width: 95%;" /></td>
-                    </tr>
-                    <tr><td class="row2" colspan="2"><input type="submit" name="login" value="'.__('Log in').'" class="submit" /></td></tr>
-                </table>
-            </form>';
+    return '
+        <form name="login" method="post" action="">
+            <table>
+                <tr>
+                    <td class="row2">'.__('Username').':</td>
+                    <td class="row2 left"><input type="text" name="user" value="" style="width: 95%;" /></td>
+                </tr>
+                <tr>
+                    <td class="row2">'.__('Password').':</td>
+                    <td class="row2 left"><input type="password" name="password" value="" style="width: 95%;" /></td>
+                </tr>
+                <tr><td class="row2" colspan="2"><input type="submit" name="login" value="'.__('Log in').'" /></td></tr>
+            </table>
+        </form>
+        ';
 }
 
-/** Displays a color selection.
+/**
+ * Displays a color selection.
+ *
  * @param  string $name      ID for the input field
  * @param  string $def_color Default color
  * @return string            Color selection form
@@ -137,13 +142,17 @@ function GetColor($name = 'idselector', $def_color = '') {
         $col += 15;
     }
 
-    $output['name']      = $name;
-    $output['def_color'] = $def_color;
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'colors.tpl');
-    return $TPL->parse($output);
+    $TPL = new TEMPLATE(__DIR__.DS.'colors.tpl');
+    $TPL->set('name',      $name);
+    $TPL->set('def_color', $def_color);
+    $TPL->set('colors',    $output['color']);
+    $TPL->set('gray',      $output['gray']);
+    return $TPL->parse();
 }
 
-/** Saves sorteg sections with categories.
+/**
+ * Saves sorteg sections with categories.
+ *
  * @param  object $obj    Object (posts, forum, etc...)
  * @param  array  $params Sections data
  * @return boolean        The result of operation
@@ -166,13 +175,17 @@ function SaveSortedSections($obj, $params) {
         $new_categories = [];
         $categories     = CMS::call($obj)->getCategories($section);
         foreach ($values as $i => $id) {
+            #
             # Get section and category
+            #
             $old = explode('.', $id);
             if ($old[0] === $section) {
                 $new_categories[$old[1]] = $categories[$old[1]];
             } else {
                 $moved = CMS::call($obj)->moveCategory($old[1], $old[0], $section);
+                #
                 # Category moved with new ID
+                #
                 $new_categories[$moved]       = CMS::call($obj)->getCategory($moved);
                 $new_categories[$moved]['id'] = $moved;
             }
@@ -184,7 +197,7 @@ function SaveSortedSections($obj, $params) {
             CMS::call($obj)->saveCategories($section, $categories);
         }
     } catch (Exception $error) {
-        ShowMessage(__($error->getMessage()));
+        SYSTEM::showError($error->getMessage());
     }
     return TRUE;
 }

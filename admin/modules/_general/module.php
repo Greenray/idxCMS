@@ -1,8 +1,7 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - General
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: Main configuration, backups, and filemanager.
 
 if (!defined('idxADMIN')) die();
 
@@ -44,7 +43,7 @@ switch (SYSTEM::get('locale')) {
         $LANG['def']['Writing']        = 'Запіс';
         break;
 }
-$MODULES[$module][0] = __('General options');
-$MODULES[$module][1]['config']      = __('Site configuration');
-$MODULES[$module][1]['backup']      = __('Backup');
-$MODULES[$module][1]['filemanager'] = __('Filemanager');
+$MODULES[$module][0] = 'General options';
+$MODULES[$module][1]['config']      = 'Site configuration';
+$MODULES[$module][1]['backup']      = 'Backup';
+$MODULES[$module][1]['filemanager'] = 'Filemanager';

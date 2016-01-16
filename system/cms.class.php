@@ -1,27 +1,30 @@
 <?php
-/** Registers objects and provides access to their methods.
+/**
+ * Registers objects and provides access to their methods.
  *
- * @program   idxCMS: Flat Files Content Management Sysytem
- * @file      system/cms.class.php
- * @version   2.4
+ * @program   idxCMS: Flat Files Content Management System
+ * @version   3.0
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+ * @copyright (c) 2011 - 2016 Victor Nabatov
+ * @license   Creative Commons — Attribution-NonCommercial-ShareAlike 4.0 International
+ * @file      system/cms.class.php
  * @package   Core
  */
 
 class CMS {
 
     /** @var array Registered objects */
-    private static $obj = [];
+    public static $obj = [];
 
-    /** Class initialization. */
+    /** Class initialization */
     private function __construct() {}
 
-    /** Prevent to clone object. */
+    /** Prevent to clone object */
     private function __clone() {}
 
-    /** Creates and registers the object.
+    /**
+     * Creates and registers the object.
+     *
      * @param  string $class Class name
      * @return object        Created and initialized object
      */
@@ -30,7 +33,8 @@ class CMS {
         return self::$obj[$class];
     }
 
-    /** Calls the object, if object is not set it will be created.
+    /**
+     * Calls the object, if object is not set it will be created.
      * <pre>
      * Examples:
      *     $CMS = CMS::call('SYSTEM');                - when it is need to initialize object
@@ -44,7 +48,9 @@ class CMS {
         return empty(self::$obj[$class]) ? self::register($class) : self::$obj[$class];
     }
 
-    /** Removes the object.
+    /**
+     * Removes the object.
+     *
      * @param string $class Class name
      */
     public static function remove($class) {

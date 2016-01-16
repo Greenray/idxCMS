@@ -1,14 +1,14 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Rate
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# License: Creative Commons — Attribution-NonCommercial-ShareAlike 4.0 International
+# Module RATE
 
 if (!defined('idxCMS')) die();
 
 if (!empty($REQUEST['act']) && !empty($REQUEST['id']) && !empty($REQUEST['user'])) {
     $time  = microtime(TRUE);
-    $rated = md5(USER::getUser('username').$REQUEST['id']);
+    $rated = md5(USER::getUser('user').$REQUEST['id']);
     if (!file_exists(TEMP.$rated)) {
         file_put_contents(TEMP.$rated, $time, LOCK_EX);
         $result = RateComment($REQUEST['user'], $REQUEST['act'], $REQUEST['id']);
@@ -25,7 +25,7 @@ if (!empty($REQUEST['act']) && !empty($REQUEST['id']) && !empty($REQUEST['user']
 }
 
 if (!empty($REQUEST['val']) && !empty($REQUEST['id'])) {
-    $user = USER::getUser('username');
+    $user = USER::getUser('user');
     if ($user !== 'guest') {
         $item = '';
         $rate = GetRate($REQUEST['id'], $item);

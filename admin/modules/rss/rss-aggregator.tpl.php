@@ -1,31 +1,30 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - RSS
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: RSS aggregator.
 
 die();?>
-<div class="module">[__RSS aggregator]</div>
+<div class="module">__RSS aggregator__</div>
 <fieldset>
     <form name="config" method="post" action="">
         <table class="std">
-            <tr class="odd">
-                <td>[__Cache timeout]</td>
-                <td><input type="text" name="cache-time" value="{cache-time}" size="6" class="text" /> [__seconds]</td>
+            <tr class="light">
+                <td>__Cache timeout__</td>
+                <td><input type="text" name="cache_time" value="$cache_time" size="6" /> __seconds__</td>
             </tr>
-            <tr class="odd">
-                <td>[__Max title length]</td>
-                <td><input type="text" name="title-length" value="{title-length}" size="6" class="text" /> [__symbols]</td>
+            <tr class="light">
+                <td>__Max title length__</td>
+                <td><input type="text" name="title_length" value="$title_length" size="6" /> __symbols__</td>
             </tr>
-            <tr class="odd">
-                <td>[__Max description length]</td>
-                <td><input type="text" name="title-length" value="{title-length}" size="4" class="text" /></td>
+            <tr class="light">
+                <td>__Max description length__</td>
+                <td><input type="text" name="title_length" value="$title_length" size="4" /></td>
             </tr>
-            <tr class="odd">
-                <td>[__Feeds to aggregate (One URL per line)]</td>
-                <td colspan="2"><textarea name="feeds" cols="20" rows="10">{feeds}</textarea></td>
+            <tr class="light">
+                <td>__Feeds to aggregate (One URL per line)__</td>
+                <td colspan="2"><textarea name="feeds" cols="20" rows="10">$feeds</textarea></td>
             </tr>
         </table>
-        <p class="center"><input type="submit" name="save" value="[__Save]" class="submit" /></p>
+        <p class="center"><input type="submit" name="save" value="__Save__" /></p>
     </form>
 </fieldset>

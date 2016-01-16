@@ -1,37 +1,59 @@
 <?php
-/** Polls and polls archives.
+/**
+ * Polls and polls archives.
  *
- * @program   idxCMS: Flat Files Content Management Sysytem
- * @file      system/polls.class.php
- * @version   2.4
+ * @program   idxCMS: Flat Files Content Management System
+ * @version   3.0
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011-2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+ * @license   Creative Commons — Attribution-NonCommercial-ShareAlike 4.0 International
+ * @file      system/polls.class.php
  * @package   Polls
  * @overview  Polls and polls archives.
  */
-if (!defined('idxCMS')) die();
 
 class POLLS {
 
-    public  $active  = [];       # Current poll
-    public  $old     = [];       # Old poll
+    /** @var array Current active poll */
+    public  $active  = [];
+
+    /** @var array Old active poll */
+    public  $old     = [];
+
+    /** @var string User cookie */
     private $_cookie = '';
 
+    /** Class constructor */
     public function __construct() {
         $this->_cookie = CONFIG::getValue('main', 'cookie');
     }
 
+    /**
+     * Returns data of all active polls.
+     *
+     * @return array Active polls data
+     */
     public function getActivePolls() {
         $this->active = GetUnserialized(CONTENT.'polls');
         return $this->getPolls($this->active);
     }
 
+    /**
+     * Returns data of all archived polls.
+     *
+     * @return array Data of archived polls
+     */
     public function getArchivedPolls() {
         $this->old = GetUnserialized(CONTENT.'polls-archive');
         return $this->getPolls($this->old);
     }
 
+    /**
+     * Counts voices for each answer in poll.
+     *
+     * @param  array $polls Polls data
+     * @return array Data of archived polls
+     */
     private function getPolls($polls) {
         $result = [];
         if (!empty($polls)) {
@@ -52,6 +74,14 @@ class POLLS {
         return $result;
     }
 
+    /**
+     * Starts active poll.
+     * Assigns a random number as poll ID.
+     * This ID will be used in a user cookie after voiting.
+     *
+     * @param  string  $id Poll ID
+     * @return boolean     The result of operation
+     */
     public function startPoll($question, $answers) {
         if (empty($question) || empty($answers)) {
             throw new Exception('Empty question or no variants');
@@ -61,7 +91,7 @@ class POLLS {
         foreach (explode(LF, preg_replace("/[\n\r]+/", LF, $answers)) as $variant) {
             if (!empty($variant)) {
                 $data['answers'][] = $variant;
-                $data['count'][] = 0;
+                $data['count'][]   = 0;
             }
         }
         $data['ips'] = [];
@@ -69,12 +99,24 @@ class POLLS {
         return $this->savePolls(TRUE, FALSE);
     }
 
+    /**
+     * Stops active poll.
+     *
+     * @param  string  $id Poll ID
+     * @return boolean     The result of operation
+     */
     public function stopPoll($id) {
         $this->old[] = $this->active[$id];
         unset($this->active[$id]);
         return $this->savePolls(TRUE, TRUE);
     }
 
+    /**
+     * Removes active poll.
+     *
+     * @param  string  $id Poll ID
+     * @return boolean     The result of operation
+     */
     public function removePoll($id) {
         $new = [];
         foreach ($this->active as $key => $value) {
@@ -86,6 +128,12 @@ class POLLS {
         return $this->savePolls(TRUE, FALSE);
     }
 
+    /**
+     * Removes poll from the archive.
+     *
+     * @param  string  $id Poll ID
+     * @return boolean     The result of operation
+     */
     public function removePollFromArchive($id) {
         $new = [];
         foreach ($this->old as $key => $value) {
@@ -97,6 +145,16 @@ class POLLS {
         return $this->savePolls(FALSE, TRUE);
     }
 
+    /**
+     * Voiting.
+     *
+     * @param  string  $poll   Poll ID
+     * @param  integer $answer Poll ID
+     * @throws Exception "Invalid ID"
+     * @throws Exception "This answer does not exists in this poll"
+     * @throws Exception "You already voted in this poll"
+     * @return boolean The result of operation
+     */
     public function voteInPoll($poll, $answer) {
         if (empty($this->active[$poll])) {
             throw new Exception('Invalid ID');
@@ -104,7 +162,7 @@ class POLLS {
         if (!isset($this->active[$poll]['answers'][$answer])) {
             throw new Exception('This answer does not exists in this poll');
         }
-        $user = USER::$logged_in ? USER::getUser('username') : $_SERVER['REMOTE_ADDR'];
+        $user = USER::$logged_in ? USER::getUser('user') : $_SERVER['REMOTE_ADDR'];
         if ($this->isVotedInPoll($poll)) {
             throw new Exception('You already voted in this poll');
         }
@@ -114,8 +172,14 @@ class POLLS {
         return $this->savePolls(TRUE, FALSE);
     }
 
+    /**
+     * Checks already voted user.
+     *
+     * @param  string  $poll Poll ID
+     * @return boolean       The result of operation
+     */
     public function isVotedInPoll($poll) {
-        $user = USER::$logged_in ? USER::getUser('username') : $_SERVER['REMOTE_ADDR'];
+        $user = USER::$logged_in ? USER::getUser('user') : $_SERVER['REMOTE_ADDR'];
         if (in_array($user, $this->active[$poll]['ips'])) {
             return TRUE;
         }
@@ -125,10 +189,16 @@ class POLLS {
         return FALSE;
     }
 
-    public function showPolls($polls, $tpl) {
+    /**
+     * Shows active polls.
+     *
+     * @param  array $polls Polls data
+     * @return array        Formatted polls data
+     */
+    public function showPolls($polls) {
         $colors = ['red', 'yellow', 'blue', 'green', 'purple', 'aqua', 'gray', 'teal', 'white', 'black'];
         $result = [];
-        $output = '';
+        $output = [];
         foreach ($polls as $id => $poll) {
             $result = $poll;
             $result['id'] = $id;
@@ -137,36 +207,31 @@ class POLLS {
             }
             $result['answers'] = [];
             foreach ($poll['answers'] as $i => $answer) {
-                $result['answers'][$i]['id'] = $i;
+                $result['answers'][$i]['id']     = $i;
                 $result['answers'][$i]['answer'] = $answer;
                 $result['answers'][$i]['count']  = $poll['count'][$i];
                 $result['answers'][$i]['voices'] = $poll['voices'][$i];
-                if ($poll['voices'][$i] == 0) {
-                    $result['answers'][$i]['color'] = 'transparent';
-                } else {
-                    $result['answers'][$i]['color'] = $colors[$i];
-                }
+                $result['answers'][$i]['color']  = ($poll['voices'][$i] === 0) ? 'transparent' : $colors[$i];
             }
-
-            $output .= $tpl->parse($result);
+            $output[] = $result;
         }
         return $output;
     }
 
+    /**
+     * Saves poll.
+     *
+     * @param  boolean $active Active poll
+     * @param  boolean $old    Old poll
+     * @return boolean         The result of operation
+     */
     private function savePolls($active = TRUE, $old = TRUE) {
-        if ($active) {
-            $a = file_put_contents(CONTENT.'polls', serialize($this->active), LOCK_EX);
-        }
-        if ($old) {
-            $b = file_put_contents(CONTENT.'polls-archive', serialize($this->old), LOCK_EX);
-        }
+        if ($active) $a = file_put_contents(CONTENT.'polls', serialize($this->active), LOCK_EX);
+        if ($old)    $b = file_put_contents(CONTENT.'polls-archive', serialize($this->old), LOCK_EX);
+
         if ($active && $old) return $a && $b;
         elseif ($old)        return $b;
         elseif ($active)     return $a;
         else return TRUE;
-    }
-
-    public function getError() {
-        return $this->error;
     }
 }

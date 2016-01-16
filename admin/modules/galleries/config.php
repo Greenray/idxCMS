@@ -1,40 +1,41 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - Galleries
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: Gallery configuration.
 
 if (!defined('idxADMIN')) die();
 
-$config = CONFIG::getSection('galleries');
-
 if (isset($init)) {
     if (empty($config)) {
-        $config['description-length'] = 300;
-        $config['comment-length']     = 2000;
-        $config['images-per-page']    = 9;
-        $config['comments-per-page']  = 10;
+        $config['description_length'] = 300;
+        $config['message_length']     = 4000;
+        $config['images_per_page']    = 9;
+        $config['comments_per_page']  = 10;
         $config['random'] = 1;
         $config['last']   = 1;
-        CMS::call('CONFIG')->setSection('galleries', $config);
-        if (!CMS::call('CONFIG')->save()) {
-            ShowMessage('Cannot save file');
-        }
+        CMS::call('CONFIG')->setSection('gallery', $config);
+        if (CMS::call('CONFIG')->save())
+             echo SYSTEM::showMessage('Configuration saved');
+        else echo SYSTEM::showError('Cannot save file'.' config.ini');
     }
 } else {
     if (!empty($REQUEST['save'])) {
         $config = [];
-        $config['description-length'] = empty($REQUEST['description-length']) ? 300  : (int) $REQUEST['description-length'];
-        $config['comment-length']     = empty($REQUEST['comment-length'])     ? 2000 : (int) $REQUEST['comment-length'];
-        $config['images-per-page']    = empty($REQUEST['images-per-page'])    ? 10   : (int) $REQUEST['images-per-page'];
-        $config['comments-per-page']  = empty($REQUEST['comments-per-page'])  ? 10   : (int) $REQUEST['comments-per-page'];
+        $config['description_length'] = empty($REQUEST['description_length']) ? 300  : (int) $REQUEST['description_length'];
+        $config['message_length']     = empty($REQUEST['message_length'])     ? 4000 : (int) $REQUEST['message_length'];
+        $config['images_per_page']    = empty($REQUEST['images_per_page'])    ? 10   : (int) $REQUEST['images_per_page'];
+        $config['comments_per_page']  = empty($REQUEST['comments_per_page'])  ? 10   : (int) $REQUEST['comments_per_page'];
         $config['random'] = empty($REQUEST['random']) ? 1 : (int) $REQUEST['random'];
         $config['last']   = empty($REQUEST['last'])   ? 1 : (int) $REQUEST['last'];
-        CMS::call('CONFIG')->setSection('galleries', $config);
-        if (!CMS::call('CONFIG')->save()) {
-            ShowMessage('Cannot save file');
-        }
+        CMS::call('CONFIG')->setSection('gallery', $config);
+        if (CMS::call('CONFIG')->save())
+             echo SYSTEM::showMessage('Configuration saved');
+        else echo SYSTEM::showError('Cannot save file'.' config.ini');
     }
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'config.tpl');
-    echo $TPL->parse($config);
+
+    $config = CONFIG::getSection('gallery');
+
+    $TPL = new TEMPLATE(__DIR__.DS.'config.tpl');
+    $TPL->set($config);
+    echo $TPL->parse();
 }

@@ -1,51 +1,55 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Tagcloud
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Module TAGCLOUD
 
 if (!defined('idxCMS')) die();
 
-$tc = CONFIG::getSection('tagcloud');
-
+$tagcloud = CONFIG::getSection('tagcloud');
+#
 # Tags colors
-if (!empty($tc['color'])) {
-    $tc['color'] = strtr($tc['color'], ['#' => '0x']);
+#
+if (!empty($tagcloud['color'])) {
+    $tagcloud['color'] = strtr($tagcloud['color'], ['#' => '0x']);
     for ($i = 0; $i < 11; $i++) {
-        $colors[$i] = $tc['color'];
+        $colors[$i] = $tagcloud['color'];
     }
-} else $colors = ['0xff0000','0x0000ff','0x00ff00','0xffff00','0xff00ff','0xff9900','0x808080','0x993300','0x00ffff','0x0f0f0f','0x6699ff'];
-
+} else $colors = ['0xff0000','0x0000ff','0x00ff00','0xffff00','0xff00ff','0xff9900',
+                  '0x808080','0x993300','0x00ffff','0x0f0f0f','0x6699ff'];
+#
 # Colors for highlighting tags
-if (!empty($tc['hicolor'])) {
-    $tc['hicolor'] = strtr($tc['hicolor'], ['#' => '0x']);
+#
+if (!empty($tagcloud['hicolor'])) {
+    $tagcloud['hicolor'] = strtr($tagcloud['hicolor'], ['#' => '0x']);
     for ($i = 0; $i < 11; $i++) {
-        $hicolors[$i] = $tc['hicolor'];
+        $hicolors[$i] = $tagcloud['hicolor'];
     }
-} else $hicolors = ['0xff9900','0x808080','0x0000ff','0x00ff00','0xffff00','0x6699ff','0xff00ff','0x00ffff','0x993300','0xff0000','0x0f0f0f'];
+} else $hicolors = ['0xff9900','0x808080','0x0000ff','0x00ff00','0xffff00',
+                    '0x6699ff','0xff00ff','0x00ffff','0x993300','0xff0000','0x0f0f0f'];
 
-$tc['search'] = '';
-$tc['search_txt'] = '';
+$search     = '';
+$search_txt = '';
 $enabled = CONFIG::getSection('enabled');
-$search  = ['posts', 'forum', 'catalogs'];
+$modules = ['posts', 'forum', 'catalogs', 'gallery'];
 
-foreach ($search as $allowed) {
+foreach ($modules as $allowed) {
     if (array_key_exists($allowed, $enabled)) {
-        $tc['search'] .= '%26'.$allowed.'=on';          # Create the parameter for search from flash tagcloud
-        $tc['search_txt'] .= '&amp;'.$allowed.'=on';    # Create the parameter for search from text tagcloud
+        $search     .= '%26'.$allowed.'=on';      # Create the parameter for search from flash tagcloud
+        $search_txt .= '&amp;'.$allowed.'=on';    # Create the parameter for search from text tagcloud
     }
 }
 
-if (empty($tc['wmode']))
-     $tc['wmode']   = '';
-else $tc['bgcolor'] = '';
+if (empty($tagcloud['wmode']))
+     $tagcloud['wmode']   = '';
+else $tagcloud['bgcolor'] = '';
 
 $tags = PrepareTags();
 
 if (!empty($tags)) {
-    $tags_amount = sizeof($tags);
-    if ($tc['tags'] < $tags_amount) $tags_amount = $tc['tags'];     # Number of tags to show in tagcloud
-
+    #
+    # Number of tags to show in tagcloud
+    #
+    $tags_amount = ($tagcloud['tags'] < sizeof($tags)) ? $tagcloud['tags'] : sizeof($tags);
     $tags = array_slice($tags, 0, $tags_amount, TRUE);
     uasort($tags, 'scmp');
     $tags_cloud = [];
@@ -54,25 +58,32 @@ if (!empty($tags)) {
         $tags_cloud[] = $key;
         $tags_rate[]  = $value;
     }
-    # Prepear link for flash cloud
-    $tc['tagcloud'] = '<tags>';
+    #
+    # Prepear links for flash cloud
+    #
+    $tagcloud['tagcloud'] = '<tags>';
     for ($i = 0; $i < $tags_amount; $i++) {
-        $rand = mt_rand(0, 10);
-        $tc['tagcloud'] .= '<a href=\'./?module=search%26search='.$tags_cloud[$i].$tc['search'].'\' style=\''.$tc['style'].'\' color=\''.$colors[$rand].'\' hicolor=\''.$hicolors[$rand].'\'>'.$tags_cloud[$i].'</a>';
+        $tagcloud['tagcloud'] .= '<a href=\''.MODULE.'search%26search='.$tags_cloud[$i].$search.'\' style=\''.$tagcloud['font'].'\' color=\''.$colors[mt_rand(0, 10)].'\' hicolor=\''.$hicolors[mt_rand(0, 10)].'\'>'.$tags_cloud[$i].'</a>';
     }
-    $tc['tagcloud'] .= '</tags>';
-    $tc['tags_amount'] = $tags_amount;
-    $tc['tags_cloud']  = $tags_cloud;
-    $tc['tags_rate']   = $tags_rate;
-    $tc['tags_colors'] = ['#ff0000','#0000ff','#00ff00','#ffff00','#ff00ff','#ff9900','#808080','#993300','#00ffff','#0f0f0f','#6699ff'];
-    $tc['font_size']   = ['8','9','10','11','12','14','16','18','20','22'];
-    $tc['tags_txt']    = '';
-    for ($i = 0; $i < $tc['tags_amount']; $i++) {
-        if ($tc['tags_rate'][$i] > 9) {
-            $tc['tags_rate'][$i] = 9;
+    $tagcloud['tagcloud'] .= '</tags>';
+    #
+    # Prepear links for text cloud
+    #
+    $colors = ['#ff0000','#0000ff','#00ff00','#ffff00','#ff00ff','#ff9900',
+               '#808080','#993300','#00ffff','#0f0f0f','#6699ff'];
+    $font_size = ['8','9','10','11','12','13','14','15','16','18'];
+
+    $tagcloud['tags_txt'] = '';
+    for ($i = 0; $i < $tags_amount; $i++) {
+        if ($tags_rate[$i] > 9) {
+            $tags_rate[$i] = 9;
         }
-        $tc['tags_txt'] .= '<span><a href=\'./?module=search&amp;search='.$tc['tags_cloud'][$i].$tc['search_txt'].'\' style="color:'.$tc['tags_colors'][mt_rand(0,10)].';font-size:'.$tc['font_size'][$tc['tags_rate'][$i]].'px">'.$tc['tags_cloud'][$i].'</a></span>'.LF;
+        $tagcloud['tags_txt'] .= '<span><a href="'.MODULE.'search&amp;search='.$tags_cloud[$i].$search_txt.'" style="color:'.$colors[mt_rand(0,10)].';font-size:'.$font_size[$tags_rate[$i]].'px">'.$tags_cloud[$i].'</a></span>'.LF;
     }
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'tagcloud.tpl');
-    ShowWindow(__('Tagcloud'), $TPL->parse($tc));
+
+    $tagcloud['path'] = MODULES.'tagcloud'.DS;
+
+    $TPL = new TEMPLATE(__DIR__.DS.'tagcloud.tpl');
+    $TPL->set($tagcloud);
+    SYSTEM::defineWindow('Tagcloud', $TPL->parse());
 }

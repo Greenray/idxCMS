@@ -1,34 +1,35 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - Forum
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: Forum configuration.
 
 if (!defined('idxADMIN')) die();
 
-$config = CONFIG::getSection('forum');
-
 if (isset($init)) {
     if (empty($config)) {
-        $config['topics-per-page']  = 10;
-        $config['replies-per-page'] = 10;
-        $config['reply-length']     = 4000;
+        $config['topics_per_page']  = 10;
+        $config['replies_per_page'] = 10;
+        $config['message_length']   = 4000;
         CMS::call('CONFIG')->setSection('forum', $config);
-        if (!CMS::call('CONFIG')->save()) {
-            ShowMessage('Cannot save file');
-        }
+        if (CMS::call('CONFIG')->save())
+             echo SYSTEM::showMessage('Configuration saved');
+        else echo SYSTEM::showError('Cannot save file'.' config.ini');
     }
 } else {
     if (!empty($REQUEST['save'])) {
         $config = [];
-        $config['topics-per-page']  = empty($REQUEST['topics-per-page'])  ? 10   : (int) $REQUEST['topics-per-page'];
-        $config['replies-per-page'] = empty($REQUEST['replies-per-page']) ? 10   : (int) $REQUEST['replies-per-page'];
-        $config['reply-length']     = empty($REQUEST['reply-length'])     ? 4000 : (int) $REQUEST['reply-length'];
+        $config['topics_per_page']  = empty($REQUEST['topics_per_page'])  ? 10   : (int) $REQUEST['topics_per_page'];
+        $config['replies_per_page'] = empty($REQUEST['replies_per_page']) ? 10   : (int) $REQUEST['replies_per_page'];
+        $config['message_length']   = empty($REQUEST['message_length'])   ? 4000 : (int) $REQUEST['message_length'];
         CMS::call('CONFIG')->setSection('forum', $config);
-        if (!CMS::call('CONFIG')->save()) {
-            ShowMessage('Cannot save file');
-        }
+        if (CMS::call('CONFIG')->save())
+             echo SYSTEM::showMessage('Configuration saved');
+        else echo SYSTEM::showError('Cannot save file'.' config.ini');
     }
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'config.tpl');
-    echo $TPL->parse($config);
+
+    $config = CONFIG::getSection('forum');
+
+    $TPL = new TEMPLATE(__DIR__.DS.'config.tpl');
+    $TPL->set($config);
+    echo $TPL->parse();
 }

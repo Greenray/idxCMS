@@ -1,15 +1,14 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Guestbook
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Module GUESTBOOK
 
 if (!defined('idxCMS')) die();
 
 SYSTEM::set('pagename', __('Guestbook'));
 $GB = new MESSAGE(CONTENT, 'guestbook');
 $messages = $GB->getMessages();
-$id = FILTER::get('REQUEST', 'message');
+$id = (int) FILTER::get('REQUEST', 'comment');
 
 if (!empty($REQUEST['save'])) {
     try {
@@ -17,31 +16,29 @@ if (!empty($REQUEST['save'])) {
             $GB->saveMessage($id, FILTER::get('REQUEST', 'text'));
             unset($id);
         } else {
-            if (USER::$logged_in || CONFIG::getValue('guestbook', 'allow-guests-post')) {
-                CheckCaptcha();
+            if (USER::$logged_in) {
                 $GB->sendMessage(FILTER::get('REQUEST', 'text'));
             }
         }
         FILTER::remove('REQUEST', 'text');
     } catch (Exception $error) {
-        ShowError(__($error->getMessage()));
+        SYSTEM::showError($error->getMessage());
     }
 } else {
     if (!empty($REQUEST['action']) && !empty($id)) {
         switch ($REQUEST['action']) {
             case 'edit':
                 if (!empty($messages[$id])) {
-                    $output = [];
+                    $TPL = new TEMPLATE(__DIR__.DS.'comment-edit.tpl');
                     if (USER::moderator('guestbook', $messages[$id])) {
-                        $output['comment'] = $id;
-                        $output['text'] = empty($REQUEST['text']) ? $messages[$id]['text'] : $REQUEST['text'];
+                        $TPL->set('comment', $id);
+                        $TPL->set('text', empty($REQUEST['text']) ? $messages[$id]['text'] : $REQUEST['text']);
                     }
                     if (USER::moderator('guestbook')) {
-                        $output['moderator'] = TRUE;
+                        $TPL->set('moderator', TRUE);
                     }
-                    $output['bbcodes'] = CMS::call('PARSER')->showBbcodesPanel('edit.text', !empty($output['moderator']));
-                    $TPL = new TEMPLATE(dirname(__FILE__).DS.'comment-edit.tpl');
-                    ShowWindow(__('Edit'), $TPL->parse($output));
+                    $TPL->set('bbcodes', CMS::call('PARSER')->showBbcodesPanel('edit.text', USER::moderator('guestbook')));
+                    SYSTEM::defineWindow('Edit', $TPL->parse());
                 }
                 break;
 
@@ -56,79 +53,73 @@ if (!empty($REQUEST['save'])) {
             case 'ban':
                 if (USER::moderator('guestbook')) CMS::call('FILTER')->ban();
                 break;
-
             default:
-                Redirect('guestbook');
                 break;
         }
     }
 }
-
+#
 # Show messages
+#
 $messages = $GB->getMessages();
 
 if (!empty($messages)) {
+    $TPL      = new TEMPLATE(__DIR__.DS.'comment.tpl');
+    $output   = '';
     $messages = array_reverse($messages, TRUE);
     $count    = sizeof($messages);
     $ids      = array_keys($messages);
-    $perpage  = (int) CONFIG::getValue('guestbook', 'per-page');
+    $perpage  = (int) CONFIG::getValue('guestbook', 'per_page');
     $page     = (int) FILTER::get('REQUEST', 'page');
     $pagination = GetPagination($page, $perpage, $count);
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'guestbook.tpl');
-    $output = '';
     for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
         if (!empty($messages[$ids[$i]])) {
-            $messages[$ids[$i]]['id']   = $ids[$i];
-            $messages[$ids[$i]]['text'] = CMS::call('PARSER')->parseText($messages[$ids[$i]]['text']);
-            $messages[$ids[$i]]['date'] = FormatTime('d F Y H:i:s', $messages[$ids[$i]]['time']);
+            $messages[$ids[$i]]['id']     = $ids[$i];
+            $messages[$ids[$i]]['text']   = CMS::call('PARSER')->parseText($messages[$ids[$i]]['text']);
+            $messages[$ids[$i]]['date']   = FormatTime('d F Y H:i:s', $messages[$ids[$i]]['time']);
             $messages[$ids[$i]]['avatar'] = GetAvatar($messages[$ids[$i]]['author']);
-            if ($messages[$ids[$i]]['author'] !== 'guest') {
-                if ($messages[$ids[$i]]['author'] !== USER::getUser('username')) {
-                    $messages[$ids[$i]]['user'] = TRUE;
-                }
-                $author = USER::getUserData($messages[$ids[$i]]['author']);
-                $messages[$ids[$i]]['status']  = __($author['status']);
-                $messages[$ids[$i]]['stars']   = $author['stars'];
-                $messages[$ids[$i]]['country'] = $author['country'];
-                $messages[$ids[$i]]['city']    = $author['city'];
-                if (($author['rights'] === '*') || (USER::getUser('username') === $messages[$ids[$i]]['author'])) {
-                    unset($messages[$ids[$i]]['ip']);
-                }
+            $author = USER::getUserData($messages[$ids[$i]]['author']);
+            if ($messages[$ids[$i]]['author'] !== $author['user']) {
+                $messages[$ids[$i]]['user'] = TRUE;
+            }
+            $messages[$ids[$i]]['status']  = __($author['status']);
+            $messages[$ids[$i]]['stars']   = $author['stars'];
+            $messages[$ids[$i]]['country'] = $author['country'];
+            $messages[$ids[$i]]['city']    = $author['city'];
+            if (($author['rights'] === '*') || (USER::getUser('user') === $messages[$ids[$i]]['author'])) {
+                unset($messages[$ids[$i]]['ip']);
             }
             if (USER::moderator('guestbook', $messages[$ids[$i]])) {
                 $messages[$ids[$i]]['moderator'] = TRUE;
+                $messages[$ids[$i]]['link'] = MODULE.'guestbook';
                 if (!empty($messages[$ids[$i]]['ip'])) {
                     if ($page < 2)
                          $messages[$ids[$i]]['ban'] = MODULE.'guestbook';
                     else $messages[$ids[$i]]['ban'] = MODULE.'guestbook'.PAGE.$page;
                 }
             }
-            $output .= $TPL->parse($messages[$ids[$i]]);
+            $TPL->set($messages[$ids[$i]]);
+            $output .= $TPL->parse();
         }
     }
-    ShowWindow(__('Guestbook'), $output);
+
+    SYSTEM::defineWindow('Guestbook', $output);
     if ($count > $perpage) {
-        ShowWindow('', Pagination($count, $perpage, $page, MODULE.'guestbook'));
+        SYSTEM::defineWindow('', Pagination($count, $perpage, $page, MODULE.'guestbook'));
     }
-} else  ShowWindow(__('Guestbook'), __('Database is empty'), 'center');
+}
 
 unset($GB);
-
+#
 # Show post form
-if (USER::$logged_in || CONFIG::getValue('guestbook', 'allow-guests-post')) {
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'comment-post.tpl');
-    ShowWindow(
-        __('Message'),
-        $TPL->parse(
-            [
-                'nickname'       => USER::getUser('nickname'),
-                'not_admin'      => !USER::$root,
-                'text'           => FILTER::get('REQUEST', 'text'),
-                'action'         => MODULE.'guestbook',
-                'comment-length' => CONFIG::getValue('guestbook', 'message-length'),
-                'bbcodes'        => CMS::call('PARSER')->showBbcodesPanel('post-comment.text'),
-                'captcha'        => ShowCaptcha()
-            ]
-        )
-    );
+#
+if (USER::$logged_in) {
+    $TPL = new TEMPLATE(__DIR__.DS.'comment-post.tpl');
+    $TPL->set('nick',           USER::getUser('nick'));
+    $TPL->set('admin',          USER::$root);
+    $TPL->set('text',           FILTER::get('REQUEST', 'text'));
+    $TPL->set('action',         MODULE.'guestbook');
+    $TPL->set('message_length', USER::$root ? NULL : CONFIG::getValue('guestbook', 'message_length'));
+    $TPL->set('bbcodes',        CMS::call('PARSER')->showBbcodesPanel('comment_post.text'));
+    SYSTEM::defineWindow('Guestbook', $TPL->parse());
 }

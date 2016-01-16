@@ -1,8 +1,14 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Menu
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Module MENU: Simple menu template
 
 die();?>
-<li><a href="{link}" title="{desc}">{name}</a></li>
+
+<div class="simple-menu">
+    <ul class="center">
+    <!-- FOREACH menu = $menus -->
+        <li><a href="$menu.link" title="$menu.desc">$menu.name</a></li>
+    <!-- ENDFOREACH -->
+    </ul>
+</div>

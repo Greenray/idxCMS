@@ -1,8 +1,7 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Posts
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Module POSTS: Posts calendar
 
 if (!defined('idxCMS')) die();
 
@@ -56,6 +55,7 @@ if (($selected_year === $current_year) && ($selected_month === $current_month)) 
     $CALENDAR->highlight(FormatTime('d', $today));
 }
 
-$TPL = new TEMPLATE(dirname(__FILE__).DS.'calendar.tpl');
-ShowWindow(__('Posts calendar'), $TPL->parse($CALENDAR->create($current_year, $selected_year, $selected_month)));
+$TPL = new TEMPLATE(__DIR__.DS.'calendar.tpl');
+$TPL->set($CALENDAR->create($current_year, $selected_year, $selected_month));
+SYSTEM::defineWindow('Posts calendar', $TPL->parse());
 unset($CALENDAR);

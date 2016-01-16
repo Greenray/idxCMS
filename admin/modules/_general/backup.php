@@ -1,57 +1,78 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - Backup
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: Backups managment.
 
 if (!defined('idxADMIN') || !USER::$root) die();
 
-if (!empty($REQUEST['backup'])) {
-    if (!empty($REQUEST['dir'])) {
-        $exclude_files =['arj','avi','bzip','bzip2','gz','gzip','mp3','mov','mpeg','rar','tar','wmv','zip'];
-
-        # Backup file name
-        $backup = BACKUPS.'backup_'.date('H-i-s_d.m.Y').'.tar.gz';
-        $PHAR = new PharData($backup);
-
-        foreach($REQUEST['dir'] as $dir) {
-            try {
-                $list = GetFilesList(CONTENT.$dir);
-                foreach ($list as $file) {
-                    $info = pathinfo(CONTENT.$dir.DS.$file);
-                        if (!in_array($info['extension'], $exclude_files)) {
-                        $PHAR->addFile(CONTENT.$dir.DS.$file);
+try {
+    if (!empty($REQUEST['save'])) {
+        if (!empty($REQUEST['dir']) || !empty($REQUEST['file'])) {
+            $exclude_files = ['arj','avi','bzip','bzip2','gz','gzip','mp3','mov','mpeg','rar','tar','wmv','zip'];
+            #
+            # Backup filename
+            #
+            $PHAR = new PharData(BACKUPS.'backup_'.date('H-i-s_d.m.Y').'.tar.gz');
+            #
+            # Backup all files in selected directories
+            #
+            if (!empty($REQUEST['dir'])) {
+                foreach($REQUEST['dir'] as $dir) {
+                    $list = GetFilesList(CONTENT.$dir);
+                    foreach ($list as $file) {
+                        $info = pathinfo(CONTENT.$dir.DS.$file);
+                        if (empty($info['extension']) || !in_array($info['extension'], $exclude_files)) {
+                            $PHAR->addFile(CONTENT.$dir.DS.$file);
+                        }
                     }
                 }
-            } catch (Exception $error) {
-                ShowMessage(__($error->getMessage()));
             }
-        }
-    } else ShowMessage(__('Nothing selected'));
-}
+            #
+            # Backup file
+            #
+            if (!empty($REQUEST['file'])) {
+                foreach($REQUEST['file'] as $file) {
+                    $PHAR->addFile(CONTENT.$file);
+                }
+            }
 
-if (!empty($REQUEST['delete']) && !empty($REQUEST['file'])) {
-    foreach ($REQUEST['file'] as $file) {
-        if (file_exists(BACKUPS.$file)) {
-            unlink(BACKUPS.$file);
-        }
+        } elseif (!empty($REQUEST['delete']) && !empty($REQUEST['backups'])) {
+            #
+            # Delete selected backups
+            #
+            foreach ($REQUEST['backups'] as $file) {
+                if (file_exists(BACKUPS.$file)) {
+                    unlink(BACKUPS.$file);
+                }
+            }
+        } else SYSTEM::showError('Nothing selected');
     }
+} catch (Exception $error) {
+    SYSTEM::showError($error->getMessage());
 }
-
+#
 # INTERFACE
-$files  = GetFilesList(BACKUPS);
-$output = [];
-
-foreach ($files as $file) {
-    $output['files'][$file] = filesize(BACKUPS.$file);
-}
-
+#
+$backups = GetFilesList(BACKUPS);
+$output  = [];
 $output['total'] = FormatSize(GetDirSize(BACKUPS));
-$dirs  = AdvScanDir(CONTENT, '', 'dir', FALSE, ['temp']);
-
-foreach ($dirs as $dir) {
-    $output['dirs'][$dir] = FormatSize(GetDirSize(CONTENT.$dir.DS));
+foreach ($backups as $key => $file) {
+    $output['backups'][$key]['name'] = $file;
+    $output['backups'][$key]['size'] = FormatSize(filesize(BACKUPS.$file));
 }
 
-$TPL = new TEMPLATE(dirname(__FILE__).DS.'backup.tpl');
-echo $TPL->parse($output);
+$dirs = AdvScanDir(CONTENT, '', 'dir', FALSE, ['temp', 'backups']);
+foreach ($dirs as $key => $dir) {
+    $output['dirs'][$key]['name'] = $dir;
+    $output['dirs'][$key]['size'] = FormatSize(GetDirSize(CONTENT.$dir.DS));
+}
+
+$files = AdvScanDir(CONTENT, '', 'file', FALSE);
+foreach ($files as $key => $file) {
+    $output['files'][$key]['name'] = $file;
+    $output['files'][$key]['size'] = FormatSize(filesize(CONTENT.$file));
+}
+
+$TPL = new TEMPLATE(__DIR__.DS.'backup.tpl');
+$TPL->set($output);
+echo $TPL->parse();

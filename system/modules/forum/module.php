@@ -1,12 +1,13 @@
 <?php
-/** Forum.
+/**
+ * Forum.
  *
- * @program   idxCMS: Flat Files Content Management Sysytem
- * @file      system/modules/forum/module.php
- * @version   2.4
+ * @program   idxCMS: Flat Files Content Management System
+ * @version   3.0
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+ * @copyright (c) 2011 - 2016 Victor Nabatov
+ * @license   Creative Commons — Attribution-NonCommercial-ShareAlike 4.0 International
+ * @file      system/modules/forum/module.php
  * @package   Forum
  * @overview  Website forum.
  *            Forum database is similar to posts database.
@@ -19,7 +20,9 @@ define('FORUM', CONTENT.'forum'.DS);
 
 require SYS.'forum.class.php';
 
-/** Sorts array.
+/**
+ * Sorts array.
+ *
  * @param  array $array Link to array to sort
  * @return array        Sorted array
  */
@@ -34,8 +37,10 @@ function ArraySort(&$array) {
     uasort($array, "ArraySortFunc");
 }
 
-/** ArraySort callback.
+/**
+ * ArraySort callback.
  * String comparison.
+ *
  * @param  array   $a Fist array to compare
  * @param  array   $b Second array to compare (Default NULL)
  * @return boolean    The result of operation
@@ -66,12 +71,13 @@ switch (SYSTEM::get('locale')) {
         $LANG['def']['New topic'] = 'Новая тема';
         $LANG['def']['Pin'] = 'Прикрепить';
         $LANG['def']['Reply'] = 'Ответ';
-//        $LANG['def']['Replies'] = 'Ответы';
+        $LANG['def']['Replies'] = 'Ответы';
         $LANG['def']['Reply editing'] = 'Редактирование ответа';
         $LANG['def']['Topic'] = 'Тема';
         $LANG['def']['Topics'] = 'Темы';
         $LANG['def']['Unpin'] = 'Открепить';
         break;
+
     case 'ua':
         $LANG['def']['Cannot save topic'] = 'Не можу зберегти тему';
         $LANG['def']['Forum'] = 'Форум';
@@ -79,12 +85,13 @@ switch (SYSTEM::get('locale')) {
         $LANG['def']['New topic'] = 'Нова тема';
         $LANG['def']['Pin'] = 'Прикріпити';
         $LANG['def']['Reply'] = 'Відповідь';
-//        $LANG['def']['Replies'] = 'Відповіді';
+        $LANG['def']['Replies'] = 'Відповіді';
         $LANG['def']['Reply editing'] = 'Редагування відповіді';
         $LANG['def']['Topic'] = 'Тема';
         $LANG['def']['Topics'] = 'Теми';
         $LANG['def']['Unpin'] = 'Відкріпити';
         break;
+
     case 'by':
         $LANG['def']['Cannot save topic'] = 'Не магу захаваць тэму';
         $LANG['def']['Forum'] = 'Форум';
@@ -92,7 +99,7 @@ switch (SYSTEM::get('locale')) {
         $LANG['def']['New topic'] = 'Новая тэма';
         $LANG['def']['Pin'] = 'Прымацаваць';
         $LANG['def']['Reply'] = 'Адказ';
-//        $LANG['def']['Replies'] = 'Адказы';
+        $LANG['def']['Replies'] = 'Адказы';
         $LANG['def']['Reply editing'] = 'Рэдагаванне адказу';
         $LANG['def']['Topic'] = 'Тэма';
         $LANG['def']['Topics'] = 'Тэмы';
@@ -102,10 +109,12 @@ switch (SYSTEM::get('locale')) {
 
 SYSTEM::registerModule('forum', 'Forum', 'main');
 SYSTEM::registerModule('forum.last', 'Last topics', 'box');
-USER::setSystemRights(['forum' => __('Forum').': '.__('Moderator')]);
+
 SYSTEM::registerMainMenu('forum');
 SYSTEM::registerSiteMap('forum');
 SYSTEM::registerSearch('forum');
+
+USER::setSystemRights(['forum' => __('Forum').': '.__('Moderator')]);
 
 $sections = CMS::call('FORUM')->getSections();
 

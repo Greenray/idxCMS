@@ -1,18 +1,20 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Menu
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Module "MENU: Simple menu
 
 if (!defined('idxCMS')) die();
 
-$data   = GetUnserialized(CONTENT.'menu');
-$TPL    = new TEMPLATE(dirname(__FILE__).DS.'simple.tpl');
-$output = '<div id="simple-menu"><ul class="center">';
+$data = GetUnserialized(CONTENT.'menu');
 
+$output = [];
 foreach ($data as $module => $menu) {
-    $output .= $TPL->parse($menu);
+    $output[$module]['name'] = $menu['name'];
+    $output[$module]['desc'] = $menu['desc'];
+    $output[$module]['link'] = $menu['link'];
 }
 
-$output .= '</ul></div>';
-ShowWindow(__('Simple menu'), $output);
+$TPL = new TEMPLATE(__DIR__.DS.'simple.tpl');
+$TPL->set('menus', $output);
+
+SYSTEM::defineWindow('Simple menu', $TPL->parse());

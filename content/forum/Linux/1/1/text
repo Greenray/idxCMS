@@ -1,4 +1,21 @@
-Notice:
-the complexity of array_pop() is O(1). 
-the complexity of array_shift() is O(n).
-array_shift() requires a re-index process on the array, so it has to run over all the elements and index them.
+Какой-то очень важный и нужный текст.
+Вторая строка.
+php код:
+
+[php]/**
+ * Gets content of gziped file.
+ *
+ * @param  string $file Name of the file
+ * @return mixed        The content of file or FALSE
+ */
+function gzfile_get_contents($file) {
+    if (!$file = gzfile($file)) {
+        return FALSE;
+    }
+    if (!$file = implode('', $file)) {
+        return FALSE;
+    }
+    return $file;
+}[/php]
+
+Какой-то очень [b]важный[/b] и [i]нужный[/i] текст.

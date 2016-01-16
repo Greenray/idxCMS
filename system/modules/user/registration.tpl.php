@@ -1,18 +1,15 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module User
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Module USER: Registration form
 
 die();?>
 
-<link rel="stylesheet" href="{TOOLS}sliding.css" type="text/css" media="screen"/>
-<script type="text/javascript" src="{TOOLS}sliding.form.js"></script>
 <script type="text/javascript">
     function check(id) {
         var form = document.getElementById(id);
-        if (form.password.value === form.confirm.value) {
-            if (form.password.value !== '') {
+        if (form.password.value !== '') {
+            if (form.password.value === form.confirm.value) {
                 document.getElementById('yes').style.display = 'block';
                 document.getElementById('no').style.display  = 'none';
             }
@@ -25,13 +22,13 @@ die();?>
         var pwlength = (pw.length);
         if (pwlength > 5) pwlength = 5;
         var numnumeric = pw.replace(/[0-9]/g, '');
-        var numeric = (pw.length - numnumeric.length);
+        var numeric    = (pw.length - numnumeric.length);
         if (numeric > 3) numeric = 3;
-        var symbols = pw.replace(/\W/g, '');
+        var symbols    = pw.replace(/\W/g, '');
         var numsymbols = (pw.length - symbols.length);
         if (numsymbols > 3) numsymbols = 3;
         var numupper = pw.replace(/[A-Z]/g, '');
-        var upper = (pw.length - numupper.length);
+        var upper    = (pw.length - numupper.length);
         if (upper > 3) upper = 3;
         var pwstrength = ((pwlength * 10) - 20) + (numeric * 10) + (numsymbols * 15) + (upper * 10);
         if (pwstrength < 0)   pwstrength = 0;
@@ -41,17 +38,14 @@ die();?>
     function updatePasswordStrength(pwbox, pwdiv, divorderlist) {
         var bpb = "" + pwbox.value;
         var pwstrength = getPasswordStrength(bpb);
-        var bars = (parseInt(pwstrength / 10) * 10);
-        var pwdivEl = document.getElementById(pwdiv);
-        if (!pwdivEl) alert('Password strength display element missing');
-        var divlist = pwdivEl.getElementsByTagName('span');
-        var imgdivnum = 0;
+        var bars       = (parseInt(pwstrength / 10) * 10);
+        var pwdivEl    = document.getElementById(pwdiv);
+        var divlist    = pwdivEl.getElementsByTagName('span');
+        var imgdivnum  = 0;
         if (divorderlist && divorderlist.image > -1) imgdivnum = divorderlist.image;
         var imgdiv = divlist[imgdivnum];
         imgdiv.id  = 'passbar-' + bars;
     }
-</script>
-<script type="text/javascript">
     function checkUsername() {
         if (/^[a-zA-Z0-9]{3,10}$/.test(document.registration.user.value)) {
             document.getElementById('help').style.display = 'none';
@@ -71,133 +65,118 @@ die();?>
         var nickRegex  = /^[a-zA-Z0-9а-яА-Я_]+(([\_][a-zA-Z0-9а-яА-Я])?[a-zA-Z0-9а-яА-Я_]*)*$/;
         var emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
         if ((user === '') || !user.match(userRegex)) {
-            ShowAlert('[__Invalid login]', '[__Error]');
+            ShowAlert('__Invalid login__');
             return false;
         }
         if ((nick === '') || !nick.match(nickRegex)) {
-            ShowAlert('[__Invalid nickname]', '[__Error]');
+            ShowAlert('__Invalid nickname__');
             return false;
         }
         if (form.password.value === '') {
-            ShowAlert('[__Enter your password]', '[__Error]');
+            ShowAlert('__Enter your password__');
             return false;
         }
         if (form.confirm.value  === '') {
-            ShowAlert('[__Confirm password]', '[__Error]');
+            ShowAlert('__Confirm password__');
             return false;
         }
         if (form.password.value !== form.confirm.value) {
-            ShowAlert('[__Error in password]', '[__Error]');
+            ShowAlert('__Error in password__');
             return false;
         }
         if ((email === '') || !email.match(emailRegex)) {
-            ShowAlert('[__Invalid email]', '[__Error]');
+            ShowAlert('__Invalid email__');
             return false;
         }
-        [if=captcha]
+        <!-- IF !empty($captcha) -->
             if  (form.captcheckout.value === '') {
-                ShowAlert('[__Enter a code]', '[__Error]');
+                ShowAlert('__Enter a code__');
                 return false;
             }
-        [/if]
+        <!-- ENDIF -->
         return true;
     }
 </script>
-<div id="content">
-    <div id="sl_form">
+<a href="#" id="register"></a>
+<div id="registration_content">
+    <div id="registration_form">
         <div id="steps">
             <form name="registration" id="registration" method="post" action="" enctype="multipart/form-data" onsubmit="return checkUserForm(this);">
-                <fieldset class="step" title="текст">
-                    <legend>[__Account]</legend>
+                <fieldset class="step">
+                    <legend>__Account__</legend>
                     <p>
-                        <label for="user">[__Username]</label>
-                        <input type="text" name="user" id="user" value="{user}" class="required" onkeyup="checkUsername();" />
-                        <span class="online_help">
-                            <span id="help" class="help block">[__Only latin characters, digits and symbol "_"]</span>
-                            <span id="good" class="none"><font color="#00cc00">[__Login is allowed]</font></span>
-                            <span id="bad" class="none"><font color="#ff0000">[__Login is not allowed]</font></span>
+                        <label for="user">__Username__</label>
+                        <input id="user" type="text" name="user" value="$user" class="required" onkeyup="checkUsername();" />
+                        <span>
+                            <span id="help" class="help block">__Only latin characters, digits and symbol "_"__</span>
+                            <span id="good" class="none">__Login is allowed__</span>
+                            <span id="bad" class="none">__Login is not allowed__</span>
                         </span>
                     </p>
                     <p>
-                        <label for="nick">[__Nick]</label>
-                        <input type="text" name="nick" id="nick" value="{nick}" class="required" />
+                        <label for="nick">__Nick__</label>
+                        <input type="text" name="nick" id="nick" value="$nick" class="required" required>
                     </p>
                     <p>
-                        <label for="password">[__Password]</label>
-                        <input id="password" name="password" type="password" value="{password}" class="required" AUTOCOMPLETE=OFF onkeyup="check('registration'); updatePasswordStrength(this, 'pass_rating', { 'image':0, 'text':1 });" />
+                        <label for="password">__Password__</label>
+                        <input id="password" name="password" type="password" value="$password" class="required" autocomplete=off onkeyup="check('registration'); updatePasswordStrength(this, 'pass_rating', {'image':0, 'text':1});" />
                         <span id="pass_rating">
                             <span id="progresbar-2-0" class="pass_img"></span>
-                            <span id="pass_title">[__Password complexity]: </span>
-
+                            <span class="pass_title">__Password complexity__: </span>
                         </span>
                     </p>
                     <p>
-                        <label for="confirm">[__Confirm password]</label>
-                        <input id="confirm" type="password" name="confirm" value="{confirm}" class="required" AUTOCOMPLETE=OFF onkeyup="check('registration');" />
-                        <span class="online_help">
-                            <span id="yes" class="help none"><font color="#33cc00">[__Passwords are equal]</font></span>
-                            <span id="no" class="help none"><font color="#ff0000">[__Passwords are not equal]</font></span>
+                        <label for="confirm">__Confirm password__</label>
+                        <input id="confirm" type="password" name="confirm" value="$confirm" class="required" autocomplete=off onkeyup="check('registration');" />
+                        <span>
+                            <span id="yes" class="help none">__Passwords are equal__</span>
+                            <span id="no" class="help block">__Passwords are not equal__</span>
                         </span>
-
                     </p>
-                    <p class="msg help">[__Required fields have a yellow background]</p>
+                    <p class="msg help">__Required fields have a yellow background__</p>
                 </fieldset>
                 <fieldset class="step">
-                    <legend>[__Additionally]</legend>
+                    <legend>__Additionally__</legend>
                     <p>
-                        <label for="country">[__Country]</label>
-                        <input id="country" name="fields[country]" type="text" value="{country}" />
+                        <label for="country">__Country__</label>
+                        <input id="country" name="fields[country]" type="text" value="$country" />
                     </p>
                     <p>
-                        <label for="city">[__City]</label>
-                        <input id="city" name="fields[city]" type="text" value="{city}" />
+                        <label for="city">__City__</label>
+                        <input id="city" name="fields[city]" type="text" value="$city" />
                     </p>
                     <p>
-                        <label for="tz">[__Time zone]</label>
-                        {utz}
-                    </p>
-                </fieldset>
-                <fieldset class="step">
-                    <legend>[__Communication]</legend>
-                    <p>
-                        <label for="email">[__Email]</label>
-                        <input id="email" name="email" placeholder="myemail@mydomain.ru" type="email" value="{email}" class="required" />
-                    </p>
-                    <p>
-                        <label for="icq">[__ICQ]</label>
-                        <input id="icq" name="fields[icq]" type="text" value="{icq}" />
-                    </p>
-                    <p>
-                        <label for="website">[__Website]</label>
-                        <input id="website" name="fields[website]" placeholder="http://www.mywebsite.com" value="{website}" type="text" />
-                    </p>
-                    <p class="msg help">[__Required fields have a yellow background]</p>
-                </fieldset>
-                <fieldset class="step">
-                    <legend>[__Avatar]</legend>
-                    <p><img src="{avatar}" hspace="5" vspace="5" alt="" /></p>
-                    <p>
-                        <label for="avatar">[__Choose / Upload]</label>
-                        <input id="avatar" type="file" name="avatar" value="" />
+                        <label for="tz">__Time zone__</label>
+                        $utz
                     </p>
                 </fieldset>
                 <fieldset class="step">
-                    <legend>[__Registration]</legend>
-                    <p>{captcha}</p>
-                    <p class="msg help">[__Required fields have a yellow background]</p>
-                    <p class="submit"><button type="submit" name="save" value="1">[__Save]</button></p>
+                    <legend>__Communication__</legend>
+                    <p>
+                        <label for="email">__Email__</label>
+                        <input id="email" name="email" placeholder="myemail@mydomain.ru" type="email" value="$email" class="required" />
+                    </p>
+                    <p>
+                        <label for="website">__Website__</label>
+                        <input id="website" name="fields[website]" placeholder="http://www.mywebsite.com" value="$website" type="url" />
+                    </p>
+                    <p class="msg help">__Required fields have a yellow background__</p>
                 </fieldset>
-                <a class="close" href="{ROOT}"></a>
+                <fieldset class="step">
+                    <legend>__Avatar__</legend>
+                    <p><img src="$avatar" hspace="5" vspace="5" alt="" /></p>
+                    <p>
+                        <label for="avatar">__Upload__</label>
+                        <input id="avatar" type="file" name="avatar" />
+                    </p>
+                </fieldset>
+                <fieldset class="step">
+                    <legend>__Registration__</legend>
+                    $captcha
+                    <p class="msg help">__Required fields have a yellow background__</p>
+                    <p><input type="submit" name="save" value="__Save__" /></p>
+                </fieldset>
             </form>
-        </div>
-        <div id="navigation" style="display:none;">
-            <ul>
-                <li class="selected"><a href="#">[__Account]</a></li>
-                <li><a href="#">[__Additionally]</a></li>
-                <li><a href="#">[__Communication]</a></li>
-                <li><a href="#">[__Avatar]</a></li>
-                <li><a href="#">[__Save]</a></li>
-            </ul>
         </div>
     </div>
 </div>

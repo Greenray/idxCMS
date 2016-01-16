@@ -1,8 +1,7 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Minichat
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Module POLLS
 
 if (!defined('idxCMS')) die();
 
@@ -15,12 +14,14 @@ switch (SYSTEM::get('locale')) {
         $LANG['def']['Polls archive'] = 'Архив голосований';
         $LANG['def']['Total votes'] = 'Всего голосов';
         break;
+
     case 'ua':
         $LANG['def']['Poll'] = 'Голосування';
         $LANG['def']['Polls'] = 'Голосування';
         $LANG['def']['Polls archive'] = 'Архів голосувань';
         $LANG['def']['Total votes'] = 'Всього голосів';
         break;
+
     case 'by':
         $LANG['def']['Poll'] = 'Галасаванне';
         $LANG['def']['Polls'] = 'Галасаванні';

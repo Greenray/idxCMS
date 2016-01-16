@@ -1,15 +1,14 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - Aphorizms
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: Aphorisms.
 
 if (!defined('idxADMIN') || !USER::$root) die();
 
 if (!empty($REQUEST['save'])) {
     if (!empty($REQUEST['aph']) && !empty($REQUEST['file'])) {
         if (!file_put_contents(APHORISMS.$REQUEST['file'], $REQUEST['aph'])) {
-            ShowMessage(__('Cannot save file').' '.$REQUEST['file']);
+             SYSTEM::showError('Cannot save file'.' '.$REQUEST['file']);
         }
     }
 }
@@ -17,6 +16,9 @@ if (!empty($REQUEST['save'])) {
 $aphorisms = array_values(GetFilesList(APHORISMS));
 
 if (!empty($REQUEST['selected'])) {
+    #
+    # View and edit selected file
+    #
     $output = [];
     if (in_array($REQUEST['selected'], $aphorisms)) {
         $output['file'] = $REQUEST['selected'];
@@ -25,13 +27,18 @@ if (!empty($REQUEST['selected'])) {
         elseif (!file_exists(APHORISMS.SYSTEM::get('locale').'.txt')) $output['aph'] = file_get_contents(APHORISMS.SYSTEM::get('locale').'.txt');
         else                                                          $output['aph'] = file_get_contents(APHORISMS.'en.txt');
 
-        $TPL = new TEMPLATE(dirname(__FILE__).DS.'aphorisms.tpl');
-        echo $TPL->parse($output);
+        $TPL = new TEMPLATE(__DIR__.DS.'aphorisms.tpl');
+        $TPL->set($output);
+        echo $TPL->parse();
     }
 } else {
+    #
+    # Select file to view or edit
+    #
     $output['title']  = __('Aphorisms');
     $output['select'] = $aphorisms;
 
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'select.tpl');
-    echo $TPL->parse($output);
+    $TPL = new TEMPLATE(__DIR__.DS.'select.tpl');
+    $TPL->set($output);
+    echo $TPL->parse();
 }

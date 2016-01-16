@@ -1,54 +1,156 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - User
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: User profile.
 
 if (!defined('idxADMIN') || !USER::$root) die();
-
+#
 # Check admin's rights
-if (FILTER::get('REQUEST', 'login')) {
-    if (CMS::call('USER')->checkUser(FILTER::get('REQUEST', 'username'), FILTER::get('REQUEST', 'password'), FALSE, $user_data) === TRUE) {
-        $tmp = '';
+#
+if (!empty($REQUEST['login'])) {
+    try {
+        CMS::call('USER')->checkUser($REQUEST['user'], $REQUEST['password'], FALSE, $user_data);
         if (file_exists(TEMP.'rights.dat')) {
             $tmp = GetUnserialized(TEMP.'rights.dat');
-            unlink(TEMP.'rights.dat');
-        }
-        if (!empty($tmp)) {
-            $level = empty($tmp[3]) ? 1 : (int) $tmp[3];
             if (!empty($tmp[2])) {
                 $rights = '*';
+                $access = 9;
             } else {
                 $rights = '';
+                $access = ($tmp[3] == 9) ? 1 : empty($tmp[3]) ? 1 : (int) $tmp[3];
                 if (!empty($tmp[1])) $rights = implode(' ', $tmp[1]);
             }
             USER::changeProfileField($tmp[0], 'rights', $rights);
-            USER::changeProfileField($tmp[0], 'access', $level);
-            ShowMessage('Rights changed');
+            USER::changeProfileField($tmp[0], 'access', $access);
+            SYSTEM::showMessage('Rights changed', '', MODULE.'admin&id=_user.profile&act=rights.'.$tmp[0]);
+            unlink(TEMP.'rights.dat');
         }
-    } else {
-        ShowMessage('Invalid password');
+    } catch (Exception $error) {
+        SYSTEM::showError($error->getMessage());
     }
-}
 
-if (!empty($REQUEST['act'])) {
+} elseif (!empty($REQUEST['act'])) {
     $action  = explode('.', $REQUEST['act'], 2);
+
     try {
         switch ($action[0]) {
+            case 'search':
+                #
+                # Search and show list of users
+                #
+                $output  = [];
+                $users   = CMS::call('USER')->getUsersList($REQUEST['search']);
+                $count   = sizeof($users);
+                $keys    = array_keys($users);
+                $page    = empty($REQUEST['page']) ? 0 : $REQUEST['page'];
+                $perpage = 20;
+                $pagination = GetPagination($page, $perpage, $count);
+                for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
+                    if (!empty($users[$keys[$i]])) {
+                        $output['users'][$i] = $users[$keys[$i]];
+                        if (!empty($users[$keys[$i]]['blocked'])) {
+                            $output['users'][$i]['blocked'] = 'unblock.'.$users[$keys[$i]]['user'];
+                            $output['users'][$i]['blocking'] = __('Unblock');
+                        } else {
+                            $output['users'][$i]['blocked'] = 'block.'.$users[$keys[$i]]['user'];
+                            $output['users'][$i]['blocking'] = __('Block');
+                        }
+                    }
+                }
+
+                $TPL = new TEMPLATE(__DIR__.DS.'list.tpl');
+                $TPL->set($output);
+                echo $TPL->parse();
+                #
+                # Pagination
+                #
+                if ($count > $perpage) echo Pagination($count, $perpage, $page, MODULE.'admin&amp;id=_user.profile&amp;search='.$REQUEST['search']);
+
+                break;
+
             case 'profile':
-                $edit = $action[1];
+                if (!empty($action[1]) && $action[1] === 'save') {
+                    #
+                    # Save user profile
+                    #
+                    try {
+                        CMS::call('USER')->updateUser($REQUEST['user'], $REQUEST['nick'], $REQUEST['fields']);
+                        USER::changeProfileField($REQUEST['user'], 'status', $REQUEST['status']);
+                    } catch (Exception $error) {
+                        SYSTEM::showError($error->getMessage());
+                    }
+                } else {
+                    $user = USER::getUserData($action[1]);
+                    #
+                    # Edit user profile
+                    #
+                    $user['avatar']    = GetAvatar($user['user']);
+                    $user['regdate']   = FormatTime('d F Y', $user['regdate']);
+                    $user['lastvisit'] = FormatTime('d F Y', $user['lastvisit']);
+                    $output = $user;
+                    $output['utz'] = SelectTimeZone('fields[tz]', $LANG['tz'], (int) $user['tz']);
+
+                    $TPL = new TEMPLATE(__DIR__.DS.'profile.tpl');
+                    $TPL->set($output);
+                    echo $TPL->parse();
+                }
                 break;
 
             case 'rights':
-                $username = $action[1];
+                if (!empty($action[1]) && $action[1] === 'save') {
+                    #
+                    # Save rights for user
+                    #
+                    file_put_contents(
+                        TEMP.'rights.dat',
+                        serialize([
+                            0 => $REQUEST['user'],
+                            1 => empty($REQUEST['rights']) ? []    : $REQUEST['rights'],
+                            2 => empty($REQUEST['root'])   ? FALSE : $REQUEST['root'],
+                            3 => empty($REQUEST['access']) ? 1     : (int) $REQUEST['access']
+                        ])
+                    );
+                    $message[0] = __('Identification');
+                    $message[1] = LoginForm();
+                    include ADMIN.'error.php';
+                } else {
+                    #
+                    # Edit user rights
+                    #
+                    if (file_exists(TEMP.'rights.dat')) {
+                        unlink(TEMP.'rights.dat');
+                    }
+                    $rights = USER::getUserRights($action[1], $root, $user);
+                    if (!empty($user)) {
+                        $output = [];
+                        $output['user']   = $user['user'];
+                        $output['nick']   = $user['nick'];
+                        $output['root']   = $root;
+                        $output['access'] = $user['access'];
+                        $system_rights    = USER::$system_rights;
+                        if (!$root) {
+                            foreach ($system_rights as $id => $desc) {
+                                $output['rights'][$id]['right'] = $id;
+                                $output['rights'][$id]['desc']  = $desc;
+                                if (array_key_exists($id, $rights)) {
+                                    $output['rights'][$id]['set'] = TRUE;
+                                }
+                            }
+                        }
+
+                        $TPL = new TEMPLATE(__DIR__.DS.'rights.tpl');
+                        $TPL->set($output);
+                        echo $TPL->parse();
+                    }
+                }
                 break;
 
             case 'block':
-                USER::changeProfileField($action[1], 'blocked', TRUE);
+                USER::changeProfileField($action[1], 'blocked', 1);
                 break;
 
             case 'unblock':
-                USER::changeProfileField($action[1], 'blocked', FALSE);
+                USER::changeProfileField($action[1], 'blocked', 0);
                 break;
 
             case 'delete':
@@ -57,118 +159,9 @@ if (!empty($REQUEST['act'])) {
                 break;
         }
     } catch (Exception $error) {
-        ShowMessage(__($error->getMessage()));
+        SYSTEM::showError($error->getMessage());
     }
-}
-
-if (FILTER::get('REQUEST', 'save')) {
-    $username = FILTER::get('REQUEST', 'username');
-    if (!empty($username)) {
-        # Save user profile
-        try {
-            CMS::call('USER')->updateUser(
-                $username,
-                FILTER::get('REQUEST', 'nickname'),
-                FILTER::get('REQUEST', 'fields'),
-                TRUE
-            );
-            USER::changeProfileField($username, 'status', FILTER::get('REQUEST', 'status'));
-            ShowMessage('Profile updated');
-        } catch (Exception $error) {
-            ShowMessage(__($error->getMessage()));
-        }
-    } else {
-        $user = FILTER::get('REQUEST', 'user');
-        if (!empty($user)) {
-            # Save rights for user
-            $rights = FILTER::get('REQUEST', 'rights');
-            $level  = FILTER::get('REQUEST', 'level');
-            file_put_contents(
-                TEMP.'rights.dat',
-                serialize([
-                    0 => $user,
-                    1 => empty($rights) ? [] : $rights,
-                    2 => FILTER::get('REQUEST', 'root'),
-                    3 => empty($level) ? 1 : $level
-                ])
-            );
-            $message  = __('Identification');
-            $message .= LoginForm();
-            include ADMIN.'error.php';
-        }
-    }
-}
-
-$search = FILTER::get('REQUEST', 'search');
-
-if (!empty($edit) && ($userdata = USER::getUserData($edit))) {
-    # Edit user profile
-    $fields = FILTER::get('REQUEST', 'fields');
-    $output = $userdata;
-    $output['avatar']    = GetAvatar($userdata['username']);
-    $output['regdate']   = FormatTime('d F Y', $userdata['regdate']);
-    $output['lastvisit'] = FormatTime('d F Y', $userdata['lastvisit']);
-    $output['utz'] = SelectTimeZone(
-        'fields[tz]',
-        $LANG['tz'],
-        empty($fields['tz']) ? $userdata['tz'] : (int) $fields['tz']
-    );
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'profile.tpl');
-    echo $TPL->parse($output);
-
-} elseif (!empty($username)) {
-    # Edit user rights
-    if (file_exists(TEMP.'rights.dat')) {
-        unlink(TEMP.'rights.dat');
-    }
-    $rights = USER::getUserRights($username, $root, $user);
-    if ($user !== FALSE) {
-        $output = [];
-        $output['user']   = $user['username'];
-        $output['nick']   = $user['nickname'];
-        $output['admin']  = $root;
-        $output['access'] = $user['access'];
-        $system_rights    = USER::$system_rights;
-        if (!$root) {
-            foreach ($system_rights as $id => $desc) {
-                $output['rights'][$id]['right'] = $id;
-                $output['rights'][$id]['desc']  = $desc;
-                if (array_key_exists($id, $rights)) {
-                    $output['rights'][$id]['set'] = TRUE;
-                }
-            }
-        }
-        $TPL = new TEMPLATE(dirname(__FILE__).DS.'rights.tpl');
-        echo $TPL->parse($output);
-    } else {
-        ShowMessage('Invalid ID');
-    }
-} elseif (!empty($search)) {
-    # Search and show user profile
-    $output  = [];
-    $users   = CMS::call('USER')->getUsersList($search);
-    $count   = sizeof($users);
-    $keys    = array_keys($users);
-    $page    = (int) FILTER::get('REQUEST', 'page');
-    $perpage = 20;
-    $pagination = GetPagination($page, $perpage, $count);
-    for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
-        $output['user'][$i] = $users[$keys[$i]];
-        if (!empty($users[$keys[$i]]['blocked'])) {
-            $output['user'][$i]['blocked'] = 'unblock.'.$users[$keys[$i]]['username'];
-            $output['user'][$i]['blocking'] = __('Unblock');
-        } else {
-            $output['user'][$i]['blocked'] = 'block.'.$users[$keys[$i]]['username'];
-            $output['user'][$i]['blocking'] = __('Block');
-        }
-    }
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'list.tpl');
-    echo $TPL->parse($output);
-
-    # Pagination
-    if ($count > $perpage) echo Pagination($count, $perpage, $page, MODULE.'admin&amp;id=_user.profile&amp;search='.$search);
 } else {
-    $output['search'] = empty($search) ? '*' : $search;
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'search.tpl');
-    echo $TPL->parse($output);
+    $TPL = new TEMPLATE(__DIR__.DS.'search.tpl');
+    echo $TPL->parse();
 }

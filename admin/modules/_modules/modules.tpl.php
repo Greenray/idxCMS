@@ -1,42 +1,48 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - Modules
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: modules management template
 
 die();?>
-<div class="module">[__Modules]</div>
+
+<div class="module">__Modules__</div>
 <fieldset>
     <form name="form" method="post" action="">
         <table class="std">
-            <tr><th colspan="2">[__Module]</th><th>[__Status]</th></tr>
-            [each=modules]
-            [ifelse=modules[system]]
-                <tr class="even">
-                    <td>{modules[title]}</td>
-                    <td>[__System module]</td>
-                    <td class="center"><input type="hidden" name="enable[{modules[module]}]" value="1" />[__Enabled]</td>
-                </tr>
-            [else]
-                <tr class="odd">
-                    <td colspan="2">{modules[title]}</td>
-                    <td class="center"><label><input type="checkbox" name="enable[{modules[module]}]" value="1" [if=module[enabled]]checked="checked"[/if] /> [__Enable]</label></td>
-                </tr>
-            [/else]
-            [each=modules[ext]]
-            <tr class="{ext[class]}">
-                <td>&emsp;&mdash; {ext[title]}</td>
-                [ifelse=ext[system]]
-                    <td> [__System module extension]</td>
-                    <td class="center"><input type="hidden" name="enable[{ext[module]}]" value="1" />[__Enabled]</td>
-                [else]
-                    <td> [__Module extension]</td>
-                    <td class="center"><label><input type="checkbox" name="enable[{ext[module]}]" value="1" {ext[checked]} /> [__Enable]</label></td>
-                [/else]
+            <tr>
+                <th>__Title__</th>
+                <th>__Type__</th>
+                <th>__Status__</th>
             </tr>
-            [/each.modules[ext]]
-            [/each.modules]
+            <!-- FOREACH module = $modules -->
+                <!-- IF !empty($module.system) -->
+                    <tr class="dark">
+                        <td>$module.title</td>
+                        <td>__System module__</td>
+                        <td class="center"><input type="hidden" name="enable[$module.module]" value="1" />__Enabled__</td>
+                    </tr>
+                <!-- ELSE -->
+                    <tr class="light">
+                        <td colspan="2">$module.title</td>
+                        <td class="center"><input type="checkbox" name="enable[$module.module]" value="1" <!-- IF !empty($module.enabled) -->checked<!-- ENDIF --> /> __Enable__</td>
+                    </tr>
+                <!-- ENDIF -->
+                <!-- IF !empty($module.ext) -->
+                    <!-- FOREACH ext = $module.ext -->
+                        <tr class="$ext.class">
+                            <td>&emsp;&mdash; $ext.title</td>
+                            <!-- IF !empty($ext.system) -->
+                                <td> __System module extension__</td>
+                                <td class="center"><input type="hidden" name="enable[$ext.module]" value="1" />__Enabled__</td>
+                            <!-- ELSE -->
+                                <td> __Module extension__</td>
+                                <td class="center"><input type="checkbox" name="enable[$ext.module]" value="1" <!-- IF !empty($ext.enabled) -->checked<!-- ENDIF --> /> __Enable__</td>
+                            <!-- ENDIF -->
+                        </tr>
+                    <!-- ENDFOREACH -->
+                <!-- ENDIF -->
+            <!-- ENDFOREACH -->
         </table>
-        <p class="center"><input type="submit" name="save" value="[__Save]" class="submit" /></p>
+        <p class="center"><input type="submit" name="save" value="__Save__" /></p>
     </form>
 </fieldset>

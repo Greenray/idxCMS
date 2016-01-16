@@ -1,36 +1,37 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - Catalogs
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Module Gallery: Catalogs configuration.
 
 if (!defined('idxADMIN')) die();
 
-$config = CONFIG::getSection('catalogs');
-
 if (isset($init)) {
     if (empty($config)) {
-        $config['description-length'] = 300;
-        $config['comment-length']     = 2000;
-        $config['items-per-page']     = 10;
-        $config['comments-per-page']  = 10;
+        $config['description_length'] = 300;
+        $config['message_length']     = 4000;
+        $config['items_per_page']     = 10;
+        $config['comments_per_page']  = 10;
         CMS::call('CONFIG')->setSection('catalogs', $config);
-        if (!CMS::call('CONFIG')->save()) {
-            ShowMessage('Cannot save file');
-        }
+        if (CMS::call('CONFIG')->save())
+             echo SYSTEM::showMessage('Configuration saved');
+        else echo SYSTEM::showError('Cannot save file'.' config.ini');
     }
 } else {
     if (!empty($REQUEST['save'])) {
         $config = [];
-        $config['description-length'] = empty($REQUEST['description-length']) ? 300  : (int) $REQUEST['description-length'];
-        $config['comment-length']     = empty($REQUEST['comment-length'])     ? 2000 : (int) $REQUEST['comment-length'];
-        $config['items-per-page']     = empty($REQUEST['items-per-page'])     ? 10   : (int) $REQUEST['item-per-page'];
-        $config['comments-per-page']  = empty($REQUEST['comments-per-page'])  ? 10   : (int) $REQUEST['comments-per-page'];
+        $config['description_length'] = empty($REQUEST['description_length']) ? 300  : (int) $REQUEST['description_length'];
+        $config['message_length']     = empty($REQUEST['message_length'])     ? 4000 : (int) $REQUEST['message_length'];
+        $config['items_per_page']     = empty($REQUEST['items_per_page'])     ? 10   : (int) $REQUEST['items_per_page'];
+        $config['comments_per_page']  = empty($REQUEST['comments_per_page'])  ? 10   : (int) $REQUEST['comments_per_page'];
         CMS::call('CONFIG')->setSection('catalogs', $config);
         if (!CMS::call('CONFIG')->save()) {
-            ShowMessage('Cannot save file');
+            SYSTEM::showError('Cannot save file');
         }
     }
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'config.tpl');
-    echo $TPL->parse($config);
+
+    $config = CONFIG::getSection('catalogs');
+
+    $TPL = new TEMPLATE(__DIR__.DS.'config.tpl');
+    $TPL->set($config);
+    echo $TPL->parse();
 }

@@ -1,12 +1,13 @@
 <?php
-/** Tagcloud.
+/**
+ * Tagcloud.
  *
- * @program   idxCMS: Flat Files Content Management Sysytem
+ * @program   idxCMS: Flat Files Content Management System
  * @file      admin/modules/tagcloud/config.php
- * @version   2.4
+ * @version   3.0
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+ * @copyright (c) 2011 - 2016 Victor Nabatov
+ * @license   Creative Commons — Attribution-NonCommercial-ShareAlike 4.0 International
  * @package   Tagcloud
  * @overview  Website Tagcloud.
  *            A visual representation of the keywords on your website.
@@ -16,7 +17,8 @@
 
 if (!defined('idxADMIN') || !USER::$root) die();
 
-/** Keywords array creation.
+/**
+ * Keywords array creation.
  *
  * @param  string $words   Comma separated list of keywords
  * @param  array  $config  Tagcloud configuration
@@ -24,11 +26,13 @@ if (!defined('idxADMIN') || !USER::$root) die();
  * @return array           Tags for tagcloud
  */
 function GetKeywords($words, $config, &$target) {
-    $keywords = explode(',', $words);      # Keywords are written through a comma.
+    $keywords = explode(',', $words);      # Keywords are written through a comma
     foreach ($keywords as $k => $value) {
-        $value = trim($value);             # Let's bite off superfluous blanks.
-        # Check for the resolved length of a keyword.
-        if ((mb_strlen($value) >= $config['query-min']) && (mb_strlen($value) <= $config['query-max'])) {
+        $value = trim($value);             # Let's bite off superfluous blanks
+        #
+        # Check for the resolved length of a keyword
+        #
+        if ((mb_strlen($value) >= $config['query_min']) && (mb_strlen($value) <= $config['query_max'])) {
             if (!empty($target[$value]))
                  $target[$value]++;        # Existing tag.
             else $target[$value] = 1;      # New tag.
@@ -36,18 +40,23 @@ function GetKeywords($words, $config, &$target) {
     }
 }
 
-function CreateTags($posts = TRUE, $files = FALSE) {
+/**
+ * Creates tags for tagcloud.
+ *
+ * @return boolean
+ */
+function CreateTags() {
     $config   = CONFIG::getSection('search');
-    $tags     = [];
     $keywords = CONFIG::getValue('main', 'keywords');
+    $tags     = [];
     GetKeywords($keywords, $config, $tags);
-    $modules = ['posts','forum','catalogs','galleries'];
+    $modules = ['posts','forum','catalogs','gallery'];
     $enabled = CONFIG::getSection('enabled');
     foreach($modules as $module) {
         if (array_key_exists($module, $enabled)) {
             $obj = strtoupper($module);
             $sections = CMS::call($obj)->getSections();
-            unset($sections['drafts']);
+            if (!empty($sections['drafts'])) unset($sections['drafts']);
 
             foreach ($sections as $id => $section) {
                 $categories = CMS::call($obj)->getCategories($id);
@@ -78,11 +87,11 @@ if (isset($init)) {
         $config['speed']   = 100;
         $config['style']   = '16';
         $config['tags']    = '20';
-        $config['distr']   = 'true';
+        $config['distr']   = 'TRUE';
         CMS::call('CONFIG')->setSection('tagcloud', $config);
-        if (!CMS::call('CONFIG')->save()) {
-            ShowMessage('Cannot save file');
-        }
+        if (CMS::call('CONFIG')->save())
+             echo SYSTEM::showMessage('Configuration saved');
+        else echo SYSTEM::showError('Cannot save file'.' config.ini');
     }
 } else {
     if (!empty($REQUEST['save'])) {
@@ -95,24 +104,20 @@ if (isset($init)) {
         $config['speed']   = empty($REQUEST['speed'])   ? 100 : (int) $REQUEST['speed'];
         $config['style']   = empty($REQUEST['style'])   ? 16  : (int) $REQUEST['style'];
         $config['tags']    = empty($REQUEST['tags'])    ? 20  : (int) $REQUEST['tags'];
-        $config['distr']   = empty($REQUEST['distr'])   ? 'false' : 'true';
+        $config['distr']   = empty($REQUEST['distr'])   ? 'FALSE' : 'TRUE';
         CMS::call('CONFIG')->setSection('tagcloud', $config);
-        if (!CMS::call('CONFIG')->save()) {
-            ShowMessage('Cannot save file');
-        }
+        if (CMS::call('CONFIG')->save())
+             echo SYSTEM::showMessage('Configuration saved');
+        else echo SYSTEM::showError('Cannot save file'.' config.ini');
     }
     if (!empty($REQUEST['create'])) {
-        /*
-        * @todo Make selection
-        */
-        if (CONFIG::getValue('enabled', 'files'))
-             $result = CreateTags(TRUE, TRUE);
-        else $result = CreateTags(TRUE);
-        if ($result === FALSE) {
-            ShowMessage('Cannot save file');
+        $result = CreateTags();
+
+        if (!$result) {
+            SYSTEM::showError('Cannot save file');
         }
     }
-    if ($config['distr'] === 'false') {
+    if ($config['distr'] === 'FALSE') {
         unset($config['distr']);
     }
     $search_ini = CONFIG::getSection('search');
@@ -121,20 +126,24 @@ if (isset($init)) {
         foreach ($REQUEST['key'] as $key => $tag) {
             if ($tag !== '') {
                 $tag = $tag;
+                #
                 # Check for the resolved length of a tag
-                if ((mb_strlen($tag) >= $search_ini['query-min']) && (mb_strlen($tag) <= $search_ini['query-max'])) {
+                #
+                if ((mb_strlen($tag) >= $search_ini['query_min']) && (mb_strlen($tag) <= $search_ini['query_max'])) {
                     $tags[$tag] = $REQUEST['value'][$key];     # New tag.
                 }
             }
         }
         if (!file_put_contents(CONTENT.'tags', serialize($tags))) {
-            ShowMessage('Cannot save file');
+            SYSTEM::showError('Cannot save file');
         }
     }
     $create_tags = 0;
+
     $config['bgcolor'] = GetColor("bgcolor", $config['bgcolor']);
-    $config['color']   = GetColor("color",$config['color']);
+    $config['color']   = GetColor("color",   $config['color']);
     $config['hicolor'] = GetColor("hicolor", $config['hicolor']);
+
     $tags = PrepareTags();
     $tags_amount = sizeof($tags);
     if ($config['tags'] < $tags_amount) {
@@ -142,6 +151,8 @@ if (isset($init)) {
     }
     $config['used']   = array_slice($tags, 0, $tags_amount, TRUE);
     $config['unused'] = array_slice($tags, $tags_amount, -1, TRUE);
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'config.tpl');
-    echo $TPL->parse($config);
+
+    $TPL = new TEMPLATE(__DIR__.DS.'config.tpl');
+    $TPL->set($config);
+    echo $TPL->parse();
 }

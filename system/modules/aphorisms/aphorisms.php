@@ -1,21 +1,27 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Aphorizms
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Module APHORISMS
 
 if (!defined('idxCMS')) die();
-
+#
 # Get file with aphorisms according to user's locale
-$aph = file(APHORISMS.SYSTEM::get('locale').'.txt');
-
-# Show random string
+#
+$aphorism = file(APHORISMS.SYSTEM::get('locale').'.txt');
+#
+# Show random string after user click
+#
 if (!empty(FILTER::get('REQUEST', 'flip'))) {
-
+    #
     # Processing of command "flip"
-    echo $aph[array_rand($aph, 1)].'$';
+    #
+    echo $aphorism[array_rand($aphorism, 1)].'$';
 
 } else {
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'aphorisms.tpl');
-    ShowWindow(__('Aphorisms'), $TPL->parse(['text' => $aph[array_rand($aph, 1)]]));
+    $TPL = new TEMPLATE(__DIR__.DS.'aphorisms.tpl');
+    $TPL->set('text', $aphorism[array_rand($aphorism, 1)]);
+    #
+    # Show aphorisms box with a random string after module init
+    #
+    SYSTEM::defineWindow('Aphorisms', $TPL->parse());
 }

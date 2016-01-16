@@ -1,8 +1,7 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
 # Module RSS
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
 
@@ -21,11 +20,12 @@ if (CONFIG::getValue('enabled', 'rss')) {
             $data['categories'][$id]['desc'] = CMS::call('PARSER')->parseText($category['desc']);
             $data['categories'][$id]['link'] = str_replace(MODULE, MODULE.'rss&amp;m=', $category['link']);
         }
-        $output['feed'][] = $data;
+        $output['feeds'][] = $data;
     }
     SYSTEM::set('pagename', __('RSS feeds list'));
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'list.tpl');
-    ShowWindow(__('RSS feeds'), $TPL->parse($output));
+    $TPL = new TEMPLATE(__DIR__.DS.'list.tpl');
+    $TPL->set($output);
+    SYSTEM::defineWindow('RSS feeds', $TPL->parse());
 } else {
-    ShowWindow(__('RSS feeds'), __('RSS feeds are off'));
+    SYSTEM::defineWindow('RSS feeds', __('RSS feeds are off'));
 }

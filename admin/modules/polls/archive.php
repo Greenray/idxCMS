@@ -1,8 +1,7 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - Polls
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: Polls archive.
 
 if (!defined('idxADMIN') || !USER::$root) die();
 
@@ -11,8 +10,8 @@ $archived = $POLLS->getArchivedPolls();
 
 if (!empty($REQUEST['remove'])) {
     if (!$POLLS->removePollFromArchive($REQUEST['poll']))
-         ShowMessage($POLLS->gerError);
-    else ShowMessage(__('Poll removed'));
+         SYSTEM::showError($POLLS->gerError);
+    else SYSTEM::showMessage('Poll removed');
 }
 
 $archived = $POLLS->getArchivedPolls();
@@ -41,9 +40,11 @@ if (!empty($archived)) {
         $data['total']     = $poll['total'];
         $output['polls'][] = $data;
     }
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'archive.tpl');
-    echo($TPL->parse($output));
+
+    $TPL = new TEMPLATE(__DIR__.DS.'archive.tpl');
+    $TPL->set($output);
+    echo($TPL->parse());
 
 } else {
-    ShowMessage(__('Database is empty'));
+    SYSTEM::showMessage('Database is empty', 'Polls', MODULE.'admin');
 }

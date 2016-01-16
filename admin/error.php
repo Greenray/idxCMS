@@ -1,8 +1,7 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: Error message.
 
 if (!defined('idxCMS')) die();
 
@@ -12,4 +11,5 @@ $output['message1'] = $message[0];
 $output['message2'] = $message[1];
 
 $TPL = new TEMPLATE(TEMPLATES.'error.tpl');
-echo $TPL->parse($output);
+$TPL->set($output);
+echo $TPL->parse();

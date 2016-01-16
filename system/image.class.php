@@ -1,13 +1,14 @@
 <?php
-/** Uploads and resize images.
+/**
+ * Uploads and resize images.
  * After uploading it generates thumbnail or icon.
  *
- * @program   idxCMS: Flat Files Content Management Sysytem
- * @file      system/image.class.php
- * @version   2.4
+ * @program   idxCMS: Flat Files Content Management System
+ * @version   3.0
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+ * @copyright (c) 2011 - 2016 Victor Nabatov
+ * @license   Creative Commons — Attribution-NonCommercial-ShareAlike 4.0 International
+ * @file      system/image.class.php
  * @package   Core
  */
 
@@ -46,7 +47,9 @@ class IMAGE {
     /** @var string Directory for uploaded files */
     private $upload_dir;
 
-    /** Class initialization.
+    /**
+     * Class initialization.
+     *
      * @param  string  $upload_dir   Name of the upload directory
      * @param  integer $max_size     Image max size
      * @param  integer $thumb_width  Thumbnail width
@@ -54,12 +57,12 @@ class IMAGE {
      */
     public function __construct($upload_dir, $max_size = '', $thumb_width = '', $thumb_height = '') {
         $this->upload_dir   = $upload_dir;
-        $this->max_size     = empty($max_size)     ? (int) CONFIG::getValue('main', 'image-max-size') : (int) $max_size;
-        $this->thumb_width  = empty($thumb_width)  ? (int) CONFIG::getValue('main', 'thumb-width')    : (int) $thumb_width;
-        $this->thumb_height = empty($thumb_height) ? (int) CONFIG::getValue('main', 'thumb-height')   : (int) $thumb_height;
+        $this->max_size     = empty($max_size)     ? (int) CONFIG::getValue('main', 'max_filesize') : (int) $max_size;
+        $this->thumb_width  = empty($thumb_width)  ? (int) CONFIG::getValue('main', 'thumb_width')  : (int) $thumb_width;
+        $this->thumb_height = empty($thumb_height) ? (int) CONFIG::getValue('main', 'thumb_height') : (int) $thumb_height;
     }
 
-    /** Calculates parameters to resize image. */
+    /** Calculates parameters to resize image */
     private function calcResizeParams() {
         $ratio = $this->image_width / $this->image_height;
         if (($this->thumb_width / $this->thumb_height) > $ratio)
@@ -67,19 +70,21 @@ class IMAGE {
         else $this->thumb_height = $this->thumb_width / $ratio;
     }
 
-    /** Generates icon.
+    /**
+     * Generates icon.
+     *
      * @param  string $name Icon name
      * @return boolean      TRUE if oparation is successful
      */
     public function generateIcon($name = '') {
-        if (!empty($name))
-             $name = $name.'.png';
-        else $name = 'icon.png';
+        $name = empty($name) ? 'icon.png' : $name.'.png';
+
         self::calcResizeParams();
-        $icon = imagecreatetruecolor($this->thumb_width, $this->thumb_height);
+        $icon = imagecreateTRUEcolor($this->thumb_width, $this->thumb_height);
+
         switch($this->image_type) {
             case 'image/gif' :
-                $img = imagecreatefromgif($this->upload_dir.$this->image_name);
+                $img = imagecreatefromgif ($this->upload_dir.$this->image_name);
                 imagecolortransparent($img);
                 break;
 
@@ -91,6 +96,7 @@ class IMAGE {
                 $img = imagecreatefrompng($this->upload_dir.$this->image_name);
                 break;
         }
+
         imagealphablending($icon, FALSE);
         imagesavealpha($icon, TRUE);
         imagecopyresampled($icon, $img, 0, 0, 0, 0, $this->thumb_width, $this->thumb_height, $this->image_width, $this->image_height);
@@ -103,7 +109,9 @@ class IMAGE {
         return TRUE;
     }
 
-    /** Generates thumbnail.
+    /**
+     * Generates thumbnail.
+     *
      * @param  string $file Image name
      * @return boolean      TRUE if oparation is successful
      */
@@ -112,10 +120,10 @@ class IMAGE {
             $this->image_name = $file;
         }
         self::calcResizeParams();
-        $thumb = imagecreatetruecolor($this->thumb_width, $this->thumb_height);
+        $thumb = imagecreateTRUEcolor($this->thumb_width, $this->thumb_height);
         switch($this->image_type) {
             case 'image/gif' :
-                $img = imagecreatefromgif($this->upload_dir.$this->image_name);
+                $img = imagecreatefromgif ($this->upload_dir.$this->image_name);
                 imagecolortransparent($img);
                 break;
 
@@ -136,12 +144,16 @@ class IMAGE {
         return TRUE;
     }
 
-    /** Sets image parameters.
+    /**
+     * Sets image parameters.
+     *
      * @param  array $image Image parameters
      * @param  array $info  Imege mime type
      */
     public function setImage($image, $info) {
-        # Allowed only letters and numbers, spaces are replaced with a sign "_",
+        #
+        # Allowed only letters and numbers, spaces are replaced with a sign "_"
+        #
         $this->image_name   = preg_replace('[^a-z0-9._]', '', str_replace('%20', '_', $image['name']));
         $this->image_size   = $image['size'];
         $this->image_width  = $info[0];
@@ -150,7 +162,9 @@ class IMAGE {
         $this->image_type   = $info['mime'];
     }
 
-    /** Checks if the file is acceptable and uploads it to upload directory.
+    /**
+     * Checks if the file is acceptable and uploads it to upload directory.
+     *
      * @param  array $image   Image parameters
      * @throws Exception "File is not allowed or is corrupted"
      * @throws Exception "File is too large"

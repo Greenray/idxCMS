@@ -1,88 +1,136 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module User
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Module USER: User panel
 
 die();?>
-[ifelse=logged_in]
-    <div class="center"><strong>[__Hello], {user}!</strong></div>
+
+<!-- IF !empty($logged_in) -->
+    <div class="center"><strong>__Hello__, $user !</strong></div>
     <div class="user_panel">
         <form method="post" action="">
-            <ul class="links">
-                [if=admin]<li><img src="{ICONS}admin.png" width="16" height="16" alt="" /><a href="{MODULE}admin&amp;id=main">[__Administration]</a></li>[/if]
-                <li><img src="{ICONS}post.png" width="16" height="16" alt="" /><a href="{MODULE}posts.post">[__Post]</a></li>
-                <li><img src="{ICONS}profile.png" width="16" height="16" alt="" /><a href="{MODULE}user">[__Profile]</a></li>
+            <ul>
+                <!-- IF !empty($admin) -->
+                    <li>
+                        <img src="{ICONS}admin.png" width="16" height="16" alt="" />
+                        <a href="{MODULE}admin">__Administration__</a>
+                    </li>
+                <!-- ENDIF -->
+                <li>
+                    <img src="{ICONS}post.png" width="16" height="16" alt="" />
+                    <a href="{MODULE}posts.post">__Post__</a>
+                </li>
+                <li>
+                    <img src="{ICONS}profile.png" width="16" height="16" alt="" />
+                    <a href="{MODULE}user">__Profile__</a>
+                </li>
                 <li>
                     <img src="{ICONS}messages.png" width="16" height="16" alt="" />
-                    <a href="{MODULE}user.pm[if=mess_new]&amp;mode=inbox[/if]" title="{mess_info}">
-                        [__Messages] [if=mess_new]<strong>({mess_new})</strong>[/if]
+                    <a href="{MODULE}user.pm<!-- IF !empty($mess_new) -->&amp;mode=inbox<!-- ENDIF -->" title="$mess_info">
+                        __Messages__ <!-- IF !empty($mess_new) --><strong>($mess_new)</strong><!-- ENDIF -->
                     </a>
                 </li>
             </ul>
-            <p class="center"><input type="submit" name="logout" value="[__Log out]" class="submit" /></p>
+            <p class="center"><input type="submit" name="logout" value="__Log out__" /></p>
         </form>
     </div>
-[else]
-    <script src="{TOOLS}jquery.lightbox_me.js" type="text/javascript"></script>
-	<script type="text/javascript">
-		$(function() {
-			$('#enter').click(function(e) {
-				$(".login").lightbox_me({centered: true, onLoad: function() {
-					$(".login").find("input:first").focus();
-				}});
-				e.preventDefault();
-			});
-		});
-	</script>
-	<link rel="stylesheet" href="{TOOLS}lightbox.css" type="text/css" media="screen">
+<!-- ELSE -->
     <script type="text/javascript">
-    // Form validation
-    function checkLoginForm(form) {
-        var username = form.username.value;
-        var password = form.password.value;
-        var nameRegex = /^[a-zA-Z0-9_]+(([\_][a-zA-Z0-9])?[a-zA-Z0-9_]*)*$/;
-        if  (username === '') {
-            ShowAlert('[__Invalid login]', '[__Error]');
-            return false;
+        function checkLoginForm(form) {
+            var username = form.user.value;
+            var password = form.password.value;
+            var nameRegex = /^[a-zA-Z0-9_]+(([\_][a-zA-Z0-9])?[a-zA-Z0-9_]*)*$/;
+            if  (username === '') {
+                ShowAlert('__Enter your login__');
+                return false;
+            }
+            if (!username.match(nameRegex)) {
+                ShowAlert('__Invalid login__');
+                return false;
+            }
+            if (password === "") {
+                ShowAlert('__Enter your password__');
+                return false;
+            }
+            return true;
         }
-        if (!username.match(nameRegex)) {
-            ShowAlert('[__Invalid username]', '[__Error]');
-            return false;
+        function checkPasswordRecoveryForm(form) {
+            if (form.name.value === '') {
+                ShowAlert('__Enter your login__');
+                return false;
+            }
+            var email = form.email.value;
+            var emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+            if ((email === '') || !email.match(emailRegex)) {
+                ShowAlert('__Error in email__');
+                return false;
+            }
+            <!-- IF !empty($captcha) -->
+                if (form.captcheckout.value === '') {
+                    ShowAlert('__Enter a code__');
+                    return false;
+                }
+            <!-- ENDIF -->
+            return true;
         }
-        if (password === "") {
-            ShowAlert('[__Enter your password]', '[__Error]');
-            return false;
-        }
-        return true;
-    }
     </script>
-    <div class="login_panel">
-        <ul class="links">
+    <div class="login-panel">
+        <ul>
             <li>
                 <img src="{ICONS}login.png" width="16" height="16" alt="" />
-                <a href="#" id="enter">[__Log in]</a>
-                <form id="login" name="login" method="post" action="" onsubmit="return checkLoginForm(this);" class="login">
-                    <h1><span class="log-in">[__Log in]</span></h1>
-                    <p class="float">
-                        <label for="login"><i class="icon-user"></i>[__Username]</label>
-                        <input type="text" name="username" id="username" placeholder="[__Login]" />
-                    </p>
-                    <p class="float">
-                        <label for="password"><i class="icon-lock"></i>[__Password]</label>
-                        <input type="password" name="password" id="password" placeholder="[__Password]" class="showpassword" />
-                    </p>
-                    <p class="dhtmlx_popup_controls">
-                        <div class='dhtmlx_popup_button'>
-                            <div><input type="submit" name="login" value="[__Log in]" class="popup_input" /></div>
-                        </div>
-                    </p>
-                    <a class="close" href="#"></a>
+                <a href="#" onclick="document.getElementById('login').style.display = ShowHide(document.getElementById('login').style.display)">[__Log in]</a>
+            </li>
+            <li id="login" style="display:none;">
+                <form id="login" name="login" method="post" action="" onsubmit="return checkLoginForm(this);">
+                    <table>
+                        <tr>
+                            <td>__Username__:</td>
+                            <td><input type="text" id="user" name="user" size="15" /></td>
+                        </tr>
+                        <tr>
+                            <td>__Password__:</td>
+                            <td><input type="password" id="password" name="password" size="15"/></td>
+                        </tr>
+                    </table>
+                    <p class="center"><input type="submit" name="login" value="__Log in__" /></p>
                 </form>
-            <li><img src="{ICONS}forgetpass.png" width="16" height="16" alt="" /><a href="{MODULE}user&amp;act=password_request">[__Password recovery]</a></li>
-            <li><img src="{ICONS}register.png" width="16" height="16" alt="" /><a href="{MODULE}user&amp;act=register">[__Registration]</a></li>
+            </li>
+            <li>
+                <img src="{ICONS}forgetpass.png" width="16" height="16" alt="" />
+                <a href="##" onclick="document.getElementById('password_request').style.display = ShowHide(document.getElementById('password_request').style.display)">[__Password recovery]</a>
+            </li>
+            <li id="password_request" style="display:none;">
+                <form id="password_request" name="password_request" method="post" action="" onsubmit="return checkPasswordRecoveryForm(this);">
+                    <table cellpadding="2" cellspacing="1" style="width:100%;">
+                        <tr>
+                            <td>__Username__:</td>
+                            <td><input type="text" id="name" name="name" size="15" /></td>
+                        </tr>
+                        <tr>
+                            <td>__E-mail__:</td>
+                            <td><input type="text" id="email" name="email" size="15" /></td>
+                        </tr>
+                        <tr>
+                            <td class="center" colspan="2">
+                                <p>
+                                    $captcha
+                                    <input type="submit" name="save" value="__Submit__" />
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </li>
+            <li>
+                <img src="{ICONS}register.png" width="16" height="16" alt="" />
+                <a href="{MODULE}user&amp;act=register">__Registration__</a>
+            </li>
         </ul>
     </div>
-[/else]
-[if=allow_skins]<div class="center"><form name="skin_select" method="post" action="">{select_skin}</form></div>[/if]
-[if=allow_langs]<div class="center"><form name="lang_select" method="post" action="">{select_lang}</form></div>[/if]
+<!-- ENDIF -->
+<!-- IF !empty($allow_skins) -->
+    <div class="center"><form name="skin_select" method="post" action="">$select_skin</form></div>
+<!-- ENDIF -->
+<!-- IF !empty($allow_languages) -->
+    <div class="center"><form name="lang_select" method="post" action="">$select_lang</form></div>
+<!-- ENDIF -->

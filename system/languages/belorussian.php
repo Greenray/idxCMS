@@ -1,8 +1,8 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
+# idxCMS Flat Files Content Management System
 # Translation
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# Version 3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
 
 $LANG['language'] = 'belorussian';
 $LANG['locale']   = 'by';
@@ -101,7 +101,8 @@ $LANG['def']['byte (s)'] = 'байт';
 $LANG['def']['Cancel'] = 'Адмяніць';
 $LANG['def']['Categories'] = 'Катэгорыі';
 $LANG['def']['Category'] = 'Катэгорыя';
-$LANG['def']['Choose / Upload'] = 'Вылучыць / Загрузіць';
+$LANG['def']['Category is empty'] = 'Катэгорыя пустая';
+$LANG['def']['Choose'] = 'Вылучыць';
 $LANG['def']['Choose color or enter a'] = 'Выбіраючы колер або ўвядзіце';
 $LANG['def']['Close'] = 'Зачыніць';
 $LANG['def']['color name'] = 'назва колеру';
@@ -141,6 +142,7 @@ $LANG['def']['Required fields have a yellow background'] = 'Абавязковы
 $LANG['def']['RSS па падзеле'] = 'RSS для часткі';
 $LANG['def']['Save'] = 'Сoхранить';
 $LANG['def']['Section'] = 'Раздзел';
+$LANG['def']['Section is empty'] = 'Раздзел пусты';
 $LANG['def']['Sections'] = 'Раздзелы';
 $LANG['def']['Select category'] = 'Выберыце катэгорыю';
 $LANG['def']['Select section'] = 'Пазначце падзел';
@@ -151,6 +153,7 @@ $LANG['def']['Submit'] = 'Даслаць';
 $LANG['def']['symbols'] = 'знакаў';
 $LANG['def']['Text'] = 'Тэкст';
 $LANG['def']['Title'] = 'Загаловак';
+$LANG['def']['Title is empty'] = 'Адсутнічае загаловак';
 $LANG['def']['Total'] = 'Усяго';
 $LANG['def']['Upload'] = 'Загрузіць';
 $LANG['def']['Version for printer'] = 'Версія для друку';
@@ -174,6 +177,8 @@ $LANG['def']['Menu'] = 'Меню';
 $LANG['def']['Navigation'] = 'Навігацыя';
 $LANG['def']['Simple menu'] = 'Простае меню';
 # POSTS
+$LANG['def']['Allow comments'] = 'Дазволіць каментары';
+$LANG['def']['Articles'] = 'Артыкулы';
 $LANG['def']['Last news'] = 'Апошнія навіны';
 $LANG['def']['Last posts'] = 'Апошнія публікацыі';
 $LANG['def']['News'] = 'Навіны';
@@ -187,6 +192,8 @@ $LANG['def']['Your article will be published after premoderation'] = 'Ваша �
 $LANG['def']['Rate'] = 'Рэйтынг';
 # SEARCH
 $LANG['def']['coincidence'] = 'супадзенняў';
+$LANG['def']['Input value must be more than'] = 'Уваходнае значэнне павінна быць больш, чым';
+$LANG['def']['and less than'] = 'і менш, чым';
 $LANG['def']['Nothing founded'] = 'Нічога не знойдзена';
 $LANG['def']['Search'] = 'Пошук';
 $LANG['def']['Search results'] = 'Вынікі пошуку';
@@ -215,6 +222,7 @@ $LANG['def']['Login is not allowed'] = 'Лагін забаронены';
 $LANG['def']['Message'] = 'Паведамленне';
 $LANG['def']['Message sent'] = 'Паведамленне адпраўлена';
 $LANG['def']['Messages'] = 'Допісы';
+$LANG['def']['No new messages'] = 'Новых паведамленняў няма';
 $LANG['def']['Outbox'] = 'Выходныя';
 $LANG['def']['Password'] = 'Пароль';
 $LANG['def']['Password complexity'] = 'Складанасць пароля';

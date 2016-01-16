@@ -1,10 +1,10 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Posts
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Module POSTS: Post template
 
 die();?>
+
 <script type="text/javascript">
     var ids = new Array({ids});
     var titles = new Array({titles});
@@ -39,104 +39,99 @@ die();?>
         var text = form.text.value;
         var textRegex = new RegExp(/<\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[^'">\s]+))?)+\s*|\s*)\/?>/gim);
         if (title === '') {
-            ShowAlert('[__Enter a title]', '[__Error]');
+            ShowAlert('__Enter a title__');
             return false;
         }
         if (title.match(textRegex)) {
-            ShowAlert('[__Invalid symbols]', '[__Error]');
+            ShowAlert('__Invalid symbols__');
             return false;
         }
         if (text === '') {
-            ShowAlert('[__Enter a text]', '[__Error]');
+            ShowAlert('__Enter a text__');
             return false;
         }
         return true;
     }
 </script>
-[ifelse=admin]
-[else]
-    <div class="center">[__Post]</div>
-    <div class="center">[__Your article will be published after premoderation]</div>
-[/else]
-<form name="editor" method="post" action="" onsubmit="return checkPost(this);">
-    <fieldset>
-    <legend>{header}</legend>
-        <table>
-            <tr class="odd">
-                <td class="label">[__Section]</td>
-                [ifelse=admin]
-                    <td><input type="hidden" name="section" value="{section_id}" /><b>{section_title}</b></td>
-                    <td class="label">[__Select section]</td>
-                    <td>
-                        <select name="new_section" onChange="setCategories(this.selectedIndex)">
-                            [each=sections]
-                                <option value="{sections[id]}" [if=sections[selected]]selected="selected"[/if]>{sections[title]}</option>
-                            [/each.sections]
-                        </select>
-                    </td>
-                [else]
-                    <td colspan="3"><b>{section_title}</b></td>
-                [/else]
-            </tr>
-            <tr class="odd">
-                <td class="label">[__Category]</td>
-                [ifelse=admin]
-                    <td><input type="hidden" name="category" value="{category_id}"/><b>{category_title}</b></td>
-                    <td class="label">[__Select category]</td>
-                    <td>
-                        <select name="new_category">
-                            [each=categories]
-                                <option value="{categories[id]}" [if=categories[selected]]selected="selected"[/if]>{categories[title]}</option>
-                            [/each.categories]
-                        </select>
-                    </td>
-                [else]
-                    <td colspan="3"><b>{category_title}</b></td>
-                [/else]
-            </tr>
-            <tr class="odd">
-                <td class="label">[__Title]</td>
-                <td colspan="3"><input type="text" name="title" value="{title}" id="title" size="60" class="required" required="required" /></td>
-            </tr>
-            <tr class="odd">
-                <td class="label">[__Keywords]</td>
-                <td colspan="3"><input type="text" id="keywords" name="keywords"  size="50"  value="{keywords}" /></td>
-            </tr>
-            <tr>
-                <td colspan="4">
-                    <div class="center">
-                        <p>
-                            <a href="#post" onclick="document.getElementById('shdesc').style.display=ShowHide(document.getElementById('shdesc').style.display)">
-                                [__Description]
-                            </a>
-                        </p>
-                    </div>
-                    <div id="shdesc" class="none">
-                        {bbCodes_desc}
-                        <div class="center"><textarea id="desc" name="desc" cols="80" rows="5" >{desc}</textarea></div>
-                    </div>
+<!-- IF empty($admin) -->
+    <div class="center">__Your article will be published after premoderation__</div>
+<!-- ENDIF -->
+<form id="editor" name="editor" method="post" action="" onsubmit="return checkPost(this);">
+    <h2 class="center">$header</h2>
+    <table id="std">
+        <tr>
+            <th>__Section__</th>
+            <!-- IF !empty($admin) -->
+                <td class="light"><input type="hidden" name="section" value="$section_id" /><strong>$section_title</strong></td>
+                <th>__Select section__</th>
+                <td class="light">
+                    <select name="new_section" onChange="setCategories(this.selectedIndex)">
+                    <!-- FOREACH section = $sections -->
+                        <option value="$section.id" <!-- IF !empty($section.selected) -->selected<!-- ENDIF -->>$section.title</option>
+                    <!-- ENDFOREACH -->
+                    </select>
                 </td>
-            </tr>
-            <tr>
-                <td colspan="4">
-                    <div class="center">[__Text]</div>
-                    {bbCodes_text}
-                    <div class="center"><textarea id="text" name="text" cols="80" rows="25">{text}</textarea></div>
+            <!-- ELSE -->
+                <td colspan="3" class="light"><strong>$section_title</strong></td>
+            <!-- ENDIF -->
+        </tr>
+        <tr>
+            <th>__Category__</td>
+            <!-- IF !empty($admin) -->
+                <td class="light"><input type="hidden" name="category" value="$category_id"/><strong>$category_title</strong></td>
+                <th>__Select category__</th>
+                <td class="light">
+                    <select name="new_category">
+                    <!-- FOREACH category = $categories -->
+                        <option value="$category.id" <!-- IF !empty($category.selected) -->selected<!-- ENDIF -->>$category.title</option>
+                    <!-- ENDFOREACH -->
+                    </select>
                 </td>
-            </tr>
-            [ifelse=admin]
-                <tr class="odd">
-                    <td>[__Comments]: <input type="checkbox" name="opened" value="1" id="opened" [if=opened]checked="checked"[/if] /><label for="opened"> [__Allow]</label></td>
-                    <td colspan="3" >&nbsp;</td>
-                </tr>
-            [else]
-                <input type="hidden" name="opened" value="1" />
-            [/else]
-        </table>
-        <p class="center">
-            <input type="hidden" name="item" value="{item}" />
-            <input type="reset" value="[__Reset]" class="submit" />
-            <input type="submit" name="save" value="[__Save]" class="submit" />
-        </p>
-    </fieldset>
+            <!-- ELSE -->
+                <td colspan="3" class="light"><strong>$category_title</strong></td>
+            <!-- ENDIF -->
+        </tr>
+        <tr>
+            <th>__Title__</th>
+            <td colspan="3" class="light"><input type="text" name="title" value="$title" id="title" size="60" class="required" /></td>
+        </tr>
+        <tr>
+            <th>__Keywords__</th>
+            <td colspan="3" class="light"><input type="text" id="keywords" name="keywords"  size="60"  value="$keywords" /></td>
+        </tr>
+        <tr>
+            <td colspan="4" class="light">
+                <div class="center">
+                    <p>
+                        <a href="#editor" onclick="document.getElementById('shdesc').style.display=ShowHide(document.getElementById('shdesc').style.display)">
+                            __Description__
+                        </a>
+                    </p>
+                </div>
+                <div id="shdesc" style="display:none;">
+                    $bbCodes_desc
+                    <div class="center"><textarea id="desc" name="desc" cols="80" rows="5" >$desc</textarea></div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="light">
+                <div class="center">__Text__</div>
+                $bbCodes_text
+                <div class="center"><textarea id="text" name="text" cols="80" rows="25">$text</textarea></div>
+            </td>
+        </tr>
+        <tr>
+        <!-- IF !empty($admin) -->
+            <td colspan="4" class="light center">__Allow comments__: <input type="checkbox" name="opened" value="1" id="opened" <!-- IF !empty($opened) -->checked<!-- ENDIF --> /></td>
+        <!-- ELSE -->
+            <td colspan="4"><input type="hidden" name="opened" value="1" /></td>
+        <!-- ENDIF -->
+        </tr>
+    </table>
+    <p class="navigation center">
+        <input type="hidden" name="item" value="$item" />
+        <input type="reset" value="__Reset__" />
+        <input type="submit" name="save" value="__Save__" />
+    </p>
 </form>

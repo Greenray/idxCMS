@@ -1,8 +1,7 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module User
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Module USER
 
 if (!defined('idxCMS')) die();
 
@@ -12,8 +11,9 @@ if (!empty($REQUEST['save'])) {
     if (!USER::$logged_in) {
         if (!empty($REQUEST['act'])) {
             if ($REQUEST['act'] === 'register') {
-
+                #
                 # Registration of a new user
+                #
                 try {
                     CheckCaptcha();
                     CMS::call('USER')->registerUser();
@@ -29,71 +29,67 @@ if (!empty($REQUEST['save'])) {
                         $IMAGE->generateIcon($REQUEST['user']);
                     }
                 } catch (Exception $error) {
-                    ShowError(__($error->getMessage()));
+                    SYSTEM::showError($error->getMessage());
                 }
             } else {
                 if ($REQUEST['act'] === 'password_request') {
                     SYSTEM::set('pagename', 'Password recovery');
                     try {
-                        CheckCaptcha();
-                        $username = basename($REQUEST['name']);
-                        $data = USER::getUserData($username);
-                        if (!empty($data)) {
-                            if (!empty($data['last_prr']) && ((int) $time <= ((int) $data['last_prr'] + (int) CONFIG::getValue('user', 'flood')))) {
+                        $username = basename($REQUEST['user']);
+                        $user     = USER::getUserData($username);
+                        if (!empty($user)) {
+                            if (!empty($user['last_prr']) && ((int) $time <= ((int) $user['last_prr'] + (int) CONFIG::getValue('user', 'flood')))) {
                                 CMS::call('LOG')->logError('Too many requests in limited period of time. Try later.');
                                 Redirect('index');
                             }
-                            if ($REQUEST['email'] === $data['email']) {
+                            if ($REQUEST['email'] === $user['email']) {
                                 $new_password = RandomString(8);
                                 $siteurl = parse_url(SYSTEM::get('url'));
                                 $time = time();
-                                $data['last_prr'] = $time;
-                                $data['password'] = md5($new_password);
-                                CMS::call('USER')->saveUserData($username, $data);
-                                if (!SendMail(
-                                    $data['email'],
+                                $user['last_prr'] = $time;
+                                $user['password'] = md5($new_password);
+                                CMS::call('USER')->saveUserData($username, $user);
+/*                                if (!SendMail(
+                                    $user['email'],
                                     'no_reply@'.$siteurl['host'],
                                     __('Password'),
                                     __('Your new password at').' '.$siteurl['host'],
                                     __('Your username at').' '.$siteurl['host'].': '.$username.LF.__('Your new password at').' '.$siteurl['host'].': '.$new_password
-                                )) {
+                                )) {*/
                                     $FEEDBACK = new MESSAGE(CONTENT, 'feedback');
                                     $FEEDBACK->sendFeedback(
                                         'Password request for '.$username.'. New password is '.$new_password.' Email was not sent.',
                                         '',
-                                        $data['email']
+                                        $user['email']
                                     );
                                     unset($FEEDBACK);
-                                    $message = 'Your request was sent to Administrator';
-                                } else {
-                                    $message = 'Your request was sent to your email';
-                                }
-                                unset($REQUEST);
-                                ShowWindow(__('Password recovery'), __($message), 'center');
+                                    SYSTEM::showMessage('Your request was sent to Administrator');
+//                                } else {
+//                                    SYSTEM::showMessage('Your request was sent to your email');
+//                                }
 
-                            } else CMS::call('LOG')->logError('Error in email');
-                        } else CMS::call('LOG')->logError('Error in username');
+                            } else SYSTEM::showError('Error in email');
+
+                        } else SYSTEM::showError('Error in username');
 
                     } catch (Exception $error) {
-                        ShowError(__($error->getMessage()));
+                        SYSTEM::showError($error->getMessage());
                     }
                 }
+                unset($REQUEST);
             }
         }
     } else {
         if (USER::$logged_in) {
             if (!empty($REQUEST['profile'])) {
-
+                #
                 # Update profile
+                #
                 SYSTEM::set('pagename', __('My profile'));
                 if (!empty($REQUEST['current_password'])) {
                     if (md5($REQUEST['current_password']) === USER::getUser('password')) {
                         try {
-                            CMS::call('USER')->updateUser(
-                                USER::getUser('username'),
-                                USER::getUser('nickname'),
-                                $REQUEST['fields']
-                            );
+                            CMS::call('USER')->updateUser(USER::getUser('user'), USER::getUser('nick'), $REQUEST['fields']);
                             if (!empty($REQUEST['avatar']['name'])) {
                                 $IMAGE = new IMAGE(
                                     AVATARS,
@@ -102,19 +98,18 @@ if (!empty($REQUEST['save'])) {
                                     CONFIG::getValue('avatar', 'height')
                                 );
                                 $IMAGE->upload($REQUEST['avatar']);
-                                $IMAGE->generateIcon(USER::getUser('username'));
+                                $IMAGE->generateIcon(USER::getUser('user'));
                             }
                         } catch (Exception $error) {
-                            ShowError(__($error->getMessage()));
+                            SYSTEM::showError($error->getMessage());
                         }
-                    } else ShowError(__('Invalid password'));
-                } else ShowError(__('Invalid password'));
+                    } else SYSTEM::showError('Invalid password');
+                } else SYSTEM::showError('Invalid password');
             }
         }
     }
 }
 
-# INTERFACE
 if (!USER::$logged_in) {
     if (!empty($REQUEST['act'])) {
 
@@ -127,26 +122,29 @@ if (!USER::$logged_in) {
             $user['email']    = (empty($REQUEST['email']) || ($REQUEST['email'] == __('Enter your e-mail'))) ? '' : $REQUEST['email'];
             $tz = empty($REQUEST['fields']['tz']) ? (int) CONFIG::getValue('main', 'tz') : (int) $REQUEST['fields']['tz'];
             $user['utz']     = SelectTimeZone('fields[tz]', $LANG['tz'], $tz);
-            $user['icq']     = empty($REQUEST['fields']['icq'])     ? '' : $REQUEST['fields']['icq'];
             $user['website'] = empty($REQUEST['fields']['website']) ? '' : $REQUEST['fields']['website'];
             $user['country'] = empty($REQUEST['fields']['country']) ? '' : $REQUEST['fields']['country'];
             $user['city']    = empty($REQUEST['fields']['city'])    ? '' : $REQUEST['fields']['city'];
             $user['captcha'] = ShowCaptcha();
             SYSTEM::set('pagename', __('Registration'));
-            $TPL = new TEMPLATE(dirname(__FILE__).DS.'registration.tpl');
-            ShowWindow(__('Registration'), $TPL->parse($user));
+            $TPL = new TEMPLATE(__DIR__.DS.'registration.tpl');
+            $TPL->set($user);
+            SYSTEM::defineWindow('Registration', $TPL->parse());
 
         } elseif ($REQUEST['act'] === 'password_request') {
             SYSTEM::set('pagename', __('Password recovery'));
-            $TPL = new TEMPLATE(dirname(__FILE__).DS.'restore-password.tpl');
-            ShowWindow(__('Password recovery'), $TPL->parse(['captcha' => ShowCaptcha()]));
+            $TPL = new TEMPLATE(__DIR__.DS.'panel.tpl');
+            $TPL->set('captcha', ShowCaptcha());
+            SYSTEM::defineWindow('Password recovery', $TPL->parse());
 
         } elseif ($just_reg) {
-            $TPL = new TEMPLATE(dirname(__FILE__).DS.'greeting.tpl');
-            ShowWindow(__('Greeting'), $TPL->parse());
+            $TPL = new TEMPLATE(__DIR__.DS.'greeting.tpl');
+            SYSTEM::defineWindow('Greeting', $TPL->parse());
 
         } else Redirect('index');
 
+    } elseif (!empty($REQUEST['user'])) {
+         Redirect('user&act=register');
     } else {
         if (!empty($REQUEST['user'])) Redirect('user&act=register');
     }
@@ -154,31 +152,35 @@ if (!USER::$logged_in) {
     if (!empty($REQUEST['user'])) {
         $user = USER::getUserData($REQUEST['user']);
         if (!empty($user)) {
-            $user['avatar']    = GetAvatar($user['username']);
+            $user['avatar']    = GetAvatar($user['user']);
             $user['regdate']   = FormatTime('d F Y', $user['regdate']);
             $user['lastvisit'] = FormatTime('d F Y', $user['lastvisit']);
 
-            if ($user['blocked'] == '0') {
+            if ($user['blocked'] === 0) {
                 unset($user['blocked']);
             }
             unset($user['rights']);
 
-            if (USER::getUser('username') !== $REQUEST['user']) {
+            if (USER::getUser('user') !== $REQUEST['user']) {
                 $user['allow_pm'] = TRUE;
             }
-            SYSTEM::set('pagename',  __('User profile').': '.$user['nickname']);
-            $TPL = new TEMPLATE(dirname(__FILE__).DS.'view.tpl');
-            ShowWindow(__('Profile').': '.$user['nickname'], $TPL->parse($user));
+            SYSTEM::set('pagename',  __('User profile').': '.$user['nick']);
+
+            $TPL = new TEMPLATE(__DIR__.DS.'view.tpl');
+            $TPL->set($user);
+            SYSTEM::defineWindow('Profile'.': '.$user['nick'], $TPL->parse());
         } else {
             Redirect('index');
         }
     } else {
         $user = USER::getUser();
-        $user['avatar']    = GetAvatar($user['username']);
-        $user['regdate']   = empty($user['regdate'])   ? '-' : FormatTime('d F Y', $user['regdate']);
-        $user['lastvisit'] = empty($user['lastvisit']) ? '-' : FormatTime('d F Y', $user['lastvisit']);
+        $user['avatar']    = GetAvatar($user['user']);
+        $user['regdate']   = FormatTime('d F Y', $user['regdate']);
+        $user['lastvisit'] = FormatTime('d F Y', $user['lastvisit']);
         $user['utz']       = SelectTimeZone('fields[tz]', $LANG['tz'], (int) $user['tz']);
-
+        $user['website']   = empty($REQUEST['fields']['website']) ? $user['website'] : $REQUEST['fields']['website'];
+        $user['country']   = empty($REQUEST['fields']['country']) ? $user['country'] : $REQUEST['fields']['country'];
+        $user['city']      = empty($REQUEST['fields']['city'])    ? $user['city']    : $REQUEST['fields']['city'];
         if ($user['rights'] !== '*') {
             $user_rights = USER::getUserRights();
             $user['rights'] = '';
@@ -190,8 +192,10 @@ if (!USER::$logged_in) {
         } else {
             $user['admin'] = TRUE;
         }
-        $TPL = new TEMPLATE(dirname(__FILE__).DS.'profile.tpl');
+
+        $TPL = new TEMPLATE(__DIR__.DS.'profile.tpl');
+        $TPL->set($user);
         SYSTEM::set('pagename', __('Profile'));
-        ShowWindow(__('Profile'), $TPL->parse($user));
+        SYSTEM::defineWindow('Profile', $TPL->parse());
     }
 }

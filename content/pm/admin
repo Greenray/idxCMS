@@ -1,1 +1,1 @@
-a:2:{s:5:"inbox";a:0:{}s:6:"outbox";a:0:{}}
+a:2:{s:5:"inbox";a:0:{}s:6:"outbox";a:2:{i:1;a:6:{s:6:"author";s:5:"admin";s:4:"nick";s:5:"ADMIN";s:4:"mail";s:0:"";s:4:"text";s:18:"Сообщение";s:4:"time";i:1450767606;s:2:"ip";s:9:"127.0.0.1";}i:2;a:6:{s:6:"author";s:5:"admin";s:4:"nick";s:5:"ADMIN";s:4:"mail";s:0:"";s:4:"text";s:20:"Сообщение 2";s:4:"time";i:1450767676;s:2:"ip";s:9:"127.0.0.1";}}}

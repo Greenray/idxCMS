@@ -1,17 +1,21 @@
 <?php
-# idxCMS version 2.4
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# FORM FOR COMMENT EDITING
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Form for comment editing
 
 die();?>
-<a name="{comment}"></a>
-<form name="edit" method="post" action="">
-    <input type="hidden" name="comment" value="{comment}" />
-    {bbcodes}
-    <fieldset>
-        <legend>[__Text]</legend>
-        <textarea id="text" name="text" cols="70" rows="10" style="width: 96%">{text}</textarea>
-        [if=moderator]<div class="prevention"><label><input type="checkbox" name="block" value="1" /> [__Block]</label></div>[/if]
-    </fieldset>
-    <p class="center"><input type="submit" name="save" value="[__Save]" /></p>
-</form>
+
+<a name="$comment"></a>
+<div class="comment_edit center">
+    $bbcodes
+    <form name="edit" method="post" action="">
+        <textarea id="text" name="text" cols="70" rows="10">$text</textarea>
+        <!-- IF !empty($moderator) -->
+            <div class="center"><input type="checkbox" name="block" value="1" /> __Block user__</div>
+        <!-- ENDIF -->
+        <p class="center">
+            <input type="hidden" name="comment" value="$comment" />
+            <input type="submit" name="save" value="__Save__" />
+        </p>
+    </form>
+</div>

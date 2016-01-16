@@ -1,13 +1,10 @@
 /**
+ * Rate system for articles and catalog items.
+ *
  * @file      tools/jquery.rating.js
  * @version   v1.0.3 : 2008/05/06
  * @author    http://www.nofunc.com/AJAX_Star_Rating/
- */
-
-/**
- * Rate system for comments and replays.
- * jquery.rating.js - Rates jquery libruary.
- * @package Rate
+ * @package   Tools
  */
 
 function _$(a, b) { return((typeof (b) === "object" ? b : document).getElementById(a)); }

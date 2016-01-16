@@ -1,8 +1,7 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: Sections management.
 
 if (!defined('idxADMIN')) die();
 
@@ -35,23 +34,25 @@ try {
         }
     }
 } catch (Exception $error) {
-    ShowMessage(__($error->getMessage()));
+    SYSTEM::showError($error->getMessage());
 }
-
+#
 # Existing sections
+#
 $sections = CMS::call($obj)->getSections();
+$output   = [];
 
 if ($obj === 'POSTS') {
+    #
     # We can't move or delete section drafts and exclude it from sorting
-    $output = [];
-    $output['drafts'] = $sections['drafts'];
-    $output['drafts']['desc'] = CMS::call('PARSER')->parseText($sections['drafts']['desc']);
+    #
+    $output['system'][0] = $sections['drafts'];
+    $output['system'][0]['desc'] = CMS::call('PARSER')->parseText($sections['drafts']['desc']);
     unset($sections['drafts']);
 }
 
 if (!empty($sections)) {
-    $class  = 'even';
-    $output = [];
+    $class  = 'dark';
     $output['sections'] = $sections;
     foreach ($sections as $id => $section) {
         $output['sections'][$id]['desc'] = CMS::call('PARSER')->parseText($section['desc']);
@@ -60,30 +61,40 @@ if (!empty($sections)) {
             $output['sections'][$id]['delete'] = TRUE;      # If section is not empty we can't delete it
         }
         $output['sections'][$id]['class'] = $class;
-        $class = ($class === 'odd') ? 'even' : 'odd';
+        $class = ($class === 'light') ? 'dark' : 'light';
     }
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'sections.tpl');
-    echo $TPL->parse($output);
+
+    $TPL = new TEMPLATE(__DIR__.DS.'sections.tpl');
+    $TPL->set($output);
+    echo $TPL->parse();
 }
 
 if (!empty($REQUEST['edit'])) {
+    #
     # Edit section
+    #
     $section = $sections[$REQUEST['edit']];
-    $section['bbCodes'] = CMS::call('PARSER')->showBbcodesPanel('form.desc');
     $section['header']  = __('Edit');
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'section.tpl');
-    echo $TPL->parse($section);
+    $section['bbCodes'] = CMS::call('PARSER')->showBbcodesPanel('form.desc');
+
+    $TPL = new TEMPLATE(__DIR__.DS.'section.tpl');
+    $TPL->set($section);
+    echo $TPL->parse();
 }
 
 if (!empty($REQUEST['new']) || empty($sections)) {
+    #
     # Create new section
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'section.tpl');
-    echo $TPL->parse([
+    #
+    $TPL = new TEMPLATE(__DIR__.DS.'section.tpl');
+    $TPL->set([
+        'header'  => __('New section'),
         'section' => empty($REQUEST['section']) ? '' : $REQUEST['section'],
         'title'   => empty($REQUEST['title'])   ? '' : $REQUEST['title'],
         'desc'    => empty($REQUEST['desc'])    ? '' : $REQUEST['desc'],
         'access'  => empty($REQUEST['access'])  ? 0  : (int)$REQUEST['access'],
-        'bbCodes' => CMS::call('PARSER')->showBbcodesPanel('form.desc'),
-        'header'  => __('New section')
+        'bbCodes' => CMS::call('PARSER')->showBbcodesPanel('form.desc')
     ]);
+
+    echo $TPL->parse();
 }

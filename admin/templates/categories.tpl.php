@@ -1,95 +1,96 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - Posts
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: Template for sections and categories.
 
 die();?>
-<script type="text/javascript" src="{TOOLS}redips.drag.js"></script>
-<script type="text/javascript" src="{TOOLS}drag.js"></script>
-<div class="module">[__Categories]</div>
+
+<script type="text/javascript" src="{TOOLS}redips{DS}redips.drag.js"></script>
+<script type="text/javascript" src="{TOOLS}redips{DS}drag.js"></script>
+<div class="module">__Categories__</div>
 <fieldset>
     <form name="sections" method="post" action="">
-        <div id="nodrag">
+        <div id="redips-nodrag">
             <table>
                 <tr>
-                    <th></th>
+                    <th class=""></th>
                     <th class="id">ID</th>
-                    <th class="icon">[__Icon]</th>
-                    <th class="title">[__Title]</th>
-                    <th class="desc">[__Description]</th>
-                    <th class="access">[__Access]</th>
-                    <th class="access">[__Posts]</th>
-                    <th class="actions">[__Actions]</th>
+                    <th class="icon">__Icon__</th>
+                    <th class="title">__Title__</th>
+                    <th class="desc">__Description__</th>
+                    <th class="access">__Access__</th>
+                    <th class="actions">__Posts__</th>
+                    <th class="actions">__Actions__</th>
                 </tr>
-                [if=system]
-                [each=system]
-                    <tr><td colspan="8" class="header"><div>{system[title]}</div></td></tr>
-                    [each=system[categories]]
-                        <tr class="{categories[class]}">
-                            <td class="rowhandler"><div class="nodrag"></div></td>
-                            <td class="id center">{categories[id]}</td>
-                            <td class="icon center"><img src="{categories[path]}icon.png" width="35" height="35" alt="icon" /></td>
-                            <td class="title">{categories[title]}</td>
-                            <td class="desc">{categories[desc]}</td>
-                            <td class="access center">{categories[access]}</td>
-                            <td class="access center">{categories[items]}</td>
-                            <td class="actions center">
-                                <button type="submit" name="edit" value="{system[id]}.{categories[id]}" title="[__Edit]">
-                                    <img src="{ICONS}edit.png" width="16" height="16" alt="[__Edit]" />
-                                </button>
-                                [if=categories[items]]
-                                    <a href="./?module=admin&amp;id={module}.items&amp;section={system[id]}&amp;category={categories[id]}">
-                                        <img src="{ICONS}posts.png" width="16" height="16" alt="[__Posts]" />
-                                    </a>
-                                [/if]
-                            </td>
-                        </tr>
-                    [/each.system[categories]]
-                [/each.system]
-                [/if]
+                <!-- IF !empty($system) -->
+                    <!-- FOREACH system = $system -->
+                        <tr><td colspan="8" class="redips-mark"><div>$system.title</div></td></tr>
+                        <!-- FOREACH category = $system.categories -->
+                            <tr class="$category.class">
+                                <td class="redips-rowhandler center"><div class="redips-nodrag"></div></td>
+                                <td class="id center">$category.id</td>
+                                <td class="icon center"><img src="[$category.path:]icon.png" width="35" height="35" alt="icon" /></td>
+                                <td class="title">$category.title</td>
+                                <td class="desc">$category.desc</td>
+                                <td class="access center">$category.access</td>
+                                <td class="actions center">$category.items</td>
+                                <td class="actions center">
+                                    <button type="submit" name="edit" value="$system.id.$category.id" title="__Edit__">
+                                        <img src="{ICONS}edit.png" width="16" height="16" alt="__Edit__" class="tip" />
+                                    </button>
+                                    <!-- IF !empty($category.items) -->
+                                        <a href="{MODULE}admin&amp;id=[$module:].items{SECTION}$system.id{CATEGORY}$category.id">
+                                            <img src="{ICONS}posts.png" width="16" height="16" alt="__Posts__" class="tip" />
+                                        </a>
+                                    <!-- ENDIF -->
+                                </td>
+                            </tr>
+                        <!-- ENDFOREACH -->
+                    <!-- ENDFOREACH -->
+                <!-- ENDIF -->
             </table>
         </div>
-        <div id="drag">
+        <div id="redips-drag">
             <table id="sortable">
-                [each=sections]
-                    <tr><td colspan="8" class="mark header"><div id="{sections[id]}" class="group">{sections[title]}</div></td></tr>
-                    <tr style="line-height:2px;height:2px;"><td colspan="7" style="border:0;">&nbsp;</td></tr>
-                    [each=sections[categories]]
-                    <tr class="{categories[class]}">
-                        <td class="rowhandler">
-                            <div id="{sections[id]}.{categories[id]}" class="drag row"><img src="{ICONS}move.png" width="16" height="16" alt="[__Move]" /></div>
+            <!-- FOREACH section = $sections -->
+                <tr><td colspan="8" class="redips-mark"><div id="$section.id" class="group">$section.title</div></td></tr>
+                <!-- FOREACH category = $section.categories -->
+                    <tr class="$category.class">
+                        <td class="redips-rowhandler">
+                            <div id="$section.id.$category.id" class="redips-drag redips-row">
+                                <img src="{ICONS}move.png" width="16" height="16" alt="__Move__" />
+                            </div>
                         </td>
-                        <td class="id center">{categories[id]}</td>
-                        <td class="icon center"><img src="{categories[path]}icon.png" width="35" height="35" alt="icon" /></td>
-                        <td class="title">{categories[title]}</td>
-                        <td class="desc">{categories[desc]}</td>
-                        <td class="access center">{categories[access]}</td>
-                        <td class="access center">{categories[items]}</td>
+                        <td class="id center">$category.id</td>
+                        <td class="icon center"><img src="[$category.path:]icon.png" width="35" height="35" alt="icon" /></td>
+                        <td class="title">$category.title</td>
+                        <td class="desc">$category.desc</td>
+                        <td class="access center">$category.access</td>
+                        <td class="actions center">$category.items</td>
                         <td class="actions center">
-                            <button type="submit" name="edit" value="{sections[id]}.{categories[id]}" title="[__Edit]">
-                                <img src="{ICONS}edit.png" width="16" height="16" alt="[__Edit]" />
+                            <button type="submit" name="edit" value="$section.id.$category.id" title="__Edit__">
+                                <img src="{ICONS}edit.png" width="16" height="16" alt="__Edit__" class="tip" />
                             </button>
-                            [ifelse=categories[items]]
-                                <a href="./?module=admin&amp;id={module}.items&amp;section={sections[id]}&amp;category={categories[id]}">
-                                    <img src="{ICONS}posts.png" width="16" height="16" alt="[__Posts]" />
-                                </a>
-                            [else]
-                                <button type="submit" name="delete" value="{sections[id]}.{categories[id]}" title="[__Delete]">
-                                    <img src="{ICONS}delete.png" width="16" height="16" alt="[__Delete]" />
+                            <a href="{MODULE}admin&id=[$module:].items{SECTION}$section.id{CATEGORY}$category.id">
+                                <img src="{ICONS}posts.png" width="16" height="16" alt="__Posts__" class="tip" />
+                            </a>
+                            <!-- IF empty($category.items) -->
+                                <button type="submit" name="delete" value="$section.id.$category.id" title="__Delete__">
+                                    <img src="{ICONS}delete.png" width="16" height="16" alt="__Delete__" class="tip" />
                                 </button>
-                            [/else]
+                            <!-- ENDIF -->
                         </td>
                     </tr>
-                    [/each.sections[categories]]
-                [/each.sections]
+                <!-- ENDFOREACH -->
+            <!-- ENDFOREACH -->
             </table>
         </div>
         <div id="result"></div>
         <p class="center">
-            <input type="submit" name="new" value="[__New category]" class="submit" />
-            [if=sections]<input type="submit" name="action" value="[__Save]" onclick="save()" class="submit" />[/if]
-            <button formaction="{MODULE}admin&amp;id=posts.posts&amp;new=1" class="submit">[__Post]</button>
+            <input type="submit" name="new" value="__New category__" />
+            <!-- IF !empty($sections) -->
+                <input type="submit" name="action" value="__Save__" onclick="save()" />
+            <!-- ENDIF -->
         </p>
     </form>
 </fieldset>

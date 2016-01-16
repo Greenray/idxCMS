@@ -1,14 +1,25 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Counter
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Module COUNTER: Template
 
 die();?>
+
 <table class="counter">
-    <tr><td>[__Total users]</td><td>{registered}</td></tr>
-    <tr><td>[__Today visitors]</td><td>{todayusers}</td></tr>
-    <tr><td colspan="2">[__Online] - {visitors} ({regonline} [__registered])</td></tr>
-    [if=regonline]<tr><td colspan="2">{logged_in}</td></tr>[/if]
-    <tr><td>[__Today hosts]</td><td>{todayhosts}</td></tr>
+    <tr>
+        <td>__Total users__</td>
+        <td class="right">$registered</td>
+    </tr>
+    <tr>
+        <td>__Today visitors__</td>
+        <td class="right">$todayusers</td>
+    </tr>
+    <tr>
+        <td>__Today hosts__</td>
+        <td class="right">$todayhosts</td>
+    </tr>
+    <tr><td colspan="2">__Online__ - $visitors ($regonline __registered__)</td></tr>
+    <!-- IF !empty($regonline) -->
+        <tr><td colspan="2">$logged_in</td></tr>
+    <!-- ENDIF -->
 </table>

@@ -1,12 +1,13 @@
 <?php
-/** HTML and PHP highlighter.
+/**
+ * HTML and PHP highlighter.
  *
- * @program   idxCMS: Flat Files Content Management Sysytem
- * @file      system/highlighter.class.php
- * @version   2.4
+ * @program   idxCMS: Flat Files Content Management System
+ * @version   3.0
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+ * @copyright (c) 2011 - 2016 Victor Nabatov
+ * @license   Creative Commons — Attribution-NonCommercial-ShareAlike 4.0 International
+ * @file      system/highlighter.class.php
  * @package   Core
  */
 
@@ -36,15 +37,19 @@ class HIGHLIGHTER extends PARSER {
     /** @var string Tag value color */
     private $_value = 'color:red;';
 
-    /** Class initialization.
+    /**
+     * Class initialization.
+     *
      * @param  string $code Code for highlighting
      */
     public function __construct($code) {
         $this->_text = $code;
     }
 
-    /** Comment highlighter.
-     * @return string HTML span block with highlighted comment
+    /**
+     * Comment highlighter.
+     *
+     *  @return string HTML span block with highlighted comment
      */
     private function highlightComment() {
         $this->_output .= '<span style="'.$this->_comment.'">&lt;';
@@ -54,7 +59,9 @@ class HIGHLIGHTER extends PARSER {
         $this->_output .= '&gt;</span>';
     }
 
-    /** PHP code highlighter.
+    /**
+     * PHP code highlighter.
+     *
      * @return string HTML span block with highlighted php code
      */
     private function highlightPhp() {
@@ -96,13 +103,17 @@ class HIGHLIGHTER extends PARSER {
         $this->_output .= '&gt;</span>';
     }
 
-    /** Tag highlighter.
+    /**
+     * Tag highlighter.
+     *
      * @return string HTML span block with highlighted tag
      */
     private function highlightTag() {
         $this->_output .= '<span style="'.$this->_tag.'">&lt;';
         $parsedTag = FALSE;
+        #
         # Parse full tag
+        #
         $length = mb_strlen($this->_text);
         for ($this->_current += 1; ($this->_current < $length) && ($this->_text[$this->_current] !== '>'); $this->_current++) {
             if (($this->_text[$this->_current] === ' ') && !$parsedTag) {
@@ -110,7 +121,9 @@ class HIGHLIGHTER extends PARSER {
                 $this->_output .= '</span>';
             } elseif (($this->_text[$this->_current] !== ' ') && $parsedTag) {
                 $attribute = '';
+                #
                 # While we are in the tag
+                #
                 for (; ($this->_current < $length) && ($this->_text[$this->_current] !== '>'); $this->_current++) {
                     if ($this->_text[$this->_current] !== '=') {
                         $attribute .= $this->_text[$this->_current];
@@ -123,7 +136,9 @@ class HIGHLIGHTER extends PARSER {
                             if ($this->_text[$this->_current] === '"' || $this->_text[$this->_current] === "'") {
                                 $quote  = $this->_text[$this->_current];
                                 $value .= $quote;
+                                #
                                 # Attribute value
+                                #
                                 for ($this->_current += 1; ($this->_current < $length) && ($this->_text[$this->_current] !== '>') && ($this->_text[$this->_current] !== $quote); $this->_current++) {
                                     if ($this->_text[$this->_current] === '<') {
                                         if ($this->_text[$this->_current + 1] === '?') {
@@ -175,7 +190,9 @@ class HIGHLIGHTER extends PARSER {
         --$this->_current;
     }
 
-    /** Hightlights string.
+    /**
+     * Hightlights string.
+     *
      * @return string Highlighted html
      */
     public function highlight() {

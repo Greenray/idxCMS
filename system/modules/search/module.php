@@ -1,12 +1,13 @@
 <?php
-/** Search the website.
+/**
+ * Search the website.
  *
- * @program   idxCMS: Flat Files Content Management Sysytem
- * @file      system/modules/searc/module.php
- * @version   2.4
+ * @program   idxCMS: Flat Files Content Management System
+ * @version   3.0
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+ * @copyright (c) 2011 - 2016 Victor Nabatov
+ * @license   Creative Commons — Attribution-NonCommercial-ShareAlike 4.0 International
+ * @file      system/modules/searc/module.php
  * @package   Search
  * @overview  Search the website.
  *            Search by key words of the tag cloud or arbitrary text.
@@ -14,7 +15,9 @@
 
 if (!defined('idxCMS')) die();
 
-/** Creates the array of search results.
+/**
+ * Creates the array of search results.
+ *
  * @param  string $text    The text to search
  * @param  string $title   The title of the item
  * @param  string $word    The search word
@@ -33,12 +36,39 @@ function SearchResult($text, $title, $word, $link, &$result) {
         $text = preg_replace('/\[quote(.*?)\[\/quote\]/is', '', $text);
         $text = preg_replace('/\[(.*?)\]/is', '', $text);
         $text = strip_tags($text);
-        if (stripos($text, $word, 0) !== FALSE) {
+        if (stripos($text, $word, 0)) {
             if (!array_key_exists($link, $result)) {
                 $result[$link] = $word.'|'.$title.'|'.$text;
             }
         }
     }
+}
+
+/**
+ * Formats output of search results.
+ *
+ * @param  string  $text   Text to search in
+ * @param  string  $word   Word to search for
+ * @param  integer $config Length of search string
+ * @return string          The result of search
+ */
+function FormatFound($text, $word, $config) {
+    $strlen = mb_strlen($text);
+    $target = mb_stristr($text, $word);
+    $real   = mb_substr($target, 0, mb_strlen($word));
+    $start  = 0;
+    $start_ = '';
+    $end_   = '';
+    $temp   = mb_stripos($text, $word);
+    if ($temp > ($config / 2)) {
+        $start  = $temp - ($config / 2);
+        $start_ = '...';
+    }
+    if (($strlen - ($config / 2)) > $temp) {
+        $strlen = $config - 1;
+        $end_   = '...';
+    }
+    return $start_.str_replace($real, '<u><strong><em>'.$real.'</em></strong></u>', mb_substr($text, $start, $strlen)).$end_;
 }
 
 SYSTEM::registerModule('search', 'Search', 'box', 'system');

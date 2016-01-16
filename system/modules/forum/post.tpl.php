@@ -1,25 +1,25 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Forum
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Module FORUM: The template for editing or posting new topic
 
 die();?>
+
 <script type="text/javascript">
     function checkTopicForm(form) {
         var title = form.title.value;
         var text = form.text.value;
         var textRegex = new RegExp(/<\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[^'">\s]+))?)+\s*|\s*)\/?>/gim);
         if (title === '') {
-            ShowAlert('[__Enter a title]', '[__Error]');
+            ShowAlert('__Enter a title__');
             return false;
         }
         if (title.match(textRegex)) {
-            ShowAlert('[__Invalid symbols]', '[__Error]');
+            ShowAlert('__Invalid symbols__');
             return false;
         }
         if (text === '') {
-            ShowAlert('[__Enter a text]', '[__Error]');
+            ShowAlert('__Enter a text__');
             return false;
         }
         return true;
@@ -28,23 +28,24 @@ die();?>
 <div>
     <form id="topic" name="topic" method="post" action="" onsubmit="return checkTopicForm(this);">
         <fieldset>
-            <legend>[__Topic]</legend>
-            [__Title] <input type="text" name="title" value="{title}" id="title" size="50" />
-            {bbCodes}
-            <p><textarea id="text" name="text" cols="70" rows="10">{text}</textarea></p>
-            [ifelse=moderator]
+            <legend>__Topic__</legend>
+            __Title__ <input type="text" name="title" value="$title" id="title" size="50" />
+            $bbCodes
+            <p><textarea id="text" name="text" cols="70" rows="10">$text</textarea></p>
+            <!-- IF !empty($moderator) -->
                 <div>
-                    <input type="checkbox" name="opened" value="1" />
-                    <label for="opened">[__Close]</label>
-                    <input type="checkbox" name="pinned" value="1" /><label for="pinned">[__Pin]</label>
+                    <input type="checkbox" name="opened" value="1" /><label for="opened">__Close__</label>
+                    <input type="checkbox" name="pinned" value="1" /><label for="pinned">__Pin__</label>
                 </div>
-            [else]
+            <!-- ELSE -->
                 <input type="hidden" name="opened" value="1" />
-            [/else]
+            <!-- ENDIF -->
         </fieldset>
         <p class="center">
-            [if=new]<input type="hidden" name="new" value="1" />[/if]
-            <input type="submit" name="save" value="[__Save]" class="submit" />
+            <!-- IF !empty($new) -->
+                <input type="hidden" name="new" value="1" />
+            <!-- ENDIF -->
+            <input type="submit" name="save" value="__Save__" />
         </p>
   </form>
 </div>

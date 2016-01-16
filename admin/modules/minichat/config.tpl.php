@@ -1,27 +1,27 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - Minichat
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: Minichat configuration template.
 
 die();?>
-<div class="module">[__Options]</div>
+
+<div class="module">__Options__</div>
 <fieldset>
     <form name="config" method="post" action="">
         <table class="std">
-            <tr class="odd">
-                <td>[__Max size of database]</td>
-                <td colspan="2"><input type="text" name="db-size" value="{db-size}" size="6" class="text" /> [__byte(s)]</td>
+            <tr class="light">
+                <td>__Max size of database__</td>
+                <td colspan="2"><input type="text" name="db_size" value="$db_size" size="6" /> __records__</td>
             </tr>
-            <tr class="odd">
-                <td>[__Max message length]</td>
-                <td colspan="2"><input type="text" name="message-length" value="{message-length}" size="6" class="text" /> [__byte(s)]</td>
+            <tr class="light">
+                <td>__Max message length__</td>
+                <td colspan="2"><input type="text" name="message_length" value="$message_length" size="6" /> __byte(s)__</td>
             </tr>
-            <tr class="odd">
-                <td>[__Messages to show]</td>
-                <td colspan="2"><input type="text" name="mess-to-show" value="{mess-to-show}" size="6" class="text" /></td>
+            <tr class="light">
+                <td>__Messages to show__</td>
+                <td colspan="2"><input type="text" name="mess_to_show" value="$mess_to_show" size="6" /></td>
             </tr>
         </table>
-        <p class="center"><input type="submit" name="save" value="[__Save]" class="submit" /></p>
+        <p class="center"><input type="submit" name="save" value="__Save__" /></p>
     </form>
 </fieldset>

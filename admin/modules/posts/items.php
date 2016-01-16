@@ -1,8 +1,7 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - Posts
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: Publications and news.
 
 if (!defined('idxADMIN')) die();
 
@@ -17,13 +16,18 @@ $new_category = FILTER::get('REQUEST', 'new_category');
 $sections   = CMS::call('POSTS')->getSections();
 $categories = CMS::call('POSTS')->getCategories($section);
 $content    = CMS::call('POSTS')->getContent($category);
-
+#
 # Save new or edited post
+#
 if (!empty($REQUEST['save'])) {
+    #
     # Check if admin decided to move post
+    #
     if (($section !== $new_section) || ($category !== $new_category)) {
         if (!empty($item))
+             #
              # Post exists, so move it
+             #
              $post = CMS::call('POSTS')->moveItem($item, $new_section, $new_category);
         else $post = '';     # Nothing to move, so add new
 
@@ -34,11 +38,14 @@ if (!empty($REQUEST['save'])) {
 
     try {
         CMS::call('POSTS')->saveItem($post);
-        USER::changeProfileField(USER::getUser('username'), 'posts', '+');
+        if (!empty($REQUEST['new'])) {
+            USER::changeProfileField(USER::getUser('user'), 'posts', '+');
+        }
+
         unset($REQUEST['new']);
 
     } catch (Exception $error) {
-        ShowMessage(__($error->getMessage()));
+        SYSTEM::showError($error->getMessage());
     }
     $post = '';
 
@@ -53,7 +60,7 @@ if (!empty($REQUEST['save'])) {
         try {
             CMS::call('POSTS')->removeItem($REQUEST['delete']);
         } catch (Exception $error) {
-            ShowMessage(__($error->getMessage()));
+            SYSTEM::showError($error->getMessage());
         }
     }
 }
@@ -74,7 +81,9 @@ if ((empty($section) && empty($category)) || !empty($REQUEST['new']) || !empty($
     foreach ($sections as $id => $data) {
         $categories = CMS::call('POSTS')->getCategories($id);
         if (!empty($categories)) {
+            #
             # Don't include sections without categories
+            #
             $choice[$id]['id']    = $data['id'];
             $choice[$id]['title'] = $data['title'];
             $ids    = [];
@@ -120,8 +129,9 @@ if ((empty($section) && empty($category)) || !empty($REQUEST['new']) || !empty($
     $output['bbCodes_desc'] = CMS::call('PARSER')->showBbcodesPanel('post.desc');
     $output['bbCodes_text'] = CMS::call('PARSER')->showBbcodesPanel('post.text');
 
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'post.tpl');
-    echo $TPL->parse($output);
+    $TPL = new TEMPLATE(__DIR__.DS.'post.tpl');
+    $TPL->set($output);
+    echo $TPL->parse();
 
 } elseif (!empty($sections[$section])) {
 
@@ -129,6 +139,7 @@ if ((empty($section) && empty($category)) || !empty($REQUEST['new']) || !empty($
 
     if (!empty($categories[$category])) {
         $output = [];
+        $output['header']         = __('Posts');
         $output['section_id']     = $section;
         $output['section_title']  = $sections[$section]['title'];
         $output['category_id']    = $category;
@@ -147,8 +158,9 @@ if ((empty($section) && empty($category)) || !empty($REQUEST['new']) || !empty($
             $output['items'][] = $post;
         }
 
-        $TPL = new TEMPLATE(dirname(__FILE__).DS.'items.tpl');
-        echo $TPL->parse($output);
+        $TPL = new TEMPLATE(__DIR__.DS.'items.tpl');
+        $TPL->set($output);
+        echo $TPL->parse();
 
     } else {
         header('Location: '.MODULE.'admin&id=posts.categories');

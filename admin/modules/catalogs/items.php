@@ -1,59 +1,65 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - Catalogs
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Module Gallery: Items management.
 
 if (!defined('idxADMIN')) die();
 
-$section    = FILTER::get('REQUEST', 'section');
-$category   = FILTER::get('REQUEST', 'category');
-$item       = FILTER::get('REQUEST', 'edit');
-
+$section      = FILTER::get('REQUEST', 'section');
+$category     = FILTER::get('REQUEST', 'category');
 $new_category = FILTER::get('REQUEST', 'new_category');
-
-$sections   = CMS::call('CATALOGS')->getSections();
-$categories = CMS::call('CATALOGS')->getCategories($section);
-$content    = CMS::call('CATALOGS')->getContent($category);
-
-# Save new or edited post
+$item         = FILTER::get('REQUEST', 'edit');
+$sections     = CMS::call('CATALOGS')->getSections();
+$categories   = CMS::call('CATALOGS')->getCategories($section);
+$content      = CMS::call('CATALOGS')->getContent($category);
+#
+# Save new or edited item
+#
 if (!empty($REQUEST['save'])) {
+    #
     # Check if admin decided to move post
+    #
+    $item = $REQUEST['item'];
     if ($category !== $new_category) {
-        if (!empty($REQUEST['item']))
-             # Topic exists, so move it
-             $item = CMS::call('CATALOGS')->moveItem($REQUEST['item'], $section, $new_category);
+        if (!empty($item))
+             #
+             # Item exists, so move it
+             #
+             $item = CMS::call('CATALOGS')->moveItem($item, $section, $new_category);
         else $item = '';     # Nothing to move, so add new
         $category = $new_category;
-    } else {
-        $item = FILTER::get('REQUEST', 'item');
     }
+
     $content = CMS::call('CATALOGS')->getContent($category);
+
     try {
         CMS::call('CATALOGS')->saveItem($item);
         $item = '';
     } catch (Exception $error) {
-         ShowMessage(__($error->getMessage()));
+        SYSTEM::showError($error->getMessage());
     }
+
 } elseif (!empty($REQUEST['close']) || !empty($REQUEST['open'])) {
     CMS::call('CATALOGS')->setValue(
         empty($REQUEST['close']) ? $REQUEST['open'] : $REQUEST['close'],
         'opened',
-        empty($REQUEST['close']) ? TRUE : FALSE
+        empty($REQUEST['close']) ? 1 : 0
     );
+
 } else {
     if (!empty($REQUEST['delete'])) {
         try {
             CMS::call('CATALOGS')->removeItem($REQUEST['delete']);
         } catch (Exception $error) {
-            ShowMessage(__($error->getMessage()));
+            SYSTEM::showError($error->getMessage());
         }
     }
 }
 
 if (!empty($REQUEST['new']) || !empty($item)) {
     $output = [];
-    $item = CMS::call('CATALOGS')->getItem($item, 'full', FALSE);
+    $item   = CMS::call('CATALOGS')->getItem($item, 'full', FALSE);
+
     if (!empty($item)) {
         $output = $item;
         $output['title']     = empty($REQUEST['title'])     ? $item['title']     : $REQUEST['title'];
@@ -64,12 +70,12 @@ if (!empty($REQUEST['new']) || !empty($item)) {
         $output['opened']    = empty($REQUEST['opened'])    ? $item['opened']    : $REQUEST['opened'];
     } else {
         $output['id']        = '';
-        $output['title']     = FILTER::get('REQUEST', 'title');
-        $output['keywords']  = FILTER::get('REQUEST', 'keywords');
-        $output['desc']      = FILTER::get('REQUEST', 'desc');
-        $output['text']      = FILTER::get('REQUEST', 'text');
-        $output['copyright'] = FILTER::get('REQUEST', 'copyright');
-        $output['opened']    = empty($REQUEST['opened']) ? TRUE : $REQUEST['opened'];
+        $output['title']     = $REQUEST['title'];
+        $output['keywords']  = $REQUEST['keywords'];
+        $output['desc']      = $REQUEST['desc'];
+        $output['text']      = $REQUEST['text'];
+        $output['copyright'] = $REQUEST['copyright'];
+        $output['opened']    = empty($REQUEST['opened']) ? 1 : $REQUEST['opened'];
     }
     $output['categories'] = $categories;
     if (!empty($category)) {
@@ -79,17 +85,25 @@ if (!empty($REQUEST['new']) || !empty($item)) {
     }
     $output['bbCodes_desc'] = CMS::call('PARSER')->showBbcodesPanel('item.desc');
     $output['bbCodes_text'] = CMS::call('PARSER')->showBbcodesPanel('item.text');
+
     switch ($section) {
         case 'links':
-            $output['site'] = empty($item) ? FILTER::get('REQUEST', 'site') : $item['site'];
-            $TPL = new TEMPLATE(dirname(__FILE__).DS.'link.tpl');
+            $output['site'] = empty($item) ? $REQUEST[ 'site'] : $item['site'];
+            $template = __DIR__.DS.'link.tpl';
+            break;
+
+        case 'files':
+            $template = __DIR__.DS.'file.tpl';
             break;
 
         default:
-            $TPL = new TEMPLATE(dirname(__FILE__).DS.'item.tpl');
+            $template = __DIR__.DS.'item.tpl';
             break;
     }
-    echo $TPL->parse($output);
+
+    $TPL = new TEMPLATE($template);
+    $TPL->set($output);
+    echo $TPL->parse();
 
 } elseif (!empty($sections[$section])) {
     $categories = CMS::call('CATALOGS')->getCategories($section);
@@ -111,8 +125,11 @@ if (!empty($REQUEST['new']) || !empty($item)) {
             }
             $output['items'][] = $item;
         }
-        $TPL = new TEMPLATE(dirname(__FILE__).DS.'items.tpl');
-        echo $TPL->parse($output);
+
+        $TPL = new TEMPLATE(__DIR__.DS.'items.tpl');
+        $TPL->set($output);
+        echo $TPL->parse();
+
     } else {
         header('Location: '.MODULE.'admin&id=catalogs.categories');
         die();

@@ -1,8 +1,7 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Minichat
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Module MINICHAT
 
 if (!defined('idxCMS')) die();
 
@@ -16,7 +15,7 @@ if (!empty($REQUEST['mctext']) && !empty($REQUEST['save'])) {
         }
         FILTER::remove('REQUEST', 'mctext');
     } catch (Exception $error) {
-        ShowError(__($error->getMessage()));
+        SYSTEM::showError($error->getMessage());
     }
 } else {
     if (!empty($REQUEST['mcaction']) && USER::moderator('minichat')) {
@@ -38,42 +37,43 @@ if (!empty($REQUEST['mctext']) && !empty($REQUEST['save'])) {
         }
     }
 }
-
+#
 # Show messages
+#
 $messages = $MC->getMessages();
 $output = [];
 
 if (!empty($messages)) {
     $messages = array_reverse($messages, TRUE);
-    $messages = array_slice($messages, 0, (int) CONFIG::getValue('minichat', 'mess-to-show'), TRUE);
+
+//    $messages = array_slice($messages, 0, (int) CONFIG::getValue('minichat', 'mess-to-show'), TRUE);
+
     foreach ($messages as $key => $message) {
-        $output['msg'][$key] = $message;
-        $output['msg'][$key]['id']   = $key;
-        $output['msg'][$key]['text'] = CMS::call('PARSER')->parseText($message['text']);
-        $output['msg'][$key]['date'] = FormatTime('d.m.Y H:i:s', $message['time']);
+        $output['messages'][$key]         = $message;
+        $output['messages'][$key]['id']   = $key;
+        $output['messages'][$key]['text'] = CMS::call('PARSER')->parseText($message['text']);
+        $output['messages'][$key]['date'] = FormatTime('d.m.Y H:i:s', $message['time']);
         if (USER::moderator('minichat')) {
-            $output['msg'][$key]['moderator'] = TRUE;
+            $output['messages'][$key]['moderator'] = TRUE;
             $author = USER::getUserData($message['author']);
             if ($author['rights'] === '*') {
-                unset($output['msg'][$key]['ip']);
+                unset($output['messages'][$key]['ip']);
             }
-        } else unset($output['msg'][$key]['ip']);
+        } else unset($output['messages'][$key]['ip']);
     }
-
 }
 unset($MC);
-
+#
 # Show post form
+#
 if (USER::$logged_in) {
-    $output['mctext'] = FILTER::get('REQUEST', 'mctext');
+    $output['mctext']     = FILTER::get('REQUEST', 'mctext');
     $output['allow_post'] = TRUE;
     if (!USER::$root) {
-        $output['not_admin'] = TRUE;
-        $output['message-length'] = CONFIG::getValue('minichat', 'message-length');
+        $output['message_length'] = CONFIG::getValue('minichat', 'message_length');
     }
 }
 
-if (!empty($output)) {
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'minichat.tpl');
-    ShowWindow(__('Minichat'), $TPL->parse($output), 'center');
-}
+$TPL = new TEMPLATE(__DIR__.DS.'minichat.tpl');
+$TPL->set($output);
+SYSTEM::defineWindow('Minichat', $TPL->parse());

@@ -1,8 +1,7 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module User
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Module USER: Feedback
 
 if (!defined('idxCMS')) die();
 
@@ -17,11 +16,11 @@ if (!empty($message)) {
             '',
             empty($REQUEST['email']) ? USER::getUser('email') : $REQUEST['email']
         );
-        ShowWindow('', __('Message sent'), 'center');
+        SYSTEM::defineWindow('', __('Message sent'));
         unset($REQUEST);
         unset($FEEDBACK);
     } catch (Exception $error) {
-        ShowError(__($error->getMessage()));
+        SYSTEM::showError($error->getMessage());
     }
 } elseif (!empty($REQUEST['new_letter'])) {
     if (USER::$logged_in) {
@@ -30,15 +29,15 @@ if (!empty($message)) {
                 SendMail(
                     CONFIG::getValue('feedback', 'email'),
                     USER::getUser('email'),
-                    USER::getUser('nickname').' ('.USER::getUser('username').')',
+                    USER::getUser('nick').' ('.USER::getUser('user').')',
                     $REQUEST['subject'],
                     $REQUEST['letter']
                 );
-                ShowWindow('', __('Message sent'));
+                SYSTEM::defineWindow('', __('Message sent'));
             } else {
-                ShowError(__('Text is empty'));
+                SYSTEM::showMessage('Text is empty');
             }
-        } else  ShowError(__('Subject is empty'));
+        } else  SYSTEM::showMessage('Subject is empty');
 
     } else {
         try {
@@ -54,29 +53,29 @@ if (!empty($message)) {
                                 $REQUEST['subject'],
                                 $REQUEST['letter']
                             );
-                            ShowWindow('', __('Message sent'));
+                            SYSTEM::defineWindow('', __('Message sent'));
                         } else {
-                            ShowError(__('Text is empty'));
+                            SYSTEM::showMessage('Text is empty');
                         }
-                    } else ShowError(__('Subject is empty'));
-                } else ShowError(__('Error in email address'));
-            } else ShowError(__('What is your name?'));
+                    } else SYSTEM::showMessage('Subject is empty');
+                } else SYSTEM::showError('Error in email address');
+            } else SYSTEM::showMessage('What is your name?');
 
         } catch (Exception $error) {
-            ShowError(__($error->getMessage()));
+            SYSTEM::showError($error->getMessage());
         }
     }
 }
 
-$output = [];
+$TPL = new TEMPLATE(__DIR__.DS.'comment-post.tpl');
 
 if (!USER::$logged_in) {
-    $output['email']   = empty($REQUEST['email']) ? __('Enter your e-mail') : $REQUEST['email'];
-    $output['captcha'] = ShowCaptcha();
+    $TPL->set('email',   empty($REQUEST['email']) ? __('Enter your e-mail') : $REQUEST['email']);
+    $TPL->set('captcha', ShowCaptcha());
 }
 
-$output['message'] = $message;
+$TPL->set('text', $message);
+$TPL->set('message_length', USER::$root ? NULL : CONFIG::getValue('feedback', 'message_length'));
+$TPL->set('bbcodes', CMS::call('PARSER')->showBbcodesPanel('feedback.text'));
 SYSTEM::set('pagename', __('Feedback'));
-
-$TPL = new TEMPLATE(dirname(__FILE__).DS.'feedback.tpl');
-ShowWindow(__('Feedback'), $TPL->parse($output));
+SYSTEM::defineWindow('Feedback', $TPL->parse());

@@ -1,8 +1,7 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Posts
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Module POSTS: Print post
 
 if (!defined('idxCMS')) die();
 
@@ -11,39 +10,51 @@ $category = FILTER::get('REQUEST', 'category');
 $post     = FILTER::get('REQUEST', 'item');
 $sections = CMS::call('POSTS')->getSections();
 
-if ($sections === FALSE) Redirect('posts');
-
 unset($sections['drafts']);
 
 if (empty($sections)) {
-    ShowWindow(__('Posts'), __('Database is empty'), 'center');
+    SYSTEM::showMessage('Database is empty');
+
 } elseif (!empty($post) && !empty($category) && !empty($section)) {
-    # Request of post
+
     $categories = CMS::call('POSTS')->getCategories($section);
+    #
     # Wrong section request
-    if ($categories === FALSE) Redirect('posts');
+    #
+    if ($categories) {
+//        Redirect('posts');
 
-    $content = CMS::call('POSTS')->getContent($category);
+        $content = CMS::call('POSTS')->getContent($category);
+        #
+        # Wrong category request
+        #
+        if ($content) {
+    //        Redirect('posts', $section);
 
-    # Wrong category request
-    if ($content === FALSE) Redirect('posts', $section);
+            $post = CMS::call('POSTS')->getItem($post, 'text');
+            #
+            # Wrong post request
+            #
+            if ($post) {
+        //        Redirect('posts', $section, $category);
 
-    $post = CMS::call('POSTS')->getItem($post, 'text');
+                SYSTEM::set('pagename', $post['title'].' - '.__('Version for printer'));
+                SYSTEM::setPageDescription($post['title']);
+                SYSTEM::setPageKeywords($post['keywords']);
 
-    # Wrong post request
-    if ($post === FALSE) Redirect('posts', $section, $category);
+                $post['section']      = $sections[$section];
+                $post['category']     = $categories[$category];
+                $post['date']         = FormatTime('d F Y', $post['time']).' '.__('year');
+                $post['current_time'] = FormatTime('d.m.Y', time());
+                $post['copyright']    = CONFIG::getValue('main', 'copyright');
+                $post['site']         = SYSTEM::get('url');
+                $post['locale']       = SYSTEM::get('locale');
 
-    SYSTEM::set('pagename', $post['title'].' - '.__('Version for printer'));
-    SYSTEM::setPageDescription($post['title']);
-    SYSTEM::setPageKeywords($post['keywords']);
-    $post['section']  = $sections[$section];
-    $post['category'] = $categories[$category];
-    $post['date'] = FormatTime('d F Y', $post['time']).' '.__('year');
-    $post['current_time'] = FormatTime('d.m.Y', time());
-    $post['copyright'] = CONFIG::getValue('main', 'copyright');
-    $post['site'] = SYSTEM::get('url');
-    $post['locale'] = SYSTEM::get('locale');
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'print.tpl');
-    echo $TPL->parse($post);
+                $TPL = new TEMPLATE(__DIR__.DS.'print.tpl');
+                $TPL->set($post);
+                echo $TPL->parse();
+            }
+        }
+    }
     exit();
 }

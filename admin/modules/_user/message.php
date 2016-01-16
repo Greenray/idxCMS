@@ -1,8 +1,7 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - User
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: Messages.
 
 if (!defined('idxADMIN') || !USER::$root) die();
 
@@ -11,13 +10,13 @@ $users = $REQUEST['users'];
 if ($REQUEST['pm']) {
     if (!empty($users)) {
         foreach ($users as $user) {
-            $PM = new MESSAGE(PM_DATA, USER::getUser('username'));
-            if ($PM->sendPrivateMessage($user) === FALSE) {
-                ShowMessage('Cannot send message'.' for '.$user);
+            $PM = new MESSAGE(PM_DATA, USER::getUser('user'));
+            if (!$PM->sendPrivateMessage($user, $REQUEST['text'])) {
+                SYSTEM::showError('Cannot send message'.' for '.$user);
             }
             unset($PM);
         }
-    } else ShowMessage('User\'s list is empty');
+    } else SYSTEM::showMessage('User\'s list is empty');
 }
 
 if ($REQUEST['letter']) {
@@ -28,23 +27,25 @@ if ($REQUEST['letter']) {
                 SendMail(
                     $userdata['email'],
                     USER::getUser('email'),
-                    USER::getUser('nickname'),
+                    USER::getUser('nick'),
                     $REQUEST['subj'],
                     $REQUEST['text']
                 );
-            } else ShowMessage('Cannot send email');
+            } else SYSTEM::showError('Cannot send email');
         }
-    } else ShowMessage('User\'s list is empty');
+    } else SYSTEM::showMessage('User\'s list is empty');
 }
 
 $users  = CMS::call('USER')->getUsersList();
 $output = [];
 
 foreach ($users as $user) {
-    $output['users'][$user['username']]['name'] = $user['username'];
-    $output['users'][$user['username']]['nick'] = $user['nickname'];
+    $output['users'][$user['user']]['name'] = $user['user'];
+    $output['users'][$user['user']]['nick'] = $user['nick'];
 }
 
 $output['bbcodes'] = CMS::call('PARSER')->showBbcodesPanel('pm.text');
-$TPL = new TEMPLATE(dirname(__FILE__).DS.'message.tpl');
-echo $TPL->parse($output);
+
+$TPL = new TEMPLATE(__DIR__.DS.'message.tpl');
+$TPL->set($output);
+echo $TPL->parse();

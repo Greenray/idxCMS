@@ -1,15 +1,14 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - User
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: Users configuration.
 
 if (!defined('idxADMIN') || !USER::$root) die();
 
 if (!empty($REQUEST['save'])) {
     $config = [];
     $config['flood']       = empty($REQUEST['flood'])       ? 120 : (int) $REQUEST['flood'];
-    $config['nick-length'] = empty($REQUEST['nick-length']) ? 1   : (int) $REQUEST['nick-length'];
+    $config['nick_length'] = empty($REQUEST['nick_length']) ? 1   : (int) $REQUEST['nick_length'];
     $config['timeout']     = empty($REQUEST['timeout'])     ? 300 : (int) $REQUEST['timeout'];
     CMS::call('CONFIG')->setSection('user', $config);
 
@@ -20,19 +19,18 @@ if (!empty($REQUEST['save'])) {
     CMS::call('CONFIG')->setSection('avatar', $config);
 
     $config = [];
-    $config['db-size']        = empty($REQUEST['db-size'])        ? 100  : (int) $REQUEST['db-size'];
-    $config['per-page']       = empty($REQUEST['per-page'])       ? 30   : (int) $REQUEST['per-page'];
-    $config['message-length'] = empty($REQUEST['message-length']) ? 2000 : (int) $REQUEST['message-length'];
+    $config['db_size']        = empty($REQUEST['db_size'])        ? 100  : (int) $REQUEST['db_size'];
+    $config['per_page']       = empty($REQUEST['per_page'])       ? 30   : (int) $REQUEST['per_page'];
+    $config['message_length'] = empty($REQUEST['message_length']) ? 4000 : (int) $REQUEST['message_length'];
     CMS::call('CONFIG')->setSection('pm', $config);
 
     $config = [];
-    $config['email']          = $REQUEST['email'];
-    $config['message-length'] = empty($REQUEST['message-length']) ? 2000 : (int) $REQUEST['message-length'];
-    $config['db-size']        = empty($REQUEST['db-size'])        ? 100  : (int) $REQUEST['db-size'];
+    $config['message_length'] = empty($REQUEST['message_length']) ? 4000 : (int) $REQUEST['message_length'];
+    $config['db_size']        = empty($REQUEST['db_size'])        ? 100  : (int) $REQUEST['db_size'];
     CMS::call('CONFIG')->setSection('feedback', $config);
-    if (!CMS::call('CONFIG')->save()) {
-        ShowMessage('Cannot save file');
-    }
+    if (CMS::call('CONFIG')->save())
+         echo SYSTEM::showMessage('Configuration saved');
+    else echo SYSTEM::showError('Cannot save file'.' config.ini');
 }
 
 $config  = CONFIG::getSection('user');
@@ -40,5 +38,7 @@ $config += CONFIG::getSection('avatar');
 $config += CONFIG::getSection('pm');
 $config += CONFIG::getSection('feedback');
 
-$TPL = new TEMPLATE(dirname(__FILE__).DS.'config.tpl');
-echo $TPL->parse($config);
+$TPL = new TEMPLATE(__DIR__.DS.'config.tpl');
+$TPL->set($config);
+echo $TPL->parse();
+

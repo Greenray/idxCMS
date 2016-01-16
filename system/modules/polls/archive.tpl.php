@@ -1,24 +1,27 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Minichat
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Module POLLS: Archive template
 
 die();?>
+
 <table class="std">
-    <tr><th colspan="2">{question}</th></tr>
-    [each=answers]
-        <tr><td class="question">{answers[answer]}</td><td class="right" style="width:50px;">{answers[voices]}%</td></tr>
+    <tr><th colspan="2">$question</th></tr>
+    <!-- FOREACH answer = $answers -->
+        <tr>
+            <td class="question">$answer.answer</td>
+            <td class="right" style="width:50px;">[$answer.voices:]%</td>
+        </tr>
         <tr>
             <td colspan="2">
-                <table class="graph" cellspacing="0" cellpadding="0">
+                <table class="graph">
                     <tr>
-                        <td width="{answers[voices]}%" height="5" style="white-space:nowrap;background:{answers[color]};"></td>
+                        <td width="[$answer.voices:]%" height="5" style="white-space:nowrap;background:$answer.color;"></td>
                         <td height="5"></td>
                     </tr>
                 </table>
             </td>
         </tr>
-    [/each.answers]
-    <tr><td class="odd center" colspan="2">[__Total votes]: {total}</td></tr>
+    <!-- ENDFOREACH -->
+    <tr><td class="light center" colspan="2">__Total votes__: $total</td></tr>
 </table>

@@ -1,37 +1,37 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Forum
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Module FORUM: Main template
 
 die();?>
+
 <table id="std">
-    <tr><th colspan="2">[__Title]</a></th><th>[__Description]</th><th>[__Topics]</th></tr>
-    [each=sections]
-        <tr><td colspan="4" class="center"><a href="{sections[link]}">{sections[title]}</a></td></tr>
-        [each=sections[categories]]
-            <tr>
-                <td class="center" style="width:40px"><img src="{categories[path]}icon.png" width="35" height="35" alt="" /></td>
-                <td class="left"><a href="{categories[link]}">{categories[title]}</a></td>
-                <td class="left">{categories[desc]}</td>
-                <td class="right" style="width:40px">{categories[topics]}</td>
+    <tr><th colspan="2">__Title__</th><th>__Description__</th><th>__Topics__</th></tr>
+    <!-- FOREACH section = $sections -->
+        <tr><td colspan="4" class="light center"><a href="$section.link">$section.title</a></td></tr>
+        <!-- FOREACH category = $section.categories -->
+            <tr class="light">
+                <td class="center" style="width:40px"><img src="[$category.path:]icon.png" width="35" height="35" alt="" /></td>
+                <td class="left"><a href="$category.link">$category.title</a></td>
+                <td class="left">$category.desc</td>
+                <td class="right" style="width:40px">$category.topics</td>
             </tr>
-        [/each.sections[categories]]
-    [/each.sections]
+        <!-- ENDFOREACH -->
+    <!-- ENDFOREACH -->
 </table>
 <table>
     <tr>
-        <th width="20%" class="center">[__Sections]</td>
-        <th width="20%" class="center">[__Categories]</td>
-        <th width="20%" class="center">[__Topics]</td>
-        <th width="20%" class="center">[__Replies]</td>
-        <th width="20%" class="center">[__Views]</td>
+        <th width="20%" class="center">__Sections__</th>
+        <th width="20%" class="center">__Categories__</th>
+        <th width="20%" class="center">__Topics__</th>
+        <th width="20%" class="center">__Replies__</th>
+        <th width="20%" class="center">__Views__</th>
     </tr>
     <tr>
-        <td class="center">{total_sections}</td>
-        <td class="center">{total_categories}</td>
-        <td class="center">{total_topics}</td>
-        <td class="center">{total_replies}</td>
-        <td class="center">{total_views}</td>
+        <td class="center">$total_sections</td>
+        <td class="center">$total_categories</td>
+        <td class="center">$total_topics</td>
+        <td class="center">$total_replies</td>
+        <td class="center">$total_views</td>
     </tr>
 </table>

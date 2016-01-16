@@ -1,8 +1,8 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
+# idxCMS Flat Files Content Management System
 # Translation
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# Version 3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
 
 $LANG['language'] = 'ukrainian';
 $LANG['locale']   = 'ua';
@@ -99,7 +99,8 @@ $LANG['def']['byte (s)'] = 'байт';
 $LANG['def']['Cancel'] = 'Скасувати';
 $LANG['def']['Categories'] = 'Категорії';
 $LANG['def']['Category'] = 'Категорія';
-$LANG['def']['Choose / Upload'] = 'Вибрати / Завантажити';
+$LANG['def']['Category is empty'] = 'Категорія порожня';
+$LANG['def']['Choose'] = 'Вибрати';
 $LANG['def']['Choose color or enter a'] = 'Вибіріте колір або введіть';
 $LANG['def']['Close'] = 'Закрити';
 $LANG['def']['color name'] = 'назва кольору';
@@ -138,6 +139,7 @@ $LANG['def']['Required fields have a yellow background'] = 'Обов`язков�
 $LANG['def']['RSS for section'] = 'RSS для розділу';
 $LANG['def']['Save'] = 'Сoхраніть';
 $LANG['def']['Section'] = 'Розділ';
+$LANG['def']['Section is empty'] = 'Розділ порожній';
 $LANG['def']['Sections'] = 'Розділи';
 $LANG['def']['Select category'] = 'Виберіть категорію';
 $LANG['def']['Select section'] = 'Виберіть розділ';
@@ -148,6 +150,7 @@ $LANG['def']['Submit'] = 'Відправити';
 $LANG['def']['symbols'] = 'символів';
 $LANG['def']['Text'] = 'Текст';
 $LANG['def']['Title'] = 'Заголовок';
+$LANG['def']['Title is empty'] = 'Відсутній заголовок';
 $LANG['def']['Total'] = 'Всього';
 $LANG['def']['Upload'] = 'Завантажити';
 $LANG['def']['Version for printer'] = 'Версія для друку';
@@ -170,6 +173,8 @@ $LANG['def']['Menu'] = 'Меню';
 $LANG['def']['Navigation'] = 'Навігація';
 $LANG['def']['Simple menu'] = 'Просте меню';
 # POSTS
+$LANG['def']['Allow comments'] = 'Дозволити коментарі';
+$LANG['def']['Articles'] = 'Статті';
 $LANG['def']['Last news'] = 'Останні новини';
 $LANG['def']['Last posts'] = 'Останні публікації';
 $LANG['def']['News'] = 'Новости';
@@ -183,6 +188,8 @@ $LANG['def']['Your article will be published after premoderation'] = 'Ваша �
 $LANG['def']['Rate'] = 'Рейтинг';
 # SEARCH
 $LANG['def']['coincidence'] = 'збігів';
+$LANG['def']['Input value must be more than'] = 'Вхідна значення повинно бути більше, ніж';
+$LANG['def']['and less than'] = 'і менш, ніж';
 $LANG['def']['Nothing founded'] = 'Нічого не знайдено';
 $LANG['def']['Search'] = 'Пошук';
 $LANG['def']['Search results'] = 'Результати пошуку';
@@ -209,7 +216,7 @@ $LANG['def']['Invalid captcha code'] = 'Помилка перевірочног�
 $LANG['def']['Invalid email'] = 'Помилка в адресі електронної пошти';
 $LANG['def']['Invalid login'] = 'Неправильний логін';
 $LANG['def']['Invalid login or password'] = 'Неправильний логін або пароль';
-$LANG['def']['Invalid nickname'] = 'Заборонене ім`я';
+$LANG['def']['Invalid nick'] = 'Заборонене ім`я';
 $LANG['def']['Invalid password'] = 'Неправильний пароль';
 $LANG['def']['Invalid value of access level'] = 'Неправильне значення рівня доступу';
 $LANG['def']['Language'] = 'Мова';
@@ -221,6 +228,7 @@ $LANG['def']['Login is not allowed'] = 'Логін заборонений';
 $LANG['def']['Message'] = 'Повідомлення';
 $LANG['def']['Message sent'] = 'Повідомлення відправлено';
 $LANG['def']['Messages'] = 'Повідомлення';
+$LANG['def']['No new messages'] = 'Нових повідомлень немає';
 $LANG['def']['Outbox'] = 'Вихідні';
 $LANG['def']['Password'] = 'Пароль';
 $LANG['def']['Password complexity'] = 'Складність пароля';

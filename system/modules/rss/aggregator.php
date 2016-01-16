@@ -1,8 +1,7 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
 # Module RSS
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
 
 if (!defined('idxCMS')) die();
 
@@ -28,15 +27,15 @@ if (!empty($rss_cfg['feeds'])) {
                 if (empty($item['title'])) {
                     $item['title'] = $item['desc'];
                 }
-                $item['title'] = mb_substr($item['title'], 0, $rss_cfg['title-length']).((mb_strlen($item['title']) > $rss_cfg['title-length']) ? '...' : '');
-                $item['desc']  = mb_substr($item['desc'],  0, $rss_cfg['desc-length']).((mb_strlen($item['desc'])   > $rss_cfg['desc-length']) ? '...' : '');
+                $item['title'] = mb_substr($item['title'], 0, $rss_cfg['title_length']).((mb_strlen($item['title']) > $rss_cfg['title_length']) ? '...' : '');
+                $item['desc']  = mb_substr($item['desc'],  0, $rss_cfg['desc_length']).((mb_strlen($item['desc'])   > $rss_cfg['desc_length']) ? '...' : '');
                 $result .= '<tr><td class="row'.$i.'"><a href="'.$rss->unHtmlEntities($item['link']).'"><abbr title="'.$item['desc'].'">'.$item['title'].' </abbr></a></td></tr>';
                 $i++;
                 if ($i > 3) $i = 2;
             }
             $result .= '</table>';
             $title = (!empty($feed['link']) ? '<a href="'.$feed['link'].'">'.(!empty($feed['title']) ? $feed['title'] : __('RSS Feed')).'</a>' : (!empty($feed['title']) ? $feed['title'] : __('RSS Feed')));
-            ShowWindow($title, $result);
+            SYSTEM::defineWindow($title, $result);
         }
     }
 }

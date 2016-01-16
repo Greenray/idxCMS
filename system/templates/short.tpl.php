@@ -1,21 +1,28 @@
 <?php
-# idxCMS version 2.4
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# SHOT ITEM DESCRIPTION TEMPLATE
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Template for short item description
 
 die();?>
+
 <div class="post">
-    <div class="date">{date}</div>
-    [if=rateid]<div id="rate{rateid}" class="main_rate">{rate}</div>[/if]
-    <div class="title"><h1><a href="{link}">{title}</a></h1></div>
-    <div class="text justify">{desc}</div>
+    <div class="date">$date</div>
+    <!-- IF !empty($rateid) -->
+        <div id="rate[$rateid:]" class="star-rate">$rate</div>
+    <!-- ENDIF -->
+    <div class="title"><h1><a href="$link">$title</a></h1></div>
+    <div class="text justify">$desc</div>
     <div class="info">
-        <span class="author center">[__Posted by]: <a href="{MODULE}user&amp;user={author}">{nick}</a></span>
+        <span class="author center">__Posted by__: <a href="{MODULE}user&amp;user=$author">$nick</a></span>
         <span class="admin">
-            <a href="{link}">[__Read more...] [if=views][{views}][/if]</a>
-            [if=downloads][__Downloads] [{downloads}][/if]
-            [if=visits][__Transitions] [{visits}][/if]
-            <a href="{comment}">[__Comments] [if=comments][{comments}][/if]</a>
+            <a href="$link">__Read more...__ <!-- IF !empty($views) -->[$views]<!-- ENDIF --></a>
+            <!-- IF !empty($downloads) -->__Downloads__ [$downloads]<!-- ENDIF -->
+            <!-- IF !empty($visits) -->__Transitions__ [$visits]<!-- ENDIF -->
+            <!-- IF $comments > 0 -->
+                <a href="$link{COMMENT}$comments">__Comments__ [$comments]</a>
+            <!-- ELSE -->
+                <a href="$link">__Comments__</a>
+            <!-- ENDIF -->
         </span>
     </div>
 </div>

@@ -1,10 +1,10 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - Config
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: Main configuration template.
 
 die();?>
+
 <script>
     var curselectorinput;
     function selectColor(color) {
@@ -40,209 +40,179 @@ die();?>
         document.getElementById("colorselector").style.display = "none";
     }
 </script>
-<div class="module">[__Site configuration]</div>
+<div class="module">__Site configuration__</div>
 <fieldset>
     <form name="config" method="post" action="">
         <table class="std">
-            <tr><th colspan="3">[__General options]</th></tr>
-            <tr class="odd">
-                <td>[__Site title]</td>
-                <td colspan="2"><input type="text" name="title" value="{title}" size="50" class="text" /></td>
+            <tr><th colspan="3">__General options__</th></tr>
+            <tr class="light">
+                <td>__Site title__</td>
+                <td colspan="2"><input type="text" name="title" value="$title" size="50" /></td>
             </tr>
-            <tr class="odd">
-                <td>[__Site URL]</td>
-                <td><input type="text" name="url" value="{url}" size="50" class="text" /></td>
-                <td>[__Leave empty for autodetection]</td>
+            <tr class="light">
+                <td>__Site URL__</td>
+                <td><input type="text" name="url" value="$url" size="50" /></td>
+                <td class="help">__Leave empty for autodetection__</td>
             </tr>
-            <tr class="odd">
-                <td>[__Description]</td>
-                <td colspan="2"><input type="text" name="description" value="{description}" size="80" class="text" /></td>
+            <tr class="light">
+                <td>__Description__</td>
+                <td colspan="2"><input type="text" name="description" value="$description" size="80" /></td>
             </tr>
-            <tr class="odd">
-                <td>[__Copyright]</td>
-                <td colspan="2"><input type="text" name="copyright" value="{copyright}" size="80" class="text" /></td>
+            <tr class="light">
+                <td>__Slogan__</td>
+                <td colspan="2"><input type="text" name="slogan" value="$slogan" size="80" /></td>
             </tr>
-            <tr class="odd">
-                <td>[__Slogan]</td>
-                <td colspan="2"><input type="text" name="slogan" value="{slogan}" size="80" class="text" /></td>
+            <tr class="light">
+                <td>__Cookie prefix for your site__</td>
+                <td><input type="text" name="cookie" value="$cookie" size="10" /></td>
+                <td class="help">__You may use the site name__</td>
             </tr>
-            <tr class="odd">
-                <td>[__Cookie prefix for your site]</td>
-                <td><input type="text" name="cookie" value="{cookie}" size="10" class="text" /></td>
-                <td>[__You may use the site name]</td>
+            <tr class="light">
+                <td>__Keywords__</td>
+                <td colspan="2"><input type="text" name="keywords" value="$keywords" size="80" /></td>
             </tr>
-            <tr class="odd">
-                <td>[__Keywords]</td>
-                <td colspan="2"><input type="text" name="keywords" value="{keywords}" size="80" class="text" /></td>
-            </tr>
-            <tr class="odd">
-                <td>[__Meta tags for your site]</td>
-                <td colspan="2">
-                    &lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /&gt;<br />
-                    &lt;meta http-equiv="Content-Language" content="<i>[__Will be set automaticaly]</i>" /&gt;
-                    <textarea name="meta_tags" cols="20" rows="7">{meta_tags}</textarea>
-                </td>
-            </tr>
-            <tr class="odd">
-                <td>[__Module on index page]</td>
-                <td colspan="2">
-                    <select name="index-module">
-                        [each=modules]
-                        <option value="{modules[module]}" [if=modules[selected]]selected="selected"[/if]>{modules[title]}</option>
-                        [/each.modules]
-                    </select>
-                </td>
-            </tr>
-            <tr class="odd">
-                <td>[__Default skin]</td>
+            <tr class="light">
+                <td>__Default skin__</td>
                 <td colspan="2">
                     <select name="skin">
-                        [each=skins]
-                        <option value="{skins[skin]}" [if=skins[selected]]selected="selected"[/if]>{skins[skin]}</option>
-                        [/each.skins]
+                    <!-- FOREACH skin = $skins -->
+                        <option value="$skin.skin" <!-- IF !empty($skin.selected) -->selected<!-- ENDIF -->>$skin.skin</option>
+                    <!-- ENDFOREACH -->
                     </select>
-                    [each=skins]
-                    <input type="hidden" name="skins[]" value="{skins[skin]}" />
-                    [/each.skins]
                 </td>
             </tr>
-            <tr class="odd">
-                <td>[__Allow users to select skin]</td>
-                <td colspan="2"><input type="checkbox" name="allow-skin" value="1" [if=allow-skin]checked="checked"[/if] /></td>
+            <tr class="light">
+                <td>__Allow users to select skin__</td>
+                <td colspan="2"><input type="checkbox" name="allow_skin" value="$allow_skin" <!-- IF !empty($allow_skin) -->checked<!-- ENDIF --> /></td>
             </tr>
-            <tr class="odd">
-                <td>[__Default language]</td>
+            <tr class="light">
+                <td>__Default language__</td>
                 <td colspan="2">
                     <select name="lang">
-                        [each=langs]
-                        <option value="{langs[lang]}" [if=langs[selected]]selected="selected"[/if]>{langs[lang]}</option>
-                        [/each.langs]
+                    <!-- FOREACH lang = $langs -->
+                        <option value="$lang.lang" <!-- IF !empty($lang.selected) -->selected<!-- ENDIF -->>$lang.lang</option>
+                    <!-- ENDFOREACH -->
                     </select>
                 </td>
             </tr>
-            <tr class="odd">
-                <td>[__Allow users to select language]</td>
-                <td colspan="2"><input type="checkbox" name="allow-lang" value="1" [if=allow-lang]checked="checked"[/if] /></td>
+            <tr class="light">
+                <td>__Allow users to select language__</td>
+                <td colspan="2"><input type="checkbox" name="allow_language" value="1" <!-- IF !empty($allow_language) -->checked<!-- ENDIF --> /></td>
             </tr>
-            <tr class="odd">
-                <td>[__Try to detect language]</td>
-                <td colspan="2"><input type="checkbox" name="detect-lang" value="1" [if=detect-lang]checked="checked"[/if] /></td>
+            <tr class="light">
+                <td>__Try to detect language__</td>
+                <td colspan="2"><input type="checkbox" name="detect_language" value="1" <!-- IF !empty($detect_language) -->checked<!-- ENDIF --> /></td>
             </tr>
-            <tr class="odd">
-                <td>[__Default timezone]</td>
+            <tr class="light">
+                <td>__Default timezone__</td>
                 <td colspan="2">
                     <select name="tz">
-                        [each=tz]
-                        <option value="{tz[tz]}" [if=tz[selected]]selected="selected"[/if]>{tz[title]}</option>
-                        [/each.tz]
+                    <!-- FOREACH tz = $tzs -->
+                        <option value="$tz.tz" <!-- IF !empty($tz.selected) -->selected<!-- ENDIF -->>$tz.title</option>
+                    <!-- ENDFOREACH -->
                     </select>
                 </td>
             </tr>
-            <tr class="odd">
-                <td>[__CAPTCHA system]</td>
+            <tr class="light">
+                <td>__CAPTCHA system__</td>
                 <td colspan="2">
                     <select name="captcha">
-                        [each=captcha]
-                        <option value="{captcha[captcha]}" [if=captcha[selected]]selected="selected"[/if]>{captcha[captcha]}</option>
-                        [/each.captcha]
+                    <!-- FOREACH captcha = $captchas -->
+                        <option value="$captcha.captcha" <!-- IF !empty($captcha.selected) -->selected<!-- ENDIF -->>$captcha.captcha</option>
+                    <!-- ENDFOREACH -->
                     </select>
                 </td>
             </tr>
-            <tr class="odd">
-                <td>[__Items per page]</td>
-                <td colspan="2"><input type="text" name="per-page" value="{per-page}" size="3" class="text" /></td>
+            <tr class="light">
+                <td>__Items per page__</td>
+                <td colspan="2"><input type="text" name="per_page" value="$per_page" size="3" /></td>
             </tr>
-            <tr class="odd">
-                <td>[__Number of latest elements]</td>
-                <td colspan="2"><input type="text" name="last" value="{last}" size="3" class="text" /></td>
+            <tr class="light">
+                <td>__Number of latest elements__</td>
+                <td colspan="2"><input type="text" name="last" value="$last" size="3" /></td>
             </tr>
-            <tr class="odd">
-                <td>[__Max file size]</td>
-                <td><input type="text" name="file-max-size" value="{file-max-size}" size="10" class="text" /> [__byte(s)]</td>
-                <td>[__Default] = {max_filesize}</td>
+            <tr class="light">
+                <td>__Max file size__</td>
+                <td><input type="text" name="max_filesize" value="$max_filesize" size="10" /> __byte(s)__</td>
+                <td class="help">__Default__ = $php_max_filesize</td>
             </tr>
-            <tr class="odd">
-                <td>[__Max image size]</td>
-                <td><input type="text" name="image-max-size" value="{image-max-size}" size="10" class="text" /> [__byte(s)]</td>
-                <td>[__Default] = {max_filesize}</td>
+            <tr class="light">
+                <td>__Thumb width__</td>
+                <td colspan="2"><input type="text" name="thumb_width" value="$thumb_width" size="3" /> px</td>
             </tr>
-            <tr class="odd">
-                <td>[__Thumb width]</td>
-                <td colspan="2"><input type="text" name="thumb-width" value="{thumb-width}" size="6" class="text" /> px</td>
+            <tr class="light">
+                <td>__Thumb height__</td>
+                <td colspan="2"><input type="text" name="thumb_height" value="$thumb_height" size="3" /> px</td>
             </tr>
-            <tr class="odd">
-                <td>[__Thumb height]</td>
-                <td colspan="2"><input type="text" name="thumb-height" value="{thumb-height}" size="6" class="text" /> px</td>
+            <tr class="light">
+                <td>__Show welcome message__</td>
+                <td><input type="checkbox" name="welcome" value="1" <!-- IF !empty($welcome) -->checked<!-- ENDIF --> /></td>
+                <td class="help">__It is visible only to guests__</td>
             </tr>
-            <tr class="odd">
-                <td>[__Show welcome message]</td>
-                <td><input type="checkbox" name="welcome" value="1" [if=welcome]checked="checked"[/if] /></td>
-                <td>[__It is visible only to guests]</td>
+            <tr class="light">
+                <td>__Welcome message__</td>
+                <td colspan="2"><textarea name="welcome_msg" cols="20" rows="10">$welcome_msg</textarea></td>
             </tr>
-            <tr class="odd">
-                <td>[__Welcome message]</td>
-                <td colspan="2"><textarea name="welcome_msg" cols="20" rows="10">{welcome_msg}</textarea></td>
+            <th colspan="3">__Search__</th>
+            <tr class="light">
+                <td>__Min searching query length__</td>
+                <td colspan="2"><input type="text" name="query_min" value="$query_min" size="4" /> __symbols__</td>
             </tr>
-            <th colspan="3">[__Search]</th>
-            <tr class="odd">
-                <td>[__Min searching query length]</td>
-                <td colspan="2"><input type="text" name="query-min" value="{query-min}" size="4" class="text" /> [__symbols]</td>
+            <tr class="light">
+                <td>__Max searching query length__</td>
+                <td colspan="2"><input type="text" name="query_max" value="$query_max" size="4" /> __symbols__</td>
             </tr>
-            <tr class="odd">
-                <td>[__Max searching query length]</td>
-                <td colspan="2"><input type="text" name="query-max" value="{query-max}" size="4" class="text" /> [__symbols]</td>
+            <tr class="light">
+                <td>__Output block length__</td>
+                <td colspan="2"><input type="text" name="block" value="$block" size="4" /> __symbols__</td>
             </tr>
-            <tr class="odd">
-                <td>[__Output block length]</td>
-                <td colspan="2"><input type="text" name="block" value="{block}" size="6" class="text" /> [__symbols]</td>
+            <tr class="light">
+                <td>__Results per page__</td>
+                <td colspan="2"><input type="text" name="per_page" value="$per_page" size="4" /></td>
             </tr>
-            <tr class="odd">
-                <td>[__Results per page]</td>
-                <td colspan="2"><input type="text" name="per-page" value="{per-page}" size="6" class="text" /></td>
+            <tr class="light">
+                <td>__Allow guests to use search__</td>
+                <td colspan="2"><input type="checkbox" name="allow_guest" value="1" <!-- IF !empty($allow_guest) -->checked<!-- ENDIF --> /></td>
             </tr>
-            <tr class="odd">
-                <td>[__Allow guests to use search]</td>
-                <td colspan="2"><input type="checkbox" name="allow-guest" value="1" [if=allow-guest]checked="checked"[/if] /></td>
+            <th colspan="3">__Audio player__</th>
+            <tr class="light">
+                <td>__Player width__</td>
+                <td colspan="2"><input type="text" name="width" value="$width" size="4" /> px</td>
             </tr>
-            <th colspan="3">[__Audio player]</th>
-            <tr class="odd">
-                <td>[__Player width]</td>
-                <td colspan="2"><input type="text" name="width" value="{width}" size="6" class="text" /> px</td>
+            <tr class="light">
+                <td>__Player height__</td>
+                <td colspan="2"><input type="text" name="height" value="$height" size="4" /> px</td>
             </tr>
-            <tr class="odd">
-                <td>[__Player height]</td>
-                <td colspan="2"><input type="text" name="height" value="{height}" size="6" class="text" /> px</td>
+            <tr class="light"><td>__Background__</td><td colspan="2">$bgcolor</td></tr>
+            <tr class="light"><td>__Left background__</td><td colspan="2">$leftbg</td></tr>
+            <tr class="light"><td>__Left icon color__</td><td colspan="2">$lefticon</td></tr>
+            <tr class="light"><td>__Right background__</td><td colspan="2">$rightbg</td></tr>
+            <tr class="light"><td>__Right icon color__</td><td colspan="2">$righticon</td></tr>
+            <tr class="light"><td>__Active right background__</td><td colspan="2">$rightbghover</td></tr>
+            <tr class="light"><td>__Active right icon color__</td><td colspan="2">$righticonhover</td></tr>
+            <tr class="light"><td>__Text color__</td><td colspan="2">$playertext</td></tr>
+            <tr class="light"><td>__Slider color__</td><td colspan="2">$slider</td></tr>
+            <tr class="light"><td>__Track color__</td><td colspan="2">$track</td></tr>
+            <tr class="light"><td>__Border color__</td><td colspan="2">$border</td></tr>
+            <tr class="light"><td>__Loader color__</td><td colspan="2">$loader</td></tr>
+            <tr class="light">
+                <td>__Autostart__</td>
+                <td colspan="2"><input type="checkbox" name="autostart" value="1" <!-- IF !empty($autostart) -->checked<!-- ENDIF --> /></td>
             </tr>
-            <tr class="odd"><td>[__Background]</td><td colspan="2">{bgcolor}</td></tr>
-            <tr class="odd"><td>[__Left background]</td><td colspan="2">{leftbg}</td></tr>
-            <tr class="odd"><td>[__Left icon color]</td><td colspan="2">{lefticon}</td></tr>
-            <tr class="odd"><td>[__Right background]</td><td colspan="2">{rightbg}</td></tr>
-            <tr class="odd"><td>[__Right icon color]</td><td colspan="2">{righticon}</td></tr>
-            <tr class="odd"><td>[__Active right background]</td><td colspan="2">{rightbghover}</td></tr>
-            <tr class="odd"><td>[__Active right icon color]</td><td colspan="2">{righticonhover}</td></tr>
-            <tr class="odd"><td>[__Text color]</td><td colspan="2">{playertext}</td></tr>
-            <tr class="odd"><td>[__Slider color]</td><td colspan="2">{slider}</td></tr>
-            <tr class="odd"><td>[__Track color]</td><td colspan="2">{track}</td></tr>
-            <tr class="odd"><td>[__Border color]</td><td colspan="2">{border}</td></tr>
-            <tr class="odd"><td>[__Loader color]</td><td colspan="2">{loader}</td></tr>
-            <tr class="odd">
-                <td>[__Autostart]</td>
-                <td colspan="2"><input type="checkbox" name="autostart" value="1" [if=autostart]checked="checked"[/if] /></td>
+            <tr class="light">
+                <td>__Loop__</td>
+                <td colspan="2"><input type="checkbox" name="loop" value="1" <!-- IF !empty($loop) -->checked<!-- ENDIF --> /></td>
             </tr>
-            <tr class="odd">
-                <td>[__Loop]</td>
-                <td colspan="2"><input type="checkbox" name="loop" value="1" [if=loop]checked="checked"[/if] /></td>
+            <th colspan="3">__Video player__</th>
+            <tr class="light">
+                <td>__Player width__</td>
+                <td colspan="2"><input type="text" name="width" value="$width" size="4" /> px</td>
             </tr>
-            <th colspan="3">[__Video player]</th>
-            <tr class="odd">
-                <td>[__Player width]</td>
-                <td colspan="2"><input type="text" name="width" value="{width}" size="6" class="text" /> px</td>
-            </tr>
-            <tr class="odd">
-                <td>[__Player height]</td>
-                <td colspan="2"><input type="text" name="height" value="{height}" size="6" class="text" /> px</td>
+            <tr class="light">
+                <td>__Player height__</td>
+                <td colspan="2"><input type="text" name="height" value="$height" size="4" /> px</td>
             </tr>
         </table>
-        <p class="center"><input type="submit" name="save" value="[__Save]" class="submit" /></p>
+        <p class="center"><input type="submit" name="save" value="__Save__" /></p>
     </form>
 </fieldset>

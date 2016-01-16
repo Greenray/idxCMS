@@ -1,53 +1,70 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - Forum
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: Forum topics management.
 
 if (!defined('idxADMIN')) die();
 
 $section    = FILTER::get('REQUEST', 'section');;
 $category   = FILTER::get('REQUEST', 'category');
 $topic      = FILTER::get('REQUEST', 'edit');
+
+$new_section  = FILTER::get('REQUEST', 'new_section');
+$new_category = FILTER::get('REQUEST', 'new_category');
+
 $sections   = CMS::call('FORUM')->getSections();
 $categories = CMS::call('FORUM')->getCategories($section);
 $content    = CMS::call('FORUM')->getContent($category);
-
-# Save new or edited post
+#
+# Save new or edited topic
+#
 if (!empty($REQUEST['save'])) {
-    # Check if admin decided to move post
-    if (($section !== $REQUEST['new_section']) || ($category !== $REQUEST['new_category'])) {
+    #
+    # Check if admin decided to move topic
+    #
+    if (($section !== $new_section) || ($category !== $new_category)) {
         if (!empty($REQUEST['item']))
-            # Topic exists, so move it
-             $topic = CMS::call('FORUM')->moveItem($REQUEST['item'], $REQUEST['new_section'], $REQUEST['new_category']);
+             #
+             # Topic exists, so move it
+             #
+             $topic = CMS::call('FORUM')->moveItem($REQUEST['item'], $new_section, $new_category);
         else $topic = '';     # Nothing to move, so add new
 
-        $section  = $REQUEST['new_section'];
-        $category = $REQUEST['new_category'];
+        $section    = $new_section;
+        $category   = $new_category;
+
     } else {
         $topic = FILTER::get('REQUEST', 'item');
     }
+
     $categories = CMS::call('FORUM')->getCategories($section);
     $content    = CMS::call('FORUM')->getContent($category);
+
     try {
         CMS::call('FORUM')->saveTopic($topic);
-        USER::changeProfileField(USER::getUser('username'), 'topics', '+');
-        $topic = '';
+        if (!empty($REQUEST['new'])) {
+            USER::changeProfileField(USER::getUser('user'), 'topics', '+');
+        }
+        unset($REQUEST['new']);
+
     } catch (Exception $error) {
-         ShowMessage(__($error->getMessage()));
+         SYSTEM::showError($error->getMessage());
     }
+    $topic = '';
+
 } elseif (!empty($REQUEST['close']) || !empty($REQUEST['open'])) {
     CMS::call('FORUM')->setValue(
         empty($REQUEST['close']) ? $REQUEST['open'] : $REQUEST['close'],
         'opened',
         empty($REQUEST['close']) ? TRUE : FALSE
     );
+
 } else {
     if (!empty($REQUEST['delete'])) {
         try {
             CMS::call('FORUM')->removeItem($REQUEST['delete']);
         } catch (Exception $error) {
-            ShowMessage(__($error->getMessage()));
+            SYSTEM::showError($error->getMessage());
         }
     }
 }
@@ -98,13 +115,16 @@ if (!empty($REQUEST['new']) || !empty($topic)) {
     $output['sections'][$output['section_id']]['selected']    = TRUE;
     $output['categories'][$output['category_id']]['selected'] = TRUE;
     $output['bbCodes_text'] = CMS::call('PARSER')->showBbcodesPanel('topic.text');
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'topic.tpl');
-    echo $TPL->parse($output);
+
+    $TPL = new TEMPLATE(__DIR__.DS.'topic.tpl');
+    $TPL->set($output);
+    echo $TPL->parse();
 
 } elseif (!empty($sections[$section])) {
     $categories = CMS::call('FORUM')->getCategories($section);
     if (!empty($categories[$category])) {
         $output = [];
+        $output['header']         = __('Forum');
         $output['section_id']     = $section;
         $output['section_title']  = $sections[$section]['title'];
         $output['category_id']    = $category;
@@ -123,8 +143,9 @@ if (!empty($REQUEST['new']) || !empty($topic)) {
             $output['items'][] = $topic;
         }
 
-        $TPL = new TEMPLATE(dirname(__FILE__).DS.'items.tpl');
-        echo $TPL->parse($output);
+        $TPL = new TEMPLATE(__DIR__.DS.'items.tpl');
+        $TPL->set($output);
+        echo $TPL->parse();
 
     } else {
         header('Location: '.MODULE.'admin&id=forum.categories');

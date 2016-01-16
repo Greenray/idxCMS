@@ -1,8 +1,7 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Sitemap
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Module SITEMAP
 
 if (!defined('idxCMS')) die();
 
@@ -10,9 +9,11 @@ switch (SYSTEM::get('locale')) {
     case 'ru':
         $LANG['def']['Sitemap'] = 'Карта сайта';
         break;
+
     case 'ua':
         $LANG['def']['Sitemap'] = 'Карта сайту';
         break;
+
     case 'by':
         $LANG['def']['Sitemap'] = 'Карта сайта';
         break;

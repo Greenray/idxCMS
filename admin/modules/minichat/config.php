@@ -1,36 +1,37 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - Minichat
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: Minichat configuration.
 
 if (!defined('idxADMIN')) die();
 
-$config = CONFIG::getSection('minichat');
-
 if (isset($init)) {
     if (empty($config)) {
-        $config['db-size'] = 100;
-        $config['message-length'] = 200;
-        $config['mess-to-show']   = 5;
+        $config['db_size']        = 100;
+        $config['message_length'] = 200;
+        $config['mess_to_show']   = 5;
         CMS::call('CONFIG')->setSection('minichat', $config);
-        if (!CMS::call('CONFIG')->save()) {
-            ShowMessage('Cannot save file');
-        }
+        if (CMS::call('CONFIG')->save())
+             echo SYSTEM::showMessage('Configuration saved');
+        else echo SYSTEM::showError('Cannot save file'.' config.ini');
     }
 } else {
     if (!empty($REQUEST['save'])) {
-        $config['db-size']        = empty($REQUEST['db-size'])        ? 100 : (int) $REQUEST['db-size'];
-        $config['message-length'] = empty($REQUEST['message-length']) ? 200 : (int) $REQUEST['message-length'];
-        $config['mess-to-show']   = empty($REQUEST['mess-to-show'])   ? 5   : (int) $REQUEST['mess-to-show'];
-        if ($config['mess-to-show'] > $config['db-size']) {
-            $config['mess-to-show'] = $config['db-size'];
+        $config['db_size']        = empty($REQUEST['db_size'])        ? 100 : (int) $REQUEST['db_size'];
+        $config['message_length'] = empty($REQUEST['message_length']) ? 200 : (int) $REQUEST['message_length'];
+        $config['mess_to_show']   = empty($REQUEST['mess_to_show'])   ? 5   : (int) $REQUEST['mess_to_show'];
+        if ($config['mess_to_show'] > $config['db_size']) {
+            $config['mess_to_show'] = $config['db_size'];
         }
         CMS::call('CONFIG')->setSection('minichat', $config);
-        if (!CMS::call('CONFIG')->save()) {
-            ShowMessage('Cannot save file');
-        }
+        if (CMS::call('CONFIG')->save())
+             echo SYSTEM::showMessage('Configuration saved');
+        else echo SYSTEM::showError('Cannot save file'.' config.ini');
     }
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'config.tpl');
-    echo $TPL->parse($config);
+
+    $config = CONFIG::getSection('minichat');
+
+    $TPL = new TEMPLATE(__DIR__.DS.'config.tpl');
+    $TPL->set($config);
+    echo $TPL->parse();
 }

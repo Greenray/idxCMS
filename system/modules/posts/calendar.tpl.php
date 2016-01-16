@@ -1,32 +1,46 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Posts
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Module POSTS: Template for calendar
 
 die();?>
-<table class="calendar">
-    <tr><th colspan="7">{month}</th></tr>
-    <tr>{header}</tr>
-    [each=calendar]
+
+<table class="calendar center">
+    <tr><th colspan="7">$month</th></tr>
+    <tr>$header</tr>
+    <!-- FOREACH calendar = $calendar -->
         <tr>
-            [if=calendar[span]]<td colspan="{calendar[span]}">&nbsp;</td>[/if]
-            [each=calendar[dates]]
-                <td class="{dates[class]} center">[if=dates[events]]<a href="{dates[events]}">[/if]{dates[date]}[if=dates[events]]</a>[/if]</td>
-            [/each.calendar[dates]]
+        <!-- IF !empty($calendar.span) -->
+            <td colspan="$calendar.span">&nbsp;</td>
+        <!-- ENDIF -->
+        <!-- FOREACH date = $calendar.dates -->
+            <td class="$date.class center">
+            <!-- IF !empty($date.events) -->
+                <a href="$date.events">
+            <!-- ENDIF -->
+                    $date.date
+            <!-- IF !empty($date.events) -->
+                </a>
+            <!-- ENDIF -->
+            </td>
+        <!-- ENDFOREACH -->
         </tr>
-    [/each.calendar]
+    <!-- ENDFOREACH -->
+    <tr>
+        <td colspan="7">
+            <form name="calendar" class="center" method="post" action="">
+                <select name="cal-month">
+                <!-- FOREACH month = $months -->
+                    <option value="$month.num" <!-- IF !empty($month.selected) -->selected<!-- ENDIF -->>$month.name</option>
+                <!-- ENDFOREACH -->
+                </select>
+                <select name="cal-year">
+                <!-- FOREACH year = $years -->
+                    <option value="$year.year" <!-- IF !empty($year.selected) -->selected<!-- ENDIF -->>$year.year</option>
+                <!-- ENDFOREACH -->
+                </select>
+                <input type="submit" value="OK" />
+            </form>
+        </td>
+    </tr>
 </table>
-<form name="calendar center" method="post" action="">
-    <select name="cal-month">
-        [each=months]
-            <option value="{months[num]}" [if=months[selected]]selected="selected"[/if]>{months[name]}</option>
-        [/each.months]
-    </select>
-    <select name="cal-year">
-        [each=years]
-            <option value="{years[year]}" [if=years[selected]]selected="selected"[/if]>{years[year]}</option>
-        [/each.years]
-    </select>
-    <input type="submit" value="OK" class="submit" />
-</form>

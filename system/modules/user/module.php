@@ -1,11 +1,11 @@
 <?php
-/** 
- * @program   idxCMS: Flat Files Content Management Sysytem
- * @file      system/modules/user/module.php
- * @version   2.4
+/**
+ * @program   idxCMS: Flat Files Content Management System
+ * @version   3.0
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+ * @copyright (c) 2011 - 2016 Victor Nabatov
+ * @license   Creative Commons — Attribution-NonCommercial-ShareAlike 4.0 International
+ * @file      system/modules/user/module.php
  * @package   User
  */
 if (!defined('idxCMS')) die();
@@ -17,7 +17,9 @@ define('AVATARS', CONTENT.'avatars'.DS);
 
 require SYS.'message.class.php';
 
-/** Create link for user profile.
+/**
+ * Creates link for user profile.
+ *
  * @param  string $user Username
  * @param  string $nick Nickname
  * @return string       Link for user profile
@@ -29,7 +31,9 @@ function CreateUserLink($user, $nick) {
     return '<a href="'.MODULE.'user&amp;user='.$user.'">'.$nick.'</a>';
 }
 
-/** Get user avatar.
+/**
+ * Gets user avatar.
+ *
  * @param  string $user Username
  * @return string       Avatar image with full path
  */
@@ -37,6 +41,24 @@ function GetAvatar($user) {
     if (file_exists(AVATARS.$user.'.png'))
          return AVATARS.$user.'.png';
     else return AVATARS.'noavatar.gif';
+}
+
+/**
+ * Constructs a drop-down list of items.
+ *
+ * @param  string $name    The name of the list
+ * @param  array  $points  Values of options
+ * @param  string $default Default value
+ * @param  string $script  Javascript
+ * @return string          A drop-duwn list of items
+ */
+function SelectPoint($name, $points, $default, $script) {
+    $result = '<select name="'.$name.'" '.$script.'>';
+    foreach ($points as $id => $point) {
+        $result .= '<option value="'.$point.'"'.(($default === $point) ? ' selected>' : '>').ucfirst($point).'</option>';
+    }
+    $result .= '</select>';
+    return $result;
 }
 
 SYSTEM::registerModule('user',          'User',             'main', 'system');

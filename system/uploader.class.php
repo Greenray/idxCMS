@@ -1,12 +1,13 @@
 <?php
-/** Uploads files.
+/**
+ * Uploads files.
  *
- * @program   idxCMS: Flat Files Content Management Sysytem
- * @file      system/uploader.class.php
- * @version   2.4
+ * @program   idxCMS: Flat Files Content Management System
+ * @version   3.0
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+ * @copyright (c) 2011 - 2016 Victor Nabatov
+ * @license   Creative Commons — Attribution-NonCommercial-ShareAlike 4.0 International
+ * @file      system/uploader.class.php
  * @package   Core
  */
 
@@ -21,7 +22,11 @@ class UPLOADER {
         'application/x-gzip',
         'application/bzip2',
         'application/pdf',
-        'audio/mp3'
+        'audio/mp3',
+        'video/avi',
+        'application/x-dvi',
+        'video/quicktime',
+        'video/mpeg'
     ];
 
     /** @var string Temorary file */
@@ -39,26 +44,30 @@ class UPLOADER {
     /** @var string Directory for uploaded files */
     private $upload_dir;
 
-    /** Class initialization.
+    /**
+     * Class initialization.
+     *
      * @param string  $upload_dir Directory for uploading of files
-     * @param integer $max_size   Max size for uploading files
      */
-    public function __construct($upload_dir, $max_size = '') {
+    public function __construct($upload_dir) {
         $this->upload_dir = $upload_dir;
-        $this->max_size   = empty($max_size) ? CONFIG::getValue('main', 'file-max-size') : $max_size;
+        $this->max_size   = CONFIG::getValue('main', 'max_filesize');
     }
 
-    /** Checks if the file is acceptable and upload it to upload directory.
-     * @param  array $file Data from global variable $_FILES
+    /**
+     * Checks if the file is acceptable and upload it to upload directory.
+     *
+     * @param  array     file Data from global variable $_FILES
      * @throws Exception "File is not allowed or is corrupted"
      * @throws Exception "File is too large"
      * @throws Exception "Error of file uploading"
-     * @return array Name of file and sizeof the file
+     * @return array     Name of file and sizeof the file
      */
     public function upload($file) {
         if ($file['error'] === '0') {
-
+            #
             # Letters and numbers are settled only, spaces are replaced with a sign "_",
+            #
             $this->file_name = preg_replace('[^a-z0-9._]', '', str_replace('%20', '_', $file['name']));
             $this->file_size = $file['size'];
             $this->file_tmp  = $file['tmp_name'];
@@ -67,7 +76,7 @@ class UPLOADER {
             if (!in_array($this->file_type, $this->allowed_types)) {
                 throw new Exception('File is not allowed or is corrupted');
             }
-            if ($this->file_size >= $this->max_size) {
+            if ($this->file_size > $this->max_size) {
                 throw new Exception('File is too large');
             }
             if (is_uploaded_file($this->file_tmp)) {

@@ -1,17 +1,19 @@
 <?php
 /**
- * @program   idxCMS: Flat Files Content Management Sysytem
- * @file      system/functions.php
- * @version   2.4
+ * @program   idxCMS: Flat Files Content Management System
+ * @version   3.0
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+ * @copyright (c) 2011 - 2016 Victor Nabatov
+ * @license   Creative Commons — Attribution-NonCommercial-ShareAlike 4.0 International
+ * @file      system/functions.php
  * @package   Core
  */
 
 # FILES and DIRECTORIES
 
-/** Recursively gets list of file from directory.
+/**
+ * Gets list of files from directory.
+ *
  * @param  string  $directory Directory for parsing
  * @param  string  $mask      Files mask
  * @param  string  $type      Files type: file or directory
@@ -19,7 +21,6 @@
  * @param  array   $except    List if files which will be excluded from result
  * @return array              List of files
  */
-
 function AdvScanDir($directory, $mask = '', $type = 'all', $filter = FALSE, $except = []) {
     $exc     = ['.', '..', '.htaccess', 'index.html'];
     $exclude = array_unique(array_merge($exc, $except));
@@ -48,9 +49,11 @@ function AdvScanDir($directory, $mask = '', $type = 'all', $filter = FALSE, $exc
     return $dir;
 }
 
-/** Removes files and directories recursively.
+/**
+ * Removes files and directories recursively.
+ *
  * @param  string  $object    Directory to remove
- * @param  boolean $recursive Remove recursively? (défaut : TRUE)
+ * @param  boolean $recursive Remove recursively? (Default : TRUE)
  * @return boolean            The result of operation
  */
 function DeleteTree($object, $recursive = TRUE) {
@@ -63,7 +66,9 @@ function DeleteTree($object, $recursive = TRUE) {
     return (is_dir($object)) ? rmdir($object) : unlink($object);
 }
 
-/** Gets the list of files from the specified directory.
+/**
+ * Gets the list of files from the specified directory.
+ *
  * @param  string $directory Name of the directory
  * @param  array  $except	 The list of files to exclude from the result
  * @return array             The list of files from the specified directory
@@ -80,8 +85,10 @@ function GetFilesList($directory, $except = []) {
     return $result;
 }
 
-/** Gets unserialized data.
+/**
+ * Gets unserialized data.
  * This function can automatically restore broken data.
+ *
  * @param  string $file Filename
  * @return array        Unserialized data
  */
@@ -89,13 +96,13 @@ function GetUnserialized($file) {
     $data = [];
     if (file_exists($file)) {
         $content = file_get_contents($file);
-        if ($content !== FALSE) {
+        if ($content) {
             $data = @unserialize($content);
-            if ($data === FALSE) {
+            if (!$data) {
                 $data = UnifyBr($content);
                 $data = preg_replace("!s:(\d+):\"(.*?)\";!se", "'s:'.strlen('$2').':\"$2\";'", $data);
                 $data = @unserialize($data);
-                if ($data === FALSE) {
+                if (!$data) {
                     $data = [];
                 } else {
                     file_put_contents($file, serialize($data), LOCK_EX);
@@ -106,9 +113,11 @@ function GetUnserialized($file) {
     return $data;
 }
 
-/** Gets content of gziped file.
+/**
+ * Gets content of gziped file.
+ *
  * @param  string $file Name of the file
- * @return mixed        The content of file
+ * @return mixed        The content of file or FALSE
  */
 function gzfile_get_contents($file) {
     if (!$file = gzfile($file)) {
@@ -120,10 +129,12 @@ function gzfile_get_contents($file) {
     return $file;
 }
 
-/** Writes data to gziped file.
+/**
+ * Writes data to gziped file.
+ *
  * @param  string  $file Filename
  * @param  string  $text Data to gzip
- * @param  string  $mode Write mode (défaut : 'w+')
+ * @param  string  $mode Write mode (Default : 'w+')
  * @return boolean       The result of operation
  */
 function gzfile_put_contents($file, $text, $mode = 'w+') {
@@ -146,8 +157,10 @@ function gzfile_put_contents($file, $text, $mode = 'w+') {
 
 # TEXT
 
-/** String localization.
+/**
+ * String localization.
  * Currently, the system supports foure languages: English, Russian, Belarusian, and Ukrainian.
+ *
  * @global array  $LANG   Array of language strings
  * @param  string $string String to be translated
  * @return string         Nhfyslated string
@@ -157,7 +170,9 @@ function __($string) {
     return empty($LANG['def'][$string]) ? $string : $LANG['def'][$string];
 }
 
-/** Checks if the string has onle latin symbols.
+/**
+ * Checks if the string has onle latin symbols.
+ *
  * @param  string $string String to check
  * @return string|boolean Checked string or FALSE if it has not only latin symbols
  */
@@ -165,7 +180,9 @@ function OnlyLatin($string) {
     return (empty($string) || preg_replace("/[\d\w]+/i", '', $string) != '') ? FALSE : $string;
 }
 
-/** Generates random string.
+/**
+ * Generates random string.
+ *
  * @param  integer $num_chars The lenght of string to generate
  * @return string             Generated string
  */
@@ -183,7 +200,9 @@ function RandomString($num_chars) {
     return $result;
 }
 
-/** Converts line endings.
+/**
+ * Converts line endings.
+ *
  * @param  string $text Text to parse
  * @return string       Parsed text
  */
@@ -193,7 +212,9 @@ function UnifyBr($text) {
 
 # DATE and TIME
 
-/** Formats date and time according to user's timezone.
+/**
+ * Formats date and time according to user's timezone.
+ *
  * @param  string $format Format
  * @param  string $date	  Date
  * @return string         Formatted date/time
@@ -214,7 +235,9 @@ function FormatTime($format, $date) {
 
 # MAIL
 
-/** Sends email.
+/**
+ * Sends email.
+ *
  * @param  string  $to     The recipient
  * @param  string  $from   Sender address
  * @param  string  $sender The sender
@@ -237,12 +260,13 @@ function SendMail($to, $from, $sender, $subj, $text) {
 # PAGINATION
 
 /**
-* @todo Comment
-* @param string $total	...
-* @param string $current	...
-* @param string $last	...
-* @return
-*/
+ * Formats data for pagination.
+ *
+ * @param  integer $total   Pages amount
+ * @param  integer $current Current page
+ * @param  integer $last    Last page
+ * @return array            Formatted data for pagination
+ */
 function AdvancedPagination($total, $current, $last) {
     $pages = [];
     if ($current < 1) {
@@ -258,6 +282,7 @@ function AdvancedPagination($total, $current, $last) {
     $show = 5;                  # Number of page links to show
     #
     # At the beginning
+    #
     if ($current == 1) {
         if ($pages['next'] == $current) {
             return $pages;      # if one page only
@@ -270,8 +295,9 @@ function AdvancedPagination($total, $current, $last) {
         }
         return $pages;
     }
-
+    #
     # At the end
+    #
     if ($current == $last) {
         $start = $last - $show;
         if ($start < 1) {
@@ -282,8 +308,9 @@ function AdvancedPagination($total, $current, $last) {
         }
         return $pages;
     }
-
+    #
     # In the middle
+    #
     $start = $current - $show;
     if (($total > 5) && ($current > 3)) $start = $current - 3;
     if (($last - $current) < 2)         $start = $current - 4;
@@ -301,13 +328,15 @@ function AdvancedPagination($total, $current, $last) {
 }
 
 /**
-* @todo Comment
-* @param string $total	...
-* @param string $perpage	...
-* @param string $current	...
-* @param string $link	...
-* @return
-*/
+ * Creates html block for pages navigation.
+ *
+ * @param  integer $total Total items
+ * @param  integer $perpage Items per page
+ * @param  integer $current Current page number
+ * @param  string  $link    Link to item
+ * @return string           html block for pages navigation
+ * @todo   Crate the template for pagination
+ */
 function Pagination($total, $perpage, $current, $link) {
     $result   = '';
     $numpages = ceil($total / $perpage);
@@ -338,12 +367,13 @@ function Pagination($total, $perpage, $current, $link) {
 }
 
 /**
-* @todo Comment
-* @param string $page	...
-* @param string $perpage	...
-* @param string $count	...
-* @return
-*/
+ * Culculates parameters for the pagination
+ *
+ * @param  integer $page    Number of the current page
+ * @param  integer $perpage Items per page
+ * @param  integer $count   Number of items
+ * @return array            Parameters for the pagination
+ */
 function GetPagination($page, $perpage, $count) {
     $result = [];
     $result['page']  = $page > 0 ? $page - 1 : 0;
@@ -354,7 +384,9 @@ function GetPagination($page, $perpage, $count) {
     return $result;
 }
 
-/** Selects the time zone.
+/**
+ * Selects the time zone.
+ *
  * @param  string $name    Time zone
  * @param  array  $points  List of time zones
  * @param  string $default The default time zone
@@ -363,13 +395,14 @@ function GetPagination($page, $perpage, $count) {
 function SelectTimeZone($name, $points, $default) {
     $result = '<select name="'.$name.'">';
     foreach ($points as $id => $point) {
-        $result .= '<option value="'.$id.'"'.(($default == $id) ? ' selected="selected">' : '>').$point.'</option>';
+        $result .= '<option value="'.$id.'"'.(($default == $id) ? ' selected>' : '>').$point.'</option>';
     }
     $result .= '</select>';
     return $result;
 }
 
-/** Shows captcha.
+/**
+ * Shows captcha.
  * There are three different options:
  * - original: black an white;
  * - color: with colored background;
@@ -393,22 +426,28 @@ function ShowCaptcha($param = '') {
         $captcha = 'Random';              # Restore system CAPTCHA
         return $result;
     }
-    return '<img src="'.TOOLS.'captcha.php?code='.$code.'" hspace="5" vspace="5" width="90" height="30" alt="CAPTCHA" /><br />
-            <input type="hidden" name="antispam" value="'.$code.'" />
-            <input type="text" name="captcheckout" id="captcheckout" value="" size="10" class="required" />';
+    return '
+    <p>
+        <img src="'.TOOLS.'captcha.php?code='.$code.'" hspace="5" vspace="5" width="90" height="30" alt="CAPTCHA" /><br />
+        <input type="hidden" name="antispam" value="'.$code.'" />
+        <input type="text" name="captcheckout" id="captcheckout" value="" size="10" class="required" />
+    </p>
+    ';
 }
 
-/** Checks captcha code.
+/**
+ * Checks captcha code.
+ *
+ * @throws Exeption "Invalid captcha code"
  * @return boolean The result of operation
- * @throws Exeption 'Invalid captcha code'
  */
 function CheckCaptcha() {
     if (USER::$logged_in) {
         return TRUE;
     }
-    if (!empty($_SESSION['code-length'])) {
-        $antispam = substr(md5(FILTER::get('REQUEST', 'antispam')), 0, $_SESSION['code-length']);
-        unset($_SESSION['code-length']);
+    if (!empty($_SESSION['code_length'])) {
+        $antispam = substr(md5(FILTER::get('REQUEST', 'antispam')), 0, $_SESSION['code_length']);
+        unset($_SESSION['code_length']);
         if ($antispam === FILTER::get('REQUEST', 'captcheckout')) {
             return TRUE;
         }
@@ -417,92 +456,56 @@ function CheckCaptcha() {
 }
 
 /**
-* @todo Comment
-* @param string $module	...
-* @param string $section	... (défaut : '')
-* @param string $category	... (défaut : '')
-* @param string $post	... (défaut : '')
-* @param string $comment	... (defaut : '')
-* @return
-*/
-function Redirect($module, $section = '', $category = '', $post = '', $comment = '') {
-    $url = MODULE.$module;
-    if (!empty($section)) {
-        $url = $url.'&section='.$section;
-        if (!empty($category)) {
-            $url = $url.'&category='.$category;
-            if (!empty($post)) {
-                $url = $url.'&post='.$post;
-                if (!empty($comment)) {
-                    $url = $url.'&comment='.$comment;
-                }
-            }
-        }
-    }
+ * Redirects to the specified page.
+ *
+ * @param  string  $module   Module name
+ * @param  string  $section  Section name (Default : NULL)
+ * @param  integer $category Category ID  (Default : NULL)
+ * @param  integer $item     Item ID      (Default : NULL)
+ * @param  integer $page     Page         (Default : NULL)
+ * @param  integer $comment  Comment ID   (Default : NULL)
+ */
+function Redirect($module, $section = NULL, $category = NULL, $post = NULL, $comment = NULL, $page = NULL) {
+    $url = CreateUrl($module, $section, $category, $post, $comment, $page);
     header('Location: '.$url);
     die();
 }
 
-/** Shows error message.
- * @param  string $message Error message
- * @return string          Formatted error message
+/**
+ * Creates url to the specified page.
+ *
+ * @param  string  $module   Module name
+ * @param  string  $section  Section name
+ * @param  integer $category Category ID
+ * @param  integer $item     Item ID
+ * @param  integer $comment  Comment ID
+ * @param  integer $page     Page
  */
-function ShowError($message) {
-    return CMS::call('SYSTEM')->defineWindow('Error', $message, 'center');
-}
-
-/** Shows block with content in the page.
- * @param  string $title   Title of the block
- * @param  string $content Content of the block
- * @param  string $align   Align of the content (défaut : 'left')
- */
-function ShowWindow($title, $content, $align = 'left') {
-    return CMS::call('SYSTEM')->defineWindow($title, $content, $align);
-}
-
-/** Shows comments.
- * @param object  $obj     Name of the object
- * @param integer $item    ID of the item
- * @param integer $page    Number of page
- * @param integer $perpage Elements on the page
- * @param stringe $path    Path to the template of the page
- */
-function ShowComments($obj, $item, $page, $perpage, $path) {
-    $comments = CMS::call($obj)->getComments($item['id']);
-    if (!empty($comments)) {
-        $TPL = new TEMPLATE($path.'comment.tpl');
-        $count  = sizeof($comments);
-        $ids    = array_keys($comments);
-        $output = '';
-        $pagination = GetPagination($page, $perpage, $count);
-        for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
-            $output .= $TPL->parse(CMS::call($obj)->getComment($ids[$i], $page));
-        }
-        ShowWindow(__('Comments'), $output);
-        if ($count > $perpage) {
-            ShowWindow('', Pagination($count, $perpage, $page, $item['link']));
+function CreateUrl($module, $section = '', $category = '', $item = '', $comment = '', $page = '') {
+    $url = MODULE.$module;
+    if (!empty($section)) {
+        $url = $url.SECTION.$section;
+        if (!empty($category)) {
+            $url = $url.CATEGORY.$category;
+            if (!empty($item)) {
+                $url = $url.ITEM.$item;
+                if (!empty($comment)) {
+                    $url = $url.COMMENT.$comment;
+                    if (!empty($page)) {
+                        $url = $url.PAGE.$comment;
+                    }
+                }
+            }
         }
     }
-    if (USER::$logged_in) {
-        if (!empty($item['opened'])) {
-            # Form to post comment
-            $TPL = new TEMPLATE($path.'comment-post.tpl');
-            ShowWindow(
-                __('Comment'),
-                $TPL->parse([
-                    'nickname'       => USER::getUser('nickname'),
-                    'not_admin'      => !USER::$root,
-                    'text'           => FILTER::get('REQUEST', 'text'),
-                    'action'         => $item['link'],
-                    'bbcodes'        => CMS::call('PARSER')->showBbcodesPanel('comment.text'),
-                    'comment-length' => CONFIG::getValue(strtolower($obj), 'comment-length')]
-                )
-            );
-        }
-    }
+    return $url;
 }
 
-/** Creates sitemap. */
+/**
+ * Creates sitemap.
+ *
+ * return boolean The result of operation
+ */
 function Sitemap() {
     $time     = FormatTime('Y-m-d', time());
     $url      = SYSTEM::get('url');
@@ -569,5 +572,5 @@ function Sitemap() {
     if (!file_put_contents(ROOT.'sitemap.xml', $site_map, LOCK_EX)) {
         CMS::call('LOG')->logPut('Error', '', 'Cannot save file sitemap.xml');
     }
-    CMS::call('SYSTEM')->createMainMenu();
+    return CMS::call('SYSTEM')->createMainMenu();
 }

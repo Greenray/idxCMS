@@ -1,24 +1,22 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Search
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Module SEARCH: Search results template
 
 die();?>
+
 <div class="results">
-    <div class="center"><b>[__Search results]: {count} [__coincidence]</b></div>
-    <ul class="level1">
-        [ifelse=count]
-            [each=result]
-            <li class="level1 parent">
-                <div class="bg">
-                    <a class="level1" href="{result[link]}">{result[title]}</a>
-                    <span class="subtitle">{result[text]}</span>
-                </div>
+    <div class="center"><b>__Search results__: $count __coincidence__</b></div>
+    <!-- IF !empty($count) -->
+        <ul class="level1">
+        <!-- FOREACH result = $results -->
+            <li class="level1">
+                <a class="level1" href="$result.link">$result.title</a>
+                <span class="subtitle">$result.text</span>
             </li>
-            [/each.result]
-        [else]
-            <div class="center"><em>[__Nothing founded]</em></div>
-        [/else]
-    </ul>
+        <!-- ENDFOREACH -->
+        </ul>
+    <!-- ELSE -->
+        <div class="center"><em>__Nothing founded__</em></div>
+    <!-- ENDIF -->
 </div>

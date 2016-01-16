@@ -1,15 +1,14 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - User
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: Bans managment.
 
 if (!defined('idxADMIN') || !USER::$root) die();
 
 if (!empty($REQUEST['ban'])) {
     $bans = [];
     foreach ($REQUEST['ban'] as $key => $ban) {
-        if (preg_match('/^(([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]).){2}(([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]|\*).)([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]|\*)$/', $ban)) {
+        if (preg_match('/^(([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]).) {2}(([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]|\*).)([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]|\*)$/', $ban)) {
             $bans[] = $ban;
         }
     }
@@ -25,5 +24,6 @@ if (!$bans = file(CONTENT.'bans', FILE_IGNORE_NEW_LINES)) {
     $bans = [];
 }
 
-$TPL = new TEMPLATE(dirname(__FILE__).DS.'bans.tpl');
-echo $TPL->parse(['ban' => $bans]);
+$TPL = new TEMPLATE(__DIR__.DS.'bans.tpl');
+$TPL->set('bans', $bans);
+echo $TPL->parse();

@@ -1,18 +1,12 @@
 <?php
-/** Statistics: view and manage.
- *
- * @program   idxCMS: Flat Files Content Management Sysytem
- * @file      admin/modules/_statistics/statistics.php
- * @version   2.4
- * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
- * @package   Statistics
- */
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: Statistcs.
 
 if (!defined('idxADMIN') || !USER::$root) die();
 
-/** Cleans website statistics.
+/**
+ * Cleans website statistics.
  *
  * @param  string  $file  Name of the file with data
  * @param  string  $field Name of the datafield
@@ -36,7 +30,7 @@ if (!empty($REQUEST['cleanagents']))  StatisticsClean(CONTENT.'spiders', 'ua');
 if (!empty($REQUEST['cleansip']))     StatisticsClean(CONTENT.'spiders', 'ip');
 if (!empty($REQUEST['cleanspiders'])) StatisticsClean(CONTENT.'spiders');
 
-$stats = GetUnserialized(CONTENT.'stats');
+$stats  = GetUnserialized(CONTENT.'stats');
 $output = [];
 
 if (!empty($stats)) {
@@ -45,16 +39,33 @@ if (!empty($stats)) {
     if (!empty($stats['ref'])) {
         arsort($stats['ref']);
     }
-    $output['ref'] = $stats['ref'];
+    foreach($stats['ref'] as $host => $ref) {
+        $output['refs'][$host]['host']  = $host;
+        $output['refs'][$host]['count'] = $ref;
+    }
+
     if (!empty($stats['ua'])) {
         arsort($stats['ua']);
     }
-    $output['ua'] = $stats['ua'];
-    foreach($stats['hosts'] as $host => $time) {
-        $output['hosts'][$host] = FormatTime('d F Y H:i:s', $time);
+    foreach($stats['ua'] as $agent => $count) {
+        $output['uas'][$agent]['agent'] = $agent;
+        $output['uas'][$agent]['count'] = $count;
     }
-    $output['ip'] = $stats['ip'];
-    $output['users'] = $stats['users'];
+
+    foreach($stats['hosts'] as $host => $time) {
+        $output['hosts'][$host]['host'] = $host;
+        $output['hosts'][$host]['time'] = FormatTime('d F Y H:i:s', $time);
+    }
+
+    foreach($stats['ip'] as $ip => $count) {
+        $output['ips'][$ip]['host']  = $ip;
+        $output['ips'][$ip]['count'] = $count;
+    }
+
+    foreach($stats['users'] as $i => $user) {
+        $output['users'][$i]['user'] = $user;
+    }
+
 } else {
     $output['total_hosts'] = 0;
     $output['today_hosts'] = 0;
@@ -68,17 +79,26 @@ if (!empty($spiders)) {
     if (!empty($spiders['ua'])) {
         arsort($spiders['ua']);
     }
-    $output['sua'] = $spiders['ua'];
+    foreach($spiders['ua'] as $agent => $ua) {
+        $output['suas'][$agent]['agent'] = $i;
+        $output['suas'][$agent]['count'] = $count;
+    }
+
     if (!empty($spiders['ip'])) {
         arsort($spiders['ip']);
     }
-    $output['sip'] = $spiders['ip'];
+    foreach($spiders['ip'] as $ip => $count) {
+        $output['sips'][$ip]['ip']    = $ip;
+        $output['sips'][$ip]['count'] = $count;
+    }
+
 } else {
     $output['total'] = 0;
     $output['today'] = 0;
 }
 
 if (!empty($output)) {
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'statistics.tpl');
-    echo $TPL->parse($output);
+    $TPL = new TEMPLATE(__DIR__.DS.'statistics.tpl');
+    $TPL->set($output);
+    echo $TPL->parse();
 }

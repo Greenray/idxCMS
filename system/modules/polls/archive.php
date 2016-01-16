@@ -1,8 +1,7 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Polls
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Module POLLS: Polls archive
 
 if (!defined('idxCMS')) die();
 
@@ -12,9 +11,10 @@ $archived = array_reverse($POLLS->getArchivedPolls());
 SYSTEM::set('pagename', __('Polls archive'));
 
 if (!empty($archived)) {
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'archive.tpl');
-    ShowWindow(__('Poll'), $POLLS->showPolls($archived, $TPL));
+    $TPL = new TEMPLATE(__DIR__.DS.'archive.tpl');
+    $TPL->set($POLLS->showPolls($archived, $TPL));
+    SYSTEM::defineWindow('Poll', $TPL->parse());
 } else {
-    ShowWindow(__('Polls archive'), __('Database is empty'), 'center');
+    SYSTEM::showMessage('Database is empty');
 }
 unset($POLLS);

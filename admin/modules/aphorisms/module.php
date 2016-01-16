@@ -1,21 +1,9 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - Aphorizms
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management Sysytem v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: Aphorisms.
 
 if (!defined('idxADMIN')) die();
 
-switch (SYSTEM::get('locale')) {
-    case 'ru':
-        $LANG['def']['Select file'] = 'Выбирите файл';
-        break;
-    case 'ua':
-        $LANG['def']['Select file'] = 'Оберіть файл';
-        break;
-    case 'by':
-        $LANG['def']['Select file'] = 'Выбіраючы файл';
-        break;
-}
-$MODULES[$module][0] = __('Aphorisms');
-$MODULES[$module][1]['aphorisms'] = __('Aphorisms');
+$MODULES[$module][0] = 'Aphorisms';
+$MODULES[$module][1]['aphorisms'] = 'Aphorisms';

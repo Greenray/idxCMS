@@ -1,18 +1,21 @@
 <?php
-/** Filemanager.
+/**
+ * Filemanager.
  *
- * @program   idxCMS: Flat Files Content Management Sysytem
- * @file      admin/modules/_general/filemeneger.php
- * @version   2.4
+ * @program   idxCMS: Flat Files Content Management System
+ * @version   3.0
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+ * @copyright (c) 2011 - 2016 Victor Nabatov
+ * @license   Creative Commons — Attribution-NonCommercial-ShareAlike 4.0 International
+ * @file      admin/modules/_general/filemeneger.php
  * @package   Administration
  */
 
 if (!defined('idxADMIN') || !USER::$root) die();
 
-/** Translates the string value of the access rights of a file into a numeric value.
+/**
+ * Translates the string value of the access rights of a file into a numeric value.
+ *
  * @param  string $mode String value of the access rights of a file
  * @return string       Numeric value of the access rights of a file
  */
@@ -26,7 +29,9 @@ function ConvertRightsString($mode) {
     return $newmode;
 }
 
-/** Gets value of the access rights of a file.
+/**
+ * Gets value of the access rights of a file.
+ *
  * @param  string  $file File to check rights
  * @param  boolean $if   Check special values
  * @return string        File info
@@ -59,7 +64,9 @@ function GetRights($file, $if = FALSE) {
     return $info;
 }
 
-/** Sets access rights of a file.
+/**
+ * Sets access rights of a file.
+ *
  * @param  string  $file  File to set rights
  * @param  value   $value Rights value
  * @return boolean        The result of operation
@@ -75,7 +82,9 @@ function SetRights($file, $value, $recursive = FALSE) {
     return $result;
 }
 
-/** Checks if file is serialized.
+/**
+ * Checks if file is serialized.
+ *
  * @param  string  $file    Filename
  * @param  string  $content Content of file
  * @return boolean|string   Unserialized content of file or FALSE
@@ -91,7 +100,7 @@ function CheckSerialized($file, &$content = '') {
     return FALSE;
 }
 
-$allowed = ['php','js','ini','log','gz','txt','html','css','xml'];
+$allowed = ['php','js','ini','log','gz','txt','html','css','xml', 'md'];
 $images  = ['gif', 'jpeg', 'jpg', 'png'];
 
 $path   = empty($REQUEST['path']) ? realpath('.').DS : $REQUEST['path'];
@@ -102,12 +111,11 @@ $output = [];
 if (!empty($REQUEST['save'])) {
     if (!empty($REQUEST['edit'])) {
         $path_parts = pathinfo($path.$REQUEST['edit']);
-        if (empty($path_parts['extension'])) {
-            if (!CheckSerialized($path.$file))                file_put_contents($path.$REQUEST['edit'], $REQUEST['content']);
-        } else {
-            if (in_array($path_parts['extension'], $allowed)) file_put_contents($path.$REQUEST['edit'], $REQUEST['content']);
-        }
+        if (empty($path_parts['extension']))
+             if (!CheckSerialized($path.$file))                file_put_contents($path.$REQUEST['edit'], $REQUEST['content']);
+        else if (in_array($path_parts['extension'], $allowed)) file_put_contents($path.$REQUEST['edit'], $REQUEST['content']);
         unset($REQUEST['edit']);
+
     } elseif (!empty($REQUEST['rights'])) {
         if (is_array($REQUEST['rights'])) {
             $rights = [];
@@ -127,75 +135,79 @@ if (!empty($REQUEST['save'])) {
     if (!empty($REQUEST['upload']['name'])) {
         $REQUEST['upload']['name'] = str_replace('%', '', $REQUEST['upload']['name']);
         if (!move_uploaded_file($REQUEST['upload']['tmp_name'], $path.$REQUEST['upload']['name'])) {
-            ShowMessage('Cannot upload file');
+            SYSTEM::showError('Cannot upload file');
         }
     }
-} elseif(!empty($REQUEST['delete'])) {
-    if (!DeleteTree($path.$REQUEST['delete'])) ShowMessage('Cannot delete file or directory');
+} elseif (!empty($REQUEST['delete'])) {
+    if (!DeleteTree($path.$REQUEST['delete'])) SYSTEM::showError('Cannot delete file or directory');
 } elseif (!empty($REQUEST['mkdir'])) {
-    if (!mkdir($path.$REQUEST['dirname']))     ShowMessage('Cannot make directory');
+    if (!mkdir($path.$REQUEST['dirname']))     SYSTEM::showError('Cannot make directory');
 }
 
-$output = [];
-$output['back'] = ($path === realpath('.').DS) ? '' : $url.'&amp;path='.dirname($path).DS;
-$output['url']  = $url;
-$output['path'] = $path;
+$TPL = new TEMPLATE(__DIR__.DS.'filemanager.tpl');
+$TPL->set('back', ($path === realpath('.').DS) ? '' : $url.'&amp;path='.dirname($path).DS);
+$TPL->set('url',  $url);
+$TPL->set('path', $path);
 $elements = array_merge(AdvScanDir($path, '', 'dir'), AdvScanDir($path, '', 'file'));
-
+$output = [];
 foreach ($elements as $key => $file) {
-    $output['elements'][$key]['file'] = $file;
+    $output[$key]['file'] = $file;
     $filedata = stat($path.$file);
-    $output['elements'][$key]['size'] = $filedata['size'];
-    $output['elements'][$key]['date'] = FormatTime('d m Y', $filedata['mtime']);
-    $output['elements'][$key]['time'] = FormatTime('H:i:s', $filedata['mtime']);
+    $output[$key]['size'] = $filedata['size'];
+    $output[$key]['date'] = FormatTime('d m Y', $filedata['mtime']);
+    $output[$key]['time'] = FormatTime('H:i:s', $filedata['mtime']);
     if (is_dir($path.$file)) {
-        $output['elements'][$key]['link']  = $url.'&amp;path='.$path.$file.DS;
-        $output['elements'][$key]['empty'] = TRUE;
-        $output['elements'][$key]['alert'] = 'onClick="if(confirm(\''.__('Delete this directory recursively?').'\')) document.location.href = \''.$url.'&amp;path='.$path.'&amp;delete='.$file.'\'"';
-        $output['elements'][$key]['style'] = 'row2';
+        $output[$key]['link']  = $url.'&amp;path='.$path.$file.DS;
+        $output[$key]['empty'] = TRUE;
+        $output[$key]['alert'] = 'onClick="if (confirm(\''.__('Delete this directory recursively?').'\')) document.location.href = \''.$url.'&amp;path='.$path.'&amp;delete='.$file.'\'"';
+        $output[$key]['style'] = 'row2';
     } else {
         $path_parts = pathinfo($path.$file);
         if (empty($path_parts['extension'])) {
             if (!CheckSerialized($path.$file))
-                 $output['elements'][$key]['edit'] = $url.'&amp;path='.$path.'&amp;edit='.$file;
-            else $output['elements'][$key]['empty'] = TRUE;
+                 $output[$key]['edit'] = $url.'&amp;path='.$path.'&amp;edit='.$file;
+            else $output[$key]['empty'] = TRUE;
         } else {
             preg_match('/[^.]+\.[^.]+$/', $path_parts['basename'], $matches);
-            if ($matches[0] === 'tar.gz')                        $output['elements'][$key]['download'] = TRUE;
+            if ($matches[0] === 'tar.gz')                        $output[$key]['download'] = TRUE;
             elseif (in_array($path_parts['extension'], $allowed) && (substr($path_parts['basename'], -6) !== 'min.js'))
-                                                                 $output['elements'][$key]['edit'] = $url.'&amp;path='.$path.'&amp;edit='.$file;
-            elseif (in_array($path_parts['extension'], $images)) $output['elements'][$key]['view'] = ROOT.str_replace(realpath('.').DS, '', $path).$file;
-            else                                                 $output['elements'][$key]['empty'] = TRUE;
+                                                                 $output[$key]['edit'] = $url.'&amp;path='.$path.'&amp;edit='.$file;
+            elseif (in_array($path_parts['extension'], $images)) $output[$key]['view'] = ROOT.str_replace(realpath('.').DS, '', $path).$file;
+            else                                                 $output[$key]['empty'] = TRUE;
         }
-        $output['elements'][$key]['style'] = 'row1';
+        $output[$key]['style'] = 'row1';
     }
-    $output['elements'][$key]['rights'] = GetRights($path.$file);
-    $output['elements'][$key]['rights_edit'] = $url.'&amp;path='.$path.'&amp;rights='.$file;
-    $output['elements'][$key]['delete'] = $url.'&amp;path='.$path.'&amp;delete='.$file;
+    $output[$key]['rights']      = GetRights($path.$file);
+    $output[$key]['rights_edit'] = $url.'&amp;path='.$path.'&amp;rights='.$file;
+    $output[$key]['delete']      = $url.'&amp;path='.$path.'&amp;delete='.$file;
 }
 
-$TPL = new TEMPLATE(dirname(__FILE__).DS.'filemanager.tpl');
-echo $TPL->parse($output);
+$TPL->set('elements', $output);
+echo $TPL->parse();
+
 clearstatcache();
+
 $output = [];
 
 if (!empty($REQUEST['rights'])) {
     $output['file'] = $REQUEST['rights'];
     $rights = str_split(GetRights($path.$REQUEST['rights'], TRUE), 1);
-    $output['owner']['r'] = ($rights[0] === 'r') ? 'r' : '';
-    $output['owner']['w'] = ($rights[1] === 'w') ? 'w' : '';
-    $output['owner']['x'] = ($rights[2] === 'x') ? 'x' : '';
-    $output['group']['r'] = ($rights[3] === 'r') ? 'r' : '';
-    $output['group']['w'] = ($rights[4] === 'w') ? 'w' : '';
-    $output['group']['x'] = ($rights[5] === 'x') ? 'x' : '';
-    $output['other']['r'] = ($rights[6] === 'r') ? 'r' : '';
-    $output['other']['w'] = ($rights[7] === 'w') ? 'w' : '';
-    $output['other']['x'] = ($rights[8] === 'x') ? 'x' : '';
+    $output['owner_r'] = ($rights[0] === 'r') ? 'r' : '';
+    $output['owner_w'] = ($rights[1] === 'w') ? 'w' : '';
+    $output['owner_x'] = ($rights[2] === 'x') ? 'x' : '';
+    $output['group_r'] = ($rights[3] === 'r') ? 'r' : '';
+    $output['group_w'] = ($rights[4] === 'w') ? 'w' : '';
+    $output['group_x'] = ($rights[5] === 'x') ? 'x' : '';
+    $output['other_r'] = ($rights[6] === 'r') ? 'r' : '';
+    $output['other_w'] = ($rights[7] === 'w') ? 'w' : '';
+    $output['other_x'] = ($rights[8] === 'x') ? 'x' : '';
     if (is_dir($path.$REQUEST['rights'])) {
         $output['dir'] = TRUE;
     }
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'rights.tpl');
-    echo $TPL->parse($output);
+
+    $TPL = new TEMPLATE(__DIR__.DS.'rights.tpl');
+    $TPL->set($output);
+    echo $TPL->parse();
 }
 
 if (!empty($REQUEST['edit'])) {
@@ -213,7 +225,8 @@ if (!empty($REQUEST['edit'])) {
     }
     $output['name'] = $REQUEST['edit'];
     if (!empty($output['content'])) {
-        $TPL = new TEMPLATE(dirname(__FILE__).DS.'edit.tpl');
-        echo $TPL->parse($output);
+        $TPL = new TEMPLATE(__DIR__.DS.'edit.tpl');
+        $TPL->set($output);
+        echo $TPL->parse();
     }
 }

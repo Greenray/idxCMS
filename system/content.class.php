@@ -1,5 +1,6 @@
 <?php
-/** Processing content: articles, topics, comments and replies.
+/**
+ * Processing content: articles, topics, comments, replies, gallery and catalogs items.
  * The structure of the posts database:
  * <pre>
  * content                 - The main directory of the website content
@@ -16,604 +17,87 @@
  *                   rate  - Comments rates
  * </pre>
  *
- * @program   idxCMS: Flat Files Content Management Sysytem
- * @file      system/content.class.php
- * @version   2.4
+ * @program   idxCMS: Flat Files Content Management System
+ * @version   3.0
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011-2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+ * @copyright (c) 2011-2016 Victor Nabatov
+ * @license   Creative Commons — Attribution-NonCommercial-ShareAlike 4.0 International
+ * @file      system/content.class.php
  * @package   Core
  */
 
-class CONTENT extends INDEX {
+class CONTENT extends COMMENTS {
 
+    /** Class initialization */
+    protected function __construct() {}
 
-    /** @var integer ID of the current category */
-    protected $category;
-
-    /** @var array Comments for article, topic, image and so on */
-    protected $comments = [];
-
-    /** @var string Current module */
-    protected $container = '';
-
-    /** @var array Content of the current category */
-    protected $content = [];
-
-    /** @var string Filename of the item with short description */
-    protected $desc = 'desc';
-
-    /** @var integer ID of the article, topic, image and so on */
-    protected $item;
-
-    /** @var string Current module which uses this class */
-    protected $module = '';
-
-    /** @var string ID of the current section */
-    protected $section = '';
-
-    /** @var array Sections of the carrent module */
-    protected $sections = [];
-
-    /** @var string Item filename with full text */
-    protected $text = 'text';
-
-    /** Gets module sections data.
-     * @return array Sections whict are allowed for current user
+    /**
+     * Sets the value of a field.
+     *
+     * @param integer $id    Item ID
+     * @param string  $field Field name
+     * @param mixed   $value Field value
      */
-    public function getSections() {
-        if (empty($this->sections)) {
-            $index = self::getIndex($this->container);
-            foreach ($index as $id => $section) {
-                if (USER::checkAccess($section)) {
-                    $this->sections[$id] = $section;
-                }
-            }
-        }
-        return $this->sections;
+    public function setValue($id, $field, $value) {
+        $this->content[$id][$field] = $value;
+        return $this->saveIndex($this->sections[$this->section]['categories'][$this->category]['path'], $this->content);
     }
 
-    /** Gets section`s data.
-     * @param  string $id Section name
-     * @return array      Section data
-     */
-    public function getSection($id) {
-        if (empty($this->sections[$id])) return FALSE;
-
-        $this->section = $id;
-        return $this->sections[$id];
-    }
-
-    /** Shows all sections with their categories of the current module.
-     * @return array Data about all existing sections
-     */
-    public function showSections() {
-        SYSTEM::set('pagename', SYSTEM::$modules[$this->module]['title'].' - '.__('Sections'));
-        SYSTEM::setPageDescription(SYSTEM::$modules[$this->module]['title'].' - '.__('Sections'));
-        $result   = [];
-        $sections = $this->sections;
-        unset($sections['drafts']);
-
-        foreach ($sections as $id => $section) {
-            # Get only allowed categories for user
-            # Don't show sections with empty categories
-            $categories = self::getCategories($id);
-            if (!empty($categories)) {
-                $result[$id] = $section;
-                $result[$id]['desc'] = CMS::call('PARSER')->parseText($section['desc']);
-
-                foreach ($categories as $key => $category) {
-                    $result[$id]['categories'][$key] = $category;
-                    $result[$id]['categories'][$key]['desc'] = CMS::call('PARSER')->parseText($category['desc']);
-                }
-            }
-        }
-        return $result;
-    }
-
-    /** Shows requested section with its categories.
-     * @param  string Section name
-     * @return array  Section data
-     */
-    public function showSection($section) {
-        $categories = self::getCategories($section);
-        if ($categories === FALSE) {
-            return FALSE;
-        }
-
-        SYSTEM::set('pagename', $this->sections[$section]['title']);
-        if (!empty($this->sections[$section]['desc']))
-             SYSTEM::setPageDescription(SYSTEM::$modules[$this->module]['title'].' - '.$this->sections[$section]['title'].' - '.$this->sections[$section]['desc']);
-        else SYSTEM::setPageDescription(SYSTEM::$modules[$this->module]['title'].' - '.$this->sections[$section]['title']);
-
-        SYSTEM::setPageKeywords($this->sections[$section]['id']);
-
-        $result = [];
-        $result['title'] = $this->sections[$section]['title'];
-        foreach($categories as $id => $category) {
-            $category = self::getCategory($id);
-            self::getContent($id);
-            $category['desc']  = CMS::call('PARSER')->parseText($category['desc']);
-            $category['items'] = sizeof($this->content);
-            if (!empty($this->content)) {
-                $category['last'] = end($this->content);
-                $category['last']['link'] = $category['link'].ITEM.$category['last']['id'];
-            }
-            $result['categories'][] = $category;
-        }
-        return $result;
-    }
-
-    /** Saves section.
-     * If parameter $id is not set, a new section will be created.
-     * This function corrects website sitemap.
-     * @throws Exception "Invalid ID"          - Empty ID or includes incorrect symbols
-     * @throws Exception "Title is empty"
-     * @throws Exception "Cannot save section" - Cannot create directory for section or save section index file
-     * @return boolean                         The result of operation
-     */
-    public function saveSection() {
-        $id = OnlyLatin(FILTER::get('REQUEST', 'section'));
-        if ($id === FALSE)    throw new Exception('Invalid ID');
-
-        $title = FILTER::get('REQUEST', 'title');
-        if ($title === FALSE) throw new Exception('Title is empty');
-
-        if (!is_dir($this->container.$id)) {
-            if (mkdir($this->container.$id, 0777) === FALSE) {
-                throw new Exception('Cannot save section');
-            }
-            if ($this->saveIndex($this->container, []) === FALSE) {
-                rmdir($this->container.$id);
-                throw new Exception('Cannot save section');
-            }
-        }
-
-        $this->sections[$id]['id']     = $id;
-        $this->sections[$id]['title']  = $title;
-        $this->sections[$id]['desc']   = FILTER::get('REQUEST', 'desc');
-        $this->sections[$id]['access'] = intval(FILTER::get('REQUEST', 'access'));
-        $this->sections[$id]['link']   = MODULE.$this->module.SECTION.$id;
-        $this->sections[$id]['path']   = $this->container.$id.DS;
-
-        if ($this->saveIndex($this->container, $this->sections) === FALSE) {
-            DeleteTree($this->container.$id);
-            throw new Exception('Cannot save section');
-        }
-
-        Sitemap();
-    }
-
-    /** Saves all sections.
-     * @param  array $sections Sections data
-     * @throws Exception "Cannot save sections"
-     */
-    public function saveSections($sections) {
-        $new = [];
-        foreach ($sections as $key => $section) {
-            $new[$section] = $this->sections[$section];
-        }
-        $this->sections = $new;
-        if ($this->saveIndex($this->container, $new) === FALSE) {
-            throw new Exception('Cannot save sections');
-        }
-    }
-
-    /** Removes section.
-     * If parameter $id is not set, a new section will be created.
-     * This function corrects website sitemap.
-     * @param  string    $id                     Section name
-     * @throws Exception "Invalid ID"            - ID is invalid or is empty
-     * @throws Exception "Cannot remove section"
-     * @return boolean                           The result of operation
-     */
-    public function removeSection($id) {
-        if (empty($this->sections[$id])) {
-            throw new Exception('Invalid ID');
-        }
-        unset($this->sections[$id]);
-
-        if (($this->saveIndex($this->container, $this->sections) === FALSE) ||
-            (DeleteTree($this->container.$id) === FALSE)) {
-            throw new Exception('Cannot remove section');
-        }
-
-        Sitemap();
-    }
-
-    /** Gets all categories of the requested section.
-     * @param  string $section Section name
-     * @return array|boolean   Section categories allowed for current user or FALSE
-     */
-    public function getCategories($section) {
-        if (empty($this->sections[$section])) {
-            return FALSE;
-        }
-
-        $this->section = $section;
-        $categories = [];
-        if (!empty($this->sections[$section]['categories'])) {
-            foreach ($this->sections[$section]['categories'] as $id => $category) {
-                if (USER::checkAccess($category)) {
-                    $categories[$id] = $category;
-                }
-            }
-        }
-        return $categories;
-    }
-
-    /** Gets requested category.
-     * @param  integer $id  Category ID
-     * @return arrayboolean Category data or FALSE
-     */
-    public function getCategory($id) {
-        if (empty($this->sections[$this->section]['categories'][$id])) {
-            return FALSE;
-        }
-
-        $this->category = $id;
-        return $this->sections[$this->section]['categories'][$id];
-    }
-
-    /** Saves category, if parameter $id is not set, a new category will be created.
-     * This function corrects website sitemap.
-     * @throws Exception "Title is empty"
-     * @throws Exception "Cannot create category" - Cannot create category directory or save index file
-     * @return boolean                            The result
-     */
-    public function saveCategory() {
-        $title = FILTER::get('REQUEST', 'title');
-        if ($title === FALSE) {
-            throw new Exception('Title is empty');
-        }
-
-        $id = FILTER::get('REQUEST', 'category');
-        if (empty($id)) {
-            # Create new directory with empty index
-            $id   = $this->newId($this->sections[$this->section]['categories']);
-            $item = $this->sections[$this->section]['path'].$id;
-            if (is_dir($item)) {
-                if (!DeleteTree($item)) {
-                    throw new Exception('Cannot save category');
-                }
-            }
-            if ((mkdir($item, 0777) === FALSE) || ($this->saveIndex($item.DS, []) === FALSE)) {
-                throw new Exception('Cannot save category');
-            }
-        }
-
-        # Access level of the category should be more or is equal to access level of the section
-        $access = (int) FILTER::get('REQUEST', 'access');
-        $section_access = (int) $this->sections[$this->section]['access'];
-
-        $this->sections[$this->section]['categories'][$id]['id']     = (int)$id;
-        $this->sections[$this->section]['categories'][$id]['title']  = $title;
-        $this->sections[$this->section]['categories'][$id]['desc']   = FILTER::get('REQUEST', 'desc');
-        $this->sections[$this->section]['categories'][$id]['access'] = ($section_access >= $access) ? $section_access : $access;
-        $this->sections[$this->section]['categories'][$id]['link']   = $this->sections[$this->section]['link'].CATEGORY.$id;
-        $this->sections[$this->section]['categories'][$id]['path']   = $this->sections[$this->section]['path'].$id.DS;
-
-        # If icon is not set an empty image will be shown
-        self::setIcon($this->sections[$this->section]['categories'][$id]['path'], FILTER::get('REQUEST', 'icon'));
-        if ($this->saveIndex($this->container, $this->sections) === FALSE) {
-            throw new Exception('Cannot save category');
-        }
-
-        Sitemap();
-    }
-
-    /** Saves all categories from requested section.
-     * @param  string    $section    Section name
-     * @param  array     $categories Categories data
-     * @throws Exception "Cannot save categories"
-     */
-    public function saveCategories($section, $categories) {
-        $this->sections[$section]['categories'] = $categories;
-        if ($this->saveIndex($this->container, $this->sections) === FALSE) {
-            throw new Exception('Cannot save categories');
-        }
-    }
-
-    /** Moves category into another section.
-     * @param  integer $id     ID of the category which will be moved
-     * @param  string  $source Name of the source section
-     * @param  string  $dest   Name of the destination section
-     * @return integer|boolean ID of the new category or FALSE
-     */
-    public function moveCategory($id, $source, $dest) {
-        if (empty($this->sections[$source])) return FALSE;
-        if (empty($this->sections[$source]['categories'][$id])) return FALSE;
-
-        $new = $this->newId($this->sections[$dest]['categories']);
-
-        $this->copyTree($this->sections[$source]['path'].$id, $this->sections[$dest]['path'].$new);
-        DeleteTree($this->sections[$source]['path'].$id);
-
-        $this->sections[$dest]['categories'][$new] = $this->sections[$source]['categories'][$id];
-        $this->sections[$dest]['categories'][$new]['link'] = $this->sections[$dest]['link'].CATEGORY.$new;
-        $this->sections[$dest]['categories'][$new]['path'] = $this->sections[$dest]['path'].$new.DS;
-
-        unset($this->sections[$source]['categories'][$id]);
-
-        $this->saveIndex($this->container, $this->sections);
-        return $new;
-    }
-
-    /** Removes category.
-     * This function corrects website sitemap.
-     * @param  integer   $id Category ID
-     * @throws Exception "Cannot remove category" - Cannot remove category directory tree or save index file
-     * @return boolean   The result
-     */
-    public function removeCategory($id) {
-        unset($this->sections[$this->section]['categories'][$id]);
-        if ((DeleteTree($this->sections[$this->section]['path'].$id) === FALSE) ||
-            ($this->saveIndex($this->container, $this->sections) === FALSE)) {
-            throw new Exception('Cannot remove category');
-        }
-
-        Sitemap();
-    }
-
-    /** Sets icon for category.
-     * @param  string  $path Path to destination directory
-     * @param  array   $icon Image data
-     * @return boolean       The result
-     */
-    protected function setIcon($path, $icon) {
-        if (empty($icon['name']) && file_exists($path.'icon.png')) {
-            return FALSE;
-        }
-
-        $IMAGE = new IMAGE($path, '', 35, 35);
-        if ($IMAGE->upload($icon) === FALSE) {
-            copy(ICONS.'icon.png', $path.'tmp.png');
-            $IMAGE->setImage([
-                'name'     => 'tmp.png',
-                'size'     => 149,
-                'tmp_name' => ''],
-                [35, 35, 'mime' => 'image/png']
-            );
-        }
-        return $IMAGE->generateIcon();
-    }
-
-    /** Gets content from the requested category.
+    /**
+     * Gets content from the requested category.
+     *
      * @param  integer $category Category ID
-     * @return array|boolean     Category content or FALSE
+     * @return array|boolean     Category content or empty array
      */
     public function getContent($category) {
         if (empty($this->sections[$this->section]['categories'][$category])) {
-            return FALSE;
+            return [];
         }
 
         $this->category = $category;
         $this->content  = $this->getIndex($this->sections[$this->section]['categories'][$category]['path']);
-
         return $this->content;
     }
 
-    /** Gets post or topic.
-     * @param  integer $id    Item ID
-     * @param  string  $type  Type of item: full text or description (default = '')
-     * @param  boolean $parse Parse text? (default = TRUE)
-     * @return array          Item data
-     */
-    public function getItem($id, $type = '', $parse = TRUE) {
-        if (empty($this->content[$id])) {
-            return FALSE;
-        }
 
-        $item = $this->content[$id];
-        $path = $this->sections[$this->section]['categories'][$this->category]['path'].$id.DS;
-        $item['link'] = $this->sections[$this->section]['categories'][$this->category]['link'].ITEM.$id;
-
-        if (!empty($type)) {
-            switch ($type) {
-
-                case 'desc':
-                    $item['desc'] = file_get_contents($path.$this->desc);
-                    break;
-
-                case 'text':
-                    $item['text'] = file_get_contents($path.$this->text);
-                    break;
-
-                case 'full':
-                    $item['desc'] = file_get_contents($path.$this->desc);
-                    $item['text'] = file_get_contents($path.$this->text);
-                    break;
-            }
-
-            if ($parse) {
-                if (!empty($item['desc'])) {
-                    $item['desc'] = CMS::call('PARSER')->parseText($item['desc'], $path);
-                }
-                if (!empty($item['text'])) {
-                    $item['text'] = CMS::call('PARSER')->parseText($item['text'], $path);
-                    if (USER::$root) {
-                        $item['admin'] = TRUE;
-                        if (!empty($item['opened'])) {
-                            $item['command'] = __('Close');
-                            $item['action']  = 'close';
-                        } else {
-                            $item['command'] = __('Open');
-                            $item['action']  = 'open';
-                        }
-                    }
-                }
-
-                $item['section']  = $this->section;
-                $item['category'] = $this->category;
-                $item['category_title'] = $this->sections[$this->section]['categories'][$this->category]['title'];
-                $item['date'] = FormatTime('d F Y', $item['time']).' '.__('year');
-
-                if (CONFIG::getValue('enabled', 'rate')) {
-                    $item['rateid'] = $this->module.'.'.$this->section.'.'.$this->category.'.'.$id;
-                    $item['rate'] = ShowRate($item['rateid']);
-                }
-            }
-        }
-        return $item;
-    }
-
-    /** Saves post or topic.
-     * This function corrects website sitemap.
-     * @param  integer    $id                 Item ID
-     * @throws Exception "Title is empty"     - Title is empty or has wrong symbols
-     * @throws Exception "Text is empty"
-     * @throws Exception "Cannot create item" - No access rights
-     * @return integer                        ID of the saved item
-     */
-    public function saveItem($id) {
-        $title = FILTER::get('REQUEST', 'title');
-        if ($title === FALSE) {
-            throw new Exception('Title is empty');
-        }
-        $text = FILTER::get('REQUEST', 'text');
-        if (empty($text)) {
-            throw new Exception('Text is empty');
-        }
-        $path  = $this->sections[$this->section]['categories'][$this->category]['path'];
-        $file  = FILTER::get('REQUEST', 'file');
-        $image = FILTER::get('REQUEST', 'image');
-        $item  = $path.$id;
-        if (empty($id)) {
-            $id   = $this->newId($this->content);
-            $item = $path.$id;
-            if (is_dir($item)) {
-                DeleteTree($item);
-            }
-            if (mkdir($path.$id, 0777) === FALSE) {
-                throw new Exception('Cannot create '.$item);
-            }
-            $this->content[$id]['id']       = (int)$id;
-            $this->content[$id]['author']   = USER::getUser('username');
-            $this->content[$id]['nick']     = USER::getUser('nickname');
-            $this->content[$id]['time']     = time();
-            $this->content[$id]['views']    = 0;
-            $this->content[$id]['comments'] = 0;
-        }
-        if (!empty($file)) {
-            try {
-                $uploaded = CMS::call('CATALOGS')->uploadFile($id, $file);
-            } catch (Exception $error) {
-                throw new Exception(__($error->getMessage()));
-            }
-            $this->content[$id]['file']      = $uploaded[0];
-            $this->content[$id]['size']      = (int) $uploaded[1];
-            $this->content[$id]['downloads'] = 0;
-            $this->content[$id]['copyright'] = FILTER::get('REQUEST', 'copyright');
-        } else {
-            if (!empty($image)) {
-                try {
-                    $uploaded = CMS::call('GALLERIES')->uploadImage($id, $image);
-                } catch (Exception $error) {
-                    throw new Exception(__($error->getMessage()));
-                }
-                $this->content[$id]['image']     = $uploaded;
-                $this->content[$id]['copyright'] = FILTER::get('REQUEST', 'copyright');
-            }
-        }
-        $this->content[$id]['title']    = $title;
-        $this->content[$id]['keywords'] = FILTER::get('REQUEST', 'keywords');
-        $this->content[$id]['opened']   = (bool) FILTER::get('REQUEST', 'opened');
-        $desc = FILTER::get('REQUEST', 'desc');
-        if (empty($desc)) {
-            $desc = $this->cutText($text, CONFIG::getValue('galleries', 'description-length'));
-        }
-        if ((file_put_contents($item.DS.$this->desc, $desc, LOCK_EX) === FALSE) ||
-            (file_put_contents($item.DS.$this->text, $text, LOCK_EX) === FALSE)) {
-            throw new Exception('Cannot save file');
-        }
-        self::saveContent($this->content);
-        Sitemap();
-
-        return $id;
-    }
-
-    /** Moves iten to another section/category or category.
-     * @param  integer   $id       Item ID
-     * @param  string    $section  Section name
-     * @param  integer   $category Category ID
-     * @throws Exception "Cannot move item"
-     * @return integer             ID of the new item
-     */
-    public function moveItem($id, $section, $category) {
-        $item = $this->content[$id];
-        $old_section  = $this->section;
-        $old_category = $this->category;
-        $this->section = $section;
-        self::getContent($category);
-        $new    = $this->newId($this->content);
-        $source = $this->sections[$old_section]['categories'][$old_category]['path'];
-        $dest   = $this->sections[$section]['categories'][$category]['path'];
-        if ($this->copyTree($source.$id, $dest.$new) === FALSE) {
-            rmdir($dest.$new);
-            throw new Exception('Cannot move item');
-        }
-
-        $this->content[$new] = $item;
-        $this->content[$new]['id'] = $new;
-        self::saveContent($this->content);
-        $this->section = $old_section;
-        self::getContent($old_category);
-        self::removeItem($item['id']);
-        return $new;
-    }
-
-    /** Saves content.
+    /**
+     * Saves content.
+     *
      * @param  array     $content Content to save
      * @throws Exception 'Cannot save content'
-     * @return void
      */
     public function saveContent($content) {
-        if ($this->saveIndex($this->sections[$this->section]['categories'][$this->category]['path'], $content) === FALSE) {
+        if (!$this->saveIndex($this->sections[$this->section]['categories'][$this->category]['path'], $content)) {
             throw new Exception('Cannot save content');
         }
     }
 
-    /** Removes item from database.
-     * @param  integer   $id Item ID
-     * @throws Exception "Invalid ID"
-     * @throws Exception "Cannot remove item"
-     * @return boolean The result of operation
-     */
-    public function removeItem($id) {
-        if (empty($this->content[$id])) {
-            throw new Exception('Invalid ID');
-        }
-        $path = $this->sections[$this->section]['categories'][$this->category]['path'];
-
-        unset($this->content[$id]);
-
-        if (($this->saveIndex($path, $this->content) === FALSE) || (DeleteTree($path.$id) === false)) {
-            throw new Exception('Cannot remove item');
-        }
-        Sitemap();
-    }
-
-    /** Increments one of counts: views, downloads and clicks.
+    /**
+     * Increments one of counts: views, downloads and clicks.
+     *
      * @param  integer $id    Item ID
      * @param  string  $field Fieldname
-     * @return                The result of operation
+     * @return boolean        The result of operation
      */
     public function incCount($id, $field) {
         if (empty($this->content[$id])) {
             return FALSE;
         }
         $this->content[$id][$field]++;
-
         return $this->saveIndex($this->sections[$this->section]['categories'][$this->category]['path'], $this->content);
     }
 
     /**
-    * @todo Comment
-    * @param string $param	...
-    * @return
+     * Gets content of the parameter.
+    *
+    * @param  mixed $param Parameter to search
+    * @return array        Content according $param
     */
     public function getStat($param) {
         $result = [];
+        if (empty($this->sections[$this->section]['categories'])) {
+            return $result;
+        }
         foreach ($this->sections[$this->section]['categories'] as $category => $data) {
             self::getContent($category);
             foreach ($this->content as $key => $item) {
@@ -623,49 +107,10 @@ class CONTENT extends INDEX {
         return $result;
     }
 
-    /** Gets list of the latest items (posts, catalog's items? etc.).
+    /**
+     * Gets the last items from category.
      * The number of the latest items specified in configuration.
-     * @param  array $items Full list of items
-     * @return array        List of latest items
-     */
-    public function getLastItems($items) {
-        krsort($items);
-        $items  = array_slice($items, 0, (int) CONFIG::getValue('main', 'last'), TRUE);
-
-        $result = [];
-        foreach ($items as $key => $data) {
-            $item = explode('.', $data);
-            self::getCategories($item[0]);
-            self::getContent($item[1]);
-            $item = self::getItem($item[2]);
-            $item['date'] = FormatTime('d F Y', $item['time']);
-            $result['items'][] = $item;
-        }
-        return $result;
-    }
-
-    /** Gets list of the latest items from specified sections.
-     * The number of the latest items specified in configuration.
-     * @param  array $sections List of sections (défaut : '')
-     * @return array           List of latest items
-     */
-    public function getSectionsLastItems($sections = '') {
-        $result = [];
-        if (empty($sections)) {
-            $sections = $this->sections;
-        }
-        foreach($sections as $id => $section) {
-            self::getCategories($id);
-            $last = $this->getStat('time');         # Get last items from section categories
-            foreach ($last as $key => $time) {
-                $result[$time] = $id.'.'.$key;      # Value is section.category.post
-            }
-        }
-        return $result;
-    }
-
-    /** Gets the last items from category.
-     * The number of the latest items specified in configuration.
+     *
      * @param  string $format The parameter for formatting posts time
      * @return array          List of latest items
      */
@@ -675,11 +120,11 @@ class CONTENT extends INDEX {
 
         $result = [];
         if (!empty($items)) {
-            $items = array_slice($items, 0, intval(CONFIG::getValue('main', 'last'), TRUE));
+            $items = array_slice($items, 0, CONFIG::getValue('main', 'last'), TRUE);
             foreach($items as $key => $data) {
                 $id = explode('.', $data);
                 self::getContent($id[0]);
-                $item = self::getItem($id[1]);
+                $item = $this->getItem($id[1]);
                 $item['date'] = FormatTime($format, $item['time']);
                 $result['items'][] = $item;
             }
@@ -687,173 +132,31 @@ class CONTENT extends INDEX {
         return $result;
     }
 
-    /** Gets comments.
-     * @param  integer $item Item ID
-     * @return array         All comments to current article or topic
+    /**
+     * Gets list of the latest items (posts, catalog's items? etc.).
+     * The number of the latest items specified in configuration.
+     *
+     * @param  array $items Full list of items
+     * @return array        List of latest items
      */
-    public function getComments($item) {
-        $this->item = $item;
-        if (!empty($this->comments)) {
-            return $this->comments;
+    public function getLastItems($items) {
+        krsort($items);
+        $items  = array_slice($items, 0, (int) CONFIG::getValue('main', 'last'), TRUE);
+        $result = [];
+        foreach ($items as $key => $data) {
+            $item = explode('.', $data);
+            $this->getCategories($item[0]);
+            self::getContent($item[1]);
+            $item = $this->getItem($item[2]);
+            $item['date'] = FormatTime('d F Y', $item['time']);
+            $result['items'][] = $item;
         }
-
-        $this->comments = $this->getIndex($this->sections[$this->section]['categories'][$this->category]['path'].$item.DS);
-        return $this->comments;
+        return $result;
     }
 
-    /** Gets comment.
-     * @param  string $id   Comment ID
-     * @param  string $page Page number
-     * @return array        Comment data
-     */
-    public function getComment($id, $page) {
-        if (empty($this->comments[$id])) {
-            return FALSE;
-        }
-
-        $comment = $this->comments[$id];
-        $comment['text']   = CMS::call('PARSER')->parseText($comment['text'], $this->sections[$this->section]['categories'][$this->category]['path'].$this->item.DS);
-        $comment['date']   = FormatTime('d F Y H:i:s', $comment['time']);
-        $comment['avatar'] = GetAvatar($comment['author']);
-        $author = USER::getUserData($comment['author']);
-        $comment['status']  = __($author['status']);
-        $comment['stars']   = $author['stars'];
-        $comment['country'] = $author['country'];
-        $comment['city']    = $author['city'];
-
-        $user = USER::getUser('username');
-        if (($author['rights'] === '*') || ($user === $comment['author'])) {
-            unset($comment['ip']);
-        }
-        if ($this->content[$this->item]['opened']) {
-            if (($user !== 'guest') && ($user !== $comment['author'])) {
-                $comment['opened'] = TRUE;
-            }
-            if (USER::$root || (($author['rights'] !== '*') && USER::moderator($this->module, $this->comments[$id]))) {
-                $comment['moderator'] = TRUE;
-                $comment['link'] = $this->sections[$this->section]['categories'][$this->category]['link'].ITEM.$this->item;
-                if (!empty($comment['ip'])) {
-                    if ($page < 2)
-                         $comment['ban'] = $comment['link'];
-                    else $comment['ban'] = $comment['link'].PAGE.$page;
-                }
-            }
-        }
-        if (CONFIG::getValue('enabled', 'rate') && $user !== 'guest') {
-            $comment['rateid'] = $this->module.'.'.$this->section.'.'.$this->category.'.'.$this->item.'.'.$id;
-        }
-        if     ($comment['rate'] < 0)   $comment['rate_color'] = 'red';
-        elseif ($comment['rate'] === 0) $comment['rate_color'] = 'black';
-        else                            $comment['rate_color'] = 'green';
-
-        return $comment;
-    }
-
-    /** Gets last comment or reply.
-     * @return integer ID of the last comment or reply
-     */
-    public function getLastComment() {
-        $last = array_pop($this->comments);
-        array_push($this->comments, $last);
-        return $last;
-    }
-
-    /** Saves new comment or reply.
-     * @param  integer   $item                 ID of the article or reply
-     * @param  string    $text                 Comment text
-     * @throws Exception "Invalid ID"          - Invalid ID of the article or topic
-     * @throws Exception "Text is empty"       - An attempt to write an empty article or topic
-     * @throws Exception "Cannot save comment" - File system error or user have no rights to post
-     * @return array                           List of comments related to article or topic
-     */
-    public function newComment($item, $text) {
-        if (empty($this->content[$item])) {
-            throw new Exception('Invalid ID');
-        }
-        $text = trim($text);
-        if (empty($text)) {
-            throw new Exception('Text is empty');
-        }
-        $path = $this->sections[$this->section]['categories'][$this->category]['path'];
-        $id = $this->newId($this->comments);
-
-        $this->comments[$id]['id']     = intval($id);
-        $this->comments[$id]['author'] = USER::getUser('username');
-        $this->comments[$id]['nick']   = USER::getUser('nickname');
-        $this->comments[$id]['time']   = time();
-        $this->comments[$id]['text']   = $text;
-        $this->comments[$id]['ip']     = $_SERVER['REMOTE_ADDR'];
-        $this->comments[$id]['rate']   = 0;
-        $this->saveIndex($path.$item.DS, $this->comments);
-        $this->content[$item]['comments']++;
-
-        if ($this->saveIndex($path, $this->content) === FALSE) {
-            throw new Exception('Cannot save comment');
-        }
-        return $this->content[$item]['comments'];
-    }
-
-    /** Saves comment.
-     * @param  string $id   Comment ID
-     * @param  array  $item Comment item ID
-     * @return array        Comment data
-     */
-    public function saveComment($id, $item) {
-        if (!USER::$logged_in)                       throw new Exception('You are not logged in!');
-        if (empty($this->content[$item]))           throw new Exception('Invalid ID');
-        if (empty($this->content[$item]['opened'])) throw new Exception('Comments are not allowed');
-
-        $text = FILTER::get('REQUEST', 'text');
-        if (empty($text)) {
-            throw new Exception('Text is empty');
-        }
-        if (empty($id)) {
-            $this->newComment($item, $text);
-        } else {
-            if (empty($this->comments[$id])) {
-                throw new Exception('Invalid ID');
-            }
-
-            $this->comments[$id]['text'] = $text;
-            if ($this->saveIndex($this->sections[$this->section]['categories'][$this->category]['path'].$item.DS, $this->comments) === FALSE) {
-                throw new Exception('Cannot save comment');
-            }
-
-            USER::changeProfileField(USER::getUser('username'), 'comments', '+');
-        }
-        FILTER::remove('REQUEST', 'text');
-        return $this->content[$item]['comments'];
-    }
-
-    /** Removes comment.
-     * @param  integer $id Comment ID
-     * @return array       Comments for current post
-     */
-    public function removeComment($id) {
-        if (empty($this->comments[$id])) throw new Exception('Invalid ID');
-        if (!USER::moderator($this->module, $this->comments[$id])) {
-            throw new Exception('Cannot remove comment');
-        }
-        unset($this->comments[$id]);
-
-        $path = $this->sections[$this->section]['categories'][$this->category]['path'];
-        if (!empty($this->comments)) {
-            $this->content[$this->item]['comments']--;
-            if ($this->saveIndex($path.$this->item.DS, $this->comments) === FALSE) {
-                throw new Exception('Cannot remove comment');
-            }
-
-        } else {
-            $this->content[$this->item]['comments'] = 0;
-            unlink($path.$this->item.DS.$this->index);
-        }
-        if ($this->saveIndex($path, $this->content) === FALSE) {
-            throw new Exception('Cannot remove comment');
-        }
-        return $this->content[$this->item]['comments'];
-    }
-
-    /** Truncates a text to a predetermined value.
+    /**
+     * Truncates a text to a predetermined value.
+     *
      * @param  string  $text   Text to truncate
      * @param  integer $length New length of text
      * @return string          Truncated string
@@ -866,8 +169,11 @@ class CONTENT extends INDEX {
             return mb_substr($text, 0, $length, 'UTF-8').'...';
         }
     }
-    /** Recursively copy a directory and its contents.
+
+    /**
+     * Recursively copy a directory and its contents.
      * This function is recursive.
+     *
      * @param  string  $source Sourse directory
      * @param  string  $dest   Destination directory
      * @return boolean        The result of operation

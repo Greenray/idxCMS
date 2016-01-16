@@ -1,34 +1,30 @@
 <?php
-# idxCMS version 2.4
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# CATEGORIES TEMPLATE
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Template for categories
 
 die();?>
-<div id="section">
-    <ul class="level1">
-        [each=categories]
-        <li class="level1 parent">
-            <div class="bg">
-                <img src="{categories[path]}icon.png" width="35" height="35" hspace="10" alt="" />
-                <a class="level1" href="{categories[link]}">
-                    <span class="title">{categories[title]}</span>
-                    <span class="subtitle">{categories[desc]}</span>
-                </a>
-            </div>
-            [if=categories[last]]
-            <div class="sub">
-                <ul class="level2">
-                    <li class="level2">
-                        <a class="level2" href="{categories[last][link]}">
-                            <span style="float:left;margin:0 5px 0 0;">[__Last addition]: </span>
-                            <span class="title">{categories[last][title]}</span>
+
+<div class="section">
+    <ul class="level3">
+    <!-- FOREACH category = $categories -->
+        <li class="level3">
+            <img src="[$category.path:]icon.png" width="35" height="35" hspace="10" alt="" />
+            <a class="level3" href="$category.link">
+                <span class="title">$category.title</span>
+                <span class="subtitle">$category.desc</span>
+            </a>
+            <!-- IF !empty($category.last_id) -->
+                <ul class="level3">
+                    <li class="level3">
+                        <span style="float:left;margin:0 5px 0 0;">__Last addition__: </span>
+                        <a class="level3" href="$category.link{ITEM}$category.last_id">
+                            <span class="title">$category.last_title</span>
                         </a>
-                        <span class="subtitle">[__Total]: {categories[items]}</span>
                     </li>
                 </ul>
-            </div>
-            [/if]
+            <!-- ENDIF -->
         </li>
-        [/each.categories]
+    <!-- ENDFOREACH -->
     </ul>
 </div>

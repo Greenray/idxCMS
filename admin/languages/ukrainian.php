@@ -1,8 +1,8 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
+# idxCMS Flat Files Content Management System
 # Administration - Translation
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# Version 3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
 
 $LANG['def']['Access'] = 'Доступ';
 $LANG['def']['Actions'] = 'Дії';
@@ -10,9 +10,9 @@ $LANG['def']['Active right background'] = 'Фон активної правій 
 $LANG['def']['Active right icon color'] = 'Колір активної правою іконки';
 $LANG['def']['Additional information'] = 'Додаткова інформація';
 $LANG['def']['admin index'] = 'до початку адміністрування';
+$LANG['def']['Administration panel'] = 'Панель адміністратора';
 $LANG['def']['Administrative letter for users'] = 'Адміністративне лист користувачам';
 $LANG['def']['Administrative message for users'] = 'Адміністративне повідомлення користувачам';
-$LANG['def']['Allow guests to post'] = 'Дозволити гостям писати повідомлення';
 $LANG['def']['Allow guests to use search'] = 'Дозволити гостям використовувати пошук';
 $LANG['def']['Allow users to select language'] = 'Дозволити користувачам вибирати мову';
 $LANG['def']['Allow users to select skin'] = 'Дозволити користувачам вибирати шаблон';
@@ -46,11 +46,12 @@ $LANG['def']['Daily logs'] = 'Щоденні логи';
 $LANG['def']['Default language'] = 'Основна мова';
 $LANG['def']['Default skin'] = 'Основний шаблон';
 $LANG['def']['Default timezone'] = 'Часовий пояс за замовчуванням';
+$LANG['def']['Description is empty'] = 'Відсутній опис';
 $LANG['def']['Description length'] = 'Розмір опису';
 $LANG['def']['Done'] = 'Виконано';
 $LANG['def']['Down'] = 'Вниз';
 $LANG['def']['Duplicate'] = 'Дублювати';
-$LANG['def']['Email for users letters'] = 'Email листів користувачів';
+$LANG['def']['Email for users letters'] = 'Email для листів користувачів';
 $LANG['def']['Enable'] = 'Включити';
 $LANG['def']['Enabled'] = 'Включено';
 $LANG['def']['Enter username or mask of usernames'] = 'Введіть ім\'я користувача або маску імен';
@@ -81,7 +82,7 @@ $LANG['def']['Leave empty for autodetection'] = 'Залиште порожнім
 $LANG['def']['Left background'] = 'Фон лівої частини';
 $LANG['def']['Left icon color'] = 'Колір лівої іконки';
 $LANG['def']['Left panel'] = 'Ліва панель';
-$LANG['def']['Length for user name or nick'] = 'Довжина імені або ніка';
+$LANG['def']['Max length for user name or nick'] = 'Мовжина імені або ніка';
 $LANG['def']['Level'] = 'Рівень';
 $LANG['def']['Loader color'] = 'Колір завантажувача';
 $LANG['def']['Login'] = 'Логин';
@@ -93,7 +94,6 @@ $LANG['def']['Max image size'] = 'Max розмір зображення';
 $LANG['def']['Max searching query length'] = 'Max довжина пошукового слова';
 $LANG['def']['Max size of database'] = 'Max розмір бази даних';
 $LANG['def']['Messages per page'] = 'Повідомлень на сторінку';
-$LANG['def']['Meta tags for your site'] = 'META теги';
 $LANG['def']['Min searching query length'] = 'Min довжина пошукового запиту (слова)';
 $LANG['def']['Module'] = 'Модуль';
 $LANG['def']['Module extension'] = 'Розширення модуля';
@@ -103,20 +103,19 @@ $LANG['def']['Modules and menu'] = 'Модулі та меню';
 $LANG['def']['Monthly logs'] = 'Логи по місяцях';
 $LANG['def']['Move'] = 'Перемістити';
 $LANG['def']['Multimedia configuration'] = 'Налаштування мультимедіа';
-$LANG['def']['Navigation panel'] = 'Панель навігації';
 $LANG['def']['New category'] = 'Нова категорія';
 $LANG['def']['New icon'] = 'Нова іконка';
 $LANG['def']['New section'] = 'Новий розділ';
 $LANG['def']['Not actual for admin'] = 'Не має значення для адміністратора';
-$LANG['def']['Nothing selected']          = 'Нічого не вибрано';
+$LANG['def']['Nothing selected'] = 'Нічого не вибрано';
 $LANG['def']['Number of latest elements'] = 'Кількість останніх елементів';
-$LANG['def']['Operation system']          = 'Операційна система';
-$LANG['def']['Options']                   = 'Параметри';
-$LANG['def']['Output block length']       = 'Довжина блоку виведення';
-$LANG['def']['Output management']         = 'Управління висновком';
+$LANG['def']['Operation system'] = 'Операційна система';
+$LANG['def']['Options'] = 'Параметри';
+$LANG['def']['Output block length'] = 'Довжина блоку виведення';
+$LANG['def']['Output management'] = 'Управління висновком';
 $LANG['def']['Period when one password request can be acomplished'] = 'Таймаут для пароля';
-$LANG['def']['Player height']             = 'Висота плейера';
-$LANG['def']['Player width']              = 'Ширина плейера';
+$LANG['def']['Player height'] = 'Висота плейера';
+$LANG['def']['Player width'] = 'Ширина плейера';
 $LANG['def']['Do not delete user, just block him to keep the structure of site'] = 'Не видаляйте користувача, просто заблокуйте його, щоб не порушити структуру даних сайту';
 $LANG['def']['Plugin'] = 'Плагін';
 $LANG['def']['Popular pages'] = 'Популярні сторінки';
@@ -134,7 +133,9 @@ $LANG['def']['Right panel'] = 'Права панель';
 $LANG['def']['Rights for'] = 'Права користувача';
 $LANG['def']['Rights for dirs'] = 'Права на каталоги';
 $LANG['def']['Rights for files'] = 'Права на файли';
+$LANG['def']['Search keywords'] = 'Пошукові слова';
 $LANG['def']['Select'] = 'Вибрати';
+$LANG['def']['Select file'] = 'Оберіть файл';
 $LANG['def']['Select users'] = 'Оберіть користувачів';
 $LANG['def']['Server'] = 'Сервер';
 $LANG['def']['Show selected'] = 'Показати вибрані';
@@ -166,5 +167,4 @@ $LANG['def']['Version of'] = 'Версія';
 $LANG['def']['Video'] = 'Відео';
 $LANG['def']['Video player'] = 'Видеоплейер';
 $LANG['def']['Welcome message'] = 'Привітання';
-$LANG['def']['Welcome to administration panel'] = 'Ласкаво просимо в панель адміністратора';
 $LANG['def']['You may use the site name'] = 'Можна використовувати ім\'я сайту';

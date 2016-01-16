@@ -1,39 +1,30 @@
 <?php
-/** Aphorizms.
- *
- * @program   idxCMS: Flat Files Content Management Sysytem
- * @file      system/modules/aphorizms/module.php
- * @version   2.4
- * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
- * @package   Aphorizms
- * @overview  Displays aphorisms or any other pre-prepared text.
- *            Used a random selection from the list.
- *            Aphorisms database is a plain text file. One string is one aphorism.
- *            Aphorisms are displayed randomly. Each locale has its file named as "locale".txt
- */
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Module APHORISMS
 
 if (!defined('idxCMS')) die();
 
-/** Data storage for aphorizms */
+/** Storage of aphorisms */
 define('APHORISMS', CONTENT.'aphorisms'.DS);
 
 switch (SYSTEM::get('locale')) {
     case 'ru':
         $LANG['def']['Aphorisms'] = 'Афоризмы';
-        $LANG['def']['Next']      = 'Следующий';
-        $LANG['def']['Previous']  = 'Предыдущий';
+        $LANG['def']['Left']      = 'Влево';
+        $LANG['def']['Right']     = 'Вправо';
         break;
+
     case 'ua':
         $LANG['def']['Aphorisms'] = 'Афоризми';
-        $LANG['def']['Next']      = 'Наступний';
-        $LANG['def']['Previous']  = 'Попередній';
+        $LANG['def']['Left']      = 'Влево';
+        $LANG['def']['Right']     = 'Вправо';
         break;
+
     case 'by':
         $LANG['def']['Aphorisms'] = 'Афарызмы';
-        $LANG['def']['Next']      = 'Наступны';
-        $LANG['def']['Previous']  = 'Папярэдні';
+        $LANG['def']['Left']      = 'Влево';
+        $LANG['def']['Right']     = 'Вправо';
         break;
 }
 

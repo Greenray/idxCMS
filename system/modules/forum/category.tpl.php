@@ -1,40 +1,42 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Forum
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Module FORUM: Category template
 
 die();?>
+
 <table id="std">
     <tr>
-        <th colspan="2">[__Title]</th>
-        <th style="width:400px">[__Answer]</th>
-        <th style="width:100px">[__Author]</th>
-        <th style="width:80px">[__Date]</th>
-        <th style="width:60px">[__Views]</th>
-        <th style="width:40px">[__Replies]</th>
+        <th colspan="2">__Title__</th>
+        <th style="width:150px">__Author__</th>
+        <th style="width:100px">__Date__</th>
+        <th style="width:80px">__Views__</th>
+        <th style="width:80px">__Replies__</th>
     </tr>
-    [each=topic]
+    <!-- FOREACH topic = $topics -->
         <tr>
-            <td class="center" style="width:20px"><img src="{ICONS}{topic[flag]}.png" width="16" height="16" alt="" /></td>
+            <td class="center" style="width:20px"><img src="{ICONS}$topic.flag.png" width="16" height="16" alt="" /></td>
             <td>
-                [if=topic[pinned]]<img src="{ICONS}pinned.png" width="16" height="16" alt="Pinned" />&nbsp;[/if]
-                <a href="{topic[link]}">{topic[title]}</a>
+                <!-- IF !empty($topic.pinned) -->
+                    <img src="{ICONS}pinned.png" width="16" height="16" alt="Pinned" />&nbsp;
+                <!-- ENDIF -->
+                <a href="$topic.link">$topic.title</a>
             </td>
-            [ifelse=topic[last_link]]
-                <td><a href="{topic[last_link]}">{topic[short]}</a></td>
-            [else]
-                <td>&nbsp;</td>
-            [/else]
-            <td class="center">{topic[nick]}</td>
-            <td class="center">{topic[date]}</td>
-            <td class="center">{topic[views]}</td>
-            [ifelse=topic[comments]]
-                <td class="center"><a href="{topic[last_link]}">{topic[comments]}</a></td>
-            [else]
+            <td class="center">$topic.nick</td>
+            <td class="center">$topic.date</td>
+            <td class="center">$topic.views</td>
+            <!-- IF !empty($topic.comments) -->
+                <td class="center"><a href="$topic.link{COMMENT}$topic.comments">$topic.comments</a></td>
+            <!-- ELSE -->
                 <td class="center"> - </td>
-            [/else]
+            <!-- ENDIF -->
         </tr>
-    [/each.topic]
+    <!-- ENDFOREACH -->
 </table>
-[if=post_allowed]<div><p class="right"><form name="form" method="post" action=""><input type="submit" name="new" value="[__New topic]" class="submit" /></form></p></div>[/if]
+<!-- IF !empty($post_allowed) -->
+    <div class="right">
+        <form name="form" method="post" action="">
+            <input type="submit" name="new" value="__New topic__" />
+        </form>
+    </div>
+<!-- ENDIF -->

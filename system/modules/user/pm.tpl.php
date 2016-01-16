@@ -1,58 +1,64 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module User
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Module USER: Template for private messages
 
 die();?>
+
 <div class="comment">
-    <a name="{id}"></a>
+    <a name="$id"></a>
     <div class="content">
-        [ifelse=inbox]
-            <div class="author center">
-                <img src="{avatar}" hspace="5" vspace="5" alt="" /><br />
-                {nick}<br />
-                [if=status]{status}<br />[/if]
-                [if=stars][__Rate]: {stars}<br />[/if]
-                [if=country]{country}<br />[/if]
-                [if=city]{city}[/if]
-            </div>
-            <div class="info">
-                {time}
-                <span class="menu"><a href="{MODULE}user&amp;user={author}" title="[__Profile]"><img src="{ICONS}profile.png" width="16" height="16" alt="[__Profile]" /></a></span>
-            </div>
-            <div class="text justify">{text}</div>
+    <!-- IF !empty($inbox) -->
+        <div class="head">
+            <span class="date">$time</span>
+            <span class="actions">
+                <a href="{MODULE}user&amp;user=$author" title="__Profile__">
+                    <img src="{ICONS}profile.png" width="16" height="16" alt="__Profile__" />
+                </a>
+            </span>
         </div>
-        <div class="menu">
-            <form method="post" action="" class="menu">
-                <button type="submit" name="delete" value="{id}" class="submit">[__Delete]</button>
-            </form>
-            <form method="post" action="" class="menu">
-                <input type="hidden" name="user" value="{author}" />
-                <button type="submit" name="mode" value="outbox" class="submit">[__Outbox]</button>
-            </form>
-            [if=reply]
-                <form method="post" action="" class="menu">
-                    <input type="hidden" name="re" value="{id}" />
-                    <button type="submit" name="reply" value="{author}" class="submit">[__Reply]</button>
-                </form>
-            [/if]
-        [else]
-            <div class="author center">
-                <img src="{avatar}" hspace="5" vspace="5" alt="" /><br />
-                {nick}
-                [if=country]<br />{country}[/if]
-                [if=city]<br />{city}[/if]
+        <div class="author center">
+            <div class="avatar center">
+                <img src="$avatar" hspace="5" vspace="5" alt="" />
             </div>
-            <div class="date">{time}</div>
-            <div class="text justify">{text}</div>
-            <div class="menu">
-                <form method="post" action="" class="menu">
-                    <input type="hidden" name="mode" value="outbox" />
-                    <button type="submit" name="remove" value="{id}" class="submit">[__Delete]</button>
-                </form>
-            </div>
-        [/else]
+            $nick
+            <!-- IF !empty($status) --><div>$status</div><!-- ENDIF -->
+            <!-- IF !empty($stars) --><div>__Rate__: $stars</div><!-- ENDIF -->
+            <!-- IF !empty($city) --><div>$city</div><!-- ENDIF -->
+            <!-- IF !empty($country) --><div>$country</div><!-- ENDIF -->
+        </div>
+        <div class="text justify">$text</div>
+    </div>
+    <div class="actions">
+        <form method="post" action="" class="actions">
+            <button type="submit" name="delete" value="$id">__Delete__</button>
+        </form>
+        <form method="post" action="" class="actions">
+            <input type="hidden" name="user" value="$author" />
+            <button type="submit" name="mode" value="outbox">__Outbox__</button>
+        </form>
+        <!-- IF !empty($reply) -->
+            <form method="post" action="" class="actions">
+                <input type="hidden" name="re" value="$id" />
+                <button type="submit" name="reply" value="$author">__Reply__</button>
+            </form>
+        <!-- ENDIF -->
+    <!-- ELSE -->
+        <div class="author center">
+            <img src="$avatar" hspace="5" vspace="5" alt="" /><br />
+            $nick
+            <!-- IF !empty($country) --><br />$country<!-- ENDIF -->
+            <!-- IF !empty($city) --><br />$city<!-- ENDIF -->
+        </div>
+        <div class="date">$time</div>
+        <div class="text justify">$text</div>
+        <div class="actions">
+            <form method="post" action="" class="actions">
+                <input type="hidden" name="mode" value="outbox" />
+                <button type="submit" name="remove" value="$id">__Delete__</button>
+            </form>
+        </div>
+    <!-- ENDIF -->
     </div>
 </div>
 <div class="clear"></div>

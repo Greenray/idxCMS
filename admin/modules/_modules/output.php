@@ -1,13 +1,14 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - Modules
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: Output management.
 
 if (!defined('idxADMIN') || !USER::$root) die();
 
 if (!empty($REQUEST['save'])) {
+    #
     # Save configuration
+    #
     $config = [];
     $page   = '';
     if (!empty($REQUEST['active'])) {
@@ -16,7 +17,7 @@ if (!empty($REQUEST['save'])) {
                 $page = substr($element, 1);
                 $config[$page] = [];
             } else {
-                $config[$page][] = trim(substr($element, 1));
+                $config[$page][] = trim(substr($element, 4));
             }
         }
         foreach ($config as $page => $data) {
@@ -27,11 +28,12 @@ if (!empty($REQUEST['save'])) {
     }
     CMS::call('CONFIG')->setSection('output.'.$REQUEST['skin'], $config);
     if (!CMS::call('CONFIG')->save()) {
-        ShowMessage('Cannot save file');
+        SYSTEM::showMessage('Cannot save file');
     }
 }
-
+#
 # INTERFACE
+#
 if (!empty($REQUEST['selected'])) {
     $panel = CONFIG::getSection('output.'.$REQUEST['selected']); # Modules layout for specified skin
     include SKINS.$REQUEST['selected'].DS.'skin.php';            # Layout definition
@@ -39,29 +41,60 @@ if (!empty($REQUEST['selected'])) {
     $unused = [];
 
     foreach ($panel as $point => $list) {
-        if (!empty($SKIN[$point]))
-             $active[DS.$point] = $SKIN[$point];
-        else $active[DS.$point] = __('Page').': '.SYSTEM::$modules[$point]['title'];
+        if (!empty($SKIN[$point])) {
+            $active[] = [
+                'key'   => DS.$point,
+                'value' => $SKIN[$point],
+                'class' => "site-page"
+            ];
+        } else {
+            $active[] = [
+                'key' => DS.$point,
+                'value' => __('Page').': '.SYSTEM::$modules[$point]['title'],
+                'class' => "site-page"
+            ];
+        }
         foreach ($list as $i => $box) {
             $key = '>'.$box;
             while (array_key_exists($key, $active)) {
                 $box = ' '.$box;
                 $key = '>'.$box;
             }
-            $active[$key] = __('Box').': '.SYSTEM::$modules[$list[$i]]['title'];
+            $active[] = ['key' => $key, 'value' => __('Box').': '.SYSTEM::$modules[$list[$i]]['title']];
         }
     }
 
     foreach ($SKIN as $point => $desc) {
-        if (!isset($active[DS.$point])) {
-            $unused[DS.$point] = $desc;
+        $founded = FALSE;
+        foreach ($active as $key => $array) {
+            if ($array['key'] === DS.$point) {
+                $founded = TRUE;
+            }
+        }
+        if (!$founded) {
+            $unused[] = [
+                'key' => DS.$point,
+                'value' => $desc,
+                'class' => "site-page"
+            ];
         }
     }
 
     foreach (SYSTEM::$modules as $id => $module) {
-        if (!isset($active[DS.$id]) && !isset($active['>'.$id])) {
-            if     ($module['type'] === 'main') $unused[DS.$id] = __('Page').': '.$module['title'];
-            elseif ($module['type'] === 'box')  $unused['>'.$id] = __('Box').': '.$module['title'];
+        $founded = FALSE;
+        foreach ($active as $key => $array) {
+            if (($array['key'] === DS.$id) || ($array['key'] === '>'.$id)) {
+                $founded = TRUE;
+            }
+        }
+        if (!$founded) {
+            if ($module['type'] === 'main') {
+                $unused[] = [
+                    'key' => DS.$id,
+                    'value' => __('Page').': '.$module['title'],
+                    'class' => "site-page"
+                ];
+            } elseif ($module['type'] === 'box')  $unused[] = ['key' => '>'.$id, 'value' => __('Box').': '.$module['title']];
         }
     }
 
@@ -70,12 +103,15 @@ if (!empty($REQUEST['selected'])) {
     $output['active'] = $active;
     $output['unused'] = $unused;
 
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'output.tpl');
-    echo $TPL->parse($output);
+    $TPL = new TEMPLATE(__DIR__.DS.'output.tpl');
+    $TPL->set($output);
+    echo $TPL->parse();
 
 } else {
     $output['title']  = __('Output management');
-    $output['select'] = explode(',', CONFIG::getValue('main', 'skins'));
-    $TPL = new TEMPLATE(dirname(__FILE__).DS.'select.tpl');
-    echo $TPL->parse($output);
+    $output['select'] = AdvScanDir(SKINS, '', 'dir', FALSE, ['images']);
+
+    $TPL = new TEMPLATE(__DIR__.DS.'select.tpl');
+    $TPL->set($output);
+    echo $TPL->parse();
 }

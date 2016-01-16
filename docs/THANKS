@@ -7,6 +7,7 @@ The Dojo Foundation - jQuery JavaScript Library (jquery.com)
 http://jquery.org/license
 
 Brandon Aaron - jQuery plugin Mousewheel (brandonaaron.net)
+
 Stu Nicholls - clickMenu (www.stunicholls.com)
 
 Plugin ColorBox:
@@ -20,10 +21,10 @@ Author Luca Manno (luca@smashup.it) http://i.smashup.it
 Original idea by Nicola Rizzo (thanks!)
 Licenses: MIT/GPL
 
-Plugin jQuery.timers:
-Timer abstractions for jQuery
-Licensed under the WTFPL (http://sam.zoy.org/wtfpl/).
-Author Blair Mitchelmore
+Plugin jQuery.lightbox_me:
+http://buckwilson.me/lightboxme
+Licensed under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0).
+Author Buck Wilson
 
 Plugin REDIPS.drag:
 JavaScript drag and drop library focused on dragging table content and table rows.
@@ -42,15 +43,6 @@ qTip - CSS Tool Tips - by Craig Erskine http://qrayg.com
 Plugin Textarea Decorator:
 Author Colin Kuebler 2012
 Dual licensed under GPLv3 and MIT
-
-Tar archiver:
-Author: Josh Barger <joshb@npt.com>
-License: The GNU General Public License (GPL) Version 2, June 1991 (http://opensource.org/licenses/gpl-2.0.php)
-
-Reset Stylesheet v1.6.1
-Last Updated: 2010-09-17
-Author: Richard Clark - http://richclarkdesign.com
-License: Creative Commons
 
 ======================
 Greenray

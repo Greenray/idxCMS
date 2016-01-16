@@ -1,42 +1,31 @@
 <?php
-/** Работа с каталогами (файлов, ссылок и т.п.)
+/**
+ * Works with catalogs (files, links etc.)
  *
- * @program   idxCMS: Flat Files Content Management Sysytem
- * @file      system/catalogs.class.php
- * @version   2.4
+ * @program   idxCMS: Flat Files Content Management System
+ * @version   3.0
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011-2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+ * @license   Creative Commons — Attribution-NonCommercial-ShareAlike 4.0 International
+ * @file      system/catalogs.class.php
  * @package   Catalogs
  */
 
 class CATALOGS extends CONTENT {
 
-    /** Инициализация класса */
+    /** Class constructor */
     public function __construct() {
         parent::__construct();
         $this->module    = 'catalogs';
         $this->container = CATALOGS;
     }
 
-    /** Получает комментарий к элементу каталога.
-     * @var integer  $id   ID комментария
-     * @var integer  $page Номер страницы комментариев
-     * @return array       Комментарий и его атрибуты (в т.ч. текущий рейтинг комментария)
-     */
-    public function getComment($id, $page) {
-        $comment = parent::getComment($id, $page);
-        if (!empty($comment['rateid'])) {
-            $comment['rateid'] = $this->section.'.'.$this->category.'.'.$this->item.'.'.$id;
-        }
-        return $comment;
-    }
-
-    /** Загрузка файла на сервер.
-     * @param  integer   $id   ID файла
-     * @param  array     $file Массив данных $_FILES
-     * @throws Exception       Если нечего грузить
-     * @return array           Имя файла и его размер
+    /**
+     * Uploads file.
+     *
+     * @param  integer $id   File ID
+     * @param  array   $file $_FILES
+     * @return array         Name and size of uploaded file
      * @uses class UPLOADER
      */
     public function uploadFile($id, $file) {

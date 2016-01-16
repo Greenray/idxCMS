@@ -1,12 +1,13 @@
 <?php
-/** BBCODES parser.
+/**
+ * BBCODES parser.
  *
- * @program   idxCMS: Flat Files Content Management Sysytem
- * @file      system/parser.class.php
- * @version   2.4
+ * @program   idxCMS: Flat Files Content Management System
+ * @version   3.0
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+ * @copyright (c) 2011 - 2016 Victor Nabatov
+ * @license   Creative Commons — Attribution-NonCommercial-ShareAlike 4.0 International
+ * @file      system/parser.class.php
  * @package   Core
  */
 
@@ -21,7 +22,7 @@ class PARSER {
     /** @var array Array of regexp */
     private $regexp = [];
 
-    /** Class initialization. */
+    /** Class initialization */
     public function __construct() {
         $this->regexp[0] = [
             "#\[\*\](.*?)\[/\*\]#is" => '<li>\\1</li>',
@@ -64,7 +65,9 @@ class PARSER {
         ];
     }
 
-    /** bbCodes panel for the specified textarea.
+    /**
+     * bbCodes panel for the specified textarea.
+     *
      * @param  string  $textarea  Textarea ID
      * @param  boolean $moderator Is user an admin or moderator? (default = FALSE)
      * @param  string  $dir       Current directory (default = "")
@@ -88,19 +91,22 @@ class PARSER {
             }
         }
         $TPL = new TEMPLATE(SYS.'templates'.DS.'bbcodes-panel.tpl');
-        return $TPL->parse([
+        $TPL->set([
             'moderator' => $moderator,
             'full'      => USER::$logged_in,
             'bbimg'     => IMAGES.'bbcodes'.DS,
             'form'      => $area[0],
             'area'      => $area[1],
-            'smile'     => $names,
+            'smiles'    => $names,
             'colors'    => $colors,
             'path'      => MODULE.'editor&amp;dir='.$dir
         ]);
+        return $TPL->parse();
     }
 
-    /** Parses smiles in text.
+    /**
+     * Parses smiles in text.
+     *
      * @return string
      */
     private function parseSmiles() {
@@ -126,7 +132,9 @@ class PARSER {
         }
     }
 
-    /** Parses [code]...[/code] bbtag.
+    /**
+     * Parses [code]...[/code] bbtag.
+     *
      * @return string
      */
     function parseCode() {
@@ -141,7 +149,9 @@ class PARSER {
         }
     }
 
-    /** Parses [php]...[/php] bbtag.
+    /**
+     * Parses [php]...[/php] bbtag.
+     *
      * @return string
      */
     private function parsePhp() {
@@ -159,7 +169,9 @@ class PARSER {
         }
     }
 
-    /** Parses [html]...[/html] bbtag.
+    /**
+     * Parses [html]...[/html] bbtag.
+     *
      * @return string
      */
     private function parseHtml() {
@@ -174,7 +186,9 @@ class PARSER {
         }
     }
 
-    /** Parses [qoute|quote="Who"]...[/qoute] bbtags.
+    /**
+     * Parses [qoute|quote="Who"]...[/qoute] bbtags.
+     *
      * @return string
      */
     private function parseQuote() {
@@ -188,7 +202,9 @@ class PARSER {
         );
     }
 
-    /** Shows spoiler with hidden text.
+    /**
+     * Shows spoiler with hidden text.
+     *
      * @param  array  $matches Array of spoiler parameters
      * @return string          HTML div block with hidden text
      */
@@ -205,7 +221,9 @@ class PARSER {
         }
     }
 
-    /** Parses [img]...[/img] bbtag.
+    /**
+     * Parses [img]...[/img] bbtag.
+     *
      * @param  string $path Path to images directory
      * @return string       HTML div block with the image
      */
@@ -214,13 +232,15 @@ class PARSER {
         if (!empty($matches)) {
             foreach ($matches[1] as $k => $picture) {
                 $image    = basename($picture);
-                $width    = CONFIG::getValue('main', 'thumb-width');
+                $width    = CONFIG::getValue('main', 'thumb_width');
                 $height   = CONFIG::getValue('main', 'thumb-height');
                 $zoom     = '';
                 $external = '';
                 $internal = '';
                 if ($picture !== $image) {
-                    # Parsing of an old image.
+                    #
+                    # Parsing of an old image
+                    #
                     $parts = explode(DS, $picture);
                     if ($parts[0] !== 'http:') {
                         if (file_exists($picture.'.jpg'))
@@ -230,22 +250,26 @@ class PARSER {
                     } else $external = $picture;
                 } else {
                     if (file_exists(TEMP.$picture)) {
-
+                        #
                         # Uploaded image
+                        #
                         if (empty($path)) {
-
+                            #
                             # Uploaded image for preview
+                            #
                             $internal = TEMP.$picture;
                         } else {
-
+                            #
                             # Uploaded image for saving of text
+                            #
                             $zoom = $path.$picture;
                             rename(TEMP.$picture, $zoom);
                             rename(TEMP.$picture.'.jpg', $zoom.'.jpg');
                         }
                     } elseif (file_exists(CONTENT.'images'.DS.$picture)) {
-
+                        #
                         # Common images
+                        #
                         $internal = CONTENT.'images'.DS.$picture;
                     } else {
                         if (file_exists($path.$picture)) {
@@ -257,7 +281,7 @@ class PARSER {
                 }
                 if (!empty($zoom)) {
                     $size = getimagesize($zoom.'.jpg');
-                    if ($size !== FALSE)
+                    if ($size)
                          $output = '<a class="cbox" href="'.$zoom.'"><img src="'.$zoom.'.jpg" '.$size[3].' hspace="10" vspace="10" alt="" /></a>';
                     else $output = '<a class="cbox" href="'.$zoom.'"><img src="'.$zoom.'.jpg" width="'.$width.'" height="'.$height.'" hspace="10" vspace="10" alt="" /></a>';
 
@@ -265,7 +289,7 @@ class PARSER {
                     $output = '<img src="'.$external.'" hspace="10" vspace="10" alt="" />';
                 } elseif (!empty($internal)) {
                     $size = getimagesize($internal);
-                    if ($size !== FALSE)
+                    if ($size)
                          $output = '<img src="'.$internal.'" '.$size[3].' hspace="10" vspace="10" alt="" />';
                     else $output = '[Image not found]';
 
@@ -276,7 +300,9 @@ class PARSER {
         }
     }
 
-    /** Parses [mp3]...[/mp3] bbtag.
+    /**
+     * Parses [mp3]...[/mp3] bbtag.
+     *
      * @return string
      */
     private function parseMP3() {
@@ -292,7 +318,9 @@ class PARSER {
                 </object>';
     }
 
-    /** Parses [youtube]...[/youtube] bbtag.
+    /**
+     * Parses [youtube]...[/youtube] bbtag.
+     *
      * @return string
      */
     private function parseYouTube() {
@@ -305,7 +333,9 @@ class PARSER {
                 </object>';
     }
 
-    /** Main parser.
+    /**
+     * Main parser.
+     *
      * @param  string $text Text for parsing
      * @param  string $path Path of images directory
      * @return string       Parsed text
@@ -326,7 +356,9 @@ class PARSER {
         return $this->text;
     }
 
-    /** Parses text.
+    /**
+     * Parses text.
+     *
      * @param  string $text Text for parsing
      * @param  string $path Path to the images directory
      * @return string       Parsed text

@@ -1,33 +1,35 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - User
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: User rights template.
 
 die();?>
-<div class="module">[__User profile]</div>
+
+<div class="module">__User profile__</div>
 <fieldset>
     <form name="config" method="post" action="">
         <table class="std">
-            <tr><th colspan="2">[__Rights for] {nick}</th></tr>
-            <tr class="odd">
-                <td>[__Access level]</td>
-                <td><input type="text" name="access" id="access" value="{access}" class="required" /></td>
+            <tr><th colspan="2">__Rights for__ $nick</th></tr>
+            <tr class="light">
+                <td>__Access level__</td>
+                <td><input type="text" name="access" value="$access" size="2" class="required" /></td>
             </tr>
-            <tr class="odd">
-                <td>[__Administrator]</td>
-                <td><input type="checkbox" name="root" value="{admin}" [if=admin]checked="checked"[/if] /></td>
+            <tr class="light">
+                <td>__Administrator__</td>
+                <td><input type="checkbox" name="root" value="1" <!-- IF !empty($root) -->checked<!-- ENDIF --> /></td>
             </tr>
-            [each=rights]
-            <tr class="odd">
-                <td>{rights[desc]}</td>
-                <td><input type="checkbox" name="rights[]" value="{rights[right]}"[if=rights[set]] checked="checked"[/if] /></td>
-            </tr>
-            [/each.rights]
+            <!-- FOREACH right = $rights -->
+                <tr class="light">
+                    <td>$right.desc</td>
+                    <td><input type="checkbox" name="rights[]" value="$right.right" <!-- IF !empty($right.set) -->checked<!-- ENDIF --> /></td>
+                </tr>
+            <!-- ENDFOREACH -->
         </table>
         <p class="center">
-            <input type="hidden" name="user" value="{user}" />
-            <input type="submit" name="save" value="[__Save]" class="submit" />
+            <input type="hidden" name="act" value="rights.save" />
+            <input type="hidden" name="user" value="$user" />
+            <input type="hidden" name="nick" value="$nick" />
+            <input type="submit" name="save" value="__Save__" />
         </p>
     </form>
 </fieldset>

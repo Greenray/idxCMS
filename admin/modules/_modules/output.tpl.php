@@ -1,11 +1,11 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - Modules
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: Output management template
 
 die();?>
-<div class="module">[__Output management]</div>
+
+<div class="module">__Output management__</div>
 <script>
     function CheckString(inputString, needle, startingIndex) {
       if (!startingIndex) startingIndex = 0;
@@ -22,8 +22,7 @@ die();?>
             if (object.options[i].selected) {
                 // ...if this is a category...
                 if (object.options[i].value.substring(0,1) !== '/') {
-                    // ...we add an element index into array
-                    selectedIndexes.push(i);
+                    selectedIndexes.push(i);    // ...we add an element index into array
                 } else {
                     // Selected element section,
                     // so if it the first in the list of selected elements,
@@ -79,8 +78,7 @@ die();?>
                 } else if (sectOption.value.substring(0,1) === '/' ) {
                     nextOption = object.options[objSelectedIndexes[0] - 2];
                 }
-                // New position of the moving element
-                object.insertBefore(currOption, nextOption);
+                object.insertBefore(currOption, nextOption);    // New position of the moving element
             } else {
                 // Moving of elements group
                 for (i = 0; i < selectedElements; i++) {
@@ -160,6 +158,7 @@ die();?>
         if (from.selectedIndex !== -1) {
             newoption.text  = from.options[from.selectedIndex].text;
             newoption.value = from.options[from.selectedIndex].value;
+            newoption.className = from.options[from.selectedIndex].className;
             if (is_ie === -1)
                  to.add(newoption, null);
             else to.add(newoption, 0);
@@ -183,6 +182,7 @@ die();?>
         if (object.selectedIndex !== -1) {
             newelement.text  = object.options[object.selectedIndex].text;
             newelement.value = object.options[object.selectedIndex].value;
+            newelement.className = object.options[object.selectedIndex].className;
             if (is_ie === -1)
                  object.add(newelement, null);
             else object.add(newelement, 0);
@@ -211,48 +211,48 @@ die();?>
 <fieldset>
     <form name="output" method="post" action="" onsubmit="SaveList(document.output.elements['active[]'])">
         <table>
-            <tr class="odd"><td>[__Skin]</td><td colspan="2"><input type="hidden" name="skin" value="{skin}" />{skin}</td></tr>
+            <tr class="light"><td colspan="3">__Skin__: <input type="hidden" name="skin" value="$skin" />$skin</td></tr>
             <tr>
-                <th class="center" style="width:45%;">[__Included modules]</th>
+                <th class="center" style="width:45%;">__Included modules__</th>
                 <td style="width:10%">&nbsp;</td>
-                <th class="center" style="width:45%;">[__Excluded modules]</th>
+                <th class="center" style="width:45%;">__Excluded modules__</th>
             </tr>
             <tr>
                 <td class="center" style="width:45%;padding:0">
                     <select name="active[]" size="30" style="width:100%" multiple>
-                        [foreach=active.key.desc]
-                        <option value="{key}">{desc}</option>
-                        [/foreach.active]
+                    <!-- FOREACH active = $active -->
+                        <option class="$active.class" value="$active.key">$active.value</option>
+                    <!-- ENDFOREACH -->
                     </select>
                 </td>
                 <td class="center" style="width:10%;">
-                    <input type="button" id="add" name="add" value="&lt; [__Include]" onclick="AddObject(document.output.elements['unused[]'], document.output.elements['active[]'])" />
-                    <input type="button" id="del" name="del" value="[__Exclude] &gt;" onclick="AddObject(document.output.elements['active[]'], document.output.elements['unused[]'])" />
+                    <input type="button" id="add" name="add" value="&lt; __Include__" onclick="AddObject(document.output.elements['unused[]'], document.output.elements['active[]'])" />
+                    <input type="button" id="del" name="del" value="__Exclude__ &gt;" onclick="AddObject(document.output.elements['active[]'], document.output.elements['unused[]'])" />
                 </td>
                 <td class="center" style="width:45%;padding:0">
                     <select name="unused[]" size="30" style="width:100%" multiple>
-                        [foreach=unused.key.desc]
-                        <option value="{key}">{desc}</option>
-                        [/foreach.unused]
+                    <!-- FOREACH unused = $unused -->
+                        <option class="$unused.class" value="$unused.key">$unused.value</option>
+                    <!-- ENDFOREACH -->
                     </select>
                 </td>
             </tr>
             <tr>
                 <td class="center" style="width:45%;">
-                    <input type="button" id="up" name="up" value="[__Up]" onclick="SortValues(document.output.elements['active[]'], 'up')" />
-                    <input type="button" id="down" name="down" value="[__Down]" onclick="SortValues(document.output.elements['active[]'], 'down')" />
-                    <input type="button" id="duplicate" name="duplicate" value="[__Duplicate]" onclick="Duplicate(document.output.elements['active[]'], document.output.elements['active[]'])" />
-                    <input type="button" id="remove" name="remove" value="[__Delete]" onclick="Remove(document.output.elements['active[]'])" />
+                    <input type="button" id="up" name="up" value="__Up__" onclick="SortValues(document.output.elements['active[]'], 'up')" />
+                    <input type="button" id="down" name="down" value="__Down__" onclick="SortValues(document.output.elements['active[]'], 'down')" />
+                    <input type="button" id="duplicate" name="duplicate" value="__Duplicate__" onclick="Duplicate(document.output.elements['active[]'], document.output.elements['active[]'])" />
+                    <input type="button" id="remove" name="remove" value="__Delete__" onclick="Remove(document.output.elements['active[]'])" />
                 </td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
                 <td class="left" colspan="3">
-                    [__In this form you can define the positions of modules on pages.<br />- "Page" - site page;<br />- "Box" - is the module which will be displayed on page.<br />You can move elements between windows, and also establish display of the same module to different pages.]
+                    __In this form you can define the positions of modules on pages.<br />- "Page" - site page;<br />- "Box" - is the module which will be displayed on page.<br />You can move elements between windows, and also establish display of the same module to different pages.__
                 </td>
             </tr>
         </table>
-        <p class="center"><input type="submit" name="save" value="[__Save]" class="submit" /></p>
+        <p class="center"><input type="submit" name="save" value="__Save__" /></p>
     </form>
 </fieldset>

@@ -1,12 +1,13 @@
 <?php
-/** Process rss feeds.
+/**
+ * Process rss feeds.
  *
- * @program   idxCMS: Flat Files Content Management Sysytem
- * @file      system/rss_feeds.class.php
- * @version   2.4
+ * @program   idxCMS: Flat Files Content Management System
+ * @version   3.0
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+ * @copyright (c) 2011 - 2016 Victor Nabatov
+ * @license   Creative Commons — Attribution-NonCommercial-ShareAlike 4.0 International
+ * @file      system/rss_feeds.class.php
  * @package   RSS
  */
 
@@ -33,7 +34,9 @@ class RSS_FEEDS {
     /** @param array RSS feed items */
     public $items = [];
 
-    /** Class initialization.
+    /**
+     * Class initialization.
+     *
      * @param  string $title       RSS feed title
      * @param  string $description RSS feed description
      */
@@ -46,7 +49,9 @@ class RSS_FEEDS {
         $this->generator   = 'idxCMS '.IDX_VERSION;
     }
 
-    /** Adds item to the RSS feed.
+    /**
+     * Adds item to the RSS feed.
+     *
      * @param  string $item Item text fo the RSS feed
      */
     public function addItem($item) {
@@ -56,7 +61,9 @@ class RSS_FEEDS {
         $this->items[] = [$item['title'], $item['desc'], $item['link'], $item['time']];
     }
 
-    /** Adds new feed.
+    /**
+     * Adds new feed.
+     *
      * @return string - XML document
      */
     public function addFeed() {
@@ -82,7 +89,9 @@ class RSS_FEEDS {
         return $result;
     }
 
-    /** Shows RSS feed.
+    /**
+     * Shows RSS feed.
+     *
      * @return string - XML document
      */
     public function showFeed() {
@@ -94,7 +103,9 @@ class RSS_FEEDS {
         return $result;
     }
 
-    /** Gets RSS feed.
+    /**
+     * Gets RSS feed.
+     *
      * @param string $feed RSS feed
      */
     public function getFeed($feed) {

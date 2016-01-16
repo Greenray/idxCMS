@@ -1,70 +1,69 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Index
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Module INDEX
 
 if (!defined('idxCMS')) die();
 
 if (!USER::$logged_in && CONFIG::getValue('main', 'welcome')) {
-    if (file_exists(CONTENT.'intro')) {
-        $intro = file_get_contents(CONTENT.'intro');
-        $TPL   = new TEMPLATE(dirname(__FILE__).DS.'intro.tpl');
-        ShowWindow(__('You are welcome!'), $TPL->parse(['intro' => $intro]));
-    }
+    #
+    # Show into page for guests or switch off it in config file
+    #
+    $TPL = new TEMPLATE(__DIR__.DS.'intro.tpl');
+    $TPL->set('intro', file_get_contents(CONTENT.'intro'));
+    SYSTEM::defineWindow('You are welcome!', $TPL->parse());
 }
 
-$module = CONFIG::getValue('main', 'index-module');
+SYSTEM::set('pagename', __('Index'));
+SYSTEM::setPageDescription(__('Index'));
 
-if (!empty(SYSTEM::$modules[$module])) {
-    include_once MODULES.$module.DS.$module.'.php';    # Load main module
-} else {
-    SYSTEM::set('pagename', __('Index'));
-    SYSTEM::setPageDescription(__('Index'));
-    $sections = CMS::call('POSTS')->getSections();
-    unset($sections['drafts']);
+$sections = CMS::call('POSTS')->getSections();
+#
+# Don't show system section "Drafts"
+#
+unset($sections['drafts']);
 
-    if (empty($sections)) {
-        ShowWindow(__('Index'), __('Database is empty'), 'center');
-    } else {
-        # The section "news" isn't necessary to us - for "news" we have another module
-        if (!empty($sections['news'])) unset($sections['news']);
+if (!empty($sections)) {
+    $TPL    = new TEMPLATE(__DIR__.DS.'index.tpl');
+    $tab    = 0;
+    $output = '';
+    foreach ($sections as $id => $section) {
+        $categories = CMS::call('POSTS')->getCategories($id);
+        foreach ($categories as $key => $category) {
+            $content = CMS::call('POSTS')->getContent($key);
+            #
+            # Show last five posts
+            #
+            $list = array_slice($content, -5, 5, TRUE);
+            $pos  = 1;
+            ++$tab;
+            $TPL->set('tab', $tab);
+            $TPL->set('icon', $category['path']);
 
-        # Don't show system section '#drats'
-        $TPL = new TEMPLATE(dirname(__FILE__).DS.'default.tpl');
-        $i   = 0;
-        $output = '';
-        foreach ($sections as $id => $section) {
-            $categories = CMS::call('POSTS')->getCategories($id);
-            foreach ($categories as $key => $category) {
-                $content = CMS::call('POSTS')->getContent($key);
-                $list = array_slice($content, -5, 5, TRUE);
-                ++$i;
-                $k = 1;
-                $post = [];
-                $post['tab'] = $i;
-                $post['section']  = $section;
-                $post['category'] = $category;
-                $post['posts'] = [];
-                foreach ($list as $j => $data) {
-                    # In article we need it's description
-                    $post['posts'][$k] = CMS::call('POSTS')->getItem($j, 'desc');
-                    $post['posts'][$k]['tab'] = $id.'-'.$k;
-                    $post['posts'][$k]['tab_date'] = FormatTime('d m Y', $post['posts'][$k]['time']);
-                    if ($post['posts'][$k]['comments'] > 0) {
-                        $post['posts'][$k]['comment'] = $post['posts'][$k]['link'].COMMENT.$post['posts'][$k]['comments'];
-                    }
-                    ++$k;
-                }
-                $output .= $TPL->parse($post);
+            $post = [];
+            foreach ($list as $item => $data) {
+                #
+                # We need only post description
+                #
+                $post[$pos] = CMS::call('POSTS')->getItem($item, 'desc');
+
+                $post[$pos]['section_title']  = $section['title'];
+                $post[$pos]['section_link']   = $section['link'];
+                $post[$pos]['category_title'] = $category['title'];
+                $post[$pos]['category_link']  = $category['link'];
+
+                $post[$pos]['tab']      = $id.'-'.$pos;
+                $post[$pos]['tab_date'] = FormatTime('d m Y', $post[$pos]['time']);
+
+                $post[$pos]['comment']  = ($post[$pos]['comments'] > 0) ? $post[$pos]['link'].COMMENT.$post[$pos]['comments'] : NULL;
+                ++$pos;
             }
-        }
-        unset($post);
-        if (!empty($output)) {
-            $_SESSION['tabs'] = $i;
-            ShowWindow(__('Index'), $output);
-        } else {
-            ShowWindow(__('Index'), __('Database is empty'), 'center');
+            $TPL->set('posts', $post);
+            $output .= $TPL->parse();
         }
     }
-}
+
+    $_SESSION['tabs'] = $tab;
+    SYSTEM::defineWindow('Index', $output);
+
+} else SYSTEM::showMessage('Database is empty');

@@ -1,20 +1,11 @@
 <?php
-/** Catalogs of files, links, etc.
- *
- * @program   idxCMS: Flat Files Content Management Sysytem
- * @file      system/modules/catalogs/module.php
- * @version   2.4
- * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011 - 2015 Victor Nabatov
- * @license   Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
- * @package   Catalogs
- * @overview  Catalogs of files, links, etc.
- *            Catalogs database is similar to posts database.
- */
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Module CATALOGS
 
 if (!defined('idxCMS')) die();
 
-/** Data storage for catalogs */
+/** Storage of catalogs */
 define('CATALOGS', CONTENT.'catalogs'.DS);
 
 require SYS.'catalogs.class.php';
@@ -22,6 +13,7 @@ require SYS.'catalogs.class.php';
 switch (SYSTEM::get('locale')) {
     case 'ru':
         $LANG['def']['Catalogs'] = 'Каталоги';
+        $LANG['def']['Catalogs updates'] = 'Обновления каталогов';
         $LANG['def']['Download'] = 'Скачать';
         $LANG['def']['Downloads'] = 'Скачан';
         $LANG['def']['Files'] = 'Файлы';
@@ -29,10 +21,11 @@ switch (SYSTEM::get('locale')) {
         $LANG['def']['Links'] = 'Ссылки';
         $LANG['def']['Size'] = 'Размер';
         $LANG['def']['Transitions'] = 'Переходов';
-        $LANG['def']['Updates'] = 'Обновления';
         break;
+
     case 'ua':
         $LANG['def']['Catalogs'] = 'Каталоги';
+        $LANG['def']['Catalogs updates'] = 'Оновлення каталогів';
         $LANG['def']['Download'] = 'Скачати';
         $LANG['def']['Downloads'] = 'Скачан';
         $LANG['def']['Files'] = 'Файлi';
@@ -40,10 +33,11 @@ switch (SYSTEM::get('locale')) {
         $LANG['def']['Links'] = 'Посилання';
         $LANG['def']['Size'] = 'Розмір';
         $LANG['def']['Transitions'] = 'Переходів';
-        $LANG['def']['Updates'] = 'Оновлення';
         break;
+
     case 'by':
         $LANG['def']['Catalogs'] = 'Каталогі';
+        $LANG['def']['Catalogs updates'] = 'Абнаўленне каталогаў';
         $LANG['def']['Download'] = 'Запампаваць';
         $LANG['def']['Downloads'] = 'запампаваны';
         $LANG['def']['Files'] = 'Файлы';
@@ -51,13 +45,13 @@ switch (SYSTEM::get('locale')) {
         $LANG['def']['Links'] = 'Спасылкі';
         $LANG['def']['Size'] = 'Памер';
         $LANG['def']['Transitions'] = 'Пераходаў';
-        $LANG['def']['Updates'] = 'Абнаўленні';
         break;
 }
 
-SYSTEM::registerModule('catalogs', 'Catalogs', 'main');
-SYSTEM::registerModule('catalogs.last', 'Updates', 'box');
-USER::setSystemRights(['catalogs' => __('Catalogs').': '.__('Moderator')]);
+SYSTEM::registerModule('catalogs',    'Catalogs',  'main');
+SYSTEM::registerModule('catalogs.last', 'Catalogs updates', 'box');
+SYSTEM::registerSearch('catalogs');
 SYSTEM::registerMainMenu('catalogs');
 SYSTEM::registerSiteMap('catalogs');
-SYSTEM::registerSearch('catalogs');
+
+USER::setSystemRights(['catalogs' => __('Catalogs').': '.__('Moderator')]);

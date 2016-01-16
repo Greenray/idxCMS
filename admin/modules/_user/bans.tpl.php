@@ -1,19 +1,23 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - User
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: Bans managment template.
 
 die();?>
-<div class="module">[__Bans]</div>
+
+<div class="module">__Bans__</div>
 <fieldset>
     <form name="config" method="post" action="">
         <table class="std">
-            [each=ban]
-            <tr class="odd"><td><input type="text" name="ban[]" value="{ban}" size="80" class="text" /></td></tr>
-            [/each.ban]
-            <tr class="odd"><td><input type="text" name="ban[]" value="" size="80" class="text" /></td></tr>
+            <!-- FOREACH ban = $bans -->
+                <tr class="light">
+                    <td><input type="text" name="ban[]" value="$ban.ban" size="80" /></td>
+                </tr>
+            <!-- ENDFOREACH -->
+            <tr class="light">
+                <td><input type="text" name="ban[]" value="" size="80" /></td>
+            </tr>
         </table>
-        <p class="center"><input type="submit" name="save" value="[__Save]" class="submit" /></p>
+        <p class="center"><input type="submit" name="save" value="__Save__" /></p>
     </form>
 </fieldset>

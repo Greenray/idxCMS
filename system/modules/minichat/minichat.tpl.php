@@ -1,11 +1,11 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Minichat
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Module MINICHAT: Template
 
 die();?>
-[if=not_admin]
+
+<!-- IF $admin==false -->
     <script type="text/javascript">
         var ns6 = document.getElementById && !document.all;
         function restrictInput(maxlength, e, placeholder) {
@@ -42,58 +42,44 @@ die();?>
             }
         }
     </script>
-[/if]
+<!-- ENDIF -->
 <script type="text/javascript">
     function checkForm(form) {
         if (form.mctext.value === '') {
-            ShowAlert('[__Enter a text]', '[__Error]');
+            ShowAlert('__Enter a text__');
             return false;
         }
-        [if=captcha]
-            if (form.captcheckout.value === '') {
-                ShowAlert('[__Enter a code]', '[__Error]');
-                return false;
-            }
-        [/if]
         return true;
     }
 </script>
-[each=msg]
-    <div class="chat">
-        <div class="name"><strong>{msg[nick]}</strong></div>
-        <div class="info">
-            {msg[date]}
-            [if=msg[moderator]]
-                <span class="menu">
+<!-- IF !empty($messages) -->
+    <!-- FOREACH message = $messages -->
+        <div class="chat">
+            <div class="info"><strong>$message.nick</strong> $message.date</div>
+            <div class="text justify">$message.text</div>
+            <!-- IF !empty($message.moderator) -->
+                <div class="right">
                     <form name="minichat" method="post" action="">
-                        <input type="hidden" name="message" value="{msg[id]}" />
-                        <button type="submit" name="mcaction" value="delete" class="tip" title="[__Delete]">
-                            <img src="{ICONS}delete.png" width="10" height="10" class="tip" alt="[__Delete]" />
-                        </button>
+                        <input type="hidden" name="message" value="$message.id" />
+                        <button type="submit" name="mcaction" value="delete">__Delete__</button>
+                    <!-- IF !empty($message.ip) -->
+                        <input type="hidden" name="host" value="$message.ip" />
+                        <button type="submit" name="mcaction" value="ban">__Ban__</button>
+                    <!-- ENDIF -->
                     </form>
-                </span>
-            [/if]
-            [if=msg[ip]]
-                <span class="menu">
-                    <form name="minichat" method="post" action="">
-                        <input type="hidden" name="host" value="{msg[ip]}" />
-                        <button type="submit" name="mcaction" value="ban" class="tip" title="[__Ban]">
-                            <img src="{ICONS}ban.png" width="10" height="10" class="tip" alt="[__Ban]" />
-                        </button>
-                    </form>
-                </span>
-            [/if]
+                </div>
+            <!-- ENDIF -->
         </div>
-        <div class="text justify">{msg[text]}</div>
-    </div>
-[/each.msg]
-[ifelse=allow_post]
-    <div class="post-comment center">
+    <!-- ENDFOREACH -->
+<!-- ENDIF -->
+<!-- IF $allow_post==true -->
+    <div class="minichat_post center">
         <form id="post" name="post" method="post" action="" onsubmit="return checkForm(this);">
-            <textarea id="mctext" name="mctext" rows="5">{mctext}</textarea>
-            [if=not_admin][__Max message length] [<script type="text/javascript">displayLimit("", "mctext", '{message-length}')</script>] [__symbols][/if]
-            <p class="center"><input type="submit" name="save" value="[__Save]" class="submit" /></p>
+            <textarea id="mctext" name="mctext" rows="5">$mctext</textarea>
+            <!-- IF !empty($message_length) -->
+                __Max message length__ [<script type="text/javascript">displayLimit("", "mctext", '$message_length')</script>] __symbols__
+            <!-- ENDIF -->
+            <input type="submit" name="save" value="__Save__" />
         </form>
     </div>
-[else]
-[/else]
+<!-- ENDIF -->

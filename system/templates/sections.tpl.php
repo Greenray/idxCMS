@@ -1,36 +1,32 @@
 <?php
-# idxCMS version 2.4
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
-# SECTIONS TEMPLATE
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Template for sections
 
 die();?>
 
-<div id="section">
-    <ul class="level1">
-    [each=sections]
-    <li class="level1 parent">
-        <div class="bg">
-            <a class="level1" href="{sections[link]}">
-                <span class="title">{sections[title]}</span>
-                <span class="subtitle">{sections[desc]}</span>
+<div class="section">
+    <ul class="level2">
+    <!-- FOREACH section = $sections -->
+        <li class="level2">
+            <a class="level2" href="$section.link">
+                <span class="title">$section.title</span>
+                <span class="subtitle">$section.desc</span>
             </a>
-        </div>
-        [if=sections[categories]]
-        <div class="sub">
-            <ul class="level2">
-            [each=sections[categories]]
-            <li class="level2">
-                <img src="{categories[path]}icon.png" width="35" height="35" hspace="10" alt="" />
-                <a class="level2" href="{categories[link]}">
-                    <span class="title">{categories[title]}</span>
-                    <span class="subtitle">{categories[desc]}</span>
-                </a>
-            </li>
-            [/each.sections[categories]]
-            </ul>
-        </div>
-        [/if]
-    </li>
-    [/each.sections]
+            <!-- IF !empty($section.categories) -->
+                <ul class="level3">
+                <!-- FOREACH category = $section.categories -->
+                    <li class="level3">
+                        <img src="[$category.path:]icon.png" width="35" height="35" hspace="10" alt="" />
+                        <a class="level3" href="$category.link">
+                            <span class="title">$category.title</span>
+                            <span class="subtitle">$category.desc</span>
+                        </a>
+                    </li>
+                <!-- ENDFOREACH -->
+                </ul>
+            <!-- ENDIF -->
+        </li>
+    <!-- ENDFOREACH -->
     </ul>
 </div>

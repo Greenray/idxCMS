@@ -1,10 +1,24 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - Catalogs
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: Catalogs management.
 
 if (!defined('idxADMIN')) die();
+
+switch (SYSTEM::get('locale')) {
+    case 'ru':
+        $LANG['def']['New file'] = 'Новый файл';
+        $LANG['def']['New link'] = 'Новая ссылка';
+        break;
+    case 'ua':
+        $LANG['def']['New file'] = 'Новий файл';
+        $LANG['def']['New link'] = 'Нова посилання';
+        break;
+    case 'by':
+        $LANG['def']['New link'] = 'Новы файл';
+        $LANG['def']['New link'] = 'Новая спасылка';
+        break;
+}
 
 $MODULES[$module][0] = __('Catalogs');
 $MODULES[$module][1]['config']     = __('Configuration');

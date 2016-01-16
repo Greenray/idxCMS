@@ -1,8 +1,7 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - Aphorizms
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: Banners.
 
 if (!defined('idxADMIN')) die();
 
@@ -23,5 +22,6 @@ switch (SYSTEM::get('locale')) {
         $LANG['def']['New banner'] = 'Новы банер';
         break;
 }
+
 $MODULES[$module][0] = __('Banners');
 $MODULES[$module][1]['banners'] = __('Banners');

@@ -1,40 +1,30 @@
-/**
- * @file      skins/print.css
- * @version   2.3
- * @author    Victor Nabatov <greenray.spb@gmail.com>\n
- * @copyright (c) 2011 - 2014 Victor Nabatov
- * @license   <http://creativecommons.org/licenses/by-nc-sa/3.0/> Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+/*
+ * idxCMS Flat Files Content Management System
+ *
+ * Version   3.0
+ * Victor Nabatov <greenray.spb@gmail.com>
+ * Copyright (c) 2011 - 2016 Victor Nabatov
+ * License: Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
+ * Print styles.
  */
-
-/**
- * print.css - Skin Default: print styles.
- * @package Skins
- */
-body, h1 {
-	margin: 0px;
-	padding: 0px
-}
 
 body {
 	background: #fff;
-	font: 11px normal arial, verdana, helvetica, sans, serif, sans-serif,
-		"Times New Roman"
+	font: 11px normal arial, verdana, helvetica, sans, serif, sans-serif,  "Times New Roman";
+    margin: 0px;
+	padding: 0p
 }
-
 a {
 	color: #000;
 	text-decoration: underline;
 }
-
 h1 {
 	font-size: 21px;
-	text-align: center
+	text-align: center;
+    margin: 0px;
+	padding: 0p
 }
-
-.text img {
-	float: left
-}
-
+.text img {	float: left }
 .codehtml, .codephp, .codetext {
 	font: normal 8pt mono, "Courier New", Courier;
 	margin: 5px 0;
@@ -42,7 +32,6 @@ h1 {
 	overflow: auto;
 	white-space: nowrap
 }
-
 .quotetitle {
 	border: #000 solid 1px;
 	font-size: 8pt;
@@ -50,7 +39,6 @@ h1 {
 	margin: 10px 0;
 	padding: 5px
 }
-
 .quotetext {
 	border: #000 solid 1px;
 	font: italic 9pt "Courier New", Courier, mono;
@@ -58,7 +46,4 @@ h1 {
 	padding: 5px;
 	overflow: auto
 }
-
-.right {
-	text-align: right
-}
+.right { text-align: right }

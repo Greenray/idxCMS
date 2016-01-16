@@ -1,66 +1,58 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Module Sitemap
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Module SITEMAP: Template
 
 die();?>
-<li class="level1 parent">
-    <a class="level1 parent" href="{link}">
-        <span class="bg">
-            [ifelse=desc]
-                <span class="title">{name}</span>
-                <span class="subtitle">{desc}</span>
-            [else]
-                {name}
-            [/else]
-        </span>
-    </a>
-    [ifelse=sections]
-        <div class="dropdown">
-            <ul class="level2">
-                [each=sections]
-                <li class="level2 parent">
-                    <div class="bg">
-                        <a class="level2" href="{sections[link]}">
-                            <span class="title">{sections[title]}</span>
-                            <span class="subtitle">{sections[desc]}</span>
+
+<!-- FOREACH point = $points -->
+<div class="section">
+    <ul class="level1">
+        <li class="level1">
+            <a class="level1" href="$point.link">
+                <span class="bg">
+                <!-- IF !empty($point.desc) -->
+                    <span class="title">$point.name</span>
+                    <span class="subtitle">$point.desc</span>
+                <!-- ELSE -->
+                    $point.name
+                <!-- ENDIF -->
+                </span>
+            </a>
+            <!-- IF !empty($point.sections) -->
+                <ul class="level2">
+                <!-- FOREACH section = $point.sections -->
+                    <li class="level2">
+                        <a class="level2" href="$section.link">
+                        <!-- IF !empty($section.desc) -->
+                            <span class="title">$section.title</span>
+                            <span class="subtitle">$section.desc</span>
+                        <!-- ELSE -->
+                            $section.title
+                        <!-- ENDIF -->
                         </a>
-                    </div>
-                    [if=sections[categories]]
-                        <div class="sub">
-                            <ul class="level3">
-                                [each=sections[categories]]
-                                <li class="level3">
-                                    <img src="{categories[path]}icon.png" width="35" height="35" hspace="10" alt="" />
-                                    <a class="level3" href="{categories[link]}">
-                                        <span class="title">{categories[title]}</span>
-                                        <span class="subtitle">{categories[desc]}</span>
-                                    </a>
-                                </li>
-                                [/each.sections[categories]]
-                            </ul>
-                        </div>
-                    [/if]
-                </li>
-                [/each.sections]
-            </ul>
-        </div>
-    [else]
-        [if=categories]
-        <div class="dropdown">
-            <ul class="level3">
-                [each=categories]
-                <li class="level3">
-                    <a class="level3" href="{categories[link]}">
-                        <img src="{categories[path]}icon.png" width="35" height="35" hspace="10" alt="" />
-                        <span class="title">{categories[title]}</span>
-                        <span class="subtitle">{categories[desc]}</span>
-                    </a>
-                </li>
-                [/each.categories]
-            </ul>
-        </div>
-        [/if]
-    [/else]
-</li>
+                    <!-- IF !empty($section.categories) -->
+                        <ul class="level3">
+                        <!-- FOREACH category = $section.categories -->
+                            <li class="level3">
+                                <img src="[$category.path:]icon.png" width="35" height="35" hspace="10" alt="" />
+                                <a class="level3" href="$category.link">
+                                <!-- IF !empty($category.desc) -->
+                                    <span class="title">$category.title</span>
+                                    <span class="subtitle">$category.desc</span>
+                                <!-- ELSE -->
+                                    $category.title
+                                <!-- ENDIF -->
+                                </a>
+                            </li>
+                        <!-- ENDFOREACH -->
+                        </ul>
+                    <!-- ENDIF -->
+                    </li>
+                <!-- ENDFOREACH -->
+                </ul>
+            <!-- ENDIF -->
+        </li>
+    </ul>
+</div>
+<!-- ENDFOREACH -->

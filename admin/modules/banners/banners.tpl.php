@@ -1,22 +1,25 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - Aphorizms
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: Banners template.
 
 die();?>
-<div class="module">[__Banners]</div>
+
+<div class="module">__Banners__</div>
 <fieldset>
     <form name="config" method="post" action="">
         <table class="std">
-            [each=banner]
-            <tr><td>{banner[bbCodes]}</td><td></td></tr>
+        <!-- FOREACH banner = $banner -->
             <tr>
-                <td><textarea id="{banner[id]}" name="text[]" cols="80" rows="10">{banner[text]}</textarea>
-                </td><td class="banner">{banner[view]}</td>
+                <td>$banner.bbCodes</td>
+                <td></td>
             </tr>
-            [/each.banner]
+            <tr>
+                <td><textarea id="$banner.id" name="text[]" cols="80" rows="10">$banner.text</textarea></td>
+                <td class="banner">$banner.view</td>
+            </tr>
+        <!-- ENDFOREACH -->
         </table>
-        <p class="center"><input type="submit" name="save" value="[__Save]" class="submit" /></p>
+        <p class="center"><input type="submit" name="save" value="__Save__" /></p>
     </form>
 </fieldset>

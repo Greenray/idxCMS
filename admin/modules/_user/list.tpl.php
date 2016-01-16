@@ -1,29 +1,37 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - User
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: User's list.
 
 die();?>
-<div class="module">[__User profile]</div>
+
+<div class="module">__User profile__</div>
 <fieldset>
     <form name="config" method="post" action="">
         <table class="std">
-            <tr class="odd"><td colspan="3" class="center">[__Do not delete user, just block him to keep the structure of site]</td></tr>
-            <tr><th style="width:20%">[__Login]</th><th style="width:20%">[__Nick]</th><th style="width:60%">[__Actions]</th></tr>
-            [each=user]
-            <tr class="odd">
-                <td>{user[username]}</td>
-                <td>{user[nickname]}</td>
-                <td>
-                    <label><input type="radio" name="act" value="profile.{user[username]}" /> [__Profile]</label>
-                    <label><input type="radio" name="act" value="rights.{user[username]}" /> [__Rights]</label>
-                    <label><input type="radio" name="act" value="{user[blocked]}" /> {user[blocking]}</label>
-                    <label><input type="radio" name="act" value="delete.{user[username]}" /> [__Delete]</label>
-                </td>
+            <tr class="light"><td colspan="3" class="center">__Do not delete user, just block him to keep the structure of site__</td></tr>
+            <tr>
+                <th style="width:20%">__Login__</th>
+                <th style="width:20%">__Nick__</th>
+                <th style="width:60%">__Actions__</th>
             </tr>
-            [/each.user]
+            <!-- FOREACH user = $users -->
+                <tr class="light">
+                    <td>$user.user</td>
+                    <!-- IF !empty($user.nick) -->
+                        <td>$user.nick</td>
+                        <td>
+                            <input type="radio" name="act" value="profile.$user.user" /> __Profile__
+                            <input type="radio" name="act" value="rights.$user.user" /> __Rights__
+                            <input type="radio" name="act" value="$user.blocked" /> $user.blocking
+                            <input type="radio" name="act" value="delete.$user.user" /> __Delete__
+                        </td>
+                    <!-- ELSE -->
+                        <td colspan="2" class="help">__User data is unreadable or corrupt__</td>
+                    <!-- ENDIF -->
+                </tr>
+            <!-- ENDFOREACH -->
         </table>
-        <p class="center"><input type="submit" name="submit" value="[__Submit]" class="submit" /></p>
+        <p class="center"><input type="submit" name="submit" value="__Submit__" /></p>
     </form>
 </fieldset>

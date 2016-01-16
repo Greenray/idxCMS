@@ -1,20 +1,23 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem
-# Administration - User
-# Version 2.4
-# Copyright (c) 2011 - 2015 Victor Nabatov
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2011 - 2016 Victor Nabatov
+# Administration: Feedbacks template.
 
 die();?>
-<div class="module">[__Feedback requests]</div>
+
+<div class="module">__Feedback requests__</div>
 <fieldset>
     <form name="config" method="post" action="">
         <table class="std">
-            <th colspan="3">[__Messages]</th>
-            [each=messages]
-            <tr class="odd"><td colspan="2">{messages[time]} {messages[info]}</td></tr>
-            <tr class="odd"><td>{messages[text]}</td><td><input type="checkbox" name="delete[]" value="{messages[id]}" />[__Delete]</td></tr>
-            [/each.messages]
+            <th colspan="3">__Messages__</th>
+            <!-- FOREACH message = $messages -->
+                <tr class="light"><td colspan="2">$message.time $message.info</td></tr>
+                <tr class="light">
+                    <td>$message.text</td>
+                    <td><input type="checkbox" name="delete[]" value="$message.id" />__Delete__</td>
+                </tr>
+            <!-- ENDFOREACH -->
         </table>
-        <p class="center"><input type="submit" name="submit" value="[__Submit]" class="submit" /></p>
+        <p class="center"><input type="submit" name="submit" value="__Submit__" /></p>
     </form>
 </fieldset>

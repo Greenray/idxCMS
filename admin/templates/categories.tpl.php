@@ -39,7 +39,7 @@ die();?>
                                         <img src="{ICONS}edit.png" width="16" height="16" alt="__Edit__" class="tip" />
                                     </button>
                                     <!-- IF !empty($category.items) -->
-                                        <a href="{MODULE}admin&amp;id=[$module:].items{SECTION}$system.id{CATEGORY}$category.id">
+                                        <a href="{MODULE}admin&id=[$module:].items{SECTION}$system.id{CATEGORY}$category.id">
                                             <img src="{ICONS}posts.png" width="16" height="16" alt="__Posts__" class="tip" />
                                         </a>
                                     <!-- ENDIF -->

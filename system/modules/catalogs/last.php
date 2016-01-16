@@ -9,6 +9,6 @@ $items = CMS::call('CATALOGS')->getSectionsLastItems();
 
 if (!empty($items)) {
     $TPL = new TEMPLATE(__DIR__.DS.'last.tpl');
-    $TPL->set(CMS::call('CATALOGS')->getLastItems($items));
+    $TPL->set('items', CMS::call('CATALOGS')->getLastItems($items));
     SYSTEM::defineWindow('Catalogs updates', $TPL->parse());
 }

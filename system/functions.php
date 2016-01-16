@@ -345,18 +345,18 @@ function Pagination($total, $perpage, $current, $link) {
         $result .= '<div id="pagination">
                         <span class="pages">'.__('Pages').': </span>';
         if ($pages['current'] != $pages['previous'])
-             $result .= '<a href="'.$link.'&amp;page=1"> &lt;</a>';
+             $result .= '<a href="'.$link.'&page=1"> &lt;</a>';
         else $result .= '<span class="pages"> &lt; </span>';
         $count = ($numpages > 5) ? 5 : $numpages;
         for ($i = 0; $i < $count; $i++) {
             if ($pages['pages'][$i] != $pages['current']) {
-                $result .= '<a href="'.$link.'&amp;page='.$pages['pages'][$i].'">'.$pages['pages'][$i].'</a>';
+                $result .= '<a href="'.$link.'&page='.$pages['pages'][$i].'">'.$pages['pages'][$i].'</a>';
             } else {
                 $result .= '<span class="active"> '.$pages['current'].'</span>';
             }
         }
         if ($pages['current'] != $pages['next']) {
-            $result .= '<a href="'.$link.'&amp;page='.$pages['last'].'"> &gt; </a><span class="pages">['.__('Total').': '.$pages['last'].']</span>';
+            $result .= '<a href="'.$link.'&page='.$pages['last'].'"> &gt; </a><span class="pages">['.__('Total').': '.$pages['last'].']</span>';
         } else {
             $result .= '<span class="pages"> &gt; ['.__('Total').': '.$pages['last'].']</span>';
         }

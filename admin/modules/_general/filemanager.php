@@ -105,7 +105,7 @@ $images  = ['gif', 'jpeg', 'jpg', 'png'];
 
 $path   = empty($REQUEST['path']) ? realpath('.').DS : $REQUEST['path'];
 $path   = str_replace('\\', '/', $path);
-$url    = MODULE.'admin&amp;id=_general.filemanager';
+$url    = MODULE.'admin&id=_general.filemanager';
 $output = [];
 
 if (!empty($REQUEST['save'])) {
@@ -145,7 +145,7 @@ if (!empty($REQUEST['save'])) {
 }
 
 $TPL = new TEMPLATE(__DIR__.DS.'filemanager.tpl');
-$TPL->set('back', ($path === realpath('.').DS) ? '' : $url.'&amp;path='.dirname($path).DS);
+$TPL->set('back', ($path === realpath('.').DS) ? '' : $url.'&path='.dirname($path).DS);
 $TPL->set('url',  $url);
 $TPL->set('path', $path);
 $elements = array_merge(AdvScanDir($path, '', 'dir'), AdvScanDir($path, '', 'file'));
@@ -157,29 +157,29 @@ foreach ($elements as $key => $file) {
     $output[$key]['date'] = FormatTime('d m Y', $filedata['mtime']);
     $output[$key]['time'] = FormatTime('H:i:s', $filedata['mtime']);
     if (is_dir($path.$file)) {
-        $output[$key]['link']  = $url.'&amp;path='.$path.$file.DS;
+        $output[$key]['link']  = $url.'&path='.$path.$file.DS;
         $output[$key]['empty'] = TRUE;
-        $output[$key]['alert'] = 'onClick="if (confirm(\''.__('Delete this directory recursively?').'\')) document.location.href = \''.$url.'&amp;path='.$path.'&amp;delete='.$file.'\'"';
+        $output[$key]['alert'] = 'onClick="if (confirm(\''.__('Delete this directory recursively?').'\')) document.location.href = \''.$url.'&path='.$path.'&delete='.$file.'\'"';
         $output[$key]['style'] = 'row2';
     } else {
         $path_parts = pathinfo($path.$file);
         if (empty($path_parts['extension'])) {
             if (!CheckSerialized($path.$file))
-                 $output[$key]['edit'] = $url.'&amp;path='.$path.'&amp;edit='.$file;
+                 $output[$key]['edit'] = $url.'&path='.$path.'&edit='.$file;
             else $output[$key]['empty'] = TRUE;
         } else {
             preg_match('/[^.]+\.[^.]+$/', $path_parts['basename'], $matches);
             if ($matches[0] === 'tar.gz')                        $output[$key]['download'] = TRUE;
             elseif (in_array($path_parts['extension'], $allowed) && (substr($path_parts['basename'], -6) !== 'min.js'))
-                                                                 $output[$key]['edit'] = $url.'&amp;path='.$path.'&amp;edit='.$file;
+                                                                 $output[$key]['edit'] = $url.'&path='.$path.'&edit='.$file;
             elseif (in_array($path_parts['extension'], $images)) $output[$key]['view'] = ROOT.str_replace(realpath('.').DS, '', $path).$file;
             else                                                 $output[$key]['empty'] = TRUE;
         }
         $output[$key]['style'] = 'row1';
     }
     $output[$key]['rights']      = GetRights($path.$file);
-    $output[$key]['rights_edit'] = $url.'&amp;path='.$path.'&amp;rights='.$file;
-    $output[$key]['delete']      = $url.'&amp;path='.$path.'&amp;delete='.$file;
+    $output[$key]['rights_edit'] = $url.'&path='.$path.'&rights='.$file;
+    $output[$key]['delete']      = $url.'&path='.$path.'&delete='.$file;
 }
 
 $TPL->set('elements', $output);

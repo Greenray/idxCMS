@@ -6,17 +6,15 @@
 if (!defined('idxCMS')) die();
 
 $images = CMS::call('GALLERY')->getSectionsLastItems();
-var_dump($images);
-$a = CMS::call('GALLERY')->getLastItems($images);
-var_dump($a);
+
 if (!empty($images)) {
     $TPL = new TEMPLATE(__DIR__.DS.'last.tpl');
     $items = CMS::call('GALLERY')->getLastItems($images);
-    $img   = $items;
-    foreach($items as $id => $item) {
-        $img['items'][$id]['image'] = CONTENT;
-    }
-    $TPL->set(CMS::call('GALLERY')->getLastItems($images));
 
+    $images = $items;
+    foreach($items as $id => $item) {
+        $items[$id]['image'] = CONTENT.'gallery'.DS.$item['section'].DS.$item['category'].DS.$item['id'].DS.$item['image'].'.jpg';
+    }
+    $TPL->set('items', $items);
     SYSTEM::defineWindow('Last photos', $TPL->parse());
 }

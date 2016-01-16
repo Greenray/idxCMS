@@ -76,8 +76,8 @@ die();?>
         <!-- IF !empty($for) -->
             <input type="hidden" name="for" value="$for" />
         <!-- ENDIF -->
-            <input type="submit" name="save" value="__Save__" />
             <input type="reset" name="reset" value="__Reset__" />
+            <input type="submit" name="save" value="__Save__" />
         </p>
     </form>
 </div>

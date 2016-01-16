@@ -64,7 +64,7 @@ if (!empty($REQUEST['login'])) {
                 #
                 # Pagination
                 #
-                if ($count > $perpage) echo Pagination($count, $perpage, $page, MODULE.'admin&amp;id=_user.profile&amp;search='.$REQUEST['search']);
+                if ($count > $perpage) echo Pagination($count, $perpage, $page, MODULE.'admin&id=_user.profile&search='.$REQUEST['search']);
 
                 break;
 

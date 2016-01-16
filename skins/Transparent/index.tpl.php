@@ -23,7 +23,7 @@ die();?>
                 <div class="title"><h1>$post.title</h1></div>
                 <div class="text justify">$post.desc</div>
                 <div class="info">
-                    <span class="author center">__Posted by__: <a class="roll-link" href="{MODULE}user&amp;user=$post.author"><span data-title="$post.nick">$post.nick</span></a></span>
+                    <span class="author center">__Posted by__: <a class="roll-link" href="{MODULE}user&user=$post.author"><span data-title="$post.nick">$post.nick</span></a></span>
                     <span class="more">
                         <a class="roll-link" href="$post.link"><span data-title="__Read more...__">__Read more...__</span></a><!-- IF !empty($post.views) -->&#x3014;$post.views&#x3015;<!-- ENDIF -->
                         <!-- IF !empty($post.comment) -->

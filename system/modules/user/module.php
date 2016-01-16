@@ -28,7 +28,7 @@ function CreateUserLink($user, $nick) {
     if ($user === 'guest') {
         return __('Guest');
     }
-    return '<a href="'.MODULE.'user&amp;user='.$user.'">'.$nick.'</a>';
+    return '<a href="'.MODULE.'user&user='.$user.'">'.$nick.'</a>';
 }
 
 /**

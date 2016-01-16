@@ -144,12 +144,14 @@ class CONTENT extends COMMENTS {
         $items  = array_slice($items, 0, (int) CONFIG::getValue('main', 'last'), TRUE);
         $result = [];
         foreach ($items as $key => $data) {
-            $item = explode('.', $data);
-            $this->getCategories($item[0]);
-            self::getContent($item[1]);
-            $item = $this->getItem($item[2]);
-            $item['date'] = FormatTime('d F Y', $item['time']);
-            $result['items'][] = $item;
+            $parts = explode('.', $data);
+            $this->getCategories($parts[0]);
+            self::getContent($parts[1]);
+            $item = $this->getItem($parts[2]);
+            $item['date']      = FormatTime('d F Y', $item['time']);
+            $item['section']   = $parts[0];
+            $item['category']  = $parts[1];
+            $result[] = $item;
         }
         return $result;
     }

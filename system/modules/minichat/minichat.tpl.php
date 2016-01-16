@@ -79,6 +79,7 @@ die();?>
             <!-- IF !empty($message_length) -->
                 __Max message length__ [<script type="text/javascript">displayLimit("", "mctext", '$message_length')</script>] __symbols__
             <!-- ENDIF -->
+            <button type="reset">__Reset__</button>
             <input type="submit" name="save" value="__Save__" />
         </form>
     </div>

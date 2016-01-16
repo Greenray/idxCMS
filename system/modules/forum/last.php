@@ -9,6 +9,6 @@ $topics = CMS::call('FORUM')->getSectionsLastItems();
 
 if (!empty($topics)) {
     $TPL = new TEMPLATE(__DIR__.DS.'last.tpl');
-    $TPL->set(CMS::call('FORUM')->getLastItems($topics));
+    $TPL->set('items', CMS::call('FORUM')->getLastItems($topics));
     SYSTEM::defineWindow('Last topics', $TPL->parse());
 }

@@ -121,7 +121,7 @@ if (!USER::$logged_in) {
                     }
                     SYSTEM::defineWindow('Messages', $output);
                     if ($count > $perpage) {
-                        SYSTEM::defineWindow('', Pagination($count, $perpage, $page, MODULE.'user.pm&amp;mode=inbox'));
+                        SYSTEM::defineWindow('', Pagination($count, $perpage, $page, MODULE.'user.pm&mode=inbox'));
                     }
                 }
             } else {
@@ -132,8 +132,8 @@ if (!USER::$logged_in) {
         SYSTEM::defineWindow(
             'Messages',
             '<div class="center">
-                <a href="'.MODULE.'user.pm&amp;mode=inbox" title="{mess_info}">'.__('Inbox').'</a>
-                <a href="'.MODULE.'user.pm&amp;mode=outbox" title="{mess_info}">'.__('Outbox').'</a>
+                <a href="'.MODULE.'user.pm&mode=inbox" title="{mess_info}">'.__('Inbox').'</a>
+                <a href="'.MODULE.'user.pm&mode=outbox" title="{mess_info}">'.__('Outbox').'</a>
              </div>'
         );
     }

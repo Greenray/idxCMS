@@ -26,7 +26,7 @@ die();?>
         <div class="center" style="margin:10px 0;">
             <object type="application/x-shockwave-flash" data="{TOOLS}scmp3player.swf" id="mp3player1" width="$width" height="$height">
                 <param name="movie" value="{TOOLS}scmp3player.swf">
-                <param name="FlashVars" value="playerID=1&amp;bg=$bgcolor&amp;leftbg=$leftbg&amp;lefticon=$lefticon&amp;rightbg=$rightbg&amp;rightbghover=$rightbghover&amp;righticon=$righticon&amp;righticonhover=$righticonhover&amp;text=$pl_txt&amp;slider=$slider&amp;track=$track&amp;border=$border&amp;loader=$loader&amp;loop=no&amp;autostart=no&amp;soundFile={CONTENT}catalogs{DS}$section{DS}$category{DS}$id{DS}$music">
+                <param name="FlashVars" value="playerID=1&bg=$bgcolor&leftbg=$leftbg&lefticon=$lefticon&rightbg=$rightbg&rightbghover=$rightbghover&righticon=$righticon&righticonhover=$righticonhover&text=$pl_txt&slider=$slider&track=$track&border=$border&loader=$loader&loop=no&autostart=no&soundFile={CONTENT}catalogs{DS}$section{DS}$category{DS}$id{DS}$music">
                 <param name="quality" value="high">
                 <param name="menu" value="FALSE">
                 <param name="wmode" value="transparent">
@@ -34,24 +34,24 @@ die();?>
         </div>
         <div class="center"><hr />__Copyright__: &copy; $copyright | __Size__: $size __bytes__ | __Downloads__: $downloads</div>
         <div class="info">
-            <span class="author center">__Posted by__: <a href="{MODULE}user&amp;user=$author">$nick</a></span>
-            <span class="admin"><a href="$link&amp;get=1" target="_blank">__Download__</a></span>
+            <span class="author center">__Posted by__: <a href="{MODULE}user&user=$author">$nick</a></span>
+            <span class="admin"><a href="$link&get=1" target="_blank">__Download__</a></span>
         </div>
     <!-- ELSEIF !empty($file) -->
         <div class="center"><hr />__Copyright__: &copy; $copyright | __Size__: $size __bytes__ | __Downloads__: $downloads</div>
         <div class="info">
-            <span class="author center">__Posted by__: <a href="{MODULE}user&amp;user=$author">$nick</a></span>
-            <span class="admin"><a href="$link&amp;get=1" target="_blank">__Download__</a></span>
+            <span class="author center">__Posted by__: <a href="{MODULE}user&user=$author">$nick</a></span>
+            <span class="admin"><a href="$link&get=1" target="_blank">__Download__</a></span>
         </div>
     <!-- ELSEIF !empty($site) -->
-        <div class="center"><hr /><a href="$link&amp;go=1" target="_blank">__Go__</a></div>
+        <div class="center"><hr /><a href="$link&go=1" target="_blank">__Go__</a></div>
         <div class="info">
-            <span class="author center">__Posted by__: <a href="{MODULE}user&amp;user=$author">$nick</a><br />__Copyright__: &copy; $copyright</span>
+            <span class="author center">__Posted by__: <a href="{MODULE}user&user=$author">$nick</a><br />__Copyright__: &copy; $copyright</span>
             <span class="admin">__Transitions__: $clicks</span>
         </div>
     <!-- ELSEIF !empty($image) -->
         <div class="info">
-            <span class="author center">__Posted by__: <a href="{MODULE}user&amp;user=$author">$nick</a></span>
+            <span class="author center">__Posted by__: <a href="{MODULE}user&user=$author">$nick</a></span>
             <span class="admin">__Copyright__: $copyright</span>
         </div>
     <!-- ELSE -->

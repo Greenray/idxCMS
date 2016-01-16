@@ -41,9 +41,9 @@ foreach ($sections as $section => $data) {
                 $date = FormatTime('d', $time);
                 $CALENDAR->event(
                     $date,
-                    MODULE.'posts&amp;from='.
+                    MODULE.'posts&from='.
                     mktime(0, 0, 0, $selected_month, $date, $selected_year).
-                    '&amp;until='.
+                    '&until='.
                     mktime(23, 59, 59, $selected_month, $date, $selected_year)
                 );
             }

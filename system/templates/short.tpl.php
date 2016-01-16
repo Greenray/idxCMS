@@ -13,7 +13,7 @@ die();?>
     <div class="title"><h1><a href="$link">$title</a></h1></div>
     <div class="text justify">$desc</div>
     <div class="info">
-        <span class="author center">__Posted by__: <a href="{MODULE}user&amp;user=$author">$nick</a></span>
+        <span class="author center">__Posted by__: <a href="{MODULE}user&user=$author">$nick</a></span>
         <span class="admin">
             <a href="$link">__Read more...__ <!-- IF !empty($views) -->[$views]<!-- ENDIF --></a>
             <!-- IF !empty($downloads) -->__Downloads__ [$downloads]<!-- ENDIF -->

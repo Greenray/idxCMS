@@ -280,7 +280,6 @@ textarea:focus { border: 1px solid red }
     padding: 5px 0;
     text-align: right }
 .info {}
-.info a { margin: 0 0 0 10px }
 .last-items li { margin: 0 0 10px 10px }
 .login-panel { margin: 10px 0 }
 .none { display: none }
@@ -329,7 +328,7 @@ textarea:focus { border: 1px solid red }
     .post .author { margin: 0 0 0 10px; line-height: 16px; width: 200px }
     .post .admin { margin: 0 20px 0; float: right; line-height: 18px }
     .post .admin a { margin: 0 2px }
-    .post .info { clear: both }
+    .post .info { clear: both; margin: 10px 0 0 }
     .post .actions { float: right; margin: 0 }
 .topic { margin: 10px; overflow: hidden }
     .topic .content { overflow: hidden }

@@ -15,6 +15,7 @@ die();?>
         <!-- ENDIF -->
         <p class="center">
             <input type="hidden" name="comment" value="$comment" />
+            <input type="reset" name="reset" value="__Reset__" />
             <input type="submit" name="save" value="__Save__" />
         </p>
     </form>

@@ -27,7 +27,7 @@ die();?>
                 </li>
                 <li>
                     <img src="{ICONS}messages.png" width="16" height="16" alt="" />
-                    <a href="{MODULE}user.pm<!-- IF !empty($mess_new) -->&amp;mode=inbox<!-- ENDIF -->" title="$mess_info">
+                    <a href="{MODULE}user.pm<!-- IF !empty($mess_new) -->&mode=inbox<!-- ENDIF -->" title="$mess_info">
                         __Messages__ <!-- IF !empty($mess_new) --><strong>($mess_new)</strong><!-- ENDIF -->
                     </a>
                 </li>
@@ -123,7 +123,7 @@ die();?>
             <li>
                 <img src="{ICONS}forgetpass.png" width="16" height="16" alt="" />
                 <a href="##" id="recovery">__Password recovery__</a>
-                <form id="password_recovery" name="password_recovery" method="post" action="{MODULE}user&amp;act=password_request" onsubmit="return checkPasswordRecoveryForm(this);" class="password_recovery">
+                <form id="password_recovery" name="password_recovery" method="post" action="{MODULE}user&act=password_request" onsubmit="return checkPasswordRecoveryForm(this);" class="password_recovery">
                     <h1><span class="password-recovery">__Password recovery__</span></h1>
                     <p class="float">
                         <label for="user">__Username__</label>
@@ -139,7 +139,7 @@ die();?>
             </li>
             <li>
                 <img src="{ICONS}register.png" width="16" height="16" alt="" />
-                <a href="{MODULE}user&amp;act=register">__Registration__</a>
+                <a href="{MODULE}user&act=register">__Registration__</a>
             </li>
         </ul>
     </div>

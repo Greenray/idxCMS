@@ -5,7 +5,7 @@
 
 die();?>
 
-<form name="search" method="post" action="" class="navigation">
+<form name="search" method="post" action="" class="navigation center">
     <input type="hidden" name="module" value="search" />
     <input type="text" name="search" value="__Search__" onClick="$(this).val('');" />
     <input type="submit" value="__Submit__" />

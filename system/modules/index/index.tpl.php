@@ -14,7 +14,7 @@ die();?>
         <div class="title"><h1>$post.title</h1></div>
         <div class="text justify">$post.desc</div>
         <div class="info">
-            <span class="author center">__Posted by__: <a href="{MODULE}user&amp;user=$post.author">$post.nick</a></span>
+            <span class="author center">__Posted by__: <a href="{MODULE}user&user=$post.author">$post.nick</a></span>
             <span class="more">
                 <a href="$post.link">__Read more...__ <!-- IF !empty($post.views) -->[$post.views]<!-- ENDIF --></a>&nbsp;&nbsp;&nbsp;&nbsp;
                 <!-- IF !empty($post.comment) -->

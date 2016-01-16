@@ -10,13 +10,20 @@ die();?>
     <!-- FOREACH item = $items -->
         <li>
             <a href="$item.link">$item.title</a><br />
-            <span class="info">
+            <div class="info">
                 $item.date<br />
+                <!-- IF !empty($item.image) -->
+                    <div class="center">
+                        <a href="$item.image">
+                            <img src="$item.image" width="200" height="150" alt="__Image__" />
+                        </a>
+                    </div>
+                <!-- ENDIF -->
                 __Views__: $item.views
                 <!-- IF !empty($item.comments) -->
                     <a href="$item.link{COMMENT}$item.comments">__Comments__: $item.comments</a>
                 <!-- ENDIF -->
-            </span>
+            </div>
         </li>
     <!-- ENDFOREACH -->
     </ul>

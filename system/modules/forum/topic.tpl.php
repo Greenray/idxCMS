@@ -14,10 +14,10 @@ die();?>
                 <span class="date">$date</span>
                 <!-- IF !empty($profile) -->
                     <span class="profile">
-                        <a href="{MODULE}user&amp;user=$author" title="__Profile__">
+                        <a href="{MODULE}user&user=$author" title="__Profile__">
                             <img src="{ICONS}profile.png" width="16" height="16" class="tip" alt="__Profile__" />
                         </a>
-                        <a href="{MODULE}user.pm&amp;for=$author" title="__Private message__">
+                        <a href="{MODULE}user.pm&for=$author" title="__Private message__">
                             <img src="{ICONS}user-pm.png" width="16" height="16" class="tip" alt="__Private message__" />
                         </a>
                     </span>
@@ -46,12 +46,12 @@ die();?>
         <div class="actions right">
             <form name="topic" method="post" action="">
                 <!-- IF !empty($ip) -->
-                    <button type="submit" formaction="$link&amp;action=ban&amp;host=$ip">$ip</button>
+                    <button type="submit" formaction="$link&action=ban&host=$ip">$ip</button>
                 <!-- ENDIF -->
-                <button type="submit" formaction="$link{ITEM}$id&amp;action=$action_pin">$command_pin</button>
-                <button type="submit" formaction="$link&amp;action=$action">$command</button>
-                <button type="submit" formaction="$link&amp;action=edit">__Edit__</button>
-                <button type="submit" formaction="$link&amp;action=delete">__Delete__</button>
+                <button type="submit" formaction="$link{ITEM}$id&action=$action_pin">$command_pin</button>
+                <button type="submit" formaction="$link&action=$action">$command</button>
+                <button type="submit" formaction="$link&action=edit">__Edit__</button>
+                <button type="submit" formaction="$link&action=delete">__Delete__</button>
             </form>
         </div>
     <!-- ENDIF -->

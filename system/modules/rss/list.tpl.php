@@ -9,7 +9,7 @@ die();?>
     <ul class="level1">
     <!-- FOREACH feed = $feeds -->
         <li class="level1 parent">
-            <div class="bg"><a class="level1" href="{MODULE}rss&amp;feed=$feed.module"><span class="title">$feed.feed</span> </a></div>
+            <div class="bg"><a class="level1" href="{MODULE}rss&feed=$feed.module"><span class="title">$feed.feed</span> </a></div>
             <div class="sub">
                 <ul class="level2">
                 <!-- FOREACH category = $feed.categories -->

@@ -55,7 +55,7 @@ if (!defined('idxADMIN')) die();?>
                         $mods.name
                         <ul>
                         <!-- FOREACH mod = $mods.module -->
-                            <li><a href="{MODULE}admin&amp;id=$mod.module.$mod.category" target="main">$mod.title</a></li>
+                            <li><a href="{MODULE}admin&id=$mod.module.$mod.category" target="main">$mod.title</a></li>
                         <!-- ENDFOREACH -->
                         </ul>
                     </li>

@@ -35,7 +35,7 @@ $modules = ['posts', 'forum', 'catalogs', 'gallery'];
 foreach ($modules as $allowed) {
     if (array_key_exists($allowed, $enabled)) {
         $search     .= '%26'.$allowed.'=on';      # Create the parameter for search from flash tagcloud
-        $search_txt .= '&amp;'.$allowed.'=on';    # Create the parameter for search from text tagcloud
+        $search_txt .= '&'.$allowed.'=on';    # Create the parameter for search from text tagcloud
     }
 }
 
@@ -78,7 +78,7 @@ if (!empty($tags)) {
         if ($tags_rate[$i] > 9) {
             $tags_rate[$i] = 9;
         }
-        $tagcloud['tags_txt'] .= '<span><a href="'.MODULE.'search&amp;search='.$tags_cloud[$i].$search_txt.'" style="color:'.$colors[mt_rand(0,10)].';font-size:'.$font_size[$tags_rate[$i]].'px">'.$tags_cloud[$i].'</a></span>'.LF;
+        $tagcloud['tags_txt'] .= '<span><a href="'.MODULE.'search&search='.$tags_cloud[$i].$search_txt.'" style="color:'.$colors[mt_rand(0,10)].';font-size:'.$font_size[$tags_rate[$i]].'px">'.$tags_cloud[$i].'</a></span>'.LF;
     }
 
     $tagcloud['path'] = MODULES.'tagcloud'.DS;

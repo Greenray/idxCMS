@@ -99,7 +99,7 @@ class PARSER {
             'area'      => $area[1],
             'smiles'    => $names,
             'colors'    => $colors,
-            'path'      => MODULE.'editor&amp;dir='.$dir
+            'path'      => MODULE.'editor&dir='.$dir
         ]);
         return $TPL->parse();
     }
@@ -311,7 +311,7 @@ class PARSER {
         $player['loop']      = empty($player['loop']) ? 'no' : 'yes';
         return '<object type="application/x-shockwave-flash" data="'.TOOLS.'scmp3player.swf" id="mp3player1" width="'.$player['width'].'" height="'.$player['height'].'">
                     <param name="movie" value="'.TOOLS.'scmp3player.swf">
-                    <param name="FlashVars" value="playerID=1&amp;bg='.$player['bgcolor'].'&amp;leftbg='.$player['leftbg'].'&amp;lefticon='.$player['lefticon'].'&amp;rightbg='.$player['rightbg'].'&amp;rightbghover='.$player['rightbghover'].'&amp;righticon='.$player['righticon'].'&amp;righticonhover='.$player['righticonhover'].'&amp;text='.$player['playertext'].'&amp;slider='.$player['slider'].'&amp;track='.$player['track'].'&amp;border='.$player['border'].'&amp;loader='.$player['loader'].'&amp;loop='.$player['loop'].'&amp;autostart='.$player['autostart'].'&amp;soundFile=\\1">
+                    <param name="FlashVars" value="playerID=1&bg='.$player['bgcolor'].'&leftbg='.$player['leftbg'].'&lefticon='.$player['lefticon'].'&rightbg='.$player['rightbg'].'&rightbghover='.$player['rightbghover'].'&righticon='.$player['righticon'].'&righticonhover='.$player['righticonhover'].'&text='.$player['playertext'].'&slider='.$player['slider'].'&track='.$player['track'].'&border='.$player['border'].'&loader='.$player['loader'].'&loop='.$player['loop'].'&autostart='.$player['autostart'].'&soundFile=\\1">
                     <param name="quality" value="high">
                     <param name="menu" value="FALSE">
                     <param name="wmode" value="transparent">

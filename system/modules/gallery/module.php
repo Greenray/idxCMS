@@ -13,19 +13,16 @@ require SYS.'gallery.class.php';
 switch (SYSTEM::get('locale')) {
     case 'ru':
         $LANG['def']['Gallery'] = 'Галерея';
-        $LANG['def']['Last photos'] = 'Последние фото';
         $LANG['def']['Random image'] = 'Случайное изображение';
         break;
 
     case 'ua':
         $LANG['def']['Gallery'] = 'Галерея';
-        $LANG['def']['Last photos'] = 'Останні фото';
         $LANG['def']['Random image'] = 'Випадкове зображення';
         break;
 
     case 'by':
         $LANG['def']['Gallery'] = 'Галерэя';
-        $LANG['def']['Last photos'] = 'Апошнія фота';
         $LANG['def']['Random image'] = 'Выпадковае малюнак';
         break;
 }
@@ -33,6 +30,7 @@ switch (SYSTEM::get('locale')) {
 SYSTEM::registerModule('gallery', 'Gallery', 'main');
 SYSTEM::registerModule('gallery.randimage', 'Random image', 'box');
 SYSTEM::registerModule('gallery.last', 'Gallery updates', 'box');
+SYSTEM::registerModule('gallery.preview', 'Gallery preview', 'box');
 
 SYSTEM::registerMainMenu('gallery');
 SYSTEM::registerSiteMap('gallery');

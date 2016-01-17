@@ -182,8 +182,6 @@ textarea:focus { border: 1px solid red }
     #layout-right li { margin-left: 5px }
     #layout-left:after,
     #layout-right:after { clear: both; content: "."; display: block; height: 0; overflow: hidden; visibility: hidden }
-
-
 .main .title { margin: 20px 0 10px }
 .main .content { padding: 10px }
 .box { padding: 10px }
@@ -363,7 +361,7 @@ textarea:focus { border: 1px solid red }
     .comment .text img { margin: 0 10px }
     .comment_edit,
     .comment_post { margin: 30px 10px 0; overflow: hidden }
-.random-image { margin: 5px 0 ; }
+.random-image { margin: 5px 0 }
 .rate {
     background: none;
     float: right;

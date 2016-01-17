@@ -55,7 +55,6 @@ die();?>
                 [show=point,{CURRENT_MODULE}@win]
             </div>
             <div id="layout-right">
-                [show=error]
                 [show=box,user.panel@panel]
                 [show=point,right@box]
             </div>

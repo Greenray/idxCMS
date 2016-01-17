@@ -129,6 +129,7 @@ if (!empty($item) && !empty($category) && !empty($section)) {
         $showed  = 0;
         $perpage = 9;
         $pagination = GetPagination($page, $perpage, $count);
+
         for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
             $item = CMS::call('GALLERY')->getImage($keys[$i]);
             $item['date']    = FormatTime('d F Y', $item['time']).' '.__('year');
@@ -145,6 +146,7 @@ if (!empty($item) && !empty($category) && !empty($section)) {
 //            }
             ++$showed;
         }
+
         $TPL = new TEMPLATE(__DIR__.DS.'images.tpl');
         $TPL->set('images', $images);
         $output .= $TPL->parse();

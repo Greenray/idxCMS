@@ -484,12 +484,12 @@ die();?>
         <button type="button" class="bbbutton" onclick="CreateBBTag('[note]','[/note]','$area');">
             <img src="[$bbimg:]note.png" name="note" title="__Note__" width="20" height="20" alt="" />
         </button>
+        <button type="button" class="bbbutton" onclick="Preview('$area','{MODULE}editor');">
+            <img src="[$bbimg:]preview.gif" name="preview" title="__Preview__" width="20" height="20" alt="" />
+        </button>
     <!-- ENDIF -->
     <button type="button" class="bbbutton" onclick="RemoveBBTag('$area');">
         <img src="[$bbimg:]cleanup.gif" name="remove" title="__Remove BBcodes__" width="20" height="20" alt="" />
-    </button>
-    <button type="button" class="bbbutton" onclick="Preview('$area','{MODULE}editor');">
-        <img src="[$bbimg:]preview.gif" name="preview" title="__Preview__" width="20" height="20" alt="" />
     </button>
     <!-- IF !empty($full) -->
         <div id="image_$area" unselectable="on" class="bbtools" style="display:none;">

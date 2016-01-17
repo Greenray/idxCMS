@@ -14,8 +14,8 @@ die();?>
                 $item.date<br />
                 <!-- IF !empty($item.image) -->
                     <div class="center">
-                        <a href="$item.image">
-                            <img src="$item.image" width="200" height="150" alt="__Image__" />
+                        <a href="{CONTENT}gallery{DS}$image.section{DS}$image.category{DS}$image.id{DS}$image.image">
+                            <img src="{CONTENT}gallery{DS}$image.section{DS}$image.category{DS}$image.id{DS}$image.image.jpg" width="200" height="150" alt="__Image__" />
                         </a>
                     </div>
                 <!-- ENDIF -->

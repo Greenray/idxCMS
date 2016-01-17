@@ -226,4 +226,53 @@ class ITEMS extends CATEGORIES {
         }
         return $result;
     }
+
+    /**
+     * Gets the last items from category.
+     * The number of the latest items specified in configuration.
+     *
+     * @param  string $format The parameter for formatting posts time
+     * @return array          List of latest items
+     */
+    public function getCategoryLastItems($format) {
+        $items  = array_flip($this->getStat('time'));
+        krsort($items);
+
+        $result = [];
+        if (!empty($items)) {
+            $items = array_slice($items, 0, CONFIG::getValue('main', 'last'), TRUE);
+            foreach($items as $key => $data) {
+                $id = explode('.', $data);
+                CONTENT::getContent($id[0]);
+                $item = $this->getItem($id[1]);
+                $item['date'] = FormatTime($format, $item['time']);
+                $result['items'][] = $item;
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Gets list of the latest items (posts, catalog's items? etc.).
+     * The number of the latest items specified in configuration.
+     *
+     * @param  array $items Full list of items
+     * @return array        List of latest items
+     */
+    public function getLastItems($items) {
+        krsort($items);
+        $items  = array_slice($items, 0, (int) CONFIG::getValue('main', 'last'), TRUE);
+        $result = [];
+        foreach ($items as $key => $data) {
+            $parts = explode('.', $data);
+            $this->getCategories($parts[0]);
+            CONTENT::getContent($parts[1]);
+            $item = $this->getItem($parts[2]);
+            $item['date']      = FormatTime('d F Y', $item['time']);
+            $item['section']   = $parts[0];
+            $item['category']  = $parts[1];
+            $result[] = $item;
+        }
+        return $result;
+    }
 }

@@ -34,7 +34,7 @@ try {
         }
     }
 } catch (Exception $error) {
-    SYSTEM::showError($error->getMessage());
+    echo SYSTEM::showError($error->getMessage());
 }
 #
 # Existing sections
@@ -92,7 +92,7 @@ if (!empty($REQUEST['new']) || empty($sections)) {
         'section' => empty($REQUEST['section']) ? '' : $REQUEST['section'],
         'title'   => empty($REQUEST['title'])   ? '' : $REQUEST['title'],
         'desc'    => empty($REQUEST['desc'])    ? '' : $REQUEST['desc'],
-        'access'  => empty($REQUEST['access'])  ? 0  : (int)$REQUEST['access'],
+        'access'  => empty($REQUEST['access'])  ? 0  : $REQUEST['access'],
         'bbCodes' => CMS::call('PARSER')->showBbcodesPanel('form.desc')
     ]);
 

@@ -9,15 +9,13 @@ die();?>
     <ul>
     <!-- FOREACH item = $items -->
         <li>
-            <a href="$item.link">$item.title</a><br />
+            <a href="$item.link">$item.title</a>
             <div class="info">
                 $item.date<br />
                 <!-- IF !empty($item.image) -->
-                    <div class="center">
-                        <a href="{CONTENT}gallery{DS}$image.section{DS}$image.category{DS}$image.id{DS}$image.image">
-                            <img src="{CONTENT}gallery{DS}$image.section{DS}$image.category{DS}$image.id{DS}$image.image.jpg" width="200" height="150" alt="__Image__" />
-                        </a>
-                    </div>
+                    <a href="{CONTENT}gallery{DS}$item.section{DS}$item.category{DS}$item.id{DS}$item.image">
+                        <img src="{CONTENT}gallery{DS}$item.section{DS}$item.category{DS}$item.id{DS}$item.image.jpg" width="200" height="150" alt="__Image__" />
+                    </a><br />
                 <!-- ENDIF -->
                 __Views__: $item.views
                 <!-- IF !empty($item.comments) -->

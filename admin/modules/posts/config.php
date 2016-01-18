@@ -7,10 +7,10 @@ if (!defined('idxADMIN')) die();
 
 if (!empty($REQUEST['save'])) {
     $config = [];
-    $config['description_length'] = empty($REQUEST['description_length']) ? 500  : (int) $REQUEST['description_length'];
-    $config['message_length']     = empty($REQUEST['message_length'])     ? 4000 : (int) $REQUEST['message_length'];
-    $config['posts_per_page']     = empty($REQUEST['posts_per_page'])     ? 10   : (int) $REQUEST['posts_per_page'];
-    $config['comments_per_page']  = empty($REQUEST['comments_per_page'])  ? 10   : (int) $REQUEST['comments_per_page'];
+    $config['description_length'] = empty($REQUEST['description_length']) ? 500  : $REQUEST['description_length'];
+    $config['message_length']     = empty($REQUEST['message_length'])     ? 4000 : $REQUEST['message_length'];
+    $config['posts_per_page']     = empty($REQUEST['posts_per_page'])     ? 10   : $REQUEST['posts_per_page'];
+    $config['comments_per_page']  = empty($REQUEST['comments_per_page'])  ? 10   : $REQUEST['comments_per_page'];
     CMS::call('CONFIG')->setSection('posts', $config);
     if (CMS::call('CONFIG')->save())
          echo SYSTEM::showMessage('Configuration saved');

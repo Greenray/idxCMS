@@ -1000,8 +1000,7 @@ class RainTpl_SyntaxException extends RainTpl_Exception{
 	 *
 	 * @return int | null
 	 */
-	public function getTemplateLine()
-	{
+	public function getTemplateLine() {
 		return $this->templateLine;
 	}
 
@@ -1011,9 +1010,8 @@ class RainTpl_SyntaxException extends RainTpl_Exception{
 	 * @param int $templateLine
 	 * @return RainTpl_SyntaxException
 	 */
-	public function setTemplateLine($templateLine)
-	{
-		$this->templateLine = (int) $templateLine;
+	public function setTemplateLine($templateLine) {
+		$this->templateLine = $templateLine;
 		return $this;
 	}
 

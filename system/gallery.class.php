@@ -104,7 +104,7 @@ class GALLERY extends CONTENT {
             if (!mkdir($path.$id, 0777)) {
                 throw new Exception('Cannot create'.' '.$item);
             }
-            $this->content[$id]['id']       = (int) $id;
+            $this->content[$id]['id']       = $id;
             $this->content[$id]['author']   = USER::getUser('user');
             $this->content[$id]['nick']     = USER::getUser('nick');
             $this->content[$id]['time']     = time();
@@ -123,7 +123,7 @@ class GALLERY extends CONTENT {
         $this->content[$id]['title']     = $title;
         $this->content[$id]['keywords']  = FILTER::get('REQUEST', 'keywords');
         $this->content[$id]['copyright'] = FILTER::get('REQUEST', 'copyright');
-        $this->content[$id]['opened']    = (int) FILTER::get('REQUEST', 'opened');
+        $this->content[$id]['opened']    = FILTER::get('REQUEST', 'opened');
         $desc = FILTER::get('REQUEST', 'desc');
         if (empty($desc)) {
             $desc = $this->cutText($text, CONFIG::getValue('gallery', 'description_length'));

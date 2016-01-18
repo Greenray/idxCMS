@@ -82,7 +82,7 @@ if (!empty($REQUEST['day']) && !empty($REQUEST['viewlog'])) {
     #
     if (!empty($REQUEST['build'])) {
         CMS::call('LOG')->logMergeByMonth();
-        SYSTEM::showMessage('Done');
+        echo SYSTEM::showMessage('Done');
     }
     #
     # Show lists of daily and monthly logs

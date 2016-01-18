@@ -124,7 +124,7 @@ if (!empty($sections)) {
                 'sections' => $choice,
                 'title'    => empty($REQUEST['title'])  ? '' : $REQUEST['title'],
                 'desc'     => empty($REQUEST['desc'])   ? '' : $REQUEST['desc'],
-                'access'   => empty($REQUEST['access']) ? 0  : (int)$REQUEST['access'],
+                'access'   => empty($REQUEST['access']) ? 0  : $REQUEST['access'],
                 'bbCodes'  => CMS::call('PARSER')->showBbcodesPanel('form.desc')
             ]);
             echo $TPL->parse();

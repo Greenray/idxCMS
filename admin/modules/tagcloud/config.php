@@ -95,16 +95,16 @@ if (isset($init)) {
     }
 } else {
     if (!empty($REQUEST['save'])) {
-        $config['width']   = empty($REQUEST['width'])   ? 210 : (int) $REQUEST['width'];
-        $config['height']  = empty($REQUEST['height'])  ? 200 : (int) $REQUEST['height'];
+        $config['width']   = empty($REQUEST['width'])   ? 210       : $REQUEST['width'];
+        $config['height']  = empty($REQUEST['height'])  ? 200       : $REQUEST['height'];
         $config['bgcolor'] = empty($REQUEST['bgcolor']) ? '#FFFFFF' : $REQUEST['bgcolor'];
         $config['color']   = FILTER::get('REQUEST', 'color');
         $config['hicolor'] = FILTER::get('REQUEST', 'hicolor');
-        $config['wmode']   = empty($REQUEST['wmode'])   ? ''  : 'transparent';
-        $config['speed']   = empty($REQUEST['speed'])   ? 100 : (int) $REQUEST['speed'];
-        $config['style']   = empty($REQUEST['style'])   ? 16  : (int) $REQUEST['style'];
-        $config['tags']    = empty($REQUEST['tags'])    ? 20  : (int) $REQUEST['tags'];
-        $config['distr']   = empty($REQUEST['distr'])   ? 'FALSE' : 'TRUE';
+        $config['wmode']   = empty($REQUEST['wmode'])   ? ''    : 'transparent';
+        $config['speed']   = empty($REQUEST['speed'])   ? 100   : $REQUEST['speed'];
+        $config['style']   = empty($REQUEST['style'])   ? 16    : $REQUEST['style'];
+        $config['tags']    = empty($REQUEST['tags'])    ? 20    : $REQUEST['tags'];
+        $config['distr']   = empty($REQUEST['distr'])   ? FALSE : TRUE;
         CMS::call('CONFIG')->setSection('tagcloud', $config);
         if (CMS::call('CONFIG')->save())
              echo SYSTEM::showMessage('Configuration saved');
@@ -112,10 +112,7 @@ if (isset($init)) {
     }
     if (!empty($REQUEST['create'])) {
         $result = CreateTags();
-
-        if (!$result) {
-            SYSTEM::showError('Cannot save file');
-        }
+        if (!$result) echo SYSTEM::showError('Cannot save file');
     }
     if ($config['distr'] === 'FALSE') {
         unset($config['distr']);
@@ -134,9 +131,7 @@ if (isset($init)) {
                 }
             }
         }
-        if (!file_put_contents(CONTENT.'tags', serialize($tags))) {
-            SYSTEM::showError('Cannot save file');
-        }
+        if (!file_put_contents(CONTENT.'tags', serialize($tags))) echo SYSTEM::showError('Cannot save file');
     }
     $create_tags = 0;
 

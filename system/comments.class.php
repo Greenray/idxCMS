@@ -14,7 +14,7 @@
 class COMMENTS extends ITEMS {
 
     /** Class initialization */
-    protected function __construct() {}
+    public function __construct() {}
 
     /**
      * Gets comments.
@@ -105,7 +105,7 @@ class COMMENTS extends ITEMS {
      * @param integer $perpage Elements on the page
      * @param stringe $path    Path to the template of the page
      */
-    function showComments($item, $page, $perpage, $path) {
+    public function showComments($item, $page, $perpage, $path) {
         $comments = $this->getComments($item['id']);
         if (!empty($comments)) {
             $TPL = new TEMPLATE($path.'comment.tpl');
@@ -127,16 +127,29 @@ class COMMENTS extends ITEMS {
                 #
                 # Form to post comment
                 #
-                $TPL = new TEMPLATE($path.'comment-post.tpl');
-                $TPL->set('nick',           USER::getUser('nick'));
-                $TPL->set('admin',          USER::$root);
-                $TPL->set('text',           FILTER::get('REQUEST', 'text'));
-                $TPL->set('action',         $item['link']);
-                $TPL->set('bbcodes',        CMS::call('PARSER')->showBbcodesPanel('comment.text'));
-                $TPL->set('message_length', USER::$root ? NULL : CONFIG::getValue(strtolower($obj), 'message_length'));
-                SYSTEM::defineWindow('Comment', $TPL->parse());
+                $this->showCommentForm($item['link']);
             }
         }
+    }
+
+    /**
+     * Form to post comment.
+     *
+     * @param  obj    $obj  Current object
+     * @param  array  $item Item to comment
+     * @return string Form to post comment
+     */
+    public function showCommentForm($action = '', $for ='') {
+        preg_match("#\module=(.*?)&#is", $action, $obj);
+        $TPL = new TEMPLATE(TEMPLATES.'comment-post.tpl');
+        $TPL->set('action',         $action);
+        $TPL->set('nick',           USER::getUser('nick'));
+        $TPL->set('admin',          USER::$root);
+        $TPL->set('text',           FILTER::get('REQUEST', 'text'));
+        $TPL->set('bbcodes',        CMS::call('PARSER')->showBbcodesPanel('comment.text'));
+        $TPL->set('message_length', USER::$root ? NULL : CONFIG::getValue($obj[1], 'message_length'));
+        $TPL->set('for',            $for);
+        SYSTEM::defineWindow('Comment', $TPL->parse());
     }
 
     /**
@@ -160,7 +173,7 @@ class COMMENTS extends ITEMS {
         $path = $this->sections[$this->section]['categories'][$this->category]['path'];
         $id = $this->newId($this->comments);
 
-        $this->comments[$id]['id']     = (int) ($id);
+        $this->comments[$id]['id']     = $id;
         $this->comments[$id]['author'] = USER::getUser('user');
         $this->comments[$id]['nick']   = USER::getUser('nick');
         $this->comments[$id]['time']   = time();

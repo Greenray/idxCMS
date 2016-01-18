@@ -164,7 +164,7 @@ class SECTIONS extends DBASE {
         $this->sections[$id]['id']     = $id;
         $this->sections[$id]['title']  = $title;
         $this->sections[$id]['desc']   = FILTER::get('REQUEST', 'desc');
-        $this->sections[$id]['access'] = (int) (FILTER::get('REQUEST', 'access'));
+        $this->sections[$id]['access'] = FILTER::get('REQUEST', 'access');
         $this->sections[$id]['link']   = MODULE.$this->module.SECTION.$id;
         $this->sections[$id]['path']   = $this->container.$id.DS;
 

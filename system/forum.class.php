@@ -61,7 +61,7 @@ class FORUM extends CONTENT {
             if (!mkdir($path.$id, 0777)) {
                 throw new Exception('Cannot save topic');
             }
-            $this->content[$id]['id']       = (int) ($id);
+            $this->content[$id]['id']       = $id;
             $this->content[$id]['author']   = USER::getUser('user');
             $this->content[$id]['nick']     = USER::getUser('nick');
             $this->content[$id]['time']     = time();
@@ -70,8 +70,8 @@ class FORUM extends CONTENT {
             $this->content[$id]['comments'] = 0;
         }
         $this->content[$id]['title']  = $title;
-        $this->content[$id]['opened'] = (int) empty(FILTER::get('REQUEST', 'opened')) ? 1 : 0;
-        $this->content[$id]['pinned'] = (int) FILTER::get('REQUEST', 'pinned');
+        $this->content[$id]['opened'] = empty(FILTER::get('REQUEST', 'opened')) ? TRUE : FALSE;
+        $this->content[$id]['pinned'] = FILTER::get('REQUEST', 'pinned');
         if (!file_put_contents($path.$id.DS.$this->text, $text, LOCK_EX)) {
             throw new Exception('Cannot save topic');
         }

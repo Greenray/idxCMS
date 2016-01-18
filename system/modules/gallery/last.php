@@ -8,9 +8,9 @@ if (!defined('idxCMS')) die();
 $images = CMS::call('GALLERY')->getSectionsLastItems();
 
 if (!empty($images)) {
-    $items = CMS::call('GALLERY')->getLastItems($images);
+    $images = CMS::call('GALLERY')->getLastItems($images);
 
     $TPL = new TEMPLATE(__DIR__.DS.'last.tpl');
-    $TPL->set('items', $items);
+    $TPL->set('items', $images);
     SYSTEM::defineWindow('Gallery updates', $TPL->parse());
 }

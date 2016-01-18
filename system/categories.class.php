@@ -101,10 +101,10 @@ class CATEGORIES extends SECTIONS {
         #
         # Access level of the category should be more or is equal to access level of the section
         #
-        $access = (int) FILTER::get('REQUEST', 'access');
-        $section_access = (int) $this->sections[$this->section]['access'];
+        $access = FILTER::get('REQUEST', 'access');
+        $section_access = $this->sections[$this->section]['access'];
 
-        $this->sections[$this->section]['categories'][$id]['id']     = (int) $id;
+        $this->sections[$this->section]['categories'][$id]['id']     = $id;
         $this->sections[$this->section]['categories'][$id]['title']  = $title;
         $this->sections[$this->section]['categories'][$id]['desc']   = FILTER::get('REQUEST', 'desc');
         $this->sections[$this->section]['categories'][$id]['access'] = ($section_access >= $access) ? $section_access : $access;

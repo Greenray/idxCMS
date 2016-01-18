@@ -197,7 +197,7 @@ function SaveSortedSections($obj, $params) {
             CMS::call($obj)->saveCategories($section, $categories);
         }
     } catch (Exception $error) {
-        SYSTEM::showError($error->getMessage());
+        echo SYSTEM::showError($error->getMessage());
     }
     return TRUE;
 }

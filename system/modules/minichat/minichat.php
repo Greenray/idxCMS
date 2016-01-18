@@ -15,7 +15,7 @@ if (!empty($REQUEST['mctext']) && !empty($REQUEST['save'])) {
         }
         FILTER::remove('REQUEST', 'mctext');
     } catch (Exception $error) {
-        SYSTEM::showError($error->getMessage());
+        echo SYSTEM::showError($error->getMessage());
     }
 } else {
     if (!empty($REQUEST['mcaction']) && USER::moderator('minichat')) {
@@ -46,7 +46,7 @@ $output = [];
 if (!empty($messages)) {
     $messages = array_reverse($messages, TRUE);
 
-//    $messages = array_slice($messages, 0, (int) CONFIG::getValue('minichat', 'mess-to-show'), TRUE);
+//    $messages = array_slice($messages, 0, CONFIG::getValue('minichat', 'mess-to-show'), TRUE);
 
     foreach ($messages as $key => $message) {
         $output['messages'][$key]         = $message;

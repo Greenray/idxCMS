@@ -54,6 +54,7 @@ die();?>
             <table id="sortable">
             <!-- FOREACH section = $sections -->
                 <tr><td colspan="8" class="redips-mark"><div id="$section.id" class="group">$section.title</div></td></tr>
+                <tr style="line-height:2px;height:2px;"><td colspan="7" style="border:0;">&nbsp;</td></tr>
                 <!-- FOREACH category = $section.categories -->
                     <tr class="$category.class">
                         <td class="redips-rowhandler">

@@ -57,9 +57,9 @@ class IMAGE {
      */
     public function __construct($upload_dir, $max_size = '', $thumb_width = '', $thumb_height = '') {
         $this->upload_dir   = $upload_dir;
-        $this->max_size     = empty($max_size)     ? (int) CONFIG::getValue('main', 'max_filesize') : (int) $max_size;
-        $this->thumb_width  = empty($thumb_width)  ? (int) CONFIG::getValue('main', 'thumb_width')  : (int) $thumb_width;
-        $this->thumb_height = empty($thumb_height) ? (int) CONFIG::getValue('main', 'thumb_height') : (int) $thumb_height;
+        $this->max_size     = empty($max_size)     ? CONFIG::getValue('main', 'max_filesize') : $max_size;
+        $this->thumb_width  = empty($thumb_width)  ? CONFIG::getValue('main', 'thumb_width')  : $thumb_width;
+        $this->thumb_height = empty($thumb_height) ? CONFIG::getValue('main', 'thumb_height') : $thumb_height;
     }
 
     /** Calculates parameters to resize image */

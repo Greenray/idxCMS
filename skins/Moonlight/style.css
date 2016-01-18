@@ -20,7 +20,6 @@ blockquote { font-style: italic; margin: 1em 40px }
 code { font-family: monospace, 'courier new'; font-size: 1em }
 dd { margin: 0 0 0 40px }
 fieldset { border: none; margin: 0; padding: 0 }
-form { margin: 0 }
 h1 { font-size: 18px; margin: 12px 0 }
 h2 { font-size: 16px; margin: 10px 0 }
 h3 { font-size: 14px; margin: 8px 0 }
@@ -51,13 +50,6 @@ sup {
     vertical-align: baseline }
 sup { top: -0.5em }
 sub { bottom: -0.25em }
-textarea { margin: 0; overflow: auto; vertical-align: top }
-button,
-input {
-    color: black;
-    line-height: normal;
-    padding: 3px;
-    overflow: visible }
 button[disabled],
 input[disabled] { background-color: #343536; border-color: #585858; cursor: not-allowed }
 button::-moz-focus-inner,
@@ -67,10 +59,11 @@ button .submit { margin: 0; padding: 2px 5px }
 input[type="button"],
 input[type="reset"],
 input[type="submit"] {
-    background:	url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAeCAMAAADaS4T1AAAAYFBMVEVwcHBtbW1ra2toaGhmZmZjY2NhYWFeXl5cXFxaWlpXV1dVVVVSUlJQUFBNTU1LS0tJSUlGRkZERERBQUE/Pz88PDw9PT0+Pj5AQEBCQkJDQ0NFRUVHR0dISEhKSkpMTEzqthaMAAAAMklEQVQImQXBhQ2AMAAAsOIMlwWH/8+kRSKVyRVKlVrQaHV6g9FktlhFm93hdLk9Xt8PIfgBvdUqyskAAAAASUVORK5CYII=);
-	background-image: -webkit-linear-gradient(top, #909090 1%, #3d3d3d 50%, #404040 99%);
-	background-image: -moz-linear-gradient(top, #909090 1%, #3d3d3d 50%, #404040 99%);
-    background-image: -o-linear-gradient(top, #909090 1%, #3d3d3d 50%, #404040 99%);
+    background: gray;
+	background-image: -webkit-linear-gradient(to bottom, #909090 1%, #3d3d3d 50%, #404040 99%);
+	background-image: -moz-linear-gradient(to bottom, #909090 1%, #3d3d3d 50%, #404040 99%);
+    background-image: -o-linear-gradient(to bottom, #909090 1%, #3d3d3d 50%, #404040 99%);
+    background-image: linear-gradient(to bottom, #909090 1%, #3d3d3d 50%, #404040 99%);
     border: 1px solid #838383;
 	border: 1px solid white;
     border-radius: 6px;
@@ -80,17 +73,14 @@ input[type="submit"] {
     -moz-box-shadow: 1px 2px 4px black;
     -webkit-box-shadow: 1px 2px 4px black;
     color: white;
-    cursor: pointer;
 	font-weight: bold;
 	line-height: 20px;
     margin: 5px;
 	min-width: 100px;
-    overflow: visible;
     outline: none;
 	padding: 0px 5px;
     position: relative;
-    text-shadow: 1px 1px 1px black;
-    -webkit-appearance: button }
+    text-shadow: 1px 1px 1px black }
 input[type="email"],
 input[type="text"],
 input[type="password"],
@@ -98,33 +88,19 @@ input[type="url"] {
 	border: 1px solid #747270;
 	border-radius: 5px;
     margin: 5px;
+    padding: 3px;
     -webkit-transition: all 0.3s ease-out;
 	-moz-transition: all 0.3s ease-out;
 	-ms-transition: all 0.3s ease-out;
 	-o-transition: all 0.3s ease-out;
     transition: all 0.3s ease-out }
 input[type="checkbox"],
-input[type="radio"] {
-    box-sizing: border-box;
-    -ms-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    padding: 0;
-    height: 13px;
-    width: 13px }
-input[type="search"] {
-    -webkit-appearance: textfield;
-    box-sizing: content-box;
-    -ms-box-sizing: content-box;
-    -moz-box-sizing: content-box;
-    -webkit-box-sizing: content-box }
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-decoration { -webkit-appearance: none }
+input[type="radio"] { padding: 0; height: 13px; width: 13px }
 input[type="button"]:hover,
 input[type="reset"]:hover,
 input[type="submit"]:hover {
     background: #4C5A64;
-    background: -moz-linear-gradient(top, #6D818F 1%, #404F5A 60%, #2E3940 99%);
+    background: -moz-linear-gradient(to bottom, #6D818F 1%, #404F5A 60%, #2E3940 99%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(3%,#4C5A64), color-stop(4%,#404F5A), color-stop(100%,#2E3940));
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4C5A64', endColorstr='#2E3940',GradientType=0 ) }
 input[type="email"]:hover,
@@ -146,15 +122,14 @@ pre {
     font-size: 1em;
     font-family: monospace, 'courier new';
     padding: 5px 0 }
-select { color: black; margin: 5px 0 0; width: 160px }
+select { color: black; margin: 2px 4px; width: 160px }
     select:focus { outline: 1px solid red }
 table {
-    border-collapse: separate;
     border-spacing: 1px;
     padding: 2px;
     vertical-align: middle;
     width: 100% }
-th, td { padding: 2px; vertical-align: middle }
+th, td { vertical-align: middle }
 table#std { border-spacing: 0 }
 table#std tr { height: 35px }
 table#std td { border: 2px groove white; padding: 0 10px }
@@ -174,25 +149,24 @@ th.views, td.views { width: 80px }
 th.comments, td.comments { width: 120px }
 th.date, td.date { padding: 0 10px; width: 140px }
 textarea {
-    background: white;
+    background: #ffffcc;
     border: 1px solid #a4a4a4;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
     color: black;
     display: inline-block;
     height: auto;
     line-height: 18px;
     margin: 0 0 10px;
     padding: 4px;
-    width: 90%;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px }
-textarea:hover { border-color: #aaa }
-textarea:focus {
-    border: 1px solid #8c8c8c;
-    outline: 2px solid red;
-	-webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5), 0 0 8px rgba(151, 183, 217, 0.6);
-	-moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5), 0 0 8px rgba(151, 183, 217, 0.6);
-	box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5), 0 0 8px rgba(151, 183, 217, 0.6) }
+    vertical-align: top;
+    width: 90% }
+    textarea:focus {
+        border: 1px solid red;
+        -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5), 0 0 8px rgba(151, 183, 217, 0.6);
+        -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5), 0 0 8px rgba(151, 183, 217, 0.6);
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5), 0 0 8px rgba(151, 183, 217, 0.6) }
 
 #wrapper {
     background: url(images/header_bg.jpg) no-repeat center top;
@@ -234,11 +208,11 @@ textarea:focus {
 .slogan { color: yellow; font-size: 12pt; margin: 10px 0 0 }
 .menu {
     background: #404040;
-    background: linear-gradient(top, #dedede 0%, black 100%);
-    background: -webkit-linear-gradient(top, #dedede 0%, black 100%);
-    background: -moz-linear-gradient(top, #dedede 0%, black 100%);
-    background: -o-linear-gradient(top, #dedede 0%, black 100%);
-    background: -ms-linear-gradient(top, #dedede 0%, black 100%);
+    background: -webkit-linear-gradient(to bottom, #dedede 0%, black 100%);
+    background: -moz-linear-gradient(to bottom, #dedede 0%, black 100%);
+    background: -o-linear-gradient(to bottom, #dedede 0%, black 100%);
+    background: -ms-linear-gradient(to bottom, #dedede 0%, black 100%);
+    background: linear-gradient(to bottom, #dedede 0%, black 100%);
      height: 35px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -296,8 +270,7 @@ textarea:focus {
     .menu li:hover>a { color: red }
     .menu li:hover>ul { opacity: 1 }
     .menu li:hover>ul li { height: 35px; padding: 0; overflow: visible }
-.content { padding: 0 }
-    .content .mainbar {
+.content .mainbar {
         background: #f4f4f4;
         border: 1px solid #808385;
         border-radius: 8px;
@@ -314,6 +287,8 @@ textarea:focus {
         padding-bottom: 8px }
     .content .mainbar .comment { margin: 0; padding: 16px 0 0 0 }
     .content .sidebar { float: right; overflow: hidden; width: 230px }
+.actions { float: right; margin: 0 10px 10px 0 }
+.actions a { margin: 0 5px }
 #bad {
     color: #ff0000;
     font-size: 11px;
@@ -327,7 +302,12 @@ textarea:focus {
     text-align: right }
 #no { color: #ff0000 }
 #yes { color: #33cc00 }
-.bbbutton { height: 26px; margin: 0 -2px; padding: 0; width: 26px }
+.bbbutton {
+    height: 26px;
+    margin: 0 -2px;
+    min-width: 26px;
+    padding: 0;
+    width: 26px }
 .bbcodes  { margin: 10px 20px }
     .bbcodes .smiles { margin: 0 0 5px }
     .bbcodes .link_text { margin: 4px 20px; text-align: right }
@@ -335,9 +315,10 @@ textarea:focus {
 .bbselect {	margin: 1px 0 4px }
 .bbtools  { background: #bfcfdf; margin: 10px 0 0; padding: 10px 0 0 }
 .block { display: block }
-.calendar { color: white; width: 100% }
-table .calendar { border: 1px solid #e0dfdf; padding: 2px; vertical-align: middle }
-.calendar th { color: white; text-align: center }
+.calendar { color: white; vertical-align: middle }
+.calendar th { padding: 2px }
+.calendar td { padding: 2px; text-align: center }
+.calendar form input { margin: 5px 0 0 }
 .category { margin: 0 0 0 50px; padding: 4px 0 0 0 }
 .center { text-align: center }
 .clear { clear: both; height: 0; overflow: hidden }
@@ -412,6 +393,21 @@ table .calendar { border: 1px solid #e0dfdf; padding: 2px; vertical-align: middl
     .post .info { clear: both; font-size: 8pt; padding: 4px 10px }
     .post .title { margin: 10px 5px }
     .post .text img { margin: 10px }
+.topic {
+    background: white;
+    border: 1px solid #777;
+    border-radius: 8px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+    box-shadow: 0 0 2px 2px rgba(255, 255, 255, .8) inset, 0 2px 0 rgba(0, 0, 0, .3);
+    -moz-box-shadow: 0 0 2px 2px rgba(255, 255, 255, .8) inset, 0 2px 0 rgba(0, 0, 0, .3);
+    -webkit-box-shadow: 0 0 2px 2px rgba(255, 255, 255, .8) inset, 0 2px 0 rgba(0, 0, 0, .3);
+    box-sizing: content-box;
+    -ms-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    margin: 10px;
+    overflow: hidden }
 .topic .content { overflow: hidden }
     .topic .author { float: left; width: 120px }
     .topic .date { font-size: 10px }
@@ -420,6 +416,32 @@ table .calendar { border: 1px solid #e0dfdf; padding: 2px; vertical-align: middl
     .topic .info span.profile   { padding: 5px }
     .topic .info span.profile a { margin: 0 5px }
     .topic .text { margin: 0 10px 10px 130px }
+.counter td { height: 20px }
+.error,
+.message {
+    background: white;
+	background-image: linear-gradient(to bottom, white 1%, #999 99%);
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);
+    display: none;
+    font-weight: bold;
+    min-width: 300px;
+    padding: 15px;
+    position: relative;
+    width: 300px }
+.error p,
+.message p { padding: 10px; }
+.error .title,
+.message .title {
+    font-size: 15px;
+    font-weight: bold;
+    padding: 8px 0;
+    text-shadow: -1px 1px 1px rgba(0, 0, 0, 0.8);
+    text-transform: uppercase }
+.error .title { background: red; color: yellow }
+.message .title { background: black; color: white }
+.dark { background: #88c3b0 }
+.light  { background: #dee3e7 }
 #editor { margin: 20px 0 0; overflow: hidden; padding: 15px }
     #editor button { cursor: pointer; margin: 0px auto }
     #editor button:hover { cursor: pointer; margin: 0px auto }
@@ -441,7 +463,6 @@ table .calendar { border: 1px solid #e0dfdf; padding: 2px; vertical-align: middl
     #editor input:focus { background: white; border: 1px solid red }
     #editor input[type="checkbox"] { float: none }
     #editor legend { font-size: 24px; font-weight: bold; margin: 10px 0 }
-.dark { background: #d4dee3 }
 .help {
     color: red;
     font-style: italic;
@@ -455,9 +476,7 @@ table .calendar { border: 1px solid #e0dfdf; padding: 2px; vertical-align: middl
 .login-panel { margin: 10px 0 }
 .main { margin: 0 auto }
 .main .title { margin: 20px 0 10px; font-weight: bold }
-.main .content { padding: 10px }
-.actions { float: right; margin: 0 10px 10px 0 }
-.actions a { margin: 0 5px }
+.login-panel { margin: 10px 0 }
 .more { float: right; margin: 0 2px }
 .negative { color: red; font-weight: bold }
 .positive { color: green; font-weight: bold }
@@ -502,7 +521,10 @@ table .calendar { border: 1px solid #e0dfdf; padding: 2px; vertical-align: middl
     .pass_img#progresbar-2-90, .pass_img#passbar-90 { background: transparent url(../images/password/pass_90.gif) no-repeat }
     .pass_img#progresbar-2-100, .pass_img#passbar-100 { background: transparent url(../images/password/pass_100.gif) no-repeat }
 .poll { margin: 0 0 10px }
+.poll table { margin: 3px 0 }
 .popup_input { background: transparent; border: 0; color: white }
+.profile th,
+.profile td { height: 35px; padding: 0 10px; vertical-align: middle }
 .random-image { margin: 5px 0 }
 .rate { float: right; height: 18px; margin: 0 10px }
     .rate button { border: 0; min-width: 16px }
@@ -635,9 +657,10 @@ table .calendar { border: 1px solid #e0dfdf; padding: 2px; vertical-align: middl
     .simple-menu li:last-child { border-right: 1px solid black; margin-right: 8px; padding-right: 12px }
 #sliding_content { margin: 15px auto; text-align: center; width: 635px }
 #sliding_form {
-    background: -webkit-linear-gradient(top, white 1%, #a0a0a0 99%);
-	background: -moz-linear-gradient(top, white 1%, #a0a0a0 99%);
-    background: -o-linear-gradient(top, white 1%, #a0a0a0 99%);
+    background: -webkit-linear-gradient(to bottom, white 1%, #a0a0a0 99%);
+	background: -moz-linear-gradient(to bottom, white 1%, #a0a0a0 99%);
+    background: -o-linear-gradient(to bottom, white 1%, #a0a0a0 99%);
+    background: linear-gradient(to bottom, white 1%, #a0a0a0 99%);
     border: 1px solid #888;
     border-radius: 10px;
     -moz-border-radius: 10px;
@@ -652,10 +675,10 @@ table .calendar { border: 1px solid #e0dfdf; padding: 2px; vertical-align: middl
     #navigation ul { float: left; margin: 10px 0 0 15px }
     #navigation ul li { float: left; margin: 10px 2px; position: relative }
     #navigation ul li a {
-        background-image: -webkit-linear-gradient(top, #999 1%, #555 50%, #222 99%);
-        background-image: -moz-linear-gradient(top, #999 1%, #555 50%, #222 99%);
-        background-image: -ms-linear-gradient(top, #999 1%, #555 50%, #222 99%);
-        background-image: -o-linear-gradient(top, #999 1%, #555 50%, #222 99%);
+        background-image: -webkit-linear-gradient(to bottom, #999 1%, #555 50%, #222 99%);
+        background-image: -moz-linear-gradient(to bottom, #999 1%, #555 50%, #222 99%);
+        background-image: -ms-linear-gradient(to bottom, #999 1%, #555 50%, #222 99%);
+        background-image: -o-linear-gradient(to bottom, #999 1%, #555 50%, #222 99%);
         border: 1px solid #838383;
         border: 1px solid white;
         border-radius: 6px;
@@ -674,10 +697,10 @@ table .calendar { border: 1px solid #e0dfdf; padding: 2px; vertical-align: middl
         text-shadow: 1px 1px 1px black}
     #navigation ul li a:hover,
     #navigation ul li.selected a {
-        background-image: -webkit-linear-gradient(top, #222 1%, #555 50%, #999 99%);
-        background-image: -moz-linear-gradient(top, #222 1%, #555 50%, #999 99%);
-        background-image: -ms-linear-gradient(top, #999 1%, #555 50%, #222 99%);
-        background-image: -o-linear-gradient(top, #222 1%, #555 50%, #999 99%) }
+        background-image: -webkit-linear-gradient(to bottom, #222 1%, #555 50%, #999 99%);
+        background-image: -moz-linear-gradient(to bottom, #222 1%, #555 50%, #999 99%);
+        background-image: -ms-linear-gradient(to bottom, #999 1%, #555 50%, #222 99%);
+        background-image: -o-linear-gradient(to bottom, #222 1%, #555 50%, #999 99%) }
 #steps { overflow: hidden }
     #steps form { padding: 0 }
     #steps form fieldset { padding: 0 }
@@ -738,46 +761,46 @@ table .calendar { border: 1px solid #e0dfdf; padding: 2px; vertical-align: middl
         width: 200px }
     #steps form input:focus { background: white; border: 1px solid red }
 .submit-button {
-   background: #404040;
-   background: -webkit-gradient(linear, left top, left bottom, from(#909090), to(#404040));
-   background: -webkit-linear-gradient(top, #909090, #404040);
-   background: -moz-linear-gradient(top, #909090, #404040);
-   background: -ms-linear-gradient(top, #909090, #404040);
-   background: -o-linear-gradient(top, #909090, #404040);
-   background-image: -ms-linear-gradient(top, #909090 0%, #404040 100%);
-   border: 1px solid #ffffff;
-   -webkit-border-radius: 4px;
-   -moz-border-radius: 4px;
-   border-radius: 4px;
-   -webkit-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
-   -moz-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
-   box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
-   color: #ffffff;
-   font-family: helvetica, serif;
-   font-size: 14px;
-   padding: 8.5px 18px;
-   text-decoration: none;
-   text-shadow: #000000 0 1px 0;
-   vertical-align: middle }
+    background: #404040;
+    background: -webkit-gradient(linear, left top, left bottom, from(#909090), to(#404040));
+    background: -webkit-linear-gradient(to bottom, #909090, #404040);
+    background: -moz-linear-gradient(to bottom, #909090, #404040);
+    background: -ms-linear-gradient(to bottom, #909090, #404040);
+    background: -o-linear-gradient(to bottom, #909090, #404040);
+    background-image: -ms-linear-gradient(to bottom, #909090 0%, #404040 100%);
+    border: 1px solid #ffffff;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+    -moz-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+    box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+    color: #ffffff;
+    font-family: helvetica, serif;
+    font-size: 14px;
+    padding: 8.5px 18px;
+    text-decoration: none;
+    text-shadow: #000000 0 1px 0;
+    vertical-align: middle }
     .submit-button:hover {
        border: 1px solid #ffffff;
        text-shadow: #000000 0 1px 0;
        background: #909090;
-       background: -webkit-gradient(linear, left top, left bottom, from(#404040), to(#909090));
-       background: -webkit-linear-gradient(top, #404040, #909090);
-       background: -moz-linear-gradient(top, #404040, #909090);
-       background: -ms-linear-gradient(top, #404040, #909090);
-       background: -o-linear-gradient(top, #404040, #909090);
-       background-image: -ms-linear-gradient(top, #404040 0%, #909090 100%);
+       background-image: -webkit-gradient(linear, left top, left bottom, from(#404040), to(#909090));
+       background-image: -webkit-linear-gradient(to bottom, #404040, #909090);
+       background: -moz-linear-gradient(to bottom, #404040, #909090);
+       background: -ms-linear-gradient(to bottom, #404040, #909090);
+       background: -o-linear-gradient(to bottom, #404040, #909090);
+       background-image: -ms-linear-gradient(to bottom, #404040 0%, #909090 100%);
        color: #ffff00 }
     .submit-button:active {
        background: #297377;
        background: -webkit-gradient(linear, left top, left bottom, from(#297377), to(#909090));
-       background: -webkit-linear-gradient(top, #297377, #297377);
-       background: -moz-linear-gradient(top, #297377, #297377);
-       background: -ms-linear-gradient(top, #297377, #297377);
-       background: -o-linear-gradient(top, #297377, #297377);
-       background-image: -ms-linear-gradient(top, #297377 0%, #297377 100%);
+       background: -webkit-linear-gradient(to bottom, #297377, #297377);
+       background: -moz-linear-gradient(to bottom, #297377, #297377);
+       background: -ms-linear-gradient(to bottom, #297377, #297377);
+       background: -o-linear-gradient(to bottom, #297377, #297377);
+       background-image: -ms-linear-gradient(to bottom, #297377 0%, #297377 100%);
        border: 1px solid white;
        color: white;
        text-shadow: #000000 0 1px 0 }
@@ -825,21 +848,6 @@ table .calendar { border: 1px solid #e0dfdf; padding: 2px; vertical-align: middl
     .tab_content .more { float: right; margin: 0 2px }
     .tab_content .section { margin: 0 0 0 50px; padding: 5px 0 0 }
     .tab_content .section a { display: inline }
-.topic {
-    background: white;
-    border: 1px solid #777;
-    border-radius: 8px;
-	-moz-border-radius: 8px;
-	-webkit-border-radius: 8px;
-    box-shadow: 0 0 2px 2px rgba(255, 255, 255, .8) inset, 0 2px 0 rgba(0, 0, 0, .3);
-    -moz-box-shadow: 0 0 2px 2px rgba(255, 255, 255, .8) inset, 0 2px 0 rgba(0, 0, 0, .3);
-    -webkit-box-shadow: 0 0 2px 2px rgba(255, 255, 255, .8) inset, 0 2px 0 rgba(0, 0, 0, .3);
-    box-sizing: content-box;
-    -ms-box-sizing: content-box;
-    -moz-box-sizing: content-box;
-    -webkit-box-sizing: content-box;
-    margin: 10px;
-    overflow: hidden }
 .user_panel { margin: 10px; padding: 0 10px }
 .win { margin: 20px 5px }
 .box {

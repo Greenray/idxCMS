@@ -3,7 +3,6 @@
 
 /* enable strict mode */
 "use strict";
-
 // define redipsInit variable
 var redipsInit;
 
@@ -13,24 +12,17 @@ redipsInit = function () {
 	var	rd = REDIPS.drag;
 	// lib initialization
 	rd.init();
-	// set hover color for TR
-	rd.hover.colorTr = '#bbb';
+	// set hover color for TR TD
+	rd.hover.color_td = "#FFCFAE";
+	rd.hover.color_tr = "#9BB3DA";
+    rd.hover.border_td = "2px solid #32568E";
+	rd.hover.border_tr = "2px solid #32568E";
 	// define color for empty row
-	rd.style.rowEmptyColor = '#fff';
+	rd.row_empty_color = "#eee";
     // dragged elements can be placed only to the empty cells
-	rd.event.rowClicked = function () {
-		// find table
-		var tbl = rd.findParent('TABLE', rd.obj);
-		// if row belongs to the "sortable" table
-		if (tbl.className.indexOf('sortable') > -1) {
-			rd.enableTable(false, 'boxes');
-			rd.enableTable(true, 'sortable');
-		}
-		// row belongs to the "boxes" table
-		else {
-			rd.enableTable(true, 'boxes');
-			rd.enableTable(false, 'sortable');
-		}
+	rd.myhandler_row_moved = function() {
+		rd.row_opacity(rd.obj, 85);
+		rd.row_opacity(rd.obj_old, 20, "White");
 	};
 };
 

@@ -45,7 +45,7 @@ if (!empty($REQUEST['save'])) {
         unset($REQUEST['new']);
 
     } catch (Exception $error) {
-        SYSTEM::showError($error->getMessage());
+        echo SYSTEM::showError($error->getMessage());
     }
     $post = '';
 
@@ -60,7 +60,7 @@ if (!empty($REQUEST['save'])) {
         try {
             CMS::call('POSTS')->removeItem($REQUEST['delete']);
         } catch (Exception $error) {
-            SYSTEM::showError($error->getMessage());
+            echo SYSTEM::showError($error->getMessage());
         }
     }
 }
@@ -118,11 +118,11 @@ if ((empty($section) && empty($category)) || !empty($REQUEST['new']) || !empty($
         $output['opened']   = empty($REQUEST['opened'])   ? $post['opened']   : $REQUEST['opened'];
     } else {
         $output['item']     = '';
-        $output['title']    = empty($REQUEST['title'])    ? '' : $REQUEST['title'];
-        $output['keywords'] = empty($REQUEST['keywords']) ? '' : $REQUEST['keywords'];
-        $output['desc']     = empty($REQUEST['desc'])     ? '' : $REQUEST['desc'];
-        $output['text']     = empty($REQUEST['text'])     ? '' : $REQUEST['text'];
-        $output['opened']   = empty($REQUEST['opened'])   ? 1  : $REQUEST['opened'];
+        $output['title']    = empty($REQUEST['title'])    ? ''   : $REQUEST['title'];
+        $output['keywords'] = empty($REQUEST['keywords']) ? ''   : $REQUEST['keywords'];
+        $output['desc']     = empty($REQUEST['desc'])     ? ''   : $REQUEST['desc'];
+        $output['text']     = empty($REQUEST['text'])     ? ''   : $REQUEST['text'];
+        $output['opened']   = empty($REQUEST['opened'])   ? TRUE : $REQUEST['opened'];
     }
     $output['sections'][$section]['selected']    = TRUE;
     $output['categories'][$category]['selected'] = TRUE;

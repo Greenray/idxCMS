@@ -21,12 +21,12 @@ if (isset($init)) {
 } else {
     if (!empty($REQUEST['save'])) {
         $config = [];
-        $config['description_length'] = empty($REQUEST['description_length']) ? 300  : (int) $REQUEST['description_length'];
-        $config['message_length']     = empty($REQUEST['message_length'])     ? 4000 : (int) $REQUEST['message_length'];
-        $config['images_per_page']    = empty($REQUEST['images_per_page'])    ? 10   : (int) $REQUEST['images_per_page'];
-        $config['comments_per_page']  = empty($REQUEST['comments_per_page'])  ? 10   : (int) $REQUEST['comments_per_page'];
-        $config['random'] = empty($REQUEST['random']) ? 1 : (int) $REQUEST['random'];
-        $config['last']   = empty($REQUEST['last'])   ? 1 : (int) $REQUEST['last'];
+        $config['description_length'] = empty($REQUEST['description_length']) ? 300  : $REQUEST['description_length'];
+        $config['message_length']     = empty($REQUEST['message_length'])     ? 4000 : $REQUEST['message_length'];
+        $config['images_per_page']    = empty($REQUEST['images_per_page'])    ? 10   : $REQUEST['images_per_page'];
+        $config['comments_per_page']  = empty($REQUEST['comments_per_page'])  ? 10   : $REQUEST['comments_per_page'];
+        $config['random'] = empty($REQUEST['random']) ? 1 : $REQUEST['random'];
+        $config['last']   = empty($REQUEST['last'])   ? 1 : $REQUEST['last'];
         CMS::call('CONFIG')->setSection('gallery', $config);
         if (CMS::call('CONFIG')->save())
              echo SYSTEM::showMessage('Configuration saved');

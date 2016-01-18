@@ -368,6 +368,11 @@ switch($MODULE) {
         }
         $output['locale'] = SYSTEM::get('locale');
         $output['slogan'] = CONFIG::getValue('main', 'slogan');
+        if (!empty($output['slogan'])) {
+            if (CONFIG::getValue('main', 'random')) {
+                $output['slogan'] = $aphorisms[array_rand($aphorisms, 1)];
+            }
+        }
         /** Requested module */
         define('CURRENT_MODULE', $MODULE);
         #

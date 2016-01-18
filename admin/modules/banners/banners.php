@@ -12,7 +12,7 @@ if (!empty($REQUEST['save'])) {
     foreach ($REQUEST['text'] as $banner) {
         if (!empty($banner)) {
             if (!file_put_contents(BANNERS.$i, $banner)) {
-                SYSTEM::showError('Cannot save file'.' '.BANNERS.$i);
+                echo SYSTEM::showError('Cannot save file'.' '.BANNERS.$i);
             }
             ++$i;
         }

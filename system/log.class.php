@@ -77,7 +77,7 @@ class LOG {
                 }
                 $PHAR->compress(Phar::GZ);
             } catch (Exception $error) {
-                SYSTEM::showError($error->getMessage());
+                echo SYSTEM::showError($error->getMessage());
             }
             foreach ($to_merge as $file) {
                     unlink(LOGS.$file);

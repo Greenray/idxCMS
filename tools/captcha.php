@@ -25,9 +25,9 @@ class CAPTCHA {
      */
     public function CAPTCHA($code) {
         $images = ['captcha.png', 'captcha_color.png'];
-        $length = (int) round(mt_rand(5, 8));
+        $length = round(mt_rand(5, 8));
         $code   = substr(md5($code), 0, $length);
-        $image  = imagecreatefrompng($images[(int) round(mt_rand(0, 1))]);
+        $image  = imagecreatefrompng($images[round(mt_rand(0, 1))]);
         $color  = imagecolorallocate($image, 255, 255, 255);
         $f_code = substr($code, 0, 3);
         $s_code = substr($code, 3);

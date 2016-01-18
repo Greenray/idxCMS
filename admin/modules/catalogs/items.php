@@ -36,7 +36,7 @@ if (!empty($REQUEST['save'])) {
         CMS::call('CATALOGS')->saveItem($item);
         $item = '';
     } catch (Exception $error) {
-        SYSTEM::showError($error->getMessage());
+        echo SYSTEM::showError($error->getMessage());
     }
 
 } elseif (!empty($REQUEST['close']) || !empty($REQUEST['open'])) {
@@ -51,7 +51,7 @@ if (!empty($REQUEST['save'])) {
         try {
             CMS::call('CATALOGS')->removeItem($REQUEST['delete']);
         } catch (Exception $error) {
-            SYSTEM::showError($error->getMessage());
+            echo SYSTEM::showError($error->getMessage());
         }
     }
 }
@@ -75,7 +75,7 @@ if (!empty($REQUEST['new']) || !empty($item)) {
         $output['desc']      = $REQUEST['desc'];
         $output['text']      = $REQUEST['text'];
         $output['copyright'] = $REQUEST['copyright'];
-        $output['opened']    = empty($REQUEST['opened']) ? 1 : $REQUEST['opened'];
+        $output['opened']    = empty($REQUEST['opened']) ? TRUE : $REQUEST['opened'];
     }
     $output['categories'] = $categories;
     if (!empty($category)) {

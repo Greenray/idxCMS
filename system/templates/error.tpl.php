@@ -5,11 +5,10 @@
 
 die();?>
 
-<div class="login-panel">
+<div>
     <form id="error" name="error" method="post" action="$url" class="error">
-        <h1><span class="log-in">__Message__</span></h1>
-        <p class="float">$message</p>
-        <p class="navigation"><input type="submit" name="error" value="__OK__" /></p>
-        <a href="#" class="close"></a>
+        <p class="title center">__Error__</p>
+        <p class="text center">$message</p>
+        <p class="center"><input type="submit" name="error" value="__OK__" /></p>
     </form>
 </div>

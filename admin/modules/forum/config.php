@@ -18,9 +18,9 @@ if (isset($init)) {
 } else {
     if (!empty($REQUEST['save'])) {
         $config = [];
-        $config['topics_per_page']  = empty($REQUEST['topics_per_page'])  ? 10   : (int) $REQUEST['topics_per_page'];
-        $config['replies_per_page'] = empty($REQUEST['replies_per_page']) ? 10   : (int) $REQUEST['replies_per_page'];
-        $config['message_length']   = empty($REQUEST['message_length'])   ? 4000 : (int) $REQUEST['message_length'];
+        $config['topics_per_page']  = empty($REQUEST['topics_per_page'])  ? 10   : $REQUEST['topics_per_page'];
+        $config['replies_per_page'] = empty($REQUEST['replies_per_page']) ? 10   : $REQUEST['replies_per_page'];
+        $config['message_length']   = empty($REQUEST['message_length'])   ? 4000 : $REQUEST['message_length'];
         CMS::call('CONFIG')->setSection('forum', $config);
         if (CMS::call('CONFIG')->save())
              echo SYSTEM::showMessage('Configuration saved');

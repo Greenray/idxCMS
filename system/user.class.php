@@ -102,7 +102,7 @@ class USER {
      * @return boolean        The result of operation
      */
     public static function checkAccess($object) {
-        return ((int) $object['access'] <= self::$user['access']) ? TRUE : FALSE;
+        return ($object['access'] <= self::$user['access']) ? TRUE : FALSE;
     }
 
     /**

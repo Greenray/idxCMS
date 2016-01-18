@@ -135,13 +135,13 @@ if (!empty($REQUEST['save'])) {
     if (!empty($REQUEST['upload']['name'])) {
         $REQUEST['upload']['name'] = str_replace('%', '', $REQUEST['upload']['name']);
         if (!move_uploaded_file($REQUEST['upload']['tmp_name'], $path.$REQUEST['upload']['name'])) {
-            SYSTEM::showError('Cannot upload file');
+            echo SYSTEM::showError('Cannot upload file');
         }
     }
 } elseif (!empty($REQUEST['delete'])) {
-    if (!DeleteTree($path.$REQUEST['delete'])) SYSTEM::showError('Cannot delete file or directory');
+    if (!DeleteTree($path.$REQUEST['delete'])) echo SYSTEM::showError('Cannot delete file or directory');
 } elseif (!empty($REQUEST['mkdir'])) {
-    if (!mkdir($path.$REQUEST['dirname']))     SYSTEM::showError('Cannot make directory');
+    if (!mkdir($path.$REQUEST['dirname']))     echo SYSTEM::showError('Cannot make directory');
 }
 
 $TPL = new TEMPLATE(__DIR__.DS.'filemanager.tpl');

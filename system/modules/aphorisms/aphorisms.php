@@ -7,7 +7,7 @@ if (!defined('idxCMS')) die();
 #
 # Get file with aphorisms according to user's locale
 #
-$aphorism = file(APHORISMS.SYSTEM::get('locale').'.txt');
+$aphorisms = file(APHORISMS.SYSTEM::get('locale').'.txt');
 #
 # Show random string after user click
 #
@@ -15,13 +15,10 @@ if (!empty(FILTER::get('REQUEST', 'flip'))) {
     #
     # Processing of command "flip"
     #
-    echo $aphorism[array_rand($aphorism, 1)].'$';
+    echo $aphorisms[array_rand($aphorisms, 1)].'$';
 
 } else {
     $TPL = new TEMPLATE(__DIR__.DS.'aphorisms.tpl');
-    $TPL->set('text', $aphorism[array_rand($aphorism, 1)]);
-    #
-    # Show aphorisms box with a random string after module init
-    #
+    $TPL->set('text', $aphorisms[array_rand($aphorisms, 1)]);
     SYSTEM::defineWindow('Aphorisms', $TPL->parse());
 }

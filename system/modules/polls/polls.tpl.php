@@ -13,14 +13,14 @@ die();?>
             <!-- FOREACH answer = $poll.answers -->
                 <tr>
                     <td>$answer.answer</td>
-                    <td class="right" style="width:35px">[$answer.voices:]%</td>
+                    <td class="result right">[$answer.voices:]%</td>
                 </tr>
                 <tr>
                     <td colspan="2">
                         <table>
                             <tr>
                                 <td width="[$answer.voices:]%" height="5" style="white-space:nowrap;background:$answer.color;"></td>
-                                <td height="5"></td>
+                                <td class="color" height="5"></td>
                             </tr>
                         </table>
                     </td>

@@ -53,7 +53,7 @@ if (!empty($item) && !empty($category) && !empty($section)) {
                     #
                     $result = CMS::call('CATALOGS')->saveComment($comment, $item);
                 } catch (Exception $error) {
-                    SYSTEM::showError($error->getMessage());
+                    echo SYSTEM::showError($error->getMessage());
                 }
 
             } else {
@@ -79,8 +79,7 @@ if (!empty($item) && !empty($category) && !empty($section)) {
                                     $TPL->set('bbcodes', CMS::call('PARSER')->showBbcodesPanel('edit.text', USER::moderator('catalogs')));
                                     SYSTEM::defineWindow('Edit', $TPL->parse());
                                 }
-                            } else
-                                SYSTEM::showMessage('Comments are not allowed');
+                            } else echo SYSTEM::showError('Comments are not allowed', CreateUrl('catalogs', $section, $category, $item));
                             break;
 
                         case 'delete':
@@ -88,7 +87,7 @@ if (!empty($item) && !empty($category) && !empty($section)) {
                                 $result = CMS::call('CATALOGS')->removeComment($comment);
                                 $result = ($result > $comment) ? $comment : $result;
                             } catch (Exception $error) {
-                                SYSTEM::showError($error->getMessage());
+                                echo SYSTEM::showError($error->getMessage());
                             }
                             break;
 
@@ -116,13 +115,10 @@ if (!empty($item) && !empty($category) && !empty($section)) {
             SYSTEM::setPageDescription($item['title']);
             SYSTEM::setPageKeywords($item['keywords']);
 
-            $perpage = (int) CONFIG::getValue('catalogs', 'comments_per_page');
-            if (!empty($comment))
-                $page = (int) ceil($comment / $perpage);
-            elseif (!empty($result))
-                $page = (int) ceil($result / $perpage);
-            else
-                $page = (int) FILTER::get('REQUEST', 'page');
+            $perpage = CONFIG::getValue('catalogs', 'comments_per_page');
+            if (!empty($comment))    $page = ceil($comment / $perpage);
+            elseif (!empty($result)) $page = ceil($result / $perpage);
+            else                     $page = FILTER::get('REQUEST', 'page');
             #
             # Don't show item, if number of comments > per page
             #
@@ -162,12 +158,12 @@ if (!empty($item) && !empty($category) && !empty($section)) {
         SYSTEM::setPageDescription(__('Catalogs').' - '.$categories[$category]['title']);
         krsort($content);
 
-        $TPL = new TEMPLATE(__DIR__.DS.'short.tpl');
+        $TPL    = new TEMPLATE(__DIR__.DS.'short.tpl');
         $output = '';
-        $count = sizeof($content);
-        $keys = array_keys($content);
-        $page = (int) FILTER::get('REQUEST', 'page');
-        $perpage = (int) CONFIG::getValue('catalogs', 'items_per_page');
+        $count  = sizeof($content);
+        $keys   = array_keys($content);
+        $page   = FILTER::get('REQUEST', 'page');
+        $perpage    = CONFIG::getValue('catalogs', 'items_per_page');
         $pagination = GetPagination($page, $perpage, $count);
 
         for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
@@ -181,22 +177,21 @@ if (!empty($item) && !empty($category) && !empty($section)) {
         if ($count > $perpage) {
             SYSTEM::defineWindow('', Pagination($count, $perpage, $page, $categories[$category]['link']));
         }
-    } else SYSTEM::showMessage('Category is empty', CreateUrl('catalogs'));
+    } else echo SYSTEM::showMessage('Category is empty', MODULE.'catalogs');
 
 } elseif (!empty($section)) {
     #
     # Show section with allowed categories and last items
     #
     $output = CMS::call('CATALOGS')->showSection($section);
+var_dump($output);
     if (!empty($output)) {
         if (!empty($output['categories'])) {
             $TPL = new TEMPLATE(__DIR__.DS.'categories.tpl');
             $TPL->set('categories', $output['categories']);
             SYSTEM::defineWindow($output['title'], $TPL->parse());
-        } else {
-            SYSTEM::showMessage('Section is empty', CreateUrl('catalogs'));
         }
-    } else SYSTEM::showMessage('Section is empty', CreateUrl('catalogs'));
+    } else echo SYSTEM::showMessage('Section is empty', MODULE.'catalogs');
 
 } else {
     #
@@ -207,6 +202,5 @@ if (!empty($item) && !empty($category) && !empty($section)) {
         $TPL = new TEMPLATE(__DIR__.DS.'sections.tpl');
         $TPL->set('sections', $output);
         SYSTEM::defineWindow('Catalogs', $TPL->parse());
-    } else
-       SYSTEM::showMessage('Database is empty');
+    } else echo SYSTEM::showMessage('Database is empty', MODULE.'index');
 }

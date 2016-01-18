@@ -100,7 +100,7 @@ die();?>
 </script>
 <form name="profile" id="profile" method="post" action="" enctype="multipart/form-data" onsubmit="return checkUserForm(this);">
     <input type="hidden" name="profile" value="1" />
-    <table id="std" class="right">
+    <table class="profile right">
         <tr class="dark">
             <td colspan="3" class="center">
                 <img src="$avatar" hspace="5" vspace="5" alt="" />

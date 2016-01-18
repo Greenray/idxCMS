@@ -21,4 +21,3 @@ die();?>
     <!-- ENDFOREACH -->
     </ul>
 </div>
-<div class="clear"></div>

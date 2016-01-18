@@ -425,49 +425,25 @@ class SYSTEM {
      * Shows message.
      *
      * @param  string  $message  Message
-     * @param  string  $title    Message title
      * @param  string  $url      Url for redirection
      */
-    public static function showMessage($message, $title = '', $url = '') {
-        $message = '<strong>'.__($message).'</strong>';
-        $title   = __($title);
-        echo '
-        <script type="text/javascript">
-            dhtmlx.modalbox({
-                type: "modalbox",
-                title: "'.$title.'",
-                text: "'.$message.'",
-                buttons: ["Ok"],
-                callback: function(){
-                    document.location.href="'.$url.'";
-                }
-            });
-        </script>
-        ';
+    public static function showMessage($message, $url = '') {
+        $TPL = new TEMPLATE(TEMPLATES.'message.tpl');
+        $TPL->set('message', $message);
+        $TPL->set('url', $url);
+        return $TPL->parse();
     }
 
     /**
      * Shows error.
      *
      * @param  string  $message  Message
-     * @param  string  $title    Message title
      * @param  string  $url      Url for redirection
      */
     public static function showError($message, $url = '') {
-        $message = '<strong>'.__($message).'</strong>';
-        $title   = __('Error');
-        echo '
-        <script type="text/javascript">
-            dhtmlx.modalbox({
-                type: "alert-error",
-                title: "'.$title.'",
-                text: "'.$message.'",
-                buttons: ["Ok"],
-                callback: function(){
-                    document.location.href="'.$url.'";
-                }
-            });
-        </script>
-        ';
+        $TPL = new TEMPLATE(TEMPLATES.'error.tpl');
+        $TPL->set('message', $message);
+        $TPL->set('url', $url);
+        return $TPL->parse();
     }
 }

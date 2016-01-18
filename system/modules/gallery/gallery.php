@@ -22,7 +22,7 @@ if (!empty($item) && !empty($category) && !empty($section)) {
     }
 
     $comments = CMS::call('GALLERY')->getComments($item);
-    $comment  = (int) FILTER::get('REQUEST', 'comment');
+    $comment  = FILTER::get('REQUEST', 'comment');
     try {
         if (!empty($REQUEST['save'])) {
             #
@@ -49,7 +49,7 @@ if (!empty($item) && !empty($category) && !empty($section)) {
                                 }
                             }
 
-                        } else SYSTEM::showMessage('Comments are not allowed');
+                        } else echo SYSTEM::showError('Comments are not allowed', CreateUrl('catalogs', $section, $category, $item));
                         break;
 
                     case 'delete':
@@ -72,7 +72,7 @@ if (!empty($item) && !empty($category) && !empty($section)) {
             }
         }
     } catch (Exception $error) {
-        SYSTEM::showError($error->getMessage());
+        echo SYSTEM::showError($error->getMessage());
     }
 
     $item = CMS::call('GALLERY')->getItem($item);
@@ -80,10 +80,10 @@ if (!empty($item) && !empty($category) && !empty($section)) {
     SYSTEM::setPageDescription($item['title']);
     SYSTEM::setPageKeywords($item['keywords']);
 
-    $perpage = (int) CONFIG::getValue('gallery', 'comments_per_page');
-    if     (!empty($comment)) $page = (int) ceil($comment / $perpage);
-    elseif (!empty($result))  $page = (int) ceil($result / $perpage);
-    else                      $page = (int) FILTER::get('REQUEST', 'page');
+    $perpage = CONFIG::getValue('gallery', 'comments_per_page');
+    if     (!empty($comment)) $page = ceil($comment / $perpage);
+    elseif (!empty($result))  $page = ceil($result / $perpage);
+    else                      $page = FILTER::get('REQUEST', 'page');
     #
     # Don't show image, if number of comments > per page
     #
@@ -107,14 +107,7 @@ if (!empty($item) && !empty($category) && !empty($section)) {
     # Show items from category
     #
     $categories = CMS::call('GALLERY')->getCategories($section);
-    if (!$categories) {
-        Redirect('gallery');  # Wrong section request
-    }
-
-    $content = CMS::call('GALLERY')->getContent($category);
-    if (!$content) {
-        Redirect('gallery', $section);    # Wrong category request
-    }
+    $content    = CMS::call('GALLERY')->getContent($category);
 
     SYSTEM::set('pagename', $categories[$category]['title']);
     SYSTEM::setPageDescription(__('Gallery').' - '.$categories[$category]['title']);
@@ -122,7 +115,7 @@ if (!empty($item) && !empty($category) && !empty($section)) {
         $output  = '';
         $count   = sizeof($content);
         $keys    = array_keys($content);
-        $page    = (int) FILTER::get('REQUEST', 'page');
+        $page    = FILTER::get('REQUEST', 'page');
         $width   = CONFIG::getValue('main', 'thumb_width');
         $height  = CONFIG::getValue('main', 'thumb-height');
         $images  = [];
@@ -164,7 +157,7 @@ if (!empty($item) && !empty($category) && !empty($section)) {
             SYSTEM::defineWindow('', Pagination($count, $perpage, $page, $categories[$category]['link']));
         }
 
-    } else SYSTEM::showMessage('Database is empty');
+    } else echo SYSTEM::showMessage('Category is empty', CreateUrl('gallery', $section));
 
 } elseif (!empty($section)) {
     #
@@ -179,7 +172,7 @@ if (!empty($item) && !empty($category) && !empty($section)) {
         $TPL->set('categories', $output['categories']);
         SYSTEM::defineWindow($output['title'], $TPL->parse());
 
-    } else SYSTEM::showMessage('Database is empty');
+    } else echo SYSTEM::showMessage('Section is empty', MODULE.'gallery');
 
 } else {
     #
@@ -191,6 +184,6 @@ if (!empty($item) && !empty($category) && !empty($section)) {
         $TPL->set('sections', $output);
         SYSTEM::defineWindow('Gallery', $TPL->parse());
 
-    } else SYSTEM::showMessage('Database is empty');
+    } else echo SYSTEM::showMessage('Database is empty', MODULE.'index');
 }
 

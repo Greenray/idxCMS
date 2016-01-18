@@ -48,7 +48,7 @@ if (!empty($REQUEST['save'])) {
         unset($REQUEST['new']);
 
     } catch (Exception $error) {
-         SYSTEM::showError($error->getMessage());
+         echo SYSTEM::showError($error->getMessage());
     }
     $topic = '';
 
@@ -64,7 +64,7 @@ if (!empty($REQUEST['save'])) {
         try {
             CMS::call('FORUM')->removeItem($REQUEST['delete']);
         } catch (Exception $error) {
-            SYSTEM::showError($error->getMessage());
+            echo SYSTEM::showError($error->getMessage());
         }
     }
 }

@@ -63,6 +63,10 @@ die();?>
                 <td colspan="2"><input type="text" name="slogan" value="$slogan" size="80" /></td>
             </tr>
             <tr class="light">
+                <td>__Allow random aphorism as a slogan__</td>
+                <td colspan="2"><input type="checkbox" name="random_slogan" value="$random_slogan" <!-- IF !empty($random_slogan) -->checked<!-- ENDIF --> /></td>
+            </tr>
+            <tr class="light">
                 <td>__Cookie prefix for your site__</td>
                 <td><input type="text" name="cookie" value="$cookie" size="10" /></td>
                 <td class="help">__You may use the site name__</td>

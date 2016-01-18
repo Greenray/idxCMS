@@ -12,11 +12,11 @@ if ($REQUEST['pm']) {
         foreach ($users as $user) {
             $PM = new MESSAGE(PM_DATA, USER::getUser('user'));
             if (!$PM->sendPrivateMessage($user, $REQUEST['text'])) {
-                SYSTEM::showError('Cannot send message'.' for '.$user);
+                echo SYSTEM::showError('Cannot send message'.' for '.$user);
             }
             unset($PM);
         }
-    } else SYSTEM::showMessage('User\'s list is empty');
+    } else SYSTEM::showError('User\'s list is empty');
 }
 
 if ($REQUEST['letter']) {
@@ -31,9 +31,9 @@ if ($REQUEST['letter']) {
                     $REQUEST['subj'],
                     $REQUEST['text']
                 );
-            } else SYSTEM::showError('Cannot send email');
+            } else echo SYSTEM::showError('Cannot send email');
         }
-    } else SYSTEM::showMessage('User\'s list is empty');
+    } else echo SYSTEM::showMessage('User\'s list is empty');
 }
 
 $users  = CMS::call('USER')->getUsersList();

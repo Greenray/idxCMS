@@ -17,16 +17,16 @@ if (!empty($REQUEST['login'])) {
                 $access = 9;
             } else {
                 $rights = '';
-                $access = ($tmp[3] == 9) ? 1 : empty($tmp[3]) ? 1 : (int) $tmp[3];
+                $access = ($tmp[3] == 9) ? 1 : empty($tmp[3]) ? 1 : $tmp[3];
                 if (!empty($tmp[1])) $rights = implode(' ', $tmp[1]);
             }
             USER::changeProfileField($tmp[0], 'rights', $rights);
             USER::changeProfileField($tmp[0], 'access', $access);
-            SYSTEM::showMessage('Rights changed', '', MODULE.'admin&id=_user.profile&act=rights.'.$tmp[0]);
+            echo SYSTEM::showMessage('Rights changed', '', MODULE.'admin&id=_user.profile&act=rights.'.$tmp[0]);
             unlink(TEMP.'rights.dat');
         }
     } catch (Exception $error) {
-        SYSTEM::showError($error->getMessage());
+        echo SYSTEM::showError($error->getMessage());
     }
 
 } elseif (!empty($REQUEST['act'])) {
@@ -77,7 +77,7 @@ if (!empty($REQUEST['login'])) {
                         CMS::call('USER')->updateUser($REQUEST['user'], $REQUEST['nick'], $REQUEST['fields']);
                         USER::changeProfileField($REQUEST['user'], 'status', $REQUEST['status']);
                     } catch (Exception $error) {
-                        SYSTEM::showError($error->getMessage());
+                        echo SYSTEM::showError($error->getMessage());
                     }
                 } else {
                     $user = USER::getUserData($action[1]);
@@ -88,7 +88,7 @@ if (!empty($REQUEST['login'])) {
                     $user['regdate']   = FormatTime('d F Y', $user['regdate']);
                     $user['lastvisit'] = FormatTime('d F Y', $user['lastvisit']);
                     $output = $user;
-                    $output['utz'] = SelectTimeZone('fields[tz]', $LANG['tz'], (int) $user['tz']);
+                    $output['utz'] = SelectTimeZone('fields[tz]', $LANG['tz'], $user['tz']);
 
                     $TPL = new TEMPLATE(__DIR__.DS.'profile.tpl');
                     $TPL->set($output);
@@ -159,7 +159,7 @@ if (!empty($REQUEST['login'])) {
                 break;
         }
     } catch (Exception $error) {
-        SYSTEM::showError($error->getMessage());
+        echo SYSTEM::showError($error->getMessage());
     }
 } else {
     $TPL = new TEMPLATE(__DIR__.DS.'search.tpl');

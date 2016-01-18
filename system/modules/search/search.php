@@ -92,14 +92,12 @@ if (USER::$logged_in || $config['allow_guest']) {
                         }
                     }
                 }
-            } else {
-                SYSTEM::showMessage(__('Input value must be more than').' '.$config['query_min'].' '.__('and less than').' '.$config['query_max'].' '.__('symbols'));
-            }
+            } else echo SYSTEM::showMessage(__('Input value must be more than').' '.$config['query_min'].' '.__('and less than').' '.$config['query_max'].' '.__('symbols'));
         }
 
         $results = [];
         $count   = sizeof($common);
-        $perpage = (int) CONFIG::getValue('search', 'per_page');
+        $perpage = CONFIG::getValue('search', 'per_page');
         $page    = FILTER::get('REQUEST', 'page');
         $pagination = GetPagination($page, $perpage, $count);
 

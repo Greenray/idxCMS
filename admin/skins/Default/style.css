@@ -230,8 +230,8 @@ footer {
 .button_delete input { padding: 0 2px; text-align: left }
 .category { padding: 0 13px }
 .center { text-align: center }
-.dark { background: #d2d2d2; height: 35px }
-.light  { background: #efefef; height: 35px }
+.dark { background: #d2d2d2; height: 25px }
+.light  { background: #efefef; height: 25px }
 .left { text-align: left }
 .right { text-align: right }
 .clear { clear: both; content: "."; display: block; height: 0; overflow: hidden; visibility: hidden }
@@ -243,20 +243,17 @@ footer {
     font-size: 10pt;
     font-weight: bold }
 .help {
-    padding: 0 30px 0 10px;
     color: red;
+    font-size: 10px;
     font-style: italic;
+    padding: 0 30px 0 10px;
     text-align: left }
 .label  { padding: 0 10px; width: 150px }
 #redips-nodrag,
-#redips-drag {
-    margin: 0 0 -9000px;
-    overflow: hidden;
-    padding: 0 0 9000px;
-    position: relative }
+#redips-drag { overflow: hidden; position: relative }
     div#redips-drag table {	background-color: #ddd }
     div#redips-nodrag table tr,
-    div#redips-drag table tr { height: 35px }
+    div#redips-drag table tr { height: 25px }
     div#redips-nodrag th,
     div#redips-drag th { border: 1px solid #758596 }
     div#redips-nodrag td,

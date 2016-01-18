@@ -5,7 +5,7 @@
 
 die();?>
 
-<table class="profile right">
+<table id="std" class="right">
     <tr class="dark"><td colspan="2" class="avatar center"><img src="$avatar" hspace="5" vspace="5" alt="" /></td></tr>
     <tr class="light"><th style="width:165px;">__Username__</th><td class="left">$user</td></tr>
     <tr class="dark"><th>__Nick__</th><td class="left">$nick</td></tr>

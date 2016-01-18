@@ -29,7 +29,7 @@ if (!empty($REQUEST['val']) && !empty($REQUEST['id'])) {
     if ($user !== 'guest') {
         $item = '';
         $rate = GetRate($REQUEST['id'], $item);
-        $rate[$user] = (int) ($REQUEST['val']);
+        $rate[$user] = $REQUEST['val'];
         file_put_contents($item, serialize($rate), LOCK_EX);
         echo ShowRate($REQUEST['id']).'$';
     }

@@ -24,7 +24,7 @@ die();?>
     <link rel="stylesheet" type="text/css" href="{CURRENT_SKIN}style.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="{TOOLS}message{DS}message.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="{TOOLS}colorbox{DS}jquery.colorbox.css" media="screen" />
-    <script type="text/javascript" src="{TOOLS}jquery.min.js"></script>
+    <script type="text/javascript" src="{TOOLS}jquery.js"></script>
     <link type="image/x-icon" rel="shortcut icon" href="{ROOT}favicon.ico" />
 </head>
 <body>
@@ -105,21 +105,29 @@ die();?>
         $(".cbox").colorbox({rel:'cbox'});
     });
 </script>
-<script type="text/javascript" src='{TOOLS}message{DS}message.js'></script>
+<script src="{TOOLS}jquery.lightbox_me.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function() {
+        $("#message").lightbox_me();
+    });
+</script>
+<script type="text/javascript" src="{TOOLS}message{DS}message.js"></script>
 <script type="text/javascript">
     function ShowHide(obj) {
-        if (obj === 'none')
-             return 'inline';
-        else return 'none';
+        if (obj === "none")
+             return "inline";
+        else return "none";
     }
-    function ShowAlert(msg, title) {
+    function ShowAlert(msg) {
         dhtmlx.modalbox({
-            type: 'alert-error',
-            title: title,
-            text: '<strong>' + msg + '</strong>',
+            type: "alert-error",
+            title: "__Error__",
+            text: "<strong>" + msg + "</strong>",
             buttons: ["Ok"]
         });
     }
 </script>
+<!--[if lt IE 7]><script type="text/javascript" src="{TOOLS}unitip{DS}unitpngfix.js"></script><![endif]-->
+<script type="text/javascript" src='{TOOLS}unitip{DS}unitip.js'></script>
 </body>
 </html>

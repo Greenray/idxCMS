@@ -29,7 +29,7 @@
 class CONTENT extends COMMENTS {
 
     /** Class initialization */
-    protected function __construct() {}
+    public function __construct() {}
 
     /**
      * Sets the value of a field.
@@ -115,7 +115,7 @@ class CONTENT extends COMMENTS {
      * @return string          Truncated string
      */
     protected function cutText($text, $length) {
-        if ((mb_strlen($text, 'UTF-8') - 1) < (int) $length) {
+        if ((mb_strlen($text, 'UTF-8') - 1) < $length) {
             return $text;
         }
         if (mb_strpos($text, '.', $length)) {

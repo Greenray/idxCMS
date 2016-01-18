@@ -28,7 +28,7 @@ if (!empty($REQUEST['save'])) {
     }
     CMS::call('CONFIG')->setSection('output.'.$REQUEST['skin'], $config);
     if (!CMS::call('CONFIG')->save()) {
-        SYSTEM::showMessage('Cannot save file');
+        echo SYSTEM::showError('Cannot save file');
     }
 }
 #
@@ -49,7 +49,7 @@ if (!empty($REQUEST['selected'])) {
             ];
         } else {
             $active[] = [
-                'key' => DS.$point,
+                'key'   => DS.$point,
                 'value' => __('Page').': '.SYSTEM::$modules[$point]['title'],
                 'class' => "site-page"
             ];
@@ -73,7 +73,7 @@ if (!empty($REQUEST['selected'])) {
         }
         if (!$founded) {
             $unused[] = [
-                'key' => DS.$point,
+                'key'   => DS.$point,
                 'value' => $desc,
                 'class' => "site-page"
             ];
@@ -90,7 +90,7 @@ if (!empty($REQUEST['selected'])) {
         if (!$founded) {
             if ($module['type'] === 'main') {
                 $unused[] = [
-                    'key' => DS.$id,
+                    'key'   => DS.$id,
                     'value' => __('Page').': '.$module['title'],
                     'class' => "site-page"
                 ];

@@ -230,9 +230,8 @@ class MESSAGE extends DBASE {
         # Save message in Outbox
         #
         unset($message['new']);
-        if (empty($this->messages['outbox']))
-             $this->messages['outbox'][1] = $message;
-        else $this->messages['outbox'][]  = $message;
+        $message['to'] = $for;
+        empty($this->messages['outbox']) ? $this->messages['outbox'][1] = $message : $this->messages['outbox'][] = $message;
         #
         # Correct database size
         #

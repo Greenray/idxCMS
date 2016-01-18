@@ -44,16 +44,14 @@ die();?>
     </div>
     <!-- IF !empty($moderator) -->
         <div class="actions right">
-            <form name="topic" method="post" action="">
-                <input type="submit" formaction="$link{COMMENT}$id&action=edit" value="__Edit__" />
-                <input type="submit" formaction="$link{COMMENT}$id&action=delete" value="__Delete__" />
+            <form name="actions" method="post" action="">
+                <button type="submit" formaction="$link{COMMENT}$id&action=edit">__Edit__</button>
+                <button type="submit" formaction="$link{COMMENT}$id&action=delete">__Delete__</button>
             <!-- IF !empty($ban) -->
-                <input type="submit" formaction="$link{COMMENT}$id&action=ban&host=$ip" value="$ip" />
+                <button type="submit" formaction="$link{COMMENT}$id&action=ban&host=$ip">$ip</button>
             <!-- ENDIF -->
-            <!-- IF !empty($opened) -->
-                <input type="submit" formaction="{MODULE}user&user=$author" value="__Profile__" />
-                <input type="submit" formaction="{MODULE}user.pm&for=$author" value="__Private message__" />
-            <!-- ENDIF -->
+                <button type="submit" formaction="{MODULE}user&user=$author">__Profile__</button>
+                <button type="submit" formaction="{MODULE}user.pm&for=$author">__Private message__</button>
             </form>
         </div>
     <!-- ENDIF -->

@@ -66,4 +66,4 @@ if (!empty($sections)) {
     $_SESSION['tabs'] = $tab;
     SYSTEM::defineWindow('Index', $output);
 
-} else SYSTEM::showMessage('Database is empty');
+} else echo SYSTEM::showMessage('Database is empty', MODULE.'index');

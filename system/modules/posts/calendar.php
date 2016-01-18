@@ -6,32 +6,33 @@
 if (!defined('idxCMS')) die();
 
 $today = time();
-$current_year  = (int) FormatTime('Y', $today);
-$current_month = (int) FormatTime('n', $today);
+$current_year  = FormatTime('Y', $today);
+$current_month = FormatTime('n', $today);
 
 if (!empty($REQUEST['from'])) {
-    $selected_year  = (int) FormatTime('Y', $REQUEST['from']);
-    $selected_month = (int) FormatTime('n', $REQUEST['from']);
+    $selected_year  = FormatTime('Y', $REQUEST['from']);
+    $selected_month = FormatTime('n', $REQUEST['from']);
 }
 
 if (!empty($REQUEST['cal-year'])) {
-    $year = (int) $REQUEST['cal-year'];
-    if (($year >= 2000) && ($year <= $current_year)) {
-        $selected_year = $year;
+    if (($REQUEST['cal-year'] >= 2000) && ($REQUEST['cal-year'] <= $current_year)) {
+        $selected_year = $REQUEST['cal-year'];
     }
+
 } else  $selected_year = $current_year;
 
 if (!empty($REQUEST['cal-month'])) {
-    $month = (int) $REQUEST['cal-month'];
-    if (($month >= 1) && ($month <= 12)) {
-        $selected_month = $month;
+    if (($REQUEST['cal-month'] >= 1) && ($REQUEST['cal-month'] <= 12)) {
+        $selected_month = $REQUEST['cal-month'];
     }
-} else  $selected_month = (int) FormatTime('n', $today);
+
+} else  $selected_month = FormatTime('n', $today);
 
 $CALENDAR = new CALENDAR($selected_month, $selected_year, $LANG['datetime']);
 $sections = CMS::call('POSTS')->getSections();
 
 unset($sections['drafts']);
+
 foreach ($sections as $section => $data) {
     CMS::call('POSTS')->getCategories($section);
     $list = CMS::call('POSTS')->getStat('time');

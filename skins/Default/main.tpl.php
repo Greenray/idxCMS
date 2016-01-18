@@ -19,8 +19,8 @@ die();?>
     [show=meta]
     <link rel="stylesheet" type="text/css" href="{SKINS}normalize.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="{CURRENT_SKIN}style.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="{TOOLS}message{DS}message.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="{TOOLS}colorbox{DS}jquery.colorbox.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="{TOOLS}message{DS}message.css" media="screen" />
     <script type="text/javascript" src="{TOOLS}jquery.min.js"></script>
     <link rel="shortcut icon" type="image/x-icon" href="{ROOT}favicon.ico" />
 </head>
@@ -105,6 +105,12 @@ die();?>
 <script type="text/javascript">
     $(document).ready(function() {
         $(".cbox").colorbox({rel:'cbox'});
+    });
+</script>
+<script src="{TOOLS}jquery.lightbox_me.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function() {
+        $("#message").lightbox_me();
     });
 </script>
 <script type="text/javascript" src='{TOOLS}message{DS}message.js'></script>

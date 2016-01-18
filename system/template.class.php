@@ -757,7 +757,7 @@ class TEMPLATE {
                     unlink(LOGS.'error.log');
                 }
                 if (!empty($error)) {
-                    return SYSTEM::showError($error);
+                    echo SYSTEM::showError($error);
                 }
             break;
         }

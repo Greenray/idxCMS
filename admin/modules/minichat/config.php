@@ -17,9 +17,9 @@ if (isset($init)) {
     }
 } else {
     if (!empty($REQUEST['save'])) {
-        $config['db_size']        = empty($REQUEST['db_size'])        ? 100 : (int) $REQUEST['db_size'];
-        $config['message_length'] = empty($REQUEST['message_length']) ? 200 : (int) $REQUEST['message_length'];
-        $config['mess_to_show']   = empty($REQUEST['mess_to_show'])   ? 5   : (int) $REQUEST['mess_to_show'];
+        $config['db_size']        = empty($REQUEST['db_size'])        ? 100 : $REQUEST['db_size'];
+        $config['message_length'] = empty($REQUEST['message_length']) ? 200 : $REQUEST['message_length'];
+        $config['mess_to_show']   = empty($REQUEST['mess_to_show'])   ? 5   : $REQUEST['mess_to_show'];
         if ($config['mess_to_show'] > $config['db_size']) {
             $config['mess_to_show'] = $config['db_size'];
         }

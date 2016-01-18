@@ -5,7 +5,7 @@
 
 die();?>
 
-<!-- IF $admin==false -->
+<!-- IF !empty($message_length) -->
     <script type="text/javascript">
         var ns6 = document.getElementById && !document.all;
         function restrictInput(maxlength, e, placeholder) {
@@ -61,10 +61,12 @@ die();?>
                 <div class="right">
                     <form name="minichat" method="post" action="">
                         <input type="hidden" name="message" value="$message.id" />
-                        <button type="submit" name="mcaction" value="delete">__Delete__</button>
+                        <input type="hidden" name="mcaction" value="delete" />
+                        <input type="submit" name="mcaction" value="__Delete__" />
                     <!-- IF !empty($message.ip) -->
                         <input type="hidden" name="host" value="$message.ip" />
-                        <button type="submit" name="mcaction" value="ban">__Ban__</button>
+                        <input type="hidden" name="mcaction" value="ban" />
+                        <input type="submit" name="mcaction" value="__Ban__" />
                     <!-- ENDIF -->
                     </form>
                 </div>
@@ -79,7 +81,7 @@ die();?>
             <!-- IF !empty($message_length) -->
                 __Max message length__ [<script type="text/javascript">displayLimit("", "mctext", '$message_length')</script>] __symbols__
             <!-- ENDIF -->
-            <button type="reset">__Reset__</button>
+            <input type="reset" value="__Reset__" />
             <input type="submit" name="save" value="__Save__" />
         </form>
     </div>

@@ -86,7 +86,7 @@ function ShowRate($for) {
             $sum = $sum + $op;
         }
         if ($voices !== 0) {
-            $value = (int) ($sum / $voices);
+            $value = $sum / $voices;
         }
     }
     $user = USER::getUser('user');
@@ -98,7 +98,7 @@ function ShowRate($for) {
     $TPL->set('value', $value);                      # Rate value
     $TPL->set('voted', $voices);                     # Number of voices
     $TPL->set('item' , $for);                        # Item
-    $TPL->set('width', (int) ($value * 79 / 100));   # Width of rate value field
+    $TPL->set('width', $value * 79 / 100);           # Width of rate value field
     $TPL->set('event', $event);                      # Allow rating?
     return $TPL->parse();
 }

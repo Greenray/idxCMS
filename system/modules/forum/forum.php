@@ -58,7 +58,7 @@ if (!empty($topic) && !empty($category) && !empty($section)) {
 
                                     SYSTEM::defineWindow('Edit', $TPL->parse());
 
-                                } else SYSTEM::showError('Your have no right to edit topic');
+                                } else echo SYSTEM::showError('Your have no right to edit topic');
 
                             } else {
                                 if (!empty($replies[$reply])) {
@@ -77,7 +77,7 @@ if (!empty($topic) && !empty($category) && !empty($section)) {
                                 }
                             }
 
-                        } else SYSTEM::showMessage('Topic is closed');
+                        } else echo SYSTEM::showMessage('Topic is closed', CreateUrl('forum', $section, $category, $topic));
                         break;
 
                     case 'delete':
@@ -92,7 +92,7 @@ if (!empty($topic) && !empty($category) && !empty($section)) {
                                 }
                             }
                         } catch (Exception $error) {
-                            SYSTEM::showError($error->getMessage());
+                            echo SYSTEM::showError($error->getMessage());
                         }
                         break;
 
@@ -125,17 +125,17 @@ if (!empty($topic) && !empty($category) && !empty($section)) {
             }
         }
     } catch (Exception $error) {
-        SYSTEM::showError($error->getMessage());
+        echo SYSTEM::showError($error->getMessage());
     }
 
     $topic = CMS::call('FORUM')->getItem($topic);
     SYSTEM::set('pagename', $topic['title']);
     SYSTEM::setPageDescription($topic['title']);
 
-    $perpage = (int) CONFIG::getValue('forum', 'replies_per_page');
-    if     (!empty($reply))  $page = (int) ceil($reply / $perpage);
-    elseif (!empty($result)) $page = (int) ceil($result / $perpage);
-    else                     $page = (int) FILTER::get('REQUEST', 'page');
+    $perpage = CONFIG::getValue('forum', 'replies_per_page');
+    if     (!empty($reply))  $page = ceil($reply / $perpage);
+    elseif (!empty($result)) $page = ceil($result / $perpage);
+    else                     $page = FILTER::get('REQUEST', 'page');
     #
     # Don't show topic, if number of comments > per page
     #
@@ -204,7 +204,7 @@ if (!empty($topic) && !empty($category) && !empty($section)) {
                             USER::changeProfileField(USER::getUser('user'), 'topics', '+');
                             Redirect('forum', $section['id'], $category['id'], $result);
                         } catch (Exception $error) {
-                            SYSTEM::showError($error->getMessage());
+                            echo SYSTEM::showError($error->getMessage());
                         }
                     }
 
@@ -217,7 +217,7 @@ if (!empty($topic) && !empty($category) && !empty($section)) {
 
                     SYSTEM::defineWindow('New topic', $TPL->parse());
 
-                } else SYSTEM::showMessage('You have no right to post topic');
+                } else echo SYSTEM::showError('You have no right to post topic', CreateUrl('forum', $section, $category));
 
             } else {
                 #
@@ -226,8 +226,8 @@ if (!empty($topic) && !empty($category) && !empty($section)) {
                 $ids     = array_keys($content);
                 $ids     = array_reverse($ids);
                 $count   = sizeof($content);
-                $page    = (int) FILTER::get('REQUEST', 'page');
-                $perpage = (int) CONFIG::getValue('forum', 'topics_per_page');
+                $page    = FILTER::get('REQUEST', 'page');
+                $perpage = CONFIG::getValue('forum', 'topics_per_page');
                 $output  = [];
                 $pagination = GetPagination($page, $perpage, $count);
                 for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
@@ -263,15 +263,12 @@ if (!empty($topic) && !empty($category) && !empty($section)) {
                     SYSTEM::defineWindow('', Pagination($count, $perpage, $page, $category['link']));
                 }
             }
-        } else SYSTEM::showMessage('Category is empty', MODULE.'forum'.SECTION.$section['id']);
-    } else SYSTEM::showMessage('Section is empty', MODULE);
+        } else echo SYSTEM::showMessage('Category is empty', MODULE.'forum'.SECTION.$section['id']);
+    } else echo SYSTEM::showMessage('Section is empty', MODULE.'forum');
 
 } elseif (!empty($section)) {
     $section    = CMS::call('FORUM')->getSection($section);
     $categories = CMS::call('FORUM')->getCategories($section['id']);
-    if (!$categories) {
-        SYSTEM::showMessage('Database is empty', CreateUrl('forum'));
-    }
 
     SYSTEM::set('pagename', $section['title']);
     if (!empty($section['desc']))
@@ -280,39 +277,35 @@ if (!empty($topic) && !empty($category) && !empty($section)) {
 
     SYSTEM::setPageKeywords($section['id']);
 
-    if (empty($categories)) {
-        SYSTEM::showMessage('Database is empty');
-
-    } else {
-        $output['total_categories'] = sizeof($categories);
-        $output['total_topics']  = 0;
-        $output['total_replies'] = 0;
-        $output['total_views']   = 0;
-        $output['link']  = $section['link'];
-        $output['title'] = $section['title'];
-        if (!empty($categories)) {
-            $stat = [];
-            $output['categories'] = $categories;
-            #
-            # Show each category
-            #
-            foreach ($categories as $key => $category) {
-                $content = CMS::call('FORUM')->getContent($key);
-                $output['categories'][$key]['desc']   = CMS::call('PARSER')->parseText($category['desc']);
-                $output['categories'][$key]['topics'] = sizeof($content);
-                if (!empty($content)) {
-                    $output['total_topics'] += $output['categories'][$key]['topics'];
-                    foreach ($content as $key => $topic) {
-                        $output['total_replies'] += $topic['comments'];
-                        $output['total_views']   += $topic['views'];
-                    }
+    $output['total_categories'] = sizeof($categories);
+    $output['total_topics']  = 0;
+    $output['total_replies'] = 0;
+    $output['total_views']   = 0;
+    $output['link']  = $section['link'];
+    $output['title'] = $section['title'];
+    if (!empty($categories)) {
+        $stat = [];
+        $output['categories'] = $categories;
+        #
+        # Show each category
+        #
+        foreach ($categories as $key => $category) {
+            $content = CMS::call('FORUM')->getContent($key);
+            $output['categories'][$key]['desc']   = CMS::call('PARSER')->parseText($category['desc']);
+            $output['categories'][$key]['topics'] = sizeof($content);
+            if (!empty($content)) {
+                $output['total_topics'] += $output['categories'][$key]['topics'];
+                foreach ($content as $key => $topic) {
+                    $output['total_replies'] += $topic['comments'];
+                    $output['total_views']   += $topic['views'];
                 }
             }
         }
-        $TPL = new TEMPLATE(__DIR__.DS.'section.tpl');
-        $TPL->set($output);
-        SYSTEM::defineWindow('Forum', $TPL->parse());
     }
+    $TPL = new TEMPLATE(__DIR__.DS.'section.tpl');
+    $TPL->set($output);
+    SYSTEM::defineWindow('Forum', $TPL->parse());
+
 } else {
     #
     # Forum main page - Sections and categories
@@ -356,5 +349,5 @@ if (!empty($topic) && !empty($category) && !empty($section)) {
         $TPL->set($output);
         SYSTEM::defineWindow('Forum', $TPL->parse());
 
-    } else SYSTEM::showMessage('Database is empty');
+    } else echo SYSTEM::showMessage('Database is empty', MODULE.'index');
 }

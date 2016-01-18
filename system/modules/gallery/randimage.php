@@ -11,7 +11,7 @@ $albums   = CMS::call('GALLERY')->getCategories(key($section));
 
 if (!empty($albums)) {
     $output = [];
-    $random = (int) CONFIG::getValue('gallery', 'random');
+    $random = CONFIG::getValue('gallery', 'random');
     $count  = sizeof($albums);
     if ($random >= $count) {
         foreach ($albums as $id => $album) {

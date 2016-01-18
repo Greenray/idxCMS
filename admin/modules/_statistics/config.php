@@ -7,8 +7,8 @@ if (!defined('idxADMIN') || !USER::$root) die();
 
 if (!empty($REQUEST['save'])) {
     $config = [];
-    $config['user_browser'] = empty($REQUEST['user_browser'])   ? '' : '1';
-    $config['spider_ip']    = empty($REQUEST['spider_ip']) ? '' : '1';
+    $config['user_browser'] = empty($REQUEST['user_browser']) ? '' : '1';
+    $config['spider_ip']    = empty($REQUEST['spider_ip'])    ? '' : '1';
     $config['spider_agent'] = empty($REQUEST['spider_agent']) ? '' : '1';
     CMS::call('CONFIG')->setSection('statistics', $config);
     if (CMS::call('CONFIG')->save())

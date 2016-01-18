@@ -7,7 +7,7 @@ if (!defined('idxADMIN') || !USER::$root) die();
 
 if (!empty($REQUEST['clean'])) {
     file_put_contents(CONTENT.'searchwords', '');
-    SYSTEM::showMessage('Done');
+    echo SYSTEM::showMessage('Done');
 } else {
     $keywords = file(CONTENT.'searchwords', FILE_IGNORE_NEW_LINES);
 
@@ -36,5 +36,5 @@ if (!empty($REQUEST['clean'])) {
         $TPL = new TEMPLATE(__DIR__.DS.'searchwords.tpl');
         $TPL->set($output);
         echo $TPL->parse();
-    } else SYSTEM::showMessage('No data', 'Searcwords', CreateUrl('admin'));
+    } else SYSTEM::showMessage('No data', MODULE.'admin');
 }

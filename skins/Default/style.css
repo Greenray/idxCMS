@@ -8,7 +8,7 @@ a,
     a:visited { color: #0066ff; text-decoration: none }
     a:active,
     a:hover { color: red }
-    a img { border: 0; vertical-align: middle }
+    a img { vertical-align: middle }
 blockquote {
     background: #f9f9f9;
     border-left: 10px solid #ccc;
@@ -132,6 +132,22 @@ textarea:focus { border: 1px solid red }
     text-align: right }
 .main-menu { background: #1a4b4e }
     .menu { display: inline-block }
+    .menu ul {
+        background: #1f2024;
+        border-radius: 0 0 5px 5px;
+        left: 0;
+        opacity: 0;
+        position: absolute;
+        top: 40px;
+        transition: opacity .25s ease .1s;
+        z-index: 10 }
+    .menu ul li {
+        height: 0;
+        overflow: hidden;
+        padding: 0;
+        transition: height .25s ease .1s }
+    .menu ul li a {	border: none; border-bottom: 1px solid #353539; margin: 0 }
+    .menu ul li:last-child a { border: none }
     .menu li { float: left; position: relative }
     .menu li a {
         border-left: 1px solid black;
@@ -148,24 +164,8 @@ textarea:focus { border: 1px solid red }
     .menu li:first-child a { border-left: none }
     .menu li:last-child a { border-right: none }
     .menu li:hover > a { color: #8fde62 }
-    .menu ul {
-        background: #1f2024;
-        border-radius: 0 0 5px 5px;
-        left: 0;
-        opacity: 0;
-        position: absolute;
-        top: 40px;
-        transition: opacity .25s ease .1s;
-        z-index: 10 }
     .menu li:hover > ul { opacity: 1 }
-    .menu ul li {
-        height: 0;
-        overflow: hidden;
-        padding: 0;
-        transition: height .25s ease .1s }
     .menu li:hover > ul li { height: 36px; overflow: visible; padding: 0 }
-    .menu ul li a {	border: none; border-bottom: 1px solid #353539; margin: 0 }
-    .menu ul li:last-child a { border: none }
 #layout-root { position: relative; height: auto !important }
     #layout-center { height: auto !important; margin: 0 235px; overflow: hidden }
     #layout-left,
@@ -201,11 +201,9 @@ textarea:focus { border: 1px solid red }
     margin: 10px;
     padding: 10px }
 .user_panel { margin: 10px; padding: 0 10px }
-
 .win { margin: 20px 5px }
-    .win .title { margin: 10px 0; text-shadow: 1px 1px 1px white }
+    .win .title { margin: 10px 0; text-shadow: 1px 0 1px white }
     .win .info { font-size: 10px }
-
 .boxes {
     height: auto !important;
     margin: 30px auto;
@@ -266,10 +264,32 @@ textarea:focus { border: 1px solid red }
     padding: 5px;
     overflow: auto;
     white-space: nowrap }
+.counter td { height: 20px }
+.error,
+.message {
+    background: white;
+	background-image: linear-gradient(to bottom, white 1%, #999 99%);
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);
+    display: none;
+    font-weight: bold;
+    min-width: 300px;
+    padding: 15px;
+    position: relative;
+    width: 300px }
+.error p,
+.message p { padding: 10px; }
+.error .title,
+.message .title {
+    font-size: 15px;
+    font-weight: bold;
+    padding: 8px 0;
+    text-shadow: -1px 1px 1px rgba(0, 0, 0, 0.8);
+    text-transform: uppercase }
+.error .title { background: red; color: yellow }
+.message .title { background: #6e7b8b; color: white }
 .dark { background: #88c3b0 }
 .light  { background: #dee3e7 }
-.light { background: #88c3b0 }
-.dark  { background: #dee3e7 }
 .help {
     color: red;
     font-style: italic;
@@ -277,7 +297,7 @@ textarea:focus { border: 1px solid red }
     margin: 0 10px 0 0;
     padding: 5px 0;
     text-align: right }
-.info {}
+.last-items { margin: 0 0 0 5px }
 .last-items li { margin: 0 0 10px 10px }
 .login-panel { margin: 10px 0 }
 .none { display: none }
@@ -320,6 +340,8 @@ textarea:focus { border: 1px solid red }
     .pass_img#progresbar-2-80, .pass_img#passbar-80 { background: transparent url(../images/password/pass_80.gif) no-repeat }
     .pass_img#progresbar-2-90, .pass_img#passbar-90 { background: transparent url(../images/password/pass_90.gif) no-repeat }
     .pass_img#progresbar-2-100, .pass_img#passbar-100 { background: transparent url(../images/password/pass_100.gif) no-repeat }
+.poll { margin: 0 0 10px }
+.poll table { margin: 3px 0 }
 .post { margin: 10px; padding: 10px; overflow: hidden }
     .post .title {}
     .post .date {}
@@ -361,6 +383,8 @@ textarea:focus { border: 1px solid red }
     .comment .text img { margin: 0 10px }
     .comment_edit,
     .comment_post { margin: 30px 10px 0; overflow: hidden }
+.profile th,
+.profile td { height: 35px; padding: 0 10px; vertical-align: middle }
 .random-image { margin: 5px 0 }
 .rate {
     background: none;
@@ -376,45 +400,14 @@ textarea:focus { border: 1px solid red }
 #registration_content { margin: 15px auto; text-align: center; width: 635px }
 #registration_form { overflow: hidden }
 .required { background: #fff888; color: red }
-.step {	float: left }
-#steps { overflow: hidden }
-    #steps form { padding: 0 }
-    #steps form fieldset { border: none; padding: 0 }
-    #steps form legend {
-        background: #297377;
-        color: #fff;
-        font-size: 18px;
-        font-weight: bold;
-        margin: 10px 0;
-        width: 635px }
-    #steps form p {
-        clear: both;
-        float: left;
-        margin: 0 0 10px 120px;
-        padding: 3px 0;
-        width: 420px }
-    #steps form p label {
-        color: #000;
-        float: left;
-        font-weight: bold;
-        line-height: 20px;
-        text-align: right;
-        width: 150px }
-    #steps form p.msg {
-        background: none;
-        border: 0;
-        border-radius: 0;
-        box-shadow: none }
-    #steps form p.submit { background: none; border: none; box-shadow: none }
-    #steps form input:not ([type=radio]),
-    #steps form textarea,
-    #steps form select {
-        border: 1px solid #ddd;
-        border-radius: 3px;
-        outline: 0;
-        padding: 5px;
-        width: 200px }
-    #steps form input:focus { background: #fff; border: 1px solid red }
+.simple-menu { background: #297377; padding: 10px }
+    .simple-menu li {
+        border-left: 1px solid #000;
+        margin-left: 8px;
+        padding-left: 12px;
+        display: inline }
+    .simple-menu li:last-child { border-right: 1px solid #000; margin-right: 8px; padding-right: 12px }
+    .simple-menu a { color: #fff }
 .section { margin: 20px }
     .section a { display: block; margin: 0 }
     .section a.level1 { text-align: left }
@@ -501,14 +494,45 @@ textarea:focus { border: 1px solid red }
     .star div.rates { margin: -16px 0 0 5px }
     .star div.sep { margin: 0 3px }
     .star-rate { margin: -20px 0 10px; padding: 0 0 20px }
-.simple-menu { background: #297377; padding: 10px }
-    .simple-menu li {
-        border-left: 1px solid #000;
-        margin-left: 8px;
-        padding-left: 12px;
-        display: inline }
-    .simple-menu li:last-child { border-right: 1px solid #000; margin-right: 8px; padding-right: 12px }
-    .simple-menu a { color: #fff }
+.step {	float: left }
+#steps { overflow: hidden }
+    #steps form { padding: 0 }
+    #steps form fieldset { border: none; padding: 0 }
+    #steps form legend {
+        background: #297377;
+        color: #fff;
+        font-size: 18px;
+        font-weight: bold;
+        margin: 10px 0;
+        width: 635px }
+    #steps form p {
+        clear: both;
+        float: left;
+        margin: 0 0 10px 120px;
+        padding: 3px 0;
+        width: 420px }
+    #steps form p label {
+        color: #000;
+        float: left;
+        font-weight: bold;
+        line-height: 20px;
+        text-align: right;
+        width: 150px }
+    #steps form p.msg {
+        background: none;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none }
+    #steps form p.submit { background: none; border: none; box-shadow: none }
+    #steps form input:not ([type=radio]),
+    #steps form textarea,
+    #steps form select {
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        outline: 0;
+        padding: 5px;
+        width: 200px }
+    #steps form input:focus { background: #fff; border: 1px solid red }
 .tab_content { margin: 20px 0 0; }
     .tab_content img { float: left; margin: 0 10px }
     .tab_content .author { width: 30% }
@@ -545,7 +569,24 @@ table#std tr { height: 35px }
 .horinaja img { margin: 0; padding: 0 }
     .horinaja ul  { font-size: 12px; position: relative }
     .horinaja ul li { background: transparent; display: block; top: 0 }
-
+    ol.horinaja_pagination {
+        background: transparent;
+        clear: both;
+        height: 40px;
+        margin: 0 auto;
+        padding: 5px 0 0 0;
+        position: relative }
+    ol.horinaja_pagination li { display: block; float: left; height: 40px }
+    ol.horinaja_pagination li a {
+        background: transparent;
+        color: white;
+        cursor: pointer;
+        height: 30px;
+        display: block;
+        float: left;
+        font-weight: bold;
+        text-align: center;
+        padding: 10px 0 0 0 }
 #unitip {
     color: #fff;
     display: none;

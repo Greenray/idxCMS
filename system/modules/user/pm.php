@@ -8,7 +8,7 @@ if (!defined('idxCMS')) die();
 SYSTEM::set('pagename', __('Private messages'));
 
 if (!USER::$logged_in) {
-    SYSTEM::showMessage('You are not logged in!');
+    echo SYSTEM::showError('You are not logged in!', MODULE.'index');
 } elseif (!empty($REQUEST['save'])) {
     #
     # Send message
@@ -16,9 +16,9 @@ if (!USER::$logged_in) {
     try {
         $PM = new MESSAGE(PM_DATA, USER::getUser('user'));
         $PM->sendPrivateMessage($REQUEST['for'], $REQUEST['text']);
-        SYSTEM::ShowMessage('Message sent');
+        echo SYSTEM::ShowMessage('Message sent');
     } catch (Exception $error) {
-        SYSTEM::showError($error->getMessage());
+        echo SYSTEM::showError($error->getMessage());
     }
     unset($PM);
 
@@ -27,25 +27,18 @@ if (!USER::$logged_in) {
     # Post new message
     #
     if ($REQUEST['for'] === USER::getUser('user')) {
-        SYSTEM::showMessage('You cannot send message to yourself');
+        echo SYSTEM::showError('You cannot send message to yourself', MODULE.'user.pm');
     } else {
-        $user = USER::getUserData($REQUEST['for']);
-        $TPL  = new TEMPLATE(__DIR__.DS.'comment-post.tpl');
-        $TPL->set('action',         '');
-        $TPL->set('nick',           $user['nick']);
-        $TPL->set('text',           FILTER::get('REQUEST', 'text'));
-        $TPL->set('message_length', USER::$root ? '' : CONFIG::getValue('pm', 'message_length'));
-        $TPL->set('bbcodes',        CMS::call('PARSER')->showBbcodesPanel('comment.text'));
-        $TPL->set('for',            $REQUEST['for']);
-        SYSTEM::defineWindow('Private message', $TPL->parse());
+        CMS::call('COMMENTS')->showCommentForm('module=pm&', $REQUEST['for']);
     }
+
 } else {
     $PM = new MESSAGE(PM_DATA, USER::getUser('user'));
     try {
-        if (!empty($REQUEST['delete'])) $PM->removeMessage((int) $REQUEST['delete'], 'inbox');
-        if (!empty($REQUEST['remove'])) $PM->removeMessage((int) $REQUEST['remove'], 'outbox');
+        if (!empty($REQUEST['delete'])) $PM->removeMessage($REQUEST['delete'], 'inbox');
+        if (!empty($REQUEST['remove'])) $PM->removeMessage($REQUEST['remove'], 'outbox');
     } catch (Exception $error) {
-        SYSTEM::showError($error->getMessage());
+        echo SYSTEM::showError($error->getMessage());
     }
     if (!empty($REQUEST['mode'])) {
         if ($REQUEST['mode'] === 'outbox') {
@@ -55,9 +48,10 @@ if (!USER::$logged_in) {
                 $output  = '';
                 $count   = sizeof($messages);
                 $ids     = array_keys($messages);
-                $page    = (int) FILTER::get('REQUEST', 'page');
-                $perpage = (int) CONFIG::getValue('pm', 'per_page');
+                $page    = FILTER::get('REQUEST', 'page');
+                $perpage = CONFIG::getValue('pm', 'per_page');
                 $pagination = GetPagination($page, $perpage, $count);
+
                 for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
                     if (!empty($messages[$ids[$i]])) {
                         $messages[$ids[$i]]['id']   = $ids[$i];
@@ -76,7 +70,8 @@ if (!USER::$logged_in) {
                 if ($count > $perpage) {
                     SYSTEM::defineWindow('', Pagination($count, $perpage, $page, MODULE.'user.pm&user='.$REQUEST['user'].'&mode=outbox'));
                 }
-            } else SYSTEM::showMessage('Database is empty');
+            } else  echo SYSTEM::showMessage('Box is empty', MODULE.'user.pm');
+
         } elseif ($REQUEST['mode'] === 'inbox') {
             $messages = $PM->getMessages('inbox');
             if (!empty($messages)) {
@@ -86,8 +81,8 @@ if (!USER::$logged_in) {
                     $TPL->set('action',         '');
                     $TPL->set('nick',           $user['nick']);
                     $TPL->set('text',           empty($REQUEST['text']) ? '[quote]'.$messages[$REQUEST['re']]['text'].'[/quote]' : $REQUEST['text']);
-                    $TPL->set('message_length', USER::$root ? '' : CONFIG::getValue('pm', 'message_length'));
                     $TPL->set('bbcodes',        CMS::call('PARSER')->showBbcodesPanel('comment.text'));
+                    $TPL->set('message_length', USER::$root ? '' : CONFIG::getValue('pm', 'message_length'));
                     $TPL->set('for',            $REQUEST['reply']);
                     SYSTEM::defineWindow('Reply', $TPL->parse());
                 } else {
@@ -97,9 +92,10 @@ if (!USER::$logged_in) {
                     $count   = sizeof($messages);
                     $ids     = array_keys($messages);
                     $ids     = array_reverse($ids);
-                    $page    = (int) FILTER::get('REQUEST', 'page');
-                    $perpage = (int) CONFIG::getValue('pm', 'per_page');
+                    $page    = FILTER::get('REQUEST', 'page');
+                    $perpage = CONFIG::getValue('pm', 'per_page');
                     $pagination = GetPagination($page, $perpage, $count);
+
                     for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
                         if (!empty($messages[$ids[$i]])) {
                             $messages[$ids[$i]]['inbox'] = TRUE;
@@ -124,16 +120,15 @@ if (!USER::$logged_in) {
                         SYSTEM::defineWindow('', Pagination($count, $perpage, $page, MODULE.'user.pm&mode=inbox'));
                     }
                 }
-            } else {
-                SYSTEM::showMessage('Database is empty');
-            }
+            } else echo SYSTEM::showMessage('Box is empty', MODULE.'user.pm');
         }
+
     } else {
         SYSTEM::defineWindow(
             'Messages',
             '<div class="center">
-                <a href="'.MODULE.'user.pm&mode=inbox" title="{mess_info}">'.__('Inbox').'</a>
-                <a href="'.MODULE.'user.pm&mode=outbox" title="{mess_info}">'.__('Outbox').'</a>
+                <a href="'.MODULE.'user.pm&mode=inbox">'.__('Inbox').'</a>
+                <a href="'.MODULE.'user.pm&mode=outbox">'.__('Outbox').'</a>
              </div>'
         );
     }

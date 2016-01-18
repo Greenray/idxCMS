@@ -18,9 +18,9 @@ if (isset($init)) {
     }
 } else {
     if (!empty($REQUEST['save'])) {
-        $config['db_size']           = empty($REQUEST['db_size'])        ? 100  : (int) $REQUEST['db_size'];
-        $config['message_length']    = empty($REQUEST['message_length']) ? 1000 : (int) $REQUEST['message_length'];
-        $config['per_page']          = empty($REQUEST['per_page'])       ? 10   : (int) $REQUEST['per_page'];
+        $config['db_size']           = empty($REQUEST['db_size'])        ? 100  : $REQUEST['db_size'];
+        $config['message_length']    = empty($REQUEST['message_length']) ? 1000 : $REQUEST['message_length'];
+        $config['per_page']          = empty($REQUEST['per_page'])       ? 10   : $REQUEST['per_page'];
         CMS::call('CONFIG')->setSection('guestbook', $config);
         if (CMS::call('CONFIG')->save())
              echo SYSTEM::showMessage('Configuration saved');

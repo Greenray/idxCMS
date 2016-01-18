@@ -62,7 +62,7 @@ if (!empty($REQUEST['save'])) {
         Redirect('posts', $section, $category, $post);
 
     } catch (Exception $error) {
-        SYSTEM::showError($error->getMessage());
+        echo SYSTEM::showError($error->getMessage());
     }
 }
 
@@ -110,7 +110,7 @@ $output['keywords'] = FILTER::get('REQUEST', 'keywords');
 $output['desc']     = FILTER::get('REQUEST', 'desc');
 $output['text']     = FILTER::get('REQUEST', 'text');
 $opened = FILTER::get('REQUEST', 'opened');
-$output['opened']   = empty($opened) ? 1 : $opened;
+$output['opened']   = empty($opened) ? TRUE : $opened;
 
 if (FILTER::get('REQUEST', 'edit') && USER::$root) {
     $content = CMS::call('POSTS')->getContent($category);

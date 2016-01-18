@@ -10,7 +10,7 @@ $FEEDBACK = new MESSAGE(CONTENT, 'feedback');
 if (!empty($REQUEST['submit']) && isset($REQUEST['delete'])) {
     foreach ($REQUEST['delete'] as $key => $id) {
         if (!$FEEDBACK->removeMessage($id)) {
-            SYSTEM::showError('Cannot remove message'.' '.$id);
+            echo SYSTEM::showError('Cannot remove message'.' '.$id);
         }
     }
 }
@@ -30,5 +30,5 @@ if (!empty($messages)) {
     $TPL->set($output);
     echo $TPL->parse();
 } else {
-    SYSTEM::showMessage('Database is empty');
+    echo SYSTEM::showMessage('Database is empty');
 }

@@ -17,40 +17,41 @@ if (!empty($REQUEST['save'])) {
         }
     } else  $config['url'] = '';
 
-    $config['description'] = !empty($REQUEST['description']) ? $REQUEST['description'] : 'Система управления сайтом idxCMS';
-    $config['slogan']      = !empty($REQUEST['slogan'])      ? $REQUEST['slogan']      : 'Пока не треснешь как следует, ничего не заработает (В.В.Путин)';
-    $config['cookie']      = !empty($REQUEST['cookie'])      ? $REQUEST['cookie']      : 'idxCMS';
+    $config['description']   = !empty($REQUEST['description'])   ? $REQUEST['description']   : 'Система управления сайтом idxCMS';
+    $config['slogan']        = !empty($REQUEST['slogan'])        ? $REQUEST['slogan']        : 'Пока не треснешь как следует, ничего не заработает (В.В.Путин)';
+    $config['random_slogan'] = !empty($REQUEST['random_slogan']) ? $REQUEST['random_slogan'] : '1';
+    $config['cookie']        = !empty($REQUEST['cookie'])        ? $REQUEST['cookie']        : 'idxCMS';
 
     if (empty($REQUEST['keywords']))
          $config['keywords'] = 'idxCMS,CMS,opensource,php';
     else $config['keywords'] = preg_replace('/\s/', '', $REQUEST['keywords']);
 
-    $config['skin']         = empty($REQUEST['skin'])         ? 'Default' : $REQUEST['skin'];
-    $config['lang']         = empty($REQUEST['lang'])         ? 'russian' : $REQUEST['lang'];
-    $config['allow_skin']   = empty($REQUEST['allow_skin'])   ? ''        : '1';
-    $config['allow_language']   = empty($REQUEST['allow_language'])   ? ''        : '1';
-    $config['detect_language']  = empty($REQUEST['detect_language'])  ? ''        : '1';
-    $config['per_page']     = empty($REQUEST['per_page'])     ? 10        : (int) $REQUEST['per_page'];
-    $config['last']         = empty($REQUEST['last'])         ? 10        : (int) $REQUEST['last'];
-    $config['max_filesize'] = empty($REQUEST['max_filesize']) ? 2000000   : (int) $REQUEST['max_filesize'];
-    $config['thumb_width']  = empty($REQUEST['thumb_width'])  ? 200       : (int) $REQUEST['thumb_width'];
-    $config['thumb_height'] = empty($REQUEST['thumb_height']) ? 150       : (int) $REQUEST['thumb_height'];
-    $config['captcha']      = empty($REQUEST['captcha'])      ? 'Random'  : $REQUEST['captcha'];
-    $config['tz']           = empty($REQUEST['tz'])           ? 3         : (int) $REQUEST['tz'];
-    $config['welcome']      = empty($REQUEST['welcome'])      ? ''        : '1';
+    $config['skin']            = empty($REQUEST['skin'])            ? 'Default' : $REQUEST['skin'];
+    $config['lang']            = empty($REQUEST['lang'])            ? 'russian' : $REQUEST['lang'];
+    $config['allow_skin']      = empty($REQUEST['allow_skin'])      ? ''        : '1';
+    $config['allow_language']  = empty($REQUEST['allow_language'])  ? ''        : '1';
+    $config['detect_language'] = empty($REQUEST['detect_language']) ? ''        : '1';
+    $config['per_page']        = empty($REQUEST['per_page'])        ? 10        : $REQUEST['per_page'];
+    $config['last']            = empty($REQUEST['last'])            ? 10        : $REQUEST['last'];
+    $config['max_filesize']    = empty($REQUEST['max_filesize'])    ? 2000000   : $REQUEST['max_filesize'];
+    $config['thumb_width']     = empty($REQUEST['thumb_width'])     ? 200       : $REQUEST['thumb_width'];
+    $config['thumb_height']    = empty($REQUEST['thumb_height'])    ? 150       : $REQUEST['thumb_height'];
+    $config['captcha']         = empty($REQUEST['captcha'])         ? 'Random'  : $REQUEST['captcha'];
+    $config['tz']              = empty($REQUEST['tz'])              ? 4         : $REQUEST['tz'];
+    $config['welcome']         = empty($REQUEST['welcome'])         ? ''        : '1';
     CMS::call('CONFIG')->setSection('main', $config);
 
     $config = [];
-    $config['query_min']   = empty($REQUEST['query_min'])   ? 6  : (int) $REQUEST['query_min'];
-    $config['query_max']   = empty($REQUEST['query_max'])   ? 20 : (int) $REQUEST['query_max'];
-    $config['block']       = empty($REQUEST['block'])       ? 50 : (int) $REQUEST['block'];
-    $config['per_page']    = empty($REQUEST['per_page'])    ? 20 : (int) $REQUEST['per_page'];
+    $config['query_min']   = empty($REQUEST['query_min'])   ? 6  : $REQUEST['query_min'];
+    $config['query_max']   = empty($REQUEST['query_max'])   ? 20 : $REQUEST['query_max'];
+    $config['block']       = empty($REQUEST['block'])       ? 50 : $REQUEST['block'];
+    $config['per_page']    = empty($REQUEST['per_page'])    ? 20 : $REQUEST['per_page'];
     $config['allow_guest'] = empty($REQUEST['allow_guest']) ? '' : '1';
     CMS::call('CONFIG')->setSection('search', $config);
 
     $config = [];
-    $config['width']          = empty($REQUEST['width'])          ? 290        : (int) $REQUEST['width'];
-    $config['height']         = empty($REQUEST['height'])         ? 24         : (int) $REQUEST['height'];
+    $config['width']          = empty($REQUEST['width'])          ? 290        : $REQUEST['width'];
+    $config['height']         = empty($REQUEST['height'])         ? 24         : $REQUEST['height'];
     $config['bgcolor']        = empty($REQUEST['bgcolor'])        ? '0x66ff66' : strtr($REQUEST['bgcolor'],        ['#' => '0x']);
     $config['leftbg']         = empty($REQUEST['leftbg'])         ? '0x969696' : strtr($REQUEST['leftbg'],         ['#' => '0x']);
     $config['lefticon']       = empty($REQUEST['lefticon'])       ? '0x3333ff' : strtr($REQUEST['lefticon'],       ['#' => '0x']);
@@ -68,8 +69,8 @@ if (!empty($REQUEST['save'])) {
     CMS::call('CONFIG')->setSection('audio', $config);
 
     $config = [];
-    $config['width']  = empty($REQUEST['width'])  ? 435 : (int) $REQUEST['width'];
-    $config['height'] = empty($REQUEST['height']) ? 350 : (int) $REQUEST['height'];
+    $config['width']  = empty($REQUEST['width'])  ? 435 : $REQUEST['width'];
+    $config['height'] = empty($REQUEST['height']) ? 350 : $REQUEST['height'];
     CMS::call('CONFIG')->setSection('video', $config);
     if (CMS::call('CONFIG')->save())
          echo SYSTEM::showMessage('Configuration saved');
@@ -77,7 +78,7 @@ if (!empty($REQUEST['save'])) {
 
     if (!empty($REQUEST['welcome_msg'])) {
         if (!file_put_contents(CONTENT.'intro', CMS::call('PARSER')->parseText($REQUEST['welcome_msg']))) {
-            SYSTEM::showMessage('Cannot save file'.' intro');
+            echo SYSTEM::showError('Cannot save file'.' intro');
         }
     }
 }
@@ -127,7 +128,7 @@ foreach ($captcha as $key => $title) {
 foreach ($LANG['tz'] as $tz => $title) {
     $config['tzs'][$tz]['tz']    = $tz;
     $config['tzs'][$tz]['title'] = $title;
-    if ($tz === (int) $current['tz']) {
+    if ($tz == $current['tz']) {
         $config['tzs'][$tz]['selected'] = TRUE;
     }
 }

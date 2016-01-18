@@ -12,7 +12,7 @@ $sections   = CMS::call('GALLERY')->getSections();
 $categories = CMS::call('GALLERY')->getCategories($section);
 $content    = CMS::call('GALLERY')->getContent($category);
 
-$new_category = (int) FILTER::get('REQUEST', 'new_category');
+$new_category = FILTER::get('REQUEST', 'new_category');
 #
 # Save new or edited item
 #
@@ -37,7 +37,7 @@ if (!empty($REQUEST['save'])) {
         CMS::call('GALLERY')->saveImage($item);
         $item = '';
     } catch (Exception $error) {
-         SYSTEM::showError($error->getMessage());
+         echo SYSTEM::showError($error->getMessage());
     }
 } elseif (!empty($REQUEST['close']) || !empty($REQUEST['open'])) {
     CMS::call('GALLERY')->setValue(
@@ -50,7 +50,7 @@ if (!empty($REQUEST['save'])) {
         try {
             CMS::call('GALLERY')->removeItem($REQUEST['delete']);
         } catch (Exception $error) {
-            SYSTEM::showError($error->getMessage());
+            echo SYSTEM::showError($error->getMessage());
         }
     }
 }
@@ -77,12 +77,12 @@ if (!empty($REQUEST['new']) || !empty($item)) {
         $output['opened']    = empty($REQUEST['opened'])    ? $item['opened']    : $REQUEST['opened'];
     } else {
         $output['id']        = '';
-        $output['title']     = empty($REQUEST['title'])     ? '' : $REQUEST['title'];
-        $output['keywords']  = empty($REQUEST['keywords'])  ? '' : $REQUEST['keywords'];
-        $output['desc']      = empty($REQUEST['desc'])      ? '' : $REQUEST['desc'];
-        $output['text']      = empty($REQUEST['text'])      ? '' : $REQUEST['text'];
-        $output['copyright'] = empty($REQUEST['copyright']) ? '' : $REQUEST['copyright'];
-        $output['opened']    = empty($REQUEST['opened'])    ? 1  : $REQUEST['opened'];
+        $output['title']     = empty($REQUEST['title'])     ? ''   : $REQUEST['title'];
+        $output['keywords']  = empty($REQUEST['keywords'])  ? ''   : $REQUEST['keywords'];
+        $output['desc']      = empty($REQUEST['desc'])      ? ''   : $REQUEST['desc'];
+        $output['text']      = empty($REQUEST['text'])      ? ''   : $REQUEST['text'];
+        $output['copyright'] = empty($REQUEST['copyright']) ? ''   : $REQUEST['copyright'];
+        $output['opened']    = empty($REQUEST['opened'])    ? TRUE : $REQUEST['opened'];
     }
     $output['bbCodes_desc'] = CMS::call('PARSER')->showBbcodesPanel('item.desc');
     $output['bbCodes_text'] = CMS::call('PARSER')->showBbcodesPanel('item.text');

@@ -112,7 +112,7 @@ class ITEMS extends CATEGORIES {
             if (!mkdir($path.$id, 0777)) {
                 throw new Exception('Cannot create'.' '.$item);
             }
-            $this->content[$id]['id']       = (int) $id;
+            $this->content[$id]['id']       = $id;
             $this->content[$id]['author']   = USER::getUser('user');
             $this->content[$id]['nick']     = USER::getUser('nick');
             $this->content[$id]['time']     = time();
@@ -127,7 +127,7 @@ class ITEMS extends CATEGORIES {
                 throw new Exception($error->getMessage());
             }
             $this->content[$id]['file']      = $uploaded[0];
-            $this->content[$id]['size']      = (int) $uploaded[1];
+            $this->content[$id]['size']      = $uploaded[1];
             $this->content[$id]['downloads'] = 0;
             $this->content[$id]['copyright'] = FILTER::get('REQUEST', 'copyright');
         } else {
@@ -261,7 +261,7 @@ class ITEMS extends CATEGORIES {
      */
     public function getLastItems($items) {
         krsort($items);
-        $items  = array_slice($items, 0, (int) CONFIG::getValue('main', 'last'), TRUE);
+        $items  = array_slice($items, 0, CONFIG::getValue('main', 'last'), TRUE);
         $result = [];
         foreach ($items as $key => $data) {
             $parts = explode('.', $data);

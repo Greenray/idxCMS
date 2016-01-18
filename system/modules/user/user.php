@@ -29,7 +29,7 @@ if (!empty($REQUEST['save'])) {
                         $IMAGE->generateIcon($REQUEST['user']);
                     }
                 } catch (Exception $error) {
-                    SYSTEM::showError($error->getMessage());
+                    echo SYSTEM::showError($error->getMessage());
                 }
             } else {
                 if ($REQUEST['act'] === 'password_request') {
@@ -38,7 +38,7 @@ if (!empty($REQUEST['save'])) {
                         $username = basename($REQUEST['user']);
                         $user     = USER::getUserData($username);
                         if (!empty($user)) {
-                            if (!empty($user['last_prr']) && ((int) $time <= ((int) $user['last_prr'] + (int) CONFIG::getValue('user', 'flood')))) {
+                            if (!empty($user['last_prr']) && ($time <= ($user['last_prr'] + CONFIG::getValue('user', 'flood')))) {
                                 CMS::call('LOG')->logError('Too many requests in limited period of time. Try later.');
                                 Redirect('index');
                             }
@@ -63,17 +63,17 @@ if (!empty($REQUEST['save'])) {
                                         $user['email']
                                     );
                                     unset($FEEDBACK);
-                                    SYSTEM::showMessage('Your request was sent to Administrator');
+                                    echo SYSTEM::showMessage('Your request was sent to Administrator');
 //                                } else {
-//                                    SYSTEM::showMessage('Your request was sent to your email');
+//                                    echo SYSTEM::showMessage('Your request was sent to your email');
 //                                }
 
-                            } else SYSTEM::showError('Error in email');
+                            } else echo SYSTEM::showError('Error in email');
 
-                        } else SYSTEM::showError('Error in username');
+                        } else echo SYSTEM::showError('Error in username');
 
                     } catch (Exception $error) {
-                        SYSTEM::showError($error->getMessage());
+                        echo SYSTEM::showError($error->getMessage());
                     }
                 }
                 unset($REQUEST);
@@ -101,10 +101,10 @@ if (!empty($REQUEST['save'])) {
                                 $IMAGE->generateIcon(USER::getUser('user'));
                             }
                         } catch (Exception $error) {
-                            SYSTEM::showError($error->getMessage());
+                            echo SYSTEM::showError($error->getMessage());
                         }
-                    } else SYSTEM::showError('Invalid password');
-                } else SYSTEM::showError('Invalid password');
+                    } else echo SYSTEM::showError('Invalid password');
+                } else echo SYSTEM::showError('Invalid password');
             }
         }
     }
@@ -120,7 +120,7 @@ if (!USER::$logged_in) {
             $user['password'] = '';
             $user['confirm']  = '';
             $user['email']    = (empty($REQUEST['email']) || ($REQUEST['email'] == __('Enter your e-mail'))) ? '' : $REQUEST['email'];
-            $tz = empty($REQUEST['fields']['tz']) ? (int) CONFIG::getValue('main', 'tz') : (int) $REQUEST['fields']['tz'];
+            $tz = empty($REQUEST['fields']['tz']) ? CONFIG::getValue('main', 'tz') : $REQUEST['fields']['tz'];
             $user['utz']     = SelectTimeZone('fields[tz]', $LANG['tz'], $tz);
             $user['website'] = empty($REQUEST['fields']['website']) ? '' : $REQUEST['fields']['website'];
             $user['country'] = empty($REQUEST['fields']['country']) ? '' : $REQUEST['fields']['country'];
@@ -177,7 +177,7 @@ if (!USER::$logged_in) {
         $user['avatar']    = GetAvatar($user['user']);
         $user['regdate']   = FormatTime('d F Y', $user['regdate']);
         $user['lastvisit'] = FormatTime('d F Y', $user['lastvisit']);
-        $user['utz']       = SelectTimeZone('fields[tz]', $LANG['tz'], (int) $user['tz']);
+        $user['utz']       = SelectTimeZone('fields[tz]', $LANG['tz'], $user['tz']);
         $user['website']   = empty($REQUEST['fields']['website']) ? $user['website'] : $REQUEST['fields']['website'];
         $user['country']   = empty($REQUEST['fields']['country']) ? $user['country'] : $REQUEST['fields']['country'];
         $user['city']      = empty($REQUEST['fields']['city'])    ? $user['city']    : $REQUEST['fields']['city'];

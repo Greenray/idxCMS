@@ -8,7 +8,7 @@ if (!defined('idxCMS')) die();
 SYSTEM::set('pagename', __('Guestbook'));
 $GB = new MESSAGE(CONTENT, 'guestbook');
 $messages = $GB->getMessages();
-$id = (int) FILTER::get('REQUEST', 'comment');
+$id = FILTER::get('REQUEST', 'comment');
 
 if (!empty($REQUEST['save'])) {
     try {
@@ -22,7 +22,7 @@ if (!empty($REQUEST['save'])) {
         }
         FILTER::remove('REQUEST', 'text');
     } catch (Exception $error) {
-        SYSTEM::showError($error->getMessage());
+        echo SYSTEM::showError($error->getMessage());
     }
 } else {
     if (!empty($REQUEST['action']) && !empty($id)) {
@@ -69,8 +69,8 @@ if (!empty($messages)) {
     $messages = array_reverse($messages, TRUE);
     $count    = sizeof($messages);
     $ids      = array_keys($messages);
-    $perpage  = (int) CONFIG::getValue('guestbook', 'per_page');
-    $page     = (int) FILTER::get('REQUEST', 'page');
+    $perpage  = CONFIG::getValue('guestbook', 'per_page');
+    $page     = FILTER::get('REQUEST', 'page');
     $pagination = GetPagination($page, $perpage, $count);
     for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
         if (!empty($messages[$ids[$i]])) {
@@ -113,13 +113,4 @@ unset($GB);
 #
 # Show post form
 #
-if (USER::$logged_in) {
-    $TPL = new TEMPLATE(__DIR__.DS.'comment-post.tpl');
-    $TPL->set('nick',           USER::getUser('nick'));
-    $TPL->set('admin',          USER::$root);
-    $TPL->set('text',           FILTER::get('REQUEST', 'text'));
-    $TPL->set('action',         MODULE.'guestbook');
-    $TPL->set('message_length', USER::$root ? NULL : CONFIG::getValue('guestbook', 'message_length'));
-    $TPL->set('bbcodes',        CMS::call('PARSER')->showBbcodesPanel('comment_post.text'));
-    SYSTEM::defineWindow('Guestbook', $TPL->parse());
-}
+if (USER::$logged_in) CMS::call('COMMENTS')->showCommentForm('guestbook', MODULE.'guestbook');

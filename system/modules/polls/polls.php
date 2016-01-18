@@ -15,7 +15,7 @@ if (!empty($poll) && !empty($save)) {
         $polls = $POLLS->getActivePolls();
         $POLLS->voteInPoll($poll, $answer);
     } catch (Exception $error) {
-        SYSTEM::showError($error->getMessage());
+        echo SYSTEM::showError($error->getMessage());
     }
 }
 

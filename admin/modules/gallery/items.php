@@ -1,6 +1,6 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem v3.0
-# Copyright (c) 2011 - 2016 Victor Nabatov
+# Copyright (c) 2016 Victor Nabatov
 # Administration: Images management.
 
 if (!defined('idxADMIN')) die();

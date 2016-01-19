@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management System
 # Version 3.0
-# Copyright (c) 2011 - 2016 Victor Nabatov
+# Copyright (c) 2016 Victor Nabatov
 # Additional skins definition
 
 if (!defined('idxCMS')) die();

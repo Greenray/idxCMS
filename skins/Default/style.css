@@ -2,7 +2,7 @@ body {
     color: black;
 	font: 12px/18px arial, helvetica, verdana, sans-serif;
     height: auto !important;
-    line-height: 1.25;
+    line-height: 1.2;
     overflow-y: scroll }
 a,
     a:visited { color: #0066ff; text-decoration: none }
@@ -271,7 +271,6 @@ textarea:focus { border: 1px solid red }
 	background-image: linear-gradient(to bottom, white 1%, #999 99%);
     border-radius: 10px;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);
-    display: none;
     font-weight: bold;
     min-width: 300px;
     position: relative;

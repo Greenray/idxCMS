@@ -1,6 +1,6 @@
 <?php
 # idxCMS Flat Files Content Management System v3.0
-# Copyright (c) 2011 - 2016 Victor Nabatov
+# Copyright (c) 2016 Victor Nabatov
 # License: Creative Commons — Attribution-NonCommercial-ShareAlike 4.0 International
 # Module RATE
 

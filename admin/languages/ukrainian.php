@@ -1,8 +1,7 @@
 <?php
-# idxCMS Flat Files Content Management System
+# idxCMS Flat Files Content Management System v3.0
+# Copyright (c) 2016 Victor Nabatov
 # Administration - Translation
-# Version 3.0
-# Copyright (c) 2011 - 2016 Victor Nabatov
 
 $LANG['def']['Access'] = 'Доступ';
 $LANG['def']['Actions'] = 'Дії';

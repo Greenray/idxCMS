@@ -1,14 +1,14 @@
 /*
  * idxCMS Flat Files Content Management System v3.0
  * Victor Nabatov <greenray.spb@gmail.com>
- * Copyright (c) 2011 - 2016 Victor Nabatov
+ * Copyright (c) 2016 Victor Nabatov
  * License: Creative Commons Attribution-NonCommercial-Share Alike 4.0 Unported License
  * Styles for admin panel.
  */
 
 body {
     background: #006699;
-    font: normal 13px arial, helvetica, verdana, sans-serif;
+    font: normal 12px arial, helvetica, verdana, sans-serif;
     height: auto !important;
     line-height: 1;
     margin: 0;
@@ -29,7 +29,6 @@ code { font: normal 11px monospace, 'courier new' }
 dl { margin: 1em 0 }
 dd { margin: 0 0 0 40px }
 fieldset { background: #d1d7dc; margin: 0 0 10px; padding: 0.75em }
-form { margin: 0 }
 h1 { font-size: 18px }
 h2 { font-size: 16px }
 h3 { font-size: 14px }
@@ -230,6 +229,27 @@ footer {
 .button_delete input { padding: 0 2px; text-align: left }
 .category { padding: 0 13px }
 .center { text-align: center }
+.error,
+.message {
+    background: white;
+	background-image: linear-gradient(to bottom, white 1%, #999 99%);
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);
+    font-weight: bold;
+    min-width: 300px;
+    position: relative;
+    width: 300px }
+.error p,
+.message p { padding: 10px; }
+.error .title,
+.message .title {
+    font-size: 15px;
+    font-weight: bold;
+    padding: 8px 0;
+    text-shadow: -1px 1px 1px rgba(0, 0, 0, 0.8);
+    text-transform: uppercase }
+.error .title { background: red; color: yellow }
+.message .title { background: #6e7b8b; color: white }
 .dark { background: #d2d2d2; height: 25px }
 .light  { background: #efefef; height: 25px }
 .left { text-align: left }

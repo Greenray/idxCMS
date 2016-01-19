@@ -1,3 +1,8 @@
+/*
+ * idxCMS Flat Files Content Management System v3.0
+ * Modal windows.
+ */
+
 if(!window.dhtmlx)
 	window.dhtmlx = {};
 

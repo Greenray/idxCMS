@@ -11,8 +11,8 @@ Mar 06, 2015.
 
 /* reveal module-pattern */
 
-/* enable strict mode
-"use strict"; */
+/* enable strict mode */
+"use strict";
 
 /**
  * @name REDIPS

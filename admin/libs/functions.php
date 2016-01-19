@@ -71,30 +71,6 @@ function InArrayRecursive($needle, $haystack) {
 }
 
 /**
- * Login form administrator.
- *
- * @return string Login form for administrator
- * @todo   Create the template
- */
-function LoginForm() {
-    return '
-        <form name="login" method="post" action="">
-            <table>
-                <tr>
-                    <td class="row2">'.__('Username').':</td>
-                    <td class="row2 left"><input type="text" name="user" value="" style="width: 95%;" /></td>
-                </tr>
-                <tr>
-                    <td class="row2">'.__('Password').':</td>
-                    <td class="row2 left"><input type="password" name="password" value="" style="width: 95%;" /></td>
-                </tr>
-                <tr><td class="row2" colspan="2"><input type="submit" name="login" value="'.__('Log in').'" /></td></tr>
-            </table>
-        </form>
-        ';
-}
-
-/**
  * Displays a color selection.
  *
  * @param  string $name      ID for the input field
@@ -197,7 +173,33 @@ function SaveSortedSections($obj, $params) {
             CMS::call($obj)->saveCategories($section, $categories);
         }
     } catch (Exception $error) {
-        echo SYSTEM::showError($error->getMessage());
+        ShowError($error->getMessage());
     }
     return TRUE;
+}
+
+/**
+ * Shows message.
+ *
+ * @param  string  $message  Message
+ * @param  string  $url      Url for redirection
+ */
+function ShowMessage($message, $url = '') {
+    $TPL = new TEMPLATE(TEMPLATES.'message.tpl');
+    $TPL->set('message', $message);
+    $TPL->set('url', $url);
+    echo $TPL->parse();
+}
+
+/**
+ * Shows error.
+ *
+ * @param  string  $message  Message
+ * @param  string  $url      Url for redirection
+ */
+function ShowError($message, $url = '') {
+    $TPL = new TEMPLATE(TEMPLATES.'error.tpl');
+    $TPL->set('message', $message);
+    $TPL->set('url', $url);
+    echo $TPL->parse();
 }

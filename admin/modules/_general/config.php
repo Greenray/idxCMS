@@ -73,12 +73,12 @@ if (!empty($REQUEST['save'])) {
     $config['height'] = empty($REQUEST['height']) ? 350 : $REQUEST['height'];
     CMS::call('CONFIG')->setSection('video', $config);
     if (CMS::call('CONFIG')->save())
-         echo SYSTEM::showMessage('Configuration saved');
-    else echo SYSTEM::showError('Cannot save file'.' config.ini');
+         ShowMessage('Configuration saved');
+    else ShowError('Cannot save file'.' config.ini');
 
     if (!empty($REQUEST['welcome_msg'])) {
         if (!file_put_contents(CONTENT.'intro', CMS::call('PARSER')->parseText($REQUEST['welcome_msg']))) {
-            echo SYSTEM::showError('Cannot save file'.' intro');
+            ShowError('Cannot save file'.' intro');
         }
     }
 }

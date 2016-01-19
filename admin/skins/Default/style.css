@@ -11,10 +11,8 @@ body {
     font: normal 12px arial, helvetica, verdana, sans-serif;
     height: auto !important;
     line-height: 1;
-    margin: 0;
     min-height: 100%;
-    overflow-y: scroll;
-    padding: 0;
+    overflow-y: auto;
     vertical-align: baseline }
 a,
     a:visited { color: #0066ff; outline: none; text-decoration: none }
@@ -162,7 +160,7 @@ header { background-color: #006699; padding: 0 0 10px 0; width: 100% }
         position: relative;
         text-shadow: 4px 4px 2px #000;
         filter: Shadow(Color=#000000, Direction=120, Strength=2) }
-nav { float: left; width: 240px; margin: 10px }
+nav { float: left; margin: 10px; width: 240px }
 	nav ul {
 		list-style: none;
 		list-style-type: none;
@@ -232,24 +230,31 @@ footer {
 .error,
 .message {
     background: white;
-	background-image: linear-gradient(to bottom, white 1%, #999 99%);
+    background-image: -webkit-linear-gradient(to bottom, white 1%, #999 99%);
+    background-image: -moz-linear-gradient(to bottom, white 1%, #999 99%);
+    background-image: -o-linear-gradient(to bottom, white 1%, #999 99%);
+    background-image: linear-gradient(to bottom, white 1%, #999 99%);
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
     border-radius: 10px;
+    -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);
+    -moz-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);
     font-weight: bold;
     min-width: 300px;
+    padding: 10px;
     position: relative;
     width: 300px }
-.error p,
-.message p { padding: 10px; }
-.error .title,
-.message .title {
-    font-size: 15px;
-    font-weight: bold;
-    padding: 8px 0;
-    text-shadow: -1px 1px 1px rgba(0, 0, 0, 0.8);
-    text-transform: uppercase }
-.error .title { background: red; color: yellow }
-.message .title { background: #6e7b8b; color: white }
+    .error p,
+    .message p { padding: 10px; text-align: center }
+    .error p.title,
+    .message p.title {
+        font-size: 14px;
+        font-weight: bold;
+        text-shadow: -1px 1px 1px rgba(0, 0, 0, 0.8);
+        text-transform: uppercase }
+    .error p.title { background: red; color: yellow }
+    .message p.title { background: #6e7b8b; color: white }
 .dark { background: #d2d2d2; height: 25px }
 .light  { background: #efefef; height: 25px }
 .left { text-align: left }
@@ -349,3 +354,4 @@ footer {
 		padding: 5px 15px;
         width: 115px }
 	#unitipcap { background: url(../../../tools/unitip/TipCap.png) no-repeat; height: 7px; overflow: hidden	}
+

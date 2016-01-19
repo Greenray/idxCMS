@@ -110,6 +110,7 @@ die();?>
 <script src="{TOOLS}jquery.lightbox_me.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(function() {
+        $("#error").lightbox_me();
         $("#message").lightbox_me();
     });
 </script>

@@ -86,7 +86,7 @@ class SYSTEM {
         #
         self::$url = CMS::call('CONFIG')->getValue('main', 'url');
         if (empty(self::$url)) {
-            self::$url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['SCRIPT_NAME'].basename($_SERVER['SCRIPT_NAME'])).DS;
+            self::$url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['SCRIPT_NAME'].basename($_SERVER['SCRIPT_NAME']));
         }
         #
         # Check if it is allowed to change website language and set user or default language
@@ -431,7 +431,7 @@ class SYSTEM {
         $TPL = new TEMPLATE(TEMPLATES.'message.tpl');
         $TPL->set('message', $message);
         $TPL->set('url', $url);
-        return $TPL->parse();
+        self::defineWindow('Message', $TPL->parse());
     }
 
     /**
@@ -444,6 +444,6 @@ class SYSTEM {
         $TPL = new TEMPLATE(TEMPLATES.'error.tpl');
         $TPL->set('message', $message);
         $TPL->set('url', $url);
-        return $TPL->parse();
+        self::defineWindow('Error', $TPL->parse());
     }
 }

@@ -15,8 +15,8 @@ if (isset($init)) {
         $config['last']   = 1;
         CMS::call('CONFIG')->setSection('gallery', $config);
         if (CMS::call('CONFIG')->save())
-             echo SYSTEM::showMessage('Configuration saved');
-        else echo SYSTEM::showError('Cannot save file'.' config.ini');
+             ShowMessage('Configuration saved');
+        else ShowError('Cannot save file'.' config.ini');
     }
 } else {
     if (!empty($REQUEST['save'])) {
@@ -29,8 +29,8 @@ if (isset($init)) {
         $config['last']   = empty($REQUEST['last'])   ? 1 : $REQUEST['last'];
         CMS::call('CONFIG')->setSection('gallery', $config);
         if (CMS::call('CONFIG')->save())
-             echo SYSTEM::showMessage('Configuration saved');
-        else echo SYSTEM::showError('Cannot save file'.' config.ini');
+             ShowMessage('Configuration saved');
+        else ShowError('Cannot save file'.' config.ini');
     }
 
     $config = CONFIG::getSection('gallery');

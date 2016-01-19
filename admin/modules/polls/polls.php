@@ -20,7 +20,7 @@ try {
         }
     }
 } catch (Exception $error) {
-    echo SYSTEM::showError($error->getMessage());
+    ShowError($error->getMessage());
 }
 
 $opened = $POLLS->getActivePolls();

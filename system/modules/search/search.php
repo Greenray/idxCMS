@@ -92,7 +92,7 @@ if (USER::$logged_in || $config['allow_guest']) {
                         }
                     }
                 }
-            } else echo SYSTEM::showMessage(__('Input value must be more than').' '.$config['query_min'].' '.__('and less than').' '.$config['query_max'].' '.__('symbols'));
+            } else SYSTEM::showMessage(__('Input value must be more than').' '.$config['query_min'].' '.__('and less than').' '.$config['query_max'].' '.__('symbols'));
         }
 
         $results = [];

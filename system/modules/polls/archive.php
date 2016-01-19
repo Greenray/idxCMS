@@ -15,6 +15,6 @@ if (!empty($archived)) {
     $TPL->set($POLLS->showPolls($archived, $TPL));
     SYSTEM::defineWindow('Poll', $TPL->parse());
 
-} else echo SYSTEM::showMessage('Database is empty', MODULE.'index');
+} else SYSTEM::showMessage('Database is empty', MODULE.'index');
 
 unset($POLLS);

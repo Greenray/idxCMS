@@ -13,8 +13,8 @@ if (isset($init)) {
         $config['allow_guests_post'] = '';
         CMS::call('CONFIG')->setSection('guestbook', $config);
         if (CMS::call('CONFIG')->save())
-             echo SYSTEM::showMessage('Configuration saved');
-        else echo SYSTEM::showError('Cannot save file'.' config.ini');
+             ShowMessage('Configuration saved');
+        else ShowError('Cannot save file'.' config.ini');
     }
 } else {
     if (!empty($REQUEST['save'])) {
@@ -23,8 +23,8 @@ if (isset($init)) {
         $config['per_page']          = empty($REQUEST['per_page'])       ? 10   : $REQUEST['per_page'];
         CMS::call('CONFIG')->setSection('guestbook', $config);
         if (CMS::call('CONFIG')->save())
-             echo SYSTEM::showMessage('Configuration saved');
-        else echo SYSTEM::showError('Cannot save file'.' config.ini');
+             ShowMessage('Configuration saved');
+        else ShowError('Cannot save file'.' config.ini');
     }
 
     $config = CONFIG::getSection('guestbook');

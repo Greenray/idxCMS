@@ -15,8 +15,8 @@
 $starttime = explode(' ', microtime());
 $starttime = $starttime[1] + $starttime[0];
 
-ini_set('phar.readonly', 0);            # Allow phar to work with phars.
-ini_set('display_errors', 1);           # Allow to log php errors.
+ini_set('phar.readonly', 0);            # Allow phar to work with phars
+ini_set('display_errors', 1);           # Allow to log php errors
 ini_set('default_charset', 'UTF-8');    # PHP >= 5.6.0, empty for PHP < 5.6.0
 
 mb_internal_encoding('UTF-8');
@@ -104,10 +104,10 @@ error_reporting(E_ALL & ~E_DEPRECATED);
  * Set error handler.
  * Handles php errors and writes info into the /content/logs/idxerror.log.
  *
- * @param  integer $num   Error number.
- * @param  string  $msg   Error message.
- * @param  string  $file  Name of the file where the error was generated.
- * @param  integer $line  Line number where the error was generated.
+ * @param  integer $num   Error number
+ * @param  string  $msg   Error message
+ * @param  string  $file  Name of the file where the error was generated
+ * @param  integer $line  Line number where the error was generated
  * @return string  $error Error message
  */
 function idxErrorHandler($num, $msg, $file, $line) {
@@ -133,7 +133,7 @@ function idxErrorHandler($num, $msg, $file, $line) {
 }
 set_error_handler("idxErrorHandler", E_ALL & ~E_DEPRECATED);
 #
-# Loading system libraries.
+# Loading system libraries
 #
 include_once SYS.'cms.class.php';
 include_once SYS.'filter.class.php';
@@ -159,7 +159,7 @@ session_start();
 /** Website localization */
 global $LANG;
 #
-# Send main headers.
+# Send main headers
 #
 header('Last-Modified: '.gmdate('r'));
 header('Content-Type: text/html; charset=UTF-8');
@@ -169,7 +169,7 @@ header('Pragma: no-cache');
 
 CMS::call('FILTER')->sanitate();
 #
-# System initialization.
+# System initialization
 #
 CMS::call('SYSTEM');
 #
@@ -194,13 +194,13 @@ $MODULE = empty($REQUEST['module']) ? 'index' : basename($REQUEST['module']);
 
 switch($MODULE) {
     #
-    # Editor for posting.
+    # Editor for posting
     #
     case 'editor':
         include TOOLS.'editor.php';
         break;
     #
-    # Rate.
+    # Rate
     #
     case 'rate':
         if (CONFIG::getValue('enabled', 'rate')) {
@@ -208,23 +208,23 @@ switch($MODULE) {
         }
         break;
     #
-    # Aphorisms flipping.
+    # Aphorisms flipping
     #
     case 'aphorisms':
         include MODULES.'aphorisms'.DS.'aphorisms.php';
         break;
     #
-    # RSS.
+    # RSS
     #
     case 'rss':
         include MODULES.'rss'.DS.'rss.php';
         break;
     #
-    # Website administration.
+    # Website administration
     #
     case 'admin':
         #
-        # Constants for administration section of the website.
+        # Constants for administration section of the website
         #
         /** Root directory for administrative part of CMS */
         define('ADMIN', ROOT.'admin'.DS);
@@ -234,7 +234,7 @@ switch($MODULE) {
         define('TEMPLATES', ADMIN.'templates'.DS);
 
         require_once ADMINLIBS.'functions.php';
-        include_once ADMIN.'languages'.DS.SYSTEM::get('language').'.php';  # Localization.
+        include_once ADMIN.'languages'.DS.SYSTEM::get('language').'.php';  # Localization
 
         if (USER::$root) {
             $modules = AdvScanDir(ADMIN.'modules', '', 'dir');
@@ -243,7 +243,7 @@ switch($MODULE) {
             /** Prevent direct access to php files */
             define('idxADMIN', TRUE);
             #
-            # Initialize enabled modules.
+            # Initialize enabled modules
             #
             foreach ($modules as $module) {
                 if ((substr($module, 0, 1) === '_') || CONFIG::getValue('enabled', $module)) {
@@ -265,9 +265,17 @@ switch($MODULE) {
                 } elseif (file_exists(ADMINLIBS.$action.'.php')) {
                     include ADMINLIBS.$action.'.php';
                 } else {
-                    $message[0] = __('Error');
-                    $message[1] = __('Module not found').': '.$REQUEST['id'];
-                    include ADMIN.'error.php';
+                    #
+                    # User is not admin or has no access rights
+                    #
+                    $TPL = new TEMPLATE(TEMPLATES.'error_full.tpl');
+                    $TPL->set('url', MODULE.'admin');
+                    $TPL->set('message', 'Module not found');
+                    echo $TPL->parse();
+                    $result = ob_get_contents();
+                    ob_end_clean();
+                    echo $result;
+                    break;
                 }
             }
 
@@ -281,10 +289,6 @@ switch($MODULE) {
                 $menu[$k]['icon'] = !empty($item['icon']) ? $item['icon'] : '';
             }
 
-            $TPL = new TEMPLATE(ADMIN.'skins/Default/default.tpl');
-            $TPL->set('locale', SYSTEM::get('locale'));
-            $TPL->set('menu', $menu);
-            $TPL->set('page', $result);
             $output = [];
             foreach($MODULES as $module => $data) {
                 if (!empty($data[1])) {
@@ -300,16 +304,20 @@ switch($MODULE) {
                 }
             }
 
+            $TPL = new TEMPLATE(ADMIN.'skins/Default/default.tpl');
+            $TPL->set('locale', SYSTEM::get('locale'));
+            $TPL->set('menu',    $menu);
+            $TPL->set('page',    $result);
             $TPL->set('modules', $output);
             echo $TPL->parse();
 
         } else {
             #
-            # User is not admin or has no access rights.
+            # User is not admin or has no access rights
             #
-            $message[0] = __('Access denied');
-            $message[1] = LoginForm();
-            include ADMIN.'error.php';
+            $TPL = new TEMPLATE(TEMPLATES.'login.tpl');
+            $TPL->set('locale', SYSTEM::get('locale'));
+            echo $TPL->parse();
         }
         break;
 
@@ -319,7 +327,7 @@ switch($MODULE) {
         /** System templates */
         define('TEMPLATES', SYS.'templates'.DS);
         #
-        # Loading main module.
+        # Loading main module
         #
         SYSTEM::setCurrentPoint('__MAIN__');
         #
@@ -327,7 +335,7 @@ switch($MODULE) {
         #
         require_once CURRENT_SKIN.'skin.php';
         #
-        # Get requested or default module.
+        # Get requested or default module
         #
         $mod = explode('.', $MODULE, 2);
         if (empty(SYSTEM::$modules[$MODULE]) || !file_exists(MODULES.$mod[0].DS.end($mod).'.php'))
@@ -336,7 +344,7 @@ switch($MODULE) {
 
         $skin = SYSTEM::get('skin');
         #
-        # Load other modules and organize them according output settings.
+        # Load other modules and organize them according output settings
         #
         $modules = [];
         if (in_array($MODULE, array_keys(CONFIG::getSection('output.'.$skin)))) {
@@ -376,7 +384,7 @@ switch($MODULE) {
         /** Requested module */
         define('CURRENT_MODULE', $MODULE);
         #
-        # The page is generated, it is possible to show it.
+        # The page is generated, it is possible to show it
         #
     // Page gentime end
     $mtime = explode(' ', microtime());

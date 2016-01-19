@@ -29,7 +29,7 @@ if (!empty($REQUEST['save'])) {
                         $IMAGE->generateIcon($REQUEST['user']);
                     }
                 } catch (Exception $error) {
-                    echo SYSTEM::showError($error->getMessage());
+                    SYSTEM::showError($error->getMessage());
                 }
             } else {
                 if ($REQUEST['act'] === 'password_request') {
@@ -63,17 +63,17 @@ if (!empty($REQUEST['save'])) {
                                         $user['email']
                                     );
                                     unset($FEEDBACK);
-                                    echo SYSTEM::showMessage('Your request was sent to Administrator');
+                                    SYSTEM::showMessage('Your request was sent to Administrator');
 //                                } else {
-//                                    echo SYSTEM::showMessage('Your request was sent to your email');
+//                                    SYSTEM::showMessage('Your request was sent to your email');
 //                                }
 
-                            } else echo SYSTEM::showError('Error in email');
+                            } else SYSTEM::showError('Error in email');
 
-                        } else echo SYSTEM::showError('Error in username');
+                        } else SYSTEM::showError('Error in username');
 
                     } catch (Exception $error) {
-                        echo SYSTEM::showError($error->getMessage());
+                        SYSTEM::showError($error->getMessage());
                     }
                 }
                 unset($REQUEST);
@@ -101,10 +101,10 @@ if (!empty($REQUEST['save'])) {
                                 $IMAGE->generateIcon(USER::getUser('user'));
                             }
                         } catch (Exception $error) {
-                            echo SYSTEM::showError($error->getMessage());
+                            SYSTEM::showError($error->getMessage());
                         }
-                    } else echo SYSTEM::showError('Invalid password');
-                } else echo SYSTEM::showError('Invalid password');
+                    } else SYSTEM::showError('Invalid password');
+                } else SYSTEM::showError('Invalid password');
             }
         }
     }

@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management System v3.0
 # Copyright (c) 2016 Victor Nabatov
-# Administration: Sections management template.
+# Administration: Sections management template
 
 die();?>
 <script type="text/javascript" src="{TOOLS}redips{DS}redips.drag.min.js"></script>

@@ -40,7 +40,7 @@ if (!empty($REQUEST['enable'])) {
         Sitemap();
 
     } catch (Exception $error) {
-        echo SYSTEM::showError($error->getMessage());
+        ShowError($error->getMessage());
     }
 }
 

@@ -10,8 +10,8 @@ $archived = $POLLS->getArchivedPolls();
 
 if (!empty($REQUEST['remove'])) {
     if (!$POLLS->removePollFromArchive($REQUEST['poll']))
-         echo SYSTEM::showError($POLLS->gerError);
-    else echo SYSTEM::showMessage('Poll removed');
+         ShowError($POLLS->gerError);
+    else ShowMessage('Poll removed');
 }
 
 $archived = $POLLS->getArchivedPolls();
@@ -46,5 +46,5 @@ if (!empty($archived)) {
     echo($TPL->parse());
 
 } else {
-    echo SYSTEM::showMessage('Database is empty', MODULE.'admin');
+    ShowMessage('Database is empty', MODULE.'admin');
 }

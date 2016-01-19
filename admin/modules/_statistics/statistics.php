@@ -38,18 +38,20 @@ if (!empty($stats)) {
     $output['today_hosts'] = sizeof($stats['hosts']);
     if (!empty($stats['ref'])) {
         arsort($stats['ref']);
-    }
-    foreach($stats['ref'] as $host => $ref) {
-        $output['refs'][$host]['host']  = $host;
-        $output['refs'][$host]['count'] = $ref;
+
+        foreach($stats['ref'] as $host => $ref) {
+            $output['refs'][$host]['host']  = $host;
+            $output['refs'][$host]['count'] = $ref;
+        }
     }
 
     if (!empty($stats['ua'])) {
         arsort($stats['ua']);
-    }
-    foreach($stats['ua'] as $agent => $count) {
-        $output['uas'][$agent]['agent'] = $agent;
-        $output['uas'][$agent]['count'] = $count;
+
+        foreach($stats['ua'] as $agent => $count) {
+            $output['uas'][$agent]['agent'] = $agent;
+            $output['uas'][$agent]['count'] = $count;
+        }
     }
 
     foreach($stats['hosts'] as $host => $time) {
@@ -78,18 +80,20 @@ if (!empty($spiders)) {
     $output['today'] = $spiders['today'];
     if (!empty($spiders['ua'])) {
         arsort($spiders['ua']);
-    }
-    foreach($spiders['ua'] as $agent => $ua) {
-        $output['suas'][$agent]['agent'] = $i;
-        $output['suas'][$agent]['count'] = $count;
+
+        foreach($spiders['ua'] as $agent => $ua) {
+            $output['suas'][$agent]['agent'] = $i;
+            $output['suas'][$agent]['count'] = $count;
+        }
     }
 
     if (!empty($spiders['ip'])) {
         arsort($spiders['ip']);
-    }
-    foreach($spiders['ip'] as $ip => $count) {
-        $output['sips'][$ip]['ip']    = $ip;
-        $output['sips'][$ip]['count'] = $count;
+
+        foreach($spiders['ip'] as $ip => $count) {
+            $output['sips'][$ip]['ip']    = $ip;
+            $output['sips'][$ip]['count'] = $count;
+        }
     }
 
 } else {
@@ -101,4 +105,6 @@ if (!empty($output)) {
     $TPL = new TEMPLATE(__DIR__.DS.'statistics.tpl');
     $TPL->set($output);
     echo $TPL->parse();
+} else {
+    ShowMessage('Statistics is off', MODULE.'admin');
 }

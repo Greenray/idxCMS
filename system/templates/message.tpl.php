@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management System 3.0
 # Copyright (c) 2016 Victor Nabatov
-# Administration: Template for error message.
+# Administration: Template for message
 
 die();?>
 

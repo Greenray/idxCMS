@@ -37,7 +37,7 @@ if (!empty($REQUEST['save'])) {
         CMS::call('GALLERY')->saveImage($item);
         $item = '';
     } catch (Exception $error) {
-         echo SYSTEM::showError($error->getMessage());
+         ShowError($error->getMessage());
     }
 } elseif (!empty($REQUEST['close']) || !empty($REQUEST['open'])) {
     CMS::call('GALLERY')->setValue(
@@ -50,7 +50,7 @@ if (!empty($REQUEST['save'])) {
         try {
             CMS::call('GALLERY')->removeItem($REQUEST['delete']);
         } catch (Exception $error) {
-            echo SYSTEM::showError($error->getMessage());
+            ShowError($error->getMessage());
         }
     }
 }

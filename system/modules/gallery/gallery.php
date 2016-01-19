@@ -49,7 +49,7 @@ if (!empty($item) && !empty($category) && !empty($section)) {
                                 }
                             }
 
-                        } else echo SYSTEM::showError('Comments are not allowed', CreateUrl('catalogs', $section, $category, $item));
+                        } else SYSTEM::showError('Comments are not allowed', CreateUrl('catalogs', $section, $category, $item));
                         break;
 
                     case 'delete':
@@ -72,7 +72,7 @@ if (!empty($item) && !empty($category) && !empty($section)) {
             }
         }
     } catch (Exception $error) {
-        echo SYSTEM::showError($error->getMessage());
+        SYSTEM::showError($error->getMessage());
     }
 
     $item = CMS::call('GALLERY')->getItem($item);
@@ -157,7 +157,7 @@ if (!empty($item) && !empty($category) && !empty($section)) {
             SYSTEM::defineWindow('', Pagination($count, $perpage, $page, $categories[$category]['link']));
         }
 
-    } else echo SYSTEM::showMessage('Category is empty', CreateUrl('gallery', $section));
+    } else SYSTEM::showMessage('Category is empty', CreateUrl('gallery', $section));
 
 } elseif (!empty($section)) {
     #
@@ -172,7 +172,7 @@ if (!empty($item) && !empty($category) && !empty($section)) {
         $TPL->set('categories', $output['categories']);
         SYSTEM::defineWindow($output['title'], $TPL->parse());
 
-    } else echo SYSTEM::showMessage('Section is empty', MODULE.'gallery');
+    } else SYSTEM::showMessage('Section is empty', MODULE.'gallery');
 
 } else {
     #
@@ -184,6 +184,6 @@ if (!empty($item) && !empty($category) && !empty($section)) {
         $TPL->set('sections', $output);
         SYSTEM::defineWindow('Gallery', $TPL->parse());
 
-    } else echo SYSTEM::showMessage('Database is empty', MODULE.'index');
+    } else SYSTEM::showMessage('Database is empty', MODULE.'index');
 }
 

@@ -13,7 +13,7 @@ $sections = CMS::call('POSTS')->getSections();
 unset($sections['drafts']);
 
 if (empty($sections)) {
-    echo SYSTEM::showMessage('Database is empty', MODULE.'index');
+    SYSTEM::showMessage('Database is empty', MODULE.'index');
 
 } elseif (!empty($post) && !empty($category) && !empty($section)) {
 

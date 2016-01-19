@@ -45,10 +45,10 @@ try {
                     unlink(BACKUPS.$file);
                 }
             }
-        } else echo SYSTEM::showError('Nothing selected');
+        } else ShowError('Nothing selected');
     }
 } catch (Exception $error) {
-    echo SYSTEM::showError($error->getMessage());
+    ShowError($error->getMessage());
 }
 #
 # INTERFACE

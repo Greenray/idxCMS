@@ -45,7 +45,7 @@ if (!empty($REQUEST['save'])) {
         unset($REQUEST['new']);
 
     } catch (Exception $error) {
-        echo SYSTEM::showError($error->getMessage());
+        ShowError($error->getMessage());
     }
     $post = '';
 
@@ -60,7 +60,7 @@ if (!empty($REQUEST['save'])) {
         try {
             CMS::call('POSTS')->removeItem($REQUEST['delete']);
         } catch (Exception $error) {
-            echo SYSTEM::showError($error->getMessage());
+            ShowError($error->getMessage());
         }
     }
 }

@@ -72,6 +72,13 @@ if (!defined('idxADMIN')) die();?>
 		<p class="center">{IDX_POWERED} {IDX_COPYRIGHT}</p>
 	</footer>
 </div>
+<script src="{TOOLS}jquery.lightbox_me.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function() {
+        $("#error").lightbox_me();
+        $("#message").lightbox_me();
+    });
+</script>
 <script type="text/javascript" src="{TOOLS}message{DS}message.js"></script>
 <script type="text/javascript">
     function ShowHide(obj) {

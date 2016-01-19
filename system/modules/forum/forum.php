@@ -58,7 +58,7 @@ if (!empty($topic) && !empty($category) && !empty($section)) {
 
                                     SYSTEM::defineWindow('Edit', $TPL->parse());
 
-                                } else echo SYSTEM::showError('Your have no right to edit topic');
+                                } else SYSTEM::showError('Your have no right to edit topic');
 
                             } else {
                                 if (!empty($replies[$reply])) {
@@ -77,7 +77,7 @@ if (!empty($topic) && !empty($category) && !empty($section)) {
                                 }
                             }
 
-                        } else echo SYSTEM::showMessage('Topic is closed', CreateUrl('forum', $section, $category, $topic));
+                        } else SYSTEM::showMessage('Topic is closed', CreateUrl('forum', $section, $category, $topic));
                         break;
 
                     case 'delete':
@@ -92,7 +92,7 @@ if (!empty($topic) && !empty($category) && !empty($section)) {
                                 }
                             }
                         } catch (Exception $error) {
-                            echo SYSTEM::showError($error->getMessage());
+                            SYSTEM::showError($error->getMessage());
                         }
                         break;
 
@@ -125,7 +125,7 @@ if (!empty($topic) && !empty($category) && !empty($section)) {
             }
         }
     } catch (Exception $error) {
-        echo SYSTEM::showError($error->getMessage());
+        SYSTEM::showError($error->getMessage());
     }
 
     $topic = CMS::call('FORUM')->getItem($topic);
@@ -204,7 +204,7 @@ if (!empty($topic) && !empty($category) && !empty($section)) {
                             USER::changeProfileField(USER::getUser('user'), 'topics', '+');
                             Redirect('forum', $section['id'], $category['id'], $result);
                         } catch (Exception $error) {
-                            echo SYSTEM::showError($error->getMessage());
+                            SYSTEM::showError($error->getMessage());
                         }
                     }
 
@@ -217,7 +217,7 @@ if (!empty($topic) && !empty($category) && !empty($section)) {
 
                     SYSTEM::defineWindow('New topic', $TPL->parse());
 
-                } else echo SYSTEM::showError('You have no right to post topic', CreateUrl('forum', $section, $category));
+                } else SYSTEM::showError('You have no right to post topic', CreateUrl('forum', $section, $category));
 
             } else {
                 #
@@ -263,8 +263,8 @@ if (!empty($topic) && !empty($category) && !empty($section)) {
                     SYSTEM::defineWindow('', Pagination($count, $perpage, $page, $category['link']));
                 }
             }
-        } else echo SYSTEM::showMessage('Category is empty', MODULE.'forum'.SECTION.$section['id']);
-    } else echo SYSTEM::showMessage('Section is empty', MODULE.'forum');
+        } else SYSTEM::showMessage('Category is empty', MODULE.'forum'.SECTION.$section['id']);
+    } else SYSTEM::showMessage('Section is empty', MODULE.'forum');
 
 } elseif (!empty($section)) {
     $section    = CMS::call('FORUM')->getSection($section);
@@ -349,5 +349,5 @@ if (!empty($topic) && !empty($category) && !empty($section)) {
         $TPL->set($output);
         SYSTEM::defineWindow('Forum', $TPL->parse());
 
-    } else echo SYSTEM::showMessage('Database is empty', MODULE.'index');
+    } else SYSTEM::showMessage('Database is empty', MODULE.'index');
 }

@@ -29,8 +29,8 @@ if (!empty($REQUEST['save'])) {
     $config['db_size']        = empty($REQUEST['db_size'])        ? 100  : $REQUEST['db_size'];
     CMS::call('CONFIG')->setSection('feedback', $config);
     if (CMS::call('CONFIG')->save())
-         echo SYSTEM::showMessage('Configuration saved');
-    else echo SYSTEM::showError('Cannot save file'.' config.ini');
+         ShowMessage('Configuration saved');
+    else ShowError('Cannot save file'.' config.ini');
 }
 
 $config  = CONFIG::getSection('user');

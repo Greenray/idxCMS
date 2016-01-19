@@ -15,7 +15,7 @@ if (!empty($REQUEST['mctext']) && !empty($REQUEST['save'])) {
         }
         FILTER::remove('REQUEST', 'mctext');
     } catch (Exception $error) {
-        echo SYSTEM::showError($error->getMessage());
+        SYSTEM::showError($error->getMessage());
     }
 } else {
     if (!empty($REQUEST['mcaction']) && USER::moderator('minichat')) {

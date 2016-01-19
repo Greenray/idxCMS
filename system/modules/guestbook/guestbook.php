@@ -22,7 +22,7 @@ if (!empty($REQUEST['save'])) {
         }
         FILTER::remove('REQUEST', 'text');
     } catch (Exception $error) {
-        echo SYSTEM::showError($error->getMessage());
+        SYSTEM::showError($error->getMessage());
     }
 } else {
     if (!empty($REQUEST['action']) && !empty($id)) {

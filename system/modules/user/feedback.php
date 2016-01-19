@@ -20,7 +20,7 @@ if (!empty($message)) {
         unset($REQUEST);
         unset($FEEDBACK);
     } catch (Exception $error) {
-        echo SYSTEM::showError($error->getMessage());
+        SYSTEM::showError($error->getMessage());
     }
 } elseif (!empty($REQUEST['new_letter'])) {
     if (USER::$logged_in) {
@@ -34,8 +34,8 @@ if (!empty($message)) {
                     $REQUEST['letter']
                 );
                 SYSTEM::defineWindow('', __('Message sent'));
-            } else echo SYSTEM::showError('Text is empty');
-        } else echo SYSTEM::showError('Subject is empty');
+            } else SYSTEM::showError('Text is empty');
+        } else SYSTEM::showError('Subject is empty');
 
     } else {
         try {
@@ -52,13 +52,13 @@ if (!empty($message)) {
                                 $REQUEST['letter']
                             );
                             SYSTEM::defineWindow('', __('Message sent'));
-                        } else echo SYSTEM::showError('Text is empty');
-                    } else echo SYSTEM::showError('Subject is empty');
-                } else echo SYSTEM::showError('Error in email address');
-            } else echo SYSTEM::showError('What is your name?');
+                        } else SYSTEM::showError('Text is empty');
+                    } else SYSTEM::showError('Subject is empty');
+                } else SYSTEM::showError('Error in email address');
+            } else SYSTEM::showError('What is your name?');
 
         } catch (Exception $error) {
-            echo SYSTEM::showError($error->getMessage());
+            SYSTEM::showError($error->getMessage());
         }
     }
 }

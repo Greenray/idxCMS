@@ -62,7 +62,7 @@ if (!empty($REQUEST['save'])) {
         Redirect('posts', $section, $category, $post);
 
     } catch (Exception $error) {
-        echo SYSTEM::showError($error->getMessage());
+        SYSTEM::showError($error->getMessage());
     }
 }
 

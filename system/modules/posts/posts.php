@@ -56,7 +56,7 @@ if (!empty($sections)) {
                                                         SYSTEM::defineWindow('Edit', $TPL->parse());
                                                     }
                                                 }
-                                            } else echo SYSTEM::showError('Comments are not allowed', CreateUrl('posts', $section, $category, $post));
+                                            } else SYSTEM::showError('Comments are not allowed', CreateUrl('posts', $section, $category, $post));
                                             break;
 
                                         case 'delete':
@@ -79,7 +79,7 @@ if (!empty($sections)) {
                                 }
                             }
                         } catch (Exception $error) {
-                            echo SYSTEM::showError($error->getMessage());
+                            SYSTEM::showError($error->getMessage());
                         }
 
                         $post = CMS::call('POSTS')->getItem($post);
@@ -111,9 +111,9 @@ if (!empty($sections)) {
                         #
                         CMS::call('POSTS')->showComments($post, $page, $perpage, __DIR__.DS);
 
-                    } else echo SYSTEM::showError('Invalid article', CreateUrl('posts', $section, $category));
-                } else echo SYSTEM::showMessage('Category is empty', CreateUrl('posts', $section));
-            } else echo SYSTEM::showMessage('Section is empty', CreateUrl('posts'));
+                    } else SYSTEM::showError('Invalid article', CreateUrl('posts', $section, $category));
+                } else SYSTEM::showMessage('Category is empty', CreateUrl('posts', $section));
+            } else SYSTEM::showMessage('Section is empty', CreateUrl('posts'));
         } elseif (!empty($category) && !empty($section)) {
             #
             # Show posts from category
@@ -145,8 +145,8 @@ if (!empty($sections)) {
                     if ($count > $perpage) {
                         SYSTEM::defineWindow('', Pagination($count, $perpage, $page, $categories[$category]['link']));
                     }
-                } else echo SYSTEM::showMessage('Category is empty', CreateUrl('posts', $section));
-            } else echo SYSTEM::showMessage('Section is empty', CreateUrl('posts'));
+                } else SYSTEM::showMessage('Category is empty', CreateUrl('posts', $section));
+            } else SYSTEM::showMessage('Section is empty', CreateUrl('posts'));
         } elseif (!empty($section)) {
             #
             # Show section with allowed categories and last items
@@ -158,8 +158,8 @@ if (!empty($sections)) {
                     $TPL->set($output);
                     SYSTEM::defineWindow($output['title'], $TPL->parse());
 
-                } else echo SYSTEM::showMessage('Section is empty', CreateUrl('posts'));
-            } else echo SYSTEM::showError('Invalid section or database is empty', MODULE.'posts');
+                } else SYSTEM::showMessage('Section is empty', CreateUrl('posts'));
+            } else SYSTEM::showError('Invalid section or database is empty', MODULE.'posts');
         }
     } elseif ((($from = FILTER::get('REQUEST', 'from')) !== FALSE) && (($until = FILTER::get('REQUEST', 'until')) !== FALSE))  {
         SYSTEM::set('pagename', __('Posts').' - '.__('Search results'));
@@ -193,6 +193,6 @@ if (!empty($sections)) {
             $TPL->set('sections', $output);
             SYSTEM::defineWindow('Posts', $TPL->parse());
 
-        } else echo SYSTEM::showMessage('Database is empty', CreateUrl('index'));
+        } else SYSTEM::showMessage('Database is empty', CreateUrl('index'));
     }
-} else echo SYSTEM::showMessage('Database is empty', CreateUrl('index'));
+} else SYSTEM::showMessage('Database is empty', CreateUrl('index'));

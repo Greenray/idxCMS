@@ -36,7 +36,7 @@ if (!empty($REQUEST['save'])) {
         CMS::call('CATALOGS')->saveItem($item);
         $item = '';
     } catch (Exception $error) {
-        echo SYSTEM::showError($error->getMessage());
+        ShowError($error->getMessage());
     }
 
 } elseif (!empty($REQUEST['close']) || !empty($REQUEST['open'])) {
@@ -51,7 +51,7 @@ if (!empty($REQUEST['save'])) {
         try {
             CMS::call('CATALOGS')->removeItem($REQUEST['delete']);
         } catch (Exception $error) {
-            echo SYSTEM::showError($error->getMessage());
+            ShowError($error->getMessage());
         }
     }
 }

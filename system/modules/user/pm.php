@@ -8,7 +8,7 @@ if (!defined('idxCMS')) die();
 SYSTEM::set('pagename', __('Private messages'));
 
 if (!USER::$logged_in) {
-    echo SYSTEM::showError('You are not logged in!', MODULE.'index');
+    SYSTEM::showError('You are not logged in!', MODULE.'index');
 } elseif (!empty($REQUEST['save'])) {
     #
     # Send message
@@ -16,9 +16,9 @@ if (!USER::$logged_in) {
     try {
         $PM = new MESSAGE(PM_DATA, USER::getUser('user'));
         $PM->sendPrivateMessage($REQUEST['for'], $REQUEST['text']);
-        echo SYSTEM::ShowMessage('Message sent');
+        SYSTEM::ShowMessage('Message sent');
     } catch (Exception $error) {
-        echo SYSTEM::showError($error->getMessage());
+        SYSTEM::showError($error->getMessage());
     }
     unset($PM);
 
@@ -27,7 +27,7 @@ if (!USER::$logged_in) {
     # Post new message
     #
     if ($REQUEST['for'] === USER::getUser('user')) {
-        echo SYSTEM::showError('You cannot send message to yourself', MODULE.'user.pm');
+        SYSTEM::showError('You cannot send message to yourself', MODULE.'user.pm');
     } else {
         CMS::call('COMMENTS')->showCommentForm('module=pm&', $REQUEST['for']);
     }
@@ -38,7 +38,7 @@ if (!USER::$logged_in) {
         if (!empty($REQUEST['delete'])) $PM->removeMessage($REQUEST['delete'], 'inbox');
         if (!empty($REQUEST['remove'])) $PM->removeMessage($REQUEST['remove'], 'outbox');
     } catch (Exception $error) {
-        echo SYSTEM::showError($error->getMessage());
+        SYSTEM::showError($error->getMessage());
     }
     if (!empty($REQUEST['mode'])) {
         if ($REQUEST['mode'] === 'outbox') {
@@ -70,7 +70,7 @@ if (!USER::$logged_in) {
                 if ($count > $perpage) {
                     SYSTEM::defineWindow('', Pagination($count, $perpage, $page, MODULE.'user.pm&user='.$REQUEST['user'].'&mode=outbox'));
                 }
-            } else  echo SYSTEM::showMessage('Box is empty', MODULE.'user.pm');
+            } else  SYSTEM::showMessage('Box is empty', MODULE.'user.pm');
 
         } elseif ($REQUEST['mode'] === 'inbox') {
             $messages = $PM->getMessages('inbox');
@@ -120,7 +120,7 @@ if (!USER::$logged_in) {
                         SYSTEM::defineWindow('', Pagination($count, $perpage, $page, MODULE.'user.pm&mode=inbox'));
                     }
                 }
-            } else echo SYSTEM::showMessage('Box is empty', MODULE.'user.pm');
+            } else SYSTEM::showMessage('Box is empty', MODULE.'user.pm');
         }
 
     } else {

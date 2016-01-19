@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management System v3.0
 # Copyright (c) 2016 Victor Nabatov
-# Administration: Template for sections and categories.
+# Administration: Template for sections and categories
 
 die();?>
 

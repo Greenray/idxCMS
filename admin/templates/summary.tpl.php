@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management System v3.0
 # Copyright (c) 2016 Victor Nabatov
-# System administration: Template for main page.
+# System administration: Template for main page
 
 die();?>
 
@@ -25,10 +25,10 @@ die();?>
             <tr class="light"><td><a href="{MODULE}admin&id=_user.profile">__Users profiles__</a></td><td>$users</td></tr>
             <tr class="light"><td><a href="{MODULE}admin&id=_user.message">__Private messages__</a></td><td>$pm</td></tr>
             <tr class="light"><td>__Avatars__</td><td>$avatars</td></tr>
-            <tr class="light"><td><a href="{MODULE}admin&id=_statistic.statistics">__Site statistics__</a></td><td>$statistics</td></tr>
-            <tr class="light"><td><a href="{MODULE}admin&id=_statistic.statistics">__Search bots__</a></td><td>$bots</td></tr>
-            <tr class="light"><td><a href="{MODULE}admin&id=_statistic.searchwords">__Search keywords__</a></td><td>$keywords</td></tr>
-            <tr class="light"><td><a href="{MODULE}admin&id=_statistic.logs">__Logs__</a></td><td>$logs</td></tr>
+            <tr class="light"><td><a href="{MODULE}admin&id=_statistics.statistics">__Site statistics__</a></td><td>$statistics</td></tr>
+            <tr class="light"><td><a href="{MODULE}admin&id=_statistics.statistics">__Search bots__</a></td><td>$bots</td></tr>
+            <tr class="light"><td><a href="{MODULE}admin&id=_statistics.searchwords">__Search keywords__</a></td><td>$keywords</td></tr>
+            <tr class="light"><td><a href="{MODULE}admin&id=_statistics.logs">__Logs__</a></td><td>$logs</td></tr>
             <tr class="light"><td><a href="{MODULE}admin&id=_general.backup">__Backups__</a></td><td>$backups</td></tr>
             <tr class="light"><td><a href="{MODULE}admin&id=posts.categories">__Posts awaits moderation__</a></td><td>$wait</td></tr>
             <tr class="light"><td><a href="{MODULE}admin&id=_user.feedback">__Feedback requests__</a></td><td>$feedback</td></tr>

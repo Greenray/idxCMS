@@ -8,7 +8,7 @@ if (!defined('idxADMIN') || !USER::$root) die();
 if (!empty($REQUEST['save'])) {
     if (!empty($REQUEST['aph']) && !empty($REQUEST['file'])) {
         if (!file_put_contents(APHORISMS.$REQUEST['file'], $REQUEST['aph'])) {
-             echo SYSTEM::showError('Cannot save file'.' '.$REQUEST['file']);
+             ShowError('Cannot save file'.' '.$REQUEST['file']);
         }
     }
 }

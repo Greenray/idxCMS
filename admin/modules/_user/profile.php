@@ -22,11 +22,11 @@ if (!empty($REQUEST['login'])) {
             }
             USER::changeProfileField($tmp[0], 'rights', $rights);
             USER::changeProfileField($tmp[0], 'access', $access);
-            echo SYSTEM::showMessage('Rights changed', '', MODULE.'admin&id=_user.profile&act=rights.'.$tmp[0]);
+            ShowMessage('Rights changed', '', MODULE.'admin&id=_user.profile&act=rights.'.$tmp[0]);
             unlink(TEMP.'rights.dat');
         }
     } catch (Exception $error) {
-        echo SYSTEM::showError($error->getMessage());
+        ShowError($error->getMessage());
     }
 
 } elseif (!empty($REQUEST['act'])) {
@@ -77,7 +77,7 @@ if (!empty($REQUEST['login'])) {
                         CMS::call('USER')->updateUser($REQUEST['user'], $REQUEST['nick'], $REQUEST['fields']);
                         USER::changeProfileField($REQUEST['user'], 'status', $REQUEST['status']);
                     } catch (Exception $error) {
-                        echo SYSTEM::showError($error->getMessage());
+                        ShowError($error->getMessage());
                     }
                 } else {
                     $user = USER::getUserData($action[1]);
@@ -159,7 +159,7 @@ if (!empty($REQUEST['login'])) {
                 break;
         }
     } catch (Exception $error) {
-        echo SYSTEM::showError($error->getMessage());
+        ShowError($error->getMessage());
     }
 } else {
     $TPL = new TEMPLATE(__DIR__.DS.'search.tpl');

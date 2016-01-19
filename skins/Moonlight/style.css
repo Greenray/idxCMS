@@ -131,7 +131,7 @@ table {
     width: 100% }
 th, td { vertical-align: middle }
 table#std { border-spacing: 0 }
-table#std tr { height: 35px }
+table#std tr { height: 25px }
 table#std td { border: 2px groove white; padding: 0 10px }
 table#std th {
     background: #555;
@@ -426,11 +426,13 @@ textarea {
     display: none;
     font-weight: bold;
     min-width: 300px;
-    padding: 15px;
+    padding: 5px;
     position: relative;
     width: 300px }
 .error p,
 .message p { padding: 10px; }
+.error .text,
+.message .text { color: black }
 .error .title,
 .message .title {
     font-size: 15px;
@@ -440,8 +442,8 @@ textarea {
     text-transform: uppercase }
 .error .title { background: red; color: yellow }
 .message .title { background: black; color: white }
-.dark { background: #88c3b0 }
-.light  { background: #dee3e7 }
+.dark { background: #999 }
+.light  { background: #ddd }
 #editor { margin: 20px 0 0; overflow: hidden; padding: 15px }
     #editor button { cursor: pointer; margin: 0px auto }
     #editor button:hover { cursor: pointer; margin: 0px auto }
@@ -524,7 +526,7 @@ textarea {
 .poll table { margin: 3px 0 }
 .popup_input { background: transparent; border: 0; color: white }
 .profile th,
-.profile td { height: 35px; padding: 0 10px; vertical-align: middle }
+.profile td { height: 25px; padding: 0 10px; vertical-align: middle }
 .random-image { margin: 5px 0 }
 .rate { float: right; height: 18px; margin: 0 10px }
     .rate button { border: 0; min-width: 16px }

@@ -28,7 +28,7 @@ if (!empty($REQUEST['save'])) {
     }
     CMS::call('CONFIG')->setSection('output.'.$REQUEST['skin'], $config);
     if (!CMS::call('CONFIG')->save()) {
-        echo SYSTEM::showError('Cannot save file');
+        echo SYSTEM::showError('Cannot save file'.' config.ini');
     }
 }
 #

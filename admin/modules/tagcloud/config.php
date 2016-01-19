@@ -112,7 +112,7 @@ if (isset($init)) {
     }
     if (!empty($REQUEST['create'])) {
         $result = CreateTags();
-        if (!$result) echo SYSTEM::showError('Cannot save file');
+        if (!$result) echo SYSTEM::showError('Cannot save file', ' '.CONTENT.'tags');
     }
     if ($config['distr'] === 'FALSE') {
         unset($config['distr']);
@@ -131,7 +131,9 @@ if (isset($init)) {
                 }
             }
         }
-        if (!file_put_contents(CONTENT.'tags', serialize($tags))) echo SYSTEM::showError('Cannot save file');
+        if (!file_put_contents(CONTENT.'tags', serialize($tags))) {
+            echo SYSTEM::showError('Cannot save file'.' '.CONTENT.'tags');
+        }
     }
     $create_tags = 0;
 

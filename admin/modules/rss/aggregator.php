@@ -14,7 +14,7 @@ if (!empty($REQUEST['save_s'])) {
     $config['feeds']        = empty($REQUEST['feeds'])        ? ''   : explode(LF, $REQUEST['feeds']);
     CMS::call('CONFIG')->setSection('rss-aggregator', $config);
     if (!CMS::call('CONFIG')->save()) {
-        echo SYSTEM::showError('Cannot save file');
+        echo SYSTEM::showError('Cannot save file'.' config.ini');
     }
 }
 

@@ -274,7 +274,6 @@ textarea:focus { border: 1px solid red }
     display: none;
     font-weight: bold;
     min-width: 300px;
-    padding: 15px;
     position: relative;
     width: 300px }
 .error p,
@@ -384,7 +383,7 @@ textarea:focus { border: 1px solid red }
     .comment_edit,
     .comment_post { margin: 30px 10px 0; overflow: hidden }
 .profile th,
-.profile td { height: 35px; padding: 0 10px; vertical-align: middle }
+.profile td { height: 25px; padding: 0 10px; vertical-align: middle }
 .random-image { margin: 5px 0 }
 .rate {
     background: none;
@@ -541,7 +540,7 @@ textarea:focus { border: 1px solid red }
     .tab_content .more { float: right; margin: 0 2px }
     .tab_content .section { margin: 0 0 0 50px; padding: 5px 0 0 }
     .tab_content .section a { display: inline }
-table#std tr { height: 35px }
+table#std tr { height: 25px }
     table#std td  { border: 2px groove #fff; padding: 0 10px }
     table#std th {
         background: #297377;

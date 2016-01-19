@@ -7,7 +7,7 @@
  * @copyright (c) 2011-2015 Victor Nabatov
  * @license   Creative Commons — Attribution-NonCommercial-ShareAlike 4.0 International
  * @file      classes/template.php
- * @package   template
+ * @package   Template
  */
 
 /** idxCMS templates parser. */

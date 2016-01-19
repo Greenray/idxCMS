@@ -6,10 +6,10 @@
 die();?>
 
 <script type="text/javascript">
-    function check(id) {
+    function checkPassword(id) {
         var form = document.getElementById(id);
-        if (form.password.value !== '') {
-            if (form.password.value === form.confirm.value) {
+        if (form.password.value === form.confirm.value) {
+            if (form.password.value !== '') {
                 document.getElementById('yes').style.display = 'block';
                 document.getElementById('no').style.display  = 'none';
             }
@@ -119,7 +119,7 @@ die();?>
                     </p>
                     <p>
                         <label for="password">__Password__</label>
-                        <input id="password" name="password" type="password" value="$password" class="required" autocomplete=off onkeyup="check('registration'); updatePasswordStrength(this, 'pass_rating', {'image':0, 'text':1});" />
+                        <input id="password" name="password" type="password" value="$password" class="required" autocomplete=off onkeyup="checkPassword('registration'); updatePasswordStrength(this, 'pass_rating', {'image':0, 'text':1});" />
                         <span id="pass_rating">
                             <span id="progresbar-2-0" class="pass_img"></span>
                             <span class="pass_title">__Password complexity__: </span>
@@ -127,7 +127,7 @@ die();?>
                     </p>
                     <p>
                         <label for="confirm">__Confirm password__</label>
-                        <input id="confirm" type="password" name="confirm" value="$confirm" class="required" autocomplete=off onkeyup="check('registration');" />
+                        <input id="confirm" type="password" name="confirm" value="$confirm" class="required" autocomplete=off onkeyup="checkPassword('registration');" />
                         <span>
                             <span id="yes" class="help none">__Passwords are equal__</span>
                             <span id="no" class="help block">__Passwords are not equal__</span>

@@ -144,9 +144,11 @@ class ITEMS extends CATEGORIES {
         if (empty($desc)) {
             $desc = $this->cutText($text, CONFIG::getValue('gallery', 'description_length'));
         }
-        if (!file_put_contents($item.DS.$this->desc, $desc, LOCK_EX) ||
-            !file_put_contents($item.DS.$this->text, $text, LOCK_EX)) {
-            throw new Exception('Cannot save file');
+        if (!file_put_contents($item.DS.$this->desc, $desc, LOCK_EX)) {
+            throw new Exception('Cannot save file'.' '.$item.DS.$this->desc);
+        }
+        if (!file_put_contents($item.DS.$this->text, $text, LOCK_EX)) {
+            throw new Exception('Cannot save file'.' '.$item.DS.$this->text);
         }
         $this->saveContent($this->content);
         Sitemap();

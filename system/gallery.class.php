@@ -92,7 +92,7 @@ class GALLERY extends CONTENT {
         if (empty($text)) {
             throw new Exception('Text is empty');
         }
-        $path  = $this->sections[$this->section]['categories'][$this->category]['path'];
+        $path = $this->sections[$this->section]['categories'][$this->category]['path'];
         if (empty($id)) {
             $id   = $this->newId($this->content);
             $item = $path.$id;
@@ -128,9 +128,11 @@ class GALLERY extends CONTENT {
         if (empty($desc)) {
             $desc = $this->cutText($text, CONFIG::getValue('gallery', 'description_length'));
         }
-        if (!file_put_contents($item.DS.$this->desc, $desc, LOCK_EX) ||
-            !file_put_contents($item.DS.$this->text, $text, LOCK_EX)) {
-            throw new Exception('Cannot save file');
+        if (!file_put_contents($path.$id.DS.$this->desc, $desc, LOCK_EX)) {
+            throw new Exception('Cannot save file'.' '.$path.$id.DS.$this->desc);
+        }
+        if (!file_put_contents($path.$id.DS.$this->text, $text, LOCK_EX)) {
+            throw new Exception('Cannot save file'.' '.$path.$id.DS.$this->text);
         }
         self::saveContent($this->content);
         Sitemap();

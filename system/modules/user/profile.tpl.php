@@ -6,7 +6,7 @@
 die();?>
 
 <script type="text/javascript">
-    function check(id) {
+    function checkPassword(id) {
         var form = document.getElementById(id);
         if (form.password.value === form.confirm.value) {
             if (form.password.value !== '') {
@@ -146,16 +146,16 @@ die();?>
         <tr class="light">
             <th>__Current password__</th>
             <td class="left"><input type="password" name="current_password" /></td>
-            <td class="left pl20">__To change data you must enter your current password__</td>
+            <td class="left help">__To change data you must enter your current password__</td>
         </tr>
         <tr class="dark">
             <th>__Password__</th>
-            <td class="left"><input type="password" name="password" value="" class="required" autocomplete=off onkeyup="check('profile'); updatePasswordStrength(this,'passwdRating',{ 'image':0, 'text':1 });" /></td>
+            <td class="left"><input type="password" name="password" value="" class="required" autocomplete=off onkeyup="checkPassword('profile'); updatePasswordStrength(this,'passwdRating',{ 'image':0, 'text':1 });" /></td>
             <td class="left pl20"><span id="passwdRating">__Password complexity__: <span id="progresbar-2-0" class="pass_img"></span></span></td>
         </tr>
         <tr class="light">
             <th>__Confirm password__</th>
-            <td class="left"><input type="password" name="confirm" onkeyup="check('profile');" value="" class="required"  /></td>
+            <td class="left"><input type="password" name="confirm" onkeyup="checkPassword('profile');" value="" class="required"  /></td>
             <td class="left pl20">
                 <div id="yes" class="none"><font color="#33cc00">__Passwords are equal__</font></div>
                 <div id="no" class="none"><font color="#ff0000">__Passwords are not equal__</font></div>

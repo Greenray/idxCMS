@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management System v3.0
-# Copyright (c) 2011 - 2015 Victor Nabatov
-# Additional skins definition
+# Copyright (c) 2016 Victor Nabatov
+# Parser of the browsers prefixes
 
 $files = explode("|", $_GET["f"]);
 

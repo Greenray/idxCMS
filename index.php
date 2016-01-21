@@ -300,6 +300,7 @@ switch($MODULE) {
                 }
             }
 
+            /* @todo Auromatic skin selection */
             $TPL = new TEMPLATE(ADMIN.'skins/Default/default.tpl');
             $TPL->set('locale', SYSTEM::get('locale'));
             $TPL->set('menu',    $menu);

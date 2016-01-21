@@ -6,67 +6,66 @@
 if (!defined('idxCMS')) die();
 
 $sections = CMS::call('CATALOGS')->getSections();
-$section  = FILTER::get('REQUEST', 'section');
-$category = FILTER::get('REQUEST', 'category');
-$item     = FILTER::get('REQUEST', 'item');
 
-if (!empty($item) && !empty($category) && !empty($section)) {
-    $categories = CMS::call('CATALOGS')->getCategories($section);
-    #
-    # Wrong section request
-    #
-    if (!$categories) Redirect('catalogs');
+if (!empty($sections)) {
+    $section  = FILTER::get('REQUEST', 'section');
+    if (!empty($section)) {
+        $category = FILTER::get('REQUEST', 'category');
+        $item     = FILTER::get('REQUEST', 'item');
+        if (!empty($item) && !empty($category) && !empty($section)) {
+            $categories = CMS::call('CATALOGS')->getCategories($section);
+            #
+            # Wrong or empty section request
+            #
+            if (!$categories) SYSTEM::showMessage('Section is empty', CreateUrl('catalogs'));
 
-    $content = CMS::call('CATALOGS')->getContent($category);
-    #
-    # Wrong category or item request
-    #
-    if (!$content || empty($content[$item])) Redirect('catalogs', $section);
-    if (!empty($content)) {
-        if (!empty($content[$item])) {
-            if (!empty($REQUEST['get'])) {
-                #
-                # Download file
-                #
-                CMS::call('CATALOGS')->incCount($item, 'downloads');
-                $file = empty($content[$item]['file']) ? $content[$item]['music'] : $content[$item]['file'];
-                header('Location: '.CATALOGS.$section.DS.$category.DS.$item.DS.$file);
-                die();
-            }
-
-            if (!empty($REQUEST['go'])) {
-                #
-                # Jumplink
-                #
-                CMS::call('CATALOGS')->incCount($item, 'clicks');
-                header('Location: '.$content[$item]['site']);
-                die();
-            }
+            $content = CMS::call('CATALOGS')->getContent($category);
+            #
+            # Wrong category or item request
+            #
+            if (!$content || empty($content[$item])) SYSTEM::showMessage('Category is empty', CreateUrl('catalogs', $section));
 
             $comments = CMS::call('CATALOGS')->getComments($item);
             $comment  = FILTER::get('REQUEST', 'comment');
 
-            if (!empty($REQUEST['save'])) {
-                try {
+            try {
+                if (!empty($REQUEST['save'])) {
                     #
                     # If $comment is empty a new comment will be created
                     #
                     $result = CMS::call('CATALOGS')->saveComment($comment, $item);
-                } catch (Exception $error) {
-                    SYSTEM::showError($error->getMessage());
                 }
 
-            } else {
+                if (!empty($REQUEST['get'])) {
+                    #
+                    # Download file
+                    #
+                    CMS::call('CATALOGS')->incCount($item, 'downloads');
+                    $file = empty($content[$item]['file']) ? $content[$item]['music'] : $content[$item]['file'];
+                    header('Location: '.CATALOGS.$section.DS.$category.DS.$item.DS.$file);
+                    die();
+                }
+
+                if (!empty($REQUEST['go'])) {
+                    #
+                    # Jumplink
+                    #
+                    CMS::call('CATALOGS')->incCount($item, 'clicks');
+                    header('Location: '.$content[$item]['site']);
+                    die();
+                }
+
                 if (!empty($REQUEST['action'])) {
                     #
                     # Actions is allowed for admin and moderators
                     #
                     if (USER::moderator('catalogs', $comments[$comment])) {
                         switch ($REQUEST['action']) {
-                        #
-                        # Edit comment
-                        #
+
                         case 'edit':
+                            #
+                            # Edit comment
+                            #
                             if (!empty($content[$item]['opened'])) {
                                 if (!empty($comments[$comment])) {
                                     #
@@ -83,34 +82,46 @@ if (!empty($item) && !empty($category) && !empty($section)) {
                             break;
 
                         case 'delete':
-                            try {
-                                $result = CMS::call('CATALOGS')->removeComment($comment);
-                                $result = ($result > $comment) ? $comment : $result;
-                            } catch (Exception $error) {
-                                SYSTEM::showError($error->getMessage());
-                            }
+                            #
+                            # Remove comment
+                            #
+                            $result = CMS::call('CATALOGS')->removeComment($comment);
+                            $result = ($result > $comment) ? $comment : $result;
                             break;
 
                         case 'close':
-                            if (USER::$root)
-                                CMS::call('CATALOGS')->setValue($item, 'opened', FALSE);
+                            #
+                            # Close item for commenting
+                            #
+                            if (USER::$root) CMS::call('CATALOGS')->setValue($item, 'opened', FALSE);
                             break;
 
                         case 'open':
-                            if (USER::$root)
-                                CMS::call('CATALOGS')->setValue($item, 'opened', TRUE);
+                            #
+                            # Open item for commenting
+                            #
+                            if (USER::$root) CMS::call('CATALOGS')->setValue($item, 'opened', TRUE);
                             break;
 
                         case 'ban':
-                            if (USER::moderator('catalogs'))
-                                CMS::call('FILTER')->ban();
+                            #
+                            # Ban bad user
+                            #
+                            if (USER::moderator('catalogs')) CMS::call('FILTER')->ban();
                             break;
                         }
                     }
                 }
+            } catch (Exception $error) {
+                SYSTEM::showError($error->getMessage());
             }
 
             $item = CMS::call('CATALOGS')->getItem($item);
+            #
+            # Wrong item request
+            #
+            if (!$item) SYSTEM::showError('Invalid query', CreateUrl('catalogs', $section, $category));
+
             SYSTEM::set('pagename', $item['title']);
             SYSTEM::setPageDescription($item['title']);
             SYSTEM::setPageKeywords($item['keywords']);
@@ -141,65 +152,70 @@ if (!empty($item) && !empty($category) && !empty($section)) {
             # Show comments
             #
             CMS::call('CATALOGS')->showComments($item, $page, $perpage, __DIR__.DS);
-        }
-    }
-} elseif (!empty($category) && !empty($section)) {
-    #
-    # Show items from category
-    #
-    $categories = CMS::call('CATALOGS')->getCategories($section);
-    if (!$categories) {
-        Redirect('catalogs');      # Wrong section request
-    }
 
-    $content = CMS::call('CATALOGS')->getContent($category);
-    if (!empty($content)) {
-        SYSTEM::set('pagename', $categories[$category]['title']);
-        SYSTEM::setPageDescription(__('Catalogs').' - '.$categories[$category]['title']);
-        krsort($content);
+        } elseif (!empty($category) && !empty($section)) {
+            #
+            # Show items from category
+            #
+            $categories = CMS::call('CATALOGS')->getCategories($section);
+            #
+            # Wrong or empty section request
+            #
+            if (!$categories) SYSTEM::showMessage('Section is empty', CreateUrl('catalogs'));
 
-        $TPL    = new TEMPLATE(__DIR__.DS.'short.tpl');
-        $output = '';
-        $count  = sizeof($content);
-        $keys   = array_keys($content);
-        $page   = FILTER::get('REQUEST', 'page');
-        $perpage    = CONFIG::getValue('catalogs', 'items_per_page');
-        $pagination = GetPagination($page, $perpage, $count);
+            $content = CMS::call('CATALOGS')->getContent($category);
+            #
+            # Wrong category or item request
+            #
+            if (!$content) SYSTEM::showMessage('Category is empty', CreateUrl('catalogs', $section));
 
-        for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
-            $item = CMS::call('CATALOGS')->getItem($keys[$i], 'desc');
-            $TPL->set($item);
-            SYSTEM::setPageKeywords($item['keywords']);
-            $output .= $TPL->parse();
-        }
-        SYSTEM::defineWindow($categories[$category]['title'], $output);
+            SYSTEM::set('pagename', $categories[$category]['title']);
+            SYSTEM::setPageDescription(__('Catalogs').' - '.$categories[$category]['title']);
+            krsort($content);
 
-        if ($count > $perpage) {
-            SYSTEM::defineWindow('', Pagination($count, $perpage, $page, $categories[$category]['link']));
-        }
-    } else SYSTEM::showMessage('Category is empty', MODULE.'catalogs');
+            $TPL    = new TEMPLATE(__DIR__.DS.'short.tpl');
+            $output = '';
+            $count  = sizeof($content);
+            $keys   = array_keys($content);
+            $page   = FILTER::get('REQUEST', 'page');
+            $perpage    = CONFIG::getValue('catalogs', 'items_per_page');
+            $pagination = GetPagination($page, $perpage, $count);
 
-} elseif (!empty($section)) {
-    #
-    # Show section with allowed categories and last items
-    #
-    $output = CMS::call('CATALOGS')->showSection($section);
-    if (!empty($output)) {
-        if (!empty($output['categories'])) {
+            for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
+                $item = CMS::call('CATALOGS')->getItem($keys[$i], 'desc');
+                $TPL->set($item);
+                SYSTEM::setPageKeywords($item['keywords']);
+                $output .= $TPL->parse();
+            }
+            SYSTEM::defineWindow($categories[$category]['title'], $output);
+
+            if ($count > $perpage) {
+                SYSTEM::defineWindow('', Pagination($count, $perpage, $page, $categories[$category]['link']));
+            }
+
+        } else {
+            #
+            # Show section with allowed categories and last items
+            #
+            $output = CMS::call('CATALOGS')->showSection($section);
+            #
+            # Empty section request
+            #
+            if (!$output) SYSTEM::showMessage('Section is empty', MODULE.'catalogs');
+
             $TPL = new TEMPLATE(__DIR__.DS.'categories.tpl');
             $TPL->set('categories', $output['categories']);
             SYSTEM::defineWindow($output['title'], $TPL->parse());
         }
-    } else SYSTEM::showMessage('Section is empty', MODULE.'catalogs');
+    } else {
+        #
+        # Show allowed sections with allowed categories for user
+        #
+        $output = CMS::call('CATALOGS')->showSections();
+        if (empty($output)) SYSTEM::showMessage('Database is empty', MODULE.'index');
 
-} else {
-    #
-    # Show allowed sections with allowed categories for user
-    #
-    $output = CMS::call('CATALOGS')->showSections();
-    if (!empty($output)) {
         $TPL = new TEMPLATE(__DIR__.DS.'sections.tpl');
         $TPL->set('sections', $output);
         SYSTEM::defineWindow('Catalogs', $TPL->parse());
-    } else SYSTEM::showMessage('Database is empty', MODULE.'index');
-}
+    }
+} else SYSTEM::showMessage('Database is empty', CreateUrl('index'));

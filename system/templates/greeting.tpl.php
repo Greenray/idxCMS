@@ -6,8 +6,8 @@
 die();?>
 
 <center>
-    __We welcome the new user of idxCMS__!
+    __We welcome our new friend__!
     <br />
     <br />
-    <font color="red"><b>__Thanks for choosing idxCMS__!</b></font>
+    <font color="red"><b>__Thanks__!</b></font>
 </center>

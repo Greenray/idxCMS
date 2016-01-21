@@ -34,24 +34,24 @@ die();?>
         </div>
         <div class="center"><hr />__Copyright__: &copy; $copyright | __Size__: $size __bytes__ | __Downloads__: $downloads</div>
         <div class="info">
-            <span class="author center">__Posted by__: <a href="{MODULE}user&user=$author">$nick</a></span>
+            <span class="author center">__Posted by__: <a href="{MODULE}user&user=$author" class="tip" title="__Profile__">$nick</a></span>
             <span class="admin"><a href="$link&get=1" target="_blank">__Download__</a></span>
         </div>
     <!-- ELSEIF !empty($file) -->
         <div class="center"><hr />__Copyright__: &copy; $copyright | __Size__: $size __bytes__ | __Downloads__: $downloads</div>
         <div class="info">
-            <span class="author center">__Posted by__: <a href="{MODULE}user&user=$author">$nick</a></span>
+            <span class="author center">__Posted by__: <a href="{MODULE}user&user=$author" class="tip" title="__Profile__">$nick</a></span>
             <span class="admin"><a href="$link&get=1" target="_blank">__Download__</a></span>
         </div>
     <!-- ELSEIF !empty($site) -->
         <div class="center"><hr /><a href="$link&go=1" target="_blank">__Go__</a></div>
         <div class="info">
-            <span class="author center">__Posted by__: <a href="{MODULE}user&user=$author">$nick</a><br />__Copyright__: &copy; $copyright</span>
+            <span class="author center">__Posted by__: <a href="{MODULE}user&user=$author" class="tip" title="__Profile__">$nick</a><br />__Copyright__: &copy; $copyright</span>
             <span class="admin">__Transitions__: $clicks</span>
         </div>
     <!-- ELSEIF !empty($image) -->
         <div class="info">
-            <span class="author center">__Posted by__: <a href="{MODULE}user&user=$author">$nick</a></span>
+            <span class="author center">__Posted by__: <a href="{MODULE}user&user=$author" class="tip" title="__Profile__">$nick</a></span>
             <span class="admin">__Copyright__: $copyright</span>
         </div>
     <!-- ELSE -->
@@ -60,7 +60,7 @@ die();?>
             <a href="{MODULE}posts.print{SECTION}$section{CATEGORY}$category{ITEM}$id" target="_blank">
                 <img src="{ICONS}printer.png" width="16" height="16" hspace="5" vspace="5" class="tip" alt="__Version for printer__" />
             </a>
-            <span class="author center">__Author__: <a href="{MODULE}user&user=$author">$nick</a></span>
+            <span class="author center">__Author__: <a href="{MODULE}user&user=$author" class="tip" title="__Profile__">$nick</a></span>
             <!-- IF !empty($admin) -->
                 <div class="actions">
                     <form name="post" method="post" action="">

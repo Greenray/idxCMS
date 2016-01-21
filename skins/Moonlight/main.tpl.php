@@ -20,11 +20,8 @@ die();?>
     <meta name="revisit" content="7">
     <meta name="generator" content="idxCMS">
     [show=meta]
-    <link rel="stylesheet" type="text/css" href="{SKINS}normalize.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="{CURRENT_SKIN}style.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="{TOOLS}message{DS}message.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="{TOOLS}colorbox{DS}jquery.colorbox.css" media="screen" />
-    <script type="text/javascript" src="{TOOLS}jquery.js"></script>
+    <link rel="stylesheet" href="{SKINS}css.php?f={SKINS}normalize|{CURRENT_SKIN}style|{TOOLS}message{DS}message|{TOOLS}colorbox{DS}jquery.colorbox">
+    <script type="text/javascript" src="{TOOLS}jquery.min.js"></script>
     <link type="image/x-icon" rel="shortcut icon" href="{ROOT}favicon.ico" />
 </head>
 <body>

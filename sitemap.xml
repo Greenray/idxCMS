@@ -1,127 +1,131 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
-		<loc>http://idxcms//?module=index</loc>
-		<lastmod>2016-01-19</lastmod>
+		<loc>http://idxcms/?module=index</loc>
+		<lastmod>2016-01-21</lastmod>
 		<changefreq>weekly</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
-		<loc>http://idxcms//?module=posts</loc>
-		<lastmod>2016-01-19</lastmod>
+		<loc>http://idxcms/?module=posts</loc>
+		<lastmod>2016-01-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
-		<loc>http://idxcms//?module=posts&section=news</loc>
-		<lastmod>2016-01-19</lastmod>
+		<loc>http://idxcms/?module=posts&section=news</loc>
+		<lastmod>2016-01-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
-		<loc>http://idxcms//?module=posts&section=news&category=1</loc>
-		<lastmod>2016-01-19</lastmod>
+		<loc>http://idxcms/?module=posts&section=news&category=1</loc>
+		<lastmod>2016-01-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
-		<loc>http://idxcms//?module=posts&section=news&category=1&item=1</loc>
+		<loc>http://idxcms/?module=posts&section=news&category=1&item=1</loc>
 		<lastmod>2015-11-20</lastmod>
 	</url>
 	<url>
-		<loc>http://idxcms//?module=posts&section=articles</loc>
-		<lastmod>2016-01-19</lastmod>
+		<loc>http://idxcms/?module=posts&section=articles</loc>
+		<lastmod>2016-01-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
-		<loc>http://idxcms//?module=posts&section=articles&category=1</loc>
-		<lastmod>2016-01-19</lastmod>
+		<loc>http://idxcms/?module=posts&section=articles&category=1</loc>
+		<lastmod>2016-01-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
-		<loc>http://idxcms//?module=posts&section=articles&category=1&item=1</loc>
+		<loc>http://idxcms/?module=posts&section=articles&category=1&item=1</loc>
 		<lastmod>2012-06-30</lastmod>
 	</url>
 	<url>
-		<loc>http://idxcms//?module=catalogs</loc>
-		<lastmod>2016-01-19</lastmod>
+		<loc>http://idxcms/?module=catalogs</loc>
+		<lastmod>2016-01-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
-		<loc>http://idxcms//?module=catalogs&section=files</loc>
-		<lastmod>2016-01-19</lastmod>
+		<loc>http://idxcms/?module=catalogs&section=files</loc>
+		<lastmod>2016-01-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
-		<loc>http://idxcms//?module=catalogs&section=links</loc>
-		<lastmod>2016-01-19</lastmod>
+		<loc>http://idxcms/?module=catalogs&section=links</loc>
+		<lastmod>2016-01-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
-		<loc>http://idxcms//?module=catalogs&section=links&category=1</loc>
-		<lastmod>2016-01-19</lastmod>
+		<loc>http://idxcms/?module=catalogs&section=links&category=1</loc>
+		<lastmod>2016-01-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
-		<loc>http://idxcms//?module=catalogs&section=links&category=1&item=1</loc>
+		<loc>http://idxcms/?module=catalogs&section=links&category=1&item=1</loc>
 		<lastmod>2012-06-30</lastmod>
 	</url>
 	<url>
-		<loc>http://idxcms//?module=forum</loc>
-		<lastmod>2016-01-19</lastmod>
+		<loc>http://idxcms/?module=forum</loc>
+		<lastmod>2016-01-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
-		<loc>http://idxcms//?module=forum&section=Linux</loc>
-		<lastmod>2016-01-19</lastmod>
+		<loc>http://idxcms/?module=forum&section=Linux</loc>
+		<lastmod>2016-01-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
-		<loc>http://idxcms//?module=forum&section=Linux&category=1</loc>
-		<lastmod>2016-01-19</lastmod>
+		<loc>http://idxcms/?module=forum&section=Linux&category=1</loc>
+		<lastmod>2016-01-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
-		<loc>http://idxcms//?module=forum&section=Linux&category=1&item=1</loc>
+		<loc>http://idxcms/?module=forum&section=Linux&category=1&item=1</loc>
 		<lastmod>2014-11-16</lastmod>
 	</url>
 	<url>
-		<loc>http://idxcms//?module=forum&section=Windows</loc>
-		<lastmod>2016-01-19</lastmod>
+		<loc>http://idxcms/?module=forum&section=Windows</loc>
+		<lastmod>2016-01-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
-		<loc>http://idxcms//?module=gallery</loc>
-		<lastmod>2016-01-19</lastmod>
+		<loc>http://idxcms/?module=gallery</loc>
+		<lastmod>2016-01-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
-		<loc>http://idxcms//?module=gallery&section=test</loc>
-		<lastmod>2016-01-19</lastmod>
+		<loc>http://idxcms/?module=gallery&section=test</loc>
+		<lastmod>2016-01-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
-		<loc>http://idxcms//?module=gallery&section=test&category=1</loc>
-		<lastmod>2016-01-19</lastmod>
+		<loc>http://idxcms/?module=gallery&section=test&category=1</loc>
+		<lastmod>2016-01-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
-		<loc>http://idxcms//?module=gallery&section=test&category=1&item=1</loc>
+		<loc>http://idxcms/?module=gallery&section=test&category=1&item=1</loc>
 		<lastmod>2012-06-30</lastmod>
 	</url>
 	<url>
-		<loc>http://idxcms//?module=gallery&section=test&category=1&item=2</loc>
+		<loc>http://idxcms/?module=gallery&section=test&category=1&item=2</loc>
 		<lastmod>2015-04-15</lastmod>
 	</url>
 	<url>
-		<loc>http://idxcms//?module=gallery&section=Example</loc>
-		<lastmod>2016-01-19</lastmod>
+		<loc>http://idxcms/?module=gallery&section=test&category=1&item=3</loc>
+		<lastmod>2016-01-21</lastmod>
+	</url>
+	<url>
+		<loc>http://idxcms/?module=gallery&section=Example</loc>
+		<lastmod>2016-01-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
-		<loc>http://idxcms//?module=gallery&section=Example&category=1</loc>
-		<lastmod>2016-01-19</lastmod>
+		<loc>http://idxcms/?module=gallery&section=Example&category=1</loc>
+		<lastmod>2016-01-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
-		<loc>http://idxcms//?module=gallery&section=Example&category=1&item=1</loc>
+		<loc>http://idxcms/?module=gallery&section=Example&category=1&item=1</loc>
 		<lastmod>2016-01-11</lastmod>
 	</url>
 </urlset>

@@ -19,148 +19,182 @@ if (!empty($sections)) {
 
         if (!empty($post) && !empty($category) && !empty($section)) {
             $categories = CMS::call('POSTS')->getCategories($section);
+            #
+            # Empty section request
+            #
+            if (!$categories) SYSTEM::showMessage('Section is empty', CreateUrl('posts'));
 
-            if (!empty($categories)) {
-                $content = CMS::call('POSTS')->getContent($category);
+            $content = CMS::call('POSTS')->getContent($category);
+            #
+            # Wrong category or item request
+            #
+            if (!$content || empty($content[$post])) SYSTEM::showMessage('Category is empty', CreateUrl('posts', $section));
 
-                if (!empty($content)) {
-                    if (!empty($content[$post])) {
-                        $comments = CMS::call('POSTS')->getComments($post);
-                        $comment  = FILTER::get('REQUEST', 'comment');
+            $comments = CMS::call('POSTS')->getComments($post);
+            $comment  = FILTER::get('REQUEST', 'comment');
 
-                        try {
-                            if (!empty($REQUEST['save'])) {
+            try {
+                if (!empty($REQUEST['save'])) {
+                    #
+                    # Save new or edited comment
+                    # If $comment is empty a new comment will be created
+                    #
+                    $result = CMS::call('POSTS')->saveComment($comment, $post);
+
+                }
+
+                if (!empty($REQUEST['action'])) {
+                    #
+                    # Actions is allowed for admin and moderators
+                    #
+                    if (USER::moderator('posts', $comments[$comment])) {
+                        switch ($REQUEST['action']) {
+
+                            case 'edit':
                                 #
-                                # Save new or edited comment
-                                # If $comment is empty a new comment will be created
+                                # Edit comment
                                 #
-                                $result = CMS::call('POSTS')->saveComment($comment, $post);
-
-                            } else {
-                                if (!empty($REQUEST['action'])) {
-                                    switch ($REQUEST['action']) {
-
-                                        case 'edit':
-                                            if (!empty($content[$post]['opened'])) {
-                                                if (!empty($comments[$comment])) {
-                                                    $moderator = USER::moderator('posts', $comments[$comment]);
-                                                    if ($moderator) {
-                                                        #
-                                                        # For user it is actual only for 5 minits after post
-                                                        #
-                                                        $TPL = new TEMPLATE(__DIR__.DS.'comment-edit.tpl');
-                                                        $TPL->set('comment', $comment);
-                                                        $TPL->set('text', empty($REQUEST['text']) ? $comments[$comment]['text'] : $REQUEST['text']);
-                                                        $TPL->set('moderator', TRUE);
-                                                        $TPL->set('bbcodes', CMS::call('PARSER')->showBbcodesPanel('edit.text', $moderator));
-                                                        SYSTEM::defineWindow('Edit', $TPL->parse());
-                                                    }
-                                                }
-                                            } else SYSTEM::showError('Comments are not allowed', CreateUrl('posts', $section, $category, $post));
-                                            break;
-
-                                        case 'delete':
-                                            $result = CMS::call('POSTS')->removeComment($comment);
-                                            $result = ($result > $comment) ? $comment : $result;
-                                            break;
-
-                                        case 'close':
-                                            if (USER::$root) CMS::call('POSTS')->setValue($post, 'opened', FALSE);
-                                            break;
-
-                                        case 'open':
-                                            if (USER::$root) CMS::call('POSTS')->setValue($post, 'opened', TRUE);
-                                            break;
-
-                                        case 'ban':
-                                            if (USER::moderator('posts')) CMS::call('FILTER')->ban();
-                                            break;
+                                if (!empty($content[$post]['opened'])) {
+                                    if (!empty($comments[$comment])) {
+                                        $moderator = USER::moderator('posts', $comments[$comment]);
+                                        if ($moderator) {
+                                            #
+                                            # For user it is actual only for 5 minits after post
+                                            #
+                                            $TPL = new TEMPLATE(__DIR__.DS.'comment-edit.tpl');
+                                            $TPL->set('comment', $comment);
+                                            $TPL->set('text', empty($REQUEST['text']) ? $comments[$comment]['text'] : $REQUEST['text']);
+                                            $TPL->set('moderator', TRUE);
+                                            $TPL->set('bbcodes', CMS::call('PARSER')->showBbcodesPanel('edit.text', $moderator));
+                                            SYSTEM::defineWindow('Edit', $TPL->parse());
+                                        }
                                     }
-                                }
-                            }
-                        } catch (Exception $error) {
-                            SYSTEM::showError($error->getMessage());
+                                } else SYSTEM::showError('Comments are not allowed', CreateUrl('posts', $section, $category, $post));
+                                break;
+
+                            case 'delete':
+                                #
+                                # Remove comment
+                                #
+                                $result = CMS::call('POSTS')->removeComment($comment);
+                                $result = ($result > $comment) ? $comment : $result;
+                                break;
+
+                            case 'close':
+                                #
+                                # Close post for commenting
+                                #
+                                if (USER::$root) CMS::call('POSTS')->setValue($post, 'opened', FALSE);
+                                break;
+
+                            case 'open':
+                                #
+                                # Open post for commenting
+                                #
+                                if (USER::$root) CMS::call('POSTS')->setValue($post, 'opened', TRUE);
+                                break;
+
+                            case 'ban':
+                                #
+                                # Ban bad user
+                                #
+                                if (USER::moderator('posts')) CMS::call('FILTER')->ban();
+                                break;
                         }
+                    }
+                }
 
-                        $post = CMS::call('POSTS')->getItem($post);
+            } catch (Exception $error) {
+                SYSTEM::showError($error->getMessage());
+            }
 
-                        SYSTEM::set('pagename', $post['title']);
-                        SYSTEM::setPageDescription($post['title']);
-                        SYSTEM::setPageKeywords($post['keywords']);
+            $post = CMS::call('POSTS')->getItem($post);
+            #
+            # Wrong post request
+            #
+            if (!$post) SYSTEM::showError('Invalid article', CreateUrl('posts', $section, $category));
 
-                        $perpage = CONFIG::getValue('posts', 'comments_per_page');
-                        if     (!empty($comment)) $page = ceil($comment / $perpage);
-                        elseif (!empty($result))  $page = ceil($result / $perpage);
-                        else                      $page = FILTER::get('REQUEST', 'page');
-                        #
-                        # Don't show post, if number of comments > per page
-                        #
-                        if ($page < 2) {
-                            #
-                            # Show post with full text
-                            #
-                            $TPL = new TEMPLATE(__DIR__.DS.'full.tpl');
-                            $TPL->set(CMS::call('POSTS')->getItem($post['id'], 'text'));
-                            $TPL->set('module', 'posts');
+            SYSTEM::set('pagename', $post['title']);
+            SYSTEM::setPageDescription($post['title']);
+            SYSTEM::setPageKeywords($post['keywords']);
 
-                            SYSTEM::defineWindow('Articles', $TPL->parse());
-                            CMS::call('POSTS')->incCount($post['id'], 'views');
-                        }
-                        #
-                        # Show comments
-                        #
-                        CMS::call('POSTS')->showComments($post, $page, $perpage, __DIR__.DS);
+            $perpage = CONFIG::getValue('posts', 'comments_per_page');
+            if     (!empty($comment)) $page = ceil($comment / $perpage);
+            elseif (!empty($result))  $page = ceil($result / $perpage);
+            else                      $page = FILTER::get('REQUEST', 'page');
+            #
+            # Don't show post, if number of comments > per page
+            #
+            if ($page < 2) {
+                #
+                # Show post with full text
+                #
+                $TPL = new TEMPLATE(__DIR__.DS.'full.tpl');
+                $TPL->set(CMS::call('POSTS')->getItem($post['id'], 'text'));
+                $TPL->set('module', 'posts');
 
-                    } else SYSTEM::showError('Invalid article', CreateUrl('posts', $section, $category));
-                } else SYSTEM::showMessage('Category is empty', CreateUrl('posts', $section));
-            } else SYSTEM::showMessage('Section is empty', CreateUrl('posts'));
+                SYSTEM::defineWindow('Articles', $TPL->parse());
+                CMS::call('POSTS')->incCount($post['id'], 'views');
+            }
+            #
+            # Show comments
+            #
+            CMS::call('POSTS')->showComments($post, $page, $perpage, __DIR__.DS);
+
         } elseif (!empty($category) && !empty($section)) {
             #
             # Show posts from category
             #
             $categories = CMS::call('POSTS')->getCategories($section);
-            if (!empty($categories)) {
-                $content = CMS::call('POSTS')->getContent($category);
+            #
+            # Wrong or empty section request
+            #
+            if (!$categories) SYSTEM::showMessage('Section is empty', CreateUrl('posts'));
 
-                if (!empty($content)) {
-                    SYSTEM::set('pagename', $categories[$category]['title']);
-                    SYSTEM::setPageDescription(__('Posts').' - '.$categories[$category]['title']);
-                    krsort($content);
+            $content = CMS::call('POSTS')->getContent($category);
+            #
+            # Wrong category or item request
+            #
+            if (!$content) SYSTEM::showMessage('Category is empty', CreateUrl('posts', $section));
 
-                    $TPL    = new TEMPLATE(__DIR__.DS.'short.tpl');
-                    $output = '';
-                    $count  = sizeof($content);
-                    $keys   = array_keys($content);
-                    $page   = FILTER::get('REQUEST', 'page');
-                    $perpage    = CONFIG::getValue('posts', 'posts_per_page');
-                    $pagination = GetPagination($page, $perpage, $count);
-                    for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
-                        $post = CMS::call('POSTS')->getItem($keys[$i], 'desc');
-                        $TPL->set($post);
-                        SYSTEM::setPageKeywords($post['keywords']);
-                        $output .= $TPL->parse();
-                    }
+            SYSTEM::set('pagename', $categories[$category]['title']);
+            SYSTEM::setPageDescription(__('Posts').' - '.$categories[$category]['title']);
+            krsort($content);
 
-                    SYSTEM::defineWindow($categories[$category]['title'], $output);
-                    if ($count > $perpage) {
-                        SYSTEM::defineWindow('', Pagination($count, $perpage, $page, $categories[$category]['link']));
-                    }
-                } else SYSTEM::showMessage('Category is empty', CreateUrl('posts', $section));
-            } else SYSTEM::showMessage('Section is empty', CreateUrl('posts'));
-        } elseif (!empty($section)) {
+            $TPL    = new TEMPLATE(__DIR__.DS.'short.tpl');
+            $output = '';
+            $count  = sizeof($content);
+            $keys   = array_keys($content);
+            $page   = FILTER::get('REQUEST', 'page');
+            $perpage    = CONFIG::getValue('posts', 'posts_per_page');
+            $pagination = GetPagination($page, $perpage, $count);
+            for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
+                $post = CMS::call('POSTS')->getItem($keys[$i], 'desc');
+                $TPL->set($post);
+                SYSTEM::setPageKeywords($post['keywords']);
+                $output .= $TPL->parse();
+            }
+
+            SYSTEM::defineWindow($categories[$category]['title'], $output);
+            if ($count > $perpage) {
+                SYSTEM::defineWindow('', Pagination($count, $perpage, $page, $categories[$category]['link']));
+            }
+
+        } else {
             #
             # Show section with allowed categories and last items
             #
             $output = CMS::call('POSTS')->showSection($section);
-            if (!empty($output)) {
-                if (!empty($output['categories'])) {
-                    $TPL = new TEMPLATE(__DIR__.DS.'categories.tpl');
-                    $TPL->set($output);
-                    SYSTEM::defineWindow($output['title'], $TPL->parse());
+            #
+            # Empty section request
+            #
+            if (!$output) SYSTEM::showMessage('Section is empty', MODULE.'posts');
 
-                } else SYSTEM::showMessage('Section is empty', CreateUrl('posts'));
-            } else SYSTEM::showError('Invalid section or database is empty', MODULE.'posts');
+            $TPL = new TEMPLATE(__DIR__.DS.'categories.tpl');
+            $TPL->set($output);
+            SYSTEM::defineWindow($output['title'], $TPL->parse());
         }
+
     } elseif ((($from = FILTER::get('REQUEST', 'from')) !== FALSE) && (($until = FILTER::get('REQUEST', 'until')) !== FALSE))  {
         SYSTEM::set('pagename', __('Posts').' - '.__('Search results'));
         SYSTEM::setPageDescription(__('Posts').' - '.__('Search results'));
@@ -188,11 +222,10 @@ if (!empty($sections)) {
         # Show allowed sections with allowed categories
         #
         $output = CMS::call('POSTS')->showSections();
-        if (!empty($output)) {
-            $TPL = new TEMPLATE(__DIR__.DS.'sections.tpl');
-            $TPL->set('sections', $output);
-            SYSTEM::defineWindow('Posts', $TPL->parse());
+        if (empty($output)) SYSTEM::showMessage('Database is empty', CreateUrl('index'));
 
-        } else SYSTEM::showMessage('Database is empty', CreateUrl('index'));
+        $TPL = new TEMPLATE(__DIR__.DS.'sections.tpl');
+        $TPL->set('sections', $output);
+        SYSTEM::defineWindow('Posts', $TPL->parse());
     }
 } else SYSTEM::showMessage('Database is empty', CreateUrl('index'));

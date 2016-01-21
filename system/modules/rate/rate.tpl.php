@@ -7,8 +7,8 @@ die();?>
 
 <div class="star">
     <div>
-        <ul id="star[$item:]" $event class="star">
-            <li id="starCur[$item:]" class="curr" title="$value" style="width:[$width:]px;"></li>
+        <ul id="star[$item:]" $event class="star b_star">
+            <li id="starCur[$item:]" class="curr w_star" title="$value" style="width:[$width:]px;"></li>
         </ul>
     </div>
     <div style="clear: both;" /></div>

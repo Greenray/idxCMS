@@ -122,6 +122,7 @@ $LANG['def']['Guest'] = 'Гость';
 $LANG['def']['Image'] = 'Изображение';
 $LANG['def']['Index'] = 'Главная';
 $LANG['def']['Insert'] = 'Вставить';
+$LANG['def']['Invalid publicaton'] = 'Нет такой публикации';
 $LANG['def']['Invalid symbols'] = 'Запрещенные символы';
 $LANG['def']['Keywords'] = 'Ключевые слова';
 $LANG['def']['Last addition'] = 'Последнее добавление';

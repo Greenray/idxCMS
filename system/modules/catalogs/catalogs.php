@@ -23,7 +23,7 @@ if (!empty($sections)) {
             #
             # Wrong category or item request
             #
-            if (!$content || empty($content[$item])) SYSTEM::showMessage('Category is empty', CreateUrl('catalogs', $section));
+            if (!$content || empty($content[$item])) SYSTEM::showMessage('Invalid publicaton', CreateUrl('catalogs', $section));
 
             $comments = CMS::call('CATALOGS')->getComments($item);
             $comment  = FILTER::get('REQUEST', 'comment');

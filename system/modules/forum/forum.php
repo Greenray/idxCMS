@@ -24,7 +24,7 @@ if (!empty($sections)) {
             #
             # Wrong category or item request
             #
-            if (!$content || empty($content[$topic])) SYSTEM::showMessage('Category is empty', CreateUrl('forum', $section));
+            if (!$content || empty($content[$topic])) SYSTEM::showMessage('Invalid publicaton', CreateUrl('forum', $section));
 
             $replies = CMS::call('FORUM')->getComments($topic);
             $reply   = FILTER::get('REQUEST', 'comment');

@@ -429,7 +429,7 @@ class SYSTEM {
      */
     public static function showMessage($message, $url = '') {
         $TPL = new TEMPLATE(TEMPLATES.'message.tpl');
-        $TPL->set('message', $message);
+        $TPL->set('message', __($message));
         $TPL->set('url', $url);
         self::defineWindow('Message', $TPL->parse());
     }
@@ -442,7 +442,7 @@ class SYSTEM {
      */
     public static function showError($message, $url = '') {
         $TPL = new TEMPLATE(TEMPLATES.'error.tpl');
-        $TPL->set('message', $message);
+        $TPL->set('message', __($message));
         $TPL->set('url', $url);
         self::defineWindow('Error', $TPL->parse());
     }

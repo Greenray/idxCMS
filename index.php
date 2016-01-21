@@ -11,10 +11,6 @@
  * @overview  The core of the system.
  */
 
-// Page gentime start
-$starttime = explode(' ', microtime());
-$starttime = $starttime[1] + $starttime[0];
-
 ini_set('phar.readonly', 0);            # Allow phar to work with phars
 ini_set('display_errors', 1);           # Allow to log php errors
 ini_set('default_charset', 'UTF-8');    # PHP >= 5.6.0, empty for PHP < 5.6.0
@@ -386,12 +382,9 @@ switch($MODULE) {
         #
         # The page is generated, it is possible to show it
         #
-    // Page gentime end
-    $mtime = explode(' ', microtime());
-    $totaltime = $mtime[0] + $mtime[1] - $starttime;
         $TPL = new TEMPLATE(CURRENT_SKIN.'main.tpl');
         $TPL->set($output);
-        echo $TPL->parse().round($totaltime, 2);
+        echo $TPL->parse();
         break;
 }
 

@@ -121,7 +121,8 @@ $LANG['def']['Guest'] = 'Госць';
 $LANG['def']['Image'] = 'Выява';
 $LANG['def']['Index'] = 'Галоўная';
 $LANG['def']['Insert'] = 'Уставіць';
-$LANG['def']['Invalid form data'] = 'Памылка дадзеных формы';
+$LANG['def']['Invalid symbols'] = 'Забароненыя сімвалы';
+$LANG['def']['Invalid publicaton'] = 'Няма такой публікацыі';
 $LANG['def']['Keywords'] = 'Ключавыя словы';
 $LANG['def']['Last addition'] = 'Апошняе даданне';
 $LANG['def']['Link'] = 'Спасылка';
@@ -161,7 +162,6 @@ $LANG['def']['Views'] = 'Прагляды';
 $LANG['def']['Yes'] = 'Так';
 $LANG['def']['You are not logged in!'] = 'Вы не ўвайшлі ў сістэму!';
 $LANG['def']['You are welcome!'] = 'Сардэчна запрашаем!';
-$LANG['def']['You have used an invalid symbols'] = 'Забароненыя сімвалы';
 # COUNTER
 $LANG['def']['Counter'] = 'Лічыльнік';
 $LANG['def']['guests'] = 'гасцей';

@@ -95,21 +95,21 @@ die();?>
     </div>
     <div class="copyright">[show=copyright]</div>
 </div>
-<script type="text/javascript" src="{TOOLS}jquery.rating.js"></script>
+<script type="text/javascript" src="{TOOLS}jquery.rating.min.js"></script>
 <script type="text/javascript" src="{TOOLS}colorbox{DS}jquery.colorbox.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         $(".cbox").colorbox({rel:'cbox'});
     });
 </script>
-<script src="{TOOLS}jquery.lightbox_me.js" type="text/javascript"></script>
+<script src="{TOOLS}jquery.lightbox_me.min.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(function() {
         $("#error").lightbox_me();
         $("#message").lightbox_me();
     });
 </script>
-<script type="text/javascript" src="{TOOLS}message{DS}message.js"></script>
+<script type="text/javascript" src="{TOOLS}message{DS}message.min.js"></script>
 <script type="text/javascript">
     function ShowHide(obj) {
         if (obj === "none")
@@ -126,6 +126,6 @@ die();?>
     }
 </script>
 <!--[if lt IE 7]><script type="text/javascript" src="{TOOLS}unitip{DS}unitpngfix.js"></script><![endif]-->
-<script type="text/javascript" src='{TOOLS}unitip{DS}unitip.js'></script>
+<script type="text/javascript" src='{TOOLS}unitip{DS}unitip.min.js'></script>
 </body>
 </html>

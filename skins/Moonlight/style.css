@@ -456,6 +456,7 @@ textarea {
     .rate button { border: none; }
     .rate button.minus,
     .rate button.plus { margin: 0 5px; }
+.special { color: red; }
 .star,
     .star ul.star,
     .star div.rates,

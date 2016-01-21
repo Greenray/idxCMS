@@ -5,8 +5,8 @@
 
 die();?>
 
-<script type="text/javascript" src="{TOOLS}redips{DS}redips.drag.js"></script>
-<script type="text/javascript" src="{TOOLS}redips{DS}drag.js"></script>
+<script type="text/javascript" src="{TOOLS}redips{DS}redips.drag.min.js"></script>
+<script type="text/javascript" src="{TOOLS}redips{DS}drag.min.js"></script>
 <div class="module">__Categories__</div>
 <fieldset>
     <form name="sections" method="post" action="">

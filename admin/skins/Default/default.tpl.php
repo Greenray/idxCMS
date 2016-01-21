@@ -16,7 +16,7 @@ if (!defined('idxADMIN')) die();?>
     <link rel="stylesheet" type="text/css" href="{SKINS}normalize.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="{ADMIN}skins/Default/style.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="{TOOLS}message{DS}message.css" media="screen" />
-    <script type="text/javascript" src="{TOOLS}jquery.js"></script>
+    <script type="text/javascript" src="{TOOLS}jquery.min.js"></script>
 </head>
 <body onload="ClickMenu('menu')">
 <div id="page">
@@ -72,14 +72,14 @@ if (!defined('idxADMIN')) die();?>
 		<p class="center">{IDX_POWERED} {IDX_COPYRIGHT}</p>
 	</footer>
 </div>
-<script src="{TOOLS}jquery.lightbox_me.js" type="text/javascript"></script>
+<script src="{TOOLS}jquery.lightbox_me.min.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(function() {
         $("#error").lightbox_me();
         $("#message").lightbox_me();
     });
 </script>
-<script type="text/javascript" src="{TOOLS}message{DS}message.js"></script>
+<script type="text/javascript" src="{TOOLS}message{DS}message.min.js"></script>
 <script type="text/javascript">
     function ShowHide(obj) {
         if (obj === "none")
@@ -123,6 +123,6 @@ if (!defined('idxADMIN')) die();?>
     };
 </script>
 <!--[if lt IE 7]><script type="text/javascript" src="{TOOLS}unitip{DS}unitpngfix.js"></script><![endif]-->
-<script type="text/javascript" src='{TOOLS}unitip{DS}unitip.js'></script>
+<script type="text/javascript" src='{TOOLS}unitip{DS}unitip.min.js'></script>
 </body>
 </html>

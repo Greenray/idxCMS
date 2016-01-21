@@ -1,12 +1,8 @@
-/**
+/*
  * Rate system for articles and catalog items.
- *
- * @file      tools/jquery.rating.js
  * @version   v1.0.3 : 2008/05/06
  * @author    http://www.nofunc.com/AJAX_Star_Rating/
- * @package   Tools
  */
-
 function _$(a, b) { return((typeof (b) === "object" ? b : document).getElementById(a)); }
 function _$S(a)   { return((typeof (a) === "object" ? a : _$(a)).style); }
 function agent(a) { return(Math.max(navigator.userAgent.toLowerCase().indexOf(a), 0)); }

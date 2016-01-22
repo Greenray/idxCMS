@@ -88,13 +88,13 @@ if (!empty($REQUEST['image']['name'])) {
                 <!--
                 body      { background:#4e889d; color:black; font:normal 0.8em arial,verdana,sans-serif; margin:0; padding:0 }
                 h1        { font-size:1.2em; font-weight:normal; line-height:22px; margin:0 0 10px }
-                #close    { width:100%; margin:5px; text-align:center; position:relative; bottom:0 }
+                #close    { bottom:0; margin:5px; position:relative; text-align:center; width:100% }
                 #preview  { background:white; width:100%; min-height:500px }
                 #window   { padding:10px }
                 #text img { float:left }
                 .title    { font-size:1.2em; font-weight:bold; margin:5px 0; padding:5px; text-align:center }
-                .codehtml { margin:0 0 1px; padding:5px; border:#6da4da solid 1px; background:#ffffc0; color:black; font:normal 9pt mono,"Courier New",Courier; overflow:auto; white-space:nowrap }
-                .codephp  { margin:0 0 1px; padding:5px; border:#6da4da solid 1px; background:#ffffc0; color:black; font:normal 9pt mono,"Courier New",Courier; overflow:auto; white-space:nowrap }
+                .codehtml,
+                .codephp,
                 .codetext { margin:0 0 1px; padding:5px; border:#6da4da solid 1px; background:#ffffc0; color:black; font:normal 9pt mono,"Courier New",Courier; overflow:auto; white-space:nowrap }
                 -->
             </style>

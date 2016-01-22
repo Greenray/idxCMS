@@ -31,7 +31,6 @@ class CAPTCHA {
         $color  = imagecolorallocate($image, 255, 255, 255);
         $f_code = substr($code, 0, 3);
         $s_code = substr($code, 3);
-//        if ($length > 5) $l_code = substr($code, 5);
 
         switch($length) {
             case 5:
@@ -42,19 +41,16 @@ class CAPTCHA {
             case 6:
                 imagestring($image, 5, 17, 2, $f_code, $color);
                 imagestring($image, 5, 43, 8, $s_code, $color);
-//                imagestring($image, 5, 20, 2, $l_code, $color);
                 break;
 
             case 7:
                 imagestring($image, 5, 15, 8, $f_code, $color);
                 imagestring($image, 5, 41, 2, $s_code, $color);
-//                imagestring($image, 5, 25, 8, $l_code, $color);
                 break;
 
             case 8:
                 imagestring($image, 5, 11, 2, $f_code, $color);
                 imagestring($image, 5, 36, 8, $s_code, $color);
-//                imagestring($image, 5, 23, 2, $l_code, $color);
                 break;
         }
         imagepng($image);

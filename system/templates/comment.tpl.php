@@ -12,9 +12,13 @@ die();?>
             <span class="date">$date</span>
             <!-- IF !empty($rateid) -->
                 <span class="rate">
-                    <button type="button" id="dnUser[$rateid:]" class="minus icons icon-minus" onclick="Rate('dn', '$author', this)">&nbsp;</button>
+                    <button type="button" id="dnUser[$rateid:]" class="minus" onclick="Rate('dn', '$author', this)">
+                        <img src="{ICONS}down_red.gif" width="16" height="14" alt="" />
+                    </button>
                     <span id="rate[$rateid:]" style="color:$rate_color">$rate</span>
-                    <button type="button" id="upUser[$rateid:]" class="plus icons icon-plus" onclick="Rate('up', '$author', this)">&nbsp;</button>
+                    <button type="button" id="upUser[$rateid:]" class="plus" onclick="Rate('up', '$author', this)">
+                        <img src="{ICONS}up_green.gif" width="16" height="15" alt="" />
+                    </button>
                 </span>
             <!-- ELSEIF !empty($rate_color) -->
                 <span class="rate $rate_color center">$rate</span>

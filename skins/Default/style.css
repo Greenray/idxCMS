@@ -5,7 +5,9 @@ body {
     line-height: 1.2;
     overflow-y: scroll; }
 a,
-    a:visited { color: #0066ff; text-decoration: none; }
+    a:visited {
+        color: #0066ff;
+        text-decoration: none; }
     a:active,
     a:hover { color: red; }
     a img { vertical-align: middle; }
@@ -30,7 +32,10 @@ h3 { font-size: 14px; }
 button::-moz-focus-inner,
 input::-moz-focus-inner { border: 0; padding: 0; }
     button[disabled],
-    input[disabled] { background-color: #343536; border-color: #585858; cursor: not-allowed; }
+    input[disabled] {
+        background-color: #343536;
+        border-color: #585858;
+        cursor: not-allowed; }
     button[type="reset"],
     button[type="submit"],
     input[type="button"],
@@ -48,7 +53,10 @@ input::-moz-focus-inner { border: 0; padding: 0; }
     input[type="text"]:focus,
     input[type="password"]:focus,
     input[type="email"]:focus,
-    input[type="url"]:focus { background: #ffffcc; border-color: red; outline: none; }
+    input[type="url"]:focus {
+        background: #ffffcc;
+        border-color: red;
+        outline: none; }
     input[type="checkbox"],
     input[type="radio"] {
         border: none;
@@ -86,13 +94,15 @@ textarea {
     width: 95%; }
     textarea:focus { border: 1px solid red; }
 
-#wrapper { height: auto !important; overflow: hidden; }
+#wrapper {
+    height: auto !important;
+    overflow: hidden; }
 .header {
     background: #297377 url(images/shadow.png) 0 0 repeat-x;
     display: inline-block;
     padding: 10px 0;
     width: 100%; }
-.toolbar { margin: 0 20px; text-align: right; }
+.toolbar { margin: 0 20px; }
     .toolbar a { color: white; }
     .toolbar a:hover { color: red; }
     .toolbar li {
@@ -103,10 +113,9 @@ textarea {
     .toolbar li:first-child { border: 0; }
 .logo-image {
     color: white;
-    float: left;
     font-size: 16px;
+    float: left;
     margin-left: 50px;
-    text-align: center;
     width: 370px; }
 .logo-version {
     color: #ccc;
@@ -138,7 +147,10 @@ textarea {
         overflow: hidden;
         padding: 0;
         _transition: height .25s ease .1s; }
-    .menu ul li a {	border: none; border-bottom: 1px solid #353539; margin: 0; }
+    .menu ul li a {
+        border: none;
+        border-bottom: 1px solid #353539;
+        margin: 0; }
     .menu ul li:last-child a { border: none; }
     .menu li { float: left; position: relative; }
     .menu li a {
@@ -157,9 +169,16 @@ textarea {
     .menu li:last-child a { border-right: none; }
     .menu li:hover > a { color: #8fde62; }
     .menu li:hover > ul { opacity: 1; }
-    .menu li:hover > ul li { height: 36px; overflow: visible; padding: 0; }
-#layout-root { position: relative; height: auto !important; }
-    #layout-center { height: auto !important; margin: 0 235px; overflow: hidden; }
+    .menu li:hover > ul li {
+        height: 36px; overflow:
+            visible; padding: 0; }
+#layout-root {
+    position: relative;
+    height: auto !important; }
+    #layout-center {
+        height: auto !important;
+        margin: 0 235px;
+        overflow: hidden; }
     #layout-left,
     #layout-right {
         background: #88c3b0;
@@ -173,7 +192,12 @@ textarea {
     #layout-left li,
     #layout-right li { margin-left: 5px; }
     #layout-left:after,
-    #layout-right:after { clear: both; content: "."; display: block; height: 0; overflow: hidden; visibility: hidden; }
+    #layout-right:after {
+        clear: both; content: ".";
+        display: block;
+        height: 0;
+        overflow: hidden;
+        visibility: hidden; }
 .main .title { margin: 20px 0 10px; }
 .main .content { padding: 10px; }
 .box { padding: 10px; }
@@ -195,7 +219,9 @@ textarea {
     padding: 10px; }
 .user_panel { margin: 10px; padding: 0 10px; }
 .win { margin: 20px 5px; }
-    .win .title { margin: 10px 0; text-shadow: 1px 0 1px white; }
+    .win .title {
+        margin: 10px 0;
+        text-shadow: 1px 0 1px white; }
     .win .info { font-size: 10px; }
 .boxes {
     height: auto !important;
@@ -214,7 +240,10 @@ textarea {
     padding: 10px 30px;
     position: relative; }
 .copyright { margin: 10px 0; width: 25%; }
-.valid { float: right; margin: 10px 0; width: 25%; }
+.valid {
+    float: right;
+    margin: 10px 0;
+    width: 25%; }
 .actions { background: transparent; margin: 0 30px 0 0; }
 #bad,
 #good { padding: 5px 10px; text-align: right; }
@@ -224,13 +253,20 @@ textarea {
 .positive { color: green; font-weight: bold; }
 #no { color: red; }
 #yes { color: green; }
-.bbbutton { height: 26px; margin: 0 -2px; padding: 0; width: 26px; }
+.bbbutton {
+    height: 26px;
+    margin: 0 -2px;
+    padding: 0;
+    width: 26px; }
 .bbcodes { margin: 10px 20px; }
     .bbcodes .smiles { margin: 0 0 5px; }
     .bbcodes .link_text { margin: 4px 20px; text-align: right; }
     .bbcodes .link_text input[type='text'] { margin: 2px 20px; }
 .bbselect {	margin: 1px 0 4px; }
-.bbtools  { background: #bfcfdf; margin: 10px 0 0; padding: 10px 0 0; }
+.bbtools  {
+    background: #bfcfdf;
+    margin: 10px 0 0;
+    padding: 10px 0 0; }
 .black { color: black; }
 .green { color: green; }
 .red { color: red; }
@@ -240,13 +276,20 @@ textarea {
 .left { text-align: left; }
 .right { text-align: right; }
 .calendar { width: 100%; }
-    .calendar th { background: #1a4b4e; color: white; padding: 2px; }
+    .calendar th {
+        background: #1a4b4e;
+        color: white;
+        padding: 2px; }
     .calendar td { padding: 2px; text-align: center; }
     .calendar form input { margin: 5px 0 0; }
 .category { margin: 0 0 0 50px; padding: 4px 0 0 0; }
 .chat { margin: 10px 0; }
     .chat button { width: 60px; }
-.clear { clear: both; content: "."; display: block; height: 0; }
+.clear {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0; }
 .codehtml,
 .codephp,
 .codetext {
@@ -303,7 +346,10 @@ textarea {
     padding: 10px; }
     #pagination li { list-style: none; margin: 0; }
     #pagination a { margin-right: 2px; padding: 0 6px; }
-    #pagination .pages { display: block; float: left; padding: 0 6px; }
+    #pagination .pages {
+        display: block;
+        float: left;
+        padding: 0 6px; }
     #pagination .next a,
     #pagination .previous a { font-weight: bold; }
     #pagination .active {
@@ -337,17 +383,27 @@ textarea {
     .pass_img#progresbar-2-100, .pass_img#passbar-100 { background: transparent url(images/password/pass_100.gif) no-repeat; }
 .poll { margin: 0 0 10px; }
 .poll table { margin: 3px 0; }
-.post { margin: 10px; padding: 10px; overflow: hidden; }
-    .post .title {}
-    .post .date {}
-    .post .author { margin: 0 0 0 10px; line-height: 18px; width: 200px; }
-    .post .admin { margin: 0 20px 0; float: right; line-height: 18px; }
+.post {
+    margin: 10px;
+    padding: 10px;
+    overflow: hidden; }
+    .post .author {
+        margin: 0 0 0 10px;
+        line-height: 18px;
+        width: 200px; }
+    .post .admin {
+        margin: 0 20px 0;
+        float: right;
+        line-height: 18px; }
     .post .admin a { margin: 0 2px; }
     .post .info { clear: both; margin: 10px 0 0; }
     .post .actions { float: right; margin: 0; }
 .topic { margin: 10px; overflow: hidden; }
     .topic .content { overflow: hidden; }
-    .topic .author { float: left; margin: 10px 0; width: 120px; }
+    .topic .author {
+        float: left;
+        margin: 10px 0;
+        width: 120px; }
     .topic .date { font-size: 10px; }
     .topic .info { line-height: 18px; padding: 0 10px 0 0; }
     .topic .profile { float: right; }
@@ -367,7 +423,10 @@ textarea {
     .gallery .title { text-transform: none; }
 .comment { overflow: hidden; }
     .comment img { float: left; }
-    .comment .author { float: left; margin: 10px 0; width: 120px; }
+    .comment .author {
+        float: left;
+        margin: 10px 0;
+        width: 120px; }
     .comment .author .avatar img { margin: 0 25px 10px; }
     .comment .content { overflow: hidden; }
     .comment .date { color: #fff; font-size: 10px; }
@@ -380,13 +439,19 @@ textarea {
     .comment_edit,
     .comment_post { margin: 30px 10px 0; overflow: hidden; }
 .profile th,
-.profile td { height: 25px; padding: 0 10px; vertical-align: middle; }
+.profile td {
+    height: 25px;
+    padding: 0 10px;
+    vertical-align: middle; }
 .random-image { margin: 5px 0; }
-.rate { float: right; margin: 30px 10px 10px; }
-    .rate button { border: none; }
-    .rate button.minus,
-    .rate button.plus { margin: 0 5px; }
-#registration_content { margin: 15px auto; text-align: center; width: 635px; }
+.rate { float: right; margin: 30px 20px 20px; }
+    .rate button { border: none; padding: 0; }
+    .rate button.minus { background: url(images/icons/down.gif) no-repeat; }
+    .rate button.plus { background: url(images/icons/up.gif) no-repeat; }
+#registration_content {
+    margin: 15px auto;
+    text-align: center;
+    width: 635px; }
 #registration_form { overflow: hidden; }
 .required { background: #fff888; color: red; }
 .simple-menu { background: #297377; padding: 10px; }
@@ -395,7 +460,10 @@ textarea {
         margin-left: 8px;
         padding-left: 12px;
         display: inline; }
-    .simple-menu li:last-child { border-right: 1px solid #000; margin-right: 8px; padding-right: 12px; }
+    .simple-menu li:last-child {
+        border-right: 1px solid #000;
+        margin-right: 8px;
+        padding-right: 12px; }
     .simple-menu a { color: #fff; }
 .section { margin: 20px; }
     .section a { display: block; margin: 0; }
@@ -409,9 +477,15 @@ textarea {
         padding: 0 5px;
         text-align: left; }
     .section a.level1 span.subtitle,
-    .section a.level2 span.subtitle { font-weight: normal; line-height: 16px; padding: 0 5px; }
+    .section a.level2 span.subtitle {
+        font-weight: normal;
+        line-height: 16px;
+        padding: 0 5px; }
     .section span { display: block; text-align: left; }
-    .section span.bg { font-size: 1.4em; font-weight: bold; text-align: center; }
+    .section span.bg {
+        font-size: 1.4em;
+        font-weight: bold;
+        text-align: center; }
     .section span.level1 { text-align: left; }
     .section li a.level1:hover { background: #e8e8ea; color: red; }
     .section span.level1 span.title {
@@ -420,7 +494,10 @@ textarea {
         line-height: 20px;
         padding: 0 5px;
         text-align: left; }
-    .section span.level1 span.subtitle { font-weight: normal; line-height: 16px; padding: 0 5px; }
+    .section span.level1 span.subtitle {
+        font-weight: normal;
+        line-height: 16px;
+        padding: 0 5px; }
     .section ul { padding: 0; }
     .section ul.level2,
     .section ul.level3 { padding: 0 0 10px 40px; text-align: left; }
@@ -503,7 +580,10 @@ textarea {
         border: 0;
         _border-radius: none;
         _box-shadow: none; }
-    #steps form p.submit { background: none; border: none; _box-shadow: none; }
+    #steps form p.submit {
+        background: none;
+        border: none;
+        _box-shadow: none; }
     #steps form input:not ([type=radio]),
     #steps form textarea,
     #steps form select {
@@ -516,7 +596,10 @@ textarea {
 .tab_content { margin: 20px 0 0;; }
     .tab_content img { float: left; margin: 0 10px; }
     .tab_content .author { width: 30%; }
-    .tab_content .date { float: right; font-style: italic; margin: 6px 50px 0 0; }
+    .tab_content .date {
+        float: right;
+        font-style: italic;
+        margin: 6px 50px 0 0; }
     .tab_content .info { clear: both; }
     .tab_content .more { float: right; margin: 0 2px; }
     .tab_content .section { margin: 0 0 0 50px; }
@@ -550,7 +633,10 @@ table#std { margin: 0 0 10px; }
     #banner a  { color: white}
 .horinaja img { margin: 0; padding: 0; }
     .horinaja ul  { font-size: 12px; position: relative; }
-    .horinaja ul li { background: transparent; display: block; top: 0; }
+    .horinaja ul li {
+        background: transparent;
+        display: block;
+        top: 0; }
     ol.horinaja_pagination {
         background: transparent;
         clear: both;
@@ -558,7 +644,10 @@ table#std { margin: 0 0 10px; }
         margin: 0 auto;
         padding: 5px 0 0 0;
         position: relative; }
-    ol.horinaja_pagination li { display: block; float: left; height: 40px; }
+    ol.horinaja_pagination li {
+        display: block;
+        float: left;
+        height: 40px; }
     ol.horinaja_pagination li a {
         background: transparent;
         color: white;
@@ -583,17 +672,16 @@ table#std { margin: 0 0 10px; }
 		position: relative;
 		top: 0px;
 		width: 145px; }
-	#unitippoint { background: url(../../tools/unitip/TipPoint.png) no-repeat; height: 19px; overflow: hidden; }
+	#unitippoint {
+        background: url(../../tools/unitip/TipPoint.png) no-repeat;
+        height: 19px;
+        overflow: hidden; }
 	#unitipmid {
 		background: url(../../tools/unitip/TipMid.png) repeat;
 		height: auto;
 		padding: 5px 15px;
         width: 115px; }
-	#unitipcap { background: url(../../../tools/unitip/TipCap.png) no-repeat; height: 7px; overflow: hidden	}
-
-.icons { background-image: url(images/icons/glyphicons-halflings.png); width: 16px; height: 16px; }
-.icon-plus { background-position: -287px 0; }
-.icon-minus { background-position: -311px 0; }
-
-.silver-icons { background-image: url(images/icons/icons1.png); width: 16px; height: 16px; }
-.icon-smile { background-position: 0 1536px; }
+	#unitipcap {
+        background: url(../../../tools/unitip/TipCap.png) no-repeat;
+        height: 7px;
+        overflow: hidden	}

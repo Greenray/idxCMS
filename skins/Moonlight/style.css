@@ -26,7 +26,10 @@ h3 { font-size: 14px; font-weight: bold; margin: 8px 0; }
 hr { _box-sizing: content-box; height: 0; }
 img { border: 0; -ms-interpolation-mode: bicubic; }
 button[disabled],
-input[disabled] { background-color: #343536; border-color: #585858; cursor: not-allowed; }
+input[disabled] {
+    background-color: #343536;
+    border-color: #585858;
+    cursor: not-allowed; }
     button::-moz-focus-inner,
     input::-moz-focus-inner { border: 0; padding: 0; }
     button img { vertical-align: middle; }
@@ -62,7 +65,10 @@ input[disabled] { background-color: #343536; border-color: #585858; cursor: not-
         padding: 3px;
         _transition: all 0.3s ease-out; }
     input[type="checkbox"],
-    input[type="radio"] { padding: 0; height: 13px; width: 13px; }
+    input[type="radio"] {
+        padding: 0;
+        height: 13px;
+        width: 13px; }
     button[type="reset"]:hover,
     button[type="submit"]:hover,
     input[type="button"]:hover,
@@ -79,8 +85,14 @@ input[disabled] { background-color: #343536; border-color: #585858; cursor: not-
     input[type="checkbox"]:focus,
     input[type="text"]:focus,
     input[type="password"]:focus,
-    input[type="url"]:focus { background: #ffffcc; border-color: #ff0000; outline: none; }
-legend { border: 0; padding: 10px; white-space: normal; }
+    input[type="url"]:focus {
+        background: #ffffcc;
+        border-color: #ff0000;
+        outline: none; }
+legend {
+    border: 0;
+    padding: 10px;
+    white-space: normal; }
 ol, p { margin: 10px 0; }
 pre {
     background: #fafafa;
@@ -97,7 +109,10 @@ pre {
 q { quotes: none; }
     q:before,
     q:after { content: ''; content: none; }
-select { color: black; padding: 2px; width: 160px; }
+select {
+    color: black;
+    padding: 2px;
+    width: 160px; }
     select:focus { outline: 1px solid red; }
 table {
     border-spacing: 1px;
@@ -114,7 +129,10 @@ table#std th {
     color: white;
     text-align: center;
     text-shadow: 0 1px 0 black}
-table.std { border: 2px groove white; padding: 10px; width: 100%; }
+table.std {
+    border: 2px groove white;
+    padding: 10px;
+    width: 100%; }
 th.icon, td.icon { width: 47px; }
 th.title, td.title { width: 250px; }
 th.access, td.access,
@@ -170,7 +188,10 @@ textarea {
     text-shadow: 4px 4px 2px black;
     width: 80px; }
 .search { float: right; margin: 20px; }
-.slogan { color: yellow; font-size: 10pt; margin: 25px 0 0 10px}
+.slogan {
+    color: yellow;
+    font-size: 10pt;
+    margin: 25px 0 0 10px}
 .menu {
     background: #404040;
     background: _linear-gradient(180deg, #dedede 0%, black 100%);
@@ -192,7 +213,10 @@ textarea {
         padding: 0;
         overflow: hidden;
         _transition: height .25s ease .1s; }
-    .menu ul li a { border: 0; min-width: 100px; text-align: center; }
+    .menu ul li a {
+        border: 0;
+        min-width: 100px;
+        text-align: center; }
     .menu ul li:last-child a { border: 0; }
     .menu li   {
         display: block;
@@ -215,7 +239,10 @@ textarea {
     .menu li:last-child a  { border-right: none; }
     .menu li:hover>a { color: red; }
     .menu li:hover>ul { opacity: 1; }
-    .menu li:hover>ul li { height: 35px; padding: 0; overflow: visible; }
+    .menu li:hover>ul li {
+        height: 35px;
+        padding: 0;
+        overflow: visible; }
 .content .mainbar {
         background: #f4f4f4;
         border: 1px solid #808385;
@@ -232,7 +259,10 @@ textarea {
         margin-bottom: 0;
         padding-bottom: 8px; }
     .content .mainbar .comment { margin: 0; padding: 16px 0 0 0; }
-    .content .sidebar { float: right; overflow: hidden; width: 230px; }
+    .content .sidebar {
+        float: right;
+        overflow: hidden;
+        width: 230px; }
 .actions { float: right; margin: 0 10px 10px 0; }
 .actions a { margin: 0 5px; }
 #bad {
@@ -259,7 +289,10 @@ textarea {
     .bbcodes .link_text { margin: 4px 20px; text-align: right; }
     .bbcodes .link_text input[type='text'] { margin: 2px 20px; }
 .bbselect {	margin: 1px 0 4px; }
-.bbtools  { background: #bfcfdf; margin: 10px 0 0; padding: 10px 0 0; }
+.bbtools  {
+    background: #bfcfdf;
+    margin: 10px 0 0;
+    padding: 10px 0 0; }
 .block { display: block; }
 .calendar { color: white; vertical-align: middle; }
 .calendar th { padding: 2px; }
@@ -267,7 +300,10 @@ textarea {
 .calendar form input { margin: 5px 0 0; }
 .category { margin: 0 0 0 50px; padding: 4px 0 0 0; }
 .center { text-align: center; }
-.clear { clear: both; height: 0; overflow: hidden; }
+.clear {
+    clear: both;
+    height: 0;
+    overflow: hidden; }
 .chat { margin: 10px 0; }
 .codehtml,
 .codephp,
@@ -286,7 +322,10 @@ textarea {
     overflow: hidden;
     padding: 10px; }
     .comment img { float: left; }
-    .comment .author { float: left; margin: 21px 0; width: 120px; }
+    .comment .author {
+        float: left;
+        margin: 21px 0;
+        width: 120px; }
     .comment .author .avatar img { margin: 0 25px 10px; }
     .comment .content { padding: 0; overflow: hidden; }
     .comment .date { font-size: 10px; }
@@ -302,7 +341,10 @@ textarea {
         padding: 10px 0 0;
         overflow: hidden; }
 .gallery { margin: 0 auto; }
-    .gallery .item { float: left; margin: 10px 3px; width: 210px; }
+    .gallery .item {
+        float: left;
+        margin: 10px 3px;
+        width: 210px; }
     .gallery .info { padding: 0 0 0 15px; }
     .gallery .item {
         _box-sizing: content-box;
@@ -317,11 +359,20 @@ textarea {
     overflow: hidden;
     padding: 10px; }
 .post img { float: left; }
-    .post .admin { margin: 0 20px 0; float: right; line-height: 18px; }
+    .post .admin {
+        margin: 0 20px 0;
+        float: right;
+        line-height: 18px; }
     .post .admin a { margin: 0 2px; }
-    .post .author { margin: 0 0 0 10px; line-height: 18px; width: 200px; }
+    .post .author {
+        margin: 0 0 0 10px;
+        line-height: 18px;
+        width: 200px; }
     .post .date { margin: 2px 0 0 40px; width: 300px; }
-    .post .info { clear: both; font-size: 8pt; padding: 4px 10px; }
+    .post .info {
+        clear: both;
+        font-size: 8pt;
+        padding: 4px 10px; }
     .post .title { margin: 10px 5px; }
     .post .text img { margin: 10px; }
 .topic {
@@ -370,7 +421,10 @@ textarea {
 .message .title { background: black; color: white; }
 .dark { background: #999; }
 .light  { background: #ddd; }
-#editor { margin: 20px 0 0; overflow: hidden; padding: 15px; }
+#editor {
+    margin: 20px 0 0;
+    overflow: hidden;
+    padding: 15px; }
     #editor button { cursor: pointer; margin: 0px auto; }
     #editor button:hover { cursor: pointer; margin: 0px auto; }
     #editor .label {
@@ -388,7 +442,10 @@ textarea {
         width: 200px; }
     #editor input:focus { background: white; border: 1px solid red; }
     #editor input[type="checkbox"] { float: none; }
-    #editor legend { font-size: 24px; font-weight: bold; margin: 10px 0; }
+    #editor legend {
+        font-size: 24px;
+        font-weight: bold;
+        margin: 10px 0; }
 .help {
     color: red;
     font-style: italic;
@@ -414,7 +471,10 @@ textarea {
     padding: 10px; }
     #pagination li { list-style: none; margin: 0; }
     #pagination a { margin-right: 2px; padding: 0 6px; }
-    #pagination .pages { display: block; float: left; padding: 0 6px; }
+    #pagination .pages {
+        display: block;
+        float: left;
+        padding: 0 6px; }
     #pagination .next a,
     #pagination .previous a { font-weight: bold; }
     #pagination .active {
@@ -426,7 +486,10 @@ textarea {
     #pagination a:link,
     #pagination a:visited { display: block; float: left; }
 #pass_rating { margin: 0 28px 0 0; }
-    .pass_title { font-size: 11px; margin: 0; padding: 5px 5px 0 80px; }
+    .pass_title {
+        font-size: 11px;
+        margin: 0;
+        padding: 5px 5px 0 80px; }
     .pass_img#progresbar-2-0, .pass_img#passbar-0, .pass_img#progresbar-2-10,
     .pass_img#passbar-10, .pass_img#progresbar-2-20, .pass_img#passbar-20,
     .pass_img#progresbar-2-30, .pass_img#passbar-30, .pass_img#progresbar-2-40,
@@ -448,9 +511,15 @@ textarea {
     .pass_img#progresbar-2-100, .pass_img#passbar-100 { background: transparent url(images/password/pass_100.gif) no-repeat; }
 .poll { margin: 0 0 10px; }
 .poll table { margin: 3px 0; }
-.popup_input { background: transparent; border: 0; color: white; }
+.popup_input {
+    background: transparent;
+    border: 0;
+    color: white; }
 .profile th,
-.profile td { height: 25px; padding: 0 10px; vertical-align: middle; }
+.profile td {
+    height: 25px;
+    padding: 0 10px;
+    vertical-align: middle; }
 .random-image { margin: 5px 0; }
 .rate { float: right; margin: 30px 10px 10px; }
     .rate button { border: none; }
@@ -488,9 +557,18 @@ textarea {
 .required { background: #fff888; color: red; }
 .results { margin: 30px; }
     .results ul,
-    .results li { margin: 0; padding: 0; position: relative; }
-    .results a { display: block; margin: 0; text-align: left; }
-    .results a.level1 { padding-top: 10px; overflow: hidden; text-align: left; }
+    .results li {
+        margin: 0;
+        padding: 0;
+        position: relative; }
+    .results a {
+        display: block;
+        margin: 0;
+        text-align: left; }
+    .results a.level1 {
+        padding-top: 10px;
+        overflow: hidden;
+        text-align: left; }
     .results a.level1 span.title {
         font-size: 10pt;
         font-weight: bold;
@@ -498,9 +576,15 @@ textarea {
         margin: 0;
         padding: 0 10px;
         text-align: left; }
-    .results a.level1 span.subtitle { font-weight: normal; line-height: 16px; padding: 0 10px; }
+    .results a.level1 span.subtitle {
+        font-weight: normal;
+        line-height: 16px;
+        padding: 0 10px; }
     .results span { display: block; text-align: left; }
-    .results span.level1 { padding-top: 10px; overflow: hidden; text-align: left; }
+    .results span.level1 {
+        padding-top: 10px;
+        overflow: hidden;
+        text-align: left; }
     .results span.level1 span.title {
         font-size: 10pt;
         font-weight: bold;
@@ -508,8 +592,14 @@ textarea {
         margin: 0;
         padding: 0 10px;
         text-align: left; }
-    .results span.level1 span.subtitle { font-weight: normal; line-height: 16px; padding: 0 10px; }
-    .results li a.level1:hover { background: #e8e8ea; color: red; text-shadow: 0 1px 0 white}
+    .results span.level1 span.subtitle {
+        font-weight: normal;
+        line-height: 16px;
+        padding: 0 10px; }
+    .results li a.level1:hover {
+        background: #e8e8ea;
+        color: red;
+        text-shadow: 0 1px 0 white}
 .section { margin: 20px; }
     .section a { display: block; margin: 0; }
     .section a.level1 { text-align: left; }
@@ -522,9 +612,15 @@ textarea {
         padding: 0 5px;
         text-align: left; }
     .section a.level1 span.subtitle,
-    .section a.level2 span.subtitle { font-weight: normal; line-height: 16px; padding: 0 5px; }
+    .section a.level2 span.subtitle {
+        font-weight: normal;
+        line-height: 16px;
+        padding: 0 5px; }
     .section span { display: block; text-align: left; }
-    .section span.bg { font-size: 1.4em; font-weight: bold; text-align: center; }
+    .section span.bg {
+        font-size: 1.4em;
+        font-weight: bold;
+        text-align: center; }
     .section span.level1 { text-align: left; }
     .section li a.level1:hover { background: #e8e8ea; color: red; }
     .section span.level1 span.title {
@@ -533,8 +629,10 @@ textarea {
         line-height: 20px;
         padding: 0 5px;
         text-align: left; }
-    .section span.level1 span.subtitle { font-weight: normal; line-height: 16px; padding: 0 5px; }
-    .section ul {}
+    .section span.level1 span.subtitle {
+        font-weight: normal;
+        line-height: 16px;
+        padding: 0 5px; }
     .section ul.level2,
     .section ul.level3 { padding: 0 0 10px 40px; text-align: left; }
     .section ul.level2 img,
@@ -565,8 +663,14 @@ textarea {
         margin-left: 8px;
         padding-left: 12px;
         display: inline; }
-    .simple-menu li:last-child { border-right: 1px solid black; margin-right: 8px; padding-right: 12px; }
-#sliding_content { margin: 15px auto; text-align: center; width: 635px; }
+    .simple-menu li:last-child {
+        border-right: 1px solid black;
+        margin-right: 8px;
+        padding-right: 12px; }
+#sliding_content {
+    margin: 15px auto;
+    text-align: center;
+    width: 635px; }
 #sliding_form {
     background: _linear-gradient(180deg, white 1%, #a0a0a0 99%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#a0a0a0',GradientType=0 );
@@ -712,7 +816,10 @@ textarea {
 .tab_content { margin: 20px 0 0;; }
     .tab_content img { float: left; margin: 0 10px; }
     .tab_content .author { width: 30%; }
-    .tab_content .date { float: right; font-style: italic; margin: 6px 50px 0 0; }
+    .tab_content .date {
+        float: right;
+        font-style: italic;
+        margin: 6px 50px 0 0; }
     .tab_content .info { clear: both; }
     .tab_content .more { float: right; margin: 0 2px; }
     .tab_content .section { margin: 0 0 0 50px; }
@@ -724,11 +831,20 @@ textarea {
     _border-radius: 8px;
     margin: 3px 0px 5px 0;
     padding: 10px; }
-.box .title { color: white; font-weight: bold; padding: 10px 5px; }
-.darkbox { background: black; margin: 3px 0px 5px 0; padding: 10px; }
+.box .title {
+    color: white;
+    font-weight: bold;
+    padding: 10px 5px; }
+.darkbox {
+    background: black;
+    margin: 3px 0px 5px 0;
+    padding: 10px; }
 .darkbox ul { list-style-type: none; }
 .darkbox .title { color: white; text-transform: uppercase; }
-.lightbox { background: white; margin: 3px 0px 5px 0; padding: 10px; }
+.lightbox {
+    background: white;
+    margin: 3px 0px 5px 0;
+    padding: 10px; }
 .lightbox ul { list-style-type: none; }
 .lightbox .title { color: black; text-transform: uppercase; }
 .panel { padding: 20px 0 0}
@@ -746,7 +862,10 @@ textarea {
     padding: 10px 30px;
     position: relative;
     text-shadow: 0 1px 1px black}
-.copyright { margin: 10px 0; text-align: center; width: 33%; }
+.copyright {
+    margin: 10px 0;
+    text-align: center;
+    width: 33%; }
 .valid {
     float: right;
     margin: 10px 0;
@@ -761,7 +880,10 @@ textarea {
     padding: 10px 0;
     position: relative; }
 .fbg h2 { color: white; text-transform: uppercase; }
-.fbg img.gal { border: none; margin: 0 8px 8px 0; padding: 0; }
+.fbg img.gal {
+    border: none;
+    margin: 0 8px 8px 0;
+    padding: 0; }
 .fbg .col { float: left; margin: 0; }
 .fbg .c1,
 .fbg .c2,
@@ -797,7 +919,10 @@ textarea {
         margin: 0 auto;
         padding: 5px 0 0 0;
         position: relative; }
-    ol.horinaja_pagination li { display: block; float: left; height: 40px; }
+    ol.horinaja_pagination li {
+        display: block;
+        float: left;
+        height: 40px; }
     ol.horinaja_pagination li a {
         background: transparent;
         color: white;
@@ -822,14 +947,16 @@ textarea {
 		position: relative;
 		top: 0px;
 		width: 145px; }
-	#unitippoint { background: url(../../tools/unitip/TipPoint.png) no-repeat; height: 19px; overflow: hidden; }
+	#unitippoint {
+        background: url(../../tools/unitip/TipPoint.png) no-repeat;
+        height: 19px;
+        overflow: hidden; }
 	#unitipmid {
 		background: url(../../tools/unitip/TipMid.png) repeat;
 		height: auto;
 		padding: 5px 15px;
         width: 115px; }
-	#unitipcap { background: url(../../tools/unitip/TipCap.png) no-repeat; height: 7px; overflow: hidden	}
-
-.icons { width: 16px; height: 16px; background-image: url(images/icons/ui-icons_222222_256x240.png); }
-.icon-plus { background-position: -16px -128px; }
-.icon-minus { background-position: -48px -128px; }
+	#unitipcap {
+        background: url(../../tools/unitip/TipCap.png) no-repeat;
+        height: 7px;
+        overflow: hidden	}

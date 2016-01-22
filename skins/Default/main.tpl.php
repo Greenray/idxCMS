@@ -24,7 +24,7 @@ die();?>
 <body>
 <div id="wrapper">
     <div class="header">
-        <div class="toolbar">
+        <div class="toolbar right">
             <ul>
                 <li><a href="{MODULE}user.feedback">__Feedback__</a></li>
                 <li><a href="{MODULE}sitemap">__Sitemap__</a></li>
@@ -35,7 +35,7 @@ die();?>
                 </li>
             </ul>
         </div>
-        <div class="logo-image">
+        <div class="logo-image center">
             <img src="{IMAGES}logo.png" width="350" height="88" alt="idxCMS" />
             Flat Files Content Management System
         </div>

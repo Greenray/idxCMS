@@ -6,15 +6,13 @@
 
 var uniTipTag   = "a,img"; //Which tag do you want to uniTip-ize? Keep it lowercase. No spaces around commas.//
 var uniTipClass = "tip"; //Which classes do you want to uniTip-ize? If you leave this blank, then all the tags designated above will get uniTip-ized. Match case. No spaces around commas.
-
 var uniTipX = 0; // X offset from cursor//
 var uniTipY = 15; // Y offset from cursor//
 
 //______________________________________________There's no need to edit anything below this line//
 
-var offsetX = uniTipX, offsetY = uniTipY, elewidth = null, eleheight = null, tipid = null, tiptop = null, tipbot = null, tipcapin=null, tippointin=null, altText=false;
-
-var x=0, y=0, WinWidth=0, WinHeight=0, TipWidth=0, TipHeight=0, CapHeight=0, PointHeight=0;
+var offsetX = uniTipX, offsetY = uniTipY, elewidth = null, eleheight = null, tipid = null, tiptop = null, tipbot = null, tipcapin = null, tippointin = null, altText = false;
+var x = 0, y = 0, WinWidth = 0, WinHeight = 0, TipWidth = 0, TipHeight = 0, CapHeight = 0, PointHeight = 0;
 
 // first, find all the correct elements
 var init = function () {
@@ -43,8 +41,8 @@ var unitipize = function (element) {
 	altText = (a.alt && a.getAttribute("alt") != '' ) ? true : false;
 	var sTitle = (altText == true) ? a.getAttribute("alt") : a.getAttribute("title");
 	if (sTitle) {
-		a.onmouseover = function() {build(a, sTitle);};
-		a.onmouseout  = function() {hide(a, sTitle);};
+		a.onmouseover = function() { build(a, sTitle); };
+		a.onmouseout  = function() { hide(a, sTitle); };
 	}
 }
 
@@ -52,7 +50,7 @@ var unitipize = function (element) {
 var build = function (a, sTitle) {
 
 	if (a.title) a.title = "";
-	if (altText==true) a.alt = "";
+	if (altText == true) a.alt = "";
 
 	var tipContainer = document.createElement("div");
 	tipContainer.setAttribute("id", "unitip");
@@ -70,32 +68,32 @@ var build = function (a, sTitle) {
 	tipContainerBot.setAttribute("id", "unitipcap");
 	tipContainer.appendChild(tipContainerBot);
 
-	tipid = document.getElementById("unitip");
+	tipid    = document.getElementById("unitip");
 	tippoint = document.getElementById("unitippoint");
-	tipmid = document.getElementById("unitipmid");
-	tipcap = document.getElementById("unitipcap");
+	tipmid   = document.getElementById("unitipmid");
+	tipcap   = document.getElementById("unitipcap");
 
 	document.getElementById("unitipmid").innerHTML = sTitle;
 	tipid.style.display = "block";
 
-	elewidth = document.getElementById("unitipmid").offsetWidth;
+	elewidth  = document.getElementById("unitipmid").offsetWidth;
 	eleheight = document.getElementById("unitip").offsetHeight;
 
-	WinWidth = document.body.offsetWidth;
+	WinWidth  = document.body.offsetWidth;
 	WinHeight = (document.body.clientHeight < document.documentElement.clientHeight) ? document.body.clientHeight : document.documentElement.clientHeight;
 
-	CapHeight = document.getElementById('unitipcap').offsetHeight;
+	CapHeight   = document.getElementById('unitipcap').offsetHeight;
 	PointHeight = document.getElementById('unitippoint').offsetHeight;
 
-	if (typeof pngfix=="function") { // if IE, rebuilds wraps unitippoint and unitipcap in outer div
+	if (typeof pngfix == "function") { // if IE, rebuilds wraps unitippoint and unitipcap in outer div
 		if (tippoint.currentStyle.backgroundImage.match(/\.png/gi)) {
 			var tipP = tippoint.innerHTML;
 
 			tippoint.id = 'unitipP'; // switch unitippoint to outer div
 
 			tippoint.style.overflow = "hidden";
-			tippoint.style.height = PointHeight + "px";
-			tippoint.style.width  = elewidth + "px";
+			tippoint.style.height   = PointHeight + "px";
+			tippoint.style.width    = elewidth + "px";
 			tippoint.style.position = "relative";
 			tippoint.style.display  = "block";
 
@@ -115,8 +113,8 @@ var build = function (a, sTitle) {
 			tipcap.id = 'unitipC';
 
 			tipcap.style.overflow = "hidden";
-			tipcap.style.height = CapHeight + "px";
-			tipcap.style.width  = elewidth + "px";
+			tipcap.style.height   = CapHeight + "px";
+			tipcap.style.width    = elewidth + "px";
 			tipcap.style.position = "relative";
 			tipcap.style.display  = "block";
 
@@ -129,11 +127,8 @@ var build = function (a, sTitle) {
 
 			tipcap.style.backgroundImage = "none";
 		}
-
 		pngfix(); // png fix
-
 	}
-
 	document.onmousemove = function (evt) {move (evt)};
 }
 
@@ -154,8 +149,8 @@ var move = function (evt) {
 		x = evt.clientX;
 		y = evt.clientY;
 
-		tipid.style.left = (TipWidth >= WinWidth ) ? ((x - offsetX - elewidth) + window.scrollX) + "px" :  (x + offsetX + window.scrollX) + "px";
-		tipid.style.top = (TipHeight >= WinHeight) ? ((y - offsetY - eleheight) + window.scrollY) + "px" : (y + offsetY + window.scrollY) + "px";
+		tipid.style.left = (TipWidth >= WinWidth )  ? ((x - offsetX - elewidth) + window.scrollX) + "px" :  (x + offsetX + window.scrollX) + "px";
+		tipid.style.top  = (TipHeight >= WinHeight) ? ((y - offsetY - eleheight) + window.scrollY) + "px" : (y + offsetY + window.scrollY) + "px";
 	}
 
 	TipWidth  = x + elewidth + 20;

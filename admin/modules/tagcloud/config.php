@@ -122,12 +122,11 @@ if (isset($init)) {
         $tags = [];
         foreach ($REQUEST['key'] as $key => $tag) {
             if ($tag !== '') {
-                $tag = $tag;
                 #
                 # Check for the resolved length of a tag
                 #
                 if ((mb_strlen($tag) >= $search_ini['query_min']) && (mb_strlen($tag) <= $search_ini['query_max'])) {
-                    $tags[$tag] = $REQUEST['value'][$key];     # New tag.
+                    $tags[$tag] = $REQUEST['value'][$key];     # New tag
                 }
             }
         }
@@ -142,13 +141,23 @@ if (isset($init)) {
     $config['hicolor'] = GetColor("hicolor", $config['hicolor']);
 
     $tags = PrepareTags();
-    $tags_amount = sizeof($tags);
+    $i = 0;
+    foreach($tags as $key => $tag) {
+        $words[$i]['key'] = $tag;
+        $words[$i]['tag'] = $key;
+        $i++;
+    }
+var_dump($words);
+    $tags_amount = $i;
+var_dump($tags_amount);
     if ($config['tags'] < $tags_amount) {
         $tags_amount = $config['tags'];
     }
-    $config['used']   = array_slice($tags, 0, $tags_amount, TRUE);
-    $config['unused'] = array_slice($tags, $tags_amount, -1, TRUE);
+    $config['used']   = array_slice($words, 0, $tags_amount, TRUE);
+    $config['unused'] = array_slice($words, $tags_amount, -1, TRUE);
 
+var_dump($config['used']);
+var_dump($config['unused']);
     $TPL = new TEMPLATE(__DIR__.DS.'config.tpl');
     $TPL->set($config);
     echo $TPL->parse();

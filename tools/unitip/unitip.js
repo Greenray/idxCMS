@@ -4,7 +4,7 @@
 // qTip - CSS Tool Tips - by Craig Erskine
 // http://qrayg.com
 
-var uniTipTag   = "a,img"; //Which tag do you want to uniTip-ize? Keep it lowercase. No spaces around commas.//
+var uniTipTag   = "a,img,button"; //Which tag do you want to uniTip-ize? Keep it lowercase. No spaces around commas.//
 var uniTipClass = "tip"; //Which classes do you want to uniTip-ize? If you leave this blank, then all the tags designated above will get uniTip-ized. Match case. No spaces around commas.
 var uniTipX = 0; // X offset from cursor//
 var uniTipY = 15; // Y offset from cursor//

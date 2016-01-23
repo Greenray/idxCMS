@@ -15,7 +15,7 @@ die();?>
                 <td></td>
             </tr>
             <tr>
-                <td><textarea id="$banner.id" name="text[]" cols="80" rows="10">$banner.text</textarea></td>
+                <td class="center"><textarea id="$banner.id" name="text[]" cols="80" rows="10">$banner.text</textarea></td>
                 <td class="banner">$banner.view</td>
             </tr>
         <!-- ENDFOREACH -->

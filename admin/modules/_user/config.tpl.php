@@ -42,11 +42,11 @@ die();?>
             <th colspan="3">__Private messages__</th>
             <tr class="light">
                 <td>__Max size of database__</td>
-                <td colspan="2"><input type="text" name="db_size" value="$db_size" size="4" /> __messages__</td>
+                <td colspan="2"><input type="text" name="db_size" value="$db_size" size="4" /> __records__</td>
             </tr>
             <tr class="light">
                 <td>__Messages per page__</td>
-                <td colspan="2"><input type="text" name="per_page" value="$per_page" size="3" /> __messages__</td>
+                <td colspan="2"><input type="text" name="per_page" value="$per_page" size="3" /> __records__</td>
             </tr>
             <tr class="light">
                 <td>__Max message length__</td>
@@ -55,7 +55,7 @@ die();?>
             <th colspan="3">__Feedback__</th>
             <tr class="light">
                 <td>__Max size of database__</td>
-                <td colspan="2"><input type="text" name="db_size" value="$db_size" size="4" /> __messages__</td>
+                <td colspan="2"><input type="text" name="db_size" value="$db_size" size="4" /> __records__</td>
             </tr>
             <tr class="light">
                 <td>__Max message length__</td>

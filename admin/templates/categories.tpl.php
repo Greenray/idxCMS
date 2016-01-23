@@ -61,10 +61,10 @@ die();?>
                         <td class="access center">$category.access</td>
                         <td class="actions center">$category.items</td>
                         <td class="actions center">
-                            <button type="submit" name="edit" value="$section.id.$category.id" class="icon icon-edit tip" title="__Edit__"></button>
+                            <a href="{MODULE}admin&id=[$module:].categories&edit=$section.id.$category.id" class="icon icon-edit tip" title="__Edit__"></a>
                             <a href="{MODULE}admin&id=[$module:].items{SECTION}$section.id{CATEGORY}$category.id" class="icon icon-posts tip" title="__Posts__"></a>
                             <!-- IF empty($category.items) -->
-                                <button type="submit" name="delete" value="$section.id.$category.id" class="icon icon-delete tip" title="__Delete__"></button>
+                                <a href="{MODULE}admin&id=[$module:].categories&delete=$section.id.$category.id" class="icon icon-delete tip" title="__Delete__"></a>
                             <!-- ENDIF -->
                         </td>
                     </tr>

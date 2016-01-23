@@ -32,11 +32,8 @@ blockquote {
     margin: 1em 40px }
 button {
     color: #000;
-    cursor: pointer;
     vertical-align: middle }
-	button img {
-        margin: -3px;
-        vertical-align: middle }
+	button img { vertical-align: middle }
     button:hover { color: red }
 code { font: normal 11px monospace, 'courier new' }
 dl { margin: 1em 0 }
@@ -168,7 +165,7 @@ table th { font-weight: bold }
     th.access,
     td.access { width: 49px; padding: 0 5px }
     th.actions,
-    td.actions { width: 85px; padding: 0 5px }
+    td.actions { width: 80px; padding: 0 5px }
     th.author,
     td.author { width: 80px }
     th.date,
@@ -303,7 +300,9 @@ footer {
     background: yellow;
     color: red;
     text-align: center }
-.banner { border: 1px solid #000 }
+.banner {
+    border: 1px solid #000;
+    width: 208px }
 .bbcodes  {
     margin: 10px;
     text-align: center }
@@ -410,7 +409,7 @@ footer {
     position: relative }
     div#redips-drag table {	background-color: #ddd }
     div#redips-nodrag table tr,
-    div#redips-drag table tr { height: 25px }
+    div#redips-drag table tr { height: 35px }
     div#redips-nodrag th,
     div#redips-drag th { border: 1px solid #758596 }
     div#redips-nodrag td,

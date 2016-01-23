@@ -15,7 +15,7 @@ die();?>
             </tr>
             <tr class="light">
                 <td>__Max message length__</td>
-                <td colspan="2"><input type="text" name="message_length" value="$message_length" size="6" /> __byte(s)__</td>
+                <td colspan="2"><input type="text" name="message_length" value="$message_length" size="6" /> __symbols__</td>
             </tr>
             <tr class="light">
                 <td>__Messages to show__</td>

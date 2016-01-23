@@ -29,7 +29,7 @@ try {
         }
     }
 } catch (Exception $error) {
-    ShowError(__($error->getMessage()));
+    ShowError($error->getMessage());
 }
 #
 # Initialize again because of sorted sections

@@ -12,7 +12,7 @@ die();?>
             <tr class="light">
                 <td>__Max reply length__</td>
                 <td><input type="text" name="message_length" value="$message_length" size="6" /> __symbols__</td>
-                <td>__Not actual for admin__</td>
+                <td class="help">__Not actual for admin__</td>
             </tr>
             <tr class="light">
                 <td>__Topics per page__</td>

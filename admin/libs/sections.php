@@ -66,6 +66,7 @@ if (!empty($sections)) {
 
     $TPL = new TEMPLATE(__DIR__.DS.'sections.tpl');
     $TPL->set($output);
+    $TPL->set('module', $module);
     echo $TPL->parse();
 }
 

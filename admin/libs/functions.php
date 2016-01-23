@@ -186,7 +186,7 @@ function SaveSortedSections($obj, $params) {
  */
 function ShowMessage($message, $url = '') {
     $TPL = new TEMPLATE(TEMPLATES.'message.tpl');
-    $TPL->set('message', $message);
+    $TPL->set('message', __($message));
     $TPL->set('url', $url);
     echo $TPL->parse();
 }
@@ -199,7 +199,7 @@ function ShowMessage($message, $url = '') {
  */
 function ShowError($message, $url = '') {
     $TPL = new TEMPLATE(TEMPLATES.'error.tpl');
-    $TPL->set('message', $message);
+    $TPL->set('message', __($message));
     $TPL->set('url', $url);
     echo $TPL->parse();
 }

@@ -30,5 +30,5 @@ if (!empty($messages)) {
     $TPL->set($output);
     echo $TPL->parse();
 } else {
-    ShowMessage('Database is empty');
+    ShowMessage('Database is empty', MODULE.'admin');
 }

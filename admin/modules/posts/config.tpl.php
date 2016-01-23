@@ -12,12 +12,12 @@ die();?>
             <tr class="light">
                 <td>__Description length__</td>
                 <td><input type="text" name="description_length" value="$description_length" size="6" /> __symbols__</td>
-                <td>__If the description is not present, it will be generated from the basic text__</td>
+                <td class="help">__If the description is not present, it will be generated from the basic text__</td>
             </tr>
             <tr class="light">
                 <td>__Max comment length__</td>
                 <td><input type="text" name="message_length" value="$message_length" size="6" /> __symbols__</td>
-                <td>__Not actual for admin__</td>
+                <td class="help">__Not actual for admin__</td>
             </tr>
             <tr class="light">
                 <td>__Posts per page__</td>

@@ -16,15 +16,24 @@ abbr[title] { border-bottom: 1px dotted; }
 [hidden] { display: none; }
 b,
 strong { font-weight: bold; }
-blockquote { font-style: italic; margin: 1em 40px; }
-code { font-family: monospace, 'courier new'; font-size: 1em; }
+blockquote {
+    font-style:
+        italic;
+    margin: 1em 40px; }
+code {
+    font-family: monospace, 'courier new';
+    font-size: 1em; }
 dd { margin: 0 0 0 40px; }
 fieldset { border: none; margin: 0; padding: 0; }
 h1 { font-size: 18px; font-weight: bold; margin: 12px 0; }
 h2 { font-size: 16px; font-weight: bold; margin: 10px 0; }
 h3 { font-size: 14px; font-weight: bold; margin: 8px 0; }
-hr { _box-sizing: content-box; height: 0; }
-img { vertical-align: middle; -ms-interpolation-mode: bicubic; }
+hr {
+    _box-sizing: content-box;
+    height: 0; }
+img {
+    vertical-align: middle;
+    -ms-interpolation-mode: bicubic; }
 button[disabled],
 input[disabled] {
     background-color: #343536;
@@ -33,7 +42,9 @@ input[disabled] {
     button::-moz-focus-inner,
     input::-moz-focus-inner { border: 0; padding: 0; }
     button img { vertical-align: middle; }
-    button .submit { margin: 0; padding: 2px 5px; }
+    button .submit {
+        margin: 0;
+        padding: 2px 5px; }
     button[type="reset"],
     button[type="submit"],
     input[type="button"],
@@ -140,7 +151,9 @@ th.actions, td.actions { width: 70px; }
 th.author, td.author,
 th.views, td.views { width: 80px; }
 th.comments, td.comments { width: 120px; }
-th.date, td.date { padding: 0 10px; width: 140px; }
+th.date, td.date {
+    padding: 0 10px;
+    width: 140px; }
 textarea {
     background: #ffffcc;
     border: 1px solid #a4a4a4;
@@ -162,7 +175,9 @@ textarea {
     display: inline-block;
     padding: 10px 0;
     width: 1000px; }
-.toolbar { margin: 0 20px; text-align: right; }
+.toolbar {
+    margin: 0 20px;
+    text-align: right; }
     .toolbar ul { margin: 0; padding: 0; }
     .toolbar li {
         border-left: 1px solid white;
@@ -258,12 +273,16 @@ textarea {
         line-height: 1.2em;
         margin-bottom: 0;
         padding-bottom: 8px; }
-    .content .mainbar .comment { margin: 0; padding: 16px 0 0 0; }
+    .content .mainbar .comment {
+        margin: 0;
+        padding: 16px 0 0 0; }
     .content .sidebar {
         float: right;
         overflow: hidden;
         width: 230px; }
-.actions { float: right; margin: 0 10px 10px 0; }
+.actions {
+    float: right;
+    margin: 0 10px 10px 0; }
 .actions a { margin: 0 5px; }
 #bad {
     color: #ff0000;
@@ -286,7 +305,9 @@ textarea {
     width: 26px; }
 .bbcodes  { margin: 10px 20px; }
     .bbcodes .smiles { margin: 0 0 5px; }
-    .bbcodes .link_text { margin: 4px 20px; text-align: right; }
+    .bbcodes .link_text {
+        margin: 4px 20px;
+        text-align: right; }
     .bbcodes .link_text input[type='text'] { margin: 2px 20px; }
 .bbselect {	margin: 1px 0 4px; }
 .bbtools  {
@@ -294,9 +315,13 @@ textarea {
     margin: 10px 0 0;
     padding: 10px 0 0; }
 .block { display: block; }
-.calendar { color: white; vertical-align: middle; }
+.calendar {
+    color: white;
+    vertical-align: middle; }
 .calendar th { padding: 2px; }
-.calendar td { padding: 2px; text-align: center; }
+.calendar td {
+    padding: 2px;
+    text-align: center; }
 .calendar form input { margin: 5px 0 0; }
 .category { margin: 0 0 0 50px; padding: 4px 0 0 0; }
 .center { text-align: center; }
@@ -327,7 +352,9 @@ textarea {
         margin: 21px 0;
         width: 120px; }
     .comment .author .avatar img { margin: 0 25px 10px; }
-    .comment .content { padding: 0; overflow: hidden; }
+    .comment .content {
+        padding: 0;
+        overflow: hidden; }
     .comment .date { font-size: 10px; }
     .comment .head { line-height: 20px; }
     .comment .info { line-height: 18px; }
@@ -368,7 +395,9 @@ textarea {
         margin: 0 0 0 10px;
         line-height: 18px;
         width: 200px; }
-    .post .date { margin: 2px 0 0 40px; width: 300px; }
+    .post .date {
+        margin: 2px 0 0 40px;
+        width: 300px; }
     .post .info {
         clear: both;
         font-size: 8pt;
@@ -386,7 +415,9 @@ textarea {
 .topic .content { overflow: hidden; }
     .topic .author { float: left; width: 120px; }
     .topic .date { font-size: 10px; }
-    .topic .info { line-height: 18px; padding: 0 10px 0 0; }
+    .topic .info {
+        line-height: 18px;
+        padding: 0 10px 0 0; }
     .topic .profile { float: right; }
     .topic .info span.profile   { padding: 5px; }
     .topic .info span.profile a { margin: 0 5px; }
@@ -417,16 +448,24 @@ textarea {
     padding: 8px 0;
     text-shadow: -1px 1px 1px rgba(0, 0, 0, 0.8);
     text-transform: uppercase; }
-.error .title { background: red; color: yellow; }
-.message .title { background: black; color: white; }
+.error .title {
+    background: red;
+    color: yellow; }
+.message .title {
+    background: black;
+    color: white; }
 .dark { background: #999; }
 .light  { background: #ddd; }
 #editor {
     margin: 20px 0 0;
     overflow: hidden;
     padding: 15px; }
-    #editor button { cursor: pointer; margin: 0px auto; }
-    #editor button:hover { cursor: pointer; margin: 0px auto; }
+    #editor button {
+        cursor: pointer;
+        margin: 0px auto; }
+    #editor button:hover {
+        cursor: pointer;
+        margin: 0px auto; }
     #editor .label {
         color: black;
         padding: 0 15px;
@@ -440,7 +479,9 @@ textarea {
         padding: 5px;
         outline: 0;
         width: 200px; }
-    #editor input:focus { background: white; border: 1px solid red; }
+    #editor input:focus {
+        background: white;
+        border: 1px solid red; }
     #editor input[type="checkbox"] { float: none; }
     #editor legend {
         font-size: 24px;
@@ -452,25 +493,39 @@ textarea {
     font-size: 11px;
     padding: 5px 10px;
     text-align: right; }
-.info { font-size: 10px; padding: 10px; }
+.info {
+    font-size: 10px;
+    padding: 10px; }
 .last-items li { margin: 5px 0; }
 .left  { text-align: left; }
 .right { text-align: right; }
 .login-panel { margin: 10px 0; }
 .main { margin: 0 auto; }
-.main .title { margin: 20px 0 10px; font-weight: bold; }
+.main .title {
+    margin: 20px 0 10px;
+    font-weight: bold; }
 .login-panel { margin: 10px 0; }
-.more { float: right; margin: 0 2px; }
-.negative { color: red; font-weight: bold; }
-.positive { color: green; font-weight: bold; }
+.more {
+    float: right;
+    margin: 0 2px; }
+.negative {
+    color: red;
+    font-weight: bold; }
+.positive {
+    color: green;
+    font-weight: bold; }
 .none { display: none; }
 #pagination {
     float: right;
     height: 20px;
     line-height: 20px;
     padding: 10px; }
-    #pagination li { list-style: none; margin: 0; }
-    #pagination a { margin-right: 2px; padding: 0 6px; }
+    #pagination li {
+        list-style: none;
+        margin: 0; }
+    #pagination a {
+        margin-right: 2px;
+        padding: 0 6px; }
     #pagination .pages {
         display: block;
         float: left;
@@ -484,7 +539,9 @@ textarea {
         font-weight: bold;
         padding: 0 6px; }
     #pagination a:link,
-    #pagination a:visited { display: block; float: left; }
+    #pagination a:visited {
+        display: block;
+        float: left; }
 #pass_rating { margin: 0 28px 0 0; }
     .pass_title {
         font-size: 11px;
@@ -497,7 +554,11 @@ textarea {
     .pass_img#progresbar-2-60, .pass_img#passbar-60, .pass_img#progresbar-2-70,
     .pass_img#passbar-70, .pass_img#progresbar-2-80, .pass_img#passbar-80,
     .pass_img#progresbar-2-90, .pass_img#passbar-90, .pass_img#progresbar-2-100,
-    .pass_img#passbar-100                           { float: right; height: 7px; margin: 6px 65px 0 0 !important; width: 138px; }
+    .pass_img#passbar-100 {
+        float: right;
+        height: 7px;
+        margin: 6px 65px 0 0 !important;
+        width: 138px; }
     .pass_img#progresbar-2-0,.pass_img#passbar-0    { background: transparent url(images/password/pass_0.gif) no-repeat; }
     .pass_img#progresbar-2-10, .pass_img#passbar-10 { background: transparent url(images/password/pass_10.gif) no-repeat; }
     .pass_img#progresbar-2-20, .pass_img#passbar-20 { background: transparent url(images/password/pass_20.gif) no-repeat; }
@@ -521,7 +582,9 @@ textarea {
     padding: 0 10px;
     vertical-align: middle; }
 .random-image { margin: 5px 0; }
-.rate { float: right; margin: 30px 10px 10px; }
+.rate {
+    float: right;
+    margin: 30px 10px 10px; }
     .rate button { border: none; }
     .rate button.minus,
     .rate button.plus { margin: 0 5px; }
@@ -551,7 +614,9 @@ textarea {
         text-indent: -9000px;
         width: 85px;
         z-index: 1; }
-    .star li.curr { background: url(images/icons/stars.png) left 25px; font-size: 1px; }
+    .star li.curr {
+        background: url(images/icons/stars.png) left 25px;
+        font-size: 1px; }
     .star div.rates { margin: -16px 0 0 5px; }
     .star div.sep { margin: 0 3px; }
 .required { background: #fff888; color: red; }
@@ -580,7 +645,9 @@ textarea {
         font-weight: normal;
         line-height: 16px;
         padding: 0 10px; }
-    .results span { display: block; text-align: left; }
+    .results span {
+        display: block;
+        text-align: left; }
     .results span.level1 {
         padding-top: 10px;
         overflow: hidden;
@@ -601,7 +668,9 @@ textarea {
         color: red;
         text-shadow: 0 1px 0 white}
 .section { margin: 20px; }
-    .section a { display: block; margin: 0; }
+    .section a {
+        display: block;
+        margin: 0; }
     .section a.level1 { text-align: left; }
     .section a.level1 span.title,
     .section a.level2 span.title {
@@ -616,13 +685,17 @@ textarea {
         font-weight: normal;
         line-height: 16px;
         padding: 0 5px; }
-    .section span { display: block; text-align: left; }
+    .section span {
+        display: block;
+        text-align: left; }
     .section span.bg {
         font-size: 1.4em;
         font-weight: bold;
         text-align: center; }
     .section span.level1 { text-align: left; }
-    .section li a.level1:hover { background: #e8e8ea; color: red; }
+    .section li a.level1:hover {
+        background: #e8e8ea;
+        color: red; }
     .section span.level1 span.title {
         font-weight: bold;
         font-size: 10pt;
@@ -634,14 +707,22 @@ textarea {
         line-height: 16px;
         padding: 0 5px; }
     .section ul.level2,
-    .section ul.level3 { padding: 0 0 10px 40px; text-align: left; }
+    .section ul.level3 {
+        padding: 0 0 10px 40px;
+        text-align: left; }
     .section ul.level2 img,
-    .section ul.level3 img { float: left; margin: 0 20px 0 0; }
+    .section ul.level3 img {
+        float: left;
+        margin: 0 20px 0 0; }
     .section li.level3 a.level3:hover span.title,
     .section li.level3 a.level3:hover span.subtitle,
     .section ul.level3 a.level3:hover span.title,
-    .section ul.level3 a.level3:hover span.subtitle { background: #e8e8ea; color: red; }
-    .section li { line-height: 18px; position: relative; }
+    .section ul.level3 a.level3:hover span.subtitle {
+        background: #e8e8ea;
+        color: red; }
+    .section li {
+        line-height: 18px;
+        position: relative; }
     .section li a.level2:hover,
     .section li a.level3:hover { background: #e8e8ea; }
     .section li a.level1:hover span.title,
@@ -651,11 +732,15 @@ textarea {
     .section li.level1 .title { margin: 15px 0 0; }
     .section li.level2 a.level2 { padding: 0 5px; }
     .section li.level2 a.level2:hover,
-    .section li.level3 a.level3:hover { background: #e8e8ea; color: blue; }
+    .section li.level3 a.level3:hover {
+        background: #e8e8ea;
+        color: blue; }
     .section li.level2 .title,
     .section li.level3 a.level3,
     .section li.level3 a.level3 span.title { margin: 20px 0 0; }
-.simple-menu { background: #bbb; padding: 10px; }
+.simple-menu {
+    background: #bbb;
+    padding: 10px; }
     .simple-menu a { color: black}
     .simple-menu a:hover { color: red; }
     .simple-menu li {
@@ -680,9 +765,16 @@ textarea {
     padding: 15px 0;
     overflow: hidden; }
 .step {	float: left; }
-#navigation { background: #ddd; height: 65px; }
-    #navigation ul { float: left; margin: 10px 0 0 15px; }
-    #navigation ul li { float: left; margin: 10px 2px; position: relative; }
+#navigation {
+    background: #ddd;
+    height: 65px; }
+    #navigation ul {
+        float: left;
+        margin: 10px 0 0 15px; }
+    #navigation ul li {
+        float: left;
+        margin: 10px 2px;
+        position: relative; }
     #navigation ul li a {
         background-image: _linear-gradient(180deg, #999 1%, #555 50%, #222 99%);
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#999999', endColorstr='#222222',GradientType=0 );
@@ -748,7 +840,9 @@ textarea {
         outline: 0;
         padding: 5px;
         width: 200px; }
-    #steps form input:focus { background: white; border: 1px solid red; }
+    #steps form input:focus {
+        background: white;
+        border: 1px solid red; }
 .submit-button {
     background: #404040;
     background: _linear-gradient(180deg, #909090, #404040);
@@ -777,11 +871,15 @@ textarea {
        border: 1px solid white;
        color: white;
        text-shadow: #000000 0 1px 0; }
-.submit-container { margin:8px 0; text-align:right; }
+.submit-container {
+    margin:8px 0;
+    text-align:right; }
     #tabs-1, #tabs-2, #tabs-3, #tabs-4, #tabs-5 { margin: 0 10px 10px; }
     div.tabs { margin: 0 0 50px 0; padding: 4px; }
     html ul.tabs li.active,
-    html ul.tabs li.active a:hover { background: white; border-bottom: 1px solid white}
+    html ul.tabs li.active a:hover {
+        background: white;
+        border-bottom: 1px solid white}
     ul.tabs {
         border-left: 1px solid #999;
         float: left;
@@ -811,17 +909,23 @@ textarea {
         border: 1px solid #999;
         border-bottom: 1px solid white;
         color: black}
-    ul.tabs li a:hover { background: red; color: yellow; }
+    ul.tabs li a:hover {
+        background: red;
+        color: yellow; }
     ul.tabs li a:focus { outline: 0; }
 .tab_content { margin: 20px 0 0;; }
-    .tab_content img { float: left; margin: 0 10px; }
+    .tab_content img {
+        float: left;
+        margin: 0 10px; }
     .tab_content .author { width: 30%; }
     .tab_content .date {
         float: right;
         font-style: italic;
         margin: 6px 50px 0 0; }
     .tab_content .info { clear: both; }
-    .tab_content .more { float: right; margin: 0 2px; }
+    .tab_content .more {
+        float: right;
+        margin: 0 2px; }
     .tab_content .section { margin: 0 0 0 50px; }
     .tab_content .section a { display: inline; }
 .user_panel { margin: 10px; padding: 0 10px; }
@@ -840,13 +944,17 @@ textarea {
     margin: 3px 0px 5px 0;
     padding: 10px; }
 .darkbox ul { list-style-type: none; }
-.darkbox .title { color: white; text-transform: uppercase; }
+.darkbox .title {
+    color: white;
+    text-transform: uppercase; }
 .lightbox {
     background: white;
     margin: 3px 0px 5px 0;
     padding: 10px; }
 .lightbox ul { list-style-type: none; }
-.lightbox .title { color: black; text-transform: uppercase; }
+.lightbox .title {
+    color: black;
+    text-transform: uppercase; }
 .panel { padding: 20px 0 0}
 .panel .title {
     border-bottom: 1px solid #444;
@@ -879,7 +987,9 @@ textarea {
     min-width: 1000px;
     padding: 10px 0;
     position: relative; }
-.fbg h2 { color: white; text-transform: uppercase; }
+.fbg h2 {
+    color: white;
+    text-transform: uppercase; }
 .fbg img.gal {
     border: none;
     margin: 0 8px 8px 0;
@@ -897,9 +1007,17 @@ textarea {
     width: 313px; }
 :-moz-placeholder { color: #7e7e7e; }
 ::-webkit-input-placeholder { color: #7e7e7e; }
-#flipbox { color: white; padding: 5px; min-height: 50px; }
-#banner { color: white; padding: 10px 0; margin: 0; }
-    #banner li { padding: 10px 0; margin: 0; }
+#flipbox {
+    color: white;
+    padding: 5px;
+    min-height: 50px; }
+#banner {
+    color: white;
+    padding: 10px 0;
+    margin: 0; }
+    #banner li {
+        padding: 10px 0;
+        margin: 0; }
     #banner a  { color: white}
 .horinaja img { margin: 0; padding: 0; }
     .horinaja ul  {
@@ -965,10 +1083,10 @@ textarea {
     content: '';
     background-image: url(images/icons.png);
     background-repeat: no-repeat;
-    background-position: 16px 16px; /* здесь нужно указать координаты иконки по умолчанию */
+    background-position: 16px 16px;
     margin: 0 3px;
     left: 0;
-    top: 3px; /* это свойство смещает иконку вниз относительно базовой линии текста */
+    top: 3px;
     position: relative;
     width: 16px;
     height: 16px;

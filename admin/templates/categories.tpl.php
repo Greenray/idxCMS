@@ -15,7 +15,7 @@ die();?>
                 <tr>
                     <th class=""></th>
                     <th class="id">ID</th>
-                    <th class="icon">__Icon__</th>
+                    <th class="pic">__Icon__</th>
                     <th class="title">__Title__</th>
                     <th class="desc">__Description__</th>
                     <th class="access">__Access__</th>
@@ -29,7 +29,7 @@ die();?>
                             <tr class="$category.class">
                                 <td class="redips-rowhandler center"><div class="redips-nodrag"></div></td>
                                 <td class="id center">$category.id</td>
-                                <td class="icon center"><img src="[$category.path:]icon.png" width="35" height="35" alt="icon" /></td>
+                                <td class="pic center"><img src="[$category.path:]icon.png" width="35" height="35" alt="icon" /></td>
                                 <td class="title">$category.title</td>
                                 <td class="desc">$category.desc</td>
                                 <td class="access center">$category.access</td>
@@ -55,7 +55,7 @@ die();?>
                     <tr class="$category.class">
                         <td class="redips-rowhandler"><div id="$section.id.$category.id" class="redips-drag redips-row icon icon-move"></div></td>
                         <td class="id center">$category.id</td>
-                        <td class="icon center"><img src="[$category.path:]icon.png" width="35" height="35" alt="icon" /></td>
+                        <td class="pic center"><img src="[$category.path:]icon.png" width="35" height="35" alt="icon" /></td>
                         <td class="title">$category.title</td>
                         <td class="desc">$category.desc</td>
                         <td class="access center">$category.access</td>

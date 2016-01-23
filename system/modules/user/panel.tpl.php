@@ -11,10 +11,10 @@ die();?>
         <form method="post" action="">
             <ul>
                 <!-- IF !empty($admin) -->
-                    <li><a href="{MODULE}admin" class="icon icon-admin">__Administration__</a></li>
+                    <li><a href="{MODULE}admin" class="icon icon-admin"> __Administration__</a></li>
                 <!-- ENDIF -->
-                <li><a href="{MODULE}posts.post" class="icon icon-post">__Post__</a></li>
-                <li><a href="{MODULE}user" class="icon icon-profile">__Profile__</a></li>
+                <li><a href="{MODULE}posts.post" class="icon icon-post"> __Post__</a></li>
+                <li><a href="{MODULE}user" class="icon icon-profile"> __Profile__</a></li>
                 <li>
                     <a href="{MODULE}user.pm<!-- IF !empty($mess_new) -->&mode=inbox<!-- ENDIF -->" title="$mess_info" class="icon icon-messages tip">
                         __Messages__ <!-- IF !empty($mess_new) --><strong>($mess_new)</strong><!-- ENDIF -->

@@ -60,13 +60,13 @@ class CALENDAR {
                  12 => 'December'] as $num => $month) {
             $months[$num]['name'] = $this->datetime[$month];
             $months[$num]['num']  = $num;
-            if ($num === $selected_month) {
+            if ($num == $selected_month) {
                  $months[$num]['selected'] = TRUE;
             }
         }
         for ($num = 2000; $num <= $current_year; $num++) {
             $years[$num]['year'] = $num;
-            if ($num === $selected_year) {
+            if ($num == $selected_year) {
                  $years[$num]['selected'] = TRUE;
             }
         }

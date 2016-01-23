@@ -5,7 +5,12 @@
  * 2. Prevent iOS text size adjust after orientation change, without disabling user zoom.
  */
 
-html { font-size: 100%; height: 100%; font-family: sans-serif; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }
+html {
+    font-size: 100%;
+    height: 100%;
+    font-family: sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%; }
 
 /* Remove default margin */
 body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, input, textarea, p, blockquote, th, td { margin: 0; padding: 0; }
@@ -78,7 +83,10 @@ dfn { font-style: italic; }
  * Address variable `h1` font-size and margin within `section` and `article`
  * contexts in Firefox 4+, Safari, and Chrome.
  */
-h1, h2, h3, h4, h5, h6 { font-size: 100%; font-weight: normal; text-align: center; }
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+    font-weight: normal;
+    text-align: center; }
 
 /* Address styling not present in IE 8/9 */
 mark { background: #ff0; color: #000; }

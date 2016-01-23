@@ -46,10 +46,6 @@ $(function() {
 </script>
 <div id="flipbox" class="center">$text</div>
 <div id="flippad" class="center">
-    <a href="#" rel="rl" rev="#000000" title="__Left__">
-        <img src="{ICONS}arrow-left.png" width="16" height="16" alt="__Left__" />
-    </a>
-    <a href="#" rel="lr" rev="#000000" title="__Right__">
-        <img src="{ICONS}arrow-right.png" width="16" height="16" alt="__Right__" />
-    </a>
+    <a href="#" rel="rl" rev="#000000" class="icon icon-arrow-left" title="__Left__"></a>
+    <a href="#" rel="lr" rev="#000000" class="icon icon-arrow-right" title="__Right__"></a>
 </div>

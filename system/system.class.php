@@ -157,7 +157,7 @@ class SYSTEM {
         $menu['index']['link']   = MODULE.'index';
         $menu['index']['name']   = __('Index');
         $menu['index']['desc']   = '';
-        $menu['index']['icon']   = ICONS.'index.png';
+        $menu['index']['class']  = 'index';
         $menu['index']['width']  = mb_strlen($menu['index']['name'], 'UTF-8') * 7 * 2;
 
         foreach (self::$modules as $module => $data) {
@@ -168,7 +168,7 @@ class SYSTEM {
                 $point[$module]['link']   = MODULE.$module;
                 $point[$module]['name']   = SYSTEM::$modules[$module]['title'];
                 $point[$module]['desc']   = '';
-                $point[$module]['icon']   = ICONS.$module.'.png';
+                $point[$module]['class']  = $module;
 
                 if (class_exists($obj)) {
                     $point[$module]['sections'] = CMS::call($obj)->getSections();

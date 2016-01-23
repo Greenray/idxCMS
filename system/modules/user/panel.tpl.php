@@ -11,22 +11,12 @@ die();?>
         <form method="post" action="">
             <ul>
                 <!-- IF !empty($admin) -->
-                    <li>
-                        <img src="{ICONS}admin.png" width="16" height="16" alt="" />
-                        <a href="{MODULE}admin">__Administration__</a>
-                    </li>
+                    <li><a href="{MODULE}admin" class="icon icon-admin">__Administration__</a></li>
                 <!-- ENDIF -->
+                <li><a href="{MODULE}posts.post" class="icon icon-post">__Post__</a></li>
+                <li><a href="{MODULE}user" class="icon icon-profile">__Profile__</a></li>
                 <li>
-                    <img src="{ICONS}post.png" width="16" height="16" alt="" />
-                    <a href="{MODULE}posts.post">__Post__</a>
-                </li>
-                <li>
-                    <img src="{ICONS}profile.png" width="16" height="16" alt="" />
-                    <a href="{MODULE}user">__Profile__</a>
-                </li>
-                <li>
-                    <img src="{ICONS}messages.png" width="16" height="16" alt="" />
-                    <a href="{MODULE}user.pm<!-- IF !empty($mess_new) -->&mode=inbox<!-- ENDIF -->" title="$mess_info">
+                    <a href="{MODULE}user.pm<!-- IF !empty($mess_new) -->&mode=inbox<!-- ENDIF -->" title="$mess_info" class="icon icon-messages tip">
                         __Messages__ <!-- IF !empty($mess_new) --><strong>($mess_new)</strong><!-- ENDIF -->
                     </a>
                 </li>
@@ -77,8 +67,7 @@ die();?>
     <div class="login-panel">
         <ul>
             <li>
-                <img src="{ICONS}login.png" width="16" height="16" alt="" />
-                <a href="#" onclick="document.getElementById('login').style.display = ShowHide(document.getElementById('login').style.display)">[__Log in]</a>
+                <a href="#" class="icon icon-login" onclick="document.getElementById('login').style.display = ShowHide(document.getElementById('login').style.display)">[__Log in]</a>
             </li>
             <li id="login" style="display:none;">
                 <form id="login" name="login" method="post" action="" onsubmit="return checkLoginForm(this);">
@@ -96,8 +85,7 @@ die();?>
                 </form>
             </li>
             <li>
-                <img src="{ICONS}forgetpass.png" width="16" height="16" alt="" />
-                <a href="##" onclick="document.getElementById('password_request').style.display = ShowHide(document.getElementById('password_request').style.display)">[__Password recovery]</a>
+                <a href="##" class="icon icon-password-request" onclick="document.getElementById('password_request').style.display = ShowHide(document.getElementById('password_request').style.display)">[__Password recovery]</a>
             </li>
             <li id="password_request" style="display:none;">
                 <form id="password_request" name="password_request" method="post" action="" onsubmit="return checkPasswordRecoveryForm(this);">
@@ -121,10 +109,7 @@ die();?>
                     </table>
                 </form>
             </li>
-            <li>
-                <img src="{ICONS}register.png" width="16" height="16" alt="" />
-                <a href="{MODULE}user&act=register">__Registration__</a>
-            </li>
+            <li><a href="{MODULE}user&act=register" class="icon icon-registration">__Registration__</a></li>
         </ul>
     </div>
 <!-- ENDIF -->

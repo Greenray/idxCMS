@@ -61,8 +61,6 @@ define('TEMP',    CONTENT.'temp'.DS);
 define('USERS',   CONTENT.'users'.DS);
 /** Path to common images */
 define('IMAGES',  SKINS.'images'.DS);
-/** Path to icons */
-define('ICONS',   IMAGES.'icons'.DS);
 /** Path to smiles */
 define('SMILES',  IMAGES.'smiles'.DS);
 /** Path to cache */
@@ -280,9 +278,9 @@ switch($MODULE) {
             $menu = [];
             $navigation = GetUnserialized(CONTENT.'menu');
             foreach ($navigation as $k => $item) {
-                $menu[$k]['link'] = $item['link'];
-                $menu[$k]['name'] = $item['name'];
-                $menu[$k]['icon'] = !empty($item['icon']) ? $item['icon'] : '';
+                $menu[$k]['link']  = $item['link'];
+                $menu[$k]['name']  = $item['name'];
+                $menu[$k]['class'] = $item['class'];
             }
 
             $output = [];

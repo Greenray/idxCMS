@@ -57,9 +57,7 @@ die();?>
     <!-- ELSE -->
         <div class="info">
             <hr />
-            <a href="{MODULE}posts.print{SECTION}$section{CATEGORY}$category{ITEM}$id" target="_blank">
-                <img src="{ICONS}printer.png" width="16" height="16" hspace="5" vspace="5" class="tip" alt="__Version for printer__" />
-            </a>
+            <a href="{MODULE}posts.print{SECTION}$section{CATEGORY}$category{ITEM}$id" class="icon icon-printer tip" title="__Version for printer__" target="_blank"></a>
             <span class="author center">__Author__: <a href="{MODULE}user&user=$author" class="tip" title="__Profile__">$nick</a></span>
             <!-- IF !empty($admin) -->
                 <div class="actions">

@@ -180,7 +180,7 @@ class CATEGORIES extends SECTIONS {
             #
             # Set the default transparent icon
             #
-            copy(ICONS.'icon.png', $path.'tmp.png');
+            copy(IMAGES.'icon.png', $path.'tmp.png');
             $IMAGE->setImage([
                 'name'     => 'tmp.png',
                 'size'     => 149,

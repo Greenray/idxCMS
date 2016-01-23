@@ -14,12 +14,8 @@ die();?>
                 <span class="date">$date</span>
                 <!-- IF !empty($profile) -->
                     <span class="profile">
-                        <a href="{MODULE}user&user=$author" title="__Profile__">
-                            <img src="{ICONS}profile.png" width="16" height="16" class="tip" alt="__Profile__" />
-                        </a>
-                        <a href="{MODULE}user.pm&for=$author" title="__Private message__">
-                            <img src="{ICONS}user-pm.png" width="16" height="16" class="tip" alt="__Private message__" />
-                        </a>
+                        <a href="{MODULE}user&user=$author" class="icon icon-profile tip" title="__Profile__"></a>
+                        <a href="{MODULE}user.pm&for=$author" class="icon icon-pm tip" title="__Private message__"></a>
                     </span>
                 <!-- ENDIF -->
             </div>

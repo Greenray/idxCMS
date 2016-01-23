@@ -171,7 +171,7 @@ nav { float: left; margin: 10px; width: 240px }
 #menu { list-style-type: none; padding: 0; margin: 0; width: 240px; border-width: 0 1px 1px; z-index: 1 }
     #menu ul { padding: 0; margin: 0 }
     #menu li { background: #d1d7dc; position: relative; float: left; border-top: 1px solid white }
-    #menu li.sub { background: #006699 url(../../../skins/images/icons/arrow.gif) no-repeat top right }
+    #menu li.sub { background: #006699 url(../../../skins/images/arrow.gif) no-repeat top right }
     #menu li.sub.click { font-weight: bold }
     #menu li.sub.click ul li a { color: black; text-shadow: none; font-weight: normal }
     #menu li.sub.click ul li.hover a { color: white; font-weight: bold }
@@ -185,11 +185,11 @@ nav { float: left; margin: 10px; width: 240px }
     #menu li.click ul { display: block; text-align: left }
     #menu li.click ul li.hover ul,
     #menu li.click ul li.hover ul li.hover ul { background: red; color: yellow; display: block; position: absolute; left: 60px; top: -1px; border: 1px solid white; border-width: 0 1px 1px }
-    #menu li.click ul li.popup { background: #999 url(../../../skins/images/icons/arrow.gif) no-repeat top right }
+    #menu li.click ul li.popup { background: #999 url(../../../skins/images/arrow.gif) no-repeat top right }
     #menu li.click ul li.hover { background: red; color: white }
     #menu li.click ul li.hover ul li { background: #356fcc }
     #menu li.click ul li.hover ul li.hover ul li { background: #780; z-index: 2 }
-    #menu li.click ul li.hover ul li.popup { background: #c60 url(../../../skins/images/icons/arrow.gif) no-repeat top right }
+    #menu li.click ul li.hover ul li.popup { background: #c60 url(../../../skins/images/arrow.gif) no-repeat top right }
     #menu li.click ul li.hover ul li.hover { background: yellow; z-index: 2 }
     #menu li.click ul li.hover ul li.hover a { color: black }
 #posts { margin:10px 10px 10px 260px }
@@ -354,4 +354,25 @@ footer {
 		padding: 5px 15px;
         width: 115px }
 	#unitipcap { background: url(../../../tools/unitip/TipCap.png) no-repeat; height: 7px; overflow: hidden	}
-
+.icon { white-space: nowrap; }
+.icon:before {
+    content: '';
+    background-image: url(../../../skins/images/icons.png);
+    background-repeat: no-repeat;
+    background-position: 16px 16px; /* здесь нужно указать координаты иконки по умолчанию */
+    margin: 0 3px;
+    left: 0;
+    top: 3px; /* это свойство смещает иконку вниз относительно базовой линии текста */
+    position: relative;
+    width: 16px;
+    height: 16px;
+    display: inline;
+    display: inline-block; }
+.icon-catalogs:before { background-position: 0 -160px; }
+.icon-delete:before { background-position: 0 -384px; }
+.icon-edit:before { background-position: 0 -288px; }
+.icon-forum:before { background-position: 0 -112px; }
+.icon-gallery:before { background-position: 0 -128px; }
+.icon-guestbook:before { background-position: 0 -96px; }
+.icon-index:before { background-position: 0 0; }
+.icon-posts:before { background-position: 0 -80px; }

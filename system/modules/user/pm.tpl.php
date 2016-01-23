@@ -11,11 +11,7 @@ die();?>
     <!-- IF !empty($inbox) -->
         <div class="head">
             <span class="date">$time</span>
-            <span class="actions">
-                <a href="{MODULE}user&user=$author" title="__Profile__">
-                    <img src="{ICONS}profile.png" width="16" height="16" alt="__Profile__" />
-                </a>
-            </span>
+            <span class="actions"><a href="{MODULE}user&user=$author" class="icon icon-profile tip" title="__Profile__"></a></span>
         </div>
         <div class="author center">
             <div class="avatar center">

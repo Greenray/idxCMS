@@ -57,15 +57,9 @@ die();?>
                     <td class="center">$item.views</td>
                     <td class="center">$item.comments</td>
                     <td class="actions center">
-                        <button type="submit" name="$item.action" value="$item.id" title="$item.command">
-                            <img src="{ICONS}$item.action.png" width="16" height="16" alt="$item.command" class="tip" />
-                        </button>
-                        <button type="submit" name="edit" value="$item.id" title="__Edit__">
-                            <img src="{ICONS}edit.png" width="16" height="16" alt="__Edit__" class="tip" />
-                        </button>
-                        <button type="submit" name="delete" value="$item.id" title="__Delete__">
-                            <img src="{ICONS}delete.png" width="16" height="16" alt="__Delete__" class="tip" />
-                        </button>
+                        <button type="submit" name="$item.action" value="$item.id" class="icon icon-$item.action tip" title="$item.command"></button>
+                        <button type="submit" name="edit" value="$item.id" class="icon icon-edit tip" title="__Edit__"></button>
+                        <button type="submit" name="delete" value="$item.id" class="icon icon-delete tip" title="__Delete__"></button>
                     </td>
                 </tr>
             <!-- ENDFOREACH -->

@@ -35,13 +35,9 @@ die();?>
                                 <td class="access center">$category.access</td>
                                 <td class="actions center">$category.items</td>
                                 <td class="actions center">
-                                    <button type="submit" name="edit" value="$system.id.$category.id" title="__Edit__">
-                                        <img src="{ICONS}edit.png" width="16" height="16" alt="__Edit__" class="tip" />
-                                    </button>
+                                    <button type="submit" name="edit" value="$system.id.$category.id" class="icon icon-edit tip" title="__Edit__"></button>
                                     <!-- IF !empty($category.items) -->
-                                        <a href="{MODULE}admin&id=[$module:].items{SECTION}$system.id{CATEGORY}$category.id">
-                                            <img src="{ICONS}posts.png" width="16" height="16" alt="__Posts__" class="tip" />
-                                        </a>
+                                        <a href="{MODULE}admin&id=[$module:].items{SECTION}$system.id{CATEGORY}$category.id" class="icon icon-posts tip" title="__Posts__"></a>
                                     <!-- ENDIF -->
                                 </td>
                             </tr>
@@ -57,11 +53,7 @@ die();?>
                 <tr style="line-height:2px;height:2px;"><td colspan="7" style="border:0;">&nbsp;</td></tr>
                 <!-- FOREACH category = $section.categories -->
                     <tr class="$category.class">
-                        <td class="redips-rowhandler">
-                            <div id="$section.id.$category.id" class="redips-drag redips-row">
-                                <img src="{ICONS}move.png" width="16" height="16" alt="__Move__" />
-                            </div>
-                        </td>
+                        <td class="redips-rowhandler"><div id="$section.id.$category.id" class="redips-drag redips-row icon icon-move"></div></td>
                         <td class="id center">$category.id</td>
                         <td class="icon center"><img src="[$category.path:]icon.png" width="35" height="35" alt="icon" /></td>
                         <td class="title">$category.title</td>
@@ -69,16 +61,10 @@ die();?>
                         <td class="access center">$category.access</td>
                         <td class="actions center">$category.items</td>
                         <td class="actions center">
-                            <button type="submit" name="edit" value="$section.id.$category.id" title="__Edit__">
-                                <img src="{ICONS}edit.png" width="16" height="16" alt="__Edit__" class="tip" />
-                            </button>
-                            <a href="{MODULE}admin&id=[$module:].items{SECTION}$section.id{CATEGORY}$category.id">
-                                <img src="{ICONS}posts.png" width="16" height="16" alt="__Posts__" class="tip" />
-                            </a>
+                            <button type="submit" name="edit" value="$section.id.$category.id" class="icon icon-edit tip" title="__Edit__"></button>
+                            <a href="{MODULE}admin&id=[$module:].items{SECTION}$section.id{CATEGORY}$category.id" class="icon icon-posts tip" title="__Posts__"></a>
                             <!-- IF empty($category.items) -->
-                                <button type="submit" name="delete" value="$section.id.$category.id" title="__Delete__">
-                                    <img src="{ICONS}delete.png" width="16" height="16" alt="__Delete__" class="tip" />
-                                </button>
+                                <button type="submit" name="delete" value="$section.id.$category.id" class="icon icon-delete tip" title="__Delete__"></button>
                             <!-- ENDIF -->
                         </td>
                     </tr>

@@ -15,13 +15,8 @@ die();?>
     </tr>
     <!-- FOREACH topic = $topics -->
         <tr>
-            <td class="center" style="width:20px"><img src="{ICONS}$topic.flag.png" width="16" height="16" alt="" /></td>
-            <td>
-                <!-- IF !empty($topic.pinned) -->
-                    <img src="{ICONS}pinned.png" width="16" height="16" alt="Pinned" />&nbsp;
-                <!-- ENDIF -->
-                <a href="$topic.link">$topic.title</a>
-            </td>
+            <td class="icon icon-flag center" style="width:20px">&nbsp;</td>
+            <td><a href="$topic.link"<!-- IF !empty($topic.pinned) --> class="icon icon-pinned"<!-- ENDIF -->>$topic.title</a></td>
             <td class="center">$topic.nick</td>
             <td class="center">$topic.date</td>
             <td class="center">$topic.views</td>

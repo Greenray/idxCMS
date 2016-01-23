@@ -35,14 +35,7 @@ if (!defined('idxADMIN')) die();?>
                         <a href="{ROOT}" target="_top">... __site index__</a>
                         <ul>
                         <!-- FOREACH menu = $menu -->
-                            <li>
-                                <a href="$menu.link" target="_top">
-                                <!-- IF !empty($menu.icon) -->
-                                    <img src="$menu.icon" width="16" height="16" alt="" />
-                                <!-- ENDIF -->
-                                    $menu.name
-                                </a>
-                            </li>
+                            <li><a href="$menu.link" class="icon icon-$menu.class" target="_top">$menu.name</a></li>
                         <!-- ENDFOREACH -->
                         </ul>
                     </li>

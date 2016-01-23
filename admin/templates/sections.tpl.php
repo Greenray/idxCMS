@@ -28,35 +28,25 @@ die();?>
                         <td class="access center">$section.access</td>
                         <td class="actions center">
                             <span class="button_edit">
-                                 <button type="submit" name="edit" value="drafts" class="tip" title="__Edit__">
-                                    <img src="{ICONS}edit.png" width="16" height="16" alt="__Edit__" />
-                                </button>
+                                 <button type="submit" name="edit" value="drafts" class="tip" class="icon icon-edit tip" title="__Edit__"></button>
                             </span>
                         </td>
                     </tr>
                 <!-- ENDFOREACH -->
                 <!-- FOREACH section = $sections -->
                     <tr class="$section.class">
-                        <td class="redips-rowhandler">
-                            <div id="$section.id" class="redips-drag redips-row">
-                                <img src="{ICONS}move.png" width="16" height="16" alt="__Move__" />
-                            </div>
-                        </td>
+                        <td class="redips-rowhandler"><div id="$section.id" class="redips-drag redips-row icon icon-move"></div></td>
                         <td class="id"><input type="hidden" name="ids[]" value="$section.id" />$section.id</td>
                         <td class="title"><input type="hidden" name="titles[]" value="$section.title" />$section.title</td>
                         <td class="desc"><input type="hidden" name="descs[]" value="$section.desc" />$section.desc</td>
                         <td class="access center"><input type="hidden" name="accesses[]" value="$section.access" />$section.access</td>
                         <td class="actions center">
                             <span class="button_edit">
-                                <button type="submit" name="edit" value="$section.id" class="tip" title="__Edit__">
-                                    <img src="{ICONS}edit.png" width="16" height="16" alt="__Edit__" />
-                                </button>
+                                <button type="submit" name="edit" value="$section.id" class="icon icon-edit tip" title="__Edit__"></button>
                             </span>
                             <!-- IF !empty($section.delete) -->
                                 <span class="button_delete">
-                                    <button type="submit" name="delete" value="$section.id" class="tip" title="__Delete__">
-                                        <img src="{ICONS}delete.png" width="16" height="16" alt="__Delete__" />
-                                    </button>
+                                    <button type="submit" name="delete" value="$section.id" class="icon icon-delete tip" title="__Delete__"></button>
                                 </span>
                             <!-- ENDIF -->
                         </td>

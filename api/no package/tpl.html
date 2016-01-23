@@ -1,0 +1,507 @@
+<!doctype html>
+<html>
+<head>
+    <title>API for class TPL (idxCMS: Flat Files Content Management System ver. 3.0)</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="generator" content="phpAPI 5.0 (https://github.com/Greenray/phpAPI/)">
+    <link href="../style.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+    <div class="page">
+        <div class="header center">
+            <div class="content">
+                idxCMS: Flat Files Content Management System ver. 3.0                <div class="logo_desc">Интерфейс прикладного программирования</div>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="content">
+                <h1>Пространства имен</h1>
+<ul>
+    <li><a href="../administration/package-summary.html">Administration</a></li>
+    <li><a href="../catalogs/package-summary.html">Catalogs</a></li>
+    <li><a href="../core/package-summary.html">Core</a></li>
+    <li><a href="../forum/package-summary.html">Forum</a></li>
+    <li><a href="../gallery/package-summary.html">Gallery</a></li>
+    <li><a href="../no package/package-summary.html">No Package</a></li>
+    <li><a href="../polls/package-summary.html">Polls</a></li>
+    <li><a href="../posts/package-summary.html">Posts</a></li>
+    <li><a href="../rss/package-summary.html">RSS</a></li>
+    <li><a href="../rate/package-summary.html">Rate</a></li>
+    <li><a href="../search/package-summary.html">Search</a></li>
+    <li><a href="../statistics/package-summary.html">Statistics</a></li>
+    <li><a href="../tagcloud/package-summary.html">Tagcloud</a></li>
+    <li><a href="../template/package-summary.html">Template</a></li>
+    <li><a href="../tools/package-summary.html">Tools</a></li>
+    <li><a href="../user/package-summary.html">User</a></li>
+</ul>
+<h1>Пространство имен User</h1>
+    <h2>Классы</h2>
+    <ul>
+            <li><a href="../no package/raintpl_exception.html" title="No Package \ RainTpl_Exception">RainTpl_Exception</a></li>
+            <li><a href="../no package/raintpl_notfoundexception.html" title="No Package \ RainTpl_NotFoundException">RainTpl_NotFoundException</a></li>
+            <li><a href="../no package/raintpl_syntaxexception.html" title="No Package \ RainTpl_SyntaxException">RainTpl_SyntaxException</a></li>
+            <li><a href="../no package/tpl.html" title="No Package \ TPL">TPL</a></li>
+        </ul>
+    <h2>Функции</h2>
+    <ul>
+            <li><a href="../no package/package-functions.html#StatisticsClean" title="No Package">StatisticsClean</a></li>
+        </ul>
+    <h2>Глобальные элементы</h2>
+    <ul>
+            <li><a href="../no package/package-globals.html#APHORISMS" title="No Package">APHORISMS</a></li>
+            <li><a href="../no package/package-globals.html#BANNERS" title="No Package">BANNERS</a></li>
+            <li><a href="../no package/package-globals.html#CATALOGS" title="No Package">CATALOGS</a></li>
+            <li><a href="../no package/package-globals.html#GALLERY" title="No Package">GALLERY</a></li>
+        </ul>
+            </div>
+        </div>
+        <div class="main">
+            <div class="content">
+                <nav class="menu_main center"><div class="menu">
+            <ul>
+                    <li><a href="../index.html">Overview</a></li>
+                    <li><a href="../no package/package-summary.html">Namespace</a></li>
+                    <li class="active">Class</li>
+                    <li><a href="../no package/package-tree.html">No Package\Tree</a></li>
+                    <li><a href="../deprecated.html">Deprecated</a></li>
+                    <li><a href="../todo.html">Todo</a></li>
+                    <li><a href="../index-all.html">Index</a></li>
+                </ul>
+    </div>
+    <div class="small_links">
+        Общий обзор: <a href="#summary_fields">Поля</a> | <a href="#summary_methods">Методы</a> | <a href="#summary_constructor">Конструктор</a>
+        Детали: <a href="#details_fields">Поля</a> | <a href="#details_methods">Методы</a> | <a href="#details_constructor">Конструктор</a>
+    </div>
+</nav>
+                <hr />
+<div class="package">Пространство имен No Package</div>
+<h1>Class TPL</h1>
+<div id="list">
+    <ul>
+        <li><strong>TPL</strong></li></ul></li>    </ul>
+</div>
+<hr />
+<p class="arguments">public  class <strong>TPL</strong></p>
+<div class="comment" id="overview_description">RainTPL<br />  -------<br />  Realized by Federico Ulfo & maintained by the Rain Team<br />  Distributed under GNU/LGPL 3 License</div>
+<div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Version</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+                            <td class="hid" colspan="2">2.7.2</td>
+                    </tr>
+        </table>
+</div>
+    <table id="summary_constants">
+        <tr><th colspan="2">Константы: общий обзор</th></tr>
+                    <tr>
+                <td class="type w_200">public final static  integer</td>
+                <td class="description">
+                    <pre><a href="#CACHE_EXPIRE_TIME"><span class="lilac">CACHE_EXPIRE_TIME</span></a> = 3600</pre>
+                    <p class="description">Описания нет</p>
+                </td>
+            </tr>
+            </table>
+    <table id="summary_fields">
+        <tr><th colspan="2">Поля: общий обзор</th></tr>
+                    <tr>
+                <td class="type w_200">protected  mixed</td>
+                <td class="description">
+                    <pre><a href="#$cache"><span class="green">$cache</span></a> = array()		// variables to keep the template directories and info
+				  $cache  false</pre>
+                    <p class="description">Описания нет</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">protected  mixed</td>
+                <td class="description">
+                    <pre><a href="#$cache_id"><span class="green">$cache_id</span></a> = array()		// variables to keep the template directories and info<br />				  $cache  false		// static cache enabled / disabled<br />                  $cache_id  null</pre>
+                    <p class="description">Описания нет</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">protected static  mixed</td>
+                <td class="description">
+                    <pre><a href="#$config_name_sum"><span class="green">$config_name_sum</span></a> = array()</pre>
+                    <p class="description">Описания нет</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">protected  mixed</td>
+                <td class="description">
+                    <pre><a href="#$tpl"><span class="green">$tpl</span></a> = array()</pre>
+                    <p class="description">Описания нет</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public static  array</td>
+                <td class="description">
+                    <pre><a href="#$var"><span class="green">$var</span></a> = array()</pre>
+                    <p class="description">Is the array where RainTPL keep the variables assigned</p>
+                </td>
+            </tr>
+            </table>
+    <table id="summary_methods">
+        <tr><th colspan="2">Методы: общий обзор</th></tr>
+                    <tr>
+                <td class="type w_200">public  void</td>
+                <td class="description">
+                    <p><a href="#assign"><strong><span class="black">assign</span></strong></a> (<span class="lilac">mixed</span> <span class="blue">$variable_name</span>, <span class="lilac">mixed</span> <span class="blue">$value</span>, <span class="lilac">mixed</span> <span class="blue">$variable</span>)</p>
+                    <p class="description">Assign variable eg. </p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public  string</td>
+                <td class="description">
+                    <p><a href="#draw"><strong><span class="black">draw</span></strong></a> (<span class="lilac">string</span> <span class="blue">$tpl_name</span>, <span class="lilac">boolean</span> <span class="blue">$return_string</span>)</p>
+                    <p class="description">Draw the template eg. </p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public  string</td>
+                <td class="description">
+                    <p><a href="#cache"><strong><span class="black">cache</span></strong></a> (<span class="lilac">string</span> <span class="blue">$tpl_name</span>, <span class="lilac">int</span> <span class="blue">$expiration_time</span>, <span class="lilac">string</span> <span class="blue">$expire_time</span>, <span class="lilac">string</span> <span class="blue">$cache_id</span>)</p>
+                    <p class="description">If exists a valid cache for this template it returns the cache</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public static  void</td>
+                <td class="description">
+                    <p><a href="#configure"><strong><span class="black">configure</span></strong></a> (<span class="lilac">mixed</span> <span class="blue">$setting</span>, <span class="lilac">string</span> <span class="blue">$value</span>)</p>
+                    <p class="description">Configure the settings of RainTPL</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">protected  void</td>
+                <td class="description">
+                    <p><a href="#check_template"><strong><span class="black">check_template</span></strong></a> (<span class="lilac">mixed</span> <span class="blue">$tpl_name</span>)</p>
+                    <p class="description">Описания нет</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">protected  void</td>
+                <td class="description">
+                    <p><a href="#xml_reSubstitution"><strong><span class="black">xml_reSubstitution</span></strong></a> (<span class="lilac">mixed</span> <span class="blue">$capture</span>)</p>
+                    <p class="description">execute stripslaches() on the xml block. </p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">protected  void</td>
+                <td class="description">
+                    <p><a href="#compileFile"><strong><span class="black">compileFile</span></strong></a> (<span class="lilac">mixed</span> <span class="blue">$tpl_basename</span>, <span class="lilac">mixed</span> <span class="blue">$tpl_basedir</span>, <span class="lilac">mixed</span> <span class="blue">$tpl_filename</span>, <span class="lilac">mixed</span> <span class="blue">$cache_dir</span>, <span class="lilac">mixed</span> <span class="blue">$compiled_filename</span>)</p>
+                    <p class="description">Compile and write the compiled template file</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">protected  void</td>
+                <td class="description">
+                    <p><a href="#compileTemplate"><strong><span class="black">compileTemplate</span></strong></a> (<span class="lilac">mixed</span> <span class="blue">$template_code</span>, <span class="lilac">mixed</span> <span class="blue">$tpl_basedir</span>)</p>
+                    <p class="description">Compile template</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">protected  void</td>
+                <td class="description">
+                    <p><a href="#compileCode"><strong><span class="black">compileCode</span></strong></a> (<span class="lilac">mixed</span> <span class="blue">$parsed_code</span>)</p>
+                    <p class="description">Compile the code</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">protected  type</td>
+                <td class="description">
+                    <p><a href="#reduce_path"><strong><span class="black">reduce_path</span></strong></a> (<span class="lilac">type</span> <span class="blue">$path</span>)</p>
+                    <p class="description">Reduce a path, eg. </p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">protected  string</td>
+                <td class="description">
+                    <p><a href="#path_replace"><strong><span class="black">path_replace</span></strong></a> (<span class="lilac">string</span> <span class="blue">$html</span>, <span class="lilac">mixed</span> <span class="blue">$tpl_basedir</span>)</p>
+                    <p class="description">replace the path of image src, link href and a href.</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public  void</td>
+                <td class="description">
+                    <p><a href="#const_replace"><strong><span class="black">const_replace</span></strong></a> (<span class="lilac">mixed</span> <span class="blue">$html</span>, <span class="lilac">mixed</span> <span class="blue">$tag_left_delimiter</span>, <span class="lilac">mixed</span> <span class="blue">$tag_right_delimiter</span>, <span class="lilac">string</span> <span class="blue">$php_left_delimiter</span>, <span class="lilac">string</span> <span class="blue">$php_right_delimiter</span>, <span class="lilac">string</span> <span class="blue">$loop_level</span>, <span class="lilac">string</span> <span class="blue">$echo</span>)</p>
+                    <p class="description">Описания нет</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public  void</td>
+                <td class="description">
+                    <p><a href="#func_replace"><strong><span class="black">func_replace</span></strong></a> (<span class="lilac">mixed</span> <span class="blue">$html</span>, <span class="lilac">mixed</span> <span class="blue">$tag_left_delimiter</span>, <span class="lilac">mixed</span> <span class="blue">$tag_right_delimiter</span>, <span class="lilac">string</span> <span class="blue">$php_left_delimiter</span>, <span class="lilac">string</span> <span class="blue">$php_right_delimiter</span>, <span class="lilac">string</span> <span class="blue">$loop_level</span>, <span class="lilac">string</span> <span class="blue">$echo</span>)</p>
+                    <p class="description">Описания нет</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public  void</td>
+                <td class="description">
+                    <p><a href="#var_replace"><strong><span class="black">var_replace</span></strong></a> (<span class="lilac">mixed</span> <span class="blue">$html</span>, <span class="lilac">mixed</span> <span class="blue">$tag_left_delimiter</span>, <span class="lilac">mixed</span> <span class="blue">$tag_right_delimiter</span>, <span class="lilac">string</span> <span class="blue">$php_left_delimiter</span>, <span class="lilac">string</span> <span class="blue">$php_right_delimiter</span>, <span class="lilac">string</span> <span class="blue">$loop_level</span>, <span class="lilac">string</span> <span class="blue">$echo</span>)</p>
+                    <p class="description">Описания нет</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">protected  void</td>
+                <td class="description">
+                    <p><a href="#function_check"><strong><span class="black">function_check</span></strong></a> (<span class="lilac">string</span> <span class="blue">$code</span>, <span class="lilac">string</span> <span class="blue">$tag</span>)</p>
+                    <p class="description">Check if function is in black list (sandbox)</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">protected  string</td>
+                <td class="description">
+                    <p><a href="#printDebug"><strong><span class="black">printDebug</span></strong></a> (<a href="../no package/raintpl_exception.html">RainTpl_Exception</a> <span class="blue">$e</span>)</p>
+                    <p class="description">Prints debug info about exception or passes it further if debug is disabled.</p>
+                </td>
+            </tr>
+            </table>
+    <h2 id="details_constants">Константы: детали</h2>
+            <div class="location">system/tpl.class.php at line 127</div>
+        <pre class="arguments" id="CACHE_EXPIRE_TIME">public final static  integer <strong>CACHE_EXPIRE_TIME</strong> = 3600</pre>
+        <div class="details">Описания нет</div>
+        <hr />
+        <h2 id="details_fields">Поля: детали</h2>
+            <div class="location">system/tpl.class.php at line 119</div>
+        <pre class="arguments" id="Undefined $cache">protected  mixed <strong><span class="green">$cache</span></strong> = array()		// variables to keep the template directories and info
+				  $cache  false</pre>
+        <div class="details">Описания нет</div>
+        <hr />
+            <div class="location">system/tpl.class.php at line 119</div>
+        <pre class="arguments" id="Undefined $cache_id">protected  mixed <strong><span class="green">$cache_id</span></strong> = array()		// variables to keep the template directories and info<br />				  $cache  false		// static cache enabled / disabled<br />                  $cache_id  null</pre>
+        <div class="details">Описания нет</div>
+        <hr />
+            <div class="location">system/tpl.class.php at line 121</div>
+        <pre class="arguments" id="Undefined $config_name_sum">protected static  mixed <strong><span class="green">$config_name_sum</span></strong> = array()</pre>
+        <div class="details">Описания нет</div>
+        <hr />
+            <div class="location">system/tpl.class.php at line 119</div>
+        <pre class="arguments" id="Undefined $tpl">protected  mixed <strong><span class="green">$tpl</span></strong> = array()</pre>
+        <div class="details">Описания нет</div>
+        <hr />
+            <div class="location">system/tpl.class.php at line 117</div>
+        <pre class="arguments" id="Undefined $var">public static  array <strong><span class="green">$var</span></strong> = array()</pre>
+        <div class="details">Is the array where RainTPL keep the variables assigned</div>
+        <hr />
+        <h2 id="details_methods">Методы: детали</h2>
+            <div class="location">system/tpl.class.php at line 139</div>
+        <code class="arguments" id="assign">public  void <strong>assign</strong> (<span class="lilac">mixed</span> <span class="blue">$variable_name</span>, <span class="lilac">mixed</span> <span class="blue">$value</span>, <span class="lilac">mixed</span> <span class="blue">$variable</span>)</code>
+        <div class="details">
+                    <p class="description">Assign variable<br /> eg. 	$t->assign('name','mickey');</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">mixed</td>
+                            <td class="hid blue w_100">$variable_name</td>
+                <td class="hid">Name of template variable or associative array name/value</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">mixed</td>
+                            <td class="hid blue w_100">$value</td>
+                <td class="hid">value assigned to this variable. Not set if variable_name is an associative array</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/tpl.class.php at line 158</div>
+        <code class="arguments" id="draw">public  string <strong>draw</strong> (<span class="lilac">string</span> <span class="blue">$tpl_name</span>, <span class="lilac">boolean</span> <span class="blue">$return_string</span>)</code>
+        <div class="details">
+                    include $this->tpl[<span class="red">'compiled_filename'</span>]<br />include $this->tpl[<span class="red">'compiled_filename'</span>]<br />                    <p class="description">Draw the template<br /> eg. 	$html = $tpl->draw( 'demo', TRUE ); // return template in string<br /> or 	$tpl->draw( $tpl_name ); // echo the template</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$tpl_name</td>
+                <td class="hid">template to load</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">boolean</td>
+                            <td class="hid blue w_100">$return_string</td>
+                <td class="hid">true=return a string, false=echo the template</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/tpl.class.php at line 217</div>
+        <code class="arguments" id="cache">public  string <strong>cache</strong> (<span class="lilac">string</span> <span class="blue">$tpl_name</span>, <span class="lilac">int</span> <span class="blue">$expiration_time</span>, <span class="lilac">string</span> <span class="blue">$expire_time</span>, <span class="lilac">string</span> <span class="blue">$cache_id</span>)</code>
+        <div class="details">
+                    <p class="description">If exists a valid cache for this template it returns the cache</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$tpl_name</td>
+                <td class="hid">Name of template (set the same of draw)</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">int</td>
+                            <td class="hid blue w_100">$expiration_time</td>
+                <td class="hid">Set after how many seconds the cache expire and must be regenerated</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid" colspan="2">it return the HTML or null if the cache must be recreated</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/tpl.class.php at line 238</div>
+        <code class="arguments" id="configure">public static  void <strong>configure</strong> (<span class="lilac">mixed</span> <span class="blue">$setting</span>, <span class="lilac">string</span> <span class="blue">$value</span>)</code>
+        <div class="details">
+                    <p class="description">Configure the settings of RainTPL</p>
+                    </div>
+        <hr />
+            <div class="location">system/tpl.class.php at line 252</div>
+        <code class="arguments" id="check_template">protected  void <strong>check_template</strong> (<span class="lilac">mixed</span> <span class="blue">$tpl_name</span>)</code>
+        <div class="details">
+                    <p class="description">Описания нет</p>
+                    </div>
+        <hr />
+            <div class="location">system/tpl.class.php at line 284</div>
+        <code class="arguments" id="xml_reSubstitution">protected  void <strong>xml_reSubstitution</strong> (<span class="lilac">mixed</span> <span class="blue">$capture</span>)</code>
+        <div class="details">
+                    <p class="description">execute stripslaches() on the xml block. Invoqued by preg_replace_callback function below</p>
+                    </div>
+        <hr />
+            <div class="location">system/tpl.class.php at line 292</div>
+        <code class="arguments" id="compileFile">protected  void <strong>compileFile</strong> (<span class="lilac">mixed</span> <span class="blue">$tpl_basename</span>, <span class="lilac">mixed</span> <span class="blue">$tpl_basedir</span>, <span class="lilac">mixed</span> <span class="blue">$tpl_filename</span>, <span class="lilac">mixed</span> <span class="blue">$cache_dir</span>, <span class="lilac">mixed</span> <span class="blue">$compiled_filename</span>)</code>
+        <div class="details">
+                    <p class="description">Compile and write the compiled template file</p>
+                    </div>
+        <hr />
+            <div class="location">system/tpl.class.php at line 331</div>
+        <code class="arguments" id="compileTemplate">protected  void <strong>compileTemplate</strong> (<span class="lilac">mixed</span> <span class="blue">$template_code</span>, <span class="lilac">mixed</span> <span class="blue">$tpl_basedir</span>)</code>
+        <div class="details">
+                    <p class="description">Compile template</p>
+                    </div>
+        <hr />
+            <div class="location">system/tpl.class.php at line 372</div>
+        <code class="arguments" id="compileCode">protected  void <strong>compileCode</strong> (<span class="lilac">mixed</span> <span class="blue">$parsed_code</span>)</code>
+        <div class="details">
+                    <p class="description">Compile the code</p>
+                    </div>
+        <hr />
+            <div class="location">system/tpl.class.php at line 590</div>
+        <code class="arguments" id="reduce_path">protected  type <strong>reduce_path</strong> (<span class="lilac">type</span> <span class="blue">$path</span>)</code>
+        <div class="details">
+                    <p class="description">Reduce a path, eg. www/library/../filepath//file => www/filepath/file</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+                            <td class="hid" colspan="2"></td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/tpl.class.php at line 608</div>
+        <code class="arguments" id="path_replace">protected  string <strong>path_replace</strong> (<span class="lilac">string</span> <span class="blue">$html</span>, <span class="lilac">mixed</span> <span class="blue">$tpl_basedir</span>)</code>
+        <div class="details">
+                    <p class="description">replace the path of image src, link href and a href.<br /> url => template_dir/url<br /> url# => url<br /> http://url => http://url</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+                            <td class="hid" colspan="2"></td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid" colspan="2">html sostituito</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/tpl.class.php at line 657</div>
+        <code class="arguments" id="const_replace">public  void <strong>const_replace</strong> (<span class="lilac">mixed</span> <span class="blue">$html</span>, <span class="lilac">mixed</span> <span class="blue">$tag_left_delimiter</span>, <span class="lilac">mixed</span> <span class="blue">$tag_right_delimiter</span>, <span class="lilac">string</span> <span class="blue">$php_left_delimiter</span>, <span class="lilac">string</span> <span class="blue">$php_right_delimiter</span>, <span class="lilac">string</span> <span class="blue">$loop_level</span>, <span class="lilac">string</span> <span class="blue">$echo</span>)</code>
+        <div class="details">
+                    <p class="description">Описания нет</p>
+                    </div>
+        <hr />
+            <div class="location">system/tpl.class.php at line 665</div>
+        <code class="arguments" id="func_replace">public  void <strong>func_replace</strong> (<span class="lilac">mixed</span> <span class="blue">$html</span>, <span class="lilac">mixed</span> <span class="blue">$tag_left_delimiter</span>, <span class="lilac">mixed</span> <span class="blue">$tag_right_delimiter</span>, <span class="lilac">string</span> <span class="blue">$php_left_delimiter</span>, <span class="lilac">string</span> <span class="blue">$php_right_delimiter</span>, <span class="lilac">string</span> <span class="blue">$loop_level</span>, <span class="lilac">string</span> <span class="blue">$echo</span>)</code>
+        <div class="details">
+                    <p class="description">Описания нет</p>
+                    </div>
+        <hr />
+            <div class="location">system/tpl.class.php at line 764</div>
+        <code class="arguments" id="var_replace">public  void <strong>var_replace</strong> (<span class="lilac">mixed</span> <span class="blue">$html</span>, <span class="lilac">mixed</span> <span class="blue">$tag_left_delimiter</span>, <span class="lilac">mixed</span> <span class="blue">$tag_right_delimiter</span>, <span class="lilac">string</span> <span class="blue">$php_left_delimiter</span>, <span class="lilac">string</span> <span class="blue">$php_right_delimiter</span>, <span class="lilac">string</span> <span class="blue">$loop_level</span>, <span class="lilac">string</span> <span class="blue">$echo</span>)</code>
+        <div class="details">
+                    <p class="description">Описания нет</p>
+                    </div>
+        <hr />
+            <div class="location">system/tpl.class.php at line 880</div>
+        <code class="arguments" id="function_check">protected  void <strong>function_check</strong> (<span class="lilac">string</span> <span class="blue">$code</span>, <span class="lilac">string</span> <span class="blue">$tag</span>)</code>
+        <div class="details">
+                    <p class="description">Check if function is in black list (sandbox)</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac"></td>
+                            <td class="hid" colspan="2"></td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac"></td>
+                            <td class="hid" colspan="2"></td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/tpl.class.php at line 908</div>
+        <code class="arguments" id="printDebug">protected  string <strong>printDebug</strong> (<a href="../no package/raintpl_exception.html">RainTpl_Exception</a> <span class="blue">$e</span>)</code>
+        <div class="details">
+                    <p class="description">Prints debug info about exception or passes it further if debug is disabled.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+                            <td class="hid" colspan="2"></td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+                    <nav class="menu_main center"><div class="menu">
+            <ul>
+                    <li><a href="../index.html">Overview</a></li>
+                    <li><a href="../no package/package-summary.html">Namespace</a></li>
+                    <li class="active">Class</li>
+                    <li><a href="../no package/package-tree.html">No Package\Tree</a></li>
+                    <li><a href="../deprecated.html">Deprecated</a></li>
+                    <li><a href="../todo.html">Todo</a></li>
+                    <li><a href="../index-all.html">Index</a></li>
+                </ul>
+    </div>
+    <div class="small_links">
+        Общий обзор: <a href="#summary_fields">Поля</a> | <a href="#summary_methods">Методы</a> | <a href="#summary_constructor">Конструктор</a>
+        Детали: <a href="#details_fields">Поля</a> | <a href="#details_methods">Методы</a> | <a href="#details_constructor">Конструктор</a>
+    </div>
+</nav>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="content">
+            <div class="copyright center">Generated by <a href="https://github.com/Greenray/phpAPI" target="_blank">phpAPI</a>: PHP Documentation Creator ver. 5.0 &copy; 2015 Greenray</div>
+        </div>
+    </div>
+</body>
+</html>

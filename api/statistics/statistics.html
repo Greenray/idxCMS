@@ -1,0 +1,256 @@
+<!doctype html>
+<html>
+<head>
+    <title>API for class STATISTICS (idxCMS: Flat Files Content Management System ver. 3.0)</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="generator" content="phpAPI 5.0 (https://github.com/Greenray/phpAPI/)">
+    <link href="../style.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+    <div class="page">
+        <div class="header center">
+            <div class="content">
+                idxCMS: Flat Files Content Management System ver. 3.0                <div class="logo_desc">Интерфейс прикладного программирования</div>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="content">
+                <h1>Пространства имен</h1>
+<ul>
+    <li><a href="../administration/package-summary.html">Administration</a></li>
+    <li><a href="../catalogs/package-summary.html">Catalogs</a></li>
+    <li><a href="../core/package-summary.html">Core</a></li>
+    <li><a href="../forum/package-summary.html">Forum</a></li>
+    <li><a href="../gallery/package-summary.html">Gallery</a></li>
+    <li><a href="../no package/package-summary.html">No Package</a></li>
+    <li><a href="../polls/package-summary.html">Polls</a></li>
+    <li><a href="../posts/package-summary.html">Posts</a></li>
+    <li><a href="../rss/package-summary.html">RSS</a></li>
+    <li><a href="../rate/package-summary.html">Rate</a></li>
+    <li><a href="../search/package-summary.html">Search</a></li>
+    <li><a href="../statistics/package-summary.html">Statistics</a></li>
+    <li><a href="../tagcloud/package-summary.html">Tagcloud</a></li>
+    <li><a href="../template/package-summary.html">Template</a></li>
+    <li><a href="../tools/package-summary.html">Tools</a></li>
+    <li><a href="../user/package-summary.html">User</a></li>
+</ul>
+<h1>Пространство имен User</h1>
+    <h2>Классы</h2>
+    <ul>
+            <li><a href="../statistics/statistics.html" title="Statistics \ STATISTICS">STATISTICS</a></li>
+        </ul>
+            </div>
+        </div>
+        <div class="main">
+            <div class="content">
+                <nav class="menu_main center"><div class="menu">
+            <ul>
+                    <li><a href="../index.html">Overview</a></li>
+                    <li><a href="../statistics/package-summary.html">Namespace</a></li>
+                    <li class="active">Class</li>
+                    <li><a href="../statistics/package-tree.html">Statistics\Tree</a></li>
+                    <li><a href="../deprecated.html">Deprecated</a></li>
+                    <li><a href="../todo.html">Todo</a></li>
+                    <li><a href="../index-all.html">Index</a></li>
+                </ul>
+    </div>
+    <div class="small_links">
+        Общий обзор: <a href="#summary_fields">Поля</a> | <a href="#summary_methods">Методы</a> | <a href="#summary_constructor">Конструктор</a>
+        Детали: <a href="#details_fields">Поля</a> | <a href="#details_methods">Методы</a> | <a href="#details_constructor">Конструктор</a>
+    </div>
+</nav>
+                <hr />
+<div class="package">Пространство имен Statistics</div>
+<h1>Class STATISTICS</h1>
+<div id="list">
+    <ul>
+        <li><strong>STATISTICS</strong></li></ul></li>    </ul>
+</div>
+<hr />
+<p class="arguments">public  class <strong>STATISTICS</strong></p>
+<div class="comment" id="overview_description">Site statistics - registers a visits to the website by visitors, users, bots and spiders.</div>
+<div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Program</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+                            <td class="hid" colspan="2">idxCMS: Flat Files Content Management System</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">Version</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+                            <td class="hid" colspan="2">3.0</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">Author</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+                            <td class="hid" colspan="2">Victor Nabatov &lt;greenray.spb@gmail.com&gt;</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">Copyright</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+                            <td class="hid" colspan="2">(c) 2016 Victor Nabatov</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">License</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+                            <td class="hid" colspan="2">Creative Commons — Attribution-NonCommercial-ShareAlike 4.0 International</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">File</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+                            <td class="hid" colspan="2">system/statistics.php</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">Overview</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+                            <td class="hid" colspan="2">Website statistics.
+ It registers visitors, bots, spiders, their IP addresses, keywords, search queries.</td>
+                    </tr>
+        </table>
+</div>
+    <table id="summary_fields">
+        <tr><th colspan="2">Поля: общий обзор</th></tr>
+                    <tr>
+                <td class="type w_200">public  mixed</td>
+                <td class="description">
+                    <pre><a href="#$bots"><span class="green">$bots</span></a> = [<span class="red">'email exractor'</span>,<span class="red">'sitesucker'</span>,<span class="red">'w3af.sourceforge.net'</span>,<span class="red">'xpymep'</span>]</pre>
+                    <p class="description">Bad bots</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public  mixed</td>
+                <td class="description">
+                    <pre><a href="#$search_queries"><span class="green">$search_queries</span></a> = [<br />            <span class="red">'a-counter'</span> => <span class="red">'sub_data'</span>, <span class="red">'about'</span>  => <span class="red">'terms'</span>,  <span class="red">'alice'</span>     => <span class="red">'qs'</span>,<br />            <span class="red">'alltheweb'</span> => <span class="red">'q'</span>,        <span class="red">'altavista'</span> => <span class="red">'q'</span>,   <span class="red">'aol'</span>       => <span class="red">'encquery'</span>,<br />            <span class="red">'aol'</span>       => <span class="red">'q'</span>,        <span class="red">'aol'</span>    => <span class="red">'query'</span>,  <span class="red">'aport'</span>     => <span class="red">'r'</span>,<br />            <span class="red">'ask'</span>       => <span class="red">'q'</span>,        <span class="red">'baidu'</span>  => <span class="red">'wd'</span>,     <span class="red">'bigmir'</span>    => <span class="red">'q'</span>,<br />            <span class="red">'club-internet'</span> => <span class="red">'q'</span>,    <span class="red">'cnn'</span>    => <span class="red">'query'</span>,  <span class="red">'gigablast'</span> => <span class="red">'q'</span>,<br />            <span class="red">'google'</span>    => <span class="red">'q'</span>,        <span class="red">'i.ua'</span>   => <span class="red">'q'</span>,      <span class="red">'live'</span>      => <span class="red">'q'</span>,<br />            <span class="red">'looksmart'</span> => <span class="red">'qt'</span>,       <span class="red">'lycos'</span>  => <span class="red">'query'</span>,  <span class="red">'mail.ru'</span>   => <span class="red">'q'</span>,<br />            <span class="red">'mama'</span>      => <span class="red">'query'</span>,    <span class="red">'mamma'</span>  => <span class="red">'query'</span>,  <span class="red">'meta.ua'</span>   => <span class="red">'q'</span>,<br />            <span class="red">'msn'</span>       => <span class="red">'q'</span>,        <span class="red">'najdi'</span>  => <span class="red">'q'</span>,      <span class="red">'netscape'</span>  => <span class="red">'query'</span>,<br />            <span class="red">'netsprint'</span> => <span class="red">'q'</span>,        <span class="red">'pchome'</span> => <span class="red">'q'</span>,      <span class="red">'rambler'</span>   => <span class="red">'words'</span>,<br />            <span class="red">'search'</span>    => <span class="red">'q'</span>,        <span class="red">'seznam'</span> => <span class="red">'q'</span>,      <span class="red">'szukacz'</span>   => <span class="red">'q'</span>,<br />            <span class="red">'szukaj'</span>    => <span class="red">'qt'</span>,       <span class="red">'szukaj'</span> => <span class="red">'szukaj'</span>, <span class="red">'virgilio'</span>  => <span class="red">'qs'</span>,<br />            <span class="red">'voila'</span>     => <span class="red">'rdata'</span>,    <span class="red">'yahoo'</span>  => <span class="red">'p'</span>,      <span class="red">'yam'</span>       => <span class="red">'k'</span>,<br />            <span class="red">'yandex'</span>    => <span class="red">'text'</span><br />        ]</pre>
+                    <p class="description">Searching queries mask</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public  mixed</td>
+                <td class="description">
+                    <pre><a href="#$spiders"><span class="green">$spiders</span></a> = [<br />            <span class="red">'110search'</span>,<span class="red">'12move'</span>,<br />            <span class="red">'a-counter'</span>,<span class="red">'abcdatos'</span>,<span class="red">'acoon'</span>,<span class="red">'aesop'</span>,<span class="red">'alexa'</span>,<span class="red">'alkaline'</span>,<span class="red">'allesklar'</span>,<span class="red">'almaden'</span>,<span class="red">'altavista'</span>,<span class="red">'aport'</span>,<span class="red">'appie'</span>,<span class="red">'arachnoidea'</span>,<span class="red">'architext'</span>,<span class="red">'archiver'</span>,<span class="red">'artabus'</span>,<br />            <span class="red">'ask'</span>,<span class="red">'aspdeek'</span>,<span class="red">'aspseek'</span>,<span class="red">'asterias'</span>,<span class="red">'atomz'</span>,<span class="red">'augurfind'</span>,<span class="red">'austronaut'</span>,<br />            <span class="red">'batsch'</span>,<span class="red">'baidu'</span>,<span class="red">'bdcindexer'</span>,<span class="red">'bellnet'</span>,<span class="red">'bestoftheweb'</span>,<span class="red">'bigfoot'</span>,<span class="red">'blitzsuche'</span>,<span class="red">'boitho'</span>,<span class="red">'bot'</span>,<span class="red">'butterfly'</span>,<br />            <span class="red">'club-internet'</span>,<span class="red">'cnn'</span>,<span class="red">'cobion'</span>,<span class="red">'cortina'</span>,<span class="red">'crawler'</span>,<br />            <span class="red">'datafountains'</span>,<span class="red">'daum'</span>,<span class="red">'deepnet'</span>,<span class="red">'digout4u'</span>,<span class="red">'ditto'</span>,<span class="red">'dmoz'</span>,<span class="red">'docomo'</span>,<br />            <span class="red">'earthcom'</span>,<span class="red">'ec2linkfinder'</span>,<span class="red">'echo.com'</span>,<span class="red">'elsop'</span>,<span class="red">'estyle'</span>,<span class="red">'eule'</span>,<span class="red">'euroseek'</span>,<span class="red">'excite'</span>,<span class="red">'ezresult'</span>,<span class="red">'ezooms'</span>,<br />            <span class="red">'fast'</span>,<span class="red">'find'</span>,<span class="red">'fireball'</span>,<span class="red">'firefly'</span>,<span class="red">'fluffy'</span>,<span class="red">'flunky'</span>,<span class="red">'freenet'</span>,<span class="red">'froogle'</span>,<span class="red">'fujitsu'</span>,<br />            <span class="red">'galaxy'</span>,<span class="red">'gazz'</span>,<span class="red">'gendoor'</span>,<span class="red">'genieknows'</span>,<span class="red">'gigablast'</span>,<span class="red">'google'</span>,<span class="red">'goto'</span>,<span class="red">'gulliver'</span>,<br />            <span class="red">'heritrix'</span>,<span class="red">'hoppa'</span>,<span class="red">'hubat'</span>,<span class="red">'hubater'</span>,<br />            <span class="red">'ichiro'</span>,<span class="red">'incywincy'</span>,<span class="red">'informatch'</span>,<span class="red">'infoseek'</span>,<span class="red">'inktomi'</span>,<span class="red">'internetseer'</span>,<span class="red">'ip3000'</span>,<span class="red">'ixquick'</span>,<br />            <span class="red">'jayde'</span>,<br />            <span class="red">'kit_fireball'</span>,<br />            <span class="red">'lachesis'</span>,<span class="red">'larbin'</span>,<span class="red">'lexis-nexis'</span>,<span class="red">'libwww-perl'</span>,<span class="red">'linkwalker'</span>,<span class="red">'live'</span>,<span class="red">'lockstep'</span>,<span class="red">'looksmart'</span>,<span class="red">'lycos'</span>,<br />            <span class="red">'mail'</span>,<span class="red">'mantraagent'</span>,<span class="red">'mariner'</span>,<span class="red">'markwatch'</span>,<span class="red">'me.dium'</span>,<span class="red">'mercator'</span>,<span class="red">'meta'</span>,<span class="red">'mirago'</span>,<span class="red">'moget'</span>,<span class="red">'muscatferret'</span>,<br />            <span class="red">'najdi'</span>,<span class="red">'nameprotect'</span>,<span class="red">'nationaldirectory'</span>,<span class="red">'nazilla'</span>,<span class="red">'nbci'</span>,<span class="red">'netcraft'</span>,<span class="red">'netmechanic'</span>,<span class="red">'netsprint'</span>,<span class="red">'news'</span>,<span class="red">'ng'</span>,<span class="red">'nico'</span>,<span class="red">'northernlight'</span>,<span class="red">'nutch'</span>,<br />            <span class="red">'openportal4u'</span>,<span class="red">'osis-project'</span>,<br />            <span class="red">'pchome'</span>,<span class="red">'pinpoint'</span>,<span class="red">'pompos'</span>,<span class="red">'portaljuice'</span>,<br />            <span class="red">'qualigo'</span>,<span class="red">'quepasacreep'</span>,<br />            <span class="red">'rabaz'</span>,<span class="red">'rambler'</span>,<span class="red">'refer'</span>,<span class="red">'roach'</span>,<span class="red">'robozilla'</span>,<span class="red">'rotondo'</span>,<br />            <span class="red">'scooter'</span>,<span class="red">'scoutabout'</span>,<span class="red">'scrubby'</span>,<span class="red">'search'</span>,<span class="red">'seventwentyfour'</span>,<span class="red">'seznam'</span>,<span class="red">'sidewinder'</span>,<span class="red">'singingfish'</span>,<span class="red">'sitecheck'</span>,<span class="red">'slurp'</span>,<span class="red">'spade'</span>,<span class="red">'spider'</span>,<span class="red">'steeler'</span>,<span class="red">'supersnooper'</span>,<br />            <span class="red">'surfnomore'</span>,<span class="red">'szuka'</span>,<br />            <span class="red">'teoma'</span>,<span class="red">'technoratisnoop'</span>,<span class="red">'tecnoseek'</span>,<span class="red">'t-h-u-n-d-e-r-s-t-o-n-e'</span>,<span class="red">'tivra'</span>,<span class="red">'toutatis'</span>,<span class="red">'tracerlock'</span>,<span class="red">'twiceler'</span>,<span class="red">'twitturls'</span>,<br />            <span class="red">'ultraseek'</span>,<br />            <span class="red">'vagabondo'</span>,<span class="red">'validator'</span>,<span class="red">'virgilio'</span>,<br />            <span class="red">'w8net'</span>,<span class="red">'walhello'</span>,<span class="red">'webalta'</span>,<span class="red">'webbug'</span>,<span class="red">'webclipping'</span>,<span class="red">'wespe'</span>,<span class="red">'wget'</span>,<span class="red">'whizbang'</span>,<span class="red">'wholeweb'</span>,<span class="red">'wiseguys'</span>,<span class="red">'worldonline'</span>,<span class="red">'wotbox'</span>,<br />            <span class="red">'xenu'</span>,<br />            <span class="red">'yahoo'</span>,<span class="red">'yam'</span>,<span class="red">'yandex'</span>,<span class="red">'yanga'</span>,<span class="red">'yeti'</span>,<br />            <span class="red">'zeus'</span>,<span class="red">'zippy'</span>,<span class="red">'zyborg'</span><br />        ]</pre>
+                    <p class="description">List of spider engines</p>
+                </td>
+            </tr>
+            </table>
+    <table id="summary_constructor">
+        <tr><th colspan="2">Конструктор: общий обзор</th></tr>
+        <tr>
+            <td class="type w_200">public  void</td>
+            <td class="description">
+                <p><a href="#__construct"><strong><span class="black">__construct</span></strong></a>()</p>
+                <p class="description">Class initialization</p>
+            </td>
+        </tr>
+    </table>
+    <table id="summary_methods">
+        <tr><th colspan="2">Методы: общий обзор</th></tr>
+                    <tr>
+                <td class="type w_200">public  boolean</td>
+                <td class="description">
+                    <p><a href="#detect"><strong><span class="black">detect</span></strong></a> (<span class="lilac">string</span> <span class="blue">$agent</span>, <span class="lilac">string</span> <span class="blue">$object</span>)</p>
+                    <p class="description">Detects spiders or bad bots.</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public  mixed</td>
+                <td class="description">
+                    <p><a href="#extractKeyword"><strong><span class="black">extractKeyword</span></strong></a> (<span class="lilac">string</span> <span class="blue">$url</span>)</p>
+                    <p class="description">Extracts keywords from the user`s query.</p>
+                </td>
+            </tr>
+            </table>
+    <h2 id="details_fields">Поля: детали</h2>
+            <div class="location">system/statistics.class.php at line 19</div>
+        <pre class="arguments" id="Undefined $bots">public  mixed <strong><span class="green">$bots</span></strong> = [<span class="red">'email exractor'</span>,<span class="red">'sitesucker'</span>,<span class="red">'w3af.sourceforge.net'</span>,<span class="red">'xpymep'</span>]</pre>
+        <div class="details">Bad bots</div>
+        <hr />
+            <div class="location">system/statistics.class.php at line 22</div>
+        <pre class="arguments" id="Undefined $search_queries">public  mixed <strong><span class="green">$search_queries</span></strong> = [<br />            <span class="red">'a-counter'</span> => <span class="red">'sub_data'</span>, <span class="red">'about'</span>  => <span class="red">'terms'</span>,  <span class="red">'alice'</span>     => <span class="red">'qs'</span>,<br />            <span class="red">'alltheweb'</span> => <span class="red">'q'</span>,        <span class="red">'altavista'</span> => <span class="red">'q'</span>,   <span class="red">'aol'</span>       => <span class="red">'encquery'</span>,<br />            <span class="red">'aol'</span>       => <span class="red">'q'</span>,        <span class="red">'aol'</span>    => <span class="red">'query'</span>,  <span class="red">'aport'</span>     => <span class="red">'r'</span>,<br />            <span class="red">'ask'</span>       => <span class="red">'q'</span>,        <span class="red">'baidu'</span>  => <span class="red">'wd'</span>,     <span class="red">'bigmir'</span>    => <span class="red">'q'</span>,<br />            <span class="red">'club-internet'</span> => <span class="red">'q'</span>,    <span class="red">'cnn'</span>    => <span class="red">'query'</span>,  <span class="red">'gigablast'</span> => <span class="red">'q'</span>,<br />            <span class="red">'google'</span>    => <span class="red">'q'</span>,        <span class="red">'i.ua'</span>   => <span class="red">'q'</span>,      <span class="red">'live'</span>      => <span class="red">'q'</span>,<br />            <span class="red">'looksmart'</span> => <span class="red">'qt'</span>,       <span class="red">'lycos'</span>  => <span class="red">'query'</span>,  <span class="red">'mail.ru'</span>   => <span class="red">'q'</span>,<br />            <span class="red">'mama'</span>      => <span class="red">'query'</span>,    <span class="red">'mamma'</span>  => <span class="red">'query'</span>,  <span class="red">'meta.ua'</span>   => <span class="red">'q'</span>,<br />            <span class="red">'msn'</span>       => <span class="red">'q'</span>,        <span class="red">'najdi'</span>  => <span class="red">'q'</span>,      <span class="red">'netscape'</span>  => <span class="red">'query'</span>,<br />            <span class="red">'netsprint'</span> => <span class="red">'q'</span>,        <span class="red">'pchome'</span> => <span class="red">'q'</span>,      <span class="red">'rambler'</span>   => <span class="red">'words'</span>,<br />            <span class="red">'search'</span>    => <span class="red">'q'</span>,        <span class="red">'seznam'</span> => <span class="red">'q'</span>,      <span class="red">'szukacz'</span>   => <span class="red">'q'</span>,<br />            <span class="red">'szukaj'</span>    => <span class="red">'qt'</span>,       <span class="red">'szukaj'</span> => <span class="red">'szukaj'</span>, <span class="red">'virgilio'</span>  => <span class="red">'qs'</span>,<br />            <span class="red">'voila'</span>     => <span class="red">'rdata'</span>,    <span class="red">'yahoo'</span>  => <span class="red">'p'</span>,      <span class="red">'yam'</span>       => <span class="red">'k'</span>,<br />            <span class="red">'yandex'</span>    => <span class="red">'text'</span><br />        ]</pre>
+        <div class="details">Searching queries mask</div>
+        <hr />
+            <div class="location">system/statistics.class.php at line 25</div>
+        <pre class="arguments" id="Undefined $spiders">public  mixed <strong><span class="green">$spiders</span></strong> = [<br />            <span class="red">'110search'</span>,<span class="red">'12move'</span>,<br />            <span class="red">'a-counter'</span>,<span class="red">'abcdatos'</span>,<span class="red">'acoon'</span>,<span class="red">'aesop'</span>,<span class="red">'alexa'</span>,<span class="red">'alkaline'</span>,<span class="red">'allesklar'</span>,<span class="red">'almaden'</span>,<span class="red">'altavista'</span>,<span class="red">'aport'</span>,<span class="red">'appie'</span>,<span class="red">'arachnoidea'</span>,<span class="red">'architext'</span>,<span class="red">'archiver'</span>,<span class="red">'artabus'</span>,<br />            <span class="red">'ask'</span>,<span class="red">'aspdeek'</span>,<span class="red">'aspseek'</span>,<span class="red">'asterias'</span>,<span class="red">'atomz'</span>,<span class="red">'augurfind'</span>,<span class="red">'austronaut'</span>,<br />            <span class="red">'batsch'</span>,<span class="red">'baidu'</span>,<span class="red">'bdcindexer'</span>,<span class="red">'bellnet'</span>,<span class="red">'bestoftheweb'</span>,<span class="red">'bigfoot'</span>,<span class="red">'blitzsuche'</span>,<span class="red">'boitho'</span>,<span class="red">'bot'</span>,<span class="red">'butterfly'</span>,<br />            <span class="red">'club-internet'</span>,<span class="red">'cnn'</span>,<span class="red">'cobion'</span>,<span class="red">'cortina'</span>,<span class="red">'crawler'</span>,<br />            <span class="red">'datafountains'</span>,<span class="red">'daum'</span>,<span class="red">'deepnet'</span>,<span class="red">'digout4u'</span>,<span class="red">'ditto'</span>,<span class="red">'dmoz'</span>,<span class="red">'docomo'</span>,<br />            <span class="red">'earthcom'</span>,<span class="red">'ec2linkfinder'</span>,<span class="red">'echo.com'</span>,<span class="red">'elsop'</span>,<span class="red">'estyle'</span>,<span class="red">'eule'</span>,<span class="red">'euroseek'</span>,<span class="red">'excite'</span>,<span class="red">'ezresult'</span>,<span class="red">'ezooms'</span>,<br />            <span class="red">'fast'</span>,<span class="red">'find'</span>,<span class="red">'fireball'</span>,<span class="red">'firefly'</span>,<span class="red">'fluffy'</span>,<span class="red">'flunky'</span>,<span class="red">'freenet'</span>,<span class="red">'froogle'</span>,<span class="red">'fujitsu'</span>,<br />            <span class="red">'galaxy'</span>,<span class="red">'gazz'</span>,<span class="red">'gendoor'</span>,<span class="red">'genieknows'</span>,<span class="red">'gigablast'</span>,<span class="red">'google'</span>,<span class="red">'goto'</span>,<span class="red">'gulliver'</span>,<br />            <span class="red">'heritrix'</span>,<span class="red">'hoppa'</span>,<span class="red">'hubat'</span>,<span class="red">'hubater'</span>,<br />            <span class="red">'ichiro'</span>,<span class="red">'incywincy'</span>,<span class="red">'informatch'</span>,<span class="red">'infoseek'</span>,<span class="red">'inktomi'</span>,<span class="red">'internetseer'</span>,<span class="red">'ip3000'</span>,<span class="red">'ixquick'</span>,<br />            <span class="red">'jayde'</span>,<br />            <span class="red">'kit_fireball'</span>,<br />            <span class="red">'lachesis'</span>,<span class="red">'larbin'</span>,<span class="red">'lexis-nexis'</span>,<span class="red">'libwww-perl'</span>,<span class="red">'linkwalker'</span>,<span class="red">'live'</span>,<span class="red">'lockstep'</span>,<span class="red">'looksmart'</span>,<span class="red">'lycos'</span>,<br />            <span class="red">'mail'</span>,<span class="red">'mantraagent'</span>,<span class="red">'mariner'</span>,<span class="red">'markwatch'</span>,<span class="red">'me.dium'</span>,<span class="red">'mercator'</span>,<span class="red">'meta'</span>,<span class="red">'mirago'</span>,<span class="red">'moget'</span>,<span class="red">'muscatferret'</span>,<br />            <span class="red">'najdi'</span>,<span class="red">'nameprotect'</span>,<span class="red">'nationaldirectory'</span>,<span class="red">'nazilla'</span>,<span class="red">'nbci'</span>,<span class="red">'netcraft'</span>,<span class="red">'netmechanic'</span>,<span class="red">'netsprint'</span>,<span class="red">'news'</span>,<span class="red">'ng'</span>,<span class="red">'nico'</span>,<span class="red">'northernlight'</span>,<span class="red">'nutch'</span>,<br />            <span class="red">'openportal4u'</span>,<span class="red">'osis-project'</span>,<br />            <span class="red">'pchome'</span>,<span class="red">'pinpoint'</span>,<span class="red">'pompos'</span>,<span class="red">'portaljuice'</span>,<br />            <span class="red">'qualigo'</span>,<span class="red">'quepasacreep'</span>,<br />            <span class="red">'rabaz'</span>,<span class="red">'rambler'</span>,<span class="red">'refer'</span>,<span class="red">'roach'</span>,<span class="red">'robozilla'</span>,<span class="red">'rotondo'</span>,<br />            <span class="red">'scooter'</span>,<span class="red">'scoutabout'</span>,<span class="red">'scrubby'</span>,<span class="red">'search'</span>,<span class="red">'seventwentyfour'</span>,<span class="red">'seznam'</span>,<span class="red">'sidewinder'</span>,<span class="red">'singingfish'</span>,<span class="red">'sitecheck'</span>,<span class="red">'slurp'</span>,<span class="red">'spade'</span>,<span class="red">'spider'</span>,<span class="red">'steeler'</span>,<span class="red">'supersnooper'</span>,<br />            <span class="red">'surfnomore'</span>,<span class="red">'szuka'</span>,<br />            <span class="red">'teoma'</span>,<span class="red">'technoratisnoop'</span>,<span class="red">'tecnoseek'</span>,<span class="red">'t-h-u-n-d-e-r-s-t-o-n-e'</span>,<span class="red">'tivra'</span>,<span class="red">'toutatis'</span>,<span class="red">'tracerlock'</span>,<span class="red">'twiceler'</span>,<span class="red">'twitturls'</span>,<br />            <span class="red">'ultraseek'</span>,<br />            <span class="red">'vagabondo'</span>,<span class="red">'validator'</span>,<span class="red">'virgilio'</span>,<br />            <span class="red">'w8net'</span>,<span class="red">'walhello'</span>,<span class="red">'webalta'</span>,<span class="red">'webbug'</span>,<span class="red">'webclipping'</span>,<span class="red">'wespe'</span>,<span class="red">'wget'</span>,<span class="red">'whizbang'</span>,<span class="red">'wholeweb'</span>,<span class="red">'wiseguys'</span>,<span class="red">'worldonline'</span>,<span class="red">'wotbox'</span>,<br />            <span class="red">'xenu'</span>,<br />            <span class="red">'yahoo'</span>,<span class="red">'yam'</span>,<span class="red">'yandex'</span>,<span class="red">'yanga'</span>,<span class="red">'yeti'</span>,<br />            <span class="red">'zeus'</span>,<span class="red">'zippy'</span>,<span class="red">'zyborg'</span><br />        ]</pre>
+        <div class="details">List of spider engines</div>
+        <hr />
+        <h2 id="details_constructor">Конструктор: детали</h2>
+    <div class="location">system/statistics.class.php at line 28</div>
+    <code class="arguments" id="__construct">public  void <strong>__construct</strong>()</code>
+    <div class="details">
+            <p class="description">Class initialization</p>
+            </div>
+    <h2 id="details_methods">Методы: детали</h2>
+            <div class="location">system/statistics.class.php at line 37</div>
+        <code class="arguments" id="detect">public  boolean <strong>detect</strong> (<span class="lilac">string</span> <span class="blue">$agent</span>, <span class="lilac">string</span> <span class="blue">$object</span>)</code>
+        <div class="details">
+                    <p class="description">Detects spiders or bad bots.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$agent</td>
+                <td class="hid">$_SERVER[<span class="red">'HTTP_USER_AGENT'</span>]</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$object</td>
+                <td class="hid">What to search</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">boolean</td>
+                            <td class="hid" colspan="2">Is spider or bot detected?</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/statistics.class.php at line 52</div>
+        <code class="arguments" id="extractKeyword">public  mixed <strong>extractKeyword</strong> (<span class="lilac">string</span> <span class="blue">$url</span>)</code>
+        <div class="details">
+                    <p class="description">Extracts keywords from the user`s query.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$url</td>
+                <td class="hid">User`s URL</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">mixed</td>
+                            <td class="hid" colspan="2">Decoded keywords or FALSE</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+                    <nav class="menu_main center"><div class="menu">
+            <ul>
+                    <li><a href="../index.html">Overview</a></li>
+                    <li><a href="../statistics/package-summary.html">Namespace</a></li>
+                    <li class="active">Class</li>
+                    <li><a href="../statistics/package-tree.html">Statistics\Tree</a></li>
+                    <li><a href="../deprecated.html">Deprecated</a></li>
+                    <li><a href="../todo.html">Todo</a></li>
+                    <li><a href="../index-all.html">Index</a></li>
+                </ul>
+    </div>
+    <div class="small_links">
+        Общий обзор: <a href="#summary_fields">Поля</a> | <a href="#summary_methods">Методы</a> | <a href="#summary_constructor">Конструктор</a>
+        Детали: <a href="#details_fields">Поля</a> | <a href="#details_methods">Методы</a> | <a href="#details_constructor">Конструктор</a>
+    </div>
+</nav>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="content">
+            <div class="copyright center">Generated by <a href="https://github.com/Greenray/phpAPI" target="_blank">phpAPI</a>: PHP Documentation Creator ver. 5.0 &copy; 2015 Greenray</div>
+        </div>
+    </div>
+</body>
+</html>

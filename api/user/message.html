@@ -1,0 +1,525 @@
+<!doctype html>
+<html>
+<head>
+    <title>API for class MESSAGE (idxCMS: Flat Files Content Management System ver. 3.0)</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="generator" content="phpAPI 5.0 (https://github.com/Greenray/phpAPI/)">
+    <link href="../style.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+    <div class="page">
+        <div class="header center">
+            <div class="content">
+                idxCMS: Flat Files Content Management System ver. 3.0                <div class="logo_desc">Интерфейс прикладного программирования</div>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="content">
+                <h1>Пространства имен</h1>
+<ul>
+    <li><a href="../administration/package-summary.html">Administration</a></li>
+    <li><a href="../catalogs/package-summary.html">Catalogs</a></li>
+    <li><a href="../core/package-summary.html">Core</a></li>
+    <li><a href="../forum/package-summary.html">Forum</a></li>
+    <li><a href="../gallery/package-summary.html">Gallery</a></li>
+    <li><a href="../no package/package-summary.html">No Package</a></li>
+    <li><a href="../polls/package-summary.html">Polls</a></li>
+    <li><a href="../posts/package-summary.html">Posts</a></li>
+    <li><a href="../rss/package-summary.html">RSS</a></li>
+    <li><a href="../rate/package-summary.html">Rate</a></li>
+    <li><a href="../search/package-summary.html">Search</a></li>
+    <li><a href="../statistics/package-summary.html">Statistics</a></li>
+    <li><a href="../tagcloud/package-summary.html">Tagcloud</a></li>
+    <li><a href="../template/package-summary.html">Template</a></li>
+    <li><a href="../tools/package-summary.html">Tools</a></li>
+    <li><a href="../user/package-summary.html">User</a></li>
+</ul>
+<h1>Пространство имен User</h1>
+    <h2>Классы</h2>
+    <ul>
+            <li><a href="../user/message.html" title="User \ MESSAGE">MESSAGE</a></li>
+            <li><a href="../user/user.html" title="User \ USER">USER</a></li>
+        </ul>
+    <h2>Функции</h2>
+    <ul>
+            <li><a href="../user/package-functions.html#CreateUserLink" title="User">CreateUserLink</a></li>
+            <li><a href="../user/package-functions.html#GetAvatar" title="User">GetAvatar</a></li>
+            <li><a href="../user/package-functions.html#SelectPoint" title="User">SelectPoint</a></li>
+        </ul>
+    <h2>Глобальные элементы</h2>
+    <ul>
+            <li><a href="../user/package-globals.html#AVATARS" title="User">AVATARS</a></li>
+            <li><a href="../user/package-globals.html#PM_DATA" title="User">PM_DATA</a></li>
+        </ul>
+            </div>
+        </div>
+        <div class="main">
+            <div class="content">
+                <nav class="menu_main center"><div class="menu">
+            <ul>
+                    <li><a href="../index.html">Overview</a></li>
+                    <li><a href="../user/package-summary.html">Namespace</a></li>
+                    <li class="active">Class</li>
+                    <li><a href="../user/package-tree.html">User\Tree</a></li>
+                    <li><a href="../deprecated.html">Deprecated</a></li>
+                    <li><a href="../todo.html">Todo</a></li>
+                    <li><a href="../index-all.html">Index</a></li>
+                </ul>
+    </div>
+    <div class="small_links">
+        Общий обзор: <a href="#summary_fields">Поля</a> | <a href="#summary_methods">Методы</a> | <a href="#summary_constructor">Конструктор</a>
+        Детали: <a href="#details_fields">Поля</a> | <a href="#details_methods">Методы</a> | <a href="#details_constructor">Конструктор</a>
+    </div>
+</nav>
+                <hr />
+<div class="package">Пространство имен User</div>
+<h1>Class MESSAGE</h1>
+<div id="list">
+    <ul>
+        <li><a href="../core/dbase.html">DBASE</a><ul><li><strong>MESSAGE</strong></li></ul></li>    </ul>
+</div>
+<hr />
+<p class="arguments">public  class <strong>MESSAGE</strong> extends <a href="../core/dbase.html">DBASE</a></p>
+<div class="comment" id="overview_description">Private messages.<br /> Module registration and internal functions.</div>
+<div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Program</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+                            <td class="hid" colspan="2">idxCMS: Flat Files Content Management System</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">Version</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+                            <td class="hid" colspan="2">3.0</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">Author</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+                            <td class="hid" colspan="2">Victor Nabatov &lt;greenray.spb@gmail.com&gt;</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">Copyright</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+                            <td class="hid" colspan="2">(c) 2016 Victor Nabatov</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">License</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+                            <td class="hid" colspan="2">Creative Commons — Attribution-NonCommercial-ShareAlike 4.0 International</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">File</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+                            <td class="hid" colspan="2">system/message.class.php</td>
+                    </tr>
+        </table>
+</div>
+    <table id="summary_fields">
+        <tr><th colspan="2">Поля: общий обзор</th></tr>
+                    <tr>
+                <td class="type w_200">private  array</td>
+                <td class="description">
+                    <pre><a href="#$config"><span class="green">$config</span></a> = []</pre>
+                    <p class="description">Messages configuration</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">private  array</td>
+                <td class="description">
+                    <pre><a href="#$messages"><span class="green">$messages</span></a> = []</pre>
+                    <p class="description">Messsages</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">private  string</td>
+                <td class="description">
+                    <pre><a href="#$path"><span class="green">$path</span></a> = <span class="red">''</span></pre>
+                    <p class="description">Path to datafile</p>
+                </td>
+            </tr>
+            </table>
+            <table class="inherit">
+            <tr><th>Поля, унаследованные из Core \ DBASE</th></tr>
+            <tr>
+                <td>
+                                <span><a href="../core/dbase.html#$category"><span class="green">$category, </span></a>&nbsp;</span>
+                                <span><a href="../core/dbase.html#$comments"><span class="green">$comments, </span></a>&nbsp;</span>
+                                <span><a href="../core/dbase.html#$container"><span class="green">$container, </span></a>&nbsp;</span>
+                                <span><a href="../core/dbase.html#$content"><span class="green">$content, </span></a>&nbsp;</span>
+                                <span><a href="../core/dbase.html#$desc"><span class="green">$desc, </span></a>&nbsp;</span>
+                                <span><a href="../core/dbase.html#$index"><span class="green">$index, </span></a>&nbsp;</span>
+                                <span><a href="../core/dbase.html#$item"><span class="green">$item, </span></a>&nbsp;</span>
+                                <span><a href="../core/dbase.html#$module"><span class="green">$module, </span></a>&nbsp;</span>
+                                <span><a href="../core/dbase.html#$section"><span class="green">$section, </span></a>&nbsp;</span>
+                                <span><a href="../core/dbase.html#$sections"><span class="green">$sections, </span></a>&nbsp;</span>
+                                <span><a href="../core/dbase.html#$text"><span class="green">$text</span></a>&nbsp;</span>
+                                </td>
+            </tr>
+        </table>
+        <table id="summary_constructor">
+        <tr><th colspan="2">Конструктор: общий обзор</th></tr>
+        <tr>
+            <td class="type w_200">public  void</td>
+            <td class="description">
+                <p><a href="#__construct"><strong><span class="black">__construct</span></strong></a>(<span class="lilac">string</span> <span class="blue">$path</span>, <span class="lilac">string</span> <span class="blue">$file</span>)</p>
+                <p class="description">Class initialization.</p>
+            </td>
+        </tr>
+    </table>
+    <table id="summary_methods">
+        <tr><th colspan="2">Методы: общий обзор</th></tr>
+                    <tr>
+                <td class="type w_200">public  array</td>
+                <td class="description">
+                    <p><a href="#checkNewMessages"><strong><span class="black">checkNewMessages</span></strong></a> ()</p>
+                    <p class="description">Checks for new messages.</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">private  string</td>
+                <td class="description">
+                    <p><a href="#checkText"><strong><span class="black">checkText</span></strong></a> (<span class="lilac">string</span> <span class="blue">$text</span>)</p>
+                    <p class="description">Checks that the user does not send an empty message.</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public  array</td>
+                <td class="description">
+                    <p><a href="#getMessages"><strong><span class="black">getMessages</span></strong></a> (<span class="lilac">string</span> <span class="blue">$from</span>)</p>
+                    <p class="description">Gets messages.</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public  boolean</td>
+                <td class="description">
+                    <p><a href="#removeMessage"><strong><span class="black">removeMessage</span></strong></a> (<span class="lilac">integer</span> <span class="blue">$id</span>, <span class="lilac">string</span> <span class="blue">$from</span>)</p>
+                    <p class="description">Removes message.</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public  boolean</td>
+                <td class="description">
+                    <p><a href="#saveMessage"><strong><span class="black">saveMessage</span></strong></a> (<span class="lilac">integer</span> <span class="blue">$id</span>, <span class="lilac">string</span> <span class="blue">$text</span>)</p>
+                    <p class="description">Saves message.</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public  type</td>
+                <td class="description">
+                    <p><a href="#sendFeedback"><strong><span class="black">sendFeedback</span></strong></a> (<span class="lilac">string</span> <span class="blue">$text</span>, <span class="lilac">string</span> <span class="blue">$email</span>)</p>
+                    <p class="description">Sends message to administrator.</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public  boolean</td>
+                <td class="description">
+                    <p><a href="#sendMessage"><strong><span class="black">sendMessage</span></strong></a> (<span class="lilac">string</span> <span class="blue">$text</span>)</p>
+                    <p class="description">Sends message.</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public  boolean</td>
+                <td class="description">
+                    <p><a href="#sendPrivateMessage"><strong><span class="black">sendPrivateMessage</span></strong></a> (<span class="lilac">string</span> <span class="blue">$for</span>, <span class="lilac">string</span> <span class="blue">$text</span>)</p>
+                    <p class="description">Sends private message.</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public  boolean</td>
+                <td class="description">
+                    <p><a href="#setAllNoNew"><strong><span class="black">setAllNoNew</span></strong></a> ()</p>
+                    <p class="description">Marks all messages as read.</p>
+                </td>
+            </tr>
+            </table>
+            <table class="inherit">
+            <tr><th>Методы, унаследованные из Core \ DBASE</th></tr>
+            <tr>
+                <td>
+                                    <span><a href="../core/dbase.html#__construct">__construct, </a>&nbsp;</span>
+                                    <span><a href="../core/dbase.html#getIndex">getIndex, </a>&nbsp;</span>
+                                    <span><a href="../core/dbase.html#newId">newId, </a>&nbsp;</span>
+                                    <span><a href="../core/dbase.html#saveIndex">saveIndex, </a>&nbsp;</span>
+                                    <span><a href="../core/dbase.html#setIndex">setIndex</a>&nbsp;</span>
+                                </td>
+            </tr>
+        </table>
+        <h2 id="details_fields">Поля: детали</h2>
+            <div class="location">system/message.class.php at line 18</div>
+        <pre class="arguments" id="Undefined $config">private  array <strong><span class="green">$config</span></strong> = []</pre>
+        <div class="details">Messages configuration</div>
+        <hr />
+            <div class="location">system/message.class.php at line 21</div>
+        <pre class="arguments" id="Undefined $messages">private  array <strong><span class="green">$messages</span></strong> = []</pre>
+        <div class="details">Messsages</div>
+        <hr />
+            <div class="location">system/message.class.php at line 24</div>
+        <pre class="arguments" id="Undefined $path">private  string <strong><span class="green">$path</span></strong> = <span class="red">''</span></pre>
+        <div class="details">Path to datafile</div>
+        <hr />
+        <h2 id="details_constructor">Конструктор: детали</h2>
+    <div class="location">system/message.class.php at line 32</div>
+    <code class="arguments" id="__construct">public  void <strong>__construct</strong>(<span class="lilac">string</span> <span class="blue">$path</span>, <span class="lilac">string</span> <span class="blue">$file</span>)</code>
+    <div class="details">
+            <p class="description">Class initialization.</p>
+        <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$path</td>
+                <td class="hid">Path to messages file</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$file</td>
+                <td class="hid">Name of messges file</td>
+                    </tr>
+        </table>
+</div>
+    </div>
+    <h2 id="details_methods">Методы: детали</h2>
+            <div class="location">system/message.class.php at line 47</div>
+        <code class="arguments" id="checkNewMessages">public  array <strong>checkNewMessages</strong> ()</code>
+        <div class="details">
+                    <p class="description">Checks for new messages.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">array</td>
+                            <td class="hid" colspan="2">Number of new messages and info about last new message</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/message.class.php at line 68</div>
+        <code class="arguments" id="checkText">private  string <strong>checkText</strong> (<span class="lilac">string</span> <span class="blue">$text</span>)</code>
+        <div class="details">
+                    <p class="description">Checks that the user does not send an empty message.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$text</td>
+                <td class="hid">Message text</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">Throws</td>
+            <td class="hid right w_100 lilac">Exception</td>
+                            <td class="hid" colspan="2"><span class="red">"Text is empty"</span></td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid" colspan="2">$text Message text with allowed length</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/message.class.php at line 83</div>
+        <code class="arguments" id="getMessages">public  array <strong>getMessages</strong> (<span class="lilac">string</span> <span class="blue">$from</span>)</code>
+        <div class="details">
+                    <p class="description">Gets messages.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$from</td>
+                <td class="hid">Sender</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">array</td>
+                            <td class="hid" colspan="2">Messages</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/message.class.php at line 94</div>
+        <code class="arguments" id="removeMessage">public  boolean <strong>removeMessage</strong> (<span class="lilac">integer</span> <span class="blue">$id</span>, <span class="lilac">string</span> <span class="blue">$from</span>)</code>
+        <div class="details">
+                    <p class="description">Removes message.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">integer</td>
+                            <td class="hid blue w_100">$id</td>
+                <td class="hid">ID of the message</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$from</td>
+                <td class="hid">Sender</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">boolean</td>
+                            <td class="hid" colspan="2">The result of operation</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/message.class.php at line 115</div>
+        <code class="arguments" id="saveMessage">public  boolean <strong>saveMessage</strong> (<span class="lilac">integer</span> <span class="blue">$id</span>, <span class="lilac">string</span> <span class="blue">$text</span>)</code>
+        <div class="details">
+                    <p class="description">Saves message.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">integer</td>
+                            <td class="hid blue w_100">$id</td>
+                <td class="hid">Message ID</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$text</td>
+                <td class="hid">Message text</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">Throws</td>
+            <td class="hid right w_100 lilac">Exception</td>
+                            <td class="hid" colspan="2"><span class="red">"Invalid ID"</span></td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">boolean</td>
+                            <td class="hid" colspan="2">The result of operation</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/message.class.php at line 132</div>
+        <code class="arguments" id="sendFeedback">public  type <strong>sendFeedback</strong> (<span class="lilac">string</span> <span class="blue">$text</span>, <span class="lilac">string</span> <span class="blue">$email</span>)</code>
+        <div class="details">
+                    <p class="description">Sends message to administrator.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$text</td>
+                <td class="hid">Message text</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$email</td>
+                <td class="hid">User's email address</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">Throws</td>
+            <td class="hid right w_100 lilac">Exception</td>
+                            <td class="hid" colspan="2"><span class="red">"Invalid email"</span></td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/message.class.php at line 162</div>
+        <code class="arguments" id="sendMessage">public  boolean <strong>sendMessage</strong> (<span class="lilac">string</span> <span class="blue">$text</span>)</code>
+        <div class="details">
+                    <p class="description">Sends message.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$text</td>
+                <td class="hid">Message text</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">boolean</td>
+                            <td class="hid" colspan="2">The result of operation</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/message.class.php at line 191</div>
+        <code class="arguments" id="sendPrivateMessage">public  boolean <strong>sendPrivateMessage</strong> (<span class="lilac">string</span> <span class="blue">$for</span>, <span class="lilac">string</span> <span class="blue">$text</span>)</code>
+        <div class="details">
+                    <p class="description">Sends private message.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Throws</td>
+            <td class="hid right w_100 lilac">Exception</td>
+                            <td class="hid blue w_100">$for</td>
+                <td class="hid"><span class="red">"Invalid user"</span></td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">Exception</td>
+                            <td class="hid blue w_100">$text</td>
+                <td class="hid"><span class="red">"Invalid email"</span></td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">Exception</td>
+                            <td class="hid" colspan="2"><span class="red">"Cannot send message"</span></td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">boolean</td>
+                            <td class="hid" colspan="2">The result of operation</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/message.class.php at line 247</div>
+        <code class="arguments" id="setAllNoNew">public  boolean <strong>setAllNoNew</strong> ()</code>
+        <div class="details">
+                    <p class="description">Marks all messages as read.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">boolean</td>
+                            <td class="hid" colspan="2">The result of operation</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+                    <nav class="menu_main center"><div class="menu">
+            <ul>
+                    <li><a href="../index.html">Overview</a></li>
+                    <li><a href="../user/package-summary.html">Namespace</a></li>
+                    <li class="active">Class</li>
+                    <li><a href="../user/package-tree.html">User\Tree</a></li>
+                    <li><a href="../deprecated.html">Deprecated</a></li>
+                    <li><a href="../todo.html">Todo</a></li>
+                    <li><a href="../index-all.html">Index</a></li>
+                </ul>
+    </div>
+    <div class="small_links">
+        Общий обзор: <a href="#summary_fields">Поля</a> | <a href="#summary_methods">Методы</a> | <a href="#summary_constructor">Конструктор</a>
+        Детали: <a href="#details_fields">Поля</a> | <a href="#details_methods">Методы</a> | <a href="#details_constructor">Конструктор</a>
+    </div>
+</nav>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="content">
+            <div class="copyright center">Generated by <a href="https://github.com/Greenray/phpAPI" target="_blank">phpAPI</a>: PHP Documentation Creator ver. 5.0 &copy; 2015 Greenray</div>
+        </div>
+    </div>
+</body>
+</html>

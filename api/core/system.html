@@ -1,0 +1,905 @@
+<!doctype html>
+<html>
+<head>
+    <title>API for class SYSTEM (idxCMS: Flat Files Content Management System ver. 3.0)</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="generator" content="phpAPI 5.0 (https://github.com/Greenray/phpAPI/)">
+    <link href="../style.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+    <div class="page">
+        <div class="header center">
+            <div class="content">
+                idxCMS: Flat Files Content Management System ver. 3.0                <div class="logo_desc">Интерфейс прикладного программирования</div>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="content">
+                <h1>Пространства имен</h1>
+<ul>
+    <li><a href="../administration/package-summary.html">Administration</a></li>
+    <li><a href="../catalogs/package-summary.html">Catalogs</a></li>
+    <li><a href="../core/package-summary.html">Core</a></li>
+    <li><a href="../forum/package-summary.html">Forum</a></li>
+    <li><a href="../gallery/package-summary.html">Gallery</a></li>
+    <li><a href="../no package/package-summary.html">No Package</a></li>
+    <li><a href="../polls/package-summary.html">Polls</a></li>
+    <li><a href="../posts/package-summary.html">Posts</a></li>
+    <li><a href="../rss/package-summary.html">RSS</a></li>
+    <li><a href="../rate/package-summary.html">Rate</a></li>
+    <li><a href="../search/package-summary.html">Search</a></li>
+    <li><a href="../statistics/package-summary.html">Statistics</a></li>
+    <li><a href="../tagcloud/package-summary.html">Tagcloud</a></li>
+    <li><a href="../template/package-summary.html">Template</a></li>
+    <li><a href="../tools/package-summary.html">Tools</a></li>
+    <li><a href="../user/package-summary.html">User</a></li>
+</ul>
+<h1>Пространство имен User</h1>
+    <h2>Классы</h2>
+    <ul>
+            <li><a href="../core/categories.html" title="Core \ CATEGORIES">CATEGORIES</a></li>
+            <li><a href="../core/cms.html" title="Core \ CMS">CMS</a></li>
+            <li><a href="../core/comments.html" title="Core \ COMMENTS">COMMENTS</a></li>
+            <li><a href="../core/config.html" title="Core \ CONFIG">CONFIG</a></li>
+            <li><a href="../core/content.html" title="Core \ CONTENT">CONTENT</a></li>
+            <li><a href="../core/dbase.html" title="Core \ DBASE">DBASE</a></li>
+            <li><a href="../core/filter.html" title="Core \ FILTER">FILTER</a></li>
+            <li><a href="../core/highlighter.html" title="Core \ HIGHLIGHTER">HIGHLIGHTER</a></li>
+            <li><a href="../core/image.html" title="Core \ IMAGE">IMAGE</a></li>
+            <li><a href="../core/items.html" title="Core \ ITEMS">ITEMS</a></li>
+            <li><a href="../core/log.html" title="Core \ LOG">LOG</a></li>
+            <li><a href="../core/parser.html" title="Core \ PARSER">PARSER</a></li>
+            <li><a href="../core/sections.html" title="Core \ SECTIONS">SECTIONS</a></li>
+            <li><a href="../core/system.html" title="Core \ SYSTEM">SYSTEM</a></li>
+            <li><a href="../core/uploader.html" title="Core \ UPLOADER">UPLOADER</a></li>
+        </ul>
+    <h2>Функции</h2>
+    <ul>
+            <li><a href="../core/package-functions.html#AdvScanDir" title="Core">AdvScanDir</a></li>
+            <li><a href="../core/package-functions.html#AdvancedPagination" title="Core">AdvancedPagination</a></li>
+            <li><a href="../core/package-functions.html#CheckCaptcha" title="Core">CheckCaptcha</a></li>
+            <li><a href="../core/package-functions.html#CreateUrl" title="Core">CreateUrl</a></li>
+            <li><a href="../core/package-functions.html#DeleteTree" title="Core">DeleteTree</a></li>
+            <li><a href="../core/package-functions.html#FormatTime" title="Core">FormatTime</a></li>
+            <li><a href="../core/package-functions.html#GetFilesList" title="Core">GetFilesList</a></li>
+            <li><a href="../core/package-functions.html#GetPagination" title="Core">GetPagination</a></li>
+            <li><a href="../core/package-functions.html#GetUnserialized" title="Core">GetUnserialized</a></li>
+            <li><a href="../core/package-functions.html#OnlyLatin" title="Core">OnlyLatin</a></li>
+            <li><a href="../core/package-functions.html#Pagination" title="Core">Pagination</a></li>
+            <li><a href="../core/package-functions.html#RandomString" title="Core">RandomString</a></li>
+            <li><a href="../core/package-functions.html#Redirect" title="Core">Redirect</a></li>
+            <li><a href="../core/package-functions.html#SelectTimeZone" title="Core">SelectTimeZone</a></li>
+            <li><a href="../core/package-functions.html#SendMail" title="Core">SendMail</a></li>
+            <li><a href="../core/package-functions.html#ShowCaptcha" title="Core">ShowCaptcha</a></li>
+            <li><a href="../core/package-functions.html#Sitemap" title="Core">Sitemap</a></li>
+            <li><a href="../core/package-functions.html#UnifyBr" title="Core">UnifyBr</a></li>
+            <li><a href="../core/package-functions.html#__" title="Core">__</a></li>
+            <li><a href="../core/package-functions.html#gzfile_get_contents" title="Core">gzfile_get_contents</a></li>
+            <li><a href="../core/package-functions.html#gzfile_put_contents" title="Core">gzfile_put_contents</a></li>
+            <li><a href="../core/package-functions.html#idxErrorHandler" title="Core">idxErrorHandler</a></li>
+        </ul>
+    <h2>Глобальные элементы</h2>
+    <ul>
+            <li><a href="../core/package-globals.html#ADMIN" title="Core">ADMIN</a></li>
+            <li><a href="../core/package-globals.html#ADMINLIBS" title="Core">ADMINLIBS</a></li>
+            <li><a href="../core/package-globals.html#CACHE_STORE" title="Core">CACHE_STORE</a></li>
+            <li><a href="../core/package-globals.html#CATEGORY" title="Core">CATEGORY</a></li>
+            <li><a href="../core/package-globals.html#COMMENT" title="Core">COMMENT</a></li>
+            <li><a href="../core/package-globals.html#CONTENT" title="Core">CONTENT</a></li>
+            <li><a href="../core/package-globals.html#CURRENT_MODULE" title="Core">CURRENT_MODULE</a></li>
+            <li><a href="../core/package-globals.html#CURRENT_SKIN" title="Core">CURRENT_SKIN</a></li>
+            <li><a href="../core/package-globals.html#DS" title="Core">DS</a></li>
+            <li><a href="../core/package-globals.html#IDX_COPYRIGHT" title="Core">IDX_COPYRIGHT</a></li>
+            <li><a href="../core/package-globals.html#IDX_POWERED" title="Core">IDX_POWERED</a></li>
+            <li><a href="../core/package-globals.html#IDX_VERSION" title="Core">IDX_VERSION</a></li>
+            <li><a href="../core/package-globals.html#IMAGES" title="Core">IMAGES</a></li>
+            <li><a href="../core/package-globals.html#ITEM" title="Core">ITEM</a></li>
+            <li><a href="../core/package-globals.html#LF" title="Core">LF</a></li>
+            <li><a href="../core/package-globals.html#LOGS" title="Core">LOGS</a></li>
+            <li><a href="../core/package-globals.html#MODULE" title="Core">MODULE</a></li>
+            <li><a href="../core/package-globals.html#MODULES" title="Core">MODULES</a></li>
+            <li><a href="../core/package-globals.html#PAGE" title="Core">PAGE</a></li>
+            <li><a href="../core/package-globals.html#ROOT" title="Core">ROOT</a></li>
+            <li><a href="../core/package-globals.html#SECTION" title="Core">SECTION</a></li>
+            <li><a href="../core/package-globals.html#SKINS" title="Core">SKINS</a></li>
+            <li><a href="../core/package-globals.html#SMILES" title="Core">SMILES</a></li>
+            <li><a href="../core/package-globals.html#SYS" title="Core">SYS</a></li>
+            <li><a href="../core/package-globals.html#TEMP" title="Core">TEMP</a></li>
+            <li><a href="../core/package-globals.html#TEMPLATES" title="Core">TEMPLATES</a></li>
+            <li><a href="../core/package-globals.html#TOOLS" title="Core">TOOLS</a></li>
+            <li><a href="../core/package-globals.html#USERS" title="Core">USERS</a></li>
+            <li><a href="../core/package-globals.html#idxADMIN" title="Core">idxADMIN</a></li>
+            <li><a href="../core/package-globals.html#idxCMS" title="Core">idxCMS</a></li>
+        </ul>
+            </div>
+        </div>
+        <div class="main">
+            <div class="content">
+                <nav class="menu_main center"><div class="menu">
+            <ul>
+                    <li><a href="../index.html">Overview</a></li>
+                    <li><a href="../core/package-summary.html">Namespace</a></li>
+                    <li class="active">Class</li>
+                    <li><a href="../core/package-tree.html">Core\Tree</a></li>
+                    <li><a href="../deprecated.html">Deprecated</a></li>
+                    <li><a href="../todo.html">Todo</a></li>
+                    <li><a href="../index-all.html">Index</a></li>
+                </ul>
+    </div>
+    <div class="small_links">
+        Общий обзор: <a href="#summary_fields">Поля</a> | <a href="#summary_methods">Методы</a> | <a href="#summary_constructor">Конструктор</a>
+        Детали: <a href="#details_fields">Поля</a> | <a href="#details_methods">Методы</a> | <a href="#details_constructor">Конструктор</a>
+    </div>
+</nav>
+                <hr />
+<div class="package">Пространство имен Core</div>
+<h1>Class SYSTEM</h1>
+<div id="list">
+    <ul>
+        <li><strong>SYSTEM</strong></li></ul></li>    </ul>
+</div>
+<hr />
+<p class="arguments">public  class <strong>SYSTEM</strong></p>
+<div class="comment" id="overview_description">System, modules, users and templates initialization.</div>
+<div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Program</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+                            <td class="hid" colspan="2">idxCMS: Flat Files Content Management System</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">Version</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+                            <td class="hid" colspan="2">3.0</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">Author</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+                            <td class="hid" colspan="2">Victor Nabatov &lt;greenray.spb@gmail.com&gt;</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">Copyright</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+                            <td class="hid" colspan="2">(c) 2016 Victor Nabatov</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">License</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+                            <td class="hid" colspan="2">Creative Commons — Attribution-NonCommercial-ShareAlike 4.0 International</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">File</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+                            <td class="hid" colspan="2">system/system.class.php</td>
+                    </tr>
+        </table>
+</div>
+    <table id="summary_fields">
+        <tr><th colspan="2">Поля: общий обзор</th></tr>
+                    <tr>
+                <td class="type w_200">public static  mixed</td>
+                <td class="description">
+                    <pre><a href="#$current_point"><span class="green">$current_point</span></a> = <span class="red">''</span></pre>
+                    <p class="description">Array of the output points.</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">private static  array</td>
+                <td class="description">
+                    <pre><a href="#$feeds"><span class="green">$feeds</span></a> = []</pre>
+                    <p class="description">Website RSS feeds</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">private static  string</td>
+                <td class="description">
+                    <pre><a href="#$language"><span class="green">$language</span></a> = <span class="red">''</span></pre>
+                    <p class="description">User language</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">private static  string</td>
+                <td class="description">
+                    <pre><a href="#$languages"><span class="green">$languages</span></a> = []</pre>
+                    <p class="description">Available website translations</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">private static  string</td>
+                <td class="description">
+                    <pre><a href="#$locale"><span class="green">$locale</span></a> = <span class="red">''</span></pre>
+                    <p class="description">Current locale</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">private static  array</td>
+                <td class="description">
+                    <pre><a href="#$menu"><span class="green">$menu</span></a> = []</pre>
+                    <p class="description">Website menu</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">private static  array</td>
+                <td class="description">
+                    <pre><a href="#$meta"><span class="green">$meta</span></a> = []</pre>
+                    <p class="description">Website meta</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public static  array</td>
+                <td class="description">
+                    <pre><a href="#$modules"><span class="green">$modules</span></a> = []</pre>
+                    <p class="description">CMS modules</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public static  array</td>
+                <td class="description">
+                    <pre><a href="#$output"><span class="green">$output</span></a> = []</pre>
+                    <p class="description">Array of generated output data</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">private static  string</td>
+                <td class="description">
+                    <pre><a href="#$pagename"><span class="green">$pagename</span></a> = <span class="red">''</span></pre>
+                    <p class="description">Name of the current page</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">private static  array</td>
+                <td class="description">
+                    <pre><a href="#$search"><span class="green">$search</span></a> = []</pre>
+                    <p class="description">Search words from user request</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">private static  array</td>
+                <td class="description">
+                    <pre><a href="#$sitemap"><span class="green">$sitemap</span></a> = []</pre>
+                    <p class="description">Website map</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">private static  string</td>
+                <td class="description">
+                    <pre><a href="#$skin"><span class="green">$skin</span></a> = <span class="red">'Default'</span></pre>
+                    <p class="description">Current skin</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public static  array</td>
+                <td class="description">
+                    <pre><a href="#$skins"><span class="green">$skins</span></a> = []</pre>
+                    <p class="description">Website skins</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">private static  string</td>
+                <td class="description">
+                    <pre><a href="#$url"><span class="green">$url</span></a> = <span class="red">''</span></pre>
+                    <p class="description">Website URL.</p>
+                </td>
+            </tr>
+            </table>
+    <table id="summary_constructor">
+        <tr><th colspan="2">Конструктор: общий обзор</th></tr>
+        <tr>
+            <td class="type w_200">public  void</td>
+            <td class="description">
+                <p><a href="#__construct"><strong><span class="black">__construct</span></strong></a>()</p>
+                <p class="description">Initialization of the system.</p>
+            </td>
+        </tr>
+    </table>
+    <table id="summary_methods">
+        <tr><th colspan="2">Методы: общий обзор</th></tr>
+                    <tr>
+                <td class="type w_200">public  boolean</td>
+                <td class="description">
+                    <p><a href="#createMainMenu"><strong><span class="black">createMainMenu</span></strong></a> ()</p>
+                    <p class="description">Creates main menu for website.</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public  array</td>
+                <td class="description">
+                    <p><a href="#getMainMenu"><strong><span class="black">getMainMenu</span></strong></a> ()</p>
+                    <p class="description">Returns data for main menu or sitemap.</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public static  string</td>
+                <td class="description">
+                    <p><a href="#get"><strong><span class="black">get</span></strong></a> (<span class="lilac">string</span> <span class="blue">$param</span>)</p>
+                    <p class="description">Gets system parameter.</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public  void</td>
+                <td class="description">
+                    <p><a href="#initModules"><strong><span class="black">initModules</span></strong></a> (<span class="lilac">boolean</span> <span class="blue">$ignore_disabled</span>)</p>
+                    <p class="description">Modules initialization.</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public static  void</td>
+                <td class="description">
+                    <p><a href="#registerFeed"><strong><span class="black">registerFeed</span></strong></a> (<span class="lilac">string</span> <span class="blue">$section</span>, <span class="lilac">string</span> <span class="blue">$title</span>, <span class="lilac">string</span> <span class="blue">$desc</span>, <span class="lilac">string</span> <span class="blue">$module</span>)</p>
+                    <p class="description">Registers RSS feed for module.</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public static  void</td>
+                <td class="description">
+                    <p><a href="#registerMainMenu"><strong><span class="black">registerMainMenu</span></strong></a> (<span class="lilac">string</span> <span class="blue">$module</span>)</p>
+                    <p class="description">Registers module for menu link.</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public static  void</td>
+                <td class="description">
+                    <p><a href="#registerModule"><strong><span class="black">registerModule</span></strong></a> (<span class="lilac">string</span> <span class="blue">$module</span>, <span class="lilac">string</span> <span class="blue">$title</span>, <span class="lilac">string</span> <span class="blue">$type</span>, <span class="lilac">string</span> <span class="blue">$system</span>)</p>
+                    <p class="description">Registers module.</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public static  void</td>
+                <td class="description">
+                    <p><a href="#registerSearch"><strong><span class="black">registerSearch</span></strong></a> (<span class="lilac">string</span> <span class="blue">$module</span>)</p>
+                    <p class="description">Registers module for search requests.</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public static  void</td>
+                <td class="description">
+                    <p><a href="#registerSiteMap"><strong><span class="black">registerSiteMap</span></strong></a> (<span class="lilac">string</span> <span class="blue">$module</span>)</p>
+                    <p class="description">Registers module for use in sitemap.</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public static  void</td>
+                <td class="description">
+                    <p><a href="#registerSkin"><strong><span class="black">registerSkin</span></strong></a> (<span class="lilac">string</span> <span class="blue">$name</span>, <span class="lilac">string</span> <span class="blue">$skin</span>)</p>
+                    <p class="description">Registers module for menu link.</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public static  void</td>
+                <td class="description">
+                    <p><a href="#set"><strong><span class="black">set</span></strong></a> (<span class="lilac">string</span> <span class="blue">$param</span>, <span class="lilac">string</span> <span class="blue">$value</span>)</p>
+                    <p class="description">Sets system parameter.</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public static  void</td>
+                <td class="description">
+                    <p><a href="#setCurrentPoint"><strong><span class="black">setCurrentPoint</span></strong></a> (<span class="lilac">type</span> <span class="blue">$point</span>)</p>
+                    <p class="description">Sets the point for output.</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public static  void</td>
+                <td class="description">
+                    <p><a href="#setPageKeywords"><strong><span class="black">setPageKeywords</span></strong></a> (<span class="lilac">string</span> <span class="blue">$keywords</span>)</p>
+                    <p class="description">Sets keywords for requested website page.</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public static  void</td>
+                <td class="description">
+                    <p><a href="#setPageDescription"><strong><span class="black">setPageDescription</span></strong></a> (<span class="lilac">string</span> <span class="blue">$desc</span>)</p>
+                    <p class="description">Sets description for requested website page.</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public static  void</td>
+                <td class="description">
+                    <p><a href="#defineWindow"><strong><span class="black">defineWindow</span></strong></a> (<span class="lilac">string</span> <span class="blue">$title</span>, <span class="lilac">string</span> <span class="blue">$content</span>)</p>
+                    <p class="description">Prepare data for output.</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public static  string</td>
+                <td class="description">
+                    <p><a href="#showWindow"><strong><span class="black">showWindow</span></strong></a> (<span class="lilac">string</span> <span class="blue">$title</span>, <span class="lilac">string</span> <span class="blue">$content</span>, <span class="lilac">string</span> <span class="blue">$template</span>)</p>
+                    <p class="description">Shows window.</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public static  void</td>
+                <td class="description">
+                    <p><a href="#showMessage"><strong><span class="black">showMessage</span></strong></a> (<span class="lilac">string</span> <span class="blue">$message</span>, <span class="lilac">string</span> <span class="blue">$url</span>)</p>
+                    <p class="description">Shows message.</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public static  void</td>
+                <td class="description">
+                    <p><a href="#showError"><strong><span class="black">showError</span></strong></a> (<span class="lilac">string</span> <span class="blue">$message</span>, <span class="lilac">string</span> <span class="blue">$url</span>)</p>
+                    <p class="description">Shows error.</p>
+                </td>
+            </tr>
+            </table>
+    <h2 id="details_fields">Поля: детали</h2>
+            <div class="location">system/system.class.php at line 28</div>
+        <pre class="arguments" id="Undefined $current_point">public static  mixed <strong><span class="green">$current_point</span></strong> = <span class="red">''</span></pre>
+        <div class="details">Array of the output points.<br /> Currently there are six points:<ul><li>'point' may be left or right panel of the website page as well as upper or lawer than main module</li><li>'main'  data for the website main window</li><li>'box'   data for website boxes</li><li>'title' name of the current page will be added to the website title, if the last has been configured</li><li>'meta'  configured meta tags will be added to the head of the generating page</li></ul>- 'error' an error message will be shown</div>
+        <hr />
+            <div class="location">system/system.class.php at line 31</div>
+        <pre class="arguments" id="Undefined $feeds">private static  array <strong><span class="green">$feeds</span></strong> = []</pre>
+        <div class="details">Website RSS feeds</div>
+        <hr />
+            <div class="location">system/system.class.php at line 34</div>
+        <pre class="arguments" id="Undefined $language">private static  string <strong><span class="green">$language</span></strong> = <span class="red">''</span></pre>
+        <div class="details">User language</div>
+        <hr />
+            <div class="location">system/system.class.php at line 37</div>
+        <pre class="arguments" id="Undefined $languages">private static  string <strong><span class="green">$languages</span></strong> = []</pre>
+        <div class="details">Available website translations</div>
+        <hr />
+            <div class="location">system/system.class.php at line 40</div>
+        <pre class="arguments" id="Undefined $locale">private static  string <strong><span class="green">$locale</span></strong> = <span class="red">''</span></pre>
+        <div class="details">Current locale</div>
+        <hr />
+            <div class="location">system/system.class.php at line 43</div>
+        <pre class="arguments" id="Undefined $menu">private static  array <strong><span class="green">$menu</span></strong> = []</pre>
+        <div class="details">Website menu</div>
+        <hr />
+            <div class="location">system/system.class.php at line 46</div>
+        <pre class="arguments" id="Undefined $meta">private static  array <strong><span class="green">$meta</span></strong> = []</pre>
+        <div class="details">Website meta</div>
+        <hr />
+            <div class="location">system/system.class.php at line 49</div>
+        <pre class="arguments" id="Undefined $modules">public static  array <strong><span class="green">$modules</span></strong> = []</pre>
+        <div class="details">CMS modules</div>
+        <hr />
+            <div class="location">system/system.class.php at line 52</div>
+        <pre class="arguments" id="Undefined $output">public static  array <strong><span class="green">$output</span></strong> = []</pre>
+        <div class="details">Array of generated output data</div>
+        <hr />
+            <div class="location">system/system.class.php at line 55</div>
+        <pre class="arguments" id="Undefined $pagename">private static  string <strong><span class="green">$pagename</span></strong> = <span class="red">''</span></pre>
+        <div class="details">Name of the current page</div>
+        <hr />
+            <div class="location">system/system.class.php at line 58</div>
+        <pre class="arguments" id="Undefined $search">private static  array <strong><span class="green">$search</span></strong> = []</pre>
+        <div class="details">Search words from user request</div>
+        <hr />
+            <div class="location">system/system.class.php at line 61</div>
+        <pre class="arguments" id="Undefined $sitemap">private static  array <strong><span class="green">$sitemap</span></strong> = []</pre>
+        <div class="details">Website map</div>
+        <hr />
+            <div class="location">system/system.class.php at line 64</div>
+        <pre class="arguments" id="Undefined $skin">private static  string <strong><span class="green">$skin</span></strong> = <span class="red">'Default'</span></pre>
+        <div class="details">Current skin</div>
+        <hr />
+            <div class="location">system/system.class.php at line 67</div>
+        <pre class="arguments" id="Undefined $skins">public static  array <strong><span class="green">$skins</span></strong> = []</pre>
+        <div class="details">Website skins</div>
+        <hr />
+            <div class="location">system/system.class.php at line 75</div>
+        <pre class="arguments" id="Undefined $url">private static  string <strong><span class="green">$url</span></strong> = <span class="red">''</span></pre>
+        <div class="details">Website URL.<br /> This one may be configured by website administrator or detected automaticaly.</div>
+        <hr />
+        <h2 id="details_constructor">Конструктор: детали</h2>
+    <div class="location">system/system.class.php at line 82</div>
+    <code class="arguments" id="__construct">public  void <strong>__construct</strong>()</code>
+    <div class="details">
+            include_once SYS.<span class="red">'languages'</span><br />.DS.self::$language.<span class="red">'.php'</span><br />            <p class="description">Initialization of the system.</p>
+        <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Uses</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+                            <td class="hid" colspan="2">$LANG Website translations</td>
+                    </tr>
+        </table>
+</div>
+    </div>
+    <h2 id="details_methods">Методы: детали</h2>
+            <div class="location">system/system.class.php at line 153</div>
+        <code class="arguments" id="createMainMenu">public  boolean <strong>createMainMenu</strong> ()</code>
+        <div class="details">
+                    <p class="description">Creates main menu for website.<br /> The menu will be created only for registered and enabled modules.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">boolean</td>
+                            <td class="hid" colspan="2">The result of operation</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/system.class.php at line 217</div>
+        <code class="arguments" id="getMainMenu">public  array <strong>getMainMenu</strong> ()</code>
+        <div class="details">
+                    <p class="description">Returns data for main menu or sitemap.<br /> Only registered and enabled modules will be used.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">array</td>
+                            <td class="hid" colspan="2">Data for main menu or sitemap</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/system.class.php at line 250</div>
+        <code class="arguments" id="get">public static  string <strong>get</strong> (<span class="lilac">string</span> <span class="blue">$param</span>)</code>
+        <div class="details">
+                    <p class="description">Gets system parameter.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$param</td>
+                <td class="hid">System parameter</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid" colspan="2">Value of the requested parameter</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/system.class.php at line 260</div>
+        <code class="arguments" id="initModules">public  void <strong>initModules</strong> (<span class="lilac">boolean</span> <span class="blue">$ignore_disabled</span>)</code>
+        <div class="details">
+                    include_once MODULES.$mod[0].DS.<span class="red">'module.php'</span><br />                    <p class="description">Modules initialization.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">boolean</td>
+                            <td class="hid blue w_100">$ignore_disabled</td>
+                <td class="hid">Init all existing modules</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">Uses</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+                            <td class="hid" colspan="2">array $LANG Website translations</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/system.class.php at line 286</div>
+        <code class="arguments" id="registerFeed">public static  void <strong>registerFeed</strong> (<span class="lilac">string</span> <span class="blue">$section</span>, <span class="lilac">string</span> <span class="blue">$title</span>, <span class="lilac">string</span> <span class="blue">$desc</span>, <span class="lilac">string</span> <span class="blue">$module</span>)</code>
+        <div class="details">
+                    <p class="description">Registers RSS feed for module.<br /> RSS feed ID is looks like "module@section".</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$section</td>
+                <td class="hid">RSS feed ID</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$title</td>
+                <td class="hid">RSS feed title</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$desc</td>
+                <td class="hid">RSS feed description</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$module</td>
+                <td class="hid">Module name</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/system.class.php at line 295</div>
+        <code class="arguments" id="registerMainMenu">public static  void <strong>registerMainMenu</strong> (<span class="lilac">string</span> <span class="blue">$module</span>)</code>
+        <div class="details">
+                    <p class="description">Registers module for menu link.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$module</td>
+                <td class="hid">Module name</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/system.class.php at line 312</div>
+        <code class="arguments" id="registerModule">public static  void <strong>registerModule</strong> (<span class="lilac">string</span> <span class="blue">$module</span>, <span class="lilac">string</span> <span class="blue">$title</span>, <span class="lilac">string</span> <span class="blue">$type</span>, <span class="lilac">string</span> <span class="blue">$system</span>)</code>
+        <div class="details">
+                    <p class="description">Registers module.<br /> Used for classify modules by type. There are three types:<ul><li>system (cannot be excluded);</li><li>main (for full pages);</li><li>box (for panels or boxes);</li></ul>- plugin (cannot be showed on any page).</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$module</td>
+                <td class="hid">Module name</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$title</td>
+                <td class="hid">Module title</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$type</td>
+                <td class="hid">Module type</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac"></td>
+                            <td class="hid" colspan="2"></td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/system.class.php at line 323</div>
+        <code class="arguments" id="registerSearch">public static  void <strong>registerSearch</strong> (<span class="lilac">string</span> <span class="blue">$module</span>)</code>
+        <div class="details">
+                    <p class="description">Registers module for search requests.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$module</td>
+                <td class="hid">Module name</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/system.class.php at line 332</div>
+        <code class="arguments" id="registerSiteMap">public static  void <strong>registerSiteMap</strong> (<span class="lilac">string</span> <span class="blue">$module</span>)</code>
+        <div class="details">
+                    <p class="description">Registers module for use in sitemap.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$module</td>
+                <td class="hid">Module name</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/system.class.php at line 342</div>
+        <code class="arguments" id="registerSkin">public static  void <strong>registerSkin</strong> (<span class="lilac">string</span> <span class="blue">$name</span>, <span class="lilac">string</span> <span class="blue">$skin</span>)</code>
+        <div class="details">
+                    <p class="description">Registers module for menu link.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$name</td>
+                <td class="hid">Skin name</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$skin</td>
+                <td class="hid">Skin template</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/system.class.php at line 352</div>
+        <code class="arguments" id="set">public static  void <strong>set</strong> (<span class="lilac">string</span> <span class="blue">$param</span>, <span class="lilac">string</span> <span class="blue">$value</span>)</code>
+        <div class="details">
+                    <p class="description">Sets system parameter.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$param</td>
+                <td class="hid">System parameter</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$value</td>
+                <td class="hid">Value of the system parameter</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/system.class.php at line 361</div>
+        <code class="arguments" id="setCurrentPoint">public static  void <strong>setCurrentPoint</strong> (<span class="lilac">type</span> <span class="blue">$point</span>)</code>
+        <div class="details">
+                    <p class="description">Sets the point for output.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">type</td>
+                            <td class="hid blue w_100">$point</td>
+                <td class="hid">Output point name</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/system.class.php at line 372</div>
+        <code class="arguments" id="setPageKeywords">public static  void <strong>setPageKeywords</strong> (<span class="lilac">string</span> <span class="blue">$keywords</span>)</code>
+        <div class="details">
+                    <p class="description">Sets keywords for requested website page.<br /> This description will be used in meta tag.<br /> If some words has been set in website configuration (global keywords) the $keywords will be added to them.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$keywords</td>
+                <td class="hid">Page keywords</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/system.class.php at line 382</div>
+        <code class="arguments" id="setPageDescription">public static  void <strong>setPageDescription</strong> (<span class="lilac">string</span> <span class="blue">$desc</span>)</code>
+        <div class="details">
+                    <p class="description">Sets description for requested website page.<br /> This description will be used in meta tag.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$desc</td>
+                <td class="hid">Page description</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/system.class.php at line 392</div>
+        <code class="arguments" id="defineWindow">public static  void <strong>defineWindow</strong> (<span class="lilac">string</span> <span class="blue">$title</span>, <span class="lilac">string</span> <span class="blue">$content</span>)</code>
+        <div class="details">
+                    <p class="description">Prepare data for output.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$title</td>
+                <td class="hid">Window title</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$content</td>
+                <td class="hid">Content for output</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/system.class.php at line 406</div>
+        <code class="arguments" id="showWindow">public static  string <strong>showWindow</strong> (<span class="lilac">string</span> <span class="blue">$title</span>, <span class="lilac">string</span> <span class="blue">$content</span>, <span class="lilac">string</span> <span class="blue">$template</span>)</code>
+        <div class="details">
+                    <p class="description">Shows window.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$title</td>
+                <td class="hid">The title of the output data</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$content</td>
+                <td class="hid">The content for use in output</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$template</td>
+                <td class="hid">Name of the template as a name of class to use in output</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid" colspan="2">Website page</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/system.class.php at line 430</div>
+        <code class="arguments" id="showMessage">public static  void <strong>showMessage</strong> (<span class="lilac">string</span> <span class="blue">$message</span>, <span class="lilac">string</span> <span class="blue">$url</span>)</code>
+        <div class="details">
+                    <p class="description">Shows message.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$message</td>
+                <td class="hid">Message</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$url</td>
+                <td class="hid">Url for redirection</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/system.class.php at line 443</div>
+        <code class="arguments" id="showError">public static  void <strong>showError</strong> (<span class="lilac">string</span> <span class="blue">$message</span>, <span class="lilac">string</span> <span class="blue">$url</span>)</code>
+        <div class="details">
+                    <p class="description">Shows error.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$message</td>
+                <td class="hid">Message</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">&nbsp</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$url</td>
+                <td class="hid">Url for redirection</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+                    <nav class="menu_main center"><div class="menu">
+            <ul>
+                    <li><a href="../index.html">Overview</a></li>
+                    <li><a href="../core/package-summary.html">Namespace</a></li>
+                    <li class="active">Class</li>
+                    <li><a href="../core/package-tree.html">Core\Tree</a></li>
+                    <li><a href="../deprecated.html">Deprecated</a></li>
+                    <li><a href="../todo.html">Todo</a></li>
+                    <li><a href="../index-all.html">Index</a></li>
+                </ul>
+    </div>
+    <div class="small_links">
+        Общий обзор: <a href="#summary_fields">Поля</a> | <a href="#summary_methods">Методы</a> | <a href="#summary_constructor">Конструктор</a>
+        Детали: <a href="#details_fields">Поля</a> | <a href="#details_methods">Методы</a> | <a href="#details_constructor">Конструктор</a>
+    </div>
+</nav>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="content">
+            <div class="copyright center">Generated by <a href="https://github.com/Greenray/phpAPI" target="_blank">phpAPI</a>: PHP Documentation Creator ver. 5.0 &copy; 2015 Greenray</div>
+        </div>
+    </div>
+</body>
+</html>

@@ -110,9 +110,9 @@ if (!empty($REQUEST['login'])) {
                             3 => empty($REQUEST['access']) ? 1     : (int) $REQUEST['access']
                         ])
                     );
-                    $message[0] = __('Identification');
-                    $message[1] = LoginForm();
-                    include ADMIN.'error.php';
+                    $TPL = new TEMPLATE(TEMPLATES.'login.tpl');
+                    $TPL->set('locale', SYSTEM::get('locale'));
+                    echo $TPL->parse();
                 } else {
                     #
                     # Edit user rights

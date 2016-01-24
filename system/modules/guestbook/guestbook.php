@@ -113,4 +113,4 @@ unset($GB);
 #
 # Show post form
 #
-if (USER::$logged_in) CMS::call('COMMENTS')->showCommentForm('guestbook', MODULE.'guestbook');
+if (USER::$logged_in) CMS::call('COMMENTS')->showCommentForm(MODULE.'guestbook');

@@ -1,1 +1,1 @@
-a:1:{i:1;a:10:{s:2:"id";i:1;s:6:"author";s:5:"admin";s:4:"nick";s:5:"ADMIN";s:4:"time";i:1416117893;s:2:"ip";s:9:"127.0.0.1";s:5:"views";i:0;s:8:"comments";i:0;s:5:"title";s:21:"Первая тема";s:6:"opened";b:1;s:6:"pinned";i:0;}}
+a:1:{i:1;a:10:{s:2:"id";i:1;s:6:"author";s:5:"admin";s:4:"nick";s:5:"ADMIN";s:4:"time";i:1416117894;s:2:"ip";s:9:"127.0.0.1";s:5:"views";i:1;s:8:"comments";i:0;s:5:"title";s:21:"Первая тема";s:6:"opened";b:1;s:6:"pinned";b:0;}}

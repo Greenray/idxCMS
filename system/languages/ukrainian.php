@@ -111,6 +111,7 @@ $LANG['def']['Date'] = 'Дата';
 $LANG['def']['Delete'] = 'Видалити';
 $LANG['def']['Description'] = 'Опис';
 $LANG['def']['Edit'] = 'Редагувати';
+$LANG['def']['Enter the text'] = 'Введіть текст';
 $LANG['def']['Error'] = 'Помилка';
 $LANG['def']['File'] = 'Файл';
 $LANG['def']['Font'] = 'Шрифт';

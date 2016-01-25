@@ -112,6 +112,7 @@ $LANG['def']['Database is empty'] = 'База дадзеных пустая';
 $LANG['def']['Date'] = 'Дата';
 $LANG['def']['Delete'] = 'Выдаліць';
 $LANG['def']['Description'] = 'Апісанне';
+$LANG['def']['Enter the text'] = 'Увядзіце тэкст';
 $LANG['def']['Edit'] = 'Рэдагаваць';
 $LANG['def']['Error'] = 'Памылка';
 $LANG['def']['File'] = 'Файл';

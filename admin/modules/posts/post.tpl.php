@@ -43,7 +43,7 @@ die();?>
             return false;
         }
         if (text === '') {
-            ShowAlert('__Enter a text__');
+            ShowAlert('__Enter the text__');
             return false;
         }
         return true;

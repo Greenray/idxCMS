@@ -51,7 +51,7 @@ die();?>
             }
         <!-- ENDIF -->
         if (form.message.value === '') {
-            ShowAlert('__Enter a text__');
+            ShowAlert('__Enter the text__');
             return false;
         }
         <!-- IF !empty($captcha) -->

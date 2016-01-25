@@ -31,6 +31,7 @@ function RateComment($user, $act, $id) {
         $file = CONTENT.$item[0].DS.$item[1].DS.$item[2].DS.$item[3].DS.'index';
         $id = $item[4];
     }
+//    $comments = json_decode($file.'.json');
     $comments = GetUnserialized($file);
     if (!empty($comments[$id])) {
         $user = USER::getUserData($user);
@@ -44,6 +45,7 @@ function RateComment($user, $act, $id) {
                     --$user['stars'];
                 }
             }
+            file_put_contents($file.'.json', json_encode($comments, JSON_UNESCAPED_UNICODE), LOCK_EX);
             file_put_contents($file, serialize($comments), LOCK_EX);
             CMS::call('USER')->saveUserData($user['user'], $user);
         }
@@ -64,6 +66,7 @@ function GetRate($for, &$item) {
     if (!empty($item[3]))
          $item = CONTENT.$item[0].DS.$item[1].DS.$item[2].DS.$item[3].DS.'rate';
     else $item = CONTENT.$item[0].DS.$item[1].DS.$item[2].DS.'rate';
+//    return json_decode($item.'.json');
     return GetUnserialized($item);
 }
 
@@ -98,7 +101,7 @@ function ShowRate($for) {
     $TPL->set('value', $value);                      # Rate value
     $TPL->set('voted', $voices);                     # Number of voices
     $TPL->set('item' , $for);                        # Item
-    $TPL->set('width', $value * 79 / 100);           # Width of rate value field
+    $TPL->set('width', $value * 84 / 100);           # Width of rate value field
     $TPL->set('event', $event);                      # Allow rating?
     return $TPL->parse();
 }

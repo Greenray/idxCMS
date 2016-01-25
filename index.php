@@ -84,7 +84,7 @@ define('PAGE',     '&page=');
 # idxCMS version
 #
 /** Version of the system */
-define('IDX_VERSION', '3.0');
+define('IDX_VERSION', '3.1');
 /** Copyright */
 define('IDX_COPYRIGHT', '&copy; 2016 Greenray');
 /** Message about system generator */

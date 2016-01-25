@@ -1,7 +1,6 @@
 <?php
-# idxCMS Flat Files Content Management System
-# Translation
-# Version 3.0
+# idxCMS Flat Files Content Management System v3.1
+# Translations into Russian
 # Copyright (c) 2016 Victor Nabatov
 
 $LANG['language'] = 'russian';

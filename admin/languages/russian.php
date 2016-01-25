@@ -1,7 +1,7 @@
 <?php
-# idxCMS Flat Files Content Management System v3.0
+# idxCMS Flat Files Content Management System v3.1
 # Copyright (c) 2016 Victor Nabatov
-# Administration - Translation
+# Administration: Translations into Russian
 
 $LANG['def']['Access'] = 'Доступ';
 $LANG['def']['Access denied'] = 'Доступ запрещен';

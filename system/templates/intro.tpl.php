@@ -1,5 +1,5 @@
 <?php
-# idxCMS Flat Files Content Management System v3.0
+# idxCMS Flat Files Content Management System v3.1
 # Copyright (c) 2014 Greenray greenray.spb@gmail.com
 # Intro template
 

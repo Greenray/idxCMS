@@ -63,7 +63,6 @@
             <li><a href="../core/package-functions.html#FormatTime" title="Core">FormatTime</a></li>
             <li><a href="../core/package-functions.html#GetFilesList" title="Core">GetFilesList</a></li>
             <li><a href="../core/package-functions.html#GetPagination" title="Core">GetPagination</a></li>
-            <li><a href="../core/package-functions.html#GetUnserialized" title="Core">GetUnserialized</a></li>
             <li><a href="../core/package-functions.html#OnlyLatin" title="Core">OnlyLatin</a></li>
             <li><a href="../core/package-functions.html#Pagination" title="Core">Pagination</a></li>
             <li><a href="../core/package-functions.html#RandomString" title="Core">RandomString</a></li>
@@ -190,13 +189,6 @@
                 <td class="description">
                     <p><a href="#GetPagination"><span class="lilac">GetPagination</span></a>(<span class="lilac">integer</span> <span class="blue">$page</span>, <span class="lilac">integer</span> <span class="blue">$perpage</span>, <span class="lilac">integer</span> <span class="blue">$count</span>)</p>
                     <p class="description">Culculates parameters for the pagination</p>
-                </td>
-            </tr>
-                    <tr>
-                <td class="type w_200">public  array</td>
-                <td class="description">
-                    <p><a href="#GetUnserialized"><span class="lilac">GetUnserialized</span></a>(<span class="lilac">string</span> <span class="blue">$file</span>)</p>
-                    <p class="description">Gets unserialized data.</p>
                 </td>
             </tr>
                     <tr>
@@ -335,7 +327,7 @@
         </table>
 </div>
         </div>
-            <div class="location">system/functions.php at line 270</div>
+            <div class="location">system/functions.php at line 242</div>
         <code id="AdvancedPagination" class="arguments">public  array <strong>AdvancedPagination</strong> (<span class="lilac">integer</span> <span class="blue">$total</span>, <span class="lilac">integer</span> <span class="blue">$current</span>, <span class="lilac">integer</span> <span class="blue">$last</span>)</code>
         <div class="details">
             Formats data for pagination.            <div class="finfo">
@@ -366,7 +358,7 @@
         </table>
 </div>
         </div>
-            <div class="location">system/functions.php at line 444</div>
+            <div class="location">system/functions.php at line 416</div>
         <code id="CheckCaptcha" class="arguments">public  boolean <strong>CheckCaptcha</strong> ()</code>
         <div class="details">
             Checks captcha code.            <div class="finfo">
@@ -384,7 +376,7 @@
         </table>
 </div>
         </div>
-            <div class="location">system/functions.php at line 484</div>
+            <div class="location">system/functions.php at line 456</div>
         <code id="CreateUrl" class="arguments">public  void <strong>CreateUrl</strong> (<span class="lilac">string</span> <span class="blue">$module</span>, <span class="lilac">string</span> <span class="blue">$section</span>, <span class="lilac">integer</span> <span class="blue">$category</span>, <span class="lilac">integer</span> <span class="blue">$item</span>, <span class="lilac">integer</span> <span class="blue">$comment</span>, <span class="lilac">integer</span> <span class="blue">$page</span>)</code>
         <div class="details">
             Creates url to the specified page.            <div class="finfo">
@@ -453,7 +445,7 @@
         </table>
 </div>
         </div>
-            <div class="location">system/functions.php at line 222</div>
+            <div class="location">system/functions.php at line 194</div>
         <code id="FormatTime" class="arguments">public  string <strong>FormatTime</strong> (<span class="lilac">string</span> <span class="blue">$format</span>, <span class="lilac">string</span> <span class="blue">$date</span>)</code>
         <div class="details">
             Formats date and time according to user's timezone.            <div class="finfo">
@@ -503,7 +495,7 @@
         </table>
 </div>
         </div>
-            <div class="location">system/functions.php at line 377</div>
+            <div class="location">system/functions.php at line 349</div>
         <code id="GetPagination" class="arguments">public  array <strong>GetPagination</strong> (<span class="lilac">integer</span> <span class="blue">$page</span>, <span class="lilac">integer</span> <span class="blue">$perpage</span>, <span class="lilac">integer</span> <span class="blue">$count</span>)</code>
         <div class="details">
             Culculates parameters for the pagination            <div class="finfo">
@@ -534,26 +526,7 @@
         </table>
 </div>
         </div>
-            <div class="location">system/functions.php at line 95</div>
-        <code id="GetUnserialized" class="arguments">public  array <strong>GetUnserialized</strong> (<span class="lilac">string</span> <span class="blue">$file</span>)</code>
-        <div class="details">
-            Gets unserialized data.<br /> This function can automatically restore broken data.            <div class="finfo">
-    <table class="hid">
-            <tr>
-            <td class="hid left w_100">Parameters</td>
-            <td class="hid right w_100 lilac">string</td>
-                            <td class="hid blue w_100">$file</td>
-                <td class="hid">Filename</td>
-                    </tr>
-            <tr>
-            <td class="hid left w_100">Return</td>
-            <td class="hid right w_100 lilac">array</td>
-                            <td class="hid" colspan="2">Unserialized data</td>
-                    </tr>
-        </table>
-</div>
-        </div>
-            <div class="location">system/functions.php at line 179</div>
+            <div class="location">system/functions.php at line 151</div>
         <code id="OnlyLatin" class="arguments">public  string|boolean <strong>OnlyLatin</strong> (<span class="lilac">string</span> <span class="blue">$string</span>)</code>
         <div class="details">
             Checks if the string has onle latin symbols.            <div class="finfo">
@@ -572,7 +545,7 @@
         </table>
 </div>
         </div>
-            <div class="location">system/functions.php at line 340</div>
+            <div class="location">system/functions.php at line 312</div>
         <code id="Pagination" class="arguments">public  string <strong>Pagination</strong> (<span class="lilac">integer</span> <span class="blue">$total</span>, <span class="lilac">integer</span> <span class="blue">$perpage</span>, <span class="lilac">integer</span> <span class="blue">$current</span>, <span class="lilac">string</span> <span class="blue">$link</span>)</code>
         <div class="details">
             Creates html block for pages navigation.            <div class="finfo">
@@ -614,7 +587,7 @@
         </table>
 </div>
         </div>
-            <div class="location">system/functions.php at line 189</div>
+            <div class="location">system/functions.php at line 161</div>
         <code id="RandomString" class="arguments">public  string <strong>RandomString</strong> (<span class="lilac">integer</span> <span class="blue">$num_chars</span>)</code>
         <div class="details">
             Generates random string.            <div class="finfo">
@@ -633,7 +606,7 @@
         </table>
 </div>
         </div>
-            <div class="location">system/functions.php at line 468</div>
+            <div class="location">system/functions.php at line 440</div>
         <code id="Redirect" class="arguments">public  void <strong>Redirect</strong> (<span class="lilac">string</span> <span class="blue">$module</span>, <span class="lilac">string</span> <span class="blue">$section</span>, <span class="lilac">integer</span> <span class="blue">$category</span>, <span class="lilac">integer</span> <span class="blue">$item</span>, <span class="lilac">integer</span> <span class="blue">$page</span>, <span class="lilac">integer</span> <span class="blue">$comment</span>, <span class="lilac">string</span> <span class="blue">$post</span>)</code>
         <div class="details">
             Redirects to the specified page.            <div class="finfo">
@@ -677,7 +650,7 @@
         </table>
 </div>
         </div>
-            <div class="location">system/functions.php at line 395</div>
+            <div class="location">system/functions.php at line 367</div>
         <code id="SelectTimeZone" class="arguments">public  string <strong>SelectTimeZone</strong> (<span class="lilac">string</span> <span class="blue">$name</span>, <span class="lilac">array</span> <span class="blue">$points</span>, <span class="lilac">string</span> <span class="blue">$default</span>)</code>
         <div class="details">
             Selects the time zone.            <div class="finfo">
@@ -708,7 +681,7 @@
         </table>
 </div>
         </div>
-            <div class="location">system/functions.php at line 248</div>
+            <div class="location">system/functions.php at line 220</div>
         <code id="SendMail" class="arguments">public  boolean <strong>SendMail</strong> (<span class="lilac">string</span> <span class="blue">$to</span>, <span class="lilac">string</span> <span class="blue">$from</span>, <span class="lilac">string</span> <span class="blue">$sender</span>, <span class="lilac">string</span> <span class="blue">$subj</span>, <span class="lilac">string</span> <span class="blue">$text</span>)</code>
         <div class="details">
             Sends email.            <div class="finfo">
@@ -751,7 +724,7 @@
         </table>
 </div>
         </div>
-            <div class="location">system/functions.php at line 416</div>
+            <div class="location">system/functions.php at line 388</div>
         <code id="ShowCaptcha" class="arguments">public  string <strong>ShowCaptcha</strong> (<span class="lilac">string</span> <span class="blue">$param</span>)</code>
         <div class="details">
             Shows captcha.<br /> There are three different options:<ul><li>original: black an white;</li><li>color: with colored background;</li><li>random selection.</li></ul>The length of the captcha code also varies randomly from five to eight letters and numbers.<br /> Captcha is displayed only for unregistered users.            <div class="finfo">
@@ -770,11 +743,11 @@
         </table>
 </div>
         </div>
-            <div class="location">system/functions.php at line 509</div>
+            <div class="location">system/functions.php at line 481</div>
         <code id="Sitemap" class="arguments">public  void <strong>Sitemap</strong> ()</code>
         <div class="details">
             Creates sitemap.<br /> return boolean The result of operation                    </div>
-            <div class="location">system/functions.php at line 209</div>
+            <div class="location">system/functions.php at line 181</div>
         <code id="UnifyBr" class="arguments">public  string <strong>UnifyBr</strong> (<span class="lilac">string</span> <span class="blue">$text</span>)</code>
         <div class="details">
             Converts line endings.            <div class="finfo">
@@ -793,7 +766,7 @@
         </table>
 </div>
         </div>
-            <div class="location">system/functions.php at line 168</div>
+            <div class="location">system/functions.php at line 140</div>
         <code id="__" class="arguments">public  string <strong>__</strong> (<span class="lilac">string</span> <span class="blue">$string</span>)</code>
         <div class="details">
             String localization.<br /> Currently, the system supports foure languages: English, Russian, Belarusian, and Ukrainian.            <div class="finfo">
@@ -817,7 +790,7 @@
         </table>
 </div>
         </div>
-            <div class="location">system/functions.php at line 122</div>
+            <div class="location">system/functions.php at line 94</div>
         <code id="gzfile_get_contents" class="arguments">public  mixed <strong>gzfile_get_contents</strong> (<span class="lilac">string</span> <span class="blue">$file</span>)</code>
         <div class="details">
             Gets content of gziped file.            <div class="finfo">
@@ -836,7 +809,7 @@
         </table>
 </div>
         </div>
-            <div class="location">system/functions.php at line 140</div>
+            <div class="location">system/functions.php at line 112</div>
         <code id="gzfile_put_contents" class="arguments">public  boolean <strong>gzfile_put_contents</strong> (<span class="lilac">string</span> <span class="blue">$file</span>, <span class="lilac">string</span> <span class="blue">$text</span>, <span class="lilac">string</span> <span class="blue">$mode</span>)</code>
         <div class="details">
             Writes data to gziped file.            <div class="finfo">

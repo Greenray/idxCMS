@@ -43,6 +43,7 @@
             <li><a href="../administration/package-functions.html#GetColor" title="Administration">GetColor</a></li>
             <li><a href="../administration/package-functions.html#GetDirSize" title="Administration">GetDirSize</a></li>
             <li><a href="../administration/package-functions.html#GetRights" title="Administration">GetRights</a></li>
+            <li><a href="../administration/package-functions.html#GetUnserialized" title="Administration">GetUnserialized</a></li>
             <li><a href="../administration/package-functions.html#InArrayRecursive" title="Administration">InArrayRecursive</a></li>
             <li><a href="../administration/package-functions.html#SaveSortedSections" title="Administration">SaveSortedSections</a></li>
             <li><a href="../administration/package-functions.html#SetRights" title="Administration">SetRights</a></li>
@@ -121,6 +122,13 @@
                 </td>
             </tr>
                     <tr>
+                <td class="type w_200">public  array</td>
+                <td class="description">
+                    <p><a href="#GetUnserialized"><span class="lilac">GetUnserialized</span></a>(<span class="lilac">string</span> <span class="blue">$file</span>)</p>
+                    <p class="description">Gets unserialized data.</p>
+                </td>
+            </tr>
+                    <tr>
                 <td class="type w_200">public  boolean</td>
                 <td class="description">
                     <p><a href="#InArrayRecursive"><span class="lilac">InArrayRecursive</span></a>(<span class="lilac">mixed</span> <span class="blue">$needle</span>, <span class="lilac">array</span> <span class="blue">$haystack</span>)</p>
@@ -157,7 +165,7 @@
             </tr>
             </table>
     <h2 id="details_functions">Функции: детали</h2>
-            <div class="location">admin/modules/_general/filemanager.php at line 92</div>
+            <div class="location">admin/modules/_general/filemanager.php at line 120</div>
         <code id="CheckSerialized" class="arguments">public  boolean|string <strong>CheckSerialized</strong> (<span class="lilac">string</span> <span class="blue">$file</span>, <span class="lilac">string</span> <span class="blue">$content</span>, <span class="lilac">string</span> <span class="blue">&$content</span>)</code>
         <div class="details">
             Checks if file is serialized.            <div class="finfo">
@@ -177,7 +185,7 @@
             <tr>
             <td class="hid left w_100">Return</td>
             <td class="hid right w_100 lilac">boolean|string</td>
-                            <td class="hid" colspan="2">Unserialized content of file or FALSE</td>
+                            <td class="hid" colspan="2">Decoded content of file or FALSE</td>
                     </tr>
         </table>
 </div>
@@ -285,6 +293,25 @@
             <td class="hid left w_100">Return</td>
             <td class="hid right w_100 lilac">string</td>
                             <td class="hid" colspan="2">File info</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+            <div class="location">admin/modules/_general/filemanager.php at line 92</div>
+        <code id="GetUnserialized" class="arguments">public  array <strong>GetUnserialized</strong> (<span class="lilac">string</span> <span class="blue">$file</span>)</code>
+        <div class="details">
+            Gets unserialized data.<br /> This function can automatically restore broken data.            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$file</td>
+                <td class="hid">Filename</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">array</td>
+                            <td class="hid" colspan="2">Unserialized data</td>
                     </tr>
         </table>
 </div>

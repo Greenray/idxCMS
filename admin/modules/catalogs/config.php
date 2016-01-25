@@ -13,7 +13,7 @@ if (isset($init)) {
         $config['comments_per_page']  = 10;
         CMS::call('CONFIG')->setSection('catalogs', $config);
         if (CMS::call('CONFIG')->save())
-             ShowMessage('Configuration saved');
+             ShowMessage('Configuration has been saved');
         else ShowError('Cannot save file'.' config.ini');
     }
 } else {
@@ -25,7 +25,7 @@ if (isset($init)) {
         $config['comments_per_page']  = empty($REQUEST['comments_per_page'])  ? 10   : $REQUEST['comments_per_page'];
         CMS::call('CONFIG')->setSection('catalogs', $config);
         if (CMS::call('CONFIG')->save())
-             ShowMessage('Configuration saved');
+             ShowMessage('Configuration has been saved');
         else ShowError('Cannot save file'.' config.ini');
     }
 

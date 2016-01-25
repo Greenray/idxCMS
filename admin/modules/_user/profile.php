@@ -11,7 +11,7 @@ if (!empty($REQUEST['login'])) {
     try {
         CMS::call('USER')->checkUser($REQUEST['user'], $REQUEST['password'], FALSE, $user_data);
         if (file_exists(TEMP.'rights.dat')) {
-            $tmp = GetUnserialized(TEMP.'rights.dat');
+            $tmp = json_decode(file_get_contents(TEMP.'rights.dat'), TRUE);
             if (!empty($tmp[2])) {
                 $rights = '*';
                 $access = 9;
@@ -101,6 +101,15 @@ if (!empty($REQUEST['login'])) {
                     #
                     # Save rights for user
                     #
+                    file_put_contents(
+                        TEMP.'rights.dat',
+                        json_encode([
+                            0 => $REQUEST['user'],
+                            1 => empty($REQUEST['rights']) ? []    : $REQUEST['rights'],
+                            2 => empty($REQUEST['root'])   ? FALSE : $REQUEST['root'],
+                            3 => empty($REQUEST['access']) ? 1     : (int) $REQUEST['access']
+                        ], JSON_UNESCAPED_UNICODE)
+                    );
                     file_put_contents(
                         TEMP.'rights.dat',
                         serialize([

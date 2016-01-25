@@ -452,7 +452,7 @@ class USER {
             #
             # Create user's PM file
             #
-            return file_put_contents(PM_DATA.$username, serialize(['inbox' => [], 'outbox' => []]), LOCK_EX);
+            return file_put_contents(PM_DATA.$username, json_encode(['inbox' => [], 'outbox' => []], JSON_UNESCAPED_UNICODE), LOCK_EX);
         }
         CMS::call('LOG')->logError('Cannot save profile '.$username);
         throw new Exception('Cannot save profile');

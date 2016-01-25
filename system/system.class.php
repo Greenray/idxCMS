@@ -205,7 +205,7 @@ class SYSTEM {
                 }
             }
         }
-        return file_put_contents(CONTENT.'menu', serialize($menu));
+        return file_put_contents(CONTENT.'menu', json_encode($menu, JSON_UNESCAPED_UNICODE), LOCK_EX);
     }
 
     /**
@@ -215,7 +215,7 @@ class SYSTEM {
      *  @return array Data for main menu or sitemap
      */
     public function getMainMenu() {
-        $data   = GetUnserialized(CONTENT.'menu');
+        $data   = json_decode(file_get_contents(CONTENT.'menu'), TRUE);
         $access = USER::getUser('access');
         $output = [];
 

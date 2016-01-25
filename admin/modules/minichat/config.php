@@ -12,7 +12,7 @@ if (isset($init)) {
         $config['mess_to_show']   = 5;
         CMS::call('CONFIG')->setSection('minichat', $config);
         if (CMS::call('CONFIG')->save())
-             ShowMessage('Configuration saved');
+             ShowMessage('Configuration has been saved');
         else ShowError('Cannot save file'.' config.ini');
     }
 } else {
@@ -25,7 +25,7 @@ if (isset($init)) {
         }
         CMS::call('CONFIG')->setSection('minichat', $config);
         if (CMS::call('CONFIG')->save())
-             ShowMessage('Configuration saved');
+             ShowMessage('Configuration has been saved');
         else ShowError('Cannot save file'.' config.ini');
     }
 

@@ -36,7 +36,7 @@ class MESSAGE extends DBASE {
         if ($this->path === CONTENT)
              $this->config = CONFIG::getSection($file);
         else $this->config = CONFIG::getSection('pm');
-        $this->messages = self::getIndex($path);
+        $this->messages = parent::getIndex($path);
     }
 
     /**
@@ -213,7 +213,7 @@ class MESSAGE extends DBASE {
         $message['ip']   = $_SERVER['REMOTE_ADDR'];
         $message['new']  = TRUE;
 
-        $data = GetUnserialized(PM_DATA.$for);
+        $data = json_decode(file_get_contents(PM_DATA.$for) , TRUE);
         if (empty($data['inbox'])) {
             $data['inbox'][1] = $message;
         } else {
@@ -223,7 +223,7 @@ class MESSAGE extends DBASE {
             #
             $data['inbox'] = array_slice($data['inbox'], -$this->config['db_size'] + 1, $this->config['db_size'], TRUE);
         }
-        if (!file_put_contents(PM_DATA.$for, serialize($data), LOCK_EX)) {
+        if (!file_put_contents(PM_DATA.$for, json_encode($data, JSON_UNESCAPED_UNICODE), LOCK_EX)) {
             throw new Exception('Cannot send message');
         }
         #

@@ -51,7 +51,8 @@ class CONTENT extends COMMENTS {
      */
     public function getContent($category) {
         if (empty($this->sections[$this->section]['categories'][$category])) {
-            return [];
+            $this->content = [];
+            return $this->content;
         }
 
         $this->category = $category;
@@ -100,8 +101,10 @@ class CONTENT extends COMMENTS {
         }
         foreach ($this->sections[$this->section]['categories'] as $category => $data) {
             self::getContent($category);
-            foreach ($this->content as $key => $item) {
-                $result[$category.'.'.$key] = $item[$param];
+            if (!empty($this->content)) {
+                foreach ($this->content as $key => $item) {
+                    $result[$category.'.'.$key] = $item[$param];
+                }
             }
         }
         return $result;

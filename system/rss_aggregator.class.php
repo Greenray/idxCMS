@@ -59,6 +59,7 @@ class RSS_AGGREGATOR {
                 #
                 # Cached file is fresh enough, return cached array
                 #
+//                $result = json_decode(join('', file($cache_file)));
                 $result = unserialize(join('', file($cache_file)));
                 #
                 # Set 'cached' to 1 only if cached file is correct

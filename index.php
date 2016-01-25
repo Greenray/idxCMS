@@ -276,7 +276,7 @@ switch($MODULE) {
             $result = ob_get_contents();
             ob_end_clean();
             $menu = [];
-            $navigation = GetUnserialized(CONTENT.'menu');
+            $navigation = json_decode(file_get_contents(CONTENT.'menu') , TRUE);
             foreach ($navigation as $k => $item) {
                 $menu[$k]['link']  = $item['link'];
                 $menu[$k]['name']  = $item['name'];

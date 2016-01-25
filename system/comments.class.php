@@ -117,6 +117,7 @@ class COMMENTS extends ITEMS {
                 $TPL->set($this->getComment($ids[$i], $page));
                 $output .= $TPL->parse();
             }
+
             SYSTEM::defineWindow('Comments', $output);
             if ($count > $perpage) {
                 SYSTEM::defineWindow('', Pagination($count, $perpage, $page, $item['link']));

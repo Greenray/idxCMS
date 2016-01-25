@@ -86,34 +86,6 @@ function GetFilesList($directory, $except = []) {
 }
 
 /**
- * Gets unserialized data.
- * This function can automatically restore broken data.
- *
- * @param  string $file Filename
- * @return array        Unserialized data
- */
-function GetUnserialized($file) {
-    $data = [];
-    if (file_exists($file)) {
-        $content = file_get_contents($file);
-        if ($content) {
-            $data = @unserialize($content);
-            if (!$data) {
-                $data = UnifyBr($content);
-                $data = preg_replace("!s:(\d+):\"(.*?)\";!se", "'s:'.strlen('$2').':\"$2\";'", $data);
-                $data = @unserialize($data);
-                if (!$data) {
-                    $data = [];
-                } else {
-                    file_put_contents($file, serialize($data), LOCK_EX);
-                }
-            }
-        }
-    }
-    return $data;
-}
-
-/**
  * Gets content of gziped file.
  *
  * @param  string $file Name of the file

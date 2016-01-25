@@ -12,7 +12,7 @@ if (!empty($REQUEST['save'])) {
     $config['spider_agent'] = empty($REQUEST['spider_agent']) ? '' : '1';
     CMS::call('CONFIG')->setSection('statistics', $config);
     if (CMS::call('CONFIG')->save())
-         ShowMessage('Configuration saved');
+         ShowMessage('Configuration has been saved');
     else ShowError('Cannot save file'.' config.ini');
 }
 

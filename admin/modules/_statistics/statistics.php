@@ -15,12 +15,12 @@ if (!defined('idxADMIN') || !USER::$root) die();
 function StatisticsClean($file, $field = '') {
     $stat = [];
     if (!empty($field)) {
-        $stat = GetUnserialized($file);
+        $stat = json_decode(file_get_contents($file), TRUE);
         if (is_array($stat[$field]))
              $stat[$field] = [];
         else $stat[$field] = 0;
     }
-    return file_put_contents($file, serialize($stat), LOCK_EX);
+    return file_put_contents($file, json_encode($stat, JSON_UNESCAPED_UNICODE), LOCK_EX);
 }
 
 if (!empty($REQUEST['cleanrefs']))    StatisticsClean(CONTENT.'stats', 'ref');
@@ -30,7 +30,7 @@ if (!empty($REQUEST['cleanagents']))  StatisticsClean(CONTENT.'spiders', 'ua');
 if (!empty($REQUEST['cleansip']))     StatisticsClean(CONTENT.'spiders', 'ip');
 if (!empty($REQUEST['cleanspiders'])) StatisticsClean(CONTENT.'spiders');
 
-$stats  = GetUnserialized(CONTENT.'stats');
+$stats = json_decode(file_get_contents(CONTENT.'stats'), TRUE);
 $output = [];
 
 if (!empty($stats)) {
@@ -73,7 +73,7 @@ if (!empty($stats)) {
     $output['today_hosts'] = 0;
 }
 
-$spiders = GetUnserialized(CONTENT.'spiders');
+$spiders = json_decode(file_get_contents(CONTENT.'spiders'), TRUE);
 
 if (!empty($spiders)) {
     $output['total'] = $spiders['total'];

@@ -12,7 +12,7 @@ if (isset($init)) {
         $config['message_length']   = 4000;
         CMS::call('CONFIG')->setSection('forum', $config);
         if (CMS::call('CONFIG')->save())
-             ShowMessage('Configuration saved');
+             ShowMessage('Configuration has been saved');
         else ShowError('Cannot save file'.' config.ini');
     }
 } else {
@@ -23,7 +23,7 @@ if (isset($init)) {
         $config['message_length']   = empty($REQUEST['message_length'])   ? 4000 : $REQUEST['message_length'];
         CMS::call('CONFIG')->setSection('forum', $config);
         if (CMS::call('CONFIG')->save())
-             ShowMessage('Configuration saved');
+             ShowMessage('Configuration has been saved');
         else ShowError('Cannot save file'.' config.ini');
     }
 

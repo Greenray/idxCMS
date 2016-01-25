@@ -34,7 +34,7 @@ class POLLS {
      * @return array Active polls data
      */
     public function getActivePolls() {
-        $this->active = GetUnserialized(CONTENT.'polls');
+        $this->active = json_decode(file_get_contents(CONTENT.'polls'), TRUE);
         return $this->getPolls($this->active);
     }
 
@@ -44,7 +44,7 @@ class POLLS {
      * @return array Data of archived polls
      */
     public function getArchivedPolls() {
-        $this->old = GetUnserialized(CONTENT.'polls-archive');
+        $this->old = json_decode(file_get_contents(CONTENT.'polls-archive'), TRUE);
         return $this->getPolls($this->old);
     }
 
@@ -226,8 +226,8 @@ class POLLS {
      * @return boolean         The result of operation
      */
     private function savePolls($active = TRUE, $old = TRUE) {
-        if ($active) $a = file_put_contents(CONTENT.'polls', serialize($this->active), LOCK_EX);
-        if ($old)    $b = file_put_contents(CONTENT.'polls-archive', serialize($this->old), LOCK_EX);
+        if ($active) file_put_contents(CONTENT.'polls', json_encode($this->active, JSON_UNESCAPED_UNICODE), LOCK_EX);
+        if ($old)    file_put_contents(CONTENT.'polls-archive', json_encode($this->old, JSON_UNESCAPED_UNICODE), LOCK_EX);
 
         if ($active && $old) return $a && $b;
         elseif ($old)        return $b;

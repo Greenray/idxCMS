@@ -24,12 +24,10 @@ die();?>
                 <div class="right">
                     <form name="minichat" method="post" action="">
                         <input type="hidden" name="message" value="$message.id" />
-                        <input type="hidden" name="mcaction" value="delete" />
-                        <input type="submit" name="mcaction" value="__Delete__" />
+                        <input type="submit" name="delete" value="__Delete__" />
                     <!-- IF !empty($message.ip) -->
                         <input type="hidden" name="host" value="$message.ip" />
-                        <input type="hidden" name="mcaction" value="ban" />
-                        <input type="submit" name="mcaction" value="__Ban__" />
+                        <input type="submit" name="ban" value="__Ban__" />
                     <!-- ENDIF -->
                     </form>
                 </div>
@@ -38,7 +36,7 @@ die();?>
     <!-- ENDFOREACH -->
 <!-- ENDIF -->
 <!-- IF $allow_post==true -->
-    <div class="minichat_post center">
+    <div class="chat-post center">
         <form id="post" name="post" method="post" action="" onsubmit="return checkForm(this);">
             <textarea id="mctext" name="mctext" rows="5">$mctext</textarea>
             <!-- IF !empty($message_length) -->

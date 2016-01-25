@@ -30,7 +30,7 @@ class DBASE {
 
     /** @var string Name of the index file */
     protected $index = 'index';
-    
+
     /** @var integer ID of the article, topic, image and so on */
     protected $item;
 
@@ -65,7 +65,7 @@ class DBASE {
      * @return array        Unserialised content of the index file or empty array
      */
     public function getIndex($path) {
-        return GetUnserialized($path.$this->index);
+        return json_decode(file_get_contents($path.$this->index), TRUE);
     }
 
     /**
@@ -77,7 +77,7 @@ class DBASE {
      * @return boolean   The result of the operation
      */
     protected function saveIndex($path, $array) {
-        return !file_put_contents($path.$this->index, serialize($array), LOCK_EX) ? FALSE : TRUE;
+        return file_put_contents($path.$this->index, json_encode($array, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), LOCK_EX);
     }
 
     /**

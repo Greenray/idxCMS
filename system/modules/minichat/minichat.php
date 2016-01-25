@@ -17,25 +17,15 @@ if (!empty($REQUEST['mctext']) && !empty($REQUEST['save'])) {
     } catch (Exception $error) {
         SYSTEM::showError($error->getMessage());
     }
-} else {
-    if (!empty($REQUEST['mcaction']) && USER::moderator('minichat')) {
+}
+if (USER::moderator('minichat')) {
+    if (!empty($REQUEST['delete'])) {
         $id = FILTER::get('REQUEST', 'message');
-        switch ($REQUEST['mcaction']) {
-            case 'delete':
-                if (!empty($messages[$id])) {
-                    $MC->removeMessage($id);
-                }
-                break;
-
-            case 'ban':
-                CMS::call('FILTER')->ban();
-                break;
-
-            default:
-                Redirect('index');
-                break;
+        if (!empty($messages[$id])) {
+            $MC->removeMessage($id);
         }
     }
+    if (!empty($REQUEST['ban'])) CMS::call('FILTER')->ban();
 }
 #
 # Show messages

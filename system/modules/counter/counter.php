@@ -5,11 +5,11 @@
 
 if (!defined('idxCMS')) die();
 
-$stats = GetUnserialized(CONTENT.'stats');           # Statistics datafile
-$stats['registered'] = sizeof(GetFilesList(USERS));  # Number of regisered users
-$stats['visitors']   = sizeof($stats['online']);     # Nubmer of visitors online
-$stats['logged_in']  = '';                           # Names of registered users online
-$guests = 0;                                         # Number of guests online
+$stats = json_decode(file_get_contents(CONTENT.'stats'), TRUE); # Statistics datafile
+$stats['registered'] = sizeof(GetFilesList(USERS));             # Number of regisered users
+$stats['visitors']   = sizeof($stats['online']);                # Nubmer of visitors online
+$stats['logged_in']  = '';                                      # Names of registered users online
+$guests = 0;                                                    # Number of guests online
 
 foreach ($stats['online'] as $ip => $data) {
     if ($data['name'] === 'guest') {

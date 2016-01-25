@@ -5,7 +5,7 @@
 
 if (!defined('idxCMS')) die();
 
-$data = GetUnserialized(CONTENT.'menu');
+$data = json_decode(file_get_contents(CONTENT.'menu'), TRUE);
 
 $output = [];
 foreach ($data as $module => $menu) {

@@ -29,7 +29,7 @@ if (!empty($REQUEST['save'])) {
     $config['db_size']        = empty($REQUEST['db_size'])        ? 100  : $REQUEST['db_size'];
     CMS::call('CONFIG')->setSection('feedback', $config);
     if (CMS::call('CONFIG')->save())
-         ShowMessage('Configuration saved');
+         ShowMessage('Configuration has been saved');
     else ShowError('Cannot save file'.' config.ini');
 }
 

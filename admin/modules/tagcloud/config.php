@@ -71,7 +71,7 @@ function CreateTags() {
             }
         }
     }
-    return file_put_contents(CONTENT.'tags', serialize($tags));
+    return file_put_contents(CONTENT.'tags', json_encode($tags, JSON_UNESCAPED_UNICODE), LOCK_EX);
 }
 
 $config = CONFIG::getSection('tagcloud');
@@ -90,7 +90,7 @@ if (isset($init)) {
         $config['distr']   = 'TRUE';
         CMS::call('CONFIG')->setSection('tagcloud', $config);
         if (CMS::call('CONFIG')->save())
-             ShowMessage('Configuration saved');
+             ShowMessage('Configuration has been saved');
         else ShowError('Cannot save file'.' config.ini');
     }
 } else {
@@ -107,7 +107,7 @@ if (isset($init)) {
         $config['distr']   = empty($REQUEST['distr'])   ? FALSE : TRUE;
         CMS::call('CONFIG')->setSection('tagcloud', $config);
         if (CMS::call('CONFIG')->save())
-             ShowMessage('Configuration saved');
+             ShowMessage('Configuration has been saved');
         else ShowError('Cannot save file'.' config.ini');
     }
     if (!empty($REQUEST['create'])) {
@@ -130,7 +130,7 @@ if (isset($init)) {
                 }
             }
         }
-        if (!file_put_contents(CONTENT.'tags', serialize($tags))) {
+        if (!file_put_contents(CONTENT.'tags', json_encode($tags, JSON_UNESCAPED_UNICODE), LOCK_EX)) {
             ShowError('Cannot save file'.' '.CONTENT.'tags');
         }
     }
@@ -147,17 +147,14 @@ if (isset($init)) {
         $words[$i]['tag'] = $key;
         $i++;
     }
-var_dump($words);
+
     $tags_amount = $i;
-var_dump($tags_amount);
     if ($config['tags'] < $tags_amount) {
         $tags_amount = $config['tags'];
     }
     $config['used']   = array_slice($words, 0, $tags_amount, TRUE);
     $config['unused'] = array_slice($words, $tags_amount, -1, TRUE);
 
-var_dump($config['used']);
-var_dump($config['unused']);
     $TPL = new TEMPLATE(__DIR__.DS.'config.tpl');
     $TPL->set($config);
     echo $TPL->parse();

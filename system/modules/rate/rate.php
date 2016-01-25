@@ -30,7 +30,7 @@ if (!empty($REQUEST['val']) && !empty($REQUEST['id'])) {
         $item = '';
         $rate = GetRate($REQUEST['id'], $item);
         $rate[$user] = $REQUEST['val'];
-        file_put_contents($item, serialize($rate), LOCK_EX);
+        file_put_contents($item, json_encode($rate, JSON_UNESCAPED_UNICODE), LOCK_EX);
         echo ShowRate($REQUEST['id']).'$';
     }
 }

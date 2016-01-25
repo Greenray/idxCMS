@@ -1,1 +1,1 @@
-a:1:{i:1;a:9:{s:2:"id";i:1;s:6:"author";s:5:"admin";s:4:"nick";s:5:"ADMIN";s:4:"time";i:1341000000;s:5:"views";i:1;s:8:"comments";i:0;s:5:"title";s:23:"Запуск сайта";s:8:"keywords";s:13:"idxCMS,сайт";s:6:"opened";b:1;}}
+{"1":{"id":1,"author":"admin","nick":"ADMIN","time":1341000000,"views":5,"comments":0,"title":"Запуск сайта","keywords":"idxCMS,сайт","opened":true}}

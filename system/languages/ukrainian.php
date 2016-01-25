@@ -106,6 +106,7 @@ $LANG['def']['Close'] = 'Закрити';
 $LANG['def']['color name'] = 'назва кольору';
 $LANG['def']['Comment'] = 'Коментар';
 $LANG['def']['Comments'] = 'Коментарі';
+$LANG['def']['Configuration has been saved'] = 'Конфигурация сохранена';
 $LANG['def']['Database is empty'] = 'База даних порожня';
 $LANG['def']['Date'] = 'Дата';
 $LANG['def']['Delete'] = 'Видалити';

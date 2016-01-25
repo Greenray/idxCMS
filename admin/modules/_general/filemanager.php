@@ -83,11 +83,39 @@ function SetRights($file, $value, $recursive = FALSE) {
 }
 
 /**
+ * Gets unserialized data.
+ * This function can automatically restore broken data.
+ *
+ * @param  string $file Filename
+ * @return array        Unserialized data
+ */
+function GetUnserialized($file) {
+    $data = [];
+    if (file_exists($file)) {
+        $content = file_get_contents($file);
+        if ($content) {
+            $data = @unserialize($content);
+            if (!$data) {
+                $data = UnifyBr($content);
+                $data = preg_replace("!s:(\d+):\"(.*?)\";!se", "'s:'.strlen('$2').':\"$2\";'", $data);
+                $data = @unserialize($data);
+                if (!$data) {
+                    $data = [];
+                } else {
+                    file_put_contents($file, serialize($data), LOCK_EX);
+                }
+            }
+        }
+    }
+    return $data;
+}
+
+/**
  * Checks if file is serialized.
  *
  * @param  string  $file    Filename
  * @param  string  $content Content of file
- * @return boolean|string   Unserialized content of file or FALSE
+ * @return boolean|string   Decoded content of file or FALSE
  */
 function CheckSerialized($file, &$content = '') {
     if (file_exists($file)) {

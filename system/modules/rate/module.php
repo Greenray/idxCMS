@@ -31,8 +31,7 @@ function RateComment($user, $act, $id) {
         $file = CONTENT.$item[0].DS.$item[1].DS.$item[2].DS.$item[3].DS.'index';
         $id = $item[4];
     }
-//    $comments = json_decode($file.'.json');
-    $comments = GetUnserialized($file);
+    $comments = json_decode($file);
     if (!empty($comments[$id])) {
         $user = USER::getUserData($user);
         if (!empty($user)) {
@@ -45,8 +44,7 @@ function RateComment($user, $act, $id) {
                     --$user['stars'];
                 }
             }
-            file_put_contents($file.'.json', json_encode($comments, JSON_UNESCAPED_UNICODE), LOCK_EX);
-            file_put_contents($file, serialize($comments), LOCK_EX);
+            file_put_contents($file, json_encode($comments, JSON_UNESCAPED_UNICODE), LOCK_EX);
             CMS::call('USER')->saveUserData($user['user'], $user);
         }
         return $comments[$id]['rate'];
@@ -64,10 +62,11 @@ function RateComment($user, $act, $id) {
 function GetRate($for, &$item) {
     $item = explode('.', $for);
     if (!empty($item[3]))
-         $item = CONTENT.$item[0].DS.$item[1].DS.$item[2].DS.$item[3].DS.'rate';
-    else $item = CONTENT.$item[0].DS.$item[1].DS.$item[2].DS.'rate';
-//    return json_decode($item.'.json');
-    return GetUnserialized($item);
+         $rate = CONTENT.$item[0].DS.$item[1].DS.$item[2].DS.$item[3].DS.'rate';
+    else $rate = CONTENT.$item[0].DS.$item[1].DS.$item[2].DS.'rate';
+    if (file_exists($rate))
+         return json_decode(file_get_contents($item), TRUE);
+    else return '';
 }
 
 /**
@@ -82,6 +81,7 @@ function ShowRate($for) {
     $event  = '';
     $item   = '';
     $rate   = GetRate($for, $item);
+
     if (!empty($rate)) {
         $voices = sizeof($rate);
         $sum = 0;
@@ -91,10 +91,12 @@ function ShowRate($for) {
         if ($voices !== 0) {
             $value = $sum / $voices;
         }
-    }
-    $user = USER::getUser('user');
-    if (($user !== 'guest') && !array_key_exists($user, $rate)) {
-        $event = 'onmousedown="star.update(this, \''.$for.'\')" onmousemove="star.mouse(event, this)" title="Rate!"';
+
+        $user = USER::getUser('user');
+
+        if (($user !== 'guest') && !array_key_exists($user, $rate)) {
+            $event = 'onmousedown="star.update(this, \''.$for.'\')" onmousemove="star.mouse(event, this)" title="Rate!"';
+        }
     }
 
     $TPL = new TEMPLATE(__DIR__.DS.'rate.tpl');

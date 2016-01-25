@@ -5,9 +5,13 @@
 
 if (!defined('idxCMS')) die();
 
-$PM   = new MESSAGE(PM_DATA, USER::getUser('user'));
-$info = $PM->checkNewMessages();
-unset($PM);
+$info = ['', ''];
+
+if (USER::$logged_in) {
+    $PM   = new MESSAGE(PM_DATA, USER::getUser('user'));
+    $info = $PM->checkNewMessages();
+    unset($PM);
+}
 
 $TPL = new TEMPLATE(__DIR__.DS.'panel.tpl');
 $TPL->set('logged_in',   USER::$logged_in);

@@ -128,7 +128,7 @@ if (CMS::call('STATISTICS')->detect($agent, 'spiders')) {
     #
     # Detect and register of searching bot
     #
-    $spiders = GetUnserialized(CONTENT.'spiders');
+    $spiders = json_decode(file_get_contents(CONTENT.'spiders'), TRUE);
     if (empty($spiders)) {
         $spiders['total'] = 1;
         $spiders['today'] = 1;
@@ -147,11 +147,11 @@ if (CMS::call('STATISTICS')->detect($agent, 'spiders')) {
         }
     }
     $spiders['update'] = $time;
-    file_put_contents(CONTENT.'spiders', serialize($spiders), LOCK_EX);
+    file_put_contents(CONTENT.'spiders', json_encode($spiders, JSON_UNESCAPED_UNICODE), LOCK_EX);
 
 } else {
-    $user  = USER::getUser();                   # User profile
-    $stats = GetUnserialized(CONTENT.'stats');  # Statistics data storage
+    $user  = USER::getUser();                                        # User profile
+    $stats = json_decode(file_get_contents(CONTENT.'stats'), TRUE);  # Statistics data storage
     if (empty($stats)) {
         $stats['total']   = 1;
         $stats['today']   = 1;
@@ -161,7 +161,8 @@ if (CMS::call('STATISTICS')->detect($agent, 'spiders')) {
         $stats['online']  = [];
         if (!empty($config['user-ua'])) $stats['ua'][$agent] = 1;
         $stats['update'] = $time;
-        file_put_contents(CONTENT.'stats', serialize($stats), LOCK_EX);
+        file_put_contents(CONTENT.'stats', json_encode($stats, JSON_UNESCAPED_UNICODE), LOCK_EX);
+
     } else {
         if ($stats['update'] < mktime(0, 0, 0, date('n'), date('j'), date('Y'))) {
             $stats['hosts'] = [];
@@ -205,7 +206,7 @@ if (CMS::call('STATISTICS')->detect($agent, 'spiders')) {
     }
     $stats['update'] = $time;   # Set the time of the last ststistic data update
 
-    file_put_contents(CONTENT.'stats', serialize($stats), LOCK_EX);
+    file_put_contents(CONTENT.'stats', json_encode($stats, JSON_UNESCAPED_UNICODE), LOCK_EX);
 
     $keyword = CMS::call('STATISTICS')->extractKeyword($referer);  # Keyword from $_SERVER['HTTP_REFERER']
     if (!empty($keyword)) {

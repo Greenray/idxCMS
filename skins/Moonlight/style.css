@@ -329,7 +329,12 @@ textarea {
     clear: both;
     height: 0;
     overflow: hidden; }
-.chat { margin: 10px 0; }
+.chat,
+.chat-post { margin: 10px 0; }
+    .chat input[type="submit"],
+    .chat input[type="reset"],
+    .chat-post input[type="submit"],
+    .chat-post input[type="reset"] { min-width: 70px; width: 70px; }
 .codehtml,
 .codephp,
 .codetext {

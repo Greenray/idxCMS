@@ -59,7 +59,7 @@ function ArrayNormalize($array) {
  * @return array Tags for the tagcloud
  */
 function PrepareTags() {
-    $tags = GetUnserialized(CONTENT.'tags');
+    $tags = json_decode(file_get_contents(CONTENT.'tags'), TRUE);
     if (!empty($tags)) {
         $tags = ArrayInvert($tags);
         krsort($tags);

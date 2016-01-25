@@ -73,7 +73,7 @@ if (!empty($REQUEST['save'])) {
     $config['height'] = empty($REQUEST['height']) ? 350 : $REQUEST['height'];
     CMS::call('CONFIG')->setSection('video', $config);
     if (CMS::call('CONFIG')->save())
-         ShowMessage('Configuration saved');
+         ShowMessage('Configuration has been saved');
     else ShowError('Cannot save file'.' config.ini');
 
     if (!empty($REQUEST['welcome_msg'])) {

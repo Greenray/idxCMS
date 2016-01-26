@@ -183,7 +183,7 @@ class USER {
                     }
                 } else {
                     if ($type === 'Nick') {
-                        if (mb_strlen($name, 'UTF-8') <= CONFIG::getValue('user', 'nick_length')) {
+                        if (strlen($name, 'UTF-8') <= CONFIG::getValue('user', 'nick_length')) {
                             return TRUE;
                         }
                     }
@@ -392,7 +392,7 @@ class USER {
      * Adds new user to user's database.
      *
      * @throws Exception "Invalid username"
-     * @throws Exception "Invalid nickname"
+     * @throws Exception "Invalid nick"
      * @throws Exception "Invalid password"
      * @throws Exception "User with this username already exists'
      * @throws Exception "Invalid email"
@@ -490,7 +490,7 @@ class USER {
      * @param  string $nickname Nickname
      * @param  array  $userdata Userdata
      * @throws Exception "Invalid username"
-     * @throws Exception "Invalid nickname"
+     * @throws Exception "Invalid nick"
      * @throws Exception "Invalid password"
      * @throws Exception "Invalid email"
      * @throws Exception "Cannot save profile"

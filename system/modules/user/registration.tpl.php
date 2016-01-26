@@ -62,14 +62,14 @@ die();?>
         var nick       = form.nick.value;
         var email      = form.email.value;
         var userRegex  = /^[a-zA-Z0-9_]+(([\_][a-zA-Z0-9])?[a-zA-Z0-9_]*)*$/;
-        var nickRegex  = /^[a-zA-Z0-9а-яА-Я_]+(([\_][a-zA-Z0-9а-яА-Я])?[a-zA-Z0-9а-яА-Я_]*)*$/;
+        var nickRegex  = /^(([ \_][a-zA-Z0-9а-яА-ЯёЁ])?[a-zA-Z0-9а-яА-Я_ёЁ]*)*$/;
         var emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
         if ((user === '') || !user.match(userRegex)) {
             ShowAlert('__Invalid login__');
             return false;
         }
         if ((nick === '') || !nick.match(nickRegex)) {
-            ShowAlert('__Invalid nickname__');
+            ShowAlert('__Invalid nick__');
             return false;
         }
         if (form.password.value === '') {

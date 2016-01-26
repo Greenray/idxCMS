@@ -70,7 +70,7 @@ die();?>
             return false;
         }
         if ((nick === '') || !nick.match(nickRegex)) {
-            ShowAlert('__Invalid nickname__');
+            ShowAlert('__Invalid nick__');
             return false;
         }
         if (form.password.value === '') {

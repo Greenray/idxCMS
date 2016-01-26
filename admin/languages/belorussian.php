@@ -131,6 +131,7 @@ $LANG['def']['Return to'] = 'Вярнуцца';
 $LANG['def']['Right background'] = 'Фон правай частцы';
 $LANG['def']['Right icon color'] = 'Колер правай абразкі';
 $LANG['def']['Right panel'] = 'Правая панэль';
+$LANG['def']['Rights changed'] = 'Правы зменены';
 $LANG['def']['Rights for'] = 'Правы карыстальніка';
 $LANG['def']['Rights for dirs'] = 'Правы на каталогі';
 $LANG['def']['Rights for files'] = 'Правы на файлы';

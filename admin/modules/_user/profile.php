@@ -9,7 +9,8 @@ if (!defined('idxADMIN') || !USER::$root) die();
 #
 if (!empty($REQUEST['login'])) {
     try {
-        CMS::call('USER')->checkUser($REQUEST['user'], $REQUEST['password'], FALSE, $user_data);
+        $fields = [];
+        CMS::call('USER')->checkUser($REQUEST['user'], $REQUEST['password'], FALSE, $fields);
         if (file_exists(TEMP.'rights.dat')) {
             $tmp = json_decode(file_get_contents(TEMP.'rights.dat'), TRUE);
             if (!empty($tmp[2])) {
@@ -40,32 +41,35 @@ if (!empty($REQUEST['login'])) {
                 #
                 $output  = [];
                 $users   = CMS::call('USER')->getUsersList($REQUEST['search']);
-                $count   = sizeof($users);
-                $keys    = array_keys($users);
-                $page    = empty($REQUEST['page']) ? 0 : $REQUEST['page'];
-                $perpage = 20;
-                $pagination = GetPagination($page, $perpage, $count);
-                for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
-                    if (!empty($users[$keys[$i]])) {
-                        $output['users'][$i] = $users[$keys[$i]];
-                        if (!empty($users[$keys[$i]]['blocked'])) {
-                            $output['users'][$i]['blocked'] = 'unblock.'.$users[$keys[$i]]['user'];
-                            $output['users'][$i]['blocking'] = __('Unblock');
-                        } else {
-                            $output['users'][$i]['blocked'] = 'block.'.$users[$keys[$i]]['user'];
-                            $output['users'][$i]['blocking'] = __('Block');
+                if (!empty($users)) {
+                    $count   = sizeof($users);
+                    $keys    = array_keys($users);
+                    $page    = empty($REQUEST['page']) ? 0 : $REQUEST['page'];
+                    $perpage = 20;
+                    $pagination = GetPagination($page, $perpage, $count);
+                    for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
+                        if (!empty($users[$keys[$i]])) {
+                            $output['users'][$i] = $users[$keys[$i]];
+                            if (!empty($users[$keys[$i]]['blocked'])) {
+                                $output['users'][$i]['blocked'] = 'unblock.'.$users[$keys[$i]]['user'];
+                                $output['users'][$i]['blocking'] = __('Unblock');
+                            } else {
+                                $output['users'][$i]['blocked'] = 'block.'.$users[$keys[$i]]['user'];
+                                $output['users'][$i]['blocking'] = __('Block');
+                            }
                         }
                     }
+
+                    $TPL = new TEMPLATE(__DIR__.DS.'list.tpl');
+                    $TPL->set($output);
+                    echo $TPL->parse();
+                    #
+                    # Pagination
+                    #
+                    if ($count > $perpage) echo Pagination($count, $perpage, $page, MODULE.'admin&id=_user.profile&search='.$REQUEST['search']);
+                } else {
+                    ShowMessage('Nothing founded', '', 'admin&id=_user.profile');
                 }
-
-                $TPL = new TEMPLATE(__DIR__.DS.'list.tpl');
-                $TPL->set($output);
-                echo $TPL->parse();
-                #
-                # Pagination
-                #
-                if ($count > $perpage) echo Pagination($count, $perpage, $page, MODULE.'admin&id=_user.profile&search='.$REQUEST['search']);
-
                 break;
 
             case 'profile':
@@ -108,16 +112,7 @@ if (!empty($REQUEST['login'])) {
                             1 => empty($REQUEST['rights']) ? []    : $REQUEST['rights'],
                             2 => empty($REQUEST['root'])   ? FALSE : $REQUEST['root'],
                             3 => empty($REQUEST['access']) ? 1     : (int) $REQUEST['access']
-                        ], JSON_UNESCAPED_UNICODE)
-                    );
-                    file_put_contents(
-                        TEMP.'rights.dat',
-                        serialize([
-                            0 => $REQUEST['user'],
-                            1 => empty($REQUEST['rights']) ? []    : $REQUEST['rights'],
-                            2 => empty($REQUEST['root'])   ? FALSE : $REQUEST['root'],
-                            3 => empty($REQUEST['access']) ? 1     : (int) $REQUEST['access']
-                        ])
+                        ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
                     );
                     $TPL = new TEMPLATE(TEMPLATES.'login.tpl');
                     $TPL->set('locale', SYSTEM::get('locale'));

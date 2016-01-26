@@ -205,7 +205,7 @@ class SYSTEM {
                 }
             }
         }
-        return file_put_contents(CONTENT.'menu', json_encode($menu, JSON_UNESCAPED_UNICODE), LOCK_EX);
+        return file_put_contents(CONTENT.'menu', json_encode($menu, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), LOCK_EX);
     }
 
     /**

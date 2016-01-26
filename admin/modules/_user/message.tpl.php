@@ -8,9 +8,9 @@ die(); ?>
 <fieldset>
     <form name="pm" method="post" action="">
         <table class="std">
-            <th colspan="2">__Administrative message for users__</th>
+            <th colspan="2">__Administrative message__</th>
             <tr class="light">
-                <td>__Select users__</td>
+                <td class="label">__Select users__</td>
                 <td>
                     <select name="users[]" size="5" multiple>
                     <!-- FOREACH user = $users -->
@@ -33,9 +33,9 @@ die(); ?>
 <fieldset>
     <form name="letter" method="post" action="">
         <table class="std">
-            <th colspan="2">__Administrative letter for users__</th>
+            <th colspan="2">__Administrative letter__</th>
             <tr class="light">
-                <td>__Select users__</td>
+                <td class="label">__Select users__</td>
                 <td>
                     <select name="users[]" size="5" multiple>
                     <!-- FOREACH user = $users -->

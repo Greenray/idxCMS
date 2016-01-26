@@ -43,6 +43,7 @@ foreach ($users as $user) {
     $output['users'][$user['user']]['name'] = $user['user'];
     $output['users'][$user['user']]['nick'] = $user['nick'];
 }
+unset ($output['users']['admin']);
 
 $output['bbcodes'] = CMS::call('PARSER')->showBbcodesPanel('pm.text');
 

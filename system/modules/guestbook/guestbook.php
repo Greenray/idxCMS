@@ -8,6 +8,7 @@ if (!defined('idxCMS')) die();
 SYSTEM::set('pagename', __('Guestbook'));
 $GB = new MESSAGE(CONTENT, 'guestbook');
 $messages = $GB->getMessages();
+var_dump($REQUEST);
 $id = FILTER::get('REQUEST', 'comment');
 
 if (!empty($REQUEST['save'])) {
@@ -64,16 +65,21 @@ if (!empty($REQUEST['save'])) {
 $messages = $GB->getMessages();
 
 if (!empty($messages)) {
+var_dump($messages);
     $TPL      = new TEMPLATE(__DIR__.DS.'comment.tpl');
     $output   = '';
     $messages = array_reverse($messages, TRUE);
     $count    = sizeof($messages);
     $ids      = array_keys($messages);
+var_dump($ids);
     $perpage  = CONFIG::getValue('guestbook', 'per_page');
+var_dump($perpage);
     $page     = FILTER::get('REQUEST', 'page');
     $pagination = GetPagination($page, $perpage, $count);
+var_dump($pagination);
     for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
         if (!empty($messages[$ids[$i]])) {
+var_dump($messages[$ids[$i]]);
             $messages[$ids[$i]]['id']     = $ids[$i];
             $messages[$ids[$i]]['text']   = CMS::call('PARSER')->parseText($messages[$ids[$i]]['text']);
             $messages[$ids[$i]]['date']   = FormatTime('d F Y H:i:s', $messages[$ids[$i]]['time']);

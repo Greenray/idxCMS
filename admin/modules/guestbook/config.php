@@ -6,16 +6,14 @@
 if (!defined('idxADMIN')) die();
 
 if (isset($init)) {
-    if (empty($config)) {
-        $config['db_size']           = 100;
-        $config['message_length']    = 1000;
-        $config['per_page']          = 10;
-        $config['allow_guests_post'] = '';
-        CMS::call('CONFIG')->setSection('guestbook', $config);
-        if (CMS::call('CONFIG')->save())
-             ShowMessage('Configuration has been saved');
-        else ShowError('Cannot save file'.' config.ini');
-    }
+    $config['db_size']           = 100;
+    $config['message_length']    = 1000;
+    $config['per_page']          = 10;
+    $config['allow_guests_post'] = '';
+    CMS::call('CONFIG')->setSection('guestbook', $config);
+    if (CMS::call('CONFIG')->save())
+         ShowMessage('Configuration has been saved');
+    else ShowError('Cannot save file'.' config.ini');
 } else {
     if (!empty($REQUEST['save'])) {
         $config['db_size']           = empty($REQUEST['db_size'])        ? 100  : $REQUEST['db_size'];

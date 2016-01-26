@@ -121,6 +121,7 @@ $LANG['def']['Plugin'] = 'Убудова';
 $LANG['def']['Popular pages'] = 'Папулярныя старонкі';
 $LANG['def']['Posts awaits moderation'] = 'Публікацыі, якія чакаюць мадэрацыі';
 $LANG['def']['Posts per page'] = 'Публікацый на старонку';
+$LANG['def']['Profile changed'] = 'Профіль зменены';
 $LANG['def']['records'] = 'запісаў';
 $LANG['def']['Referers'] = 'Крыніцы';
 $LANG['def']['Register spider IP'] = 'Рэгістраваць IP бота';

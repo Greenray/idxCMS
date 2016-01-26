@@ -80,6 +80,7 @@ if (!empty($REQUEST['login'])) {
                     try {
                         CMS::call('USER')->updateUser($REQUEST['user'], $REQUEST['nick'], $REQUEST['fields']);
                         USER::changeProfileField($REQUEST['user'], 'status', $REQUEST['status']);
+                        ShowMessage('Profile changed', '', 'admin&id=_user.profile');
                     } catch (Exception $error) {
                         ShowError($error->getMessage());
                     }

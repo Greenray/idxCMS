@@ -146,7 +146,10 @@ table th { font-weight: bold }
         color: #ff0000;
         text-decoration: underline }
     td { padding: 0 10px }
-    td.actions button { border: 0 }
+    td.actions button {
+        border: 0;
+        padding: 0;
+        margin: 0 3px }
     td.actions a img {
         margin: 0 5px;
         vertical-align: bottom }
@@ -165,7 +168,7 @@ table th { font-weight: bold }
     th.access,
     td.access { width: 49px; padding: 0 5px }
     th.actions,
-    td.actions { width: 80px; padding: 0 5px }
+    td.actions { width: 90px }
     th.author,
     td.author { width: 80px }
     th.date,
@@ -550,6 +553,7 @@ footer {
     display: inline;
     display: inline-block; }
 .icon-catalogs:before { background-position: 0 -160px; }
+.icon-close:before { background-position: 0 -144px; }
 .icon-delete:before { background-position: 0 -384px; }
 .icon-edit:before { background-position: 0 -288px; }
 .icon-forum:before { background-position: 0 -112px; }

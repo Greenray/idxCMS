@@ -105,7 +105,7 @@ if (!empty($sections)) {
                 }
 
             } catch (Exception $error) {
-                SYSTEM::showError($error->getMessage());
+                SYSTEM::showError($error->getMessage(), CreateUrl('posts', $section, $category, $post));
             }
 
             $post = CMS::call('POSTS')->getItem($post);

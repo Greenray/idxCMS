@@ -122,6 +122,7 @@ $LANG['def']['Guest'] = 'Госць';
 $LANG['def']['Image'] = 'Выява';
 $LANG['def']['Index'] = 'Галоўная';
 $LANG['def']['Insert'] = 'Уставіць';
+$LANG['def']['Invalid ID'] = 'Няправільная спасылка';
 $LANG['def']['Invalid symbols'] = 'Забароненыя сімвалы';
 $LANG['def']['Invalid publicaton'] = 'Няма такой публікацыі';
 $LANG['def']['Keywords'] = 'Ключавыя словы';

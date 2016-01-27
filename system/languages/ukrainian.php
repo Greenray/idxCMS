@@ -119,6 +119,7 @@ $LANG['def']['Guest'] = 'Гість';
 $LANG['def']['Image'] = 'Зображення';
 $LANG['def']['Index'] = 'Головна';
 $LANG['def']['Insert'] = 'Вставити';
+$LANG['def']['Invalid ID'] = 'Неправильне посилання';
 $LANG['def']['Invalid publicaton'] = 'Немає такої публікації';
 $LANG['def']['Invalid symbols'] = 'Заборонені символи';
 $LANG['def']['Keywords'] = 'Ключові слова';

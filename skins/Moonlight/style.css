@@ -984,6 +984,22 @@ textarea {
     margin: 10px 0;
     position: relative;
     width: 20%; }
+.valid-icon { white-space: nowrap; }
+.valid-icon:before {
+    content: '';
+    background-image: url(images/logos.jpg);
+    background-repeat: no-repeat;
+    background-position: 80px 15px;
+    width: 80px;
+    height: 15px;
+    display: inline;
+    display: inline-block; }
+.valid-icon-cms:before { background-position: 0 0; }
+.valid-icon-xhtml:before { background-position: 0 -45px; }
+.valid-icon-css:before { background-position: 0 -30px; }
+.valid-icon-php:before { background-position: 0 -60px; }
+.valid-icon-db:before { background-position: 0 -75px; }
+.valid-icon-license:before { background-position: 0 -90px; }
 .fbg {
     color: white;
     height: auto !important;

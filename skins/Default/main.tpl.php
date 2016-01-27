@@ -88,12 +88,12 @@ die();?>
 [show=box,menu.simple@empty]
 <div class="footer">
     <div class="valid center">
-        <a href="./"><img src="{IMAGES}cms.gif" width="80" height="15" alt="idxCMS" /></a>
-        <a href="http://www.php.net"><img src="{IMAGES}php.gif" width="80" height="15" alt="PHP powered" /></a>
-        <a href="http://ru.wikipedia.org/wiki/NoSQL"><img src="{IMAGES}db.gif" width="80" height="15" alt="No SQL" /></a>
-        <a href="http://validator.w3.org/check?uri=referer"><img src="{IMAGES}html.gif" width="80" height="15" alt="Valid HTML!" /></a>
-        <a href="http://jigsaw.w3.org/css-validator/check/referer"><img src="{IMAGES}css.gif" width="80" height="15" alt="Valid CSS!" /></a>
-        <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="{IMAGES}cc.png" width="80" height="15" alt="Creative Commons License" /></a>
+        <a href="./" class="valid-icon valid-icon-cms"></a>
+        <a href="http://www.php.net" class="valid-icon valid-icon-php"></a>
+        <a href="http://ru.wikipedia.org/wiki/NoSQL" class="valid-icon valid-icon-db"></a>
+        <a href="http://validator.w3.org/check?uri=referer" class="valid-icon valid-icon-xhtml"></a>
+        <a href="http://jigsaw.w3.org/css-validator/check/referer" class="valid-icon valid-icon-css"></a>
+        <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" class="valid-icon valid-icon-license"></a>
     </div>
     <div class="copyright center">[show=copyright]</div>
 </div>

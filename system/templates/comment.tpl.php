@@ -32,7 +32,7 @@ die();?>
             <!-- ENDIF -->
             </div>
             <!-- IF !empty($status) --><div>$status</div><!-- ENDIF -->
-            <!-- IF !empty($stars) --><div>__Rate__: $stars</div><!-- ENDIF -->
+            <!-- IF !empty($stars) --><div>__Rate__: <span id="stars[$rateid:]">$stars</span></div><!-- ENDIF -->
             <!-- IF !empty($city) --><div>$city</div><!-- ENDIF -->
             <!-- IF !empty($country) --><div>$country</div><!-- ENDIF -->
         </div>

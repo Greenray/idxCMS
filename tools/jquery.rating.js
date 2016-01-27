@@ -79,17 +79,18 @@ star.revert = function () {
 star.num = 0;
 
 /**
- * Rate for comments and replies.
- * @param   {string} b Action: up|down rate.
- * @param   {string} c User name.
- * @param   {string} f Rate ID.
- * @returns {integer}  Rate value.
+ * Rates comments and replies.
+ *
+ * @param   string b Action: up|down rate
+ * @param   string c User name
+ * @param   string f Rate ID
+ * @returns integer  Rate value
  */
 function Rate(b, c, f) {
     var g = f.id.substr(6);
     var d = _$("rate" + g);
     if (d.value !== undefined) {
-        val = d.value;
+        var val = d.value;
     } else {
         if (d.innerText !== undefined) {
             val = d.innerText;
@@ -104,8 +105,11 @@ function Rate(b, c, f) {
         clearTimeout(a);
         if (e.status === 200) {
             var h = new Array();
-            h = e.responseText.split("$", 2);
+            var s = _$("stars" + g);
+            h = e.responseText.split("$", 3);
             d.innerHTML = h[0];
+            d.style = h[1];
+            if (h[2] !== '') s.innerHTML = h[2];
         } else {
             handleError(e.statusText);
         }

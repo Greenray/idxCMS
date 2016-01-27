@@ -79,9 +79,9 @@ class COMMENTS extends ITEMS {
             }
         }
 
-        if     ($comment['rate'] < 0)   $comment['rate_color'] = 'red';
-        elseif ($comment['rate'] === 0) $comment['rate_color'] = 'black';
-        else                            $comment['rate_color'] = 'green';
+        if     ($comment['rate'] < 0)  $comment['rate_color'] = 'red';
+        elseif ($comment['rate'] == 0) $comment['rate_color'] = 'black';
+        else                           $comment['rate_color'] = 'green';
 
         return $comment;
     }

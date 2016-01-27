@@ -44,10 +44,12 @@ function RateComment($user, $act, $id) {
                     --$user['stars'];
                 }
             }
-            $a = file_put_contents($file, json_encode($comments, JSON_UNESCAPED_UNICODE), LOCK_EX);
+            file_put_contents($file, json_encode($comments, JSON_UNESCAPED_UNICODE), LOCK_EX);
             CMS::call('USER')->saveUserData($user['user'], $user);
         }
-        return $comments[$id]['rate'];
+        $result['rate'] = $comments[$id]['rate'];
+        $result['stars'] = $user['stars'];
+        return $result;
     }
     return FALSE;
 }

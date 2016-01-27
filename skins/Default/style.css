@@ -513,7 +513,7 @@ textarea {
     vertical-align: middle; }
 .random-image { margin: 5px 0; }
 .rate { float: right; margin: 30px 20px 20px; }
-    .rate button { border: none; padding: 0; }
+    .rate button { border: none; }
     .rate button.minus { background: url(images/down.gif) no-repeat; }
     .rate button.plus { background: url(images/up.gif) no-repeat; }
 #registration_content {
@@ -801,6 +801,7 @@ table#std { margin: 0 0 10px; }
 .icon { white-space: nowrap; }
 .icon:before {
     content: '';
+    background-color: white;
     background-image: url(images/icons.png);
     background-repeat: no-repeat;
     background-position: 16px 16px;
@@ -818,7 +819,8 @@ table#std { margin: 0 0 10px; }
 .icon-catalogs:before { background-position: 0 -160px; }
 .icon-close:before { background-position: 0 -144px; }
 .icon-delete:before { background-position: 0 -384px; }
-.icon-down:before { background-position: 0 -336px; }
+.icon-down:before { background-color: white; background-position: 0 -336px; }
+.icon-down { background-color: white; }
 .icon-edit:before { background-position: 0 -288px; }
 .icon-flag:before { background-position: 0 -368px; }
 .icon-forum:before { background-position: 0 -112px; }
@@ -838,4 +840,5 @@ table#std { margin: 0 0 10px; }
 .icon-registration:before { background-position: 0 -32px; }
 .icon-rss:before { background-position: 0 -432px; }
 .icon-sitemap:before { background-position: 0 -208px; }
-.icon-up:before { background-position: 0 -320px; }
+.icon-up:before { background-color: white; background-position: 0 -320px; }
+.icon-up { background-color: white; }

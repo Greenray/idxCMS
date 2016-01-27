@@ -31,7 +31,7 @@ function RateComment($user, $act, $id) {
         $file = CONTENT.$item[0].DS.$item[1].DS.$item[2].DS.$item[3].DS.'index';
         $id = $item[4];
     }
-    $comments = json_decode($file);
+    $comments = json_decode(file_get_contents($file), TRUE);
     if (!empty($comments[$id])) {
         $user = USER::getUserData($user);
         if (!empty($user)) {
@@ -44,7 +44,7 @@ function RateComment($user, $act, $id) {
                     --$user['stars'];
                 }
             }
-            file_put_contents($file, json_encode($comments, JSON_UNESCAPED_UNICODE), LOCK_EX);
+            $a = file_put_contents($file, json_encode($comments, JSON_UNESCAPED_UNICODE), LOCK_EX);
             CMS::call('USER')->saveUserData($user['user'], $user);
         }
         return $comments[$id]['rate'];
@@ -62,11 +62,11 @@ function RateComment($user, $act, $id) {
 function GetRate($for, &$item) {
     $item = explode('.', $for);
     if (!empty($item[3]))
-         $rate = CONTENT.$item[0].DS.$item[1].DS.$item[2].DS.$item[3].DS.'rate';
-    else $rate = CONTENT.$item[0].DS.$item[1].DS.$item[2].DS.'rate';
-    if (file_exists($rate))
+         $item = CONTENT.$item[0].DS.$item[1].DS.$item[2].DS.$item[3].DS.'rate';
+    else $item = CONTENT.$item[0].DS.$item[1].DS.$item[2].DS.'rate';
+    if (file_exists($item))
          return json_decode(file_get_contents($item), TRUE);
-    else return '';
+    else return [];
 }
 
 /**
@@ -91,12 +91,11 @@ function ShowRate($for) {
         if ($voices !== 0) {
             $value = $sum / $voices;
         }
+    }
+    $user = USER::getUser('user');
 
-        $user = USER::getUser('user');
-
-        if (($user !== 'guest') && !array_key_exists($user, $rate)) {
-            $event = 'onmousedown="star.update(this, \''.$for.'\')" onmousemove="star.mouse(event, this)" title="Rate!"';
-        }
+    if (($user !== 'guest') && !array_key_exists($user, $rate)) {
+        $event = 'onmousedown="star.update(this, \''.$for.'\')" onmousemove="star.mouse(event, this)" title="Rate!"';
     }
 
     $TPL = new TEMPLATE(__DIR__.DS.'rate.tpl');

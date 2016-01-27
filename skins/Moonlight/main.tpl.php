@@ -21,7 +21,7 @@ die();?>
     <meta name="generator" content="idxCMS">
     [show=meta]
     <link rel="stylesheet" href="{SKINS}css.php?f={SKINS}normalize|{CURRENT_SKIN}style|{TOOLS}message{DS}message|{TOOLS}colorbox{DS}jquery.colorbox">
-    <script type="text/javascript" src="{TOOLS}jquery.min.js"></script>
+    <script type="text/javascript" src="{TOOLS}jquery-2.2.0.min.js"></script>
     <link type="image/x-icon" rel="shortcut icon" href="{ROOT}favicon.ico" />
 </head>
 <body>

@@ -1,5 +1,5 @@
 /*
- * Rate system for articles and catalog items.
+ * Rate system for articles, catalog and gallery items
  * @version   v1.0.3 : 2008/05/06
  * @author    http://www.nofunc.com/AJAX_Star_Rating/
  */

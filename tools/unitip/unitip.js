@@ -69,9 +69,9 @@ var build = function (a, sTitle) {
 	tipContainer.appendChild(tipContainerBot);
 
 	tipid    = document.getElementById("unitip");
-	tippoint = document.getElementById("unitippoint");
-	tipmid   = document.getElementById("unitipmid");
-	tipcap   = document.getElementById("unitipcap");
+	var tippoint = document.getElementById("unitippoint");
+	var tipmid   = document.getElementById("unitipmid");
+	var tipcap   = document.getElementById("unitipcap");
 
 	document.getElementById("unitipmid").innerHTML = sTitle;
 	tipid.style.display = "block";
@@ -134,6 +134,10 @@ var build = function (a, sTitle) {
 
 // now, we track the mouse and make the tooltip follow
 var move = function (evt) {
+
+    var tippoint = document.getElementById("unitippoint");
+    var tipmid   = document.getElementById("unitipmid");
+    var tipcap   = document.getElementById("unitipcap");
 
 	if (window.event) {
 		x = window.event.clientX;

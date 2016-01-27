@@ -13,6 +13,7 @@ switch (SYSTEM::get('locale')) {
         $LANG['def']['Polls'] = 'Голосования';
         $LANG['def']['Polls archive'] = 'Архив голосований';
         $LANG['def']['Total votes'] = 'Всего голосов';
+        $LANG['def']['You already voted in this poll'] = 'Вы уже проголосовали в этом опросе';
         break;
 
     case 'ua':
@@ -20,6 +21,7 @@ switch (SYSTEM::get('locale')) {
         $LANG['def']['Polls'] = 'Голосування';
         $LANG['def']['Polls archive'] = 'Архів голосувань';
         $LANG['def']['Total votes'] = 'Всього голосів';
+        $LANG['def']['You already voted in this poll'] = 'Ви вже проголосували в цьому опитуванні';
         break;
 
     case 'by':
@@ -27,6 +29,7 @@ switch (SYSTEM::get('locale')) {
         $LANG['def']['Polls'] = 'Галасаванні';
         $LANG['def']['Polls archive'] = 'Архіў галасаванняў';
         $LANG['def']['Total votes'] = 'Усяго галасоў';
+        $LANG['def']['You already voted in this poll'] = 'Вы ўжо прагаласавалі ў гэтым апытанні';
         break;
 }
 

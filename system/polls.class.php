@@ -226,11 +226,11 @@ class POLLS {
      * @return boolean         The result of operation
      */
     private function savePolls($active = TRUE, $old = TRUE) {
-        if ($active) file_put_contents(CONTENT.'polls', json_encode($this->active, JSON_UNESCAPED_UNICODE), LOCK_EX);
-        if ($old)    file_put_contents(CONTENT.'polls-archive', json_encode($this->old, JSON_UNESCAPED_UNICODE), LOCK_EX);
+        if ($active) $a = file_put_contents(CONTENT.'polls', json_encode($this->active, JSON_UNESCAPED_UNICODE), LOCK_EX);
+        if ($old)    $o = file_put_contents(CONTENT.'polls-archive', json_encode($this->old, JSON_UNESCAPED_UNICODE), LOCK_EX);
 
-        if ($active && $old) return $a && $b;
-        elseif ($old)        return $b;
+        if ($active && $old) return $a && $o;
+        elseif ($old)        return $o;
         elseif ($active)     return $a;
         else return TRUE;
     }

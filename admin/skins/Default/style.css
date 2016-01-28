@@ -538,9 +538,10 @@ footer {
         background: url(../../../tools/unitip/TipCap.png) no-repeat;
         height: 7px;
         overflow: hidden	}
-.icon { white-space: nowrap; }
+.icon { background-color: transparent; white-space: nowrap; }
 .icon:before {
     content: '';
+    background-color: transparent;
     background-image: url(../../../skins/images/icons.png);
     background-repeat: no-repeat;
     background-position: 16px 16px;

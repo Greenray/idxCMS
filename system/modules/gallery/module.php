@@ -14,18 +14,21 @@ switch (SYSTEM::get('locale')) {
     case 'ru':
         $LANG['def']['Gallery'] = 'Галерея';
         $LANG['def']['Gallery preview'] = 'Предпросмотр галереи';
+        $LANG['def']['Gallery updates'] = 'Обновления галереи';
         $LANG['def']['Random image'] = 'Случайное изображение';
         break;
 
     case 'ua':
         $LANG['def']['Gallery'] = 'Галерея';
         $LANG['def']['Gallery preview'] = 'Перегляд галереї';
+        $LANG['def']['Gallery updates'] = 'Оновлення галереї';
         $LANG['def']['Random image'] = 'Випадкове зображення';
         break;
 
     case 'by':
         $LANG['def']['Gallery'] = 'Галерэя';
         $LANG['def']['Gallery preview'] = 'Прадпрагляд галерэі';
+        $LANG['def']['Gallery updates'] = 'Абнаўлення галерэі';
         $LANG['def']['Random image'] = 'Выпадковае малюнак';
         break;
 }

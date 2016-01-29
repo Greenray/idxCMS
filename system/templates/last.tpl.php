@@ -13,7 +13,7 @@ die();?>
             <div class="info">
                 $item.date<br />
                 <!-- IF !empty($item.image) -->
-                    <a href="{CONTENT}gallery{DS}$item.section{DS}$item.category{DS}$item.id{DS}$item.image">
+                    <a href="{CONTENT}gallery{DS}$item.section{DS}$item.category{DS}$item.id{DS}$item.image" class="cbox">
                         <img src="{CONTENT}gallery{DS}$item.section{DS}$item.category{DS}$item.id{DS}$item.image.jpg" width="200" height="150" alt="__Image__" />
                     </a><br />
                 <!-- ENDIF -->

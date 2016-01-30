@@ -92,10 +92,6 @@ if (!empty($REQUEST['new']) || !empty($item)) {
             $template = __DIR__.DS.'link.tpl';
             break;
 
-        case 'files':
-            $template = __DIR__.DS.'file.tpl';
-            break;
-
         default:
             $template = __DIR__.DS.'item.tpl';
             break;

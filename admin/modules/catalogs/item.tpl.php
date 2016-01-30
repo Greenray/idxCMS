@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management System v3.1
 # Copyright (c) 2016 Victor Nabatov
-# Administration: File, links, music or video template.
+# Administration: Files, links, music or video template.
 
 die();?>
 

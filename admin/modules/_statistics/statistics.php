@@ -1,7 +1,15 @@
 <?php
-# idxCMS Flat Files Content Management System v3.1
-# Copyright (c) 2016 Victor Nabatov
-# Administration: Statistcs.
+/**
+ * Statistics.
+ *
+ * @program   idxCMS: Flat Files Content Management System
+ * @version   3.1
+ * @author    Victor Nabatov <greenray.spb@gmail.com>
+ * @copyright (c) 2016 Victor Nabatov
+ * @license   Creative Commons Attribution-ShareAlike 4.0 International
+ * @file      admin/modules/_statistics/statistics.php
+ * @package   Administration
+ */
 
 if (!defined('idxADMIN') || !USER::$root) die();
 

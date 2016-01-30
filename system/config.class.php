@@ -13,10 +13,10 @@
  * </pre>
  *
  * @program   idxCMS: Flat Files Content Management System
- * @version   3.0
+ * @version   3.1
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2016 Victor Nabatov
- * @license   Creative Commons — Attribution-NonCommercial-ShareAlike 4.0 International
+ * @license   Creative Commons Attribution-ShareAlike 4.0 International
  * @file      system/config.class.php
  * @package   Core
  */

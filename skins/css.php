@@ -3,7 +3,7 @@
 # Copyright (c) 2016 Victor Nabatov
 # Parser of the browsers prefixes
 
-$files = explode("|", $_GET["f"]);
+$files = explode("|", $_GET["files"]);
 
 $contents = '';
 foreach ($files as $file) {

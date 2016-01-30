@@ -17,17 +17,17 @@ die();?>
                 <th class="title">__Title__</th>
                 <th class="author">__Date__</th>
                 <th class="author">__Author__</th>
-                <!-- IF ($section_id == 'files') -->
+                <!-- IF ($section_id == files) -->
                     <th>__File__</th>
                     <th>__Size__</th>
                     <th>__Downloads__</th>
                 <!-- ENDIF -->
-                <!-- IF ($section_id == 'music') -->
+                <!-- IF ($section_id == music) -->
                     <th>__File__</th>
                     <th>__Size__</th>
                     <th>__Downloads__</th>
                 <!-- ENDIF -->
-                <!-- IF ($section_id == 'links') -->
+                <!-- IF ($section_id == links) -->
                     <th>__Site URL__</th>
                     <th>__Transitions__</th>
                 <!-- ENDIF -->
@@ -50,7 +50,7 @@ die();?>
                         <td class="right">$item.size</td>
                         <td class="center">$item.downloads</td>
                     <!-- ENDIF -->
-                    <!-- IF $section_id === links -->
+                    <!-- IF $section_id == links -->
                         <td class="left">$item.site</td>
                         <td class="center">$item.clicks</td>
                     <!-- ENDIF -->

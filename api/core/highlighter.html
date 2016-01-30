@@ -1,0 +1,442 @@
+<!doctype html>
+<html>
+<head>
+    <title>API for class HIGHLIGHTER (idxCMS: Flat Files Content Management Sysytem ver. 3.1)</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="generator" content="phpAPI 5.0 (https://github.com/Greenray/phpAPI/)">
+    <link href="../style.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+    <div class="page">
+        <div class="header center">
+            <div class="content">
+                idxCMS: Flat Files Content Management Sysytem ver. 3.1                <div class="logo_desc">Интерфейс прикладного программирования</div>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="content">
+                <h1>Пространства имен</h1>
+<ul>
+    <li><a href="../administration/package-summary.html">Administration</a></li>
+    <li><a href="../catalogs/package-summary.html">Catalogs</a></li>
+    <li><a href="../core/package-summary.html">Core</a></li>
+    <li><a href="../forum/package-summary.html">Forum</a></li>
+    <li><a href="../gallery/package-summary.html">Gallery</a></li>
+    <li><a href="../no package/package-summary.html">No Package</a></li>
+    <li><a href="../polls/package-summary.html">Polls</a></li>
+    <li><a href="../posts/package-summary.html">Posts</a></li>
+    <li><a href="../rss/package-summary.html">RSS</a></li>
+    <li><a href="../rate/package-summary.html">Rate</a></li>
+    <li><a href="../search/package-summary.html">Search</a></li>
+    <li><a href="../statistics/package-summary.html">Statistics</a></li>
+    <li><a href="../tagcloud/package-summary.html">Tagcloud</a></li>
+    <li><a href="../template/package-summary.html">Template</a></li>
+    <li><a href="../tools/package-summary.html">Tools</a></li>
+    <li><a href="../user/package-summary.html">User</a></li>
+</ul>
+<h1>Пространство имен User</h1>
+    <h2>Классы</h2>
+    <ul>
+            <li><a href="../core/categories.html" title="Core \ CATEGORIES">CATEGORIES</a></li>
+            <li><a href="../core/cms.html" title="Core \ CMS">CMS</a></li>
+            <li><a href="../core/comments.html" title="Core \ COMMENTS">COMMENTS</a></li>
+            <li><a href="../core/config.html" title="Core \ CONFIG">CONFIG</a></li>
+            <li><a href="../core/content.html" title="Core \ CONTENT">CONTENT</a></li>
+            <li><a href="../core/dbase.html" title="Core \ DBASE">DBASE</a></li>
+            <li><a href="../core/filter.html" title="Core \ FILTER">FILTER</a></li>
+            <li><a href="../core/highlighter.html" title="Core \ HIGHLIGHTER">HIGHLIGHTER</a></li>
+            <li><a href="../core/image.html" title="Core \ IMAGE">IMAGE</a></li>
+            <li><a href="../core/items.html" title="Core \ ITEMS">ITEMS</a></li>
+            <li><a href="../core/log.html" title="Core \ LOG">LOG</a></li>
+            <li><a href="../core/parser.html" title="Core \ PARSER">PARSER</a></li>
+            <li><a href="../core/sections.html" title="Core \ SECTIONS">SECTIONS</a></li>
+            <li><a href="../core/system.html" title="Core \ SYSTEM">SYSTEM</a></li>
+            <li><a href="../core/uploader.html" title="Core \ UPLOADER">UPLOADER</a></li>
+        </ul>
+    <h2>Функции</h2>
+    <ul>
+            <li><a href="../core/package-functions.html#AdvScanDir" title="Core">AdvScanDir</a></li>
+            <li><a href="../core/package-functions.html#AdvancedPagination" title="Core">AdvancedPagination</a></li>
+            <li><a href="../core/package-functions.html#CheckCaptcha" title="Core">CheckCaptcha</a></li>
+            <li><a href="../core/package-functions.html#CreateUrl" title="Core">CreateUrl</a></li>
+            <li><a href="../core/package-functions.html#DeleteTree" title="Core">DeleteTree</a></li>
+            <li><a href="../core/package-functions.html#FormatTime" title="Core">FormatTime</a></li>
+            <li><a href="../core/package-functions.html#GetFilesList" title="Core">GetFilesList</a></li>
+            <li><a href="../core/package-functions.html#GetPagination" title="Core">GetPagination</a></li>
+            <li><a href="../core/package-functions.html#OnlyLatin" title="Core">OnlyLatin</a></li>
+            <li><a href="../core/package-functions.html#Pagination" title="Core">Pagination</a></li>
+            <li><a href="../core/package-functions.html#RandomString" title="Core">RandomString</a></li>
+            <li><a href="../core/package-functions.html#Redirect" title="Core">Redirect</a></li>
+            <li><a href="../core/package-functions.html#SelectTimeZone" title="Core">SelectTimeZone</a></li>
+            <li><a href="../core/package-functions.html#SendMail" title="Core">SendMail</a></li>
+            <li><a href="../core/package-functions.html#ShowCaptcha" title="Core">ShowCaptcha</a></li>
+            <li><a href="../core/package-functions.html#Sitemap" title="Core">Sitemap</a></li>
+            <li><a href="../core/package-functions.html#UnifyBr" title="Core">UnifyBr</a></li>
+            <li><a href="../core/package-functions.html#__" title="Core">__</a></li>
+            <li><a href="../core/package-functions.html#gzfile_get_contents" title="Core">gzfile_get_contents</a></li>
+            <li><a href="../core/package-functions.html#gzfile_put_contents" title="Core">gzfile_put_contents</a></li>
+            <li><a href="../core/package-functions.html#idxErrorHandler" title="Core">idxErrorHandler</a></li>
+        </ul>
+    <h2>Глобальные элементы</h2>
+    <ul>
+            <li><a href="../core/package-globals.html#ADMIN" title="Core">ADMIN</a></li>
+            <li><a href="../core/package-globals.html#ADMINLIBS" title="Core">ADMINLIBS</a></li>
+            <li><a href="../core/package-globals.html#CACHE_STORE" title="Core">CACHE_STORE</a></li>
+            <li><a href="../core/package-globals.html#CATEGORY" title="Core">CATEGORY</a></li>
+            <li><a href="../core/package-globals.html#COMMENT" title="Core">COMMENT</a></li>
+            <li><a href="../core/package-globals.html#CONTENT" title="Core">CONTENT</a></li>
+            <li><a href="../core/package-globals.html#CURRENT_MODULE" title="Core">CURRENT_MODULE</a></li>
+            <li><a href="../core/package-globals.html#CURRENT_SKIN" title="Core">CURRENT_SKIN</a></li>
+            <li><a href="../core/package-globals.html#DS" title="Core">DS</a></li>
+            <li><a href="../core/package-globals.html#IDX_COPYRIGHT" title="Core">IDX_COPYRIGHT</a></li>
+            <li><a href="../core/package-globals.html#IDX_POWERED" title="Core">IDX_POWERED</a></li>
+            <li><a href="../core/package-globals.html#IDX_VERSION" title="Core">IDX_VERSION</a></li>
+            <li><a href="../core/package-globals.html#IMAGES" title="Core">IMAGES</a></li>
+            <li><a href="../core/package-globals.html#ITEM" title="Core">ITEM</a></li>
+            <li><a href="../core/package-globals.html#LF" title="Core">LF</a></li>
+            <li><a href="../core/package-globals.html#LOGS" title="Core">LOGS</a></li>
+            <li><a href="../core/package-globals.html#MODULE" title="Core">MODULE</a></li>
+            <li><a href="../core/package-globals.html#MODULES" title="Core">MODULES</a></li>
+            <li><a href="../core/package-globals.html#PAGE" title="Core">PAGE</a></li>
+            <li><a href="../core/package-globals.html#ROOT" title="Core">ROOT</a></li>
+            <li><a href="../core/package-globals.html#SECTION" title="Core">SECTION</a></li>
+            <li><a href="../core/package-globals.html#SKINS" title="Core">SKINS</a></li>
+            <li><a href="../core/package-globals.html#SMILES" title="Core">SMILES</a></li>
+            <li><a href="../core/package-globals.html#SYS" title="Core">SYS</a></li>
+            <li><a href="../core/package-globals.html#TEMP" title="Core">TEMP</a></li>
+            <li><a href="../core/package-globals.html#TEMPLATES" title="Core">TEMPLATES</a></li>
+            <li><a href="../core/package-globals.html#TOOLS" title="Core">TOOLS</a></li>
+            <li><a href="../core/package-globals.html#USERS" title="Core">USERS</a></li>
+            <li><a href="../core/package-globals.html#idxADMIN" title="Core">idxADMIN</a></li>
+            <li><a href="../core/package-globals.html#idxCMS" title="Core">idxCMS</a></li>
+        </ul>
+            </div>
+        </div>
+        <div class="main">
+            <div class="content">
+                <nav class="menu_main center"><div class="menu">
+            <ul>
+                    <li><a href="../index.html">Overview</a></li>
+                    <li><a href="../core/package-summary.html">Namespace</a></li>
+                    <li class="active">Class</li>
+                    <li><a href="../core/package-tree.html">Core\Tree</a></li>
+                    <li><a href="../deprecated.html">Deprecated</a></li>
+                    <li><a href="../todo.html">Todo</a></li>
+                    <li><a href="../index-all.html">Index</a></li>
+                </ul>
+    </div>
+    <div class="small_links">
+        Общий обзор: <a href="#summary_fields">Поля</a> | <a href="#summary_methods">Методы</a> | <a href="#summary_constructor">Конструктор</a>
+        Детали: <a href="#details_fields">Поля</a> | <a href="#details_methods">Методы</a> | <a href="#details_constructor">Конструктор</a>
+    </div>
+</nav>
+                <hr />
+<div class="package">Пространство имен Core</div>
+<h1>Class HIGHLIGHTER</h1>
+<div id="list">
+    <ul>
+        <li><a href="../core/parser.html">PARSER</a><ul><li><strong>HIGHLIGHTER</strong></li></ul></li>    </ul>
+</div>
+<hr />
+<p class="arguments">public  class <strong>HIGHLIGHTER</strong> extends <a href="../core/parser.html">PARSER</a></p>
+<div class="comment" id="overview_description">HTML and PHP highlighter.</div>
+<div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Program</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+                            <td class="hid" colspan="2">idxCMS: Flat Files Content Management System</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">Version</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+                            <td class="hid" colspan="2">3.1</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">Author</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+                            <td class="hid" colspan="2">Victor Nabatov &lt;greenray.spb@gmail.com&gt;</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">Copyright</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+                            <td class="hid" colspan="2">(c) 2016 Victor Nabatov</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">License</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+                            <td class="hid" colspan="2">Creative Commons Attribution-ShareAlike 4.0 International</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">File</td>
+            <td class="hid right w_100 lilac">&nbsp;</td>
+                            <td class="hid" colspan="2">system/highlighter.class.php</td>
+                    </tr>
+        </table>
+</div>
+    <table id="summary_fields">
+        <tr><th colspan="2">Поля: общий обзор</th></tr>
+                    <tr>
+                <td class="type w_200">private  string</td>
+                <td class="description">
+                    <pre><a href="#$_attr"><span class="green">$_attr</span></a> = <span class="red">'color:green;'</span></pre>
+                    <p class="description">Tag attribute color</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">private  string</td>
+                <td class="description">
+                    <pre><a href="#$_comment"><span class="green">$_comment</span></a> = <span class="red">'font-style:italic;color:gray;'</span></pre>
+                    <p class="description">inline style for comment</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">private  integer</td>
+                <td class="description">
+                    <pre><a href="#$_current"><span class="green">$_current</span></a> = 0</pre>
+                    <p class="description">Parsing counter</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">private  string</td>
+                <td class="description">
+                    <pre><a href="#$_output"><span class="green">$_output</span></a> = <span class="red">''</span></pre>
+                    <p class="description">The results of parsing</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">private  string</td>
+                <td class="description">
+                    <pre><a href="#$_php"><span class="green">$_php</span></a> = <span class="red">'color:black;'</span></pre>
+                    <p class="description">PHP tag color</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">private  string</td>
+                <td class="description">
+                    <pre><a href="#$_tag"><span class="green">$_tag</span></a> = <span class="red">'color:blue;'</span></pre>
+                    <p class="description">Tag name color</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">private  string</td>
+                <td class="description">
+                    <pre><a href="#$_text"><span class="green">$_text</span></a> = <span class="red">''</span></pre>
+                    <p class="description">Text to parse</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">private  string</td>
+                <td class="description">
+                    <pre><a href="#$_value"><span class="green">$_value</span></a> = <span class="red">'color:red;'</span></pre>
+                    <p class="description">Tag value color</p>
+                </td>
+            </tr>
+            </table>
+            <table class="inherit">
+            <tr><th>Поля, унаследованные из Core \ PARSER</th></tr>
+            <tr>
+                <td>
+                                <span><a href="../core/parser.html#$regexp"><span class="green">$regexp, </span></a>&nbsp;</span>
+                                <span><a href="../core/parser.html#$temp"><span class="green">$temp, </span></a>&nbsp;</span>
+                                <span><a href="../core/parser.html#$text"><span class="green">$text</span></a>&nbsp;</span>
+                                </td>
+            </tr>
+        </table>
+        <table id="summary_constructor">
+        <tr><th colspan="2">Конструктор: общий обзор</th></tr>
+        <tr>
+            <td class="type w_200">public  void</td>
+            <td class="description">
+                <p><a href="#__construct"><strong><span class="black">__construct</span></strong></a>(<span class="lilac">string</span> <span class="blue">$code</span>)</p>
+                <p class="description">Class initialization.</p>
+            </td>
+        </tr>
+    </table>
+    <table id="summary_methods">
+        <tr><th colspan="2">Методы: общий обзор</th></tr>
+                    <tr>
+                <td class="type w_200">private  string</td>
+                <td class="description">
+                    <p><a href="#highlightComment"><strong><span class="black">highlightComment</span></strong></a> ()</p>
+                    <p class="description">Comment highlighter.</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">private  string</td>
+                <td class="description">
+                    <p><a href="#highlightPhp"><strong><span class="black">highlightPhp</span></strong></a> ()</p>
+                    <p class="description">PHP code highlighter.</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">private  string</td>
+                <td class="description">
+                    <p><a href="#highlightTag"><strong><span class="black">highlightTag</span></strong></a> ()</p>
+                    <p class="description">Tag highlighter.</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">public  string</td>
+                <td class="description">
+                    <p><a href="#highlight"><strong><span class="black">highlight</span></strong></a> ()</p>
+                    <p class="description">Hightlights string.</p>
+                </td>
+            </tr>
+            </table>
+            <table class="inherit">
+            <tr><th>Методы, унаследованные из Core \ PARSER</th></tr>
+            <tr>
+                <td>
+                                    <span><a href="../core/parser.html#__construct">__construct, </a>&nbsp;</span>
+                                    <span><a href="../core/parser.html#parse">parse, </a>&nbsp;</span>
+                                    <span><a href="../core/parser.html#parseCode">parseCode, </a>&nbsp;</span>
+                                    <span><a href="../core/parser.html#parseHtml">parseHtml, </a>&nbsp;</span>
+                                    <span><a href="../core/parser.html#parseImage">parseImage, </a>&nbsp;</span>
+                                    <span><a href="../core/parser.html#parseMP3">parseMP3, </a>&nbsp;</span>
+                                    <span><a href="../core/parser.html#parsePhp">parsePhp, </a>&nbsp;</span>
+                                    <span><a href="../core/parser.html#parseQuote">parseQuote, </a>&nbsp;</span>
+                                    <span><a href="../core/parser.html#parseSmiles">parseSmiles, </a>&nbsp;</span>
+                                    <span><a href="../core/parser.html#parseSpoiler">parseSpoiler, </a>&nbsp;</span>
+                                    <span><a href="../core/parser.html#parseText">parseText, </a>&nbsp;</span>
+                                    <span><a href="../core/parser.html#parseYouTube">parseYouTube, </a>&nbsp;</span>
+                                    <span><a href="../core/parser.html#showBbcodesPanel">showBbcodesPanel</a>&nbsp;</span>
+                                </td>
+            </tr>
+        </table>
+        <h2 id="details_fields">Поля: детали</h2>
+            <div class="location">system/highlighter.class.php at line 17</div>
+        <pre class="arguments" id="Undefined $_attr">private  string <strong><span class="green">$_attr</span></strong> = <span class="red">'color:green;'</span></pre>
+        <div class="details">Tag attribute color</div>
+        <hr />
+            <div class="location">system/highlighter.class.php at line 20</div>
+        <pre class="arguments" id="Undefined $_comment">private  string <strong><span class="green">$_comment</span></strong> = <span class="red">'font-style:italic;color:gray;'</span></pre>
+        <div class="details">inline style for comment</div>
+        <hr />
+            <div class="location">system/highlighter.class.php at line 23</div>
+        <pre class="arguments" id="Undefined $_current">private  integer <strong><span class="green">$_current</span></strong> = 0</pre>
+        <div class="details">Parsing counter</div>
+        <hr />
+            <div class="location">system/highlighter.class.php at line 26</div>
+        <pre class="arguments" id="Undefined $_output">private  string <strong><span class="green">$_output</span></strong> = <span class="red">''</span></pre>
+        <div class="details">The results of parsing</div>
+        <hr />
+            <div class="location">system/highlighter.class.php at line 29</div>
+        <pre class="arguments" id="Undefined $_php">private  string <strong><span class="green">$_php</span></strong> = <span class="red">'color:black;'</span></pre>
+        <div class="details">PHP tag color</div>
+        <hr />
+            <div class="location">system/highlighter.class.php at line 32</div>
+        <pre class="arguments" id="Undefined $_tag">private  string <strong><span class="green">$_tag</span></strong> = <span class="red">'color:blue;'</span></pre>
+        <div class="details">Tag name color</div>
+        <hr />
+            <div class="location">system/highlighter.class.php at line 35</div>
+        <pre class="arguments" id="Undefined $_text">private  string <strong><span class="green">$_text</span></strong> = <span class="red">''</span></pre>
+        <div class="details">Text to parse</div>
+        <hr />
+            <div class="location">system/highlighter.class.php at line 38</div>
+        <pre class="arguments" id="Undefined $_value">private  string <strong><span class="green">$_value</span></strong> = <span class="red">'color:red;'</span></pre>
+        <div class="details">Tag value color</div>
+        <hr />
+        <h2 id="details_constructor">Конструктор: детали</h2>
+    <div class="location">system/highlighter.class.php at line 45</div>
+    <code class="arguments" id="__construct">public  void <strong>__construct</strong>(<span class="lilac">string</span> <span class="blue">$code</span>)</code>
+    <div class="details">
+            <p class="description">Class initialization.</p>
+        <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$code</td>
+                <td class="hid">Code for highlighting</td>
+                    </tr>
+        </table>
+</div>
+    </div>
+    <h2 id="details_methods">Методы: детали</h2>
+            <div class="location">system/highlighter.class.php at line 54</div>
+        <code class="arguments" id="highlightComment">private  string <strong>highlightComment</strong> ()</code>
+        <div class="details">
+                    <p class="description">Comment highlighter.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid" colspan="2">HTML span block with highlighted comment</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/highlighter.class.php at line 67</div>
+        <code class="arguments" id="highlightPhp">private  string <strong>highlightPhp</strong> ()</code>
+        <div class="details">
+                    <p class="description">PHP code highlighter.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid" colspan="2">HTML span block with highlighted php code</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/highlighter.class.php at line 111</div>
+        <code class="arguments" id="highlightTag">private  string <strong>highlightTag</strong> ()</code>
+        <div class="details">
+                    <p class="description">Tag highlighter.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid" colspan="2">HTML span block with highlighted tag</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/highlighter.class.php at line 198</div>
+        <code class="arguments" id="highlight">public  string <strong>highlight</strong> ()</code>
+        <div class="details">
+                    <p class="description">Hightlights string.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid" colspan="2">Highlighted html</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+                    <nav class="menu_main center"><div class="menu">
+            <ul>
+                    <li><a href="../index.html">Overview</a></li>
+                    <li><a href="../core/package-summary.html">Namespace</a></li>
+                    <li class="active">Class</li>
+                    <li><a href="../core/package-tree.html">Core\Tree</a></li>
+                    <li><a href="../deprecated.html">Deprecated</a></li>
+                    <li><a href="../todo.html">Todo</a></li>
+                    <li><a href="../index-all.html">Index</a></li>
+                </ul>
+    </div>
+    <div class="small_links">
+        Общий обзор: <a href="#summary_fields">Поля</a> | <a href="#summary_methods">Методы</a> | <a href="#summary_constructor">Конструктор</a>
+        Детали: <a href="#details_fields">Поля</a> | <a href="#details_methods">Методы</a> | <a href="#details_constructor">Конструктор</a>
+    </div>
+</nav>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="content">
+            <div class="copyright center">Generated by <a href="https://github.com/Greenray/phpAPI" target="_blank">phpAPI</a>: PHP Documentation Creator ver. 5.0 &copy; 2016 Greenray</div>
+        </div>
+    </div>
+</body>
+</html>

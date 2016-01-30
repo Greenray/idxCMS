@@ -1,7 +1,7 @@
 <?php
 # idxCMS Flat Files Content Management System v3.1
 # Translations into Belorussian
-# Copyright (c) 2016 Victor Nabatov
+# Copyright (c) 2016 Victor Nabatov greenray.spb@gmail.com
 
 $LANG['language'] = 'belorussian';
 $LANG['locale']   = 'by';

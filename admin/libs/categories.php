@@ -1,6 +1,6 @@
 <?php
 # idxCMS Flat Files Content Management Sysytem v3.0
-# Copyright (c) 2016 Victor Nabatov
+# Copyright (c) 2016 Victor Nabatov greenray.spb@gmail.com
 # Administration: Categories management.
 
 if (!defined('idxADMIN')) die();

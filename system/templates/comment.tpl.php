@@ -1,6 +1,6 @@
 <?php
 # idxCMS Flat Files Content Management System v3.1
-# Copyright (c) 2014 Greenray greenray.spb@gmail.com
+# Copyright (c) 2016 Victor Nabatov greenray.spb@gmail.com greenray.spb@gmail.com
 # Comment template
 
 die();?>

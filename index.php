@@ -5,13 +5,10 @@
  * @program   idxCMS: Flat Files Content Management System
  * @version   3.1
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2016 Victor Nabatov
- * @license   Creative Commons — Attribution-NonCommercial-ShareAlike 4.0 International
+ * @Copyright (c) 2016 Victor Nabatov greenray.spb@gmail.com
+ * @license   Creative Commons Attribution-ShareAlike 4.0 International
  * @package   Core
  * @overview  The core of the system.
- *
- *            This program is free software; you can redistribute it and/or modify it under the terms of the
- *            Creative Commons Attribution-ShareAlike 4.0 International License
  *
  *            This program is distributed in the hope that it will be useful,
  *            but WITHOUT ANY WARRANTY; without even the implied warranty of

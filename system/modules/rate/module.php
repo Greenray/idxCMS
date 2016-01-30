@@ -5,7 +5,7 @@
  * @program   idxCMS: Flat Files Content Management System
  * @version   3.1
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2016 Victor Nabatov
+ * @Copyright (c) 2016 Victor Nabatov greenray.spb@gmail.com
  * @license   Creative Commons Attribution-ShareAlike 4.0 International
  * @file      system/modules/rate/module.php
  * @package   Rate

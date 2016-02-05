@@ -27,13 +27,11 @@ die();?>
 <body>
 <div id="wrapper">
     <div class="header">
-        <div class="toolbar">
-            <ul>
-                <li><a href="{MODULE}user.feedback">__Feedback__</a></li>
-                <li><a href="{MODULE}sitemap">__Sitemap__</a></li>
-                <li><a href="{MODULE}rss.list" class="tip" title="Subscribe to RSS feeds"><img src="{IMAGES}rss.png" height="24" width="24" alt="RSS" /></a></li>
-            </ul>
-        </div>
+        <ul class="toolbar">
+            <li><a href="{MODULE}user.feedback">__Feedback__</a></li>
+            <li><a href="{MODULE}sitemap">__Sitemap__</a></li>
+            <li><a href="{MODULE}rss.list" class="tip" title="Subscribe to RSS feeds"><img src="{IMAGES}rss.png" height="24" width="24" alt="RSS" /></a></li>
+        </ul>
         <div class="logo-image">
             <img src="{IMAGES}logo.png" width="350" height="88" alt="idxCMS" />
             Flat Files Content Management System

@@ -12,5 +12,5 @@ die();?>
     <!-- FOREACH banner = $banners -->
         <li>$banner.text</li>
     <!-- ENDFOREACH -->
-    </ul>
+</ul>
 </div>

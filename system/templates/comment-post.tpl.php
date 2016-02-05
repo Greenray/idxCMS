@@ -34,7 +34,9 @@ die();?>
         <!-- IF !empty($message_length) -->
             <div>__Max message length__ [<script type="text/javascript">displayLimit("document.comment.text", "", '$message_length')</script>] __symbols__</div>
         <!-- ENDIF -->
-        <!-- IF !empty($captcha) -->$captcha<!-- ENDIF -->
+        <!-- IF !empty($captcha) -->
+            <p class="center">$captcha</p>
+        <!-- ENDIF -->
         <p class="navigation center">
         <!-- IF !empty($for) -->
             <input type="hidden" name="for" value="$for" />

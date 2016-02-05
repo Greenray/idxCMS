@@ -172,7 +172,7 @@ die();?>
                 </fieldset>
                 <fieldset class="step">
                     <legend>__Registration__</legend>
-                    $captcha
+                    <p class="center">$captcha</p>
                     <p class="msg help">__Required fields have a yellow background__</p>
                     <p><input type="submit" name="save" value="__Save__" /></p>
                 </fieldset>

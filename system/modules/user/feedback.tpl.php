@@ -46,7 +46,7 @@ die();?>
             <p class="center">$captcha</p>
         <!-- ENDIF -->
         <p class="center">
-            <!-- IF !empty($captcha) -->$captcha<!-- ENDIF -->
+        <!-- IF !empty($captcha) -->$captcha<!-- ENDIF -->
             <button type="submit">__Submit__</button>
             <button type="reset">__Reset__</button>
         </p>

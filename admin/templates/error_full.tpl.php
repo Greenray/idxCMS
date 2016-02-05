@@ -5,13 +5,11 @@
 
 die();?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.w3.org/MarkUp/SCHEMA/xhtml11.xsd"
-      xml:lang="en" >
+<!DOCTYPE html>
+<html lang="$locale">
 <head>
 <head>
+    <meta charset="UTF-8">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta http-equiv="content-language" content="$locale" />
     <link rel="stylesheet" type="text/css" href="{SKINS}normalize.css" media="screen" />
@@ -72,10 +70,10 @@ die();?>
     </style>
 </head>
 <body>
-    <form id="error" name="error" method="post" action="$url" class="error center">
-        <p class="title">__Error__</p>
-        <p class="text center">__$message__</p>
-        <p class="center"><input type="submit" name="error" value="__OK__" /></p>
-    </form>
+<form id="error" name="error" method="post" action="$url" class="error center">
+    <p class="title">__Error__</p>
+    <p class="text center">__$message__</p>
+    <p class="center"><input type="submit" name="error" value="__OK__" /></p>
+</form>
 </body>
 </html>

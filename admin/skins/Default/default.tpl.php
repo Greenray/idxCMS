@@ -5,18 +5,15 @@
 
 if (!defined('idxADMIN')) die();?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.w3.org/MarkUp/SCHEMA/xhtml11.xsd"
-      xml:lang="en" >
+<!DOCTYPE>
+<html lang="$locale">
 <head>
-    <title>__Administration__</title>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="Content-Language" content="$locale" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content="idxCMS">
+    <title>__Administration__</title>
     <link rel="stylesheet" type="text/css" href="{SKINS}normalize.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="{ADMIN}skins/Default/style.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="{TOOLS}message{DS}message.css" media="screen" />
@@ -117,7 +114,7 @@ if (!defined('idxADMIN')) die();?>
         }
     };
 </script>
-<!--[if lt IE 7]><script type="text/javascript" src="{TOOLS}unitip{DS}unitpngfix.js"></script><![endif]-->
 <script type="text/javascript" src='{TOOLS}unitip{DS}unitip.min.js'></script>
+<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </body>
 </html>

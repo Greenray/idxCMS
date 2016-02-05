@@ -5,13 +5,10 @@
 
 die();?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.w3.org/MarkUp/SCHEMA/xhtml11.xsd"
-      xml:lang="en" >
+<!DOCTYPE>
+<html lang="$locale">
 <head>
-    <title>[show=title]</title>
+    <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="Content-Language" content="$locale" />
     <meta name="resource-type" content="document" />
@@ -21,6 +18,7 @@ die();?>
     <meta name="revisit" content="7" />
     <meta name="generator" content="idxCMS" />
     [show=meta]
+    <title>[show=title]</title>
     <link rel="stylesheet" href="{SKINS}css.php?files={SKINS}normalize|{CURRENT_SKIN}style|{TOOLS}message{DS}message|{TOOLS}colorbox{DS}jquery.colorbox" />
     <script type="text/javascript" src="{TOOLS}jquery.min.js"></script>
     <link rel="shortcut icon" type="image/x-icon" href="{ROOT}favicon.ico" />
@@ -127,7 +125,7 @@ die();?>
         });
     }
 </script>
-<!--[if lt IE 7]><script type="text/javascript" src="{TOOLS}unitip{DS}unitpngfix.js"></script><![endif]-->
 <script type="text/javascript" src='{TOOLS}unitip{DS}unitip.min.js'></script>
+<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </body>
 </html>

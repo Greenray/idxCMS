@@ -42,11 +42,11 @@ die();?>
                         <td class="access center"><input type="hidden" name="accesses[]" value="$section.access" />$section.access</td>
                         <td class="actions center">
                             <span class="button_edit">
-                                <a href="{MODULE}admin&id=[$module:].categories&edit=$section.id" class="icon icon-edit tip" title="__Edit__"></a>
+                                <a href="{MODULE}admin&id=[$module:].sections&amp;edit=$section.id" class="icon icon-edit tip" title="__Edit__"></a>
                             </span>
                             <!-- IF !empty($section.delete) -->
                                 <span class="button_delete">
-                                    <a href="{MODULE}admin&id=[$module:].categories&delete=$section.id" class="icon icon-delete tip" title="__Delete__"></a>
+                                    <a href="{MODULE}admin&id=[$module:].sectionss&amp;delete=$section.id" class="icon icon-delete tip" title="__Delete__"></a>
                                 </span>
                             <!-- ENDIF -->
                         </td>

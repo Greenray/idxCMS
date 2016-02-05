@@ -10,7 +10,7 @@ die();?>
     <table class="std">
         <tr class="light"><td>$text</td></tr>
     </table>
-    <form name="month" method="post" action="{MODULE}admin&id=logs._statistics" target="main">
+    <form name="month" method="post" action="{MODULE}admin&amp;id=logs._statistics" target="main">
         <p align="center"><input type="submit" value="__Back__" /></p>
     </form>
 </fieldset>

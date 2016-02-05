@@ -738,7 +738,7 @@ class TEMPLATE {
                 if (CONFIG::getValue('enabled', 'rss')) {
                     $feeds = SYSTEM::get('feeds');
                     foreach ($feeds as $module => $title) {
-                        $output .= '<link href="'.MODULE.'rss&m='.$module.'" rel="alternate" type="application/xml" title="RSS '.$title[0].'" />'.LF;
+                        $output .= '<link href="'.MODULE.'rss&amp;m='.$module.'" rel="alternate" type="application/xml" title="RSS '.$title[0].'" />'.LF;
                     }
                 }
                 return $output;

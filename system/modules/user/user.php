@@ -144,9 +144,9 @@ if (!USER::$logged_in) {
         } else Redirect('index');
 
     } elseif (!empty($REQUEST['user'])) {
-         Redirect('user&act=register');
+         Redirect('user&amp;act=register');
     } else {
-        if (!empty($REQUEST['user'])) Redirect('user&act=register');
+        if (!empty($REQUEST['user'])) Redirect('user&amp;act=register');
     }
 } else {
     if (!empty($REQUEST['user'])) {

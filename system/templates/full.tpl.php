@@ -34,35 +34,35 @@ die();?>
         </div>
         <div class="center"><hr />__Copyright__: &copy; $copyright | __Size__: $size __bytes__ | __Downloads__: $downloads</div>
         <div class="info">
-            <span class="author center">__Posted by__: <a href="{MODULE}user&user=$author" class="tip" title="__Profile__">$nick</a></span>
+            <span class="author center">__Posted by__: <a href="{MODULE}user&amp;user=$author" class="tip" title="__Profile__">$nick</a></span>
             <span class="admin"><a href="$link&get=1" target="_blank">__Download__</a></span>
         </div>
     <!-- ELSEIF !empty($file) -->
         <div class="center"><hr />__Copyright__: &copy; $copyright | __Size__: $size __bytes__ | __Downloads__: $downloads</div>
         <div class="info">
-            <span class="author center">__Posted by__: <a href="{MODULE}user&user=$author" class="tip" title="__Profile__">$nick</a></span>
+            <span class="author center">__Posted by__: <a href="{MODULE}user&amp;user=$author" class="tip" title="__Profile__">$nick</a></span>
             <span class="admin"><a href="$link&get=1" target="_blank">__Download__</a></span>
         </div>
     <!-- ELSEIF !empty($site) -->
         <div class="center"><hr /><a href="$link&go=1" target="_blank">__Go__</a></div>
         <div class="info">
-            <span class="author center">__Posted by__: <a href="{MODULE}user&user=$author" class="tip" title="__Profile__">$nick</a><br />__Copyright__: &copy; $copyright</span>
+            <span class="author center">__Posted by__: <a href="{MODULE}user&amp;user=$author" class="tip" title="__Profile__">$nick</a><br />__Copyright__: &copy; $copyright</span>
             <span class="admin">__Transitions__: $clicks</span>
         </div>
     <!-- ELSEIF !empty($image) -->
         <div class="info">
-            <span class="author center">__Posted by__: <a href="{MODULE}user&user=$author" class="tip" title="__Profile__">$nick</a></span>
+            <span class="author center">__Posted by__: <a href="{MODULE}user&amp;user=$author" class="tip" title="__Profile__">$nick</a></span>
             <span class="admin">__Copyright__: $copyright</span>
         </div>
     <!-- ELSE -->
         <div class="info">
             <hr />
             <a href="{MODULE}posts.print{SECTION}$section{CATEGORY}$category{ITEM}$id" class="icon icon-printer tip" title="__Version for printer__" target="_blank"></a>
-            <span class="author center">__Author__: <a href="{MODULE}user&user=$author" class="tip" title="__Profile__">$nick</a></span>
+            <span class="author center">__Author__: <a href="{MODULE}user&amp;user=$author" class="tip" title="__Profile__">$nick</a></span>
             <!-- IF !empty($admin) -->
                 <div class="actions">
                     <form name="post" method="post" action="">
-                        <button type="submit" formaction="{MODULE}$module{SECTION}$section{CATEGORY}$category{ITEM}$id&action=$action">$command</button>
+                        <button type="submit" formaction="{MODULE}$module{SECTION}$section{CATEGORY}$category{ITEM}$id&amp;action=$action">$command</button>
                     </form>
                 </div>
             <!-- ENDIF -->

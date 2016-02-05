@@ -14,8 +14,8 @@ die();?>
                 <span class="date">$date</span>
                 <!-- IF !empty($profile) -->
                     <span class="profile">
-                        <a href="{MODULE}user&user=$author" class="icon icon-profile tip" title="__Profile__"></a>
-                        <a href="{MODULE}user.pm&for=$author" class="icon icon-pm tip" title="__Private message__"></a>
+                        <a href="{MODULE}user&amp;user=$author" class="icon icon-profile tip" title="__Profile__"></a>
+                        <a href="{MODULE}user.pm&amp;for=$author" class="icon icon-pm tip" title="__Private message__"></a>
                     </span>
                 <!-- ENDIF -->
             </div>
@@ -42,12 +42,12 @@ die();?>
         <div class="actions right">
             <form name="topic" method="post" action="">
                 <!-- IF !empty($ip) -->
-                    <button type="submit" formaction="$link&action=ban&host=$ip">$ip</button>
+                    <button type="submit" formaction="$link&amp;action=ban&amp;host=$ip">$ip</button>
                 <!-- ENDIF -->
-                <button type="submit" formaction="$link{ITEM}$id&action=$action_pin">$command_pin</button>
-                <button type="submit" formaction="$link&action=$action">$command</button>
-                <button type="submit" formaction="$link&action=edit">__Edit__</button>
-                <button type="submit" formaction="$link&action=delete">__Delete__</button>
+                <button type="submit" formaction="$link{ITEM}$id&amp;action=$action_pin">$command_pin</button>
+                <button type="submit" formaction="$link&amp;action=$action">$command</button>
+                <button type="submit" formaction="$link&amp;action=edit">__Edit__</button>
+                <button type="submit" formaction="$link&amp;action=delete">__Delete__</button>
             </form>
         </div>
     <!-- ENDIF -->

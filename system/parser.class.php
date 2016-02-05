@@ -59,8 +59,8 @@ class PARSER {
             "#\[url=(\"|&quot;|)([^ \"\n\r\t\<]*?)(\"|&quot;|)\](.*?)\[/url\]#is"      => '<a href="\\2">\\4</a>',
             "#\[url=(\"|&quot;|)(www\.[^ \"\n\r\t\<]*?)(\"|&quot;|)\](.*?)\[/url\]#is" => '<a href="http://\\2" target="_blank">\\4</a>',
             "#\[url=(\"|&quot;|)(((https?|ftp|ed2k|irc)://)[^ \"\n\r\t\<]*?)(\"|&quot;|)(.*?)\](.*?)\[/url\]#is" => '<a href="\\2\\6" target="_blank">\\7</a>',
-            "#\[user\]([\d\w]*?)\[/user\]#is"       => '<a href="'.ROOT.'?module=user&user=\\1">\\1</a>',
-            "#\[user=([\d\w]*?)\](.*?)\[/user\]#is" => '<a href="'.ROOT.'?module=user&user=\\1">\\2</a>',
+            "#\[user\]([\d\w]*?)\[/user\]#is"       => '<a href="'.ROOT.'?module=user&amp;user=\\1">\\1</a>',
+            "#\[user=([\d\w]*?)\](.*?)\[/user\]#is" => '<a href="'.ROOT.'?module=user&amp;user=\\1">\\2</a>',
             "#\[youtube\](.*?)\[/youtube\]#is"      => $this->parseYouTube()
         ];
     }

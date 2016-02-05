@@ -173,7 +173,7 @@ class SYSTEM {
                 if (class_exists($obj)) {
                     $point[$module]['sections'] = CMS::call($obj)->getSections();
                     unset($point[$module]['sections']['drafts']);
-                    $point[$module]['width']  = mb_strlen($point[$module]['name'], 'UTF-8') * 7 * 2;
+                    $point[$module]['width'] = mb_strlen($point[$module]['name'], 'UTF-8') * 7 * 2;
 
                     foreach ($point[$module]['sections'] as $id => $section) {
                         $point[$module]['sections'][$id]['desc'] = CMS::call('PARSER')->parseText($section['desc']);

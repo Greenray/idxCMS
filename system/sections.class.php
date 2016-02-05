@@ -143,7 +143,7 @@ class SECTIONS extends DBASE {
      * @return boolean                         The result of operation
      */
     public function saveSection() {
-        $id = OnlyLatin(FILTER::get('REQUEST', 'section'));
+        $id = FILTER::get('REQUEST', 'section');
         if (!$id) {
             throw new Exception('Invalid ID');
         }

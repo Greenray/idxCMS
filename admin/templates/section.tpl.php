@@ -35,10 +35,7 @@ die();?>
             <tr>
                 <td class="label">ID</td>
                 <!-- IF !empty($id) -->
-                    <td colspan="2">
-                        <input type="hidden" name="section" value="$id" />
-                        <input type="text" name="section" value="$id" id="section" size="30" disabled="disabled" />
-                    </td>
+                    <td colspan="2" class="label">$id</td>
                 <!-- ELSE -->
                     <td><input type="text" name="section" value="" id="section" size="30" class="required" /></td>
                     <td class="help">__Only latin characters, digits and symbol "_"__</td>
@@ -53,11 +50,12 @@ die();?>
             <tr><td colspan="3"><textarea id="desc" name="desc" cols="130" rows="5">$desc</textarea></td></tr>
             <tr>
                 <td class="label">__Access level__</td>
-                <td><input type="text" name="access" id="access" size="2" value="$access" class="center required" /></td>
+                <td><input type="text" name="access" value="$access" id="access" size="2" class="center required" /></td>
                 <td class="help">__Required fields have a yellow background__</td>
             </tr>
         </table>
         <p class="center">
+            <input type="hidden" name="section" value="$id" />
             <input type="reset" value="__Reset__" />
             <input type="submit" name="save" value="__Save__" />
         </p>

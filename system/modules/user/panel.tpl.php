@@ -109,7 +109,7 @@ die();?>
                     </table>
                 </form>
             </li>
-            <li><a href="{MODULE}user&act=register" class="icon icon-registration">__Registration__</a></li>
+            <li><a href="{MODULE}user&amp;act=register" class="icon icon-registration">__Registration__</a></li>
         </ul>
     </div>
 <!-- ENDIF -->

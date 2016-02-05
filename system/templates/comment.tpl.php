@@ -41,13 +41,13 @@ die();?>
     <!-- IF !empty($moderator) -->
         <div class="actions right">
             <form name="actions" method="post" action="">
-                <button type="submit" formaction="$link{COMMENT}$id&action=edit">__Edit__</button>
-                <button type="submit" formaction="$link{COMMENT}$id&action=delete">__Delete__</button>
+                <button type="submit" formaction="$link{COMMENT}$id&amp;action=edit">__Edit__</button>
+                <button type="submit" formaction="$link{COMMENT}$id&amp;action=delete">__Delete__</button>
             <!-- IF !empty($ban) -->
-                <button type="submit" formaction="$link{COMMENT}$id&action=ban&host=$ip">$ip</button>
+                <button type="submit" formaction="$link{COMMENT}$id&amp;action=ban&amp;host=$ip">$ip</button>
             <!-- ENDIF -->
-                <button type="submit" formaction="{MODULE}user&user=$author">__Profile__</button>
-                <button type="submit" formaction="{MODULE}user.pm&for=$author">__Private message__</button>
+                <button type="submit" formaction="{MODULE}user&amp;user=$author">__Profile__</button>
+                <button type="submit" formaction="{MODULE}user.pm&amp;for=$author">__Private message__</button>
             </form>
         </div>
     <!-- ENDIF -->

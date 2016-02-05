@@ -23,7 +23,7 @@ if (!empty($REQUEST['login'])) {
             }
             USER::changeProfileField($tmp[0], 'rights', $rights);
             USER::changeProfileField($tmp[0], 'access', $access);
-            ShowMessage('Rights changed', '', MODULE.'admin&id=_user.profile&act=rights.'.$tmp[0]);
+            ShowMessage('Rights changed', '', MODULE.'admin&id=_user.profile&amp;act=rights.'.$tmp[0]);
             unlink(TEMP.'rights.dat');
         }
     } catch (Exception $error) {

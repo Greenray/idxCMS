@@ -7,7 +7,10 @@
 die();?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.w3.org/MarkUp/SCHEMA/xhtml11.xsd"
+      xml:lang="en" >
 <head>
     <title>[show=title]</title>
     <meta charset="UTF-8">
@@ -20,8 +23,8 @@ die();?>
     <meta name="revisit" content="7">
     <meta name="generator" content="idxCMS">
     [show=meta]
-    <link rel="stylesheet" href="{SKINS}css.php?files={SKINS}normalize|{CURRENT_SKIN}style|{TOOLS}message{DS}message|{TOOLS}colorbox{DS}jquery.colorbox">
-    <script type="text/javascript" src="{TOOLS}jquery-2.2.0.min.js"></script>
+    <link rel="stylesheet" href="{SKINS}css.php?files={SKINS}normalize|{CURRENT_SKIN}style|{TOOLS}message{DS}message|{TOOLS}colorbox{DS}jquery.colorbox" />
+    <script type="text/javascript" src="{TOOLS}jquery.min.js"></script>
     <link type="image/x-icon" rel="shortcut icon" href="{ROOT}favicon.ico" />
 </head>
 <body>
@@ -31,7 +34,7 @@ die();?>
             <ul>
                 <li><a href="{MODULE}user.feedback">__Feedback__</a></li>
                 <li><a href="{MODULE}sitemap">__Sitemap__</a></li>
-                <li><a href="{MODULE}rss.list" title="Subscribe to RSS feeds"><img src="{IMAGES}rss.png" height="24" width="24" alt="RSS" /></a></li>
+                <li><a href="{MODULE}rss.list" class="tip" title="Subscribe to RSS feeds"><img src="{IMAGES}rss.png" height="24" width="24" alt="RSS" /></a></li>
             </ul>
         </div>
         <div class="logo-image">
@@ -99,7 +102,7 @@ die();?>
 <script type="text/javascript" src="{TOOLS}colorbox{DS}jquery.colorbox.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $(".cbox").colorbox({rel:'cbox'});
+        $(".cbox").colorbox({rel:"cbox"});
     });
 </script>
 <script src="{TOOLS}jquery.lightbox_me.min.js" type="text/javascript"></script>

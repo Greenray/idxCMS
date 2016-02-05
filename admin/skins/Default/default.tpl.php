@@ -61,9 +61,7 @@ if (!defined('idxADMIN')) die();?>
             $page
         </article>
 	</div>
-	<footer>
-		<p class="center">{IDX_POWERED} {IDX_COPYRIGHT}</p>
-	</footer>
+	<footer><p class="center">{IDX_POWERED} {IDX_COPYRIGHT}</p></footer>
 </div>
 <script src="{TOOLS}jquery.lightbox_me.min.js" type="text/javascript"></script>
 <script type="text/javascript">
@@ -100,13 +98,13 @@ if (!defined('idxADMIN')) die();?>
                     getAgn[x].className = getAgn[x].className.replace("unclick", "");
                     getAgn[x].className = getAgn[x].className.replace("click", "unclick");
                 }
-                if ((this.className.indexOf("unclick")) != -1) {
+                if ((this.className.indexOf("unclick")) !== -1) {
                     this.className = this.className.replace("unclick", "");
                 } else {
                     this.className += " click";
                 }
             };
-            getEls[i].onmouseover=function() {
+            getEls[i].onmouseover = function() {
                 this.className += " hover";
             };
             getEls[i].onmouseout = function() {

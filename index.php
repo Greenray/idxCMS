@@ -75,15 +75,15 @@ define('CACHE_STORE', CONTENT.'temp'.DS);
 /** Query of module */
 define('MODULE',    ROOT.'?module=');
 /** The part of query of section */
-define('SECTION',  '&section=');
+define('SECTION',  '&amp;section=');
 /** The part of query of category */
-define('CATEGORY', '&category=');
+define('CATEGORY', '&amp;category=');
 /** The part of query of item */
-define('ITEM',     '&item=');
+define('ITEM',     '&amp;item=');
 /** The part of query of comment */
-define('COMMENT',  '&comment=');
+define('COMMENT',  '&amp;comment=');
 /** The part of query of page */
-define('PAGE',     '&page=');
+define('PAGE',     '&amp;page=');
 #
 # idxCMS version
 #

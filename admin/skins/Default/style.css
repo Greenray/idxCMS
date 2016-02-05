@@ -51,7 +51,7 @@ input[type='button'] {
 input[type='text'],
 input[type='password'] {
     margin: 2px;
-    padding: 1px 0 1px 5px;
+    padding: 1px 5px;
     border: 1px solid #c8c8c8 }
 input[type='text']:hover,
 input[type='password']:hover { border-color: #aaa }
@@ -171,7 +171,7 @@ table th { font-weight: bold }
     td.author { width: 80px }
     th.date,
     td.date { width: 140px; padding: 0 5px }
-    td.label { width: 250px; padding: 0 5px }
+    td.label { width: 250px }
 textarea {
     background: #ffffcc;
     border: 1px solid #a4a4a4;
@@ -509,6 +509,7 @@ footer {
     border-collapse: separate;
     border-spacing: 2px;
     width: 100% }
+    .std tr { height: 25px }
 
 #unitip {
     color: #fff;

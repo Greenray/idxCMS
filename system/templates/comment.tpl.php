@@ -6,7 +6,7 @@
 die();?>
 
 <div class="comment">
-    <a name="$id"></a>
+    <a id="$id"></a>
     <div class="content">
         <div class="head">
             <span class="date">$date</span>

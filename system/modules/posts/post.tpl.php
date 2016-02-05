@@ -67,7 +67,7 @@ die();?>
                 <td class="light">
                     <select name="new_section" onChange="setCategories(this.selectedIndex)">
                     <!-- FOREACH section = $sections -->
-                        <option value="$section.id" <!-- IF !empty($section.selected) -->selected<!-- ENDIF -->>$section.title</option>
+                        <option value="$section.id" <!-- IF !empty($section.selected) -->selected="selected"<!-- ENDIF -->>$section.title</option>
                     <!-- ENDFOREACH -->
                     </select>
                 </td>
@@ -83,7 +83,7 @@ die();?>
                 <td class="light">
                     <select name="new_category">
                     <!-- FOREACH category = $categories -->
-                        <option value="$category.id" <!-- IF !empty($category.selected) -->selected<!-- ENDIF -->>$category.title</option>
+                        <option value="$category.id" <!-- IF !empty($category.selected) -->selected="selected"<!-- ENDIF -->>$category.title</option>
                     <!-- ENDFOREACH -->
                     </select>
                 </td>

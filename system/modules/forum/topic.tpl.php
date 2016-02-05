@@ -6,7 +6,7 @@
 die();?>
 
 <div class="topic">
-    <a name="$id"></a>
+    <a id="$id"></a>
     <div class="content">
         <div class="title"><h1>$title</h1></div>
 

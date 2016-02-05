@@ -80,7 +80,7 @@ die();?>
                 <td colspan="2">
                     <select name="skin">
                     <!-- FOREACH skin = $skins -->
-                        <option value="$skin.skin" <!-- IF !empty($skin.selected) -->selected<!-- ENDIF -->>$skin.skin</option>
+                        <option value="$skin.skin" <!-- IF !empty($skin.selected) -->selected="selected"<!-- ENDIF -->>$skin.skin</option>
                     <!-- ENDFOREACH -->
                     </select>
                 </td>
@@ -94,7 +94,7 @@ die();?>
                 <td colspan="2">
                     <select name="lang">
                     <!-- FOREACH lang = $langs -->
-                        <option value="$lang.lang" <!-- IF !empty($lang.selected) -->selected<!-- ENDIF -->>$lang.lang</option>
+                        <option value="$lang.lang" <!-- IF !empty($lang.selected) -->selected="selected"<!-- ENDIF -->>$lang.lang</option>
                     <!-- ENDFOREACH -->
                     </select>
                 </td>
@@ -112,7 +112,7 @@ die();?>
                 <td colspan="2">
                     <select name="tz">
                     <!-- FOREACH tz = $tzs -->
-                        <option value="$tz.tz" <!-- IF !empty($tz.selected) -->selected<!-- ENDIF -->>$tz.title</option>
+                        <option value="$tz.tz" <!-- IF !empty($tz.selected) -->selected="selected"<!-- ENDIF -->>$tz.title</option>
                     <!-- ENDFOREACH -->
                     </select>
                 </td>
@@ -122,7 +122,7 @@ die();?>
                 <td colspan="2">
                     <select name="captcha">
                     <!-- FOREACH captcha = $captchas -->
-                        <option value="$captcha.captcha" <!-- IF !empty($captcha.selected) -->selected<!-- ENDIF -->>$captcha.captcha</option>
+                        <option value="$captcha.captcha" <!-- IF !empty($captcha.selected) -->selected="selected"<!-- ENDIF -->>$captcha.captcha</option>
                     <!-- ENDFOREACH -->
                     </select>
                 </td>

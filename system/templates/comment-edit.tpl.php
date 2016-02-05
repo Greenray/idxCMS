@@ -5,7 +5,7 @@
 
 die();?>
 
-<a name="$comment"></a>
+<a id="$comment"></a>
 <div class="comment_edit center">
     $bbcodes
     <form name="edit" method="post" action="">

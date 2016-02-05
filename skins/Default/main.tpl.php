@@ -12,14 +12,14 @@ die();?>
       xml:lang="en" >
 <head>
     <title>[show=title]</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="Content-Language" content="$locale">
-    <meta name="resource-type" content="document">
-    <meta name="document-state" content ="dynamic">
-    <meta http-equiv="pragma" content="no-cache">
-    <meta name="robots" content="index, follow">
-    <meta name="revisit" content="7">
-    <meta name="generator" content="idxCMS">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Language" content="$locale" />
+    <meta name="resource-type" content="document" />
+    <meta name="document-state" content ="dynamic" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta name="robots" content="index, follow" />
+    <meta name="revisit" content="7" />
+    <meta name="generator" content="idxCMS" />
     [show=meta]
     <link rel="stylesheet" href="{SKINS}css.php?files={SKINS}normalize|{CURRENT_SKIN}style|{TOOLS}message{DS}message|{TOOLS}colorbox{DS}jquery.colorbox" />
     <script type="text/javascript" src="{TOOLS}jquery.min.js"></script>

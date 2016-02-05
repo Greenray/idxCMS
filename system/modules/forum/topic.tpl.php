@@ -21,7 +21,7 @@ die();?>
             </div>
             <div class="author center">
                 <div class="avatar center">
-                    <img src="$avatar" hspace="5" vspace="5" alt="avatar" />
+                    <img src="$avatar" alt="avatar" />
                 </div>
                 <div class="user center">
                 <!-- IF !empty($opened) -->
@@ -40,7 +40,7 @@ die();?>
     </div>
     <!-- IF !empty($admin) -->
         <div class="actions right">
-            <form name="topic" method="post" action="">
+            <form name="topic" method="post" >
                 <!-- IF !empty($ip) -->
                     <button type="submit" formaction="$link&amp;action=ban&amp;host=$ip">$ip</button>
                 <!-- ENDIF -->

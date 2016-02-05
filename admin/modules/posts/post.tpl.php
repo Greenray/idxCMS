@@ -51,7 +51,7 @@ die();?>
 </script>
 <div class="module">__Post__</div>
 <fieldset>
-    <form name="post" method="post" action="" onsubmit="return checkPost(this);">
+    <form name="post" method="post"  onsubmit="return checkPost(this);">
         <table class="std">
             <tr class="light">
                 <td class="label">__Section__</td>

@@ -92,7 +92,7 @@ die();?>
         </tr>
     <!-- ENDIF -->
     </table>
-    <form name="clean" method="post" action="">
+    <form name="clean" method="post" >
         <p align="center">
             <input type="submit" name="cleanrefs" value="__Clean referers__" />
             <input type="submit" name="cleanua" value="__Clean agents__" />
@@ -154,7 +154,7 @@ die();?>
         </tr>
     <!-- ENDIF -->
     </table>
-    <form name="cleanspiders" method="post" action="">
+    <form name="cleanspiders" method="post" >
         <p align="center">
             <input type="submit" name="cleanagents" value="__Clean agents__" />
             <input type="submit" name="cleansip" value="__Clean ip__" />

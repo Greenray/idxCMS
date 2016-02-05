@@ -17,7 +17,7 @@ die();?>
     <div class="text justify">
     <!-- IF !empty($image) -->
         <a class="cbox" href="{GALLERY}$section{DS}$category{DS}$id{DS}$image" title="$title">
-            <img src="{GALLERY}$section{DS}$category{DS}$id{DS}[$image:].jpg" hspace="10" vspace="10" alt="" />
+            <img src="{GALLERY}$section{DS}$category{DS}$id{DS}[$image:].jpg" alt="IMAGE" />
         </a>
     <!-- ENDIF -->
         $text
@@ -61,7 +61,7 @@ die();?>
             <span class="author center">__Author__: <a href="{MODULE}user&amp;user=$author" class="tip" title="__Profile__">$nick</a></span>
             <!-- IF !empty($admin) -->
                 <div class="actions">
-                    <form name="post" method="post" action="">
+                    <form name="post" method="post" >
                         <button type="submit" formaction="{MODULE}$module{SECTION}$section{CATEGORY}$category{ITEM}$id&amp;action=$action">$command</button>
                     </form>
                 </div>

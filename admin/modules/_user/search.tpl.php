@@ -7,7 +7,7 @@ die();?>
 
 <div class="module">__User profile__</div>
 <fieldset>
-    <form name="config" method="post" action="">
+    <form name="config" method="post" >
         <table class="std">
             <tr class="light">
                 <td>__Enter username or mask of usernames__</td>

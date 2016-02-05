@@ -56,7 +56,7 @@ die();?>
 <!-- IF empty($admin) -->
     <div class="center">__Your article will be published after premoderation__</div>
 <!-- ENDIF -->
-<form id="editor" name="editor" method="post" action="" onsubmit="return checkPost(this);">
+<form id="editor" name="editor" method="post"  onsubmit="return checkPost(this);">
     <h2 class="center">$header</h2>
     <table id="std">
         <tr>

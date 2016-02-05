@@ -12,7 +12,7 @@ die();?>
             <div id="rate[$image.rateid:]">$image.rate</div>
         <!-- ENDIF -->
         <a class="cbox" href="$image.path$image.id{DS}$image.image" title="$image.title">
-            <img src="$image.path$image.id{DS}$image.image.jpg" width="$image.width" height="$image.height" hspace="10" vspace="10" alt="" />
+            <img src="$image.path$image.id{DS}$image.image.jpg" width="$image.width" height="$image.height" alt="IMAGE" />
         </a>
         <div class="title">$image.title</div>
         <div class="info">

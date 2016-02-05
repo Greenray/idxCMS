@@ -8,7 +8,7 @@ die();?>
 <a id="$comment"></a>
 <div class="comment_edit center">
     $bbcodes
-    <form name="edit" method="post" action="">
+    <form name="edit" method="post" >
         <textarea id="text" name="text" cols="70" rows="10">$text</textarea>
         <!-- IF !empty($moderator) -->
             <div class="center"><input type="checkbox" name="block" value="1" /> __Block user__</div>

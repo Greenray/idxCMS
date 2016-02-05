@@ -8,7 +8,7 @@ die();?>
 <!-- FOREACH random = $randoms -->
     <div class="center">
         <a href="$random.link">
-            <img src="$random.path$random.id{DS}[$random.image:].jpg" width="200" height="150" alt="__Random image__" />
+            <img src="$random.path$random.id{DS}[$random.image:].jpg" class="nomargin" alt="IMAGE" />
         </a>
     </div>
     <div class="random-image center">$random.title</div>

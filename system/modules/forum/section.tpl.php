@@ -10,7 +10,7 @@ die();?>
     <tr><td colspan="4"class="center"><a href="$link">$title</a></td></tr>
     <!-- FOREACH category = $categories -->
         <tr>
-            <td style="width:40px"><img src="[$category.path:]icon.png" width="35" height="35" alt="" /></td>
+            <td style="width:40px"><img src="[$category.path:]icon.png" width="35" height="35" alt="ICON" /></td>
             <td class="left"><a href="$category.link">$category.title</a></td>
             <td class="left">$category.desc</td>
             <td class="center" style="width:40px">$category.topics</td>

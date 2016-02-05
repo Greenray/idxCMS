@@ -26,7 +26,7 @@ die();?>
     }
 </script>
 <div>
-    <form id="topic" name="topic" method="post" action="" onsubmit="return checkTopicForm(this);">
+    <form id="topic" name="topic" method="post"  onsubmit="return checkTopicForm(this);">
         <fieldset>
             <legend>__Topic__</legend>
             __Title__ <input type="text" name="title" value="$title" id="title" size="50" />

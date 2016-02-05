@@ -22,7 +22,7 @@ die();?>
         </div>
         <div class="author center">
             <div class="avatar center">
-                <img src="$avatar" hspace="5" vspace="5" alt="" />
+                <img src="$avatar" alt="AVATAR" />
             </div>
             <div class="user center">
             <!-- IF !empty($opened) -->
@@ -40,7 +40,7 @@ die();?>
     </div>
     <!-- IF !empty($moderator) -->
         <div class="actions right">
-            <form name="actions" method="post" action="">
+            <form name="actions" method="post" >
                 <button type="submit" formaction="$link{COMMENT}$id&amp;action=edit">__Edit__</button>
                 <button type="submit" formaction="$link{COMMENT}$id&amp;action=delete">__Delete__</button>
             <!-- IF !empty($ban) -->

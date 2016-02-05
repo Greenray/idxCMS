@@ -6,7 +6,7 @@
 die(); ?>
 
 <fieldset>
-    <form name="pm" method="post" action="">
+    <form name="pm" method="post" >
         <table class="std">
             <th colspan="2">__Administrative message__</th>
             <tr class="light">
@@ -31,7 +31,7 @@ die(); ?>
     </form>
 </fieldset>
 <fieldset>
-    <form name="letter" method="post" action="">
+    <form name="letter" method="post" >
         <table class="std">
             <th colspan="2">__Administrative letter__</th>
             <tr class="light">

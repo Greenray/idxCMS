@@ -27,7 +27,7 @@ die();?>
 </script>
 <div class="module">__Link__</div>
 <fieldset>
-    <form name="item" method="post" action="" enctype="multipart/form-data" onsubmit="return checkLink(this);">
+    <form name="item" method="post"  enctype="multipart/form-data" onsubmit="return checkLink(this);">
         <table class="std">
             <tr class="light">
             <!-- IF !empty($category_id) -->

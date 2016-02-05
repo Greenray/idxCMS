@@ -30,7 +30,7 @@ die();?>
 </table>
 <!-- IF !empty($post_allowed) -->
     <div class="right">
-        <form name="form" method="post" action="">
+        <form name="form" method="post" >
             <input type="submit" name="new" value="__New topic__" />
         </form>
     </div>

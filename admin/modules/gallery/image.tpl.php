@@ -27,7 +27,7 @@ die();?>
 </script>
 <div class="module">__Image__</div>
 <fieldset>
-    <form name="item" method="post" action="" enctype="multipart/form-data" onsubmit="return checkImage(this);">
+    <form name="item" method="post"  enctype="multipart/form-data" onsubmit="return checkImage(this);">
         <table class="std">
             <tr class="light">
                 <td class="label">__Section__</td>

@@ -98,12 +98,12 @@ die();?>
         return true;
     }
 </script>
-<form name="profile" id="profile" method="post" action="" enctype="multipart/form-data" onsubmit="return checkUserForm(this);">
+<form name="profile" id="profile" method="post"  enctype="multipart/form-data" onsubmit="return checkUserForm(this);">
     <input type="hidden" name="profile" value="1" />
     <table class="profile right">
         <tr class="dark">
             <td colspan="3" class="center">
-                <img src="$avatar" hspace="5" vspace="5" alt="" />
+                <img src="$avatar" alt="AVATAR" />
                 <p>
                     <a href="#" onclick="document.getElementById('shdesc').style.display=ShowHide(document.getElementById('shdesc').style.display)">
                         __Avatar__

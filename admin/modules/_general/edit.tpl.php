@@ -132,7 +132,7 @@ function Parser(rules, i) {
         <tr><th>$name</th></tr>
         <tr>
             <td class="row1">
-                <form name="edit" method="post" action="">
+                <form name="edit" method="post" >
                     <textarea id="tad" class="tad" name="content">$content</textarea>
                 </form>
             </td>

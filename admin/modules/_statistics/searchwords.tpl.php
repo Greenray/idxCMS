@@ -23,7 +23,7 @@ die();?>
             </tr>
         <!-- ENDFOREACH -->
     </table>
-    <form name="clean" method="post" action="">
+    <form name="clean" method="post" >
         <p align="center"><input type="submit" name="clean" value="__Clean__" /></p>
     </form>
 </fieldset>

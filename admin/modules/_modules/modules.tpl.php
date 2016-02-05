@@ -7,7 +7,7 @@ die();?>
 
 <div class="module">__Modules__</div>
 <fieldset>
-    <form name="form" method="post" action="">
+    <form name="form" method="post" >
         <table class="std">
             <tr>
                 <th>__Title__</th>

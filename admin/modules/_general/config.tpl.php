@@ -42,7 +42,7 @@ die();?>
 </script>
 <div class="module">__Site configuration__</div>
 <fieldset>
-    <form name="config" method="post" action="">
+    <form name="config" method="post" >
         <table class="std">
             <tr><th colspan="3">__General options__</th></tr>
             <tr class="light">

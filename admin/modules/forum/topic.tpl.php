@@ -39,7 +39,7 @@ die();?>
 </script>
 <div class="module">__Topic__</div>
 <fieldset>
-    <form name="post" method="post" action="">
+    <form name="post" method="post" >
         <table class="std">
             <tr class="light">
                 <td class="label">__Section__</td>

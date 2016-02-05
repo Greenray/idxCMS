@@ -5,15 +5,14 @@
 
 die();?>
 
-<<!DOCTYPE>
+<!DOCTYPE html>
 <html lang="$locale">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <meta http-equiv="content-language" content="$locale" />
     <link rel="stylesheet" type="text/css" href="{SKINS}normalize.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="{TOOLS}message{DS}message.css" media="screen" />
-    <style>
+    <style type="text/css">
         html { background: #444 }
         .denied {
             color: red;
@@ -137,7 +136,7 @@ die();?>
     </script>
 </head>
 <body>
-<form id="login" name="login" method="post" action="" onsubmit="return checkLoginForm(this);" class="login">
+<form id="login" name="login" method="post"  onsubmit="return checkLoginForm(this);" class="login">
     <span class="denied">__Access denied__</span>
     <h1><span class="log-in">__Log in__</span></h1>
     <p class="float">

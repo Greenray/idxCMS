@@ -8,7 +8,7 @@ die();?>
 <div class="module">__Polls__</div>
 <fieldset>
 <!-- FOREACH poll = $polls -->
-    <form name="polls$poll.id" method="post" action="">
+    <form name="polls$poll.id" method="post" >
         <input type="hidden" name="poll" value="$poll.id" />
         <table class="std">
             <tr><th colspan="3">$poll.question</th></tr>

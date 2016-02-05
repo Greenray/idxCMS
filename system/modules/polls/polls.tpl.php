@@ -19,8 +19,8 @@ die();?>
                     <td colspan="2">
                         <table>
                             <tr>
-                                <td width="[$answer.voices:]%" height="5" style="white-space:nowrap;background:$answer.color;"></td>
-                                <td class="color" height="5"></td>
+                                <td width="[$answer.voices:]%" style="white-space:nowrap;background:$answer.color;"></td>
+                                <td class="color">&nbsp;</td>
                             </tr>
                         </table>
                     </td>
@@ -29,7 +29,7 @@ die();?>
             <tr><td colspan="2" class="center">__Total votes__: $poll.total</td></tr>
         </table>
     <!-- ELSE -->
-        <form name="poll" method="post" action="">
+        <form name="poll" method="post" >
             <input type="hidden" name="poll" value="$poll.id" />
             <table>
                 <tr><th colspan="2" class="center">$poll.question</th></tr>

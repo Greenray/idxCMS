@@ -49,7 +49,7 @@ die();?>
     <table class="std">
         <tr>
             <td class="row2">
-                <form name="form1" method="post" action="">
+                <form name="form1" method="post" >
                     <input type="hidden" name="path" value="$path"/>
                     <input type="text" name="dirname" size="30"/>
                     <input type="submit" name="mkdir" value="__Make directory__"/>

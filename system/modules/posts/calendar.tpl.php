@@ -28,7 +28,7 @@ die();?>
     <!-- ENDFOREACH -->
     <tr>
         <td colspan="7">
-            <form name="calendar" class="center" method="post" action="">
+            <form name="calendar" class="center" method="post" >
                 <select name="cal-month">
                 <!-- FOREACH month = $months -->
                     <option value="$month.num" <!-- IF !empty($month.selected) -->selected="selected"<!-- ENDIF -->>$month.name</option>

@@ -7,7 +7,7 @@ die();?>
 
 <div class="module">__User profile__</div>
 <fieldset>
-    <form name="config" method="post" action="">
+    <form name="config" method="post" >
         <table class="std">
             <tr><th colspan="2">__Rights for__ $nick</th></tr>
             <tr class="light">

@@ -101,7 +101,7 @@ die();?>
 <div id="registration_content">
     <div id="registration_form">
         <div id="steps">
-            <form name="registration" id="registration" method="post" action="" enctype="multipart/form-data" onsubmit="return checkUserForm(this);">
+            <form name="registration" id="registration" method="post"  enctype="multipart/form-data" onsubmit="return checkUserForm(this);">
                 <fieldset class="step">
                     <legend>__Account__</legend>
                     <p>
@@ -164,7 +164,7 @@ die();?>
                 </fieldset>
                 <fieldset class="step">
                     <legend>__Avatar__</legend>
-                    <p><img src="$avatar" hspace="5" vspace="5" alt="" /></p>
+                    <p><img src="$avatar" alt="AVATAR" /></p>
                     <p>
                         <label for="avatar">__Upload__</label>
                         <input id="avatar" type="file" name="avatar" />

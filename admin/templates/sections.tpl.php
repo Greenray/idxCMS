@@ -8,7 +8,7 @@ die();?>
 <script type="text/javascript" src="{TOOLS}redips{DS}drag.min.js"></script>
 <div class="module">__Sections__</div>
 <fieldset>
-    <form name="sections" method="post" action="" class="form">
+    <form name="sections" method="post"  class="form">
         <div id="redips-drag">
             <table class="sortable">
                 <tr>

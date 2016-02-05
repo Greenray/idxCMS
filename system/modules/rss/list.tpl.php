@@ -14,7 +14,7 @@ die();?>
                 <ul class="level2">
                 <!-- FOREACH category = $feed.categories -->
                     <li class="level2">
-                        <img src="[$category.path:]icon.png" width="35" height="35" hspace="10" alt="" />
+                        <img src="[$category.path:]icon.png" width="35" height="35" alt="ICON" />
                         <span class="title">$category.title</span>
                         <span class="subtitle">$category.desc</span>
                     </li>

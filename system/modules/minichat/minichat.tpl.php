@@ -22,7 +22,7 @@ die();?>
             <div class="text justify">$message.text</div>
             <!-- IF !empty($message.moderator) -->
                 <div class="right">
-                    <form name="minichat" method="post" action="">
+                    <form name="minichat" method="post" >
                         <input type="hidden" name="message" value="$message.id" />
                         <input type="submit" name="delete" value="__Delete__" />
                     <!-- IF !empty($message.ip) -->
@@ -37,7 +37,7 @@ die();?>
 <!-- ENDIF -->
 <!-- IF $allow_post==true -->
     <div class="chat-post center">
-        <form id="post" name="post" method="post" action="" onsubmit="return checkForm(this);">
+        <form id="post" name="post" method="post"  onsubmit="return checkForm(this);">
             <textarea id="mctext" name="mctext" rows="5">$mctext</textarea>
             <!-- IF !empty($message_length) -->
                 __Max message length__ [<script type="text/javascript">displayLimit("document.post.mctext", "", '$message_length')</script>] __symbols__

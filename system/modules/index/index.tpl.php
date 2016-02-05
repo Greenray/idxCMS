@@ -8,7 +8,7 @@ die();?>
 <!-- FOREACH post = $posts -->
     <div class="tab_content">
         <div class="date">$post.date</div>
-        <img src="[$icon:]icon.png" width="35" height="35" alt="" />
+        <img src="[$icon:]icon.png" width="35" height="35" alt="ICON" />
         <div class="section">__Section__: <a href="$post.section_link">$post.section_title</a></div>
         <div class="category">__Category__: <a href="$post.category_link">$post.category_title</a></div>
         <div class="title"><h1>$post.title</h1></div>

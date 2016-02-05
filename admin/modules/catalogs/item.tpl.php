@@ -27,7 +27,7 @@ die();?>
 </script>
 <div class="module">__Catalog__</div>
 <fieldset>
-    <form name="item" method="post" action="" enctype="multipart/form-data" onsubmit="return checkForm(this);">
+    <form name="item" method="post"  enctype="multipart/form-data" onsubmit="return checkForm(this);">
         <table class="std">
             <tr class="light">
             <!-- IF !empty($category_id) -->

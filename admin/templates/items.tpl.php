@@ -7,7 +7,7 @@ die();?>
 
 <div class="module">$header</div>
 <fieldset>
-    <form name="item" method="post" action="">
+    <form name="item" method="post" >
         <table class="std">
             <tr class="dark">
                 <td><input type="hidden" name="section" value="$section_id" />__Section__: <b>$section_title</b></td>

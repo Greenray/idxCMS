@@ -8,7 +8,7 @@ die();?>
 <div class="preview center">
 <!-- FOREACH image = $images -->
     <a class="cbox" href="{CONTENT}gallery{DS}$image.section{DS}$image.category{DS}$image.id{DS}$image.image" title="$image.title">
-        <img src="{CONTENT}gallery{DS}$image.section{DS}$image.category{DS}$image.id{DS}$image.image.jpg" width="100" height="75" hspace="10" vspace="10" alt="" />
+        <img src="{CONTENT}gallery{DS}$image.section{DS}$image.category{DS}$image.id{DS}$image.image.jpg" width="100" height="75" alt="IMAGE" />
     </a>
 <!-- ENDFOREACH -->
 </div>

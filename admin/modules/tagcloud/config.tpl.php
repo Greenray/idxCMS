@@ -42,7 +42,7 @@ die();?>
 </script>
 <div class="module">__Tagcloud__</div>
 <fieldset>
-    <form name="config" method="post" action="">
+    <form name="config" method="post" >
         <table class="std">
             <tr><th colspan="3">__General options__</th></tr>
             <tr class="light">
@@ -101,7 +101,7 @@ die();?>
     </form>
 </fieldset>
 <fieldset>
-    <form name="tc_edit" method="post" action="">
+    <form name="tc_edit" method="post" >
         <table class="std">
             <tr><th colspan="3">__Tags__</th></tr>
             <tr class="light">

@@ -7,7 +7,7 @@ die();?>
 
 <div class="module">__Logs__</div>
 <fieldset>
-    <form name="day" method="post" action="">
+    <form name="day" method="post" >
         <table class="std">
             <tr><th colspan="2">__Daily logs__</th></tr>
             <!-- FOREACH day = $days -->
@@ -27,7 +27,7 @@ die();?>
         </form>
     </fieldset>
     <fieldset>
-        <form name="month" method="post" action="">
+        <form name="month" method="post" >
             <table class="std">
                 <tr><th colspan="2">__Monthly logs__</th></tr>
                 <!-- FOREACH month = $months -->

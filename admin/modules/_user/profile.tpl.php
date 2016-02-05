@@ -21,7 +21,7 @@ die();?>
 </script>
 <div class="module">__User profile__</div>
 <fieldset>
-    <form name="profile" id="profile" method="post" action="">
+    <form name="profile" id="profile" method="post" >
         <table class="std">
             <tr class="light">
                 <td class="right">__Username__</td>
@@ -38,7 +38,7 @@ die();?>
             <tr class="light">
                 <td class="right">__Avatar__</td>
                 <td colspan="2" class="left">
-                    <img src="$avatar" hspace="5" vspace="5" alt="" />
+                    <img src="$avatar" alt="AVATAR" />
                 </td>
             </tr>
             <tr class="light">

@@ -23,7 +23,7 @@ die();?>
     }
 </script>
 <fieldset>
-    <form id="form" name="form" method="post" action="" enctype="multipart/form-data" onsubmit="return checkForm(this);">
+    <form id="form" name="form" method="post"  enctype="multipart/form-data" onsubmit="return checkForm(this);">
         <table class="std">
             <tr><th colspan="3">$header</th></tr>
             <tr>

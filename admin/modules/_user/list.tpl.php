@@ -7,7 +7,7 @@ die();?>
 
 <div class="module">__User profile__</div>
 <fieldset>
-    <form name="config" method="post" action="">
+    <form name="config" method="post" >
         <table class="std">
             <tr class="light"><td colspan="3" class="center">__Do not delete user, just block him to keep the structure of site__</td></tr>
             <tr>

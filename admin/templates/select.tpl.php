@@ -7,7 +7,7 @@ die();?>
 
 <div class="module">$title</div>
 <fieldset>
-    <form name="config" method="post" action="">
+    <form name="config" method="post" >
         <table class="std">
             <tr class="light">
                 <td>__Select file__</td>

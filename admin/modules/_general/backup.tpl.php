@@ -7,7 +7,7 @@ die();?>
 
 <div class="module">__Backup__</div>
 <fieldset>
-    <form name="form" method="post" action="">
+    <form name="form" method="post" >
         <table class="std">
             <tr>
                 <th>__Title__</th>
@@ -33,7 +33,7 @@ die();?>
     </form>
 </fieldset>
 <fieldset>
-    <form name="form" method="post" action="">
+    <form name="form" method="post" >
         <table class="std">
             <tr><th colspan="3">__Backup data__</th></tr>
             <tr>

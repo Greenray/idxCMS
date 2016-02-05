@@ -7,8 +7,8 @@ die();?>
 
 <!-- IF !empty($logged_in) -->
     <div class="center"><strong>__Hello__, $user !</strong></div>
-    <div class="user_panel">
-        <form method="post" action="">
+    <div class="user-panel">
+        <form method="post" >
             <ul>
                 <!-- IF !empty($admin) -->
                     <li><a href="{MODULE}admin" class="icon icon-admin"> __Administration__</a></li>
@@ -66,11 +66,9 @@ die();?>
     </script>
     <div class="login-panel">
         <ul>
-            <li>
-                <a href="#" class="icon icon-login" onclick="document.getElementById('login').style.display = ShowHide(document.getElementById('login').style.display)">[__Log in]</a>
-            </li>
+            <li><a href="#" class="icon icon-login" onclick="document.getElementById('login').style.display = ShowHide(document.getElementById('login').style.display)">[__Log in]</a></li>
             <li id="login" style="display:none;">
-                <form id="login" name="login" method="post" action="" onsubmit="return checkLoginForm(this);">
+                <form id="login-form" name="login" method="post"  onsubmit="return checkLoginForm(this);">
                     <table>
                         <tr>
                             <td>__Username__:</td>
@@ -84,12 +82,10 @@ die();?>
                     <p class="center"><input type="submit" name="login" value="__Log in__" /></p>
                 </form>
             </li>
-            <li>
-                <a href="##" class="icon icon-password-request" onclick="document.getElementById('password_request').style.display = ShowHide(document.getElementById('password_request').style.display)">[__Password recovery]</a>
-            </li>
+            <li><a href="#" class="icon icon-password-request" onclick="document.getElementById('password_request').style.display = ShowHide(document.getElementById('password_request').style.display)">[__Password recovery]</a></li>
             <li id="password_request" style="display:none;">
-                <form id="password_request" name="password_request" method="post" action="" onsubmit="return checkPasswordRecoveryForm(this);">
-                    <table cellpadding="2" cellspacing="1" style="width:100%;">
+                <form id="password_request-form" name="password_request" method="post"  onsubmit="return checkPasswordRecoveryForm(this);">
+                    <table>
                         <tr>
                             <td>__Username__:</td>
                             <td><input type="text" id="name" name="name" size="15" /></td>
@@ -114,8 +110,8 @@ die();?>
     </div>
 <!-- ENDIF -->
 <!-- IF !empty($allow_skins) -->
-    <div class="center"><form name="skin_select" method="post" action="">$select_skin</form></div>
+    <div class="center"><form name="skin_select" method="post" >$select_skin</form></div>
 <!-- ENDIF -->
 <!-- IF !empty($allow_languages) -->
-    <div class="center"><form name="lang_select" method="post" action="">$select_lang</form></div>
+    <div class="center"><form name="lang_select" method="post" >$select_lang</form></div>
 <!-- ENDIF -->

@@ -7,7 +7,7 @@ die();?>
 
 <div class="module">__Users__</div>
 <fieldset>
-    <form name="config" method="post" action="">
+    <form name="config" method="post" >
         <table class="std">
             <th colspan="3">__Interaction with user__</th>
             <tr class="light">

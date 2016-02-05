@@ -6,7 +6,7 @@
 die();?>
 
 <fieldset>
-    <form name="form1" method="post" action="">
+    <form name="form1" method="post" >
     <table class="std">
         <tr><th colspan="3">__Rights__</th></td></tr>
         <tr>

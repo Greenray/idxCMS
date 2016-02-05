@@ -209,7 +209,7 @@ die();?>
     }
 </script>
 <fieldset>
-    <form name="output" method="post" action="" onsubmit="SaveList(document.output.elements['active[]'])">
+    <form name="output" method="post"  onsubmit="SaveList(document.output.elements['active[]'])">
         <table>
             <tr class="light"><td colspan="3">__Skin__: <input type="hidden" name="skin" value="$skin" />$skin</td></tr>
             <tr>

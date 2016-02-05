@@ -29,7 +29,7 @@ die();?>
     }
 </script>
 <fieldset>
-    <form id="form" name="form" method="post" action="" onsubmit="return checkForm(this);">
+    <form id="form" name="form" method="post"  onsubmit="return checkForm(this);">
         <table class="std">
             <tr><th colspan="3">$header</th></tr>
             <tr>

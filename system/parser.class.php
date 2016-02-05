@@ -282,15 +282,15 @@ class PARSER {
                 if (!empty($zoom)) {
                     $size = getimagesize($zoom.'.jpg');
                     if ($size)
-                         $output = '<a class="cbox" href="'.$zoom.'"><img src="'.$zoom.'.jpg" '.$size[3].' hspace="10" vspace="10" alt="" /></a>';
-                    else $output = '<a class="cbox" href="'.$zoom.'"><img src="'.$zoom.'.jpg" width="'.$width.'" height="'.$height.'" hspace="10" vspace="10" alt="" /></a>';
+                         $output = '<a class="cbox" href="'.$zoom.'"><img src="'.$zoom.'.jpg" '.$size[3].' alt="ZOOM" /></a>';
+                    else $output = '<a class="cbox" href="'.$zoom.'"><img src="'.$zoom.'.jpg" width="'.$width.'" height="'.$height.'" alt="ZOOM" /></a>';
 
                 } elseif (!empty($external)) {
-                    $output = '<img src="'.$external.'" hspace="10" vspace="10" alt="" />';
+                    $output = '<img src="'.$external.'" alt="IMAGE" />';
                 } elseif (!empty($internal)) {
                     $size = getimagesize($internal);
                     if ($size)
-                         $output = '<img src="'.$internal.'" '.$size[3].' hspace="10" vspace="10" alt="" />';
+                         $output = '<img src="'.$internal.'" '.$size[3].' alt="IMAGE" />';
                     else $output = '[Image not found]';
 
                 } else $output = '[Image not found]';

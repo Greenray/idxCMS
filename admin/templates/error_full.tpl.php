@@ -11,9 +11,8 @@ die();?>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <meta http-equiv="content-language" content="$locale" />
     <link rel="stylesheet" type="text/css" href="{SKINS}normalize.css" media="screen" />
-    <style>
+    <style type="text/css">
         html { background: #444 }
         form {
             -webkit-border-radius: 10px;

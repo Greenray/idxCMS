@@ -5,12 +5,12 @@
 
 die();?>
 
-<!DOCTYPE>
+<!DOCTYPE html>
 <html lang="$locale">
 <head>
     <meta charset="UTF-8">
     <title>$title - __Version for printer__</title>
-    <link rel="stylesheet" href="{SKINS}print.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{SKINS}print.css" />
 </head>
 <body>
 <table width="90%">

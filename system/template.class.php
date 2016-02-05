@@ -34,6 +34,21 @@ class TEMPLATE {
 	/** @var string Template Code object */
 	private $sphp_code;
 
+    /* @var Brousers prefixes */
+    private $styles = [
+        'background'          => ['-webkit-', '-moz-', '-ms-', '-o-', ''],
+        'background-image'    => ['-webkit-', '-moz-', '-ms-', '-o-', ''],
+        '_border-radius'      => ['-webkit-', '-moz-', ''],
+        '_box-shadow'         => ['-webkit-', '-moz-', ''],
+        '_box-sizing'         => ['-webkit-', '-moz-', '-ms-', ''],
+        '_perspective'        => ['-webkit-', '-moz-', ''],
+        '_perspective-origin' => ['-webkit-', '-moz-', ''],
+        '_transform'          => ['-webkit-', '-moz-', '-ms-', '-o-', ''],
+        '_transform-origin'   => ['-webkit-', '-moz-', '-ms-', '-o-', ''],
+        'transform-style'     => ['-webkit-', '-moz-', '-ms-', '-o-', ''],
+        '_transition'         => ['-webkit-', '-moz-', '-ms-', '-o-', ''],
+    ];
+
 	/** @var array Array of the template variables */
 	private $vars;
 
@@ -168,7 +183,13 @@ class TEMPLATE {
         #
 		# Execute php code
         #
-		ob_start();
+        ob_start();
+        $css = preg_match_all("#\<link rel=\"stylesheet\" type=\"text/css\" href=\"(.*?)\" media=\"screen\" /\>#is", $code, $matches);
+        if (!empty($matches[1])) {
+            foreach($matches[1] as $key => $file) {
+                $code = str_replace($matches[0][$key], '<style type="text/css"><!--'.$this->css($file).'--></style>', $code);
+            }
+        }
 		if (!eval('?>'.$code.'<?php return TRUE; ?>')) {
 			$err_msg = ob_get_clean();
 			$this->getEvalError($err_msg, $err_line);
@@ -572,8 +593,7 @@ class TEMPLATE {
 	 * @return boolean TRUE if there php tags
 	 */
 	private function checkPhpCode($code) {
-		$search = '#<\?php[\s]+|<\?[\s]+|[\s]+\?>#';
-		if (preg_match($search, $code)) {
+		if (preg_match('#<\?php[\s]+|<\?[\s]+|[\s]+\?>#', $code)) {
 			$this->errors[] = 'syntax error, illegal php tags';
 			return TRUE;
 		}
@@ -633,13 +653,44 @@ class TEMPLATE {
      *   {CONST} - global constant
      * </pre>
      *
-     * @param  array  $matches Matches for control structure "if"
+     * @param  array  $matches Matches for control structure "IF"
      * @return string          Parsed string
      */
     private function value($matches) {
         if (defined($matches[1])) {
             return str_replace($matches[0], constant($matches[1]), $matches[0]);
         }
+    }
+
+    /**
+     * Generateы CSS3 properties with browser-specific prefixes.
+     * The prefix list is not complete, it contains only the used properties in the CMS.
+     * 
+     * @param  string $file css file to to work with
+     * @return string       Parsed string
+     */
+    private function css($file) {
+        $file    = str_replace('./', '/', $file);
+        $content = file_get_contents($_SERVER['DOCUMENT_ROOT'].$file);
+        $content = preg_replace('/(\/\*).*?(\*\/)/s', '', $content);
+        preg_match_all('/_[a-zA-Z\-]+:[\s_|][a-zA-Z0-9\.\-].+?;/sm', $content, $keys);
+        preg_match_all('/[a-zA-Z\-]+:\s_[a-z].+?;/sm', $content, $values);
+        $css = array_merge($keys[0], $values[0]);
+
+        foreach ($css as $property) {
+            foreach ($this->styles as $style => $prefixes) {
+                $needle = explode(':', $property);
+                if ($style === $needle[0]) {
+                    $result = '';
+                    foreach ($prefixes as $match) {
+                        $result .= str_replace('_', $match, $property);
+                    }
+                    $content = str_replace($property, $result, $content);
+                }
+            }
+        }
+
+        return $content;
     }
 
     /**
@@ -770,7 +821,6 @@ class TEMPLATE {
      * @return string          Parsed string
      */
     private function show($matches) {
-
         if (!empty($matches)) {
             $params = explode(',', $matches[1]);
             if (!empty($params[1])) {

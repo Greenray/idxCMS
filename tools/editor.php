@@ -16,14 +16,10 @@ if (!empty($REQUEST['image']['name'])) {
     }
 }
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.w3.org/MarkUp/SCHEMA/xhtml11.xsd"
-      xml:lang="en" >
+<!DOCTYPE html>
 <head>
+    <html lang="$locale">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta http-equiv="Content-Language" content="<?php echo SYSTEM::get('locale');?>" />
     <?php if (empty($REQUEST['text'])) { ?>
         <title>idxCMS version <?php echo IDX_VERSION.' - '.__('Images browser');?></title>
         <style type="text/css">
@@ -48,7 +44,7 @@ if (!empty($REQUEST['image']['name'])) {
         <body>
         <div id="window">
             <div>
-                <form id="upload" method="post" action="" enctype="multipart/form-data">
+                <form id="upload" method="post"  enctype="multipart/form-data">
                     <label for="image"><?php echo __('File');?>: </label>
                     <input type="file" id="image" name="image" />
                     <input type="submit" value="<?php echo __('Upload');?>" />
@@ -81,7 +77,7 @@ if (!empty($REQUEST['image']['name'])) {
                 </fieldset>
             </div>
         </div>
-        <div id="close"><form method="post" action=""><input type="button" onclick="window.close();" value="<?php echo __('Close');?>" /></form></div>
+        <div id="close"><form method="post" ><input type="button" onclick="window.close();" value="<?php echo __('Close');?>" /></form></div>
 <?php } else {
         if (!empty($REQUEST['text'])) {
             $title = empty($REQUEST['title']) ? '' : $REQUEST['title'];
@@ -113,9 +109,10 @@ if (!empty($REQUEST['image']['name'])) {
                 </div>
             </div>
             <div id="close">
-                <form method="post" action=""><input type="button" onclick="window.close();" value="<?php echo __('Close');?>" /></form>
+                <form method="post" ><input type="button" onclick="window.close();" value="<?php echo __('Close');?>" /></form>
             </div>
     <?php }
 } ?>
+<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </body>
 </html>

@@ -63,14 +63,13 @@ input[type='password']:focus {
 input[type='submit'],
 input[type='reset'] {
     background-color: #ccc;
-    background-image: linear-gradient(to bottom, #eee, #ccc);
+    background-image: _linear-gradient(to bottom, #eee, #ccc);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#999999', GradientType=0 );
     border: 1px solid #777;
-    -webkit-border-radius: .4em;
-    -moz-border-radius: .4em;
-    border-radius: .4em;
-    -webkit-box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.804) inset, 0 1px 0 rgba(0, 0, 0, 0.149);
-    -moz-box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.804) inset, 0 1px 0 rgba(0, 0, 0, 0.149);
-    box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.804) inset, 0 1px 0 rgba(0, 0, 0, 0.149);
+    _border-radius: .4em;
+    _box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.804) inset, 0 1px 0 rgba(0, 0, 0, 0.149);
+    filter: progid:DXImageTransform.Microsoft.dropshadow(offX=1, offY=1, color=#000000);
+    filter: progid:DXImageTransform.Microsoft.shadow(direction=120, color=#000000, strength=10);
     cursor: pointer;
     min-width: 100px;
     padding: 5px;
@@ -192,7 +191,7 @@ ul { margin: 1em 0; padding: 0 0 0 10px }
 	height: auto !important;
     overflow: hidden }
 header {
-    background-color: #006699;
+    background: #006699;
     padding: 0 0 10px 0;
     width: 100% }
 .logo {
@@ -234,7 +233,7 @@ nav { float: left; margin: 10px; width: 240px }
         position: relative;
         float: left;
         border-top: 1px solid white }
-    #menu li.sub { background: #006699 url(../../../skins/images/arrow.gif) no-repeat top right }
+    #menu li.sub { background: url(../../../skins/images/arrow.gif) no-repeat top right #006699 }
     #menu li.sub.click { font-weight: bold }
     #menu li.sub.click ul li a {
         color: black;
@@ -275,7 +274,7 @@ nav { float: left; margin: 10px; width: 240px }
         top: -1px;
         border: 1px solid white;
         border-width: 0 1px 1px }
-    #menu li.click ul li.popup { background: #999 url(../../../skins/images/arrow.gif) no-repeat top right }
+    #menu li.click ul li.popup { background: url(../../../skins/images/arrow.gif) no-repeat top right #999 }
     #menu li.click ul li.hover {
         background: red;
         color: white }
@@ -283,7 +282,7 @@ nav { float: left; margin: 10px; width: 240px }
     #menu li.click ul li.hover ul li.hover ul li {
         background: #780;
         z-index: 2 }
-    #menu li.click ul li.hover ul li.popup { background: #c60 url(../../../skins/images/arrow.gif) no-repeat top right }
+    #menu li.click ul li.hover ul li.popup { background: url(../../../skins/images/arrow.gif) no-repeat top right #c60 }
     #menu li.click ul li.hover ul li.hover {
         background: yellow;
         z-index: 2 }
@@ -312,12 +311,10 @@ footer {
     .bbbutton { margin: 0; padding: 2px }
     .bbtools  {
         border: 1px solid #777;
-        -webkit-border-radius: .4em;
-        -moz-border-radius: .4em;
-        border-radius: .4em;
-        -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, .8);
-        -moz-box-shadow: 0 0 10px rgba(0, 0, 0, .8);
-        box-shadow: 0 0 10px rgba(0, 0, 0, .8);
+        _border-radius: .4em;
+        _box-shadow: 0 0 10px rgba(0, 0, 0, .8);
+        filter: progid:DXImageTransform.Microsoft.dropshadow(offX=0, offY=0, color=#000000);
+        filter: progid:DXImageTransform.Microsoft.shadow(direction=120, color=#000000, strength=10);
         color: #000;
         margin: 10px 0 0;
         padding: 10px 0 0 }
@@ -358,16 +355,12 @@ footer {
 .error,
 .message {
     background: white;
-    background-image: -webkit-linear-gradient(to bottom, white 1%, #999 99%);
-    background-image: -moz-linear-gradient(to bottom, white 1%, #999 99%);
-    background-image: -o-linear-gradient(to bottom, white 1%, #999 99%);
-    background-image: linear-gradient(to bottom, white 1%, #999 99%);
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-    -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);
-    -moz-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);
+    background-image: _linear-gradient(to bottom, white 1%, #999 99%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#999999', GradientType=0 );
+    _border-radius: 10px;
+    _box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);
+    filter: progid:DXImageTransform.Microsoft.dropshadow(offX=5, offY=5, color=#000000);
+    filter: progid:DXImageTransform.Microsoft.shadow(direction=120, color=#000000, strength=10);
     font-weight: bold;
     min-width: 300px;
     padding: 10px;
@@ -404,7 +397,10 @@ footer {
     height: 0;
     overflow: hidden;
     visibility: hidden }
-.colortable { box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5) }
+.colortable {
+    _box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+    filter: progid:DXImageTransform.Microsoft.dropshadow(offX=10, offY=10, color=#000000);
+    filter: progid:DXImageTransform.Microsoft.shadow(direction=120, color=#000000, strength=10) }
     .colortable td { padding: 0 }
 .header {
     background: #d1d7dc;
@@ -422,7 +418,7 @@ footer {
 #redips-drag {
     overflow: hidden;
     position: relative }
-    div#redips-drag table {	background-color: #ddd }
+    div#redips-drag table {	background: #ddd }
     div#redips-nodrag table tr,
     div#redips-drag table tr { height: 35px }
     div#redips-nodrag th,
@@ -443,7 +439,7 @@ footer {
         width: 20px }
     #left-table,
     #right-table {
-        background-color: #eee;
+        background: #eee;
         display: table;
         width: 49% }
     #left-table { float: left }
@@ -537,7 +533,7 @@ footer {
         background: url(../../../tools/unitip/TipCap.png) no-repeat;
         height: 7px;
         overflow: hidden	}
-.icon { background-color: transparent; white-space: nowrap; }
+.icon { background: transparent; white-space: nowrap; }
 .icon:before {
     content: '';
     background-color: transparent;

@@ -73,7 +73,6 @@ input::-moz-focus-inner { border: 0; padding: 0; }
     input[type="reset"]:hover,
     input[type="submit"]:hover { color: red; }
 img {
-    margin: 10px;
     vertical-align: middle;
     -ms-interpolation-mode: bicubic; }
 option { padding: 0 5px; }
@@ -104,7 +103,7 @@ textarea {
     height: auto !important;
     overflow: hidden; }
 .header {
-    background: url(../images/shadow.png) 0 0 repeat-x #297377;
+    background: url(skins/images/shadow.png) 0 0 repeat-x #297377;
     display: inline-block;
     padding: 0 0 10px 0;
     width: 100%; }
@@ -232,9 +231,7 @@ textarea {
     margin: 10px;
     padding: 0 10px; }
 .win { margin: 20px 5px; }
-    .win .title {
-        margin: 10px 0;
-        text-shadow: 1px 0 1px white; }
+    .win .title { margin: 10px 0; }
     .win .info { font-size: 10px; }
 .boxes {
     height: auto !important;
@@ -264,7 +261,7 @@ textarea {
 .valid-icon { white-space: nowrap; }
 .valid-icon:before {
     content: '';
-    background-image: url(../images/logos.jpg);
+    background-image: url(skins/images/logos.jpg);
     background-repeat: no-repeat;
     background-position: 80px 15px;
     width: 80px;
@@ -435,17 +432,17 @@ textarea {
     .pass_img#passbar-70, .pass_img#progresbar-2-80, .pass_img#passbar-80,
     .pass_img#progresbar-2-90, .pass_img#passbar-90, .pass_img#progresbar-2-100,
     .pass_img#passbar-100                           { float: right; height: 7px; margin: 6px 60px 0 0 !important; width: 138px; }
-    .pass_img#progresbar-2-0,.pass_img#passbar-0    { background: transparent url(../images/password/pass_0.gif) no-repeat; }
-    .pass_img#progresbar-2-10, .pass_img#passbar-10 { background: transparent url(../images/password/pass_10.gif) no-repeat; }
-    .pass_img#progresbar-2-20, .pass_img#passbar-20 { background: transparent url(../images/password/pass_20.gif) no-repeat; }
-    .pass_img#progresbar-2-30, .pass_img#passbar-30 { background: transparent url(../images/password/pass_30.gif) no-repeat; }
-    .pass_img#progresbar-2-40, .pass_img#passbar-40 { background: transparent url(../images/password/pass_40.gif) no-repeat; }
-    .pass_img#progresbar-2-50, .pass_img#passbar-50 { background: transparent url(../images/password/pass_50.gif) no-repeat; }
-    .pass_img#progresbar-2-60, .pass_img#passbar-60 { background: transparent url(../images/password/pass_60.gif) no-repeat; }
-    .pass_img#progresbar-2-70, .pass_img#passbar-70 { background: transparent url(../images/password/pass_70.gif) no-repeat; }
-    .pass_img#progresbar-2-80, .pass_img#passbar-80 { background: transparent url(../images/password/pass_80.gif) no-repeat; }
-    .pass_img#progresbar-2-90, .pass_img#passbar-90 { background: transparent url(../images/password/pass_90.gif) no-repeat; }
-    .pass_img#progresbar-2-100, .pass_img#passbar-100 { background: transparent url(../images/password/pass_100.gif) no-repeat; }
+    .pass_img#progresbar-2-0,.pass_img#passbar-0    { background: transparent url(skins/images/password/pass_0.gif) no-repeat; }
+    .pass_img#progresbar-2-10, .pass_img#passbar-10 { background: transparent url(skins/images/password/pass_10.gif) no-repeat; }
+    .pass_img#progresbar-2-20, .pass_img#passbar-20 { background: transparent url(skins/images/password/pass_20.gif) no-repeat; }
+    .pass_img#progresbar-2-30, .pass_img#passbar-30 { background: transparent url(skins/images/password/pass_30.gif) no-repeat; }
+    .pass_img#progresbar-2-40, .pass_img#passbar-40 { background: transparent url(skins/images/password/pass_40.gif) no-repeat; }
+    .pass_img#progresbar-2-50, .pass_img#passbar-50 { background: transparent url(skins/images/password/pass_50.gif) no-repeat; }
+    .pass_img#progresbar-2-60, .pass_img#passbar-60 { background: transparent url(skins/images/password/pass_60.gif) no-repeat; }
+    .pass_img#progresbar-2-70, .pass_img#passbar-70 { background: transparent url(skins/images/password/pass_70.gif) no-repeat; }
+    .pass_img#progresbar-2-80, .pass_img#passbar-80 { background: transparent url(skins/images/password/pass_80.gif) no-repeat; }
+    .pass_img#progresbar-2-90, .pass_img#passbar-90 { background: transparent url(skins/images/password/pass_90.gif) no-repeat; }
+    .pass_img#progresbar-2-100, .pass_img#passbar-100 { background: transparent url(skins/images/password/pass_100.gif) no-repeat; }
 .poll { margin: 0 0 10px; }
 .poll table { margin: 3px 0; }
 .post {
@@ -523,8 +520,8 @@ textarea {
 .random-image { margin: 5px 0; }
 .rate { float: right; margin: 30px 20px 20px; }
     .rate button { border: none; }
-    .rate button.minus { background: url(../images/down.gif) no-repeat; }
-    .rate button.plus { background: url(../images/up.gif) no-repeat; }
+    .rate button.minus { background: url(skins/images/down.gif) no-repeat; }
+    .rate button.plus { background: url(skins/images/up.gif) no-repeat; }
 #registration_content {
     margin: 15px auto;
     text-align: center;
@@ -628,7 +625,7 @@ textarea {
         height: 20px;
         margin: 0 10px 0 0; }
     .star ul.star {
-        background: url(../images/stars.png) repeat-x;
+        background: url(skins/images/stars.png) repeat-x;
         cursor: pointer;
         height: 22px;
         margin: 0 50px 0 0;
@@ -646,7 +643,7 @@ textarea {
         width: 85px;
         z-index: 1; }
     .star li.curr {
-        background: url(../images/stars.png) left 25px;
+        background: url(skins/images/stars.png) left 25px;
         font-size: 1px; }
     .star div.rates { margin: -16px 0 0 5px; }
     .star div.sep { margin: 0 3px; }
@@ -794,16 +791,16 @@ table#std { margin: 0 0 10px; }
 		top: 0px;
 		width: 145px; }
 	#unitippoint {
-        background: url(../../../tools/unitip/TipPoint.png) no-repeat;
+        background: url(tools/unitip/TipPoint.png) no-repeat;
         height: 19px;
         overflow: hidden; }
 	#unitipmid {
-		background: url(../../../tools/unitip/TipMid.png) repeat;
+		background: url(tools/unitip/TipMid.png) repeat;
 		height: auto;
 		padding: 5px 15px;
         width: 115px; }
 	#unitipcap {
-        background: url(../../../../tools/unitip/TipCap.png) no-repeat;
+        background: url(tools/unitip/TipCap.png) no-repeat;
         height: 7px;
         overflow: hidden	}
 
@@ -811,7 +808,7 @@ table#std { margin: 0 0 10px; }
 .icon:before {
     content: '';
     background-color: transparent;
-    background-image: url(../images/icons.png);
+    background-image: url(skins/images/icons.png);
     background-repeat: no-repeat;
     background-position: 16px 16px;
     margin: 0 3px;

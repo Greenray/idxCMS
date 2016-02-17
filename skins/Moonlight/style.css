@@ -1,5 +1,5 @@
 body {
-    background: url(skins/images/main_bg.gif) repeat left top  #0f0f0f;
+    background: url(skins/Moonlight/images/main_bg.gif) repeat left top  #0f0f0f;
     color: white;
     font: normal 12px/1.2em arial, helvetica, verdana, sans-serif;
     height: auto !important;
@@ -167,7 +167,7 @@ textarea {
     textarea:focus { border: 1px solid red; }
 
 #wrapper {
-    background: url(skins/images/header_bg.jpg) no-repeat center top;
+    background: url(skins/Moonlight/images/header_bg.jpg) no-repeat center top;
     height: auto !important;
     margin: 0 auto;
     overflow: hidden;

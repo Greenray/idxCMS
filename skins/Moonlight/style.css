@@ -978,7 +978,6 @@ textarea {
 .lightbox .title {
     color: black;
     text-transform: uppercase; }
-.panel { padding: 20px 0 0}
 .panel .title {
     border-bottom: 1px solid #444;
     color: white;
@@ -1041,7 +1040,7 @@ textarea {
     float: left;
     margin: 0 auto;
     overflow: hidden;
-    padding: 10px;
+    padding: 0 10px;
     position: relative;
     width: 313px; }
 :-moz-placeholder { color: #7e7e7e; }
@@ -1052,7 +1051,7 @@ textarea {
     min-height: 50px; }
 #banner {
     color: white;
-    padding: 10px 0;
+    padding: 0 7px;
     margin: 0; }
     #banner li {
         padding: 10px 0;

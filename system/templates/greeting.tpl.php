@@ -6,7 +6,7 @@
 die();?>
 
 <center>
-    __We welcome our new friend__!
+    __We welcome our new friend!__
     <br />
     <br />
     <font color="red"><b>__Thanks__!</b></font>

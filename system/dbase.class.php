@@ -65,7 +65,11 @@ class DBASE {
      * @return array        Unserialised content of the index file or empty array
      */
     public function getIndex($path) {
-        return json_decode(file_get_contents($path.$this->index), TRUE);
+        if (file_exists($path.$this->index)) {
+            return json_decode(file_get_contents($path.$this->index), TRUE);
+        } else {
+            return [];
+        }
     }
 
     /**

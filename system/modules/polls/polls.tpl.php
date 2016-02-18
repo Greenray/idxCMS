@@ -19,8 +19,8 @@ die();?>
                     <td colspan="2">
                         <table>
                             <tr>
-                                <td width="[$answer.voices:]%" style="white-space:nowrap;background:$answer.color;"></td>
-                                <td class="color">&nbsp;</td>
+                                <td width="[$answer.voices:]%" height="5" style="background:$answer.color;white-space:nowrap;"></td>
+                                <td height="5" ></td>
                             </tr>
                         </table>
                     </td>

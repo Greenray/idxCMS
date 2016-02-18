@@ -161,11 +161,11 @@ if (!empty($sections)) {
             SYSTEM::setPageDescription(__('Posts').' - '.$categories[$category]['title']);
             krsort($content);
 
-            $TEMPLATE    = new TEMPLATE(__DIR__.DS.'short.tpl');
-            $output = '';
-            $count  = sizeof($content);
-            $keys   = array_keys($content);
-            $page   = FILTER::get('REQUEST', 'page');
+            $TEMPLATE   = new TEMPLATE(__DIR__.DS.'short.tpl');
+            $output     = '';
+            $count      = sizeof($content);
+            $keys       = array_keys($content);
+            $page       = FILTER::get('REQUEST', 'page');
             $perpage    = CONFIG::getValue('posts', 'posts_per_page');
             $pagination = GetPagination($page, $perpage, $count);
             for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
@@ -196,8 +196,10 @@ if (!empty($sections)) {
         }
 
     } elseif ((($from = FILTER::get('REQUEST', 'from')) !== FALSE) && (($until = FILTER::get('REQUEST', 'until')) !== FALSE))  {
+
         SYSTEM::set('pagename', __('Posts').' - '.__('Search results'));
         SYSTEM::setPageDescription(__('Posts').' - '.__('Search results'));
+
         $output = '';
         $TEMPLATE = new TEMPLATE(__DIR__.DS.'short.tpl');
         foreach ($sections as $id => $section) {

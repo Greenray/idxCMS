@@ -11,7 +11,9 @@ die();?>
         <li class="level2">
             <a class="level2" href="$section.link">
                 <span class="title">$section.title</span>
+            <!-- IF !empty($section.desc) -->
                 <span class="subtitle">$section.desc</span>
+            <!-- ENDIF -->
             </a>
             <!-- IF !empty($section.categories) -->
                 <ul class="level3">
@@ -20,7 +22,9 @@ die();?>
                         <img src="[$category.path:]icon.png" width="35" height="35" alt="IMAGE" />
                         <a class="level3" href="$category.link">
                             <span class="title">$category.title</span>
+                        <!-- IF !empty($category.desc) -->
                             <span class="subtitle">$category.desc</span>
+                        <!-- ENDIF -->
                         </a>
                     </li>
                 <!-- ENDFOREACH -->

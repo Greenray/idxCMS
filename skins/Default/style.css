@@ -355,7 +355,7 @@ textarea {
         background: red;
         color: yellow; }
     .message .title {
-        background: #6e7b8b;
+        background: #297377;
         color: white; }
 .gallery { margin: 0 auto; }
     .gallery img { margin: 5px 0 0 5px; }
@@ -519,8 +519,12 @@ textarea {
     color: red; }
 .right { text-align: right; }
 .section { margin: 20px; }
-    .section a { display: block; margin: 0; }
-    .section a.level1 { text-align: left; }
+    .section a {
+        display: block;
+        margin: 0; }
+    .section a.level1 {
+        padding: 10px 0;
+        text-align: left; }
     .section a.level1 span.title,
     .section a.level2 span.title {
         font-weight: bold;
@@ -555,7 +559,6 @@ textarea {
         font-weight: normal;
         line-height: 16px;
         padding: 0 5px; }
-    .section ul { padding: 0; }
     .section ul.level2,
     .section ul.level3 {
         padding: 0 0 10px 40px;
@@ -571,11 +574,8 @@ textarea {
         background: #e8e8ea;
         color: red; }
     .section li {
-        margin: 0;
-        padding: 0;
+        line-height: 18px;
         position: relative; }
-    .section li a.level2:hover,
-    .section li a.level3:hover { background: #e8e8ea; }
     .section li a.level1:hover span.title,
     .section li a.level2:hover span.subtitle,
     .section li a.level3:hover span.title    { color: blue; }
@@ -799,7 +799,10 @@ table#std { margin: 0 0 10px; }
         font-weight: bold;
         text-align: center;
         padding: 10px 0 0 0; }
-#flipbox { color: black; padding: 5px; min-height: 50px; }
+#flipbox {
+    color: black;
+    padding: 5px;
+    min-height: 50px; }
 :-moz-placeholder { color: #7e7e7e; }
 ::-webkit-input-placeholder { color: #7e7e7e; }
 .icon { background: transparent; white-space: nowrap; }

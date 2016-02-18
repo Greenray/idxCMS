@@ -29,138 +29,134 @@ if (!empty($sections)) {
             $replies = CMS::call('FORUM')->getComments($topic);
             $reply   = FILTER::get('REQUEST', 'comment');
 
-            if (!empty($reply)) {
-                #
-                # Save reply
-                #
-                try {
-                    if (!empty($REQUEST['save'])) {
-                        #
-                        # Save new or edited comment
-                        # If $comment is empty a new comment will be created
-                        #
-                        $result = CMS::call('FORUM')->saveComment($reply, $topic);
-                    }
+            try {
+                if (!empty($REQUEST['save'])) {
+                    #
+                    # Save new or edited comment
+                    # If $comment is empty a new comment will be created
+                    #
+                    $result = CMS::call('FORUM')->saveComment($reply, $topic);
+                }
 
-                    if (!empty($REQUEST['action'])) {
-                        #
-                        # Actions is allowed for admin and moderators
-                        #
-                        if (USER::moderator('forum', $replies[$reply])) {
-                            switch ($REQUEST['action']) {
+                if (!empty($REQUEST['action'])) {
+                    #
+                    # Actions is allowed for admin and moderators
+                    #
+                    if (USER::moderator('forum', $replies[$reply])) {
+                        switch ($REQUEST['action']) {
 
-                                case 'edit':
-                                    #
-                                    # Edit reply
-                                    #
-                                    if (!empty($content[$topic]['opened'])) {
-                                        if (empty($reply)) {
-                                            #
-                                            # Edit topic
-                                            #
-                                            if (!USER::$logged_in) SYSTEM::showError('Your have no right to edit topic', CreateUrl('forum', $section, $category, $topic));
+                            case 'edit':
+                                #
+                                # Edit reply
+                                #
+                                if (!empty($content[$topic]['opened'])) {
+                                    if (empty($reply)) {
+                                        #
+                                        # Edit topic
+                                        #
+                                        if (!USER::$logged_in) SYSTEM::showError('Your have no right to edit topic', CreateUrl('forum', $section, $category, $topic));
 
-                                            if (!empty($REQUEST['save'])) {
-                                                $topic = CMS::call('FORUM')->saveTopic($topic);
-                                                Redirect('forum', $section, $category, $topic);
-                                            }
-                                            $ed  = CMS::call('FORUM')->getItem($topic, 'text', FALSE);
-                                            $TPL = new TEMPLATE(__DIR__.DS.'post.tpl');
-                                            $TPL->set('topic', $ed['id']);
-                                            $TPL->set('title',  empty($REQUEST['title'])  ? $ed['title']  : $REQUEST['title']);
-                                            $TPL->set('text',   empty($REQUEST['text'])   ? $ed['text']   : $REQUEST['text']);
-                                            $TPL->set('opened', empty($REQUEST['opened']) ? $ed['opened'] : $REQUEST['opened']);
-                                            $TPL->set('pinned', empty($REQUEST['pinned']) ? $ed['pinned'] : $REQUEST['pinned']);
-                                            $TPL->set('moderator', USER::moderator('forum', $topic));
-                                            $TPL->set('bbCodes', CMS::call('PARSER')->showBbcodesPanel('topic.text'));
-
-                                            SYSTEM::defineWindow('Edit', $TPL->parse());
-
-                                        } else {
-                                            if (!empty($replies[$reply])) {
-                                                #
-                                                # Edit reply
-                                                #
-                                                if (USER::moderator('forum', $replies[$reply])) {
-                                                    $TPL = new TEMPLATE(__DIR__.DS.'comment-edit.tpl');
-                                                    $TPL->set('comment', $reply);
-                                                    $TPL->set('text', empty($REQUEST['text']) ? $replies[$reply]['text'] : $REQUEST['text']);
-                                                    $TPL->set('moderator', USER::moderator('forum') ? TRUE : NULL);
-                                                    $TPL->set('bbcodes', CMS::call('PARSER')->showBbcodesPanel('edit.text', !empty($output['moderator'])));
-
-                                                    SYSTEM::defineWindow('Edit', $TPL->parse());
-                                                }
-                                            }
+                                        if (!empty($REQUEST['save'])) {
+                                            $topic = CMS::call('FORUM')->saveTopic($topic);
+                                            Redirect('forum', $section, $category, $topic);
                                         }
+                                        $ed  = CMS::call('FORUM')->getItem($topic, 'text', FALSE);
+                                        $TPL = new TEMPLATE(__DIR__.DS.'post.tpl');
+                                        $TPL->set('topic', $ed['id']);
+                                        $TPL->set('title',  empty($REQUEST['title'])  ? $ed['title']  : $REQUEST['title']);
+                                        $TPL->set('text',   empty($REQUEST['text'])   ? $ed['text']   : $REQUEST['text']);
+                                        $TPL->set('opened', empty($REQUEST['opened']) ? $ed['opened'] : $REQUEST['opened']);
+                                        $TPL->set('pinned', empty($REQUEST['pinned']) ? $ed['pinned'] : $REQUEST['pinned']);
+                                        $TPL->set('moderator', USER::moderator('forum', $topic));
+                                        $TPL->set('bbCodes', CMS::call('PARSER')->showBbcodesPanel('topic.text'));
 
-                                    } else SYSTEM::showMessage('Topic is closed', CreateUrl('forum', $section, $category, $topic));
-                                    break;
+                                        SYSTEM::defineWindow('Edit', $TPL->parse());
 
-                                case 'delete':
-                                    #
-                                    # Remove reply
-                                    #
-                                    if (!empty($reply)) {
-                                        $result = CMS::call('FORUM')->removeComment($reply);
-                                        $reply  = ($result > $reply) ? $reply : $result;
                                     } else {
-                                        #
-                                        # Remove topic
-                                        #
-                                        if (USER::moderator('forum', $content[$topic])) {
-                                            CMS::call('FORUM')->removeItem($topic);
-                                            Redirect('forum', $section, $category);
+                                        if (!empty($replies[$reply])) {
+                                            #
+                                            # Edit reply
+                                            #
+                                            if (USER::moderator('forum', $replies[$reply])) {
+                                                $TPL = new TEMPLATE(__DIR__.DS.'comment-edit.tpl');
+                                                $TPL->set('comment', $reply);
+                                                $TPL->set('text', empty($REQUEST['text']) ? $replies[$reply]['text'] : $REQUEST['text']);
+                                                $TPL->set('moderator', USER::moderator('forum') ? TRUE : NULL);
+                                                $TPL->set('bbcodes', CMS::call('PARSER')->showBbcodesPanel('edit.text', !empty($output['moderator'])));
+
+                                                SYSTEM::defineWindow('Edit', $TPL->parse());
+                                            }
                                         }
                                     }
-                                    break;
 
-                                case 'close':
-                                    #
-                                    # Close topic for commenting
-                                    #
-                                    if (USER::moderator('forum')) CMS::call('FORUM')->setValue($topic, 'opened', FALSE);
-                                    break;
+                                } else SYSTEM::showMessage('Topic is closed', CreateUrl('forum', $section, $category, $topic));
+                                break;
 
-                                case 'open':
+                            case 'delete':
+                                #
+                                # Remove reply
+                                #
+                                if (!empty($reply)) {
+                                    $result = CMS::call('FORUM')->removeComment($reply);
+                                    $reply  = ($result > $reply) ? $reply : $result;
+                                } else {
                                     #
-                                    # Open topic for commenting
+                                    # Remove topic
                                     #
-                                    if (USER::moderator('forum')) CMS::call('FORUM')->setValue($topic, 'opened', TRUE);
-                                    break;
-
-                                case 'pin':
-                                    #
-                                    # Pin topic
-                                    #
-                                    if (USER::moderator('forum')) {
-                                        CMS::call('FORUM')->setValue($topic, 'pinned', 1);
-                                        CMS::call('FORUM')->sortTopics();
+                                    if (USER::moderator('forum', $content[$topic])) {
+                                        CMS::call('FORUM')->removeItem($topic);
+                                        Redirect('forum', $section, $category);
                                     }
-                                    break;
+                                }
+                                break;
 
-                                case 'unpin':
-                                    #
-                                    # Unpin topic
-                                    #
-                                    if (USER::moderator('forum')) {
-                                        CMS::call('FORUM')->setValue($topic, 'pinned', 0);
-                                        CMS::call('FORUM')->sortTopics();
-                                    }
-                                    break;
+                            case 'close':
+                                #
+                                # Close topic for commenting
+                                #
+                                if (USER::moderator('forum')) CMS::call('FORUM')->setValue($topic, 'opened', FALSE);
+                                break;
 
-                                case 'ban':
-                                    #
-                                    # Ban bad user
-                                    #
-                                    if (USER::moderator('forum')) CMS::call('FILTER')->ban();
-                                    break;
-                            }
+                            case 'open':
+                                #
+                                # Open topic for commenting
+                                #
+                                if (USER::moderator('forum')) CMS::call('FORUM')->setValue($topic, 'opened', TRUE);
+                                break;
+
+                            case 'pin':
+                                #
+                                # Pin topic
+                                #
+                                if (USER::moderator('forum')) {
+                                    CMS::call('FORUM')->setValue($topic, 'pinned', 1);
+                                    CMS::call('FORUM')->sortTopics();
+                                }
+                                break;
+
+                            case 'unpin':
+                                #
+                                # Unpin topic
+                                #
+                                if (USER::moderator('forum')) {
+                                    CMS::call('FORUM')->setValue($topic, 'pinned', 0);
+                                    CMS::call('FORUM')->sortTopics();
+                                }
+                                break;
+
+                            case 'ban':
+                                #
+                                # Ban bad user
+                                #
+                                if (USER::moderator('forum')) CMS::call('FILTER')->ban();
+                                break;
                         }
                     }
-                } catch (Exception $error) {
-                    SYSTEM::showError($error->getMessage());
                 }
+            } catch (Exception $error) {
+                SYSTEM::showError($error->getMessage());
             }
+
             $topic = CMS::call('FORUM')->getItem($topic);
             #
             # Wrong post request

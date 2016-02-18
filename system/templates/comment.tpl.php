@@ -26,7 +26,7 @@ die();?>
             </div>
             <div class="user center">
             <!-- IF !empty($opened) -->
-                <strong><a href="javascript:InsertText(document.forms['comment_post'].elements['text'], '[b]$nick![/b]' + '\n');">$nick</a></strong>
+                <strong><a href="javascript:InsertText(document.forms['comment'].elements['text'], '[b]$nick![/b]' + '\n');">$nick</a></strong>
             <!-- ELSE -->
                 $nick
             <!-- ENDIF -->
@@ -38,18 +38,21 @@ die();?>
         </div>
         <div class="text justify">$text</div>
     </div>
-    <!-- IF !empty($moderator) -->
+
         <div class="actions right">
             <form name="actions" method="post" >
+            <!-- IF $moderator==true -->
                 <button type="submit" formaction="$link{COMMENT}$id&amp;action=edit">__Edit__</button>
                 <button type="submit" formaction="$link{COMMENT}$id&amp;action=delete">__Delete__</button>
-            <!-- IF !empty($ban) -->
+            <!-- ENDIF -->
+            <!-- IF !empty($ip) -->
                 <button type="submit" formaction="$link{COMMENT}$id&amp;action=ban&amp;host=$ip">$ip</button>
             <!-- ENDIF -->
+            <!-- IF !empty($opened) -->
                 <button type="submit" formaction="{MODULE}user&amp;user=$author">__Profile__</button>
                 <button type="submit" formaction="{MODULE}user.pm&amp;for=$author">__Private message__</button>
+            <!-- ENDIF -->
             </form>
         </div>
-    <!-- ENDIF -->
 </div>
 <div class="clear"></div>

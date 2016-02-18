@@ -29,7 +29,7 @@ if (!USER::$logged_in) {
     if ($REQUEST['for'] === USER::getUser('user')) {
         SYSTEM::showError('You cannot send message to yourself', MODULE.'user.pm');
     } else {
-        CMS::call('COMMENTS')->showCommentForm('module=pm&', $REQUEST['for']);
+        CMS::call('COMMENTS')->showCommentForm(MODULE.'pm&', $REQUEST['for']);
     }
 
 } else {

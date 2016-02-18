@@ -27,7 +27,6 @@ class COMMENTS extends ITEMS {
         if (!empty($this->comments)) {
             return $this->comments;
         }
-
         $this->comments = $this->getIndex($this->sections[$this->section]['categories'][$this->category]['path'].$item.DS);
         return $this->comments;
     }
@@ -43,7 +42,6 @@ class COMMENTS extends ITEMS {
         if (empty($this->comments[$id])) {
             return FALSE;
         }
-
         $comment = $this->comments[$id];
         $comment['text']   = CMS::call('PARSER')->parseText($comment['text'], $this->sections[$this->section]['categories'][$this->category]['path'].$this->item.DS);
         $comment['date']   = FormatTime('d F Y H:i:s', $comment['time']);
@@ -53,7 +51,6 @@ class COMMENTS extends ITEMS {
         $comment['stars']   = $author['stars'];
         $comment['country'] = $author['country'];
         $comment['city']    = $author['city'];
-
         $user = USER::getUser('user');
         #
         # Do not show user IP for admin and comment author
@@ -78,11 +75,9 @@ class COMMENTS extends ITEMS {
                 }
             }
         }
-
         if     ($comment['rate'] < 0)  $comment['rate_color'] = 'red';
         elseif ($comment['rate'] == 0) $comment['rate_color'] = 'black';
         else                           $comment['rate_color'] = 'green';
-
         return $comment;
     }
 
@@ -108,7 +103,7 @@ class COMMENTS extends ITEMS {
     public function showComments($item, $page, $perpage, $path) {
         $comments = $this->getComments($item['id']);
         if (!empty($comments)) {
-            $TPL = new TEMPLATE($path.'comment.tpl');
+            $TPL    = new TEMPLATE($path.'comment.tpl');
             $count  = sizeof($comments);
             $ids    = array_keys($comments);
             $output = '';
@@ -117,7 +112,6 @@ class COMMENTS extends ITEMS {
                 $TPL->set($this->getComment($ids[$i], $page));
                 $output .= $TPL->parse();
             }
-
             SYSTEM::defineWindow('Comments', $output);
             if ($count > $perpage) {
                 SYSTEM::defineWindow('', Pagination($count, $perpage, $page, $item['link']));
@@ -136,14 +130,14 @@ class COMMENTS extends ITEMS {
     /**
      * Form to post comment.
      *
-     * @param  obj    $obj  Current object
-     * @param  array  $item Item to comment
+     * @param  obj    $module Current object
+     * @param  array  $for    Item to comment
      * @return string Form to post comment
      */
-    public function showCommentForm($action = '', $for ='') {
-        preg_match("#\module=(.*?)&#is", $action, $obj);
+    public function showCommentForm($module, $for ='') {
+        preg_match("#\module=(.*?)&#is", $module, $obj);
         $TPL = new TEMPLATE(TEMPLATES.'comment-post.tpl');
-        $TPL->set('action',         $action);
+        $TPL->set('action',         $module);
         $TPL->set('nick',           USER::getUser('nick'));
         $TPL->set('admin',          USER::$root);
         $TPL->set('text',           FILTER::get('REQUEST', 'text'));
@@ -173,7 +167,6 @@ class COMMENTS extends ITEMS {
         }
         $path = $this->sections[$this->section]['categories'][$this->category]['path'];
         $id = $this->newId($this->comments);
-
         $this->comments[$id]['id']     = $id;
         $this->comments[$id]['author'] = USER::getUser('user');
         $this->comments[$id]['nick']   = USER::getUser('nick');
@@ -183,7 +176,6 @@ class COMMENTS extends ITEMS {
         $this->comments[$id]['rate']   = 0;
         $this->saveIndex($path.$item.DS, $this->comments);
         $this->content[$item]['comments']++;
-
         if (!$this->saveIndex($path, $this->content)) {
             throw new Exception('Cannot save comment');
         }

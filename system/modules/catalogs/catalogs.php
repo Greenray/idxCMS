@@ -28,95 +28,94 @@ if (!empty($sections)) {
             $comments = CMS::call('CATALOGS')->getComments($item);
             $comment  = FILTER::get('REQUEST', 'comment');
 
-            if (!empty($comment)) {
-                try {
-                    if (!empty($REQUEST['save'])) {
-                        #
-                        # If $comment is empty a new comment will be created
-                        #
-                        $result = CMS::call('CATALOGS')->saveComment($comment, $item);
-                    }
+            try {
+                if (!empty($REQUEST['save'])) {
+                    #
+                    # If $comment is empty a new comment will be created
+                    #
+                    $result = CMS::call('CATALOGS')->saveComment($comment, $item);
+                }
 
-                    if (!empty($REQUEST['get'])) {
-                        #
-                        # Download file
-                        #
-                        CMS::call('CATALOGS')->incCount($item, 'downloads');
-                        $file = empty($content[$item]['file']) ? $content[$item]['music'] : $content[$item]['file'];
-                        header('Location: '.CATALOGS.$section.DS.$category.DS.$item.DS.$file);
-                        die();
-                    }
+                if (!empty($REQUEST['get'])) {
+                    #
+                    # Download file
+                    #
+                    CMS::call('CATALOGS')->incCount($item, 'downloads');
+                    $file = empty($content[$item]['file']) ? $content[$item]['music'] : $content[$item]['file'];
+                    header('Location: '.CATALOGS.$section.DS.$category.DS.$item.DS.$file);
+                    die();
+                }
 
-                    if (!empty($REQUEST['go'])) {
-                        #
-                        # Jumplink
-                        #
-                        CMS::call('CATALOGS')->incCount($item, 'clicks');
-                        header('Location: '.$content[$item]['site']);
-                        die();
-                    }
+                if (!empty($REQUEST['go'])) {
+                    #
+                    # Jumplink
+                    #
+                    CMS::call('CATALOGS')->incCount($item, 'clicks');
+                    header('Location: '.$content[$item]['site']);
+                    die();
+                }
 
-                    if (!empty($REQUEST['action'])) {
-                        #
-                        # Actions is allowed for admin and moderators
-                        #
-                        if (USER::moderator('catalogs', $comments[$comment])) {
-                            switch ($REQUEST['action']) {
+                if (!empty($REQUEST['action'])) {
+                    #
+                    # Actions is allowed for admin and moderators
+                    #
+                    if (USER::moderator('catalogs', $comments[$comment])) {
+                        switch ($REQUEST['action']) {
 
-                            case 'edit':
-                                #
-                                # Edit comment
-                                #
-                                if (!empty($content[$item]['opened'])) {
-                                    if (!empty($comments[$comment])) {
-                                        #
-                                        # For user it is actual only for 5 minits after post
-                                        #
-                                        $TPL = new TEMPLATE(__DIR__.DS.'comment-edit.tpl');
-                                        $TPL->set('comment', $comment);
-                                        $TPL->set('text', empty($REQUEST['text']) ? $comments[$comment]['text'] : $REQUEST['text']);
-                                        $TPL->set('moderator', USER::moderator('catalogs') ? TRUE : NULL);
-                                        $TPL->set('bbcodes', CMS::call('PARSER')->showBbcodesPanel('edit.text', USER::moderator('catalogs')));
-                                        SYSTEM::defineWindow('Edit', $TPL->parse());
-                                    }
-                                } else SYSTEM::showError('Comments are not allowed', CreateUrl('catalogs', $section, $category, $item));
-                                break;
+                        case 'edit':
+                            #
+                            # Edit comment
+                            #
+                            if (!empty($content[$item]['opened'])) {
+                                if (!empty($comments[$comment])) {
+                                    #
+                                    # For user it is actual only for 5 minits after post
+                                    #
+                                    $TPL = new TEMPLATE(__DIR__.DS.'comment-edit.tpl');
+                                    $TPL->set('comment', $comment);
+                                    $TPL->set('text', empty($REQUEST['text']) ? $comments[$comment]['text'] : $REQUEST['text']);
+                                    $TPL->set('moderator', USER::moderator('catalogs') ? TRUE : NULL);
+                                    $TPL->set('bbcodes', CMS::call('PARSER')->showBbcodesPanel('edit.text', USER::moderator('catalogs')));
+                                    SYSTEM::defineWindow('Edit', $TPL->parse());
+                                }
+                            } else SYSTEM::showError('Comments are not allowed', CreateUrl('catalogs', $section, $category, $item));
+                            break;
 
-                            case 'delete':
-                                #
-                                # Remove comment
-                                #
-                                $result = CMS::call('CATALOGS')->removeComment($comment);
-                                $result = ($result > $comment) ? $comment : $result;
-                                break;
+                        case 'delete':
+                            #
+                            # Remove comment
+                            #
+                            $result = CMS::call('CATALOGS')->removeComment($comment);
+                            $result = ($result > $comment) ? $comment : $result;
+                            break;
 
-                            case 'close':
-                                #
-                                # Close item for commenting
-                                #
-                                if (USER::$root) CMS::call('CATALOGS')->setValue($item, 'opened', FALSE);
-                                break;
+                        case 'close':
+                            #
+                            # Close item for commenting
+                            #
+                            if (USER::$root) CMS::call('CATALOGS')->setValue($item, 'opened', FALSE);
+                            break;
 
-                            case 'open':
-                                #
-                                # Open item for commenting
-                                #
-                                if (USER::$root) CMS::call('CATALOGS')->setValue($item, 'opened', TRUE);
-                                break;
+                        case 'open':
+                            #
+                            # Open item for commenting
+                            #
+                            if (USER::$root) CMS::call('CATALOGS')->setValue($item, 'opened', TRUE);
+                            break;
 
-                            case 'ban':
-                                #
-                                # Ban bad user
-                                #
-                                if (USER::moderator('catalogs')) CMS::call('FILTER')->ban();
-                                break;
-                            }
+                        case 'ban':
+                            #
+                            # Ban bad user
+                            #
+                            if (USER::moderator('catalogs')) CMS::call('FILTER')->ban();
+                            break;
                         }
                     }
-                } catch (Exception $error) {
-                    SYSTEM::showError($error->getMessage());
                 }
+            } catch (Exception $error) {
+                SYSTEM::showError($error->getMessage());
             }
+
             $item = CMS::call('CATALOGS')->getItem($item);
             #
             # Wrong item request

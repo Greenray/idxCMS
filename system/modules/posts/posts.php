@@ -33,82 +33,81 @@ if (!empty($sections)) {
             $comments = CMS::call('POSTS')->getComments($post);
             $comment  = FILTER::get('REQUEST', 'comment');
 
-            if (!empty($comment)) {
-                try {
-                    if (!empty($REQUEST['save'])) {
-                        #
-                        # Save new or edited comment
-                        # If $comment is empty a new comment will be created
-                        #
-                        $result = CMS::call('POSTS')->saveComment($comment, $post);
+            try {
+                if (!empty($REQUEST['save'])) {
+                    #
+                    # Save new or edited comment
+                    # If $comment is empty a new comment will be created
+                    #
+                    $result = CMS::call('POSTS')->saveComment($comment, $post);
 
-                    }
+                }
 
-                    if (!empty($REQUEST['action'])) {
-                        #
-                        # Actions is allowed for admin and moderators
-                        #
-                        if (USER::moderator('posts', $comments[$comment])) {
-                            switch ($REQUEST['action']) {
+                if (!empty($REQUEST['action'])) {
+                    #
+                    # Actions is allowed for admin and moderators
+                    #
+                    if (USER::moderator('posts', $comments[$comment])) {
+                        switch ($REQUEST['action']) {
 
-                                case 'edit':
-                                    #
-                                    # Edit comment
-                                    #
-                                    if (!empty($content[$post]['opened'])) {
-                                        if (!empty($comments[$comment])) {
-                                            $moderator = USER::moderator('posts', $comments[$comment]);
-                                            if ($moderator) {
-                                                #
-                                                # For user it is actual only for 5 minits after post
-                                                #
-                                                $TPL = new TEMPLATE(__DIR__.DS.'comment-edit.tpl');
-                                                $TPL->set('comment', $comment);
-                                                $TPL->set('text', empty($REQUEST['text']) ? $comments[$comment]['text'] : $REQUEST['text']);
-                                                $TPL->set('moderator', TRUE);
-                                                $TPL->set('bbcodes', CMS::call('PARSER')->showBbcodesPanel('edit.text', $moderator));
-                                                SYSTEM::defineWindow('Edit', $TPL->parse());
-                                            }
+                            case 'edit':
+                                #
+                                # Edit comment
+                                #
+                                if (!empty($content[$post]['opened'])) {
+                                    if (!empty($comments[$comment])) {
+                                        $moderator = USER::moderator('posts', $comments[$comment]);
+                                        if ($moderator) {
+                                            #
+                                            # For user it is actual only for 5 minits after post
+                                            #
+                                            $TPL = new TEMPLATE(__DIR__.DS.'comment-edit.tpl');
+                                            $TPL->set('comment', $comment);
+                                            $TPL->set('text', empty($REQUEST['text']) ? $comments[$comment]['text'] : $REQUEST['text']);
+                                            $TPL->set('moderator', TRUE);
+                                            $TPL->set('bbcodes', CMS::call('PARSER')->showBbcodesPanel('edit.text', $moderator));
+                                            SYSTEM::defineWindow('Edit', $TPL->parse());
                                         }
-                                    } else SYSTEM::showError('Comments are not allowed', CreateUrl('posts', $section, $category, $post));
-                                    break;
+                                    }
+                                } else SYSTEM::showError('Comments are not allowed', CreateUrl('posts', $section, $category, $post));
+                                break;
 
-                                case 'delete':
-                                    #
-                                    # Remove comment
-                                    #
-                                    $result = CMS::call('POSTS')->removeComment($comment);
-                                    $result = ($result > $comment) ? $comment : $result;
-                                    break;
+                            case 'delete':
+                                #
+                                # Remove comment
+                                #
+                                $result = CMS::call('POSTS')->removeComment($comment);
+                                $result = ($result > $comment) ? $comment : $result;
+                                break;
 
-                                case 'close':
-                                    #
-                                    # Close post for commenting
-                                    #
-                                    if (USER::$root) CMS::call('POSTS')->setValue($post, 'opened', FALSE);
-                                    break;
+                            case 'close':
+                                #
+                                # Close post for commenting
+                                #
+                                if (USER::$root) CMS::call('POSTS')->setValue($post, 'opened', FALSE);
+                                break;
 
-                                case 'open':
-                                    #
-                                    # Open post for commenting
-                                    #
-                                    if (USER::$root) CMS::call('POSTS')->setValue($post, 'opened', TRUE);
-                                    break;
+                            case 'open':
+                                #
+                                # Open post for commenting
+                                #
+                                if (USER::$root) CMS::call('POSTS')->setValue($post, 'opened', TRUE);
+                                break;
 
-                                case 'ban':
-                                    #
-                                    # Ban bad user
-                                    #
-                                    if (USER::moderator('posts')) CMS::call('FILTER')->ban();
-                                    break;
-                            }
+                            case 'ban':
+                                #
+                                # Ban bad user
+                                #
+                                if (USER::moderator('posts')) CMS::call('FILTER')->ban();
+                                break;
                         }
                     }
-
-                } catch (Exception $error) {
-                    SYSTEM::showError($error->getMessage(), CreateUrl('posts', $section, $category, $post));
                 }
+
+            } catch (Exception $error) {
+                SYSTEM::showError($error->getMessage(), CreateUrl('posts', $section, $category, $post));
             }
+
             $post = CMS::call('POSTS')->getItem($post);
             #
             # Wrong post request

@@ -382,10 +382,11 @@ class USER {
         if (self::$user['user'] === 'guest') {
             return FALSE;
         }
+        $moderator = self::checkRight($module);
         if (!empty($item)) {
-            return self::checkRight($module) || ((self::$user['user'] === $item['author']) && ((time() - $item['time']) < 300));
+            $moderator = self::checkRight($module) || (self::$user['user'] === $item['author']) && ((time() - $item['time']) < 300);
         }
-        return self::checkRight($module);
+        return $moderator;
     }
 
     /**

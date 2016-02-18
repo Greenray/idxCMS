@@ -35,7 +35,6 @@ $output = [];
 
 if (!empty($messages)) {
     $messages = array_slice($messages, 0, CONFIG::getValue('minichat', 'mess_to_show'), TRUE);
-
     foreach ($messages as $key => $message) {
         $output['messages'][$key]         = $message;
         $output['messages'][$key]['id']   = $key;

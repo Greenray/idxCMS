@@ -66,7 +66,6 @@ $messages = $GB->getMessages();
 if (!empty($messages)) {
     $TPL      = new TEMPLATE(__DIR__.DS.'comment.tpl');
     $output   = '';
-    $messages = array_reverse($messages, TRUE);
     $count    = sizeof($messages);
     $ids      = array_keys($messages);
     $perpage  = CONFIG::getValue('guestbook', 'per_page');
@@ -74,20 +73,24 @@ if (!empty($messages)) {
     $pagination = GetPagination($page, $perpage, $count);
     for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
         if (!empty($messages[$ids[$i]])) {
-            $messages[$ids[$i]]['id']     = $ids[$i];
-            $messages[$ids[$i]]['text']   = CMS::call('PARSER')->parseText($messages[$ids[$i]]['text']);
-            $messages[$ids[$i]]['date']   = FormatTime('d F Y H:i:s', $messages[$ids[$i]]['time']);
-            $messages[$ids[$i]]['avatar'] = GetAvatar($messages[$ids[$i]]['author']);
+            $messages[$ids[$i]]['id']      = $ids[$i];
+            $messages[$ids[$i]]['text']    = CMS::call('PARSER')->parseText($messages[$ids[$i]]['text']);
+            $messages[$ids[$i]]['date']    = FormatTime('d F Y H:i:s', $messages[$ids[$i]]['time']);
+            $messages[$ids[$i]]['avatar']  = GetAvatar($messages[$ids[$i]]['author']);
             $author = USER::getUserData($messages[$ids[$i]]['author']);
-            if ($messages[$ids[$i]]['author'] !== $author['user']) {
-                $messages[$ids[$i]]['user'] = TRUE;
-            }
             $messages[$ids[$i]]['status']  = __($author['status']);
             $messages[$ids[$i]]['stars']   = $author['stars'];
             $messages[$ids[$i]]['country'] = $author['country'];
             $messages[$ids[$i]]['city']    = $author['city'];
-            if (($author['rights'] === '*') || (USER::getUser('user') === $messages[$ids[$i]]['author'])) {
-                unset($messages[$ids[$i]]['ip']);
+            $messages[$ids[$i]]['opened']  = FALSE;
+            $user = USER::getUser('user');
+            if ($user !== 'guest') {
+                if ($messages[$ids[$i]]['author'] !== $user) {
+                    $messages[$ids[$i]]['opened'] = TRUE;
+                }
+            }
+            if (($author['rights'] === '*') || ($user === $messages[$ids[$i]]['author'])) {
+                $messages[$ids[$i]]['ip'] = '';
             }
             if (USER::moderator('guestbook', $messages[$ids[$i]])) {
                 $messages[$ids[$i]]['moderator'] = TRUE;
@@ -108,7 +111,6 @@ if (!empty($messages)) {
         SYSTEM::defineWindow('', Pagination($count, $perpage, $page, MODULE.'guestbook'));
     }
 }
-
 unset($GB);
 #
 # Show post form

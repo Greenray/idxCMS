@@ -28,79 +28,78 @@ if (!empty($sections)) {
             $comments = CMS::call('GALLERY')->getComments($item);
             $comment  = FILTER::get('REQUEST', 'comment');
 
-            if (!empty($comment)) {
-                try {
-                    if (!empty($REQUEST['save'])) {
-                        #
-                        # If $comment is empty a new comment will be created
-                        #
-                        $result = CMS::call('GALLERY')->saveComment($comment, $item);
-                    }
+            try {
+                if (!empty($REQUEST['save'])) {
+                    #
+                    # If $comment is empty a new comment will be created
+                    #
+                    $result = CMS::call('GALLERY')->saveComment($comment, $item);
+                }
 
-                    if (!empty($REQUEST['action'])) {
-                        #
-                        # Actions is allowed for admin and moderators
-                        #
-                        if (USER::moderator('gallery', $comments[$comment])) {
-                            switch ($REQUEST['action']) {
+                if (!empty($REQUEST['action'])) {
+                    #
+                    # Actions is allowed for admin and moderators
+                    #
+                    if (USER::moderator('gallery', $comments[$comment])) {
+                        switch ($REQUEST['action']) {
 
-                                case 'edit':
-                                    #
-                                    # Edit comment
-                                    #
-                                    if (!empty($content[$item]['opened'])) {
-                                        if (!empty($comments[$comment])) {
-                                            if (USER::moderator('gallery', $comments[$comment])) {
-                                                #
-                                                # For user it is actual only for 5 minits after post
-                                                #
-                                                $TPL = new TEMPLATE(__DIR__.DS.'comment-edit.tpl');
-                                                $TPL->set('comment',   $comment);
-                                                $TPL->set('text',      empty($REQUEST['text']) ? $comments[$comment]['text'] : $REQUEST['text']);
-                                                $TPL->set('moderator', USER::moderator('gallery') ? TRUE : NULL);
-                                                $TPL->set('bbcodes',   CMS::call('PARSER')->showBbcodesPanel('edit.text', USER::moderator('gallery')));
-                                                SYSTEM::defineWindow('Edit', $TPL->parse());
-                                            }
+                            case 'edit':
+                                #
+                                # Edit comment
+                                #
+                                if (!empty($content[$item]['opened'])) {
+                                    if (!empty($comments[$comment])) {
+                                        if (USER::moderator('gallery', $comments[$comment])) {
+                                            #
+                                            # For user it is actual only for 5 minits after post
+                                            #
+                                            $TPL = new TEMPLATE(__DIR__.DS.'comment-edit.tpl');
+                                            $TPL->set('comment',   $comment);
+                                            $TPL->set('text',      empty($REQUEST['text']) ? $comments[$comment]['text'] : $REQUEST['text']);
+                                            $TPL->set('moderator', USER::moderator('gallery') ? TRUE : NULL);
+                                            $TPL->set('bbcodes',   CMS::call('PARSER')->showBbcodesPanel('edit.text', USER::moderator('gallery')));
+                                            SYSTEM::defineWindow('Edit', $TPL->parse());
                                         }
-                                    } else SYSTEM::showError('Comments are not allowed', CreateUrl('catalogs', $section, $category, $item));
-                                    break;
+                                    }
+                                } else SYSTEM::showError('Comments are not allowed', CreateUrl('catalogs', $section, $category, $item));
+                                break;
 
-                                case 'delete':
-                                    #
-                                    # Remove comment
-                                    #
-                                    $result = CMS::call('GALLERY')->removeComment($comment);
-                                    $result = ($result > $comment) ? $comment : $result;
-                                    break;
+                            case 'delete':
+                                #
+                                # Remove comment
+                                #
+                                $result = CMS::call('GALLERY')->removeComment($comment);
+                                $result = ($result > $comment) ? $comment : $result;
+                                break;
 
-                                case 'close':
-                                    #
-                                    # Close post for commenting
-                                    #
-                                    if (USER::$root) CMS::call('GALLERY')->setValue($item, 'opened', FALSE);
-                                    break;
+                            case 'close':
+                                #
+                                # Close post for commenting
+                                #
+                                if (USER::$root) CMS::call('GALLERY')->setValue($item, 'opened', FALSE);
+                                break;
 
-                                case 'open':
-                                    #
-                                    # Open item for commenting
-                                    #
-                                    if (USER::$root) CMS::call('GALLERY')->setValue($item, 'opened', TRUE);
-                                    break;
+                            case 'open':
+                                #
+                                # Open item for commenting
+                                #
+                                if (USER::$root) CMS::call('GALLERY')->setValue($item, 'opened', TRUE);
+                                break;
 
-                                case 'ban':
-                                    #
-                                    # Ban bad user
-                                    #
-                                    if (USER::moderator('gallery')) CMS::call('FILTER')->ban();
-                                    break;
-                            }
+                            case 'ban':
+                                #
+                                # Ban bad user
+                                #
+                                if (USER::moderator('gallery')) CMS::call('FILTER')->ban();
+                                break;
                         }
                     }
-
-                } catch (Exception $error) {
-                    SYSTEM::showError($error->getMessage());
                 }
+
+            } catch (Exception $error) {
+                SYSTEM::showError($error->getMessage());
             }
+
             $item = CMS::call('GALLERY')->getItem($item);
             #
             # Wrong item request

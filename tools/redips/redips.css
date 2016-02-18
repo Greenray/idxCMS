@@ -7,12 +7,9 @@
         border: 1px solid red;
         height: 1px; }
     div#redips-drag table {	background: #ddd; }
-    div#redips-nodrag table tr,
-    div#redips-drag table tr { height: 35px; }
-    div#redips-nodrag th,
-    div#redips-drag th { border: 1px solid #758596; }
-    div#redips-nodrag td,
-    div#redips-drag td { border: 1px solid #a1a5a9; }
+    div#redips-nodrag table tr, div#redips-drag table tr { height: 35px; }
+    div#redips-nodrag th, div#redips-drag th { border: 1px solid #758596; }
+    div#redips-nodrag td, div#redips-drag td { border: 1px solid #a1a5a9; }
     .redips-nodrag,
     .redips-drag {
         border: 0;

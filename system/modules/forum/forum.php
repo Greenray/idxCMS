@@ -8,7 +8,7 @@ if (!defined('idxCMS')) die();
 $sections = CMS::call('FORUM')->getSections();
 
 if (!empty($sections)) {
-    $section  = FILTER::get('REQUEST', 'section');
+    $section = FILTER::get('REQUEST', 'section');
     if (!empty($section)) {
         $category = FILTER::get('REQUEST', 'category');
         $topic    = FILTER::get('REQUEST', 'item');

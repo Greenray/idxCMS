@@ -20,6 +20,8 @@ a,
     a img {
         border: 0;
         vertical-align: middle }
+article { margin-bottom: 20px }
+    article p { padding: 10px }
 blockquote {
     font-style: italic;
     margin: 1em 40px }
@@ -117,55 +119,6 @@ sup {
     vertical-align: baseline }
     sub { bottom: -0.25em }
     sup { top: -0.5em }
-table th { font-weight: bold }
-    table.bg { background: #acbbc6 }
-    table.message {
-        border: 1px solid #000;
-        margin: 10px auto;
-        width: 500px }
-    th+td { border-left: 1px solid #808385 }
-    th {
-        background: #006699;
-        color: #fff;
-        font-weight: bold;
-        height: 25px;
-        text-align: center;
-        text-shadow: 1px 1px 1px #000 }
-    th a:link,
-    th a:visited { color: #fff }
-    th a:active  { color: #0000ff }
-    th a:hover {
-        color: #ff0000;
-        text-decoration: underline }
-    td { padding: 0 10px }
-    td.actions button {
-        border: 0;
-        padding: 0;
-        margin: 0 3px }
-    td.actions a img {
-        margin: 0 5px;
-        vertical-align: bottom }
-    td.stat {
-        color: #000;
-        font-weight: normal;
-        text-shadow: none }
-    th.id,
-    td.id { width: 20px; padding: 0 5px }
-    th.pic,
-    td.pic { width: 45px; padding: 0 5px }
-    th.items,
-    td.items { width: 85px; padding: 0 5px }
-    th.title,
-    td.title { width: 20% }
-    th.access,
-    td.access { width: 49px; padding: 0 5px }
-    th.actions,
-    td.actions { width: 90px }
-    th.author,
-    td.author { width: 80px }
-    th.date,
-    td.date { width: 140px; padding: 0 5px }
-    td.label { width: 250px }
 textarea {
     background: #ffffcc;
     border: 1px solid #a4a4a4;
@@ -282,9 +235,6 @@ nav { float: left; margin: 10px; width: 240px }
         background: yellow;
         z-index: 2 }
     #menu li.click ul li.hover ul li.hover a { color: black }
-#posts { margin:10px 10px 10px 260px }
-article { margin-bottom: 20px }
-    article p { padding: 10px }
 footer {
     background: #006699;
     clear: both;
@@ -318,28 +268,28 @@ footer {
         text-align: center }
     .bbcodes .link_text input[type='text'] { margin: 2px 20px }
 .block { display: block }
-.button_edit {
-    padding: 0 4px 0 0;
-    text-align: right;
-    width: 50% }
-.button_delete {
-    padding: 0 4px 0 0;
-    text-align: left;
-    width: 50% }
-.button_edit input {
-    padding: 0 2px;
-    text-align: right }
-.button_delete input {
-    padding: 0 2px;
-    text-align: left }
-.category { padding: 0 13px }
-.center { text-align: center }
-#colorbtn,
 #bgcolorbtn,
 #hicolorbtn {
     background: #ccc;
     border: 1px solid black;
     padding:0 5px; }
+.button_edit {
+    padding: 0 4px 0 0;
+    text-align: right;
+    width: 50% }
+    .button_edit input {
+        padding: 0 2px;
+        text-align: right }
+.button_delete {
+    padding: 0 4px 0 0;
+    text-align: left;
+    width: 50% }
+    .button_delete input {
+        padding: 0 2px;
+        text-align: left }
+.category { padding: 0 13px }
+.center { text-align: center }
+#colorbtn,
 #colorselector {
     display: none;
     background: white;
@@ -347,6 +297,21 @@ footer {
     position: absolute;
     width: 300px;
     z-index: 10; }
+.clear {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden }
+.colortable {
+    _box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+    filter: progid:DXImageTransform.Microsoft.dropshadow(offX=10, offY=10, color=#000000);
+    filter: progid:DXImageTransform.Microsoft.shadow(direction=120, color=#000000, strength=10) }
+    .colortable td { padding: 0 }
+.dark {
+    background: #d2d2d2;
+    height: 25px }
 .error,
 .message {
     background: white;
@@ -377,26 +342,6 @@ footer {
     .message p.title {
         background: #6e7b8b;
         color: white }
-.dark {
-    background: #d2d2d2;
-    height: 25px }
-.light  {
-    background: #efefef;
-    height: 25px }
-.left { text-align: left }
-.right { text-align: right }
-.clear {
-    clear: both;
-    content: ".";
-    display: block;
-    height: 0;
-    overflow: hidden;
-    visibility: hidden }
-.colortable {
-    _box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
-    filter: progid:DXImageTransform.Microsoft.dropshadow(offX=10, offY=10, color=#000000);
-    filter: progid:DXImageTransform.Microsoft.shadow(direction=120, color=#000000, strength=10) }
-    .colortable td { padding: 0 }
 .header {
     background: #d1d7dc;
     text-align: center;
@@ -409,6 +354,10 @@ footer {
     padding: 0 30px 0 10px;
     text-align: left }
 .label  { padding: 0 10px; width: 150px }
+.left { text-align: left }
+.light  {
+    background: #efefef;
+    height: 25px }
 .module {
     background: #006699;
     color: yellow;
@@ -446,9 +395,11 @@ footer {
 		float: left;
 		color: red;
 		background: #fff }
+#posts { margin:10px 10px 10px 260px }
 .required {
     background: #fff888;
     color: red }
+.right { text-align: right }
 .row1 { background: #efefef }
 .row2 { background: #d2d2d2 }
 .row3 {
@@ -464,28 +415,77 @@ footer {
     border-spacing: 2px;
     width: 100% }
     .std tr { height: 25px }
+table th { font-weight: bold }
+    table.bg { background: #acbbc6 }
+    table.message {
+        border: 1px solid #000;
+        margin: 10px auto;
+        width: 500px }
+    th+td { border-left: 1px solid #808385 }
+    th {
+        background: #006699;
+        color: #fff;
+        font-weight: bold;
+        height: 25px;
+        text-align: center;
+        text-shadow: 1px 1px 1px #000 }
+    th a:link,
+    th a:visited { color: #fff }
+    th a:active  { color: #0000ff }
+    th a:hover {
+        color: #ff0000;
+        text-decoration: underline }
+    td { padding: 0 10px }
+    td.actions button {
+        border: 0;
+        padding: 0;
+        margin: 0 3px }
+    td.actions a img {
+        margin: 0 5px;
+        vertical-align: bottom }
+    td.stat {
+        color: #000;
+        font-weight: normal;
+        text-shadow: none }
+    th.id,
+    td.id { width: 20px; padding: 0 5px }
+    th.pic,
+    td.pic { width: 45px; padding: 0 5px }
+    th.items,
+    td.items { width: 85px; padding: 0 5px }
+    th.title,
+    td.title { width: 20% }
+    th.access,
+    td.access { width: 49px; padding: 0 5px }
+    th.actions,
+    td.actions { width: 90px }
+    th.author,
+    td.author { width: 80px }
+    th.date,
+    td.date { width: 140px; padding: 0 5px }
+    td.label { width: 250px }
 .icon { background: transparent; white-space: nowrap; }
-.icon:before {
-    content: '';
-    background-color: transparent;
-    background-image: url(../../../skins/images/icons.png);
-    background-repeat: no-repeat;
-    background-position: 16px 16px;
-    margin: 0 3px;
-    left: 0;
-    top: 3px;
-    position: relative;
-    width: 16px;
-    height: 16px;
-    display: inline;
-    display: inline-block; }
-.icon-catalogs:before { background-position: 0 -160px; }
-.icon-close:before { background-position: 0 -144px; }
-.icon-delete:before { background-position: 0 -384px; }
-.icon-edit:before { background-position: 0 -288px; }
-.icon-forum:before { background-position: 0 -112px; }
-.icon-gallery:before { background-position: 0 -128px; }
-.icon-guestbook:before { background-position: 0 -96px; }
-.icon-index:before { background-position: 0 0; }
-.icon-move:before { background-position: 0 -400px; }
-.icon-posts:before { background-position: 0 -80px; }
+    .icon:before {
+        content: '';
+        background-color: transparent;
+        background-image: url(../../../skins/images/icons.png);
+        background-repeat: no-repeat;
+        background-position: 16px 16px;
+        margin: 0 3px;
+        left: 0;
+        top: 3px;
+        position: relative;
+        width: 16px;
+        height: 16px;
+        display: inline;
+        display: inline-block; }
+    .icon-catalogs:before { background-position: 0 -160px; }
+    .icon-close:before { background-position: 0 -144px; }
+    .icon-delete:before { background-position: 0 -384px; }
+    .icon-edit:before { background-position: 0 -288px; }
+    .icon-forum:before { background-position: 0 -112px; }
+    .icon-gallery:before { background-position: 0 -128px; }
+    .icon-guestbook:before { background-position: 0 -96px; }
+    .icon-index:before { background-position: 0 0; }
+    .icon-move:before { background-position: 0 -400px; }
+    .icon-posts:before { background-position: 0 -80px; }

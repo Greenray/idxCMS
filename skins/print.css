@@ -1,9 +1,4 @@
-/*
- * idxCMS Flat Files Content Management System v3.1
- * Copyright (c) 2016 Victor Nabatov greenray.spb@gmail.com
- * Print styles
- */
-
+/* Print styles */
 body {
 	background: #fff;
 	font: 11px normal arial, verdana, helvetica, sans, serif, sans-serif,  "Times New Roman";
@@ -18,7 +13,9 @@ h1 {
     margin: 0px;
 	padding: 0p; }
 .text img {	float: left }
-.codehtml, .codephp, .codetext {
+.codehtml,
+.codephp,
+.codetext {
 	font: normal 8pt mono, "Courier New", Courier;
 	margin: 5px 0;
 	padding: 5px;
@@ -36,4 +33,4 @@ h1 {
 	margin: 10px 0;
 	padding: 5px;
 	overflow: auto; }
-.right { text-align: right }
+.right { text-align: right; }

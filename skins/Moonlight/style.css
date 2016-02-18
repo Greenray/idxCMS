@@ -10,7 +10,9 @@ body {
     width: 100%; }
 a,
     a:focus,
-    a:visited { color: #0066ff; text-decoration: none; }
+    a:visited {
+        color: #0066ff;
+        text-decoration: none; }
     a:hover { color: red; }
     a img {
         margin: 5px;
@@ -34,7 +36,9 @@ h3 { font-size: 14px; font-weight: bold; margin: 8px 0; }
 hr {
     _box-sizing: content-box;
     height: 0; }
-img { vertical-align: middle; -ms-interpolation-mode:bicubic; }
+img {
+    vertical-align: middle;
+    -ms-interpolation-mode:bicubic; }
 button[disabled],
 input[disabled] {
     background: #343536;
@@ -122,7 +126,9 @@ pre {
     word-wrap: break-word; }
 q { quotes: none; }
     q:before,
-    q:after { content: ''; content: none; }
+    q:after {
+        content: '';
+        content: none; }
 select {
     color: black;
     padding: 2px;
@@ -133,30 +139,6 @@ table {
     padding: 2px;
     vertical-align: middle;
     width: 100%; }
-th, td { vertical-align: middle; }
-table#std { margin: 0 0 10px; }table#std { margin: 0 0 10px; }
-table#std tr { height: 25px; }
-table#std td { border: 2px groove white; padding: 0 10px; }
-table#std th {
-    background: #555;
-    border: 2px groove white;
-    color: white;
-    text-align: center;
-    text-shadow: 0 1px 0 black}
-table.std {
-    border: 2px groove white;
-    padding: 10px;
-    width: 100%; }
-th.icon, td.icon { width: 47px; }
-th.title, td.title { width: 250px; }
-th.access, td.access,
-th.actions, td.actions { width: 70px; }
-th.author, td.author,
-th.views, td.views { width: 80px; }
-th.comments, td.comments { width: 120px; }
-th.date, td.date {
-    padding: 0 10px;
-    width: 140px; }
 textarea {
     background: #ffffcc;
     border: 1px solid #a4a4a4;
@@ -283,23 +265,47 @@ textarea {
         float: right;
         overflow: hidden;
         width: 230px; }
+.boxes {
+    color: white;
+    height: auto !important;
+    margin: 0 auto;
+    max-width: 1000px;
+    min-width: 1000px;
+    padding: 10px 0;
+    position: relative; }
+    .boxes h2 {
+        color: white;
+        text-transform: uppercase; }
+    .boxes img.gal {
+        border: none;
+        margin: 0 8px 8px 0;
+        padding: 0; }
+    .boxes .leftbox,
+    .boxes .middlebox,
+    .boxes .rightbox {
+        display: inline-block;
+        float: left;
+        margin: 0 auto;
+        overflow: hidden;
+        padding: 0 10px;
+        position: relative;
+        width: 313px; }
+.footer {
+    background: #222;
+    color: white;
+    overflow: hidden;
+    padding: 10px 30px;
+    position: relative;
+    text-shadow: 0 1px 1px black}
 .actions {
     float: right;
     margin: 0 10px 10px 0; }
-.actions a { margin: 0 5px; }
+    .actions a { margin: 0 5px; }
 #bad {
     color: #ff0000;
     font-size: 11px;
     padding: 5px 10px;
     text-align: right; }
-#captcheckout { width: 90px; }
-#good {
-    color: #33cc00;
-    font-size: 11px;
-    padding: 5px 10px;
-    text-align: right; }
-#no { color: #ff0000; }
-#yes { color: #33cc00; }
 .bbbutton {
     height: 26px;
     margin: 0 -2px;
@@ -318,15 +324,27 @@ textarea {
     margin: 10px 0 0;
     padding: 10px 0 0; }
 .block { display: block; }
+.box {
+    border: 1px solid #808385;
+    _border-radius: 8px;
+    margin: 3px 0px 5px 0;
+    padding: 10px; }
+    .box .title {
+        color: white;
+        font-weight: bold;
+        padding: 10px 5px; }
 .calendar {
     color: white;
     vertical-align: middle; }
-.calendar th { padding: 2px; }
-.calendar td {
-    padding: 2px;
-    text-align: center; }
-.calendar form input { margin: 5px 0 0; }
-.category { margin: 0 0 0 50px; padding: 4px 0 0 0; }
+    .calendar th { padding: 2px; }
+    .calendar td {
+        padding: 2px;
+        text-align: center; }
+    .calendar form input { margin: 5px 0 0; }
+#captcheckout { width: 90px; }
+.category {
+    margin: 0 0 0 50px;
+    padding: 4px 0 0 0; }
 .center { text-align: center; }
 .clear {
     clear: both;
@@ -337,7 +355,9 @@ textarea {
     .chat input[type="submit"],
     .chat input[type="reset"],
     .chat-post input[type="submit"],
-    .chat-post input[type="reset"] { min-width: 70px; width: 70px; }
+    .chat-post input[type="reset"] {
+        min-width: 70px;
+        width: 70px; }
 .codehtml,
 .codephp,
 .codetext {
@@ -375,64 +395,51 @@ textarea {
         _box-sizing: content-box;
         padding: 10px 0 0;
         overflow: hidden; }
-.gallery { margin: 0 auto; }
-    .gallery .item {
-        float: left;
-        margin: 10px 3px;
-        width: 210px; }
-    .gallery .info { padding: 0 0 0 15px; }
-    .gallery .item {
-        _box-sizing: content-box;
-        padding: 10px 12px;
-        padding: 10px;
-        overflow: hidden; }
-    .gallery .title { text-transform: none; }
-    .gallery img { margin: 5px 0 0 5px; }
-.post {
-    _box-sizing: content-box;
-    margin: 10px;
-    overflow: hidden;
-    padding: 10px; }
-.post img { float: left; }
-    .post .admin {
-        margin: 0 20px 0;
-        float: right;
-        line-height: 18px; }
-    .post .admin a { margin: 0 2px; }
-    .post .author {
-        margin: 0 0 0 10px;
-        line-height: 18px;
-        width: 200px; }
-    .post .date {
-        margin: 2px 0 0 40px;
-        width: 300px; }
-    .post .info {
-        clear: both;
-        font-size: 8pt;
-        padding: 4px 10px; }
-    .post .title { margin: 10px 5px; }
-    .post .text img { margin: 10px; }
-.topic {
-    background: white;
-    border: 1px solid #777;
-    _border-radius: 8px;
-    _box-shadow: 4px 4px 4px black;
-    filter: progid:DXImageTransform.Microsoft.dropshadow(offX=4, offY=4, color=#000000);
-    filter: progid:DXImageTransform.Microsoft.shadow(direction=120, color=#000000, strength=10);
-    _box-sizing: content-box;
-    margin: 10px;
-    overflow: hidden; }
-.topic .content { overflow: hidden; }
-    .topic .author { float: left; width: 120px; }
-    .topic .date { font-size: 10px; }
-    .topic .info {
-        line-height: 18px;
-        padding: 0 10px 0 0; }
-    .topic .profile { float: right; }
-    .topic .info span.profile   { padding: 5px; }
-    .topic .info span.profile a { margin: 0 5px; }
-    .topic .text { margin: 0 10px 10px 130px; }
+.copyright {
+    margin: 10px 0;
+    text-align: center;
+    width: 33%; }
 .counter td { height: 20px; }
+.dark { background: #999; }
+.darkbox {
+    background: black;
+    margin: 3px 0px 5px 0;
+    padding: 10px; }
+    .darkbox ul { list-style-type: none; }
+    .darkbox .title {
+        color: white;
+        text-transform: uppercase; }
+#editor {
+    margin: 20px 0 0;
+    overflow: hidden;
+    padding: 15px; }
+    #editor button {
+        cursor: pointer;
+        margin: 0px auto; }
+    #editor button:hover {
+        cursor: pointer;
+        margin: 0px auto; }
+    #editor .label {
+        color: black;
+        padding: 0 15px;
+        text-align: right;
+        width: 160px; }
+    #editor input:not ([type=radio]),
+    #editor textarea,
+    #editor select {
+        border: 1px solid #ddd;
+        _border-radius: 3px;
+        padding: 5px;
+        outline: 0;
+        width: 200px; }
+    #editor input:focus {
+        background: white;
+        border: 1px solid red; }
+    #editor input[type="checkbox"] { float: none; }
+    #editor legend {
+        font-size: 24px;
+        font-weight: bold;
+        margin: 10px 0; }
 .error,
 .message {
     background: white;
@@ -466,40 +473,25 @@ textarea {
 .message .title {
     background: black;
     color: white; }
-.dark { background: #999; }
-.light  { background: #ddd; }
-#editor {
-    margin: 20px 0 0;
-    overflow: hidden;
-    padding: 15px; }
-    #editor button {
-        cursor: pointer;
-        margin: 0px auto; }
-    #editor button:hover {
-        cursor: pointer;
-        margin: 0px auto; }
-    #editor .label {
-        color: black;
-        padding: 0 15px;
-        text-align: right;
-        width: 160px; }
-    #editor input:not ([type=radio]),
-    #editor textarea,
-    #editor select {
-        border: 1px solid #ddd;
-        _border-radius: 3px;
-        padding: 5px;
-        outline: 0;
-        width: 200px; }
-    #editor input:focus {
-        background: white;
-        border: 1px solid red; }
-    #editor input[type="checkbox"] { float: none; }
-    #editor legend {
-        font-size: 24px;
-        font-weight: bold;
-        margin: 10px 0; }
-.help {
+.gallery { margin: 0 auto; }
+    .gallery .item {
+        float: left;
+        margin: 10px 3px;
+        width: 210px; }
+    .gallery .info { padding: 0 0 0 15px; }
+    .gallery .item {
+        _box-sizing: content-box;
+        padding: 10px 12px;
+        padding: 10px;
+        overflow: hidden; }
+    .gallery .title { text-transform: none; }
+    .gallery img { margin: 5px 0 0 5px; }
+#good {
+    color: #33cc00;
+    font-size: 11px;
+    padding: 5px 10px;
+    text-align: right; }
+help {
     color: red;
     font-style: italic;
     font-size: 11px;
@@ -510,21 +502,57 @@ textarea {
     padding: 10px 0; }
 .last-items li { margin: 5px 0; }
 .left  { text-align: left; }
-.right { text-align: right; }
+.light  { background: #ddd; }
+.lightbox {
+    background: white;
+    margin: 3px 0px 5px 0;
+    padding: 10px; }
+    .lightbox ul { list-style-type: none; }
+    .lightbox .title {
+        color: black;
+        text-transform: uppercase; }
 .login-panel { margin: 10px 0; }
 .main { margin: 0 auto; }
-.main .title {
-    margin: 20px 0 10px;
-    font-weight: bold; }
-.login-panel { margin: 10px 0; }
+    .main .title {
+        margin: 20px 0 10px;
+        font-weight: bold; }
 .more {
     float: right;
     margin: 0 2px; }
+#navigation {
+    background: #ddd;
+    height: 65px; }
+    #navigation ul {
+        float: left;
+        margin: 10px 0 0 15px; }
+    #navigation ul li {
+        float: left;
+        margin: 10px 2px;
+        position: relative; }
+    #navigation ul li a {
+        background-image: _linear-gradient(180deg, #999 1%, #555 50%, #222 99%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#999999', endColorstr='#222222', GradientType=0 );
+        border: 1px solid #838383;
+        border: 1px solid white;
+        _border-radius: 6px;
+        _box-shadow: 1px 2px 2px black;
+        filter: progid:DXImageTransform.Microsoft.dropshadow(offX=2, offY=2, color=#000000);
+        filter: progid:DXImageTransform.Microsoft.shadow(direction=120, color=#000000, strength=10);
+        color: white;
+        display: inline-block;
+        line-height: 20px;
+        min-width: 100px;
+        outline: none;
+        padding: 0px 5px;
+        text-decoration: none;
+        text-shadow: 1px 1px 1px black}
+    #navigation ul li a:hover,
+    #navigation ul li.selected a {
+        background: _linear-gradient(180deg, #222 1%, #555 50%, #999 99%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#222222', endColorstr='#999999', GradientType=0 ); }
+#no { color: #ff0000; }
 .negative {
     color: red;
-    font-weight: bold; }
-.positive {
-    color: green;
     font-weight: bold; }
 .nomargin {
     margin: 0;
@@ -558,11 +586,14 @@ textarea {
     #pagination a:visited {
         display: block;
         float: left; }
+.panel .title {
+    border-bottom: 1px solid #444;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding: 10px 5px;
+    text-transform: uppercase; }
 #pass_rating { margin: 0 28px 0 0; }
-    .pass_title {
-        font-size: 11px;
-        margin: 0;
-        padding: 5px 5px 0 80px; }
     .pass_img#progresbar-2-0, .pass_img#passbar-0, .pass_img#progresbar-2-10,
     .pass_img#passbar-10, .pass_img#progresbar-2-20, .pass_img#passbar-20,
     .pass_img#progresbar-2-30, .pass_img#passbar-30, .pass_img#progresbar-2-40,
@@ -586,12 +617,43 @@ textarea {
     .pass_img#progresbar-2-80, .pass_img#passbar-80 { background: transparent url(skins/images/password/pass_80.gif) no-repeat; }
     .pass_img#progresbar-2-90, .pass_img#passbar-90 { background: transparent url(skins/images/password/pass_90.gif) no-repeat; }
     .pass_img#progresbar-2-100, .pass_img#passbar-100 { background: transparent url(skins/images/password/pass_100.gif) no-repeat; }
+    .pass_title {
+        font-size: 11px;
+        margin: 0;
+        padding: 5px 5px 0 80px; }
 .poll { margin: 0 0 10px; }
-.poll table { margin: 3px 0; }
+    .poll table { margin: 3px 0; }
 .popup_input {
     background: transparent;
     border: 0;
     color: white; }
+.positive {
+    color: green;
+    font-weight: bold; }
+.post {
+    _box-sizing: content-box;
+    margin: 10px;
+    overflow: hidden;
+    padding: 10px; }
+    .post img { float: left; }
+    .post .admin {
+        margin: 0 20px 0;
+        float: right;
+        line-height: 18px; }
+    .post .admin a { margin: 0 2px; }
+    .post .author {
+        margin: 0 0 0 10px;
+        line-height: 18px;
+        width: 200px; }
+    .post .date {
+        margin: 2px 0 0 40px;
+        width: 300px; }
+    .post .info {
+        clear: both;
+        font-size: 8pt;
+        padding: 4px 10px; }
+    .post .title { margin: 10px 5px; }
+    .post .text img { margin: 10px; }
 .profile th,
 .profile td {
     height: 25px;
@@ -604,38 +666,6 @@ textarea {
     .rate button { border: none; }
     .rate button.minus,
     .rate button.plus { margin: 0 5px; }
-.special { color: red; }
-.star,
-    .star ul.star,
-    .star div.rates,
-    .star div.user,
-    .star div.voted,
-    .star div.sep { float: right; }
-    .star { height: 20px; margin: 0 10px 0 0; }
-    .star ul.star {
-        background: url(skins/images/stars.png) repeat-x;
-        cursor: pointer;
-        height: 22px;
-        margin: 0 50px 0 0;
-        padding: 0;
-        width: 85px; }
-    .star li {
-        display: block;
-        float: right;
-        height: 20px;
-        margin: 0;
-        padding: 0;
-        position: absolute;
-        text-decoration: none;
-        text-indent: -9000px;
-        width: 85px;
-        z-index: 1; }
-    .star li.curr {
-        background: url(skins/images/stars.png) left 25px;
-        font-size: 1px; }
-    .star div.rates { margin: -16px 0 0 5px; }
-    .star div.sep { margin: 0 3px; }
-.required { background: #fff888; color: red; }
 .results { margin: 30px; }
     .results ul,
     .results li {
@@ -683,6 +713,8 @@ textarea {
         background: #e8e8ea;
         color: red;
         text-shadow: 0 1px 0 white}
+.required { background: #fff888; color: red; }
+.right { text-align: right; }
 .section { margin: 20px; }
     .section a {
         display: block;
@@ -782,38 +814,38 @@ textarea {
     filter: progid:DXImageTransform.Microsoft.shadow(direction=120, color=#000000, strength=10);
     padding: 15px 0;
     overflow: hidden; }
-.step {	float: left; }
-#navigation {
-    background: #ddd;
-    height: 65px; }
-    #navigation ul {
-        float: left;
-        margin: 10px 0 0 15px; }
-    #navigation ul li {
-        float: left;
-        margin: 10px 2px;
-        position: relative; }
-    #navigation ul li a {
-        background-image: _linear-gradient(180deg, #999 1%, #555 50%, #222 99%);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#999999', endColorstr='#222222', GradientType=0 );
-        border: 1px solid #838383;
-        border: 1px solid white;
-        _border-radius: 6px;
-        _box-shadow: 1px 2px 2px black;
-        filter: progid:DXImageTransform.Microsoft.dropshadow(offX=2, offY=2, color=#000000);
-        filter: progid:DXImageTransform.Microsoft.shadow(direction=120, color=#000000, strength=10);
-        color: white;
-        display: inline-block;
-        line-height: 20px;
-        min-width: 100px;
-        outline: none;
-        padding: 0px 5px;
+.special { color: red; }
+.star,
+    .star ul.star,
+    .star div.rates,
+    .star div.user,
+    .star div.voted,
+    .star div.sep { float: right; }
+    .star { height: 20px; margin: 0 10px 0 0; }
+    .star ul.star {
+        background: url(skins/images/stars.png) repeat-x;
+        cursor: pointer;
+        height: 22px;
+        margin: 0 50px 0 0;
+        padding: 0;
+        width: 85px; }
+    .star li {
+        display: block;
+        float: right;
+        height: 20px;
+        margin: 0;
+        padding: 0;
+        position: absolute;
         text-decoration: none;
-        text-shadow: 1px 1px 1px black}
-    #navigation ul li a:hover,
-    #navigation ul li.selected a {
-        background: _linear-gradient(180deg, #222 1%, #555 50%, #999 99%);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#222222', endColorstr='#999999', GradientType=0 ); }
+        text-indent: -9000px;
+        width: 85px;
+        z-index: 1; }
+    .star li.curr {
+        background: url(skins/images/stars.png) left 25px;
+        font-size: 1px; }
+    .star div.rates { margin: -16px 0 0 5px; }
+    .star div.sep { margin: 0 3px; }
+.step {	float: left; }
 #steps { overflow: hidden; }
     #steps form { padding: 0; }
     #steps form fieldset { padding: 0; }
@@ -952,51 +984,49 @@ textarea {
         margin: 0 2px; }
     .tab_content .section { margin: 0 0 0 50px; }
     .tab_content .section a { display: inline; }
-.user-panel { margin: 10px; padding: 0 10px; }
-.win { margin: 20px 5px; }
-.box {
-    border: 1px solid #808385;
-    _border-radius: 8px;
-    margin: 3px 0px 5px 0;
-    padding: 10px; }
-.box .title {
-    color: white;
-    font-weight: bold;
-    padding: 10px 5px; }
-.darkbox {
-    background: black;
-    margin: 3px 0px 5px 0;
-    padding: 10px; }
-.darkbox ul { list-style-type: none; }
-.darkbox .title {
-    color: white;
-    text-transform: uppercase; }
-.lightbox {
+table#std { margin: 0 0 10px; }table#std { margin: 0 0 10px; }
+    table#std tr { height: 25px; }
+    table#std td { border: 2px groove white; padding: 0 10px; }
+    table#std th {
+        background: #555;
+        border: 2px groove white;
+        color: white;
+        text-align: center;
+        text-shadow: 0 1px 0 black; }
+    table.std {
+        border: 2px groove white;
+        padding: 10px;
+        width: 100%; }
+    th, td { vertical-align: middle; }
+    th.icon, td.icon { width: 47px; }
+    th.title, td.title { width: 250px; }
+    th.access, td.access, th.actions, td.actions { width: 70px; }
+    th.author, td.author, th.views, td.views { width: 80px; }
+    th.comments, td.comments { width: 120px; }
+    th.date, td.date {
+        padding: 0 10px;
+        width: 140px; }
+.topic {
     background: white;
-    margin: 3px 0px 5px 0;
-    padding: 10px; }
-.lightbox ul { list-style-type: none; }
-.lightbox .title {
-    color: black;
-    text-transform: uppercase; }
-.panel .title {
-    border-bottom: 1px solid #444;
-    color: white;
-    font-weight: bold;
-    margin-bottom: 10px;
-    padding: 10px 5px;
-    text-transform: uppercase; }
-.footer {
-    background: #222;
-    color: white;
-    overflow: hidden;
-    padding: 10px 30px;
-    position: relative;
-    text-shadow: 0 1px 1px black}
-.copyright {
-    margin: 10px 0;
-    text-align: center;
-    width: 33%; }
+    border: 1px solid #777;
+    _border-radius: 8px;
+    _box-shadow: 4px 4px 4px black;
+    filter: progid:DXImageTransform.Microsoft.dropshadow(offX=4, offY=4, color=#000000);
+    filter: progid:DXImageTransform.Microsoft.shadow(direction=120, color=#000000, strength=10);
+    _box-sizing: content-box;
+    margin: 10px;
+    overflow: hidden; }
+    .topic .content { overflow: hidden; }
+    .topic .author { float: left; width: 120px; }
+    .topic .date { font-size: 10px; }
+    .topic .info {
+        line-height: 18px;
+        padding: 0 10px 0 0; }
+    .topic .profile { float: right; }
+    .topic .info span.profile   { padding: 5px; }
+    .topic .info span.profile a { margin: 0 5px; }
+    .topic .text { margin: 0 10px 10px 130px; }
+.user-panel { margin: 10px; padding: 0 10px; }
 .valid {
     float: right;
     margin: 10px 0;
@@ -1012,44 +1042,16 @@ textarea {
     height: 15px;
     display: inline;
     display: inline-block; }
-.valid-icon-cms:before { background-position: 0 0; }
-.valid-icon-xhtml:before { background-position: 0 -45px; }
-.valid-icon-css:before { background-position: 0 -30px; }
-.valid-icon-php:before { background-position: 0 -60px; }
-.valid-icon-db:before { background-position: 0 -75px; }
-.valid-icon-license:before { background-position: 0 -90px; }
-.fbg {
-    color: white;
-    height: auto !important;
-    margin: 0 auto;
-    max-width: 1000px;
-    min-width: 1000px;
-    padding: 10px 0;
-    position: relative; }
-.fbg h2 {
-    color: white;
-    text-transform: uppercase; }
-.fbg img.gal {
-    border: none;
-    margin: 0 8px 8px 0;
-    padding: 0; }
-.fbg .col { float: left; margin: 0; }
-.fbg .c1,
-.fbg .c2,
-.fbg .c3 {
-    display: inline-block;
-    float: left;
-    margin: 0 auto;
-    overflow: hidden;
-    padding: 0 10px;
-    position: relative;
-    width: 313px; }
+    .valid-icon-cms:before { background-position: 0 0; }
+    .valid-icon-xhtml:before { background-position: 0 -45px; }
+    .valid-icon-css:before { background-position: 0 -30px; }
+    .valid-icon-php:before { background-position: 0 -60px; }
+    .valid-icon-db:before { background-position: 0 -75px; }
+    .valid-icon-license:before { background-position: 0 -90px; }
+.win { margin: 20px 5px; }
+#yes { color: #33cc00; }
 :-moz-placeholder { color: #7e7e7e; }
 ::-webkit-input-placeholder { color: #7e7e7e; }
-#flipbox {
-    color: white;
-    padding: 5px;
-    min-height: 50px; }
 #banner {
     color: white;
     padding: 0 7px;
@@ -1057,7 +1059,7 @@ textarea {
     #banner li {
         padding: 10px 0;
         margin: 0; }
-    #banner a  { color: white}
+    #banner a { color: white}
 .horinaja img { margin: 0; padding: 0; }
     .horinaja ul  {
         margin: 0;
@@ -1091,43 +1093,43 @@ textarea {
         text-align: center;
         padding: 10px 0 0 0; }
 .icon { white-space: nowrap; }
-.icon:before {
-    content: '';
-    background-image: url(skins/images/icons.png);
-    background-repeat: no-repeat;
-    background-position: 16px 16px;
-    margin: 0 3px;
-    left: 0;
-    top: 3px;
-    position: relative;
-    width: 16px;
-    height: 16px;
-    display: inline;
-    display: inline-block; }
-.icon-admin:before { background-position: 0 -16px; }
-.icon-arrow-left:before { background-position: 0 -448px; }
-.icon-arrow-right:before { background-position: 0 -464px; }
-.icon-catalogs:before { background-position: 0 -160px; }
-.icon-close:before { background-position: 0 -144px; }
-.icon-delete:before { background-position: 0 -384px; }
-.icon-down:before { background-position: 0 -336px; }
-.icon-edit:before { background-position: 0 -288px; }
-.icon-flag:before { background-position: 0 -368px; }
-.icon-forum:before { background-position: 0 -112px; }
-.icon-gallery:before { background-position: 0 -128px; }
-.icon-guestbook:before { background-position: 0 -96px; }
-.icon-index:before { background-position: 0 0; }
-.icon-login:before { background-position: 0 -416px; }
-.icon-messages:before { background-position: 0 -352px; }
-.icon-open:before { background-position: 0 -176px; }
-.icon-password-request:before { background-position: 0 -48px; }
-.icon-pinned:before { background-position: 0 -272px; }
-.icon-pm:before { background-position: 0 -224px; }
-.icon-post:before { background-position: 0 -64px; }
-.icon-posts:before { background-position: 0 -80px; }
-.icon-printer:before { background-position: 0 -256px; }
-.icon-profile:before { background-position: 0 -240px; }
-.icon-registration:before { background-position: 0 -32px; }
-.icon-rss:before { background-position: 0 -432px; }
-.icon-sitemap:before { background-position: 0 -208px; }
-.icon-up:before { background-position: 0 -320px; }
+    .icon:before {
+        content: '';
+        background-image: url(skins/images/icons.png);
+        background-repeat: no-repeat;
+        background-position: 16px 16px;
+        margin: 0 3px;
+        left: 0;
+        top: 3px;
+        position: relative;
+        width: 16px;
+        height: 16px;
+        display: inline;
+        display: inline-block; }
+    .icon-admin:before { background-position: 0 -16px; }
+    .icon-arrow-left:before { background-position: 0 -448px; }
+    .icon-arrow-right:before { background-position: 0 -464px; }
+    .icon-catalogs:before { background-position: 0 -160px; }
+    .icon-close:before { background-position: 0 -144px; }
+    .icon-delete:before { background-position: 0 -384px; }
+    .icon-down:before { background-position: 0 -336px; }
+    .icon-edit:before { background-position: 0 -288px; }
+    .icon-flag:before { background-position: 0 -368px; }
+    .icon-forum:before { background-position: 0 -112px; }
+    .icon-gallery:before { background-position: 0 -128px; }
+    .icon-guestbook:before { background-position: 0 -96px; }
+    .icon-index:before { background-position: 0 0; }
+    .icon-login:before { background-position: 0 -416px; }
+    .icon-messages:before { background-position: 0 -352px; }
+    .icon-open:before { background-position: 0 -176px; }
+    .icon-password-request:before { background-position: 0 -48px; }
+    .icon-pinned:before { background-position: 0 -272px; }
+    .icon-pm:before { background-position: 0 -224px; }
+    .icon-post:before { background-position: 0 -64px; }
+    .icon-posts:before { background-position: 0 -80px; }
+    .icon-printer:before { background-position: 0 -256px; }
+    .icon-profile:before { background-position: 0 -240px; }
+    .icon-registration:before { background-position: 0 -32px; }
+    .icon-rss:before { background-position: 0 -432px; }
+    .icon-sitemap:before { background-position: 0 -208px; }
+    .icon-up:before { background-position: 0 -320px; }

@@ -58,26 +58,26 @@ die();?>
         </div>
         <div class="clear"></div>
     </div>
-    <div class="fbg">
-        <div class="col c1">
+    <div class="boxes">
+        <div class="leftbox">
             [show=box,gallery.preview@win]
         </div>
-        <div class="col c2">
+        <div class="middlebox">
             [show=box,aphorisms@win]
         </div>
-        <div class="col c3">
+        <div class="rightbox">
             [show=box,tagcloud@win]
         </div>
         <div class="clear"></div>
     </div>
-    <div class="fbg">
-        <div class="col c1">
+    <div class="boxes">
+        <div class="leftbox">
             [show=box,polls@panel]
         </div>
-        <div class="col c2">
+        <div class="middlebox">
             [show=box,minichat@panel]
         </div>
-        <div class="col c3">
+        <div class="rightbox">
             [show=box,counter@panel]
         </div>
         <div class="clear"></div>

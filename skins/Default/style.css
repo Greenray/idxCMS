@@ -11,7 +11,9 @@ a,
         text-decoration: none; }
     a:active,
     a:hover { color: red; }
-    a img { margin: 5px; vertical-align: middle; }
+    a img {
+        margin: 5px;
+        vertical-align: middle; }
 blockquote {
     background: #f9f9f9;
     border-left: 10px solid #ccc;
@@ -73,7 +75,9 @@ input::-moz-focus-inner { border: 0; padding: 0; }
     input[type="button"]:hover,
     input[type="reset"]:hover,
     input[type="submit"]:hover { color: red; }
-img { vertical-align: middle; -ms-interpolation-mode:bicubic; }
+img {
+    vertical-align: middle;
+    -ms-interpolation-mode:bicubic; }
 option { padding: 0 5px; }
 p { margin: 10px 0; }
 pre {
@@ -88,7 +92,9 @@ pre {
     white-space: pre;
     white-space: pre-wrap;
     word-wrap: break-word; }
-select { padding: 2px 5px; width: 160px; }
+select {
+    padding: 2px 5px;
+    width: 160px; }
     select:focus { outline: 1px solid red; }
 textarea {
     background: #ffffcc;
@@ -207,38 +213,13 @@ textarea {
         visibility: hidden; }
 .main .title { margin: 20px 0 10px; }
 .main .content { padding: 10px; }
-.box { padding: 10px; }
-    .box .title {
-        background: #297377;
-        color: white;
-        padding: 10px 0;
-        text-shadow: 1px 1px 3px #000;
-        text-transform: uppercase; }
-    .box .content { padding: 10px 0; }
-.panel {
-    background: #88c3b0;
-    background: _linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(136,195,176,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#88c3b0', GradientType=0);
-    border: 1px solid #808385;
-    _border-radius: 8px;
-    _box-shadow: 4px 4px 10px black;
-    filter: progid:DXImageTransform.Microsoft.dropshadow(offX=4, offY=4, color=#000000);
-    filter: progid:DXImageTransform.Microsoft.shadow(direction=120, color=#000000, strength=10);
-    margin: 10px;
-    padding: 10px; }
-.user-panel {
-    margin: 10px;
-    padding: 0 10px; }
-.win { margin: 20px 5px; }
-    .win .title { margin: 10px 0; }
-    .win .info { font-size: 10px; }
 .boxes {
     height: auto !important;
     margin: 30px auto;
     max-width: 1000px;
     min-width: 1000px;
     position: relative; }
-.boxes .leftbox,
+    .boxes .leftbox,
     .boxes .middlebox,
     .boxes .rightbox {
         float: left;
@@ -250,46 +231,22 @@ textarea {
     overflow: hidden;
     padding: 10px 30px;
     position: relative; }
-.copyright {
-    margin: 10px 0;
-    width: 25%; }
-.valid {
-    float: right;
-    margin: 10px 0;
-    width: 25%; }
-.valid-icon { white-space: nowrap; }
-.valid-icon:before {
-    content: '';
-    background-image: url(skins/images/logos.jpg);
-    background-repeat: no-repeat;
-    background-position: 80px 15px;
-    width: 80px;
-    height: 15px;
-    display: inline;
-    display: inline-block; }
-.valid-icon-cms:before { background-position: 0 0; }
-.valid-icon-xhtml:before { background-position: 0 -45px; }
-.valid-icon-css:before { background-position: 0 -30px; }
-.valid-icon-php:before { background-position: 0 -60px; }
-.valid-icon-db:before { background-position: 0 -75px; }
-.valid-icon-license:before { background-position: 0 -90px; }
 .actions {
     background: transparent;
     margin: 0 30px 0 0; }
+.box { padding: 10px; }
+    .box .title {
+        background: #297377;
+        color: white;
+        padding: 10px 0;
+        text-shadow: 1px 1px 3px #000;
+        text-transform: uppercase; }
+    .box .content { padding: 10px 0; }
 #bad,
 #good {
     padding: 5px 10px;
     text-align: right; }
 #bad  { color: red; }
-#good { color: green; }
-.negative {
-    color: red;
-    font-weight: bold; }
-.positive {
-    color: green;
-    font-weight: bold; }
-#no { color: red; }
-#yes { color: green; }
 .bbbutton {
     height: 26px;
     margin: 0 -2px;
@@ -297,7 +254,9 @@ textarea {
     width: 26px; }
 .bbcodes { margin: 10px 20px; }
     .bbcodes .smiles { margin: 0 0 5px; }
-    .bbcodes .link_text { margin: 4px 20px; text-align: right; }
+    .bbcodes .link_text {
+        margin: 4px 20px;
+        text-align: right; }
     .bbcodes .link_text input[type='text'] { margin: 2px 20px; }
 .bbselect {	margin: 1px 0 4px; }
 .bbtools  {
@@ -305,13 +264,7 @@ textarea {
     margin: 10px 0 0;
     padding: 10px 0 0; }
 .black { color: black; }
-.green { color: green; }
-.red { color: red; }
 .block { display: block; }
-.center { text-align: center; }
-.justify { text-align: justify; }
-.left { text-align: left; }
-.right { text-align: right; }
 .calendar { width: 100%; }
     .calendar th {
         background: #1a4b4e;
@@ -322,12 +275,15 @@ textarea {
         text-align: center; }
     .calendar form input { margin: 5px 0 0; }
 .category { margin: 0 0 0 50px; padding: 4px 0 0 0; }
+.center { text-align: center; }
 .chat,
 .chat-post { margin: 10px 0; }
     .chat input[type="submit"],
     .chat input[type="reset"],
     .chat-post input[type="submit"],
-    .chat-post input[type="reset"] { min-width: 70px; width: 70px; }
+    .chat-post input[type="reset"] {
+        min-width: 70px;
+        width: 70px; }
 .clear {
     clear: both;
     content: ".";
@@ -344,7 +300,34 @@ textarea {
     padding: 5px;
     overflow: auto;
     white-space: nowrap; }
+.comment { overflow: hidden; }
+    .comment img { float: left; }
+    .comment .author {
+        float: left;
+        margin: 10px 0;
+        width: 120px; }
+    .comment .author .avatar img { margin: 0 25px 10px; }
+    .comment .content { overflow: hidden; }
+    .comment .date {
+        color: #fff;
+        font-size: 10px; }
+    .comment .head {
+        background: #215F62;
+        padding: 0 5px; }
+    .comment .info { line-height: 18px; }
+    .comment .info .profile a { margin: 0 3px; }
+    .comment .profile { float: right; }
+    .comment .text { margin: 10px 10px 10px 130px; }
+    .comment .text img { margin: 0 10px; }
+    .comment_edit,
+    .comment_post {
+        margin: 30px 10px 0;
+        overflow: hidden; }
+ .copyright {
+    margin: 10px 0;
+    width: 25%; }
 .counter td { height: 20px; }
+.dark { background: #88c3b0; }
 .error,
 .message {
     background: white;
@@ -374,8 +357,19 @@ textarea {
     .message .title {
         background: #6e7b8b;
         color: white; }
-.dark { background: #88c3b0; }
-.light { background: #dee3e7; }
+.gallery { margin: 0 auto; }
+    .gallery img { margin: 5px 0 0 5px; }
+    .gallery .item {
+        _box-sizing: content-box;
+        float: left;
+        margin: 10px 12px;
+        padding: 10px;
+        overflow: hidden;
+        width: 210px; }
+    .gallery .info { padding: 0 0 0 15px; }
+    .gallery .title { text-transform: none; }
+#good { color: green; }
+.green { color: green; }
 .help {
     color: red;
     font-style: italic;
@@ -384,9 +378,16 @@ textarea {
     padding: 5px 0;
     text-align: right; }
 .info { font-size: 10px; padding: 10px 0; }
+.justify { text-align: justify; }
 .last-items { margin: 0 0 0 5px; }
 .last-items li { margin: 0 0 10px 10px; }
+.left { text-align: left; }
+.light { background: #dee3e7; }
 .login-panel { margin: 10px 0; }
+.negative {
+    color: red;
+    font-weight: bold; }
+#no { color: red; }
 .nomargin {
     margin: 0;
     height: 150px;
@@ -419,10 +420,18 @@ textarea {
     #pagination a:visited {
         display: block;
         float: left; }
+.panel {
+    background: #88c3b0;
+    background: _linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(136,195,176,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#88c3b0', GradientType=0);
+    border: 1px solid #808385;
+    _border-radius: 8px;
+    _box-shadow: 4px 4px 10px black;
+    filter: progid:DXImageTransform.Microsoft.dropshadow(offX=4, offY=4, color=#000000);
+    filter: progid:DXImageTransform.Microsoft.shadow(direction=120, color=#000000, strength=10);
+    margin: 10px;
+    padding: 10px; }
 #pass_rating { margin: 0 28px 0 0; }
-    .pass_title {
-        margin: 0;
-        padding: 5px 5px 0 100px; }
     .pass_img#progresbar-2-0, .pass_img#passbar-0, .pass_img#progresbar-2-10,
     .pass_img#passbar-10, .pass_img#progresbar-2-20, .pass_img#passbar-20,
     .pass_img#progresbar-2-30, .pass_img#passbar-30, .pass_img#progresbar-2-40,
@@ -430,7 +439,11 @@ textarea {
     .pass_img#progresbar-2-60, .pass_img#passbar-60, .pass_img#progresbar-2-70,
     .pass_img#passbar-70, .pass_img#progresbar-2-80, .pass_img#passbar-80,
     .pass_img#progresbar-2-90, .pass_img#passbar-90, .pass_img#progresbar-2-100,
-    .pass_img#passbar-100                           { float: right; height: 7px; margin: 6px 60px 0 0 !important; width: 138px; }
+    .pass_img#passbar-100 {
+        float: right;
+        height: 7px;
+        margin: 6px 60px 0 0 !important;
+        width: 138px; }
     .pass_img#progresbar-2-0,.pass_img#passbar-0    { background: transparent url(skins/images/password/pass_0.gif) no-repeat; }
     .pass_img#progresbar-2-10, .pass_img#passbar-10 { background: transparent url(skins/images/password/pass_10.gif) no-repeat; }
     .pass_img#progresbar-2-20, .pass_img#passbar-20 { background: transparent url(skins/images/password/pass_20.gif) no-repeat; }
@@ -442,80 +455,39 @@ textarea {
     .pass_img#progresbar-2-80, .pass_img#passbar-80 { background: transparent url(skins/images/password/pass_80.gif) no-repeat; }
     .pass_img#progresbar-2-90, .pass_img#passbar-90 { background: transparent url(skins/images/password/pass_90.gif) no-repeat; }
     .pass_img#progresbar-2-100, .pass_img#passbar-100 { background: transparent url(skins/images/password/pass_100.gif) no-repeat; }
+    .pass_title {
+        margin: 0;
+        padding: 5px 5px 0 100px; }
 .poll { margin: 0 0 10px; }
-.poll table { margin: 3px 0; }
+    .poll table { margin: 3px 0; }
+.positive {
+    color: green;
+    font-weight: bold; }
 .post {
     margin: 10px;
     padding: 10px;
     overflow: hidden; }
-    .post .author {
-        margin: 0 0 0 10px;
-        line-height: 18px;
-        width: 200px; }
+    .post .actions {
+        float: right;
+        margin: 0; }
     .post .admin {
         margin: 0 20px 0;
         float: right;
         line-height: 18px; }
     .post .admin a { margin: 0 2px; }
+    .post .author {
+        margin: 0 0 0 10px;
+        line-height: 18px;
+        width: 200px; }
     .post .info {
         clear: both;
         margin: 10px 0 0; }
-    .post .actions {
-        float: right;
-        margin: 0; }
-.topic { margin: 10px; overflow: hidden; }
-    .topic .content { overflow: hidden; }
-    .topic .author {
-        float: left;
-        margin: 10px 0;
-        width: 120px; }
-    .topic .date { font-size: 10px; }
-    .topic .info {
-        line-height: 18px;
-        padding: 0 10px 0 0; }
-    .topic .profile { float: right; }
-    .topic .info span.profile { padding: 5px; }
-    .topic .info span.profile a { margin: 0 5px; }
-    .topic .text { margin: 10px 10px 10px 130px; }
-.gallery { margin: 0 auto; }
-    .gallery img { margin: 5px 0 0 5px; }
-    .gallery .item {
-        _box-sizing: content-box;
-        float: left;
-        margin: 10px 12px;
-        padding: 10px;
-        overflow: hidden;
-        width: 210px; }
-    .gallery .info { padding: 0 0 0 15px; }
-    .gallery .title { text-transform: none; }
-.comment { overflow: hidden; }
-    .comment img { float: left; }
-    .comment .author {
-        float: left;
-        margin: 10px 0;
-        width: 120px; }
-    .comment .author .avatar img { margin: 0 25px 10px; }
-    .comment .content { overflow: hidden; }
-    .comment .date {
-        color: #fff;
-        font-size: 10px; }
-    .comment .head {
-        background: #215F62;
-        padding: 0 5px; }
-    .comment .info { line-height: 18px; }
-    .comment .info .profile a { margin: 0 3px; }
-    .comment .profile { float: right; }
-    .comment .text { margin: 10px 10px 10px 130px; }
-    .comment .text img { margin: 0 10px; }
-    .comment_edit,
-    .comment_post {
-        margin: 30px 10px 0;
-        overflow: hidden; }
 .profile th,
 .profile td {
     height: 25px;
     padding: 0 10px;
     vertical-align: middle; }
+.red { color: red; }
 .random-image { margin: 5px 0; }
 .rate { float: right; margin: 30px 20px 20px; }
     .rate button { border: none; }
@@ -529,19 +501,7 @@ textarea {
 .required {
     background: #fff888;
     color: red; }
-.simple-menu {
-    background: #297377;
-    padding: 10px; }
-    .simple-menu li {
-        border-left: 1px solid #000;
-        margin-left: 8px;
-        padding-left: 12px;
-        display: inline; }
-    .simple-menu li:last-child {
-        border-right: 1px solid #000;
-        margin-right: 8px;
-        padding-right: 12px; }
-    .simple-menu a { color: #fff; }
+.right { text-align: right; }
 .section { margin: 20px; }
     .section a { display: block; margin: 0; }
     .section a.level1 { text-align: left; }
@@ -613,6 +573,19 @@ textarea {
     .section li.level2 .title,
     .section li.level3 a.level3,
     .section li.level3 a.level3 span.title { margin: 20px 0 0; }
+.simple-menu {
+    background: #297377;
+    padding: 10px; }
+    .simple-menu a { color: #fff; }
+    .simple-menu li {
+        border-left: 1px solid #000;
+        margin-left: 8px;
+        padding-left: 12px;
+        display: inline; }
+    .simple-menu li:last-child {
+        border-right: 1px solid #000;
+        margin-right: 8px;
+        padding-right: 12px; }
 .special { color: red; }
 .star,
     .star ul.star,
@@ -712,7 +685,7 @@ textarea {
     .tab_content .section a { display: inline; }
 table#std { margin: 0 0 10px; }
     table#std tr { height: 25px; }
-    table#std td  {
+    table#std td {
         border: 2px groove #fff;
         padding: 0 10px; }
     table#std th {
@@ -722,24 +695,57 @@ table#std { margin: 0 0 10px; }
         text-align: center;
         text-shadow: 0 1px 2px #000;
         filter: Shadow(Color=#000000, Direction=120, Strength=2); }
-    table.std  { border: 2px groove #fff; padding: 10px; }
-    th.icon, td.icon  { width: 47px; }
+    table.std { border: 2px groove #fff; padding: 10px; }
+    th.icon, td.icon { width: 47px; }
     th.title, td.title { width: 250px; }
-    th.access, td.access,
-    th.actions, td.actions { width: 70px; }
-    th.author, td.author,
-    th.views, td.views { width: 80px; }
+    th.access, td.access, th.actions, td.actions { width: 70px; }
+    th.author, td.author, th.views, td.views { width: 80px; }
     th.comments, td.comments { width: 120px; }
     th.date, td.date {
         padding: 0 10px;
         width: 140px; }
 .text img { float: left; }
-:-moz-placeholder { color: #7e7e7e; }
-::-webkit-input-placeholder { color: #7e7e7e; }
-#flipbox {
-    color: black;
-    padding: 5px;
-    min-height: 50px; }
+.topic { margin: 10px; overflow: hidden; }
+    .topic .content { overflow: hidden; }
+    .topic .author {
+        float: left;
+        margin: 10px 0;
+        width: 120px; }
+    .topic .date { font-size: 10px; }
+    .topic .info {
+        line-height: 18px;
+        padding: 0 10px 0 0; }
+    .topic .profile { float: right; }
+    .topic .info span.profile { padding: 5px; }
+    .topic .info span.profile a { margin: 0 5px; }
+    .topic .text { margin: 10px 10px 10px 130px; }
+.user-panel {
+    margin: 10px;
+    padding: 0 10px; }
+.valid {
+    float: right;
+    margin: 10px 0;
+    width: 25%; }
+.valid-icon { white-space: nowrap; }
+    .valid-icon:before {
+        content: '';
+        background-image: url(skins/images/logos.jpg);
+        background-repeat: no-repeat;
+        background-position: 80px 15px;
+        width: 80px;
+        height: 15px;
+        display: inline;
+        display: inline-block; }
+    .valid-icon-cms:before { background-position: 0 0; }
+    .valid-icon-xhtml:before { background-position: 0 -45px; }
+    .valid-icon-css:before { background-position: 0 -30px; }
+    .valid-icon-php:before { background-position: 0 -60px; }
+    .valid-icon-db:before { background-position: 0 -75px; }
+    .valid-icon-license:before { background-position: 0 -90px; }
+.win { margin: 20px 5px; }
+    .win .title { margin: 10px 0; }
+    .win .info { font-size: 10px; }
+#yes { color: green; }
 #banner { padding: 10px 0; }
     #banner ul { padding: 0; }
     #banner li {
@@ -775,45 +781,47 @@ table#std { margin: 0 0 10px; }
         font-weight: bold;
         text-align: center;
         padding: 10px 0 0 0; }
+:-moz-placeholder { color: #7e7e7e; }
+::-webkit-input-placeholder { color: #7e7e7e; }
 .icon { background: transparent; white-space: nowrap; }
-.icon:before {
-    content: '';
-    background-color: transparent;
-    background-image: url(skins/images/icons.png);
-    background-repeat: no-repeat;
-    background-position: 16px 16px;
-    margin: 0 3px;
-    left: 0;
-    top: 3px;
-    position: relative;
-    width: 16px;
-    height: 16px;
-    display: inline;
-    display: inline-block; }
-.icon-admin:before { background-position: 0 -16px; }
-.icon-arrow-left:before { background-position: 0 -448px; }
-.icon-arrow-right:before { background-position: 0 -464px; }
-.icon-catalogs:before { background-position: 0 -160px; }
-.icon-close:before { background-position: 0 -144px; }
-.icon-delete:before { background-position: 0 -384px; }
-.icon-down:before { background-position: 0 -336px; }
-.icon-edit:before { background-position: 0 -288px; }
-.icon-flag:before { background-position: 0 -368px; }
-.icon-forum:before { background-position: 0 -112px; }
-.icon-gallery:before { background-position: 0 -128px; }
-.icon-guestbook:before { background-position: 0 -96px; }
-.icon-index:before { background-position: 0 0; }
-.icon-login:before { background-position: 0 -416px; }
-.icon-messages:before { background-position: 0 -352px; }
-.icon-open:before { background-position: 0 -176px; }
-.icon-password-request:before { background-position: 0 -48px; }
-.icon-pinned:before { background-position: 0 -272px; }
-.icon-pm:before { background-position: 0 -224px; }
-.icon-post:before { background-position: 0 -64px; }
-.icon-posts:before { background-position: 0 -80px; }
-.icon-printer:before { background-position: 0 -256px; }
-.icon-profile:before { background-position: 0 -240px; }
-.icon-registration:before { background-position: 0 -32px; }
-.icon-rss:before { background-position: 0 -432px; }
-.icon-sitemap:before { background-position: 0 -208px; }
-.icon-up:before { background-position: 0 -320px; }
+    .icon:before {
+        content: '';
+        background-color: transparent;
+        background-image: url(skins/images/icons.png);
+        background-repeat: no-repeat;
+        background-position: 16px 16px;
+        margin: 0 3px;
+        left: 0;
+        top: 3px;
+        position: relative;
+        width: 16px;
+        height: 16px;
+        display: inline;
+        display: inline-block; }
+    .icon-admin:before { background-position: 0 -16px; }
+    .icon-arrow-left:before { background-position: 0 -448px; }
+    .icon-arrow-right:before { background-position: 0 -464px; }
+    .icon-catalogs:before { background-position: 0 -160px; }
+    .icon-close:before { background-position: 0 -144px; }
+    .icon-delete:before { background-position: 0 -384px; }
+    .icon-down:before { background-position: 0 -336px; }
+    .icon-edit:before { background-position: 0 -288px; }
+    .icon-flag:before { background-position: 0 -368px; }
+    .icon-forum:before { background-position: 0 -112px; }
+    .icon-gallery:before { background-position: 0 -128px; }
+    .icon-guestbook:before { background-position: 0 -96px; }
+    .icon-index:before { background-position: 0 0; }
+    .icon-login:before { background-position: 0 -416px; }
+    .icon-messages:before { background-position: 0 -352px; }
+    .icon-open:before { background-position: 0 -176px; }
+    .icon-password-request:before { background-position: 0 -48px; }
+    .icon-pinned:before { background-position: 0 -272px; }
+    .icon-pm:before { background-position: 0 -224px; }
+    .icon-post:before { background-position: 0 -64px; }
+    .icon-posts:before { background-position: 0 -80px; }
+    .icon-printer:before { background-position: 0 -256px; }
+    .icon-profile:before { background-position: 0 -240px; }
+    .icon-registration:before { background-position: 0 -32px; }
+    .icon-rss:before { background-position: 0 -432px; }
+    .icon-sitemap:before { background-position: 0 -208px; }
+    .icon-up:before { background-position: 0 -320px; }

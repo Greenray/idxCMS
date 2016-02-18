@@ -660,6 +660,22 @@ help {
     height: 25px;
     padding: 0 10px;
     vertical-align: middle; }
+.quotetitle {
+    background: #aabbcc;
+    border: 1px solid #a9b8c2;
+    color: #000;
+    font-size: 8pt;
+    font-style: italic;
+    margin: 5px 0 0;
+    padding: 2px; }
+.quotetext {
+    background: #fafafa;
+    border: 1px solid #a9b8c2;
+    color: #555;
+    font: italic 9pt monospace, "Courier New", Courier;
+    margin: 0 0 5px;
+    padding: 5px;
+    overflow: auto; }
 .random-image { margin: 5px 0; }
 .rate {
     float: right;
@@ -816,6 +832,8 @@ help {
     padding: 15px 0;
     overflow: hidden; }
 .special { color: red; }
+.spoiler { margin: 10px 0 0; }
+    .spoiler:hover { cursor: pointer; }
 .star,
     .star ul.star,
     .star div.rates,

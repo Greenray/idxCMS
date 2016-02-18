@@ -20,7 +20,7 @@ var init = function () {
 	for(var j = 0; j < elementList.length; j++) {
 		var elements = document.getElementsByTagName(elementList[j]);
 
-		if(elements) {
+		if (elements) {
 			for (var i = 0; i < elements.length; i++) {
 				if (uniTipClass != '') {
 

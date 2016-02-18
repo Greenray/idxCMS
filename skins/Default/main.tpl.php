@@ -21,6 +21,7 @@ die();?>
     <link rel="stylesheet" type="text/css" href="{CURRENT_SKIN}style.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="{TOOLS}message{DS}message.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="{TOOLS}colorbox{DS}jquery.colorbox.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="{TOOLS}unitip{DS}unitip.css" media="screen" />
     <script type="text/javascript" src="{TOOLS}jquery.min.js"></script>
     <link rel="shortcut icon" type="image/x-icon" href="{ROOT}favicon.ico" />
 </head>

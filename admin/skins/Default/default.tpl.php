@@ -16,6 +16,8 @@ if (!defined('idxADMIN')) die();?>
     <link rel="stylesheet" type="text/css" href="{SKINS}normalize.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="{ADMIN}skins/Default/style.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="{TOOLS}message{DS}message.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="{TOOLS}redips{DS}redips.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="{TOOLS}unitip{DS}unitip.css" media="screen" />
     <script type="text/javascript" src="{TOOLS}jquery.min.js"></script>
 </head>
 <body onload="ClickMenu('menu')">

@@ -1,3 +1,4 @@
+/* Default skin - style.css */
 body {
     background: url(skins/Moonlight/images/main_bg.gif) repeat left top  #0f0f0f;
     color: white;
@@ -10,30 +11,30 @@ body {
 a,
     a:focus,
     a:visited { color: #0066ff; text-decoration: none; }
-    a:hover { color: red; text-decoration: underline; }
-    a img { border: 0; vertical-align: middle; }
-abbr[title] { border-bottom: 1px dotted; }
-[hidden] { display: none; }
+    a:hover { color: red; }
+    a img {
+        margin: 5px;
+        vertical-align: middle; }
 b,
 strong { font-weight: bold; }
 blockquote {
-    font-style:
-        italic;
+    font-style: italic;
     margin: 1em 40px; }
 code {
     font-family: monospace, 'courier new';
     font-size: 1em; }
 dd { margin: 0 0 0 40px; }
-fieldset { border: none; margin: 0; padding: 0; }
+fieldset {
+    border: none;
+    margin: 0;
+    padding: 0; }
 h1 { font-size: 18px; font-weight: bold; margin: 12px 0; }
 h2 { font-size: 16px; font-weight: bold; margin: 10px 0; }
 h3 { font-size: 14px; font-weight: bold; margin: 8px 0; }
 hr {
     _box-sizing: content-box;
     height: 0; }
-img {
-    vertical-align: middle;
-    -ms-interpolation-mode: bicubic; }
+img { vertical-align: middle; -ms-interpolation-mode:bicubic; }
 button[disabled],
 input[disabled] {
     background: #343536;
@@ -1089,33 +1090,6 @@ textarea {
         font-weight: bold;
         text-align: center;
         padding: 10px 0 0 0; }
-#unitip {
-    color: #fff;
-    display: none;
-    font: normal normal 10px/12px Verdana, Arial, Helvetica, sans-serif;
-	position: absolute;
-    text-align: center;
-	top: -1000px;
-	z-index: 1000; }
-	#unitippoint, #unitipmid, #unitipcap {
-        display: block;
-        left: 0px;
-		position: relative;
-		top: 0px;
-		width: 145px; }
-	#unitippoint {
-        background: url(tools/unitip/TipPoint.png) no-repeat;
-        height: 19px;
-        overflow: hidden; }
-	#unitipmid {
-		background: url(tools/unitip/TipMid.png) repeat;
-		height: auto;
-		padding: 5px 15px;
-        width: 115px; }
-	#unitipcap {
-        background: url(tools/unitip/TipCap.png) no-repeat;
-        height: 7px;
-        overflow: hidden	}
 .icon { white-space: nowrap; }
 .icon:before {
     content: '';

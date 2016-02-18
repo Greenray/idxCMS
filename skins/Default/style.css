@@ -1,3 +1,4 @@
+/* Moonlight skin - style.css */
 body {
     color: black;
 	font: 12px/18px arial, helvetica, verdana, sans-serif;
@@ -10,7 +11,7 @@ a,
         text-decoration: none; }
     a:active,
     a:hover { color: red; }
-    a img { vertical-align: middle; }
+    a img { margin: 5px; vertical-align: middle; }
 blockquote {
     background: #f9f9f9;
     border-left: 10px solid #ccc;
@@ -72,9 +73,7 @@ input::-moz-focus-inner { border: 0; padding: 0; }
     input[type="button"]:hover,
     input[type="reset"]:hover,
     input[type="submit"]:hover { color: red; }
-img {
-    vertical-align: middle;
-    -ms-interpolation-mode: bicubic; }
+img { vertical-align: middle; -ms-interpolation-mode:bicubic; }
 option { padding: 0 5px; }
 p { margin: 10px 0; }
 pre {
@@ -776,34 +775,6 @@ table#std { margin: 0 0 10px; }
         font-weight: bold;
         text-align: center;
         padding: 10px 0 0 0; }
-#unitip {
-    color: #fff;
-    display: none;
-    font: normal normal 10px/12px Verdana, Arial, Helvetica, sans-serif;
-	position: absolute;
-    text-align: center;
-	top: -1000px;
-	z-index: 1000; }
-	#unitippoint, #unitipmid, #unitipcap {
-        display: block;
-        left: 0px;
-		position: relative;
-		top: 0px;
-		width: 145px; }
-	#unitippoint {
-        background: url(tools/unitip/TipPoint.png) no-repeat;
-        height: 19px;
-        overflow: hidden; }
-	#unitipmid {
-		background: url(tools/unitip/TipMid.png) repeat;
-		height: auto;
-		padding: 5px 15px;
-        width: 115px; }
-	#unitipcap {
-        background: url(tools/unitip/TipCap.png) no-repeat;
-        height: 7px;
-        overflow: hidden	}
-
 .icon { background: transparent; white-space: nowrap; }
 .icon:before {
     content: '';

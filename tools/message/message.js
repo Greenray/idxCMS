@@ -1,7 +1,4 @@
-/*
- * idxCMS Flat Files Content Management System v3.1
- * Modal windows
- */
+/* Modal windows */
 if(!window.dhtmlx)window.dhtmlx={};
 (function(){
 	var _dhx_msg_cfg=null;

@@ -1,9 +1,4 @@
-/*
- * idxCMS Flat Files Content Management System v3.1
- * Copyright (c) 2016 Victor Nabatov greenray.spb@gmail.com
- * Styles for admin panel.
- */
-
+/* Styles for admin panel - style.css */
 body {
     background: #006699;
     font: normal 12px arial, helvetica, verdana, sans-serif;
@@ -414,43 +409,6 @@ footer {
     padding: 0 30px 0 10px;
     text-align: left }
 .label  { padding: 0 10px; width: 150px }
-#redips-nodrag,
-#redips-drag {
-    overflow: hidden;
-    position: relative }
-    div#redips-drag table {	background: #ddd }
-    div#redips-nodrag table tr,
-    div#redips-drag table tr { height: 35px }
-    div#redips-nodrag th,
-    div#redips-drag th { border: 1px solid #758596 }
-    div#redips-nodrag td,
-    div#redips-drag td { border: 1px solid #a1a5a9 }
-    .redips-nodrag,
-    .redips-drag {
-        border: 0;
-        margin: auto }
-    .redips-rowhandler { width: 25px }
-    .redips-rowhandler img { margin: 0 auto }
-    .redips-mark {
-        font-weight: bold;
-        text-align: center }
-    .redips-row {
-        height: 20px;
-        width: 20px }
-    #left-table,
-    #right-table {
-        background: #eee;
-        display: table;
-        width: 49% }
-    #left-table { float: left }
-    #right-table { float: right }
-    #redips-clone {
-        border: 1px solid red;
-        height: 1px }
-    .site-page {
-        background: #ddd;
-        margin: 10px 0 0;
-        text-align: center }
 .module {
     background: #006699;
     color: yellow;
@@ -506,33 +464,6 @@ footer {
     border-spacing: 2px;
     width: 100% }
     .std tr { height: 25px }
-
-#unitip {
-    color: #fff;
-    display: none;
-    font: normal normal 1.1em/15px Verdana, Arial, Helvetica, sans-serif;
-	position: absolute;
-	top: -1000px;
-	z-index: 1000 }
-	#unitippoint, #unitipmid, #unitipcap {
-        display: block;
-        left: 0px;
-		position: relative;
-		top: 0px;
-		width: 145px }
-	#unitippoint {
-        background: url(../../../tools/unitip/TipPoint.png) no-repeat;
-        height: 19px;
-        overflow: hidden }
-	#unitipmid {
-		background: url(../../../tools/unitip/TipMid.png) repeat;
-		height: auto;
-		padding: 5px 15px;
-        width: 115px }
-	#unitipcap {
-        background: url(../../../tools/unitip/TipCap.png) no-repeat;
-        height: 7px;
-        overflow: hidden	}
 .icon { background: transparent; white-space: nowrap; }
 .icon:before {
     content: '';

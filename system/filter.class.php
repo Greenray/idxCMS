@@ -158,7 +158,8 @@ final class FILTER {
         #
         $ids = [
             'alert', 'applet', 'base', 'benchmark', 'concat', 'document.cookie', 'echo', 'embed', 'etc/passwd', 'etc/shadow',
-            'eval', 'iframe', 'img', 'insert', 'into', 'object', 'script', 'select', 'substr', 'style', 'union'
+            'eval', 'iframe', 'img', 'insert', 'into', 'null', 'object', 'order by','order+by', 'script', 'select', 'substr',
+            'style', 'union', '<', '>', '</', '/>'
         ];
         $_SERVER['REQUEST_URI']     = empty($_SERVER['REQUEST_URI'])          ? htmlspecialchars($_SERVER['SCRIPT_NAME']) : htmlspecialchars($_SERVER['REQUEST_URI']);
         $_SERVER['REMOTE_ADDR']     = empty($_SERVER['REMOTE_ADDR'])          ? '0.0.0.0'               : htmlspecialchars($_SERVER['REMOTE_ADDR']);

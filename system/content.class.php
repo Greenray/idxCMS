@@ -50,13 +50,11 @@ class CONTENT extends COMMENTS {
      * @return array|boolean     Category content or empty array
      */
     public function getContent($category) {
-        if (empty($this->sections[$this->section]['categories'][$category])) {
-            $this->content = [];
-            return $this->content;
-        }
-
         $this->category = $category;
         $this->content  = $this->getIndex($this->sections[$this->section]['categories'][$category]['path']);
+        if (empty($this->content)) {
+            $this->content = [];
+        }
         return $this->content;
     }
 

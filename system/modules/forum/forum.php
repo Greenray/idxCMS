@@ -234,7 +234,7 @@ if (!empty($sections)) {
             #
             # Wrong category or item request
             #
-            if (!$content) SYSTEM::showMessage('Category is empty', CreateUrl('posts', $section['id']));
+            if (!$content) SYSTEM::showMessage('Category is empty', CreateUrl('forum', $section['id']));
 
             SYSTEM::set('pagename', $category['title']);
             SYSTEM::setPageDescription(__('Forum').' - '.$category['title']);

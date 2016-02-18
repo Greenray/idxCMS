@@ -168,7 +168,7 @@ if (!empty($sections)) {
             #
             # Wrong category or item request
             #
-            if (!$content) SYSTEM::showMessage('Category is empty', CreateUrl('catalogs', $section));
+            if (empty($content)) SYSTEM::showMessage('Category is empty', CreateUrl('catalogs', $section));
 
             SYSTEM::set('pagename', $categories[$category]['title']);
             SYSTEM::setPageDescription(__('Catalogs').' - '.$categories[$category]['title']);

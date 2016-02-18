@@ -191,7 +191,8 @@ textarea {
 .slogan {
     color: yellow;
     font-size: 10pt;
-    margin: 25px 0 0 10px}
+    margin: 25px 0 0 10px;
+    width: 680px; }
 .menu {
     background: #404040;
     background: _linear-gradient(180deg, #dedede 0%, black 100%);

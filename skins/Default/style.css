@@ -781,6 +781,7 @@ table#std { margin: 0 0 10px; }
         font-weight: bold;
         text-align: center;
         padding: 10px 0 0 0; }
+#flipbox { color: black; padding: 5px; min-height: 50px; }
 :-moz-placeholder { color: #7e7e7e; }
 ::-webkit-input-placeholder { color: #7e7e7e; }
 .icon { background: transparent; white-space: nowrap; }

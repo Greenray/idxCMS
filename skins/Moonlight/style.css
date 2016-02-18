@@ -1092,6 +1092,11 @@ table#std { margin: 0 0 10px; }table#std { margin: 0 0 10px; }
         font-weight: bold;
         text-align: center;
         padding: 10px 0 0 0; }
+#flipbox {
+    background: white;
+    color: black;
+    padding: 5px;
+    min-height: 50px; }
 .icon { white-space: nowrap; }
     .icon:before {
         content: '';

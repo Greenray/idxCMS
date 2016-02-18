@@ -44,9 +44,6 @@ $(function() {
     });
 });
 </script>
-<style type="text/css">
-    #flipbox { color: black; padding: 5px; min-height: 50px; }
-</style>
 <div id="flipbox" class="center">$text</div>
 <div id="flippad" class="center">
     <a href="#" rel="rl" rev="#000000" class="icon icon-arrow-left" title="__Left__"></a>

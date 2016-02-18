@@ -177,7 +177,6 @@ class ITEMS extends CATEGORIES {
             rmdir($dest.$new);
             throw new Exception('Cannot move item');
         }
-
         $this->content[$new] = $item;
         $this->content[$new]['id'] = $new;
         $this->saveContent($this->content);
@@ -239,7 +238,6 @@ class ITEMS extends CATEGORIES {
     public function getCategoryLastItems($format) {
         $items  = array_flip($this->getStat('time'));
         krsort($items);
-
         $result = [];
         if (!empty($items)) {
             $items = array_slice($items, 0, CONFIG::getValue('main', 'last'), TRUE);

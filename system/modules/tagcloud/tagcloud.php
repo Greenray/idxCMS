@@ -11,9 +11,11 @@ $tagcloud = CONFIG::getSection('tagcloud');
 #
 if (!empty($tagcloud['color'])) {
     $tagcloud['color'] = strtr($tagcloud['color'], ['#' => '0x']);
+
     for ($i = 0; $i < 11; $i++) {
         $colors[$i] = $tagcloud['color'];
     }
+
 } else $colors = ['0xff0000','0x0000ff','0x00ff00','0xffff00','0xff00ff','0xff9900',
                   '0x808080','0x993300','0x00ffff','0x0f0f0f','0x6699ff'];
 #
@@ -21,9 +23,11 @@ if (!empty($tagcloud['color'])) {
 #
 if (!empty($tagcloud['hicolor'])) {
     $tagcloud['hicolor'] = strtr($tagcloud['hicolor'], ['#' => '0x']);
+
     for ($i = 0; $i < 11; $i++) {
         $hicolors[$i] = $tagcloud['hicolor'];
     }
+
 } else $hicolors = ['0xff9900','0x808080','0x0000ff','0x00ff00','0xffff00',
                     '0x6699ff','0xff00ff','0x00ffff','0x993300','0xff0000','0x0f0f0f'];
 
@@ -54,6 +58,7 @@ if (!empty($tags)) {
     uasort($tags, 'scmp');
     $tags_cloud = [];
     $tags_rate  = [];
+
     foreach ($tags as $key => $value) {
         $tags_cloud[] = $key;
         $tags_rate[]  = $value;
@@ -62,9 +67,11 @@ if (!empty($tags)) {
     # Prepear links for flash cloud
     #
     $tagcloud['tagcloud'] = '<tags>';
+
     for ($i = 0; $i < $tags_amount; $i++) {
         $tagcloud['tagcloud'] .= '<a href=\''.MODULE.'search%26search='.$tags_cloud[$i].$search.'\' style=\''.$tagcloud['font'].'\' color=\''.$colors[mt_rand(0, 10)].'\' hicolor=\''.$hicolors[mt_rand(0, 10)].'\'>'.$tags_cloud[$i].'</a>';
     }
+
     $tagcloud['tagcloud'] .= '</tags>';
     #
     # Prepear links for text cloud
@@ -74,7 +81,9 @@ if (!empty($tags)) {
     $font_size = ['8','9','10','11','12','13','14','15','16','18'];
 
     $tagcloud['tags_txt'] = '';
+
     for ($i = 0; $i < $tags_amount; $i++) {
+
         if ($tags_rate[$i] > 9) {
             $tags_rate[$i] = 9;
         }
@@ -83,7 +92,7 @@ if (!empty($tags)) {
 
     $tagcloud['path'] = MODULES.'tagcloud'.DS;
 
-    $TPL = new TEMPLATE(__DIR__.DS.'tagcloud.tpl');
-    $TPL->set($tagcloud);
-    SYSTEM::defineWindow('Tagcloud', $TPL->parse());
+    $TEMPLATE = new TEMPLATE(__DIR__.DS.'tagcloud.tpl');
+    $TEMPLATE->set($tagcloud);
+    SYSTEM::defineWindow('Tagcloud', $TEMPLATE->parse());
 }

@@ -118,12 +118,12 @@ function GetColor($name = 'idselector', $def_color = '') {
         $col += 15;
     }
 
-    $TPL = new TEMPLATE(__DIR__.DS.'colors.tpl');
-    $TPL->set('name',      $name);
-    $TPL->set('def_color', $def_color);
-    $TPL->set('colors',    $output['color']);
-    $TPL->set('gray',      $output['gray']);
-    return $TPL->parse();
+    $TEMPLATE = new TEMPLATE(__DIR__.DS.'colors.tpl');
+    $TEMPLATE->set('name',      $name);
+    $TEMPLATE->set('def_color', $def_color);
+    $TEMPLATE->set('colors',    $output['color']);
+    $TEMPLATE->set('gray',      $output['gray']);
+    return $TEMPLATE->parse();
 }
 
 /**
@@ -185,10 +185,10 @@ function SaveSortedSections($obj, $params) {
  * @param  string  $url      Url for redirection
  */
 function ShowMessage($message, $url = '') {
-    $TPL = new TEMPLATE(TEMPLATES.'message.tpl');
-    $TPL->set('message', __($message));
-    $TPL->set('url', $url);
-    echo $TPL->parse();
+    $TEMPLATE = new TEMPLATE(TEMPLATES.'message.tpl');
+    $TEMPLATE->set('message', __($message));
+    $TEMPLATE->set('url', $url);
+    echo $TEMPLATE->parse();
 }
 
 /**
@@ -198,8 +198,8 @@ function ShowMessage($message, $url = '') {
  * @param  string  $url      Url for redirection
  */
 function ShowError($message, $url = '') {
-    $TPL = new TEMPLATE(TEMPLATES.'error.tpl');
-    $TPL->set('message', __($message));
-    $TPL->set('url', $url);
-    echo $TPL->parse();
+    $TEMPLATE = new TEMPLATE(TEMPLATES.'error.tpl');
+    $TEMPLATE->set('message', __($message));
+    $TEMPLATE->set('url', $url);
+    echo $TEMPLATE->parse();
 }

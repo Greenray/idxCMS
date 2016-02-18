@@ -90,8 +90,8 @@ class PARSER {
                 }
             }
         }
-        $TPL = new TEMPLATE(SYS.'templates'.DS.'bbcodes-panel.tpl');
-        $TPL->set([
+        $TEMPLATE = new TEMPLATE(SYS.'templates'.DS.'bbcodes-panel.tpl');
+        $TEMPLATE->set([
             'moderator' => $moderator,
             'full'      => USER::$logged_in,
             'bbimg'     => IMAGES.'bbcodes'.DS,
@@ -101,7 +101,7 @@ class PARSER {
             'colors'    => $colors,
             'path'      => MODULE.'editor&dir='.$dir
         ]);
-        return $TPL->parse();
+        return $TEMPLATE->parse();
     }
 
     /**

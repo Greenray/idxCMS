@@ -9,9 +9,11 @@ $sections = CMS::call('CATALOGS')->getSections();
 
 if (!empty($sections)) {
     $section  = FILTER::get('REQUEST', 'section');
+
     if (!empty($section)) {
         $category = FILTER::get('REQUEST', 'category');
         $item     = FILTER::get('REQUEST', 'item');
+
         if (!empty($item) && !empty($category) && !empty($section)) {
             $categories = CMS::call('CATALOGS')->getCategories($section);
             #
@@ -71,12 +73,12 @@ if (!empty($sections)) {
                                     #
                                     # For user it is actual only for 5 minits after post
                                     #
-                                    $TPL = new TEMPLATE(__DIR__.DS.'comment-edit.tpl');
-                                    $TPL->set('comment', $comment);
-                                    $TPL->set('text', empty($REQUEST['text']) ? $comments[$comment]['text'] : $REQUEST['text']);
-                                    $TPL->set('moderator', USER::moderator('catalogs') ? TRUE : NULL);
-                                    $TPL->set('bbcodes', CMS::call('PARSER')->showBbcodesPanel('edit.text', USER::moderator('catalogs')));
-                                    SYSTEM::defineWindow('Edit', $TPL->parse());
+                                    $TEMPLATE = new TEMPLATE(__DIR__.DS.'comment-edit.tpl');
+                                    $TEMPLATE->set('comment', $comment);
+                                    $TEMPLATE->set('text', empty($REQUEST['text']) ? $comments[$comment]['text'] : $REQUEST['text']);
+                                    $TEMPLATE->set('moderator', USER::moderator('catalogs') ? TRUE : NULL);
+                                    $TEMPLATE->set('bbcodes', CMS::call('PARSER')->showBbcodesPanel('edit.text', USER::moderator('catalogs')));
+                                    SYSTEM::defineWindow('Edit', $TEMPLATE->parse());
                                 }
                             } else SYSTEM::showError('Comments are not allowed', CreateUrl('catalogs', $section, $category, $item));
                             break;
@@ -139,13 +141,14 @@ if (!empty($sections)) {
                 #
                 $output = CMS::call('CATALOGS')->getItem($item['id'], 'text');
                 $output['module'] = 'catalogs';
+                
                 if ($section === 'music') {
                     $output = array_merge($output, CONFIG::getSection('audio'));
                 }
 
-                $TPL = new TEMPLATE(__DIR__.DS.'full.tpl');
-                $TPL->set($output);
-                SYSTEM::defineWindow($categories[$category]['title'], $TPL->parse());
+                $TEMPLATE = new TEMPLATE(__DIR__.DS.'full.tpl');
+                $TEMPLATE->set($output);
+                SYSTEM::defineWindow($categories[$category]['title'], $TEMPLATE->parse());
                 CMS::call('CATALOGS')->incCount($item['id'], 'views');
             }
             #
@@ -173,7 +176,7 @@ if (!empty($sections)) {
             SYSTEM::setPageDescription(__('Catalogs').' - '.$categories[$category]['title']);
             krsort($content);
 
-            $TPL    = new TEMPLATE(__DIR__.DS.'short.tpl');
+            $TEMPLATE = new TEMPLATE(__DIR__.DS.'short.tpl');
             $output = '';
             $count  = sizeof($content);
             $keys   = array_keys($content);
@@ -183,10 +186,11 @@ if (!empty($sections)) {
 
             for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
                 $item = CMS::call('CATALOGS')->getItem($keys[$i], 'desc');
-                $TPL->set($item);
+                $TEMPLATE->set($item);
                 SYSTEM::setPageKeywords($item['keywords']);
-                $output .= $TPL->parse();
+                $output .= $TEMPLATE->parse();
             }
+
             SYSTEM::defineWindow($categories[$category]['title'], $output);
 
             if ($count > $perpage) {
@@ -203,9 +207,9 @@ if (!empty($sections)) {
             #
             if (!$output) SYSTEM::showMessage('Section is empty', MODULE.'catalogs');
 
-            $TPL = new TEMPLATE(__DIR__.DS.'categories.tpl');
-            $TPL->set('categories', $output['categories']);
-            SYSTEM::defineWindow($output['title'], $TPL->parse());
+            $TEMPLATE = new TEMPLATE(__DIR__.DS.'categories.tpl');
+            $TEMPLATE->set('categories', $output['categories']);
+            SYSTEM::defineWindow($output['title'], $TEMPLATE->parse());
         }
     } else {
         #
@@ -214,8 +218,8 @@ if (!empty($sections)) {
         $output = CMS::call('CATALOGS')->showSections();
         if (empty($output)) SYSTEM::showMessage('Database is empty', MODULE.'index');
 
-        $TPL = new TEMPLATE(__DIR__.DS.'sections.tpl');
-        $TPL->set('sections', $output);
-        SYSTEM::defineWindow('Catalogs', $TPL->parse());
+        $TEMPLATE = new TEMPLATE(__DIR__.DS.'sections.tpl');
+        $TEMPLATE->set('sections', $output);
+        SYSTEM::defineWindow('Catalogs', $TEMPLATE->parse());
     }
 } else SYSTEM::showMessage('Database is empty', CreateUrl('index'));

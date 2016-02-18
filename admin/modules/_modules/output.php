@@ -103,15 +103,15 @@ if (!empty($REQUEST['selected'])) {
     $output['active'] = $active;
     $output['unused'] = $unused;
 
-    $TPL = new TEMPLATE(__DIR__.DS.'output.tpl');
-    $TPL->set($output);
-    echo $TPL->parse();
+    $TEMPLATE = new TEMPLATE(__DIR__.DS.'output.tpl');
+    $TEMPLATE->set($output);
+    echo $TEMPLATE->parse();
 
 } else {
     $output['title']  = __('Output management');
     $output['select'] = AdvScanDir(SKINS, '', 'dir', FALSE, ['images']);
 
-    $TPL = new TEMPLATE(__DIR__.DS.'select.tpl');
-    $TPL->set($output);
-    echo $TPL->parse();
+    $TEMPLATE = new TEMPLATE(__DIR__.DS.'select.tpl');
+    $TEMPLATE->set($output);
+    echo $TEMPLATE->parse();
 }

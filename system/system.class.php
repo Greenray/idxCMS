@@ -409,15 +409,15 @@ class SYSTEM {
 
         } else {
 
-            $TPL = new TEMPLATE(SYSTEM::$skins[$template]);
-            $TPL->set(
+            $TEMPLATE = new TEMPLATE(SYSTEM::$skins[$template]);
+            $TEMPLATE->set(
                 [
                     'title'   => $title,
                     'content' => $content,
                     'class'   => $template
                 ]
             );
-            return $TPL->parse();
+            return $TEMPLATE->parse();
         }
     }
 
@@ -428,10 +428,10 @@ class SYSTEM {
      * @param  string  $url      Url for redirection
      */
     public static function showMessage($message, $url = '') {
-        $TPL = new TEMPLATE(TEMPLATES.'message.tpl');
-        $TPL->set('message', __($message));
-        $TPL->set('url', $url);
-        self::defineWindow('Message', $TPL->parse());
+        $TEMPLATE = new TEMPLATE(TEMPLATES.'message.tpl');
+        $TEMPLATE->set('message', __($message));
+        $TEMPLATE->set('url', $url);
+        self::defineWindow('Message', $TEMPLATE->parse());
     }
 
     /**
@@ -441,9 +441,9 @@ class SYSTEM {
      * @param  string  $url      Url for redirection
      */
     public static function showError($message, $url = '') {
-        $TPL = new TEMPLATE(TEMPLATES.'error.tpl');
-        $TPL->set('message', __($message));
-        $TPL->set('url', $url);
-        self::defineWindow('Error', $TPL->parse());
+        $TEMPLATE = new TEMPLATE(TEMPLATES.'error.tpl');
+        $TEMPLATE->set('message', __($message));
+        $TEMPLATE->set('url', $url);
+        self::defineWindow('Error', $TEMPLATE->parse());
     }
 }

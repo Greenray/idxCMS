@@ -27,6 +27,7 @@ class COMMENTS extends ITEMS {
         if (!empty($this->comments)) {
             return $this->comments;
         }
+
         $this->comments = $this->getIndex($this->sections[$this->section]['categories'][$this->category]['path'].$item.DS);
         return $this->comments;
     }
@@ -42,6 +43,7 @@ class COMMENTS extends ITEMS {
         if (empty($this->comments[$id])) {
             return FALSE;
         }
+
         $comment = $this->comments[$id];
         $comment['text']   = CMS::call('PARSER')->parseText($comment['text'], $this->sections[$this->section]['categories'][$this->category]['path'].$this->item.DS);
         $comment['date']   = FormatTime('d F Y H:i:s', $comment['time']);
@@ -58,6 +60,7 @@ class COMMENTS extends ITEMS {
         if (($author['rights'] === '*') || ($user === $comment['author'])) {
             unset($comment['ip']);
         }
+
         if ($this->content[$this->item]['opened']) {
             if (($user !== 'guest') && ($user !== $comment['author'])) {
                 $comment['opened'] = TRUE;
@@ -65,6 +68,7 @@ class COMMENTS extends ITEMS {
                     $comment['rateid'] = $this->module.'.'.$this->section.'.'.$this->category.'.'.$this->item.'.'.$id;
                 }
             }
+
             if (USER::$root || (($author['rights'] !== '*') && USER::moderator($this->module, $this->comments[$id]))) {
                 $comment['moderator'] = TRUE;
                 $comment['link'] = $this->sections[$this->section]['categories'][$this->category]['link'].ITEM.$this->item;
@@ -78,6 +82,7 @@ class COMMENTS extends ITEMS {
         if     ($comment['rate'] < 0)  $comment['rate_color'] = 'red';
         elseif ($comment['rate'] == 0) $comment['rate_color'] = 'black';
         else                           $comment['rate_color'] = 'green';
+
         return $comment;
     }
 
@@ -103,20 +108,23 @@ class COMMENTS extends ITEMS {
     public function showComments($item, $page, $perpage, $path) {
         $comments = $this->getComments($item['id']);
         if (!empty($comments)) {
-            $TPL    = new TEMPLATE($path.'comment.tpl');
+            $TEMPLATE    = new TEMPLATE($path.'comment.tpl');
             $count  = sizeof($comments);
             $ids    = array_keys($comments);
             $output = '';
             $pagination = GetPagination($page, $perpage, $count);
             for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
-                $TPL->set($this->getComment($ids[$i], $page));
-                $output .= $TPL->parse();
+                $TEMPLATE->set($this->getComment($ids[$i], $page));
+                $output .= $TEMPLATE->parse();
             }
+
             SYSTEM::defineWindow('Comments', $output);
+
             if ($count > $perpage) {
                 SYSTEM::defineWindow('', Pagination($count, $perpage, $page, $item['link']));
             }
         }
+
         if (USER::$logged_in) {
             if (!empty($item['opened'])) {
                 #
@@ -136,15 +144,15 @@ class COMMENTS extends ITEMS {
      */
     public function showCommentForm($module, $for ='') {
         preg_match("#\module=(.*?)&#is", $module, $obj);
-        $TPL = new TEMPLATE(TEMPLATES.'comment-post.tpl');
-        $TPL->set('action',         $module);
-        $TPL->set('nick',           USER::getUser('nick'));
-        $TPL->set('admin',          USER::$root);
-        $TPL->set('text',           FILTER::get('REQUEST', 'text'));
-        $TPL->set('bbcodes',        CMS::call('PARSER')->showBbcodesPanel('comment.text'));
-        $TPL->set('message_length', USER::$root ? NULL : CONFIG::getValue($obj[1], 'message_length'));
-        $TPL->set('for',            $for);
-        SYSTEM::defineWindow('Comment', $TPL->parse());
+        $TEMPLATE = new TEMPLATE(TEMPLATES.'comment-post.tpl');
+        $TEMPLATE->set('action',         $module);
+        $TEMPLATE->set('nick',           USER::getUser('nick'));
+        $TEMPLATE->set('admin',          USER::$root);
+        $TEMPLATE->set('text',           FILTER::get('REQUEST', 'text'));
+        $TEMPLATE->set('bbcodes',        CMS::call('PARSER')->showBbcodesPanel('comment.text'));
+        $TEMPLATE->set('message_length', USER::$root ? NULL : CONFIG::getValue($obj[1], 'message_length'));
+        $TEMPLATE->set('for',            $for);
+        SYSTEM::defineWindow('Comment', $TEMPLATE->parse());
     }
 
     /**
@@ -161,10 +169,12 @@ class COMMENTS extends ITEMS {
         if (empty($this->content[$item])) {
             throw new Exception('Invalid ID');
         }
+
         $text = trim($text);
         if (empty($text)) {
             throw new Exception('Text is empty');
         }
+
         $path = $this->sections[$this->section]['categories'][$this->category]['path'];
         $id = $this->newId($this->comments);
         $this->comments[$id]['id']     = $id;
@@ -176,6 +186,7 @@ class COMMENTS extends ITEMS {
         $this->comments[$id]['rate']   = 0;
         $this->saveIndex($path.$item.DS, $this->comments);
         $this->content[$item]['comments']++;
+
         if (!$this->saveIndex($path, $this->content)) {
             throw new Exception('Cannot save comment');
         }
@@ -200,23 +211,27 @@ class COMMENTS extends ITEMS {
         if (empty($this->content[$item]['opened'])) throw new Exception('Comments are not allowed');
 
         $text = FILTER::get('REQUEST', 'text');
+
         if (empty($text)) {
             throw new Exception('Text is empty');
         }
         if (empty($id)) {
             $this->newComment($item, $text);
+
         } else {
             if (empty($this->comments[$id])) {
                 throw new Exception('Invalid ID');
             }
 
             $this->comments[$id]['text'] = $text;
+
             if (!$this->saveIndex($this->sections[$this->section]['categories'][$this->category]['path'].$item.DS, $this->comments)) {
                 throw new Exception('Cannot save comment');
             }
 
             USER::changeProfileField(USER::getUser('user'), 'comments', '+');
         }
+
         FILTER::remove('REQUEST', 'text');
         return $this->content[$item]['comments'];
     }
@@ -236,6 +251,7 @@ class COMMENTS extends ITEMS {
         unset($this->comments[$id]);
 
         $path = $this->sections[$this->section]['categories'][$this->category]['path'];
+
         if (!empty($this->comments)) {
             $this->content[$this->item]['comments']--;
             if (!$this->saveIndex($path.$this->item.DS, $this->comments)) {

@@ -93,9 +93,9 @@ if (!empty($REQUEST['new']) || !empty($item)) {
         $output['image'] = '';
     }
 
-    $TPL = new TEMPLATE(__DIR__.DS.'image.tpl');
-    $TPL->set($output);
-    echo $TPL->parse();
+    $TEMPLATE = new TEMPLATE(__DIR__.DS.'image.tpl');
+    $TEMPLATE->set($output);
+    echo $TEMPLATE->parse();
 
 } else {
     $sections = CMS::call('GALLERY')->getSections();
@@ -122,9 +122,9 @@ if (!empty($REQUEST['new']) || !empty($item)) {
                 $output['items'][] = $item;
             }
 
-            $TPL = new TEMPLATE(__DIR__.DS.'items.tpl');
-            $TPL->set($output);
-            echo $TPL->parse();
+            $TEMPLATE = new TEMPLATE(__DIR__.DS.'items.tpl');
+            $TEMPLATE->set($output);
+            echo $TEMPLATE->parse();
 
         } else {
             header('Location: '.MODULE.'admin&id=catalogs.categories');

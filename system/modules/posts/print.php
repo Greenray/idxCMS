@@ -50,9 +50,9 @@ if (empty($sections)) {
                 $post['site']         = SYSTEM::get('url');
                 $post['locale']       = SYSTEM::get('locale');
 
-                $TPL = new TEMPLATE(__DIR__.DS.'print.tpl');
-                $TPL->set($post);
-                echo $TPL->parse();
+                $TEMPLATE = new TEMPLATE(__DIR__.DS.'print.tpl');
+                $TEMPLATE->set($post);
+                echo $TEMPLATE->parse();
             }
         }
     }

@@ -57,6 +57,7 @@ final class FILTER {
      */
     private function clear($vars) {
         $result = [];
+
         foreach($vars as $key => $value) {
             if (!is_array($value)) {
                 $result[$this->cleanValue($key)] = $this->cleanValue($value);
@@ -77,10 +78,12 @@ final class FILTER {
      */
     public function sanitate() {
         $this->ids();
+
         foreach(self::$types as $VAR) {
             $$VAR = $this->clear($GLOBALS['_'.$VAR]);
             unset($GLOBALS['_'.$VAR]);
         }
+
         self::$REQUEST = array_merge($REQUEST, $FILES);
         self::$COOKIE  = $COOKIE;
     }
@@ -167,6 +170,7 @@ final class FILTER {
         $_SERVER['REMOTE_HOST']     = empty($_SERVER['REMOTE_HOST'])          ? $_SERVER['REMOTE_ADDR'] : htmlspecialchars($_SERVER['REMOTE_HOST']);
         $_SERVER['HTTP_REFERER']    = empty($_SERVER['HTTP_REFERER'])         ? ''       : htmlspecialchars($_SERVER['HTTP_REFERER']);
         $_SERVER['HTTP_USER_AGENT'] = empty($_SERVER['HTTP_USER_AGENT'])      ? 'Hidden' : htmlspecialchars($_SERVER['HTTP_USER_AGENT']);
+
         if (isset($_COOKIE['UID'])) {
             CMS::call('LOG')->logPut('Note', '', 'Access from the forbidden IP: '.$_SERVER['REMOTE_ADDR']);
             session_destroy();
@@ -176,6 +180,7 @@ final class FILTER {
         # Ban check
         #
         $bans = file_exists(CONTENT.'bans') ? file(CONTENT.'bans', FILE_IGNORE_NEW_LINES) : [];
+
         foreach ($bans as $ban) {
             $ban = '/^'.str_replace('*', '(\d*)', str_replace('.', '\\.', trim($ban))).'$/';
             if (preg_match($ban, $_SERVER['REMOTE_ADDR'])) {
@@ -193,8 +198,10 @@ final class FILTER {
                 'User agent: '       .$_SERVER['HTTP_USER_AGENT'].LF;
 
         $result = '';
+
         foreach(self::$types as $var) {
             $result .= $var.': ';
+
             foreach($GLOBALS['_'.$var] as $key => $value) {
                 if (!is_array($value)) {
                     $result .= $key.'='.$value.'|';

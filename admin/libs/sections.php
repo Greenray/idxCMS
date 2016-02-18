@@ -64,10 +64,10 @@ if (!empty($sections)) {
         $class = ($class === 'light') ? 'dark' : 'light';
     }
 
-    $TPL = new TEMPLATE(__DIR__.DS.'sections.tpl');
-    $TPL->set($output);
-    $TPL->set('module', $module);
-    echo $TPL->parse();
+    $TEMPLATE = new TEMPLATE(__DIR__.DS.'sections.tpl');
+    $TEMPLATE->set($output);
+    $TEMPLATE->set('module', $module);
+    echo $TEMPLATE->parse();
 }
 
 if (!empty($REQUEST['edit'])) {
@@ -78,17 +78,17 @@ if (!empty($REQUEST['edit'])) {
     $section['header']  = __('Edit');
     $section['bbCodes'] = CMS::call('PARSER')->showBbcodesPanel('form.desc');
 
-    $TPL = new TEMPLATE(__DIR__.DS.'section.tpl');
-    $TPL->set($section);
-    echo $TPL->parse();
+    $TEMPLATE = new TEMPLATE(__DIR__.DS.'section.tpl');
+    $TEMPLATE->set($section);
+    echo $TEMPLATE->parse();
 }
 
 if (!empty($REQUEST['new']) || empty($sections)) {
     #
     # Create new section
     #
-    $TPL = new TEMPLATE(__DIR__.DS.'section.tpl');
-    $TPL->set([
+    $TEMPLATE = new TEMPLATE(__DIR__.DS.'section.tpl');
+    $TEMPLATE->set([
         'header'  => __('New section'),
         'section' => empty($REQUEST['section']) ? '' : $REQUEST['section'],
         'title'   => empty($REQUEST['title'])   ? '' : $REQUEST['title'],
@@ -97,5 +97,5 @@ if (!empty($REQUEST['new']) || empty($sections)) {
         'bbCodes' => CMS::call('PARSER')->showBbcodesPanel('form.desc')
     ]);
 
-    echo $TPL->parse();
+    echo $TEMPLATE->parse();
 }

@@ -85,6 +85,6 @@ foreach ($registered_modules as $mod => $values) {
     }
 }
 
-$TPL = new TEMPLATE(__DIR__.DS.'modules.tpl');
-$TPL->set('modules', $output);
-echo $TPL->parse();
+$TEMPLATE = new TEMPLATE(__DIR__.DS.'modules.tpl');
+$TEMPLATE->set('modules', $output);
+echo $TEMPLATE->parse();

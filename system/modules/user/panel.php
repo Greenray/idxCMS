@@ -13,26 +13,26 @@ if (USER::$logged_in) {
     unset($PM);
 }
 
-$TPL = new TEMPLATE(__DIR__.DS.'panel.tpl');
-$TPL->set('logged_in',   USER::$logged_in);
-$TPL->set('user',        USER::getUser('nick'));
-$TPL->set('admin',       USER::$root);
-$TPL->set('mess_new',    $info[0]);
-$TPL->set('mess_info',   $info[1]);
-$TPL->set('captcha', ShowCaptcha());
-$TPL->set('allow_skins', CONFIG::getValue('main', 'allow_skin'));
-$TPL->set('select_skin', SelectPoint(
+$TEMPLATE = new TEMPLATE(__DIR__.DS.'panel.tpl');
+$TEMPLATE->set('logged_in',   USER::$logged_in);
+$TEMPLATE->set('user',        USER::getUser('nick'));
+$TEMPLATE->set('admin',       USER::$root);
+$TEMPLATE->set('mess_new',    $info[0]);
+$TEMPLATE->set('mess_info',   $info[1]);
+$TEMPLATE->set('captcha', ShowCaptcha());
+$TEMPLATE->set('allow_skins', CONFIG::getValue('main', 'allow_skin'));
+$TEMPLATE->set('select_skin', SelectPoint(
     'skin',
     AdvScanDir(SKINS, '', 'dir', FALSE, ['images']),
     SYSTEM::get('skin'),
     'onchange="document.forms[\'skin_select\'].submit()" title="'.__('Skin').'"'
 ));
-$TPL->set('allow_languages', CONFIG::getValue('main', 'allow_language'));
-$TPL->set('select_lang', SelectPoint(
+$TEMPLATE->set('allow_languages', CONFIG::getValue('main', 'allow_language'));
+$TEMPLATE->set('select_lang', SelectPoint(
     'language',
     SYSTEM::get('languages'),
     SYSTEM::get('language'),
     'onchange="document.forms[\'lang_select\'].submit()" title="'.__('Language').'"'
 ));
 
-SYSTEM::defineWindow('User panel', $TPL->parse());
+SYSTEM::defineWindow('User panel', $TEMPLATE->parse());

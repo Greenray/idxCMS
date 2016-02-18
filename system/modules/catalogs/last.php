@@ -8,7 +8,7 @@ if (!defined('idxCMS')) die();
 $items = CMS::call('CATALOGS')->getSectionsLastItems();
 
 if (!empty($items)) {
-    $TPL = new TEMPLATE(__DIR__.DS.'last.tpl');
-    $TPL->set('items', CMS::call('CATALOGS')->getLastItems($items));
-    SYSTEM::defineWindow('Catalogs updates', $TPL->parse());
+    $TEMPLATE = new TEMPLATE(__DIR__.DS.'last.tpl');
+    $TEMPLATE->set('items', CMS::call('CATALOGS')->getLastItems($items));
+    SYSTEM::defineWindow('Catalogs updates', $TEMPLATE->parse());
 }

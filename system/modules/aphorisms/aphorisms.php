@@ -18,7 +18,7 @@ if (!empty(FILTER::get('REQUEST', 'flip'))) {
     echo $aphorisms[array_rand($aphorisms, 1)].'$';
 
 } else {
-    $TPL = new TEMPLATE(__DIR__.DS.'aphorisms.tpl');
-    $TPL->set('text', $aphorisms[array_rand($aphorisms, 1)]);
-    SYSTEM::defineWindow('Aphorisms', $TPL->parse());
+    $TEMPLATE = new TEMPLATE(__DIR__.DS.'aphorisms.tpl');
+    $TEMPLATE->set('text', $aphorisms[array_rand($aphorisms, 1)]);
+    SYSTEM::defineWindow('Aphorisms', $TEMPLATE->parse());
 }

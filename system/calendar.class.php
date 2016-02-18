@@ -64,23 +64,28 @@ class CALENDAR {
                  $months[$num]['selected'] = TRUE;
             }
         }
+
         for ($num = 2000; $num <= $current_year; $num++) {
             $years[$num]['year'] = $num;
             if ($num == $selected_year) {
                  $years[$num]['selected'] = TRUE;
             }
         }
+
         $position = ($this->temp['first_day_week'] == 0) ? 7 : $this->temp['first_day_week'];
         $calendar = [];
         $string   = 1;
         $showed   = 1;
+
         while ($showed <= $this->temp['num_of_days']) {
             if ($position > 1) {
                 $calendar[$string]['span'] = $position - 1;
             }
             $inc = 0;
+
             for ($i = $showed; $i < ($showed + 7) && ($i <= $this->temp['num_of_days']) && ($position <= 7); $i++) {
                 $class = 'event';
+
                 if (empty($this->events[$i]))
                      $class = '';
                 else $calendar[$string]['dates'][$i]['events'] = $this->events[$i];
@@ -88,6 +93,7 @@ class CALENDAR {
                 if (!empty($this->today[$i]) && ($current_year === $selected_year)) {
                     $class .= ' special';
                 }
+
                 $calendar[$string]['dates'][$i]['class'] = $class;
                 $calendar[$string]['dates'][$i]['date']  = $i;
                 $position++;
@@ -97,6 +103,7 @@ class CALENDAR {
             $position = 0;
             ++$string;
         }
+
         return [
             'month'  => $this->localiseDate(date('F Y', $this->temp['first_day'])),
             'header' => $this->localiseDate(
@@ -145,6 +152,7 @@ class CALENDAR {
     function localiseDate($string) {
         global $LANG;
         $translate = [];
+
         if ($LANG['language'] !== 'english') {
             foreach($LANG['datetime'] as $match => $replace) {
                 $translate[$match] = $replace;

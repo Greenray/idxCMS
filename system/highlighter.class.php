@@ -69,14 +69,18 @@ class HIGHLIGHTER extends PARSER {
         ++$this->_current;
         $this->_output .= $this->_text[$this->_current];
         ++$this->_current;
+
         while ($this->_text[$this->_current] !== '?') {
             $nextChar = $this->_text[$this->_current + 1];
             if ($this->_text[$this->_current] === ' ') {
                 $this->_output .= '&nbsp;';
+
             } elseif ($this->_text[$this->_current] === '<') {
                 $this->_output .= '&lt;';
+
             } elseif ($this->_text[$this->_current] === '>') {
                 $this->_output .= '&gt;';
+
             } elseif ($this->_text[$this->_current] === "\r") {
                 if ($nextChar === "\n") {
                     $this->_output .= str_replace("\r", '<br />', $this->_text[$this->_current]);
@@ -146,6 +150,7 @@ class HIGHLIGHTER extends PARSER {
                                             ++$this->_current;
                                             $value .= $this->_text[$this->_current];
                                             $this->_current += 1;
+
                                             while ($this->_text[$this->_current] !== '?') {
                                                 $value .= $this->_text[$this->_current];
                                                 ++$this->_current;
@@ -153,6 +158,7 @@ class HIGHLIGHTER extends PARSER {
                                             $value .= '?';
                                             ++$this->_current;
                                             $value .= '&gt;</span>';
+
                                         } else {
                                             $value .= '&lt;';
                                             for ($this->_current += 1; $this->_text[$this->_current] !== '>'; $this->_current++) {
@@ -160,14 +166,11 @@ class HIGHLIGHTER extends PARSER {
                                             }
                                             $value .= '&gt;';
                                         }
-                                    } else {
-                                        $value .= $this->_text[$this->_current];
-                                    }
+                                    } else $value .= $this->_text[$this->_current];
                                 }
                                 $value .= $quote;
-                            } else {
-                                $value .= $this->_text[$this->_current];
-                            }
+
+                            } else $value .= $this->_text[$this->_current];
                         }
                         $this->_output .= '<span style="'.$this->_value.'">'.$value.'</span>';
                         break;
@@ -179,6 +182,7 @@ class HIGHLIGHTER extends PARSER {
             }
             if ($this->_text[$this->_current] === '>') {
                 break;
+
             } else {
                 $this->_output .= $this->_text[$this->_current];
             }
@@ -200,8 +204,10 @@ class HIGHLIGHTER extends PARSER {
         $length = mb_strlen($this->_text) - 1;
         for ($this->_current = 0; $this->_current < $length; $this->_current++) {
             $nextChar = $this->_text[$this->_current + 1];
+
             if ($this->_text[$this->_current] === ' ') {
                 $this->_output .= str_replace(' ', '&nbsp;', $this->_text[$this->_current]);
+                
             } elseif ($this->_text[$this->_current] === '<') {
                 if ($nextChar === '!') {
                     $this->highlightComment();

@@ -116,9 +116,9 @@ if (!empty($REQUEST['new']) || !empty($topic)) {
     $output['categories'][$output['category_id']]['selected'] = TRUE;
     $output['bbCodes_text'] = CMS::call('PARSER')->showBbcodesPanel('topic.text');
 
-    $TPL = new TEMPLATE(__DIR__.DS.'topic.tpl');
-    $TPL->set($output);
-    echo $TPL->parse();
+    $TEMPLATE = new TEMPLATE(__DIR__.DS.'topic.tpl');
+    $TEMPLATE->set($output);
+    echo $TEMPLATE->parse();
 
 } elseif (!empty($sections[$section])) {
     $categories = CMS::call('FORUM')->getCategories($section);
@@ -143,9 +143,9 @@ if (!empty($REQUEST['new']) || !empty($topic)) {
             $output['items'][] = $topic;
         }
 
-        $TPL = new TEMPLATE(__DIR__.DS.'items.tpl');
-        $TPL->set($output);
-        echo $TPL->parse();
+        $TEMPLATE = new TEMPLATE(__DIR__.DS.'items.tpl');
+        $TEMPLATE->set($output);
+        echo $TEMPLATE->parse();
 
     } else {
         header('Location: '.MODULE.'admin&id=forum.categories');

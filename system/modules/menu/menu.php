@@ -5,6 +5,6 @@
 
 if (!defined('idxCMS')) die();
 
-$TPL = new TEMPLATE(__DIR__.DS.'menu.tpl');
-$TPL->set('menu', CMS::call('SYSTEM')->getMainMenu());
-SYSTEM::defineWindow('Menu', $TPL->parse());
+$TEMPLATE = new TEMPLATE(__DIR__.DS.'menu.tpl');
+$TEMPLATE->set('menu', CMS::call('SYSTEM')->getMainMenu());
+SYSTEM::defineWindow('Menu', $TEMPLATE->parse());

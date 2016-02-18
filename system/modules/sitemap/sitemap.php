@@ -5,7 +5,6 @@
 
 if (!defined('idxCMS')) die();
 
-$TPL = new TEMPLATE(__DIR__.DS.'sitemap.tpl');
-$TPL->set('points', CMS::call('SYSTEM')->getMainMenu());
-
-SYSTEM::defineWindow('Sitemap', $TPL->parse());
+$TEMPLATE = new TEMPLATE(__DIR__.DS.'sitemap.tpl');
+$TEMPLATE->set('points', CMS::call('SYSTEM')->getMainMenu());
+SYSTEM::defineWindow('Sitemap', $TEMPLATE->parse());

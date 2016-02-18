@@ -172,10 +172,10 @@ if (!empty($REQUEST['save'])) {
     if (!mkdir($path.$REQUEST['dirname']))     ShowError('Cannot make directory');
 }
 
-$TPL = new TEMPLATE(__DIR__.DS.'filemanager.tpl');
-$TPL->set('back', ($path === realpath('.').DS) ? '' : $url.'&amp;path='.dirname($path).DS);
-$TPL->set('url',  $url);
-$TPL->set('path', $path);
+$TEMPLATE = new TEMPLATE(__DIR__.DS.'filemanager.tpl');
+$TEMPLATE->set('back', ($path === realpath('.').DS) ? '' : $url.'&amp;path='.dirname($path).DS);
+$TEMPLATE->set('url',  $url);
+$TEMPLATE->set('path', $path);
 $elements = array_merge(AdvScanDir($path, '', 'dir'), AdvScanDir($path, '', 'file'));
 $output = [];
 foreach ($elements as $key => $file) {
@@ -210,8 +210,8 @@ foreach ($elements as $key => $file) {
     $output[$key]['delete']      = $url.'&amp;path='.$path.'&amp;delete='.$file;
 }
 
-$TPL->set('elements', $output);
-echo $TPL->parse();
+$TEMPLATE->set('elements', $output);
+echo $TEMPLATE->parse();
 
 clearstatcache();
 
@@ -233,9 +233,9 @@ if (!empty($REQUEST['rights'])) {
         $output['dir'] = TRUE;
     }
 
-    $TPL = new TEMPLATE(__DIR__.DS.'rights.tpl');
-    $TPL->set($output);
-    echo $TPL->parse();
+    $TEMPLATE = new TEMPLATE(__DIR__.DS.'rights.tpl');
+    $TEMPLATE->set($output);
+    echo $TEMPLATE->parse();
 }
 
 if (!empty($REQUEST['edit'])) {
@@ -253,8 +253,8 @@ if (!empty($REQUEST['edit'])) {
     }
     $output['name'] = $REQUEST['edit'];
     if (!empty($output['content'])) {
-        $TPL = new TEMPLATE(__DIR__.DS.'edit.tpl');
-        $TPL->set($output);
-        echo $TPL->parse();
+        $TEMPLATE = new TEMPLATE(__DIR__.DS.'edit.tpl');
+        $TEMPLATE->set($output);
+        echo $TEMPLATE->parse();
     }
 }

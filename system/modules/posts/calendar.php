@@ -13,19 +13,16 @@ if (!empty($REQUEST['from'])) {
     $selected_year  = FormatTime('Y', $REQUEST['from']);
     $selected_month = FormatTime('n', $REQUEST['from']);
 }
-
 if (!empty($REQUEST['cal-year'])) {
     if (($REQUEST['cal-year'] >= 2000) && ($REQUEST['cal-year'] <= $current_year)) {
         $selected_year = $REQUEST['cal-year'];
     }
-
 } else  $selected_year = $current_year;
 
 if (!empty($REQUEST['cal-month'])) {
     if (($REQUEST['cal-month'] >= 1) && ($REQUEST['cal-month'] <= 12)) {
         $selected_month = $REQUEST['cal-month'];
     }
-
 } else  $selected_month = FormatTime('n', $today);
 
 $CALENDAR = new CALENDAR($selected_month, $selected_year, $LANG['datetime']);
@@ -36,8 +33,10 @@ unset($sections['drafts']);
 foreach ($sections as $section => $data) {
     CMS::call('POSTS')->getCategories($section);
     $list = CMS::call('POSTS')->getStat('time');
+
     if (!empty($list)) {
         foreach($list as $id => $time) {
+
             if ((FormatTime('Y', $time) == $selected_year) && (FormatTime('n', $time) == $selected_month)) {
                 $date = FormatTime('d', $time);
                 $CALENDAR->event(
@@ -51,12 +50,11 @@ foreach ($sections as $section => $data) {
         }
     }
 }
-
 if (($selected_year === $current_year) && ($selected_month === $current_month)) {
     $CALENDAR->highlight(FormatTime('d', $today));
 }
 
-$TPL = new TEMPLATE(__DIR__.DS.'calendar.tpl');
-$TPL->set($CALENDAR->create($current_year, $selected_year, $selected_month));
-SYSTEM::defineWindow('Posts calendar', $TPL->parse());
+$TEMPLATE = new TEMPLATE(__DIR__.DS.'calendar.tpl');
+$TEMPLATE->set($CALENDAR->create($current_year, $selected_year, $selected_month));
+SYSTEM::defineWindow('Posts calendar', $TEMPLATE->parse());
 unset($CALENDAR);

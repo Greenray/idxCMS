@@ -60,9 +60,9 @@ if (!empty($REQUEST['login'])) {
                         }
                     }
 
-                    $TPL = new TEMPLATE(__DIR__.DS.'list.tpl');
-                    $TPL->set($output);
-                    echo $TPL->parse();
+                    $TEMPLATE = new TEMPLATE(__DIR__.DS.'list.tpl');
+                    $TEMPLATE->set($output);
+                    echo $TEMPLATE->parse();
                     #
                     # Pagination
                     #
@@ -95,9 +95,9 @@ if (!empty($REQUEST['login'])) {
                     $output = $user;
                     $output['utz'] = SelectTimeZone('fields[tz]', $LANG['tz'], $user['tz']);
 
-                    $TPL = new TEMPLATE(__DIR__.DS.'profile.tpl');
-                    $TPL->set($output);
-                    echo $TPL->parse();
+                    $TEMPLATE = new TEMPLATE(__DIR__.DS.'profile.tpl');
+                    $TEMPLATE->set($output);
+                    echo $TEMPLATE->parse();
                 }
                 break;
 
@@ -115,9 +115,9 @@ if (!empty($REQUEST['login'])) {
                             3 => empty($REQUEST['access']) ? 1     : (int) $REQUEST['access']
                         ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
                     );
-                    $TPL = new TEMPLATE(TEMPLATES.'login.tpl');
-                    $TPL->set('locale', SYSTEM::get('locale'));
-                    echo $TPL->parse();
+                    $TEMPLATE = new TEMPLATE(TEMPLATES.'login.tpl');
+                    $TEMPLATE->set('locale', SYSTEM::get('locale'));
+                    echo $TEMPLATE->parse();
                 } else {
                     #
                     # Edit user rights
@@ -143,9 +143,9 @@ if (!empty($REQUEST['login'])) {
                             }
                         }
 
-                        $TPL = new TEMPLATE(__DIR__.DS.'rights.tpl');
-                        $TPL->set($output);
-                        echo $TPL->parse();
+                        $TEMPLATE = new TEMPLATE(__DIR__.DS.'rights.tpl');
+                        $TEMPLATE->set($output);
+                        echo $TEMPLATE->parse();
                     }
                 }
                 break;
@@ -167,6 +167,6 @@ if (!empty($REQUEST['login'])) {
         ShowError($error->getMessage());
     }
 } else {
-    $TPL = new TEMPLATE(__DIR__.DS.'search.tpl');
-    echo $TPL->parse();
+    $TEMPLATE = new TEMPLATE(__DIR__.DS.'search.tpl');
+    echo $TEMPLATE->parse();
 }

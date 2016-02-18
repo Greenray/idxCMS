@@ -82,6 +82,7 @@ class CONTENT extends COMMENTS {
         if (empty($this->content[$id])) {
             return FALSE;
         }
+
         $this->content[$id][$field]++;
         return $this->saveIndex($this->sections[$this->section]['categories'][$this->category]['path'], $this->content);
     }
@@ -94,9 +95,11 @@ class CONTENT extends COMMENTS {
     */
     public function getStat($param) {
         $result = [];
+
         if (empty($this->sections[$this->section]['categories'])) {
             return $result;
         }
+
         foreach ($this->sections[$this->section]['categories'] as $category => $data) {
             self::getContent($category);
             if (!empty($this->content)) {
@@ -119,6 +122,7 @@ class CONTENT extends COMMENTS {
         if ((mb_strlen($text, 'UTF-8') - 1) < $length) {
             return $text;
         }
+
         if (mb_strpos($text, '.', $length)) {
             return mb_substr($text, 0, $length, 'UTF-8').'...';
         }
@@ -141,6 +145,7 @@ class CONTENT extends COMMENTS {
             chmod($dest, 0777);
         }
         $dir = dir($source);
+
         while (($element = $dir->read()) !== FALSE) {
             if (($element == '.') || ($element == '..')) {
                 continue;

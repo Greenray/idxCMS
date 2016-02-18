@@ -38,6 +38,6 @@ $output['banner'][$i]['text']    = '';
 $output['banner'][$i]['view']    = '';
 $output['banner'][$i]['bbCodes'] = CMS::call('PARSER')->showBbcodesPanel('form.'.$i);
 
-$TPL = new TEMPLATE(__DIR__.DS.'banners.tpl');
-$TPL->set($output);
-echo $TPL->parse();
+$TEMPLATE = new TEMPLATE(__DIR__.DS.'banners.tpl');
+$TEMPLATE->set($output);
+echo $TEMPLATE->parse();

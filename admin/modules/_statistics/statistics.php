@@ -110,9 +110,9 @@ if (!empty($spiders)) {
 }
 
 if (!empty($output)) {
-    $TPL = new TEMPLATE(__DIR__.DS.'statistics.tpl');
-    $TPL->set($output);
-    echo $TPL->parse();
+    $TEMPLATE = new TEMPLATE(__DIR__.DS.'statistics.tpl');
+    $TEMPLATE->set($output);
+    echo $TEMPLATE->parse();
 } else {
     ShowMessage('Statistics is off', MODULE.'admin');
 }

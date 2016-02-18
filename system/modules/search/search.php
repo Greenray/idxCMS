@@ -10,7 +10,7 @@ $config = CONFIG::getSection('search');
 if (USER::$logged_in || $config['allow_guest']) {
     if (!empty($REQUEST['search'])) {
 
-        $TPL = new TEMPLATE(__DIR__.DS.'results.tpl');
+        $TEMPLATE = new TEMPLATE(__DIR__.DS.'results.tpl');
 
         $items   = explode(' ', $REQUEST['search']);
         $founded = [];
@@ -23,6 +23,7 @@ if (USER::$logged_in || $config['allow_guest']) {
 
             if (($length >= $config['query_min']) && ($length <= $config['query_max'])) {
                 $searchs = SYSTEM::get('search');
+
                 foreach($searchs as $module) {
                     $obj = strtoupper($module);
                     $sections = CMS::call($obj)->getSections();
@@ -50,6 +51,7 @@ if (USER::$logged_in || $config['allow_guest']) {
                                                     $result
                                                 );
                                             }
+
                                             SearchResult(
                                                 $item['title'],
                                                 $item['title'],
@@ -57,6 +59,7 @@ if (USER::$logged_in || $config['allow_guest']) {
                                                 $item['link'],
                                                 $result
                                             );
+
                                             SearchResult(
                                                 $item['nick'],
                                                 $item['title'],
@@ -64,6 +67,7 @@ if (USER::$logged_in || $config['allow_guest']) {
                                                 $item['link'],
                                                 $result
                                             );
+
                                             if (!empty($item['desc'])) {
                                                 SearchResult(
                                                     $item['desc'],
@@ -73,6 +77,7 @@ if (USER::$logged_in || $config['allow_guest']) {
                                                     $result
                                                 );
                                             }
+
                                             SearchResult(
                                                 $item['text'],
                                                 $item['title'],
@@ -104,6 +109,7 @@ if (USER::$logged_in || $config['allow_guest']) {
         if (!empty($common)) {
             $show = array_slice($common, $pagination['start'], $perpage, TRUE);
             $i    = 1;
+
             foreach ($show as $link => $text) {
                 $parts = explode('|', $text);
                 $results[$i]['link']  = $link;
@@ -112,19 +118,22 @@ if (USER::$logged_in || $config['allow_guest']) {
                 ++$i;
             }
         }
-        $TPL->set('count', $count);
-        $TPL->set('results', $results);
-        $output .= $TPL->parse();
+
+        $TEMPLATE->set('count', $count);
+        $TEMPLATE->set('results', $results);
+        $output .= $TEMPLATE->parse();
+
         SYSTEM::set('pagename', __('Search results'));
         SYSTEM::defineWindow('Search results', $output);
 
         if ($count > $perpage) {
             SYSTEM::defineWindow('', Pagination($count, $perpage, $page, MODULE.'search&search='.$REQUEST['search']));
         }
+
         unset($REQUEST['search']);
 
     } else {
-        $TPL = new TEMPLATE(__DIR__.DS.'search.tpl');
-        SYSTEM::defineWindow('Search', $TPL->parse());
+        $TEMPLATE = new TEMPLATE(__DIR__.DS.'search.tpl');
+        SYSTEM::defineWindow('Search', $TEMPLATE->parse());
     }
 }

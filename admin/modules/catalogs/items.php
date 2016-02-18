@@ -97,9 +97,9 @@ if (!empty($REQUEST['new']) || !empty($item)) {
             break;
     }
 
-    $TPL = new TEMPLATE($template);
-    $TPL->set($output);
-    echo $TPL->parse();
+    $TEMPLATE = new TEMPLATE($template);
+    $TEMPLATE->set($output);
+    echo $TEMPLATE->parse();
 
 } elseif (!empty($sections[$section])) {
     $categories = CMS::call('CATALOGS')->getCategories($section);
@@ -122,9 +122,9 @@ if (!empty($REQUEST['new']) || !empty($item)) {
             $output['items'][] = $item;
         }
 
-        $TPL = new TEMPLATE(__DIR__.DS.'items.tpl');
-        $TPL->set($output);
-        echo $TPL->parse();
+        $TEMPLATE = new TEMPLATE(__DIR__.DS.'items.tpl');
+        $TEMPLATE->set($output);
+        echo $TEMPLATE->parse();
 
     } else {
         header('Location: '.MODULE.'admin&id=catalogs.categories');

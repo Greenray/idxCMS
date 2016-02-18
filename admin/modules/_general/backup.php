@@ -73,6 +73,6 @@ foreach ($files as $key => $file) {
     $output['files'][$key]['size'] = FormatSize(filesize(CONTENT.$file));
 }
 
-$TPL = new TEMPLATE(__DIR__.DS.'backup.tpl');
-$TPL->set($output);
-echo $TPL->parse();
+$TEMPLATE = new TEMPLATE(__DIR__.DS.'backup.tpl');
+$TEMPLATE->set($output);
+echo $TEMPLATE->parse();

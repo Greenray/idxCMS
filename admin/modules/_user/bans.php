@@ -24,6 +24,6 @@ if (!$bans = file(CONTENT.'bans', FILE_IGNORE_NEW_LINES)) {
     $bans = [];
 }
 
-$TPL = new TEMPLATE(__DIR__.DS.'bans.tpl');
-$TPL->set('bans', $bans);
-echo $TPL->parse();
+$TEMPLATE = new TEMPLATE(__DIR__.DS.'bans.tpl');
+$TEMPLATE->set('bans', $bans);
+echo $TEMPLATE->parse();

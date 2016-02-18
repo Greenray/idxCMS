@@ -17,9 +17,11 @@ if (!USER::$root) {
     #
     $section  = 'drafts';
     $category = 2;
+
 } else {
     $section  = FILTER::get('REQUEST', 'section');
     $category = FILTER::get('REQUEST', 'category');
+
     if (empty($section))  $section  = 'drafts';
     if (empty($category)) $category = 1;
 }
@@ -44,6 +46,7 @@ if (!empty($REQUEST['save'])) {
                     CMS::call('POSTS')->getCategories($section);
                     CMS::call('POSTS')->getContent($category);
                     $post = CMS::call('POSTS')->moveItem($post, $new_section, $new_category);
+
                 } else {
                     $post = '';     # Nothing to move, so add new
                 }
@@ -51,6 +54,7 @@ if (!empty($REQUEST['save'])) {
                 $category = $new_category;
             }
         }
+
         CMS::call('POSTS')->getCategories($section);
         CMS::call('POSTS')->getContent($category);
 
@@ -71,6 +75,7 @@ if (USER::$root) {
     $choice = [];
     $list_i = [];
     $list_t = [];
+
     foreach ($sections as $id => $data) {
         $categories = CMS::call('POSTS')->getCategories($id);
         if (!empty($categories)) {
@@ -81,6 +86,7 @@ if (USER::$root) {
             $choice[$id]['title'] = $data['title'];
             $ids    = [];
             $titles = [];
+
             foreach ($categories as $key => $cat) {
                 $ids[$id][]    = $key;
                 $titles[$id][] = $cat['title'];
@@ -122,6 +128,7 @@ if (FILTER::get('REQUEST', 'edit') && USER::$root) {
     $output['text']     = empty($output['text'])     ? $post['text']     : $output['text'];
     $output['opened']   = empty($output['opened'])   ? $post['opened']   : $output['opened'];
     $output['header']   = __('Edit');
+
 } else {
     $output['item']   = '';
     $output['header'] = __('New post');
@@ -132,6 +139,6 @@ $output['categories'][$output['category_id']]['selected'] = TRUE;
 $output['bbCodes_desc'] = CMS::call('PARSER')->showBbcodesPanel('post.desc');
 $output['bbCodes_text'] = CMS::call('PARSER')->showBbcodesPanel('post.text');
 
-$TPL = new TEMPLATE(__DIR__.DS.'post.tpl');
-$TPL->set($output);
-SYSTEM::defineWindow('Post', $TPL->parse());
+$TEMPLATE = new TEMPLATE(__DIR__.DS.'post.tpl');
+$TEMPLATE->set($output);
+SYSTEM::defineWindow('Post', $TEMPLATE->parse());

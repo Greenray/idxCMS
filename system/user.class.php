@@ -23,7 +23,7 @@ class USER {
 
     /** @var array Disallowed names for registration */
     private static $disallowed_names = [
-        'administrator', 'false', 'guest', 'idxcms', 'moderator', 'noavatar', 'null', 'root',
+        'admin', 'administrator', 'false', 'guest', 'idxcms', 'moderator', 'noavatar', 'null', 'root',
         'superuser', 'supervisor', 'sponsor', 'system', 'test', 'true', 'unknown', 'user'
     ];
 

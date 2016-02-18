@@ -61,12 +61,12 @@ if (!empty($sections)) {
                                             #
                                             # For user it is actual only for 5 minits after post
                                             #
-                                            $TPL = new TEMPLATE(__DIR__.DS.'comment-edit.tpl');
-                                            $TPL->set('comment', $comment);
-                                            $TPL->set('text', empty($REQUEST['text']) ? $comments[$comment]['text'] : $REQUEST['text']);
-                                            $TPL->set('moderator', TRUE);
-                                            $TPL->set('bbcodes', CMS::call('PARSER')->showBbcodesPanel('edit.text', $moderator));
-                                            SYSTEM::defineWindow('Edit', $TPL->parse());
+                                            $TEMPLATE = new TEMPLATE(__DIR__.DS.'comment-edit.tpl');
+                                            $TEMPLATE->set('comment', $comment);
+                                            $TEMPLATE->set('text', empty($REQUEST['text']) ? $comments[$comment]['text'] : $REQUEST['text']);
+                                            $TEMPLATE->set('moderator', TRUE);
+                                            $TEMPLATE->set('bbcodes', CMS::call('PARSER')->showBbcodesPanel('edit.text', $moderator));
+                                            SYSTEM::defineWindow('Edit', $TEMPLATE->parse());
                                         }
                                     }
                                 } else SYSTEM::showError('Comments are not allowed', CreateUrl('posts', $section, $category, $post));
@@ -129,11 +129,11 @@ if (!empty($sections)) {
                 #
                 # Show post with full text
                 #
-                $TPL = new TEMPLATE(__DIR__.DS.'full.tpl');
-                $TPL->set(CMS::call('POSTS')->getItem($post['id'], 'text'));
-                $TPL->set('module', 'posts');
+                $TEMPLATE = new TEMPLATE(__DIR__.DS.'full.tpl');
+                $TEMPLATE->set(CMS::call('POSTS')->getItem($post['id'], 'text'));
+                $TEMPLATE->set('module', 'posts');
 
-                SYSTEM::defineWindow('Articles', $TPL->parse());
+                SYSTEM::defineWindow('Articles', $TEMPLATE->parse());
                 CMS::call('POSTS')->incCount($post['id'], 'views');
             }
             #
@@ -161,7 +161,7 @@ if (!empty($sections)) {
             SYSTEM::setPageDescription(__('Posts').' - '.$categories[$category]['title']);
             krsort($content);
 
-            $TPL    = new TEMPLATE(__DIR__.DS.'short.tpl');
+            $TEMPLATE    = new TEMPLATE(__DIR__.DS.'short.tpl');
             $output = '';
             $count  = sizeof($content);
             $keys   = array_keys($content);
@@ -170,9 +170,9 @@ if (!empty($sections)) {
             $pagination = GetPagination($page, $perpage, $count);
             for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
                 $post = CMS::call('POSTS')->getItem($keys[$i], 'desc');
-                $TPL->set($post);
+                $TEMPLATE->set($post);
                 SYSTEM::setPageKeywords($post['keywords']);
-                $output .= $TPL->parse();
+                $output .= $TEMPLATE->parse();
             }
 
             SYSTEM::defineWindow($categories[$category]['title'], $output);
@@ -190,16 +190,16 @@ if (!empty($sections)) {
             #
             if (!$output) SYSTEM::showMessage('Section is empty', MODULE.'posts');
 
-            $TPL = new TEMPLATE(__DIR__.DS.'categories.tpl');
-            $TPL->set($output);
-            SYSTEM::defineWindow($output['title'], $TPL->parse());
+            $TEMPLATE = new TEMPLATE(__DIR__.DS.'categories.tpl');
+            $TEMPLATE->set($output);
+            SYSTEM::defineWindow($output['title'], $TEMPLATE->parse());
         }
 
     } elseif ((($from = FILTER::get('REQUEST', 'from')) !== FALSE) && (($until = FILTER::get('REQUEST', 'until')) !== FALSE))  {
         SYSTEM::set('pagename', __('Posts').' - '.__('Search results'));
         SYSTEM::setPageDescription(__('Posts').' - '.__('Search results'));
         $output = '';
-        $TPL = new TEMPLATE(__DIR__.DS.'short.tpl');
+        $TEMPLATE = new TEMPLATE(__DIR__.DS.'short.tpl');
         foreach ($sections as $id => $section) {
             $categories = CMS::call('POSTS')->getCategories($id);
             foreach($categories as $key => $category) {
@@ -208,8 +208,8 @@ if (!empty($sections)) {
                     if (($post['time'] >= $from) && ($post['time'] <= $until)) {
                         $post = CMS::call('POSTS')->getItem($i, 'desc');
                         $post['comment'] = ($post['comments'] > 0) ? $post['link'].COMMENT.$post['comments'] : $post['link'];
-                        $TPL->set($post);
-                        $output .= $TPL->parse();
+                        $TEMPLATE->set($post);
+                        $output .= $TEMPLATE->parse();
                     }
                 }
             }
@@ -224,8 +224,8 @@ if (!empty($sections)) {
         $output = CMS::call('POSTS')->showSections();
         if (empty($output)) SYSTEM::showMessage('Database is empty', CreateUrl('index'));
 
-        $TPL = new TEMPLATE(__DIR__.DS.'sections.tpl');
-        $TPL->set('sections', $output);
-        SYSTEM::defineWindow('Posts', $TPL->parse());
+        $TEMPLATE = new TEMPLATE(__DIR__.DS.'sections.tpl');
+        $TEMPLATE->set('sections', $output);
+        SYSTEM::defineWindow('Posts', $TEMPLATE->parse());
     }
 } else SYSTEM::showMessage('Database is empty', CreateUrl('index'));

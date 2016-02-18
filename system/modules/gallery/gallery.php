@@ -9,9 +9,11 @@ $sections = CMS::call('GALLERY')->getSections();
 
 if (!empty($sections)) {
     $section  = FILTER::get('REQUEST', 'section');
+
     if (!empty($section)) {
         $category = FILTER::get('REQUEST', 'category');
         $item     = FILTER::get('REQUEST', 'item');
+
         if (!empty($item) && !empty($category) && !empty($section)) {
             $categories = CMS::call('GALLERY')->getCategories($section);
             #
@@ -53,12 +55,12 @@ if (!empty($sections)) {
                                             #
                                             # For user it is actual only for 5 minits after post
                                             #
-                                            $TPL = new TEMPLATE(__DIR__.DS.'comment-edit.tpl');
-                                            $TPL->set('comment',   $comment);
-                                            $TPL->set('text',      empty($REQUEST['text']) ? $comments[$comment]['text'] : $REQUEST['text']);
-                                            $TPL->set('moderator', USER::moderator('gallery') ? TRUE : NULL);
-                                            $TPL->set('bbcodes',   CMS::call('PARSER')->showBbcodesPanel('edit.text', USER::moderator('gallery')));
-                                            SYSTEM::defineWindow('Edit', $TPL->parse());
+                                            $TEMPLATE = new TEMPLATE(__DIR__.DS.'comment-edit.tpl');
+                                            $TEMPLATE->set('comment',   $comment);
+                                            $TEMPLATE->set('text',      empty($REQUEST['text']) ? $comments[$comment]['text'] : $REQUEST['text']);
+                                            $TEMPLATE->set('moderator', USER::moderator('gallery') ? TRUE : NULL);
+                                            $TEMPLATE->set('bbcodes',   CMS::call('PARSER')->showBbcodesPanel('edit.text', USER::moderator('gallery')));
+                                            SYSTEM::defineWindow('Edit', $TEMPLATE->parse());
                                         }
                                     }
                                 } else SYSTEM::showError('Comments are not allowed', CreateUrl('catalogs', $section, $category, $item));
@@ -95,7 +97,6 @@ if (!empty($sections)) {
                         }
                     }
                 }
-
             } catch (Exception $error) {
                 SYSTEM::showError($error->getMessage());
             }
@@ -121,10 +122,10 @@ if (!empty($sections)) {
                 #
                 # Show image with full text
                 #
-                $TPL = new TEMPLATE(__DIR__.DS.'full.tpl');
-                $TPL->set(CMS::call('GALLERY')->getItem($item['id'], 'text'));
-                $TPL->set('module', 'gallery');
-                SYSTEM::defineWindow($categories[$category]['title'], $TPL->parse());
+                $TEMPLATE = new TEMPLATE(__DIR__.DS.'full.tpl');
+                $TEMPLATE->set(CMS::call('GALLERY')->getItem($item['id'], 'text'));
+                $TEMPLATE->set('module', 'gallery');
+                SYSTEM::defineWindow($categories[$category]['title'], $TEMPLATE->parse());
                 CMS::call('GALLERY')->incCount($item['id'], 'views');
             }
             #
@@ -142,7 +143,7 @@ if (!empty($sections)) {
             #
             if (!$categories) SYSTEM::showMessage('Section is empty', CreateUrl('gallery'));
 
-            $content    = CMS::call('GALLERY')->getContent($category);
+            $content = CMS::call('GALLERY')->getContent($category);
             #
             # Wrong category or item request
             #
@@ -172,16 +173,17 @@ if (!empty($sections)) {
                 SYSTEM::setPageKeywords($item['keywords']);
                 $images[] = $item;
     //            if (($i === 2) || ($i === 5)) {
-    //                $TPL->set('images', $images);
-    //                $output .= $TPL->parse(__DIR__.DS.'images.tpl');
+    //                $TEMPLATE->set('images', $images);
+    //                $output .= $TEMPLATE->parse(__DIR__.DS.'images.tpl');
     //                $images = [];
     //            }
                 ++$showed;
             }
 
-            $TPL = new TEMPLATE(__DIR__.DS.'images.tpl');
-            $TPL->set('images', $images);
-            $output .= $TPL->parse();
+            $TEMPLATE = new TEMPLATE(__DIR__.DS.'images.tpl');
+            $TEMPLATE->set('images', $images);
+            $output .= $TEMPLATE->parse();
+
             if ($showed !== $perpage) {
                 for ($showed; $showed < $perpage; $showed++) {
                     $images[] = [];
@@ -206,10 +208,9 @@ if (!empty($sections)) {
             #
             if (!$output) SYSTEM::showMessage('Section is empty', MODULE.'gallery');
 
-
-            $TPL = new TEMPLATE(__DIR__.DS.'categories.tpl');
-            $TPL->set('categories', $output['categories']);
-            SYSTEM::defineWindow($output['title'], $TPL->parse());
+            $TEMPLATE = new TEMPLATE(__DIR__.DS.'categories.tpl');
+            $TEMPLATE->set('categories', $output['categories']);
+            SYSTEM::defineWindow($output['title'], $TEMPLATE->parse());
         }
 
     } else {
@@ -219,8 +220,8 @@ if (!empty($sections)) {
         $output = CMS::call('GALLERY')->showSections();
         if (empty($output)) SYSTEM::showMessage('Database is empty', MODULE.'index');
 
-        $TPL = new TEMPLATE(__DIR__.DS.'sections.tpl');
-        $TPL->set('sections', $output);
-        SYSTEM::defineWindow('Gallery', $TPL->parse());
+        $TEMPLATE = new TEMPLATE(__DIR__.DS.'sections.tpl');
+        $TEMPLATE->set('sections', $output);
+        SYSTEM::defineWindow('Gallery', $TEMPLATE->parse());
     }
 } else SYSTEM::showMessage('Database is empty', CreateUrl('index'));

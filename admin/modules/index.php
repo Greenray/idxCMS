@@ -59,6 +59,6 @@ if (USER::$root) {
     $output['wait'] = '<strong>'.sizeof($content).'</strong>';
 }
 
-$TPL = new TEMPLATE(TEMPLATES.'summary.tpl');
-$TPL->set($output);
-echo $TPL->parse();
+$TEMPLATE = new TEMPLATE(TEMPLATES.'summary.tpl');
+$TEMPLATE->set($output);
+echo $TEMPLATE->parse();

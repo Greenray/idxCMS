@@ -41,9 +41,9 @@ if (!empty($archived)) {
         $output['polls'][] = $data;
     }
 
-    $TPL = new TEMPLATE(__DIR__.DS.'archive.tpl');
-    $TPL->set($output);
-    echo($TPL->parse());
+    $TEMPLATE = new TEMPLATE(__DIR__.DS.'archive.tpl');
+    $TEMPLATE->set($output);
+    echo($TEMPLATE->parse());
 
 } else {
     ShowMessage('Database is empty', MODULE.'admin');

@@ -26,9 +26,9 @@ if (!empty($messages)) {
         $mail = $REQUEST['mail'];
         $output['messages'][$id]['info'] = __('Message by').' '.CreateUserLink($message['author'], $message['nick']).' ('.$mail.')';
     }
-    $TPL = new TEMPLATE(__DIR__.DS.'feedback.tpl');
-    $TPL->set($output);
-    echo $TPL->parse();
+    $TEMPLATE = new TEMPLATE(__DIR__.DS.'feedback.tpl');
+    $TEMPLATE->set($output);
+    echo $TEMPLATE->parse();
 } else {
     ShowMessage('Database is empty', MODULE.'admin');
 }

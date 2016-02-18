@@ -12,11 +12,14 @@ if (!empty($REQUEST['act']) && !empty($REQUEST['id']) && !empty($REQUEST['user']
     if (!file_exists(TEMP.$rated)) {
         file_put_contents(TEMP.$rated, $time, LOCK_EX);
         $result = RateComment($REQUEST['user'], $REQUEST['act'], $REQUEST['id']);
+
     } else {
         $old_time = file_get_contents(TEMP.$rated);
+
         if (($time - $old_time) > CONFIG::getValue('user', 'timeout')) {
             file_put_contents(TEMP.$rated, $time, LOCK_EX);
             $result = RateComment($REQUEST['user'], $REQUEST['act'], $REQUEST['id']);
+
         } else {
             $result['rate']  = $REQUEST['rate'];
             $result['stars'] = '';
@@ -32,7 +35,6 @@ if (!empty($REQUEST['act']) && !empty($REQUEST['id']) && !empty($REQUEST['user']
 
 if (!empty($REQUEST['val']) && !empty($REQUEST['id'])) {
     $user = USER::getUser('user');
-
     if ($user !== 'guest') {
         $item = '';
         $rate = GetRate($REQUEST['id'], $item);

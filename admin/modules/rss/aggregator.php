@@ -21,6 +21,6 @@ if (!empty($REQUEST['save_s'])) {
 $config = CONFIG::getSection('rss-aggregator');
 $config['feeds'] = empty($config['feeds']) ? '' : implode(LF, $config['feeds']);
 
-$TPL = new TEMPLATE(__DIR__.DS.'rss-aggregator.tpl');
-$TPL->set($config);
-echo $TPL->parse();
+$TEMPLATE = new TEMPLATE(__DIR__.DS.'rss-aggregator.tpl');
+$TEMPLATE->set($config);
+echo $TEMPLATE->parse();

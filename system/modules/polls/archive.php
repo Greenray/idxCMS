@@ -11,9 +11,9 @@ $archived = array_reverse($POLLS->getArchivedPolls());
 SYSTEM::set('pagename', __('Polls archive'));
 
 if (!empty($archived)) {
-    $TPL = new TEMPLATE(__DIR__.DS.'archive.tpl');
-    $TPL->set($POLLS->showPolls($archived, $TPL));
-    SYSTEM::defineWindow('Poll', $TPL->parse());
+    $TEMPLATE = new TEMPLATE(__DIR__.DS.'archive.tpl');
+    $TEMPLATE->set($POLLS->showPolls($archived, $TEMPLATE));
+    SYSTEM::defineWindow('Poll', $TEMPLATE->parse());
 
 } else SYSTEM::showMessage('Database is empty', MODULE.'index');
 

@@ -36,7 +36,7 @@ try {
 #
 $sections = CMS::call($obj)->getSections();
 $output   = [];
-$TPL = new TEMPLATE(__DIR__.DS.'categories.tpl');
+$TEMPLATE = new TEMPLATE(__DIR__.DS.'categories.tpl');
 
 if ($obj === 'POSTS') {
     #
@@ -61,7 +61,7 @@ if ($obj === 'POSTS') {
 
     unset($sections['drafts']);
 
-    $TPL->set($output);
+    $TEMPLATE->set($output);
     $output = [];
 }
 
@@ -86,9 +86,9 @@ if (!empty($sections)) {
     #
     # Show existing sections and categories
     #
-    $TPL->set('module',   $module);
-    $TPL->set('sections', $output);
-    echo $TPL->parse();
+    $TEMPLATE->set('module',   $module);
+    $TEMPLATE->set('sections', $output);
+    echo $TEMPLATE->parse();
 
     if (!empty($REQUEST['edit'])) {
         #
@@ -105,9 +105,9 @@ if (!empty($sections)) {
             $category['access']  = empty($REQUEST['access']) ? $category['access'] : $REQUEST['access'];
             $category['bbCodes'] = CMS::call('PARSER')->showBbcodesPanel('form.desc');
 
-            $TPL = new TEMPLATE(__DIR__.DS.'category.tpl');
-            $TPL->set($category);
-            echo $TPL->parse();
+            $TEMPLATE = new TEMPLATE(__DIR__.DS.'category.tpl');
+            $TEMPLATE->set($category);
+            echo $TEMPLATE->parse();
 
         } else {
             header('Location: '.MODULE.'admin&id='.$module.'.categories');
@@ -118,8 +118,8 @@ if (!empty($sections)) {
         # Create new category
         #
         if (!empty($REQUEST['new'])) {
-            $TPL = new TEMPLATE(__DIR__.DS.'category.tpl');
-            $TPL->set([
+            $TEMPLATE = new TEMPLATE(__DIR__.DS.'category.tpl');
+            $TEMPLATE->set([
                 'header'   => __('New category'),
                 'sections' => $choice,
                 'title'    => empty($REQUEST['title'])  ? '' : $REQUEST['title'],
@@ -127,7 +127,7 @@ if (!empty($sections)) {
                 'access'   => empty($REQUEST['access']) ? 0  : $REQUEST['access'],
                 'bbCodes'  => CMS::call('PARSER')->showBbcodesPanel('form.desc')
             ]);
-            echo $TPL->parse();
+            echo $TEMPLATE->parse();
         }
     }
 } else {

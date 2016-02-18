@@ -17,9 +17,9 @@ if (!empty($REQUEST['day']) && !empty($REQUEST['viewlog'])) {
         $output .= CMS::call('PARSER')->parseText('[quote='.$logfile.']'.$content.'[/quote]');
     }
 
-    $TPL = new TEMPLATE(__DIR__.DS.'log.tpl');
-    $TPL->set('text', $output);
-    echo $TPL->parse();
+    $TEMPLATE = new TEMPLATE(__DIR__.DS.'log.tpl');
+    $TEMPLATE->set('text', $output);
+    echo $TEMPLATE->parse();
 
 } elseif (!empty($REQUEST['archive']) && !empty($REQUEST['viewlog'])) {
     #
@@ -33,9 +33,9 @@ if (!empty($REQUEST['day']) && !empty($REQUEST['viewlog'])) {
         unlink(LOGS.$logfile);
     }
 
-    $TPL = new TEMPLATE(__DIR__.DS.'log.tpl');
-    $TPL->set('text', $output);
-    echo $TPL->parse();
+    $TEMPLATE = new TEMPLATE(__DIR__.DS.'log.tpl');
+    $TEMPLATE->set('text', $output);
+    echo $TEMPLATE->parse();
 
 } elseif (!empty($REQUEST['month']) && !empty($REQUEST['browse'])) {
     #
@@ -72,9 +72,9 @@ if (!empty($REQUEST['day']) && !empty($REQUEST['viewlog'])) {
     }
     $output['archive'] = TRUE;
 
-    $TPL = new TEMPLATE(__DIR__.DS.'logs.tpl');
-    $TPL->set($output);
-    echo $TPL->parse();
+    $TEMPLATE = new TEMPLATE(__DIR__.DS.'logs.tpl');
+    $TEMPLATE->set($output);
+    echo $TEMPLATE->parse();
 
 } else {
     #
@@ -122,7 +122,7 @@ if (!empty($REQUEST['day']) && !empty($REQUEST['viewlog'])) {
         }
     }
 
-    $TPL = new TEMPLATE(__DIR__.DS.'logs.tpl');
-    $TPL->set($output);
-    echo $TPL->parse();
+    $TEMPLATE = new TEMPLATE(__DIR__.DS.'logs.tpl');
+    $TEMPLATE->set($output);
+    echo $TEMPLATE->parse();
 }

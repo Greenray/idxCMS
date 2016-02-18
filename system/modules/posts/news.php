@@ -9,7 +9,7 @@ $categories = CMS::call('POSTS')->getCategories('news');
 $output     = CMS::call('POSTS')->getCategoryLastItems('d F Y H:i:s');
 
 if (!empty($output)) {
-    $TPL = new TEMPLATE(__DIR__.DS.'last.tpl');
-    $TPL->set($output);
-    SYSTEM::defineWindow('Last news', $TPL->parse());
+    $TEMPLATE = new TEMPLATE(__DIR__.DS.'last.tpl');
+    $TEMPLATE->set($output);
+    SYSTEM::defineWindow('Last news', $TEMPLATE->parse());
 }

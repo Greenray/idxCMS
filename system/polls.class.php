@@ -178,7 +178,7 @@ class POLLS {
      * @return boolean       The result of operation
      */
     public function isVotedInPoll($poll) {
-        if (in_array(USER::getUser('user'), $this->active[$poll]['users'])) {
+        if (in_array(USER::getUser('user'), $this->active[$poll]['users']) || (USER::getUser('user') === 'guest')) {
             return TRUE;
         }
         if (!empty($_COOKIE[$this->_cookie.'_poll']) && is_array($_COOKIE[$this->_cookie.'_poll']) && in_array($poll, $_COOKIE[$this->_cookie.'_poll'])) {

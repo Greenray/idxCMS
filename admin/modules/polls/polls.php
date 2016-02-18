@@ -48,6 +48,6 @@ foreach ($opened as $id => $poll) {
     $output['polls'][] = $data;
 }
 
-$TPL = new TEMPLATE(__DIR__.DS.'polls.tpl');
-$TPL->set($output);
-echo $TPL->parse();
+$TEMPLATE = new TEMPLATE(__DIR__.DS.'polls.tpl');
+$TEMPLATE->set($output);
+echo $TEMPLATE->parse();

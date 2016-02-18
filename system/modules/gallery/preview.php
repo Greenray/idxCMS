@@ -11,7 +11,7 @@ if (!empty($images)) {
     $images = CMS::call('GALLERY')->getLastItems($images);
     $images = array_slice($images, 0, 3, TRUE);
 
-    $TPL = new TEMPLATE(__DIR__.DS.'preview.tpl');
-    $TPL->set('images', $images);
-    SYSTEM::defineWindow('Gallery preview', $TPL->parse());
+    $TEMPLATE = new TEMPLATE(__DIR__.DS.'preview.tpl');
+    $TEMPLATE->set('images', $images);
+    SYSTEM::defineWindow('Gallery preview', $TEMPLATE->parse());
 }

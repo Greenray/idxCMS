@@ -266,10 +266,10 @@ switch($MODULE) {
                     #
                     # User is not admin or has no access rights
                     #
-                    $TPL = new TEMPLATE(TEMPLATES.'error_full.tpl');
-                    $TPL->set('url', MODULE.'admin');
-                    $TPL->set('message', 'Module not found');
-                    echo $TPL->parse();
+                    $TEMPLATE = new TEMPLATE(TEMPLATES.'error_full.tpl');
+                    $TEMPLATE->set('url', MODULE.'admin');
+                    $TEMPLATE->set('message', 'Module not found');
+                    echo $TEMPLATE->parse();
                     $result = ob_get_contents();
                     ob_end_clean();
                     echo $result;
@@ -303,20 +303,20 @@ switch($MODULE) {
             }
 
             /* @todo Auromatic skin selection */
-            $TPL = new TEMPLATE(ADMIN.'skins/Default/default.tpl');
-            $TPL->set('locale', SYSTEM::get('locale'));
-            $TPL->set('menu',    $menu);
-            $TPL->set('page',    $result);
-            $TPL->set('modules', $output);
-            echo $TPL->parse();
+            $TEMPLATE = new TEMPLATE(ADMIN.'skins/Default/default.tpl');
+            $TEMPLATE->set('locale', SYSTEM::get('locale'));
+            $TEMPLATE->set('menu',    $menu);
+            $TEMPLATE->set('page',    $result);
+            $TEMPLATE->set('modules', $output);
+            echo $TEMPLATE->parse();
 
         } else {
             #
             # User is not admin or has no access rights
             #
-            $TPL = new TEMPLATE(TEMPLATES.'login.tpl');
-            $TPL->set('locale', SYSTEM::get('locale'));
-            echo $TPL->parse();
+            $TEMPLATE = new TEMPLATE(TEMPLATES.'login.tpl');
+            $TEMPLATE->set('locale', SYSTEM::get('locale'));
+            echo $TEMPLATE->parse();
         }
         break;
 
@@ -385,9 +385,9 @@ switch($MODULE) {
         #
         # The page is generated, it is possible to show it
         #
-        $TPL = new TEMPLATE(CURRENT_SKIN.'main.tpl');
-        $TPL->set($output);
-        echo $TPL->parse();
+        $TEMPLATE = new TEMPLATE(CURRENT_SKIN.'main.tpl');
+        $TEMPLATE->set($output);
+        echo $TEMPLATE->parse();
         break;
 }
 

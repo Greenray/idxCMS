@@ -155,7 +155,7 @@ if (isset($init)) {
     $config['used']   = array_slice($words, 0, $tags_amount, TRUE);
     $config['unused'] = array_slice($words, $tags_amount, -1, TRUE);
 
-    $TPL = new TEMPLATE(__DIR__.DS.'config.tpl');
-    $TPL->set($config);
-    echo $TPL->parse();
+    $TEMPLATE = new TEMPLATE(__DIR__.DS.'config.tpl');
+    $TEMPLATE->set($config);
+    echo $TEMPLATE->parse();
 }

@@ -29,6 +29,7 @@ class CATEGORIES extends SECTIONS {
 
         $this->section = $section;
         $categories = [];
+
         if (!empty($this->sections[$section]['categories'])) {
             foreach ($this->sections[$section]['categories'] as $id => $category) {
                 if (USER::checkAccess($category)) {
@@ -63,6 +64,7 @@ class CATEGORIES extends SECTIONS {
      */
     public function saveCategories($section, $categories) {
         $this->sections[$section]['categories'] = $categories;
+
         if (!$this->saveIndex($this->container, $this->sections)) {
             throw new Exception('Cannot save categories');
         }
@@ -89,6 +91,7 @@ class CATEGORIES extends SECTIONS {
             #
             $id   = $this->newId($this->sections[$this->section]['categories']);
             $item = $this->sections[$this->section]['path'].$id;
+
             if (is_dir($item)) {
                 if (!DeleteTree($item)) {
                     throw new Exception('Cannot save category');
@@ -114,9 +117,11 @@ class CATEGORIES extends SECTIONS {
         # If icon is not set an empty image will be shown
         #
         $this->setIcon($this->sections[$this->section]['categories'][$id]['path'], FILTER::get('REQUEST', 'icon'));
+
         if (!$this->saveIndex($this->container, $this->sections)) {
             throw new Exception('Cannot save category');
         }
+
         Sitemap();
     }
 
@@ -157,10 +162,12 @@ class CATEGORIES extends SECTIONS {
      */
     public function removeCategory($id) {
         unset($this->sections[$this->section]['categories'][$id]);
+
         if (!DeleteTree($this->sections[$this->section]['path'].$id) ||
             !$this->saveIndex($this->container, $this->sections)) {
             throw new Exception('Cannot remove category');
         }
+
         Sitemap();
     }
 
@@ -187,6 +194,7 @@ class CATEGORIES extends SECTIONS {
                 'tmp_name' => ''],
                 [35, 35, 'mime' => 'image/png']
             );
+
         } else $IMAGE->generateIcon();
     }
 }

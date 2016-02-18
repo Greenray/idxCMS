@@ -11,7 +11,7 @@ unset($sections['drafts']);
 $posts = CMS::call('POSTS')->getSectionsLastItems($sections);
 
 if (!empty($posts)) {
-    $TPL = new TEMPLATE(__DIR__.DS.'last.tpl');
-    $TPL->set('items', CMS::call('POSTS')->getLastItems($posts));
-    SYSTEM::defineWindow('Last posts',  $TPL->parse());
+    $TEMPLATE = new TEMPLATE(__DIR__.DS.'last.tpl');
+    $TEMPLATE->set('items', CMS::call('POSTS')->getLastItems($posts));
+    SYSTEM::defineWindow('Last posts',  $TEMPLATE->parse());
 }

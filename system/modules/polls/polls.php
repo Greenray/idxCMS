@@ -7,13 +7,11 @@ if (!defined('idxCMS')) die();
 
 $POLLS  = new POLLS();
 $poll   = FILTER::get('REQUEST', 'poll');
-$save   = FILTER::get('REQUEST', 'save');
-$answer = FILTER::get('REQUEST', 'answer');
 
-if (!empty($poll) && !empty($save)) {
+if (!empty($poll) && !empty(FILTER::get('REQUEST', 'save'))) {
     try {
         $polls = $POLLS->getActivePolls();
-        $POLLS->voteInPoll($poll, $answer);
+        $POLLS->voteInPoll($poll, FILTER::get('REQUEST', 'answer'));
     } catch (Exception $error) {
         SYSTEM::showError($error->getMessage());
     }
@@ -23,8 +21,8 @@ $polls = $POLLS->getActivePolls();
 
 if (!empty($polls)) {
 
-    $TPL = new TEMPLATE(__DIR__.DS.'polls.tpl');
-    $TPL->set('polls', $POLLS->showPolls($polls));
-    SYSTEM::defineWindow('Poll', $TPL->parse());
+    $TEMPLATE = new TEMPLATE(__DIR__.DS.'polls.tpl');
+    $TEMPLATE->set('polls', $POLLS->showPolls($polls));
+    SYSTEM::defineWindow('Poll', $TEMPLATE->parse());
 }
 unset($POLLS);

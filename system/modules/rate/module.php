@@ -100,13 +100,13 @@ function ShowRate($for) {
         $event = 'onmousedown="star.update(this, \''.$for.'\')" onmousemove="star.mouse(event, this)" title="Rate!"';
     }
 
-    $TPL = new TEMPLATE(__DIR__.DS.'rate.tpl');
-    $TPL->set('value', $value);                      # Rate value
-    $TPL->set('voted', $voices);                     # Number of voices
-    $TPL->set('item' , $for);                        # Item
-    $TPL->set('width', $value * 84 / 100);           # Width of rate value field
-    $TPL->set('event', $event);                      # Allow rating?
-    return $TPL->parse();
+    $TEMPLATE = new TEMPLATE(__DIR__.DS.'rate.tpl');
+    $TEMPLATE->set('value', $value);                      # Rate value
+    $TEMPLATE->set('voted', $voices);                     # Number of voices
+    $TEMPLATE->set('item' , $for);                        # Item
+    $TEMPLATE->set('width', $value * 84 / 100);           # Width of rate value field
+    $TEMPLATE->set('event', $event);                      # Allow rating?
+    return $TEMPLATE->parse();
 }
 
 SYSTEM::registerModule('rate', 'Rate', 'plugin');

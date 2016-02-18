@@ -15,7 +15,7 @@ $SKIN['boxes']       = __('Boxes');
 #
 # Skins for boxes and system messages
 #
-$tpl = '
+$template = '
 <div class="$class">
     <!-- IF !empty($title) --><div class="title center"><h3>$title</h3></div><!-- ENDIF -->
     <div class="content">
@@ -47,10 +47,10 @@ $message = '
 </script>
 ';
 
-CMS::call('SYSTEM')->registerSkin('box', $tpl);
-CMS::call('SYSTEM')->registerSkin('darkbox', $tpl);
-CMS::call('SYSTEM')->registerSkin('lightbox', $tpl);
+CMS::call('SYSTEM')->registerSkin('box', $template);
+CMS::call('SYSTEM')->registerSkin('darkbox', $template);
+CMS::call('SYSTEM')->registerSkin('lightbox', $template);
 CMS::call('SYSTEM')->registerSkin('main', $main);
-CMS::call('SYSTEM')->registerSkin('panel', $tpl);
-CMS::call('SYSTEM')->registerSkin('win', $tpl);
+CMS::call('SYSTEM')->registerSkin('panel', $template);
+CMS::call('SYSTEM')->registerSkin('win', $template);
 CMS::call('SYSTEM')->registerSkin('message', $message);

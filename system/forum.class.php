@@ -47,6 +47,7 @@ class FORUM extends CONTENT {
         if (!USER::$logged_in) {
             throw new Exception('You are not logged in!');
         }
+
         $title = FILTER::get('REQUEST', 'title');
         if (!$title) {
             throw new Exception('Title is empty');
@@ -55,12 +56,15 @@ class FORUM extends CONTENT {
         if (empty($text)) {
             throw new Exception('Text is empty');
         }
+
         $path = $this->sections[$this->section]['categories'][$this->category]['path'];
         if (empty($id)) {
             $id = $this->newId($this->content);
+
             if (!mkdir($path.$id, 0777)) {
                 throw new Exception('Cannot save topic');
             }
+
             $this->content[$id]['id']       = $id;
             $this->content[$id]['author']   = USER::getUser('user');
             $this->content[$id]['nick']     = USER::getUser('nick');
@@ -72,6 +76,7 @@ class FORUM extends CONTENT {
         $this->content[$id]['title']  = $title;
         $this->content[$id]['opened'] = empty(FILTER::get('REQUEST', 'opened')) ? TRUE : FALSE;
         $this->content[$id]['pinned'] = FILTER::get('REQUEST', 'pinned');
+
         if (!file_put_contents($path.$id.DS.$this->text, $text, LOCK_EX)) {
             throw new Exception('Cannot save topic');
         }

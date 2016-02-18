@@ -6,6 +6,7 @@
 if (!defined('idxCMS')) die();
 
 SYSTEM::set('pagename', __('Guestbook'));
+
 $GUESTBOOK = new MESSAGE(CONTENT, 'guestbook');
 $messages = $GUESTBOOK->getMessages();
 $id = FILTER::get('REQUEST', 'comment');
@@ -15,6 +16,7 @@ if (!empty($REQUEST['save'])) {
         if (!empty($id) && USER::moderator('guestbook', $messages[$id])) {
             $GUESTBOOK->saveMessage($id, FILTER::get('REQUEST', 'text'));
             unset($id);
+
         } else {
             if (USER::$logged_in) {
                 $GUESTBOOK->sendMessage(FILTER::get('REQUEST', 'text'));
@@ -24,21 +26,24 @@ if (!empty($REQUEST['save'])) {
     } catch (Exception $error) {
         SYSTEM::showError($error->getMessage());
     }
+
 } else {
     if (!empty($REQUEST['action']) && !empty($id)) {
+
         switch ($REQUEST['action']) {
             case 'edit':
                 if (!empty($messages[$id])) {
-                    $TPL = new TEMPLATE(__DIR__.DS.'comment-edit.tpl');
+                    $TEMPLATE = new TEMPLATE(__DIR__.DS.'comment-edit.tpl');
+
                     if (USER::moderator('guestbook', $messages[$id])) {
-                        $TPL->set('comment', $id);
-                        $TPL->set('text', empty($REQUEST['text']) ? $messages[$id]['text'] : $REQUEST['text']);
+                        $TEMPLATE->set('comment', $id);
+                        $TEMPLATE->set('text', empty($REQUEST['text']) ? $messages[$id]['text'] : $REQUEST['text']);
                     }
                     if (USER::moderator('guestbook')) {
-                        $TPL->set('moderator', TRUE);
+                        $TEMPLATE->set('moderator', TRUE);
                     }
-                    $TPL->set('bbcodes', CMS::call('PARSER')->showBbcodesPanel('edit.text', USER::moderator('guestbook')));
-                    SYSTEM::defineWindow('Edit', $TPL->parse());
+                    $TEMPLATE->set('bbcodes', CMS::call('PARSER')->showBbcodesPanel('edit.text', USER::moderator('guestbook')));
+                    SYSTEM::defineWindow('Edit', $TEMPLATE->parse());
                 }
                 break;
 
@@ -64,7 +69,7 @@ if (!empty($REQUEST['save'])) {
 $messages = $GUESTBOOK->getMessages();
 
 if (!empty($messages)) {
-    $TPL      = new TEMPLATE(__DIR__.DS.'comment.tpl');
+    $TEMPLATE = new TEMPLATE(__DIR__.DS.'comment.tpl');
     $output   = '';
     $count    = sizeof($messages);
     $ids      = array_keys($messages);
@@ -72,6 +77,7 @@ if (!empty($messages)) {
     $page     = FILTER::get('REQUEST', 'page');
     $pagination = GetPagination($page, $perpage, $count);
     for ($i = $pagination['start']; $i < $pagination['last']; $i++) {
+
         if (!empty($messages[$ids[$i]])) {
             $messages[$ids[$i]]['id']      = $ids[$i];
             $messages[$ids[$i]]['text']    = CMS::call('PARSER')->parseText($messages[$ids[$i]]['text']);
@@ -85,6 +91,7 @@ if (!empty($messages)) {
             $messages[$ids[$i]]['opened']  = FALSE;
             $user = USER::getUser('user');
             if ($user !== 'guest') {
+
                 if ($messages[$ids[$i]]['author'] !== $user) {
                     $messages[$ids[$i]]['opened'] = TRUE;
                 }
@@ -95,18 +102,20 @@ if (!empty($messages)) {
             if (USER::moderator('guestbook', $messages[$ids[$i]])) {
                 $messages[$ids[$i]]['moderator'] = TRUE;
                 $messages[$ids[$i]]['link'] = MODULE.'guestbook';
+
                 if (!empty($messages[$ids[$i]]['ip'])) {
                     if ($page < 2)
                          $messages[$ids[$i]]['ban'] = MODULE.'guestbook';
                     else $messages[$ids[$i]]['ban'] = MODULE.'guestbook'.PAGE.$page;
                 }
             }
-            $TPL->set($messages[$ids[$i]]);
-            $output .= $TPL->parse();
+            $TEMPLATE->set($messages[$ids[$i]]);
+            $output .= $TEMPLATE->parse();
         }
     }
 
     SYSTEM::defineWindow('Guestbook', $output);
+
     if ($count > $perpage) {
         SYSTEM::defineWindow('', Pagination($count, $perpage, $page, MODULE.'guestbook'));
     }

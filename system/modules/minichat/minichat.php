@@ -5,13 +5,13 @@
 
 if (!defined('idxCMS')) die();
 
-$MC = new MESSAGE(CONTENT, 'minichat');
-$messages = $MC->getMessages();
+$MINICHAT = new MESSAGE(CONTENT, 'minichat');
+$messages = $MINICHAT->getMessages();
 
 if (!empty($REQUEST['mctext']) && !empty($REQUEST['save'])) {
     try {
         if (USER::$logged_in) {
-            $MC->sendMessage($REQUEST['mctext']);
+            $MINICHAT->sendMessage($REQUEST['mctext']);
         }
         FILTER::remove('REQUEST', 'mctext');
     } catch (Exception $error) {
@@ -22,7 +22,7 @@ if (USER::moderator('minichat')) {
     if (!empty($REQUEST['delete'])) {
         $id = FILTER::get('REQUEST', 'message');
         if (!empty($messages[$id])) {
-            $MC->removeMessage($id);
+            $MINICHAT->removeMessage($id);
         }
     }
     if (!empty($REQUEST['ban'])) CMS::call('FILTER')->ban();
@@ -30,11 +30,12 @@ if (USER::moderator('minichat')) {
 #
 # Show messages
 #
-$messages = $MC->getMessages();
+$messages = $MINICHAT->getMessages();
 $output = [];
 
 if (!empty($messages)) {
     $messages = array_slice($messages, 0, CONFIG::getValue('minichat', 'mess_to_show'), TRUE);
+
     foreach ($messages as $key => $message) {
         $output['messages'][$key]         = $message;
         $output['messages'][$key]['id']   = $key;
@@ -49,7 +50,7 @@ if (!empty($messages)) {
         } else unset($output['messages'][$key]['ip']);
     }
 }
-unset($MC);
+unset($MINICHAT);
 #
 # Show post form
 #
@@ -61,6 +62,6 @@ if (USER::$logged_in) {
     }
 }
 
-$TPL = new TEMPLATE(__DIR__.DS.'minichat.tpl');
-$TPL->set($output);
-SYSTEM::defineWindow('Minichat', $TPL->parse());
+$TEMPLATE = new TEMPLATE(__DIR__.DS.'minichat.tpl');
+$TEMPLATE->set($output);
+SYSTEM::defineWindow('Minichat', $TEMPLATE->parse());

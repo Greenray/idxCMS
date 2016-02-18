@@ -129,9 +129,9 @@ if ((empty($section) && empty($category)) || !empty($REQUEST['new']) || !empty($
     $output['bbCodes_desc'] = CMS::call('PARSER')->showBbcodesPanel('post.desc');
     $output['bbCodes_text'] = CMS::call('PARSER')->showBbcodesPanel('post.text');
 
-    $TPL = new TEMPLATE(__DIR__.DS.'post.tpl');
-    $TPL->set($output);
-    echo $TPL->parse();
+    $TEMPLATE = new TEMPLATE(__DIR__.DS.'post.tpl');
+    $TEMPLATE->set($output);
+    echo $TEMPLATE->parse();
 
 } elseif (!empty($sections[$section])) {
 
@@ -158,9 +158,9 @@ if ((empty($section) && empty($category)) || !empty($REQUEST['new']) || !empty($
             $output['items'][] = $post;
         }
 
-        $TPL = new TEMPLATE(__DIR__.DS.'items.tpl');
-        $TPL->set($output);
-        echo $TPL->parse();
+        $TEMPLATE = new TEMPLATE(__DIR__.DS.'items.tpl');
+        $TEMPLATE->set($output);
+        echo $TEMPLATE->parse();
 
     } else {
         header('Location: '.MODULE.'admin&id=posts.categories');

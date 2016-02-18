@@ -21,6 +21,6 @@ $stats['todayusers'] = empty($stats['users']) ? 0 : sizeof($stats['users']);
 $stats['todayhosts'] = sizeof($stats['hosts']);
 $stats['regonline']  = $stats['visitors'] - $guests; # Number of registered users online
 
-$TPL = new TEMPLATE(__DIR__.DS.'counter.tpl');
-$TPL->set($stats);
-SYSTEM::defineWindow('Counter', $TPL->parse());
+$TEMPLATE = new TEMPLATE(__DIR__.DS.'counter.tpl');
+$TEMPLATE->set($stats);
+SYSTEM::defineWindow('Counter', $TEMPLATE->parse());

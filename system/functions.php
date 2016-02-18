@@ -25,6 +25,7 @@ function AdvScanDir($directory, $mask = '', $type = 'all', $filter = FALSE, $exc
     $exc     = ['.', '..', '.htaccess', 'index.html'];
     $exclude = array_unique(array_merge($exc, $except));
     $dir     = [];
+
     if (!empty($mask)) {
         $mask = '/^'.str_replace('*', '(.*)', str_replace('.', '\\.', $mask)).DS;
     }

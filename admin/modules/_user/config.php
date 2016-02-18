@@ -38,7 +38,7 @@ $config += CONFIG::getSection('avatar');
 $config += CONFIG::getSection('pm');
 $config += CONFIG::getSection('feedback');
 
-$TPL = new TEMPLATE(__DIR__.DS.'config.tpl');
-$TPL->set($config);
-echo $TPL->parse();
+$TEMPLATE = new TEMPLATE(__DIR__.DS.'config.tpl');
+$TEMPLATE->set($config);
+echo $TEMPLATE->parse();
 

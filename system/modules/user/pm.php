@@ -17,9 +17,11 @@ if (!USER::$logged_in) {
         $PM = new MESSAGE(PM_DATA, USER::getUser('user'));
         $PM->sendPrivateMessage($REQUEST['for'], $REQUEST['text']);
         SYSTEM::ShowMessage('Message sent');
+
     } catch (Exception $error) {
         SYSTEM::showError($error->getMessage());
     }
+
     unset($PM);
 
 } elseif (!empty($REQUEST['for'])) {
@@ -37,14 +39,16 @@ if (!USER::$logged_in) {
     try {
         if (!empty($REQUEST['delete'])) $PM->removeMessage($REQUEST['delete'], 'inbox');
         if (!empty($REQUEST['remove'])) $PM->removeMessage($REQUEST['remove'], 'outbox');
+
     } catch (Exception $error) {
         SYSTEM::showError($error->getMessage());
     }
+
     if (!empty($REQUEST['mode'])) {
         if ($REQUEST['mode'] === 'outbox') {
             $messages = $PM->getMessages('outbox');
             if (!empty($messages)) {
-                $TPL = new TEMPLATE(__DIR__.DS.'pm.tpl');
+                $TEMPLATE = new TEMPLATE(__DIR__.DS.'pm.tpl');
                 $output  = '';
                 $count   = sizeof($messages);
                 $ids     = array_keys($messages);
@@ -62,14 +66,17 @@ if (!USER::$logged_in) {
                         $messages[$ids[$i]]['avatar']  = GetAvatar($messages[$ids[$i]]['to']);
                         $messages[$ids[$i]]['country'] = $user['country'];
                         $messages[$ids[$i]]['city']    = $user['city'];
-                        $TPL->set($messages[$ids[$i]]);
-                        $output .= $TPL->parse();
+                        $TEMPLATE->set($messages[$ids[$i]]);
+                        $output .= $TEMPLATE->parse();
                     }
                 }
+
                 SYSTEM::defineWindow('Messages', $output);
+
                 if ($count > $perpage) {
                     SYSTEM::defineWindow('', Pagination($count, $perpage, $page, MODULE.'user.pm&user='.$REQUEST['user'].'&mode=outbox'));
                 }
+
             } else  SYSTEM::showMessage('Box is empty', MODULE.'user.pm');
 
         } elseif ($REQUEST['mode'] === 'inbox') {
@@ -77,17 +84,17 @@ if (!USER::$logged_in) {
             if (!empty($messages)) {
                 if (!empty($REQUEST['reply'])) {
                     $user = USER::getUserData($REQUEST['reply']);
-                    $TPL  = new TEMPLATE(__DIR__.DS.'comment-post.tpl');
-                    $TPL->set('action',         '');
-                    $TPL->set('nick',           $user['nick']);
-                    $TPL->set('text',           empty($REQUEST['text']) ? '[quote]'.$messages[$REQUEST['re']]['text'].'[/quote]' : $REQUEST['text']);
-                    $TPL->set('bbcodes',        CMS::call('PARSER')->showBbcodesPanel('comment.text'));
-                    $TPL->set('message_length', USER::$root ? '' : CONFIG::getValue('pm', 'message_length'));
-                    $TPL->set('for',            $REQUEST['reply']);
-                    SYSTEM::defineWindow('Reply', $TPL->parse());
+                    $TEMPLATE  = new TEMPLATE(__DIR__.DS.'comment-post.tpl');
+                    $TEMPLATE->set('action',         '');
+                    $TEMPLATE->set('nick',           $user['nick']);
+                    $TEMPLATE->set('text',           empty($REQUEST['text']) ? '[quote]'.$messages[$REQUEST['re']]['text'].'[/quote]' : $REQUEST['text']);
+                    $TEMPLATE->set('bbcodes',        CMS::call('PARSER')->showBbcodesPanel('comment.text'));
+                    $TEMPLATE->set('message_length', USER::$root ? '' : CONFIG::getValue('pm', 'message_length'));
+                    $TEMPLATE->set('for',            $REQUEST['reply']);
+                    SYSTEM::defineWindow('Reply', $TEMPLATE->parse());
                 } else {
                     $PM->setAllNoNew();
-                    $TPL = new TEMPLATE(__DIR__.DS.'pm.tpl');
+                    $TEMPLATE = new TEMPLATE(__DIR__.DS.'pm.tpl');
                     $output  = '';
                     $count   = sizeof($messages);
                     $ids     = array_keys($messages);
@@ -111,15 +118,18 @@ if (!USER::$logged_in) {
                                 $messages[$ids[$i]]['city']    = $user['city'];
                                 $messages[$ids[$i]]['reply']   = TRUE;
                             }
-                            $TPL->set($messages[$ids[$i]]);
-                            $output .= $TPL->parse();
+
+                            $TEMPLATE->set($messages[$ids[$i]]);
+                            $output .= $TEMPLATE->parse();
                         }
                     }
                     SYSTEM::defineWindow('Messages', $output);
+
                     if ($count > $perpage) {
                         SYSTEM::defineWindow('', Pagination($count, $perpage, $page, MODULE.'user.pm&mode=inbox'));
                     }
                 }
+
             } else SYSTEM::showMessage('Box is empty', MODULE.'user.pm');
         }
 

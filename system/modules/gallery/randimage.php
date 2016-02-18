@@ -13,14 +13,17 @@ if (!empty($albums)) {
     $output = [];
     $random = CONFIG::getValue('gallery', 'random');
     $count  = sizeof($albums);
+
     if ($random >= $count) {
         foreach ($albums as $id => $album) {
             $image = CMS::call('GALLERY')->getRandomImage($id);
+
             if (!empty($image)) {
                 $output[$id] = $image;
                 $output[$id]['path'] = $album['path'];
             }
         }
+
     } else {
         for ($i = 1; $i <= $random; $i++) {
             $album = mt_rand(1, $count);
@@ -31,9 +34,10 @@ if (!empty($albums)) {
             }
         }
     }
+
     if (!empty($output)) {
-        $TPL = new TEMPLATE(__DIR__.DS.'randimage.tpl');
-        $TPL->set('randoms', $output);
-        SYSTEM::defineWindow('Random image', $TPL->parse());
+        $TEMPLATE = new TEMPLATE(__DIR__.DS.'randimage.tpl');
+        $TEMPLATE->set('randoms', $output);
+        SYSTEM::defineWindow('Random image', $TEMPLATE->parse());
     }
 }

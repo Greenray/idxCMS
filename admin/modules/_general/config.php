@@ -150,6 +150,6 @@ $config['track']          = GetColor('track',          strtr($current['track'], 
 $config['border']         = GetColor('border',         strtr($current['border'],         ['0x' => '#']));
 $config['loader']         = GetColor('loader',         strtr($current['loader'],         ['0x' => '#']));
 
-$TPL = new TEMPLATE(__DIR__.DS.'config.tpl');
-$TPL->set($config);
-echo $TPL->parse();
+$TEMPLATE = new TEMPLATE(__DIR__.DS.'config.tpl');
+$TEMPLATE->set($config);
+echo $TEMPLATE->parse();

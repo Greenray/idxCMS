@@ -27,9 +27,9 @@ if (!empty($REQUEST['selected'])) {
         elseif (!file_exists(APHORISMS.SYSTEM::get('locale').'.txt')) $output['aph'] = file_get_contents(APHORISMS.SYSTEM::get('locale').'.txt');
         else                                                          $output['aph'] = file_get_contents(APHORISMS.'en.txt');
 
-        $TPL = new TEMPLATE(__DIR__.DS.'aphorisms.tpl');
-        $TPL->set($output);
-        echo $TPL->parse();
+        $TEMPLATE = new TEMPLATE(__DIR__.DS.'aphorisms.tpl');
+        $TEMPLATE->set($output);
+        echo $TEMPLATE->parse();
     }
 } else {
     #
@@ -38,7 +38,7 @@ if (!empty($REQUEST['selected'])) {
     $output['title']  = __('Aphorisms');
     $output['select'] = $aphorisms;
 
-    $TPL = new TEMPLATE(__DIR__.DS.'select.tpl');
-    $TPL->set($output);
-    echo $TPL->parse();
+    $TEMPLATE = new TEMPLATE(__DIR__.DS.'select.tpl');
+    $TEMPLATE->set($output);
+    echo $TEMPLATE->parse();
 }

@@ -19,6 +19,6 @@ if (!empty($REQUEST['save'])) {
 
 $config = CONFIG::getSection('posts');
 
-$TPL = new TEMPLATE(__DIR__.DS.'config.tpl');
-$TPL->set(CONFIG::getSection('posts'));
-echo $TPL->parse();
+$TEMPLATE = new TEMPLATE(__DIR__.DS.'config.tpl');
+$TEMPLATE->set(CONFIG::getSection('posts'));
+echo $TEMPLATE->parse();

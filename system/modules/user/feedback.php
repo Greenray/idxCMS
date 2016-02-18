@@ -17,11 +17,14 @@ if (!empty($message)) {
             empty($REQUEST['email']) ? USER::getUser('email') : $REQUEST['email']
         );
         SYSTEM::defineWindow('', __('Message sent'));
+
         unset($REQUEST);
         unset($FEEDBACK);
+
     } catch (Exception $error) {
         SYSTEM::showError($error->getMessage());
     }
+
 } elseif (!empty($REQUEST['new_letter'])) {
     if (USER::$logged_in) {
         if (!empty($REQUEST['subject'])) {
@@ -34,7 +37,9 @@ if (!empty($message)) {
                     $REQUEST['letter']
                 );
                 SYSTEM::defineWindow('', __('Message sent'));
+
             } else SYSTEM::showError('Text is empty');
+
         } else SYSTEM::showError('Subject is empty');
 
     } else {
@@ -52,9 +57,13 @@ if (!empty($message)) {
                                 $REQUEST['letter']
                             );
                             SYSTEM::defineWindow('', __('Message sent'));
+
                         } else SYSTEM::showError('Text is empty');
+
                     } else SYSTEM::showError('Subject is empty');
+
                 } else SYSTEM::showError('Error in email address');
+
             } else SYSTEM::showError('What is your name?');
 
         } catch (Exception $error) {
@@ -63,15 +72,16 @@ if (!empty($message)) {
     }
 }
 
-$TPL = new TEMPLATE(__DIR__.DS.'comment-post.tpl');
+$TEMPLATE = new TEMPLATE(__DIR__.DS.'comment-post.tpl');
 
 if (!USER::$logged_in) {
-    $TPL->set('email',   empty($REQUEST['email']) ? __('Enter your e-mail') : $REQUEST['email']);
-    $TPL->set('captcha', ShowCaptcha());
+    $TEMPLATE->set('email',   empty($REQUEST['email']) ? __('Enter your e-mail') : $REQUEST['email']);
+    $TEMPLATE->set('captcha', ShowCaptcha());
 }
 
-$TPL->set('text', $message);
-$TPL->set('message_length', USER::$root ? NULL : CONFIG::getValue('feedback', 'message_length'));
-$TPL->set('bbcodes', CMS::call('PARSER')->showBbcodesPanel('feedback.text'));
+$TEMPLATE->set('text', $message);
+$TEMPLATE->set('message_length', USER::$root ? NULL : CONFIG::getValue('feedback', 'message_length'));
+$TEMPLATE->set('bbcodes', CMS::call('PARSER')->showBbcodesPanel('feedback.text'));
+
 SYSTEM::set('pagename', __('Feedback'));
-SYSTEM::defineWindow('Feedback', $TPL->parse());
+SYSTEM::defineWindow('Feedback', $TEMPLATE->parse());

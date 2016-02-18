@@ -175,7 +175,7 @@ class USER {
      * @return boolean       The result
      */
     private function checkUserName($name, $type) {
-        if (!empty($name)) {
+        if (!empty($name) && !empty($type)) {
             if (!in_array(strtolower($name), self::$disallowed_names)) {
                 if ($type === 'Name') {
                     if (OnlyLatin($name)) {
@@ -183,7 +183,7 @@ class USER {
                     }
                 } else {
                     if ($type === 'Nick') {
-                        if (strlen($name, 'UTF-8') <= CONFIG::getValue('user', 'nick_length')) {
+                        if (mb_strlen($name, 'UTF-8') <= CONFIG::getValue('user', 'nick_length')) {
                             return TRUE;
                         }
                     }

@@ -6,18 +6,18 @@
 if (!defined('idxCMS')) die();
 
 SYSTEM::set('pagename', __('Guestbook'));
-$GB = new MESSAGE(CONTENT, 'guestbook');
-$messages = $GB->getMessages();
+$GUESTBOOK = new MESSAGE(CONTENT, 'guestbook');
+$messages = $GUESTBOOK->getMessages();
 $id = FILTER::get('REQUEST', 'comment');
 
 if (!empty($REQUEST['save'])) {
     try {
         if (!empty($id) && USER::moderator('guestbook', $messages[$id])) {
-            $GB->saveMessage($id, FILTER::get('REQUEST', 'text'));
+            $GUESTBOOK->saveMessage($id, FILTER::get('REQUEST', 'text'));
             unset($id);
         } else {
             if (USER::$logged_in) {
-                $GB->sendMessage(FILTER::get('REQUEST', 'text'));
+                $GUESTBOOK->sendMessage(FILTER::get('REQUEST', 'text'));
             }
         }
         FILTER::remove('REQUEST', 'text');
@@ -45,7 +45,7 @@ if (!empty($REQUEST['save'])) {
             case 'delete':
                 if (!empty($messages[$id])) {
                     if (USER::moderator('guestbook', $messages[$id])) {
-                        $GB->removeMessage($id);
+                        $GUESTBOOK->removeMessage($id);
                     }
                 }
                 break;
@@ -61,7 +61,7 @@ if (!empty($REQUEST['save'])) {
 #
 # Show messages
 #
-$messages = $GB->getMessages();
+$messages = $GUESTBOOK->getMessages();
 
 if (!empty($messages)) {
     $TPL      = new TEMPLATE(__DIR__.DS.'comment.tpl');
@@ -89,7 +89,7 @@ if (!empty($messages)) {
                     $messages[$ids[$i]]['opened'] = TRUE;
                 }
             }
-            if (($author['rights'] === '*') || ($user === $messages[$ids[$i]]['author'])) {
+            if (($user === 'guest') || ($author['rights'] === '*') || ($user === $messages[$ids[$i]]['author'])) {
                 $messages[$ids[$i]]['ip'] = '';
             }
             if (USER::moderator('guestbook', $messages[$ids[$i]])) {
@@ -111,7 +111,6 @@ if (!empty($messages)) {
         SYSTEM::defineWindow('', Pagination($count, $perpage, $page, MODULE.'guestbook'));
     }
 }
-unset($GB);
 #
 # Show post form
 #

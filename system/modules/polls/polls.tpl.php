@@ -7,7 +7,7 @@ die();?>
 
 <!-- FOREACH poll = $polls -->
 <div class="poll">
-    <!-- IF !empty($poll.voited) -->
+    <!-- IF $poll.voited==TRUE -->
         <table>
             <tr><th colspan="2" class="center">$poll.question</th></tr>
             <!-- FOREACH answer = $poll.answers -->

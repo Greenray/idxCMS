@@ -94,7 +94,7 @@ class POLLS {
                 $data['count'][]   = 0;
             }
         }
-        $data['ips'] = [];
+        $data['users'] = [];
         $this->active[RandomString(8)] = $data;
         return $this->savePolls(TRUE, FALSE);
     }
@@ -162,12 +162,11 @@ class POLLS {
         if (!isset($this->active[$poll]['answers'][$answer])) {
             throw new Exception('This answer does not exists in this poll');
         }
-        $user = USER::$logged_in ? USER::getUser('user') : $_SERVER['REMOTE_ADDR'];
         if ($this->isVotedInPoll($poll)) {
-            throw new Exception('You already voted in this poll');
+            return TRUE;
         }
         $this->active[$poll]['count'][$answer]++;
-        $this->active[$poll]['ips'][] = $user;
+        $this->active[$poll]['users'][] = USER::getUser('user');
         setcookie($this->_cookie.'_poll['.$poll.']', $poll, time() + 3600 * 24 * 365 * 5);
         return $this->savePolls(TRUE, FALSE);
     }
@@ -179,8 +178,7 @@ class POLLS {
      * @return boolean       The result of operation
      */
     public function isVotedInPoll($poll) {
-        $user = USER::$logged_in ? USER::getUser('user') : $_SERVER['REMOTE_ADDR'];
-        if (in_array($user, $this->active[$poll]['ips'])) {
+        if (in_array(USER::getUser('user'), $this->active[$poll]['users'])) {
             return TRUE;
         }
         if (!empty($_COOKIE[$this->_cookie.'_poll']) && is_array($_COOKIE[$this->_cookie.'_poll']) && in_array($poll, $_COOKIE[$this->_cookie.'_poll'])) {

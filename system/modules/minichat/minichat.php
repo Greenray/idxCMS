@@ -34,9 +34,7 @@ $messages = $MC->getMessages();
 $output = [];
 
 if (!empty($messages)) {
-    $messages = array_reverse($messages, TRUE);
-
-//    $messages = array_slice($messages, 0, CONFIG::getValue('minichat', 'mess-to-show'), TRUE);
+    $messages = array_slice($messages, 0, CONFIG::getValue('minichat', 'mess_to_show'), TRUE);
 
     foreach ($messages as $key => $message) {
         $output['messages'][$key]         = $message;

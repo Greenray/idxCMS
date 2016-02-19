@@ -1,5 +1,5 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem v3.0
+# idxCMS Flat Files Content Management Sysytem v3.2
 # Copyright (c) 2016 Victor Nabatov greenray.spb@gmail.com
 # Administration: Aphorisms.
 

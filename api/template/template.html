@@ -304,7 +304,14 @@
                     <tr>
                 <td class="type w_200">private  string</td>
                 <td class="description">
-                    <p><a href="#css"><strong><span class="black">css</span></strong></a> (<span class="lilac">string</span> <span class="blue">$file</span>)</p>
+                    <p><a href="#setPrefixes"><strong><span class="black">setPrefixes</span></strong></a> (<span class="lilac">string</span> <span class="blue">$file</span>)</p>
+                    <p class="description">Generateы CSS3 properties with browser-specific prefixes.</p>
+                </td>
+            </tr>
+                    <tr>
+                <td class="type w_200">private  string</td>
+                <td class="description">
+                    <p><a href="#compressCSS"><strong><span class="black">compressCSS</span></strong></a> (<span class="lilac">string</span> <span class="blue">$file</span>)</p>
                     <p class="description">Generateы CSS3 properties with browser-specific prefixes.</p>
                 </td>
             </tr>
@@ -904,7 +911,7 @@
         </div>
         <hr />
             <div class="location">system/template.class.php at line 660</div>
-        <code class="arguments" id="css">private  string <strong>css</strong> (<span class="lilac">string</span> <span class="blue">$file</span>)</code>
+        <code class="arguments" id="setPrefixes">private  string <strong>setPrefixes</strong> (<span class="lilac">string</span> <span class="blue">$file</span>)</code>
         <div class="details">
                     <p class="description">Generateы CSS3 properties with browser-specific prefixes.<br /> The prefix list is not complete, it contains only the used properties in the CMS.</p>
             <div class="finfo">
@@ -924,7 +931,28 @@
 </div>
         </div>
         <hr />
-            <div class="location">system/template.class.php at line 698</div>
+            <div class="location">system/template.class.php at line 690</div>
+        <code class="arguments" id="compressCSS">private  string <strong>compressCSS</strong> (<span class="lilac">string</span> <span class="blue">$file</span>)</code>
+        <div class="details">
+                    <p class="description">Generateы CSS3 properties with browser-specific prefixes.<br /> The prefix list is not complete, it contains only the used properties in the CMS.</p>
+            <div class="finfo">
+    <table class="hid">
+            <tr>
+            <td class="hid left w_100">Parameters</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid blue w_100">$file</td>
+                <td class="hid">css file to to work with</td>
+                    </tr>
+            <tr>
+            <td class="hid left w_100">Return</td>
+            <td class="hid right w_100 lilac">string</td>
+                            <td class="hid" colspan="2">Parsed string</td>
+                    </tr>
+        </table>
+</div>
+        </div>
+        <hr />
+            <div class="location">system/template.class.php at line 716</div>
         <code class="arguments" id="showElement">private  string <strong>showElement</strong> (<span class="lilac">string</span> <span class="blue">$element</span>, <span class="lilac">string</span> <span class="blue">$parameters</span>)</code>
         <div class="details">
                     <p class="description">Shows the content.<br /> <pre><br /> The template is:<br />   [show=main,{module}@main]<ul><li>main - module type (main, box и т.д)</li><li>{module} - module name</li><li>main - template type (defined in /skins/_skin_name_/skin.php</li></ul></pre></p>
@@ -951,7 +979,7 @@
 </div>
         </div>
         <hr />
-            <div class="location">system/template.class.php at line 811</div>
+            <div class="location">system/template.class.php at line 829</div>
         <code class="arguments" id="show">private  string <strong>show</strong> (<span class="lilac">array</span> <span class="blue">$matches</span>)</code>
         <div class="details">
                     <p class="description">Shows element.</p>
@@ -972,7 +1000,7 @@
 </div>
         </div>
         <hr />
-            <div class="location">system/template.class.php at line 830</div>
+            <div class="location">system/template.class.php at line 848</div>
         <code class="arguments" id="storeString">private  string <strong>storeString</strong> (<span class="lilac">array</span> <span class="blue">$strings</span>, <span class="lilac">string</span> <span class="blue">$quot</span>, <span class="lilac">string</span> <span class="blue">$string</span>, <span class="lilac">mixed</span> <span class="blue">&$strings</span>)</code>
         <div class="details">
                     <p class="description">Stores a template code string in array.</p>
@@ -1005,7 +1033,7 @@
 </div>
         </div>
         <hr />
-            <div class="location">system/template.class.php at line 854</div>
+            <div class="location">system/template.class.php at line 872</div>
         <code class="arguments" id="_error">private  void <strong>_error</strong> (<span class="lilac">integer</span> <span class="blue">$errno</span>, <span class="lilac">string</span> <span class="blue">$err_msg</span>, <span class="lilac">string|boolean</span> <span class="blue">$err_file</span>, <span class="lilac">string|boolean</span> <span class="blue">$err_line</span>)</code>
         <div class="details">
                     <p class="description">Shows a template error.</p>
@@ -1039,7 +1067,7 @@
 </div>
         </div>
         <hr />
-            <div class="location">system/template.class.php at line 883</div>
+            <div class="location">system/template.class.php at line 901</div>
         <code class="arguments" id="executeErrorFunction">protected  void <strong>executeErrorFunction</strong> (<span class="lilac">integer</span> <span class="blue">$errno</span>, <span class="lilac">string</span> <span class="blue">$err_msg</span>, <span class="lilac">unknown</span> <span class="blue">$err_file</span>, <span class="lilac">unknown</span> <span class="blue">$err_line</span>)</code>
         <div class="details">
                     <p class="description">Ececutes the error function when detect an error in template code.</p>
@@ -1073,7 +1101,7 @@
 </div>
         </div>
         <hr />
-            <div class="location">system/template.class.php at line 925</div>
+            <div class="location">system/template.class.php at line 943</div>
         <code class="arguments" id="templateErrorHandler">public final  boolean <strong>templateErrorHandler</strong> (<span class="lilac">integer</span> <span class="blue">$errno</span>, <span class="lilac">string</span> <span class="blue">$err_msg</span>, <span class="lilac">string</span> <span class="blue">$err_file</span>, <span class="lilac">integer</span> <span class="blue">$err_line</span>)</code>
         <div class="details">
                     <p class="description">Error handler.</p>
@@ -1112,7 +1140,7 @@
 </div>
         </div>
         <hr />
-            <div class="location">system/template.class.php at line 944</div>
+            <div class="location">system/template.class.php at line 962</div>
         <code class="arguments" id="getEvalError">private  boolean <strong>getEvalError</strong> (<span class="lilac">string</span> <span class="blue">$err_msg</span>, <span class="lilac">integer</span> <span class="blue">$err_line</span>, <span class="lilac">mixed</span> <span class="blue">&$err_msg</span>, <span class="lilac">mixed</span> <span class="blue">&$err_line</span>)</code>
         <div class="details">
                     <p class="description">Parses and gets the message and the line of a evaluation error.</p>
@@ -1139,7 +1167,7 @@
 </div>
         </div>
         <hr />
-            <div class="location">system/template.class.php at line 971</div>
+            <div class="location">system/template.class.php at line 989</div>
         <code class="arguments" id="getFromCache">protected  boolean <strong>getFromCache</strong> (<span class="lilac">string</span> <span class="blue">$file</span>, <span class="lilac">string</span> <span class="blue">$code</span>, <span class="lilac">mixed</span> <span class="blue">&$code</span>)</code>
         <div class="details">
                     <p class="description">Gets the php code of a cache handler.</p>
@@ -1166,7 +1194,7 @@
 </div>
         </div>
         <hr />
-            <div class="location">system/template.class.php at line 986</div>
+            <div class="location">system/template.class.php at line 1004</div>
         <code class="arguments" id="getDataFromCache">public  boolean <strong>getDataFromCache</strong> (<span class="lilac">string</span> <span class="blue">$data_name</span>, <span class="lilac">mixed</span> <span class="blue">$data</span>, <span class="lilac">mixed</span> <span class="blue">&$data</span>)</code>
         <div class="details">
                     include $file<br />                    <p class="description">Gets a data from the cache.</p>
@@ -1193,7 +1221,7 @@
 </div>
         </div>
         <hr />
-            <div class="location">system/template.class.php at line 1002</div>
+            <div class="location">system/template.class.php at line 1020</div>
         <code class="arguments" id="toCache">protected  void <strong>toCache</strong> (<span class="lilac">string</span> <span class="blue">$file</span>, <span class="lilac">unknown</span> <span class="blue">$code</span>)</code>
         <div class="details">
                     <p class="description">Puts the php code in a cache.</p>
@@ -1215,7 +1243,7 @@
 </div>
         </div>
         <hr />
-            <div class="location">system/template.class.php at line 1018</div>
+            <div class="location">system/template.class.php at line 1036</div>
         <code class="arguments" id="storeInCache">public  void <strong>storeInCache</strong> (<span class="lilac">string</span> <span class="blue">$data_name</span>, <span class="lilac">mixed</span> <span class="blue">$data</span>, <span class="lilac">boolean|integer</span> <span class="blue">$expired</span>)</code>
         <div class="details">
                     <p class="description">Stores a template in the cache.</p>

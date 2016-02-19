@@ -153,7 +153,7 @@
             <tr>
             <td class="hid left w_100">Version</td>
             <td class="hid right w_100 lilac">&nbsp;</td>
-                            <td class="hid" colspan="2">3.1</td>
+                            <td class="hid" colspan="2">3.2</td>
                     </tr>
             <tr>
             <td class="hid left w_100">Author</td>
@@ -225,7 +225,7 @@
                     <tr>
                 <td class="type w_200">public  string</td>
                 <td class="description">
-                    <p><a href="#showCommentForm"><strong><span class="black">showCommentForm</span></strong></a> (<span class="lilac">obj</span> <span class="blue">$obj</span>, <span class="lilac">array</span> <span class="blue">$item</span>, <span class="lilac">string</span> <span class="blue">$action</span>, <span class="lilac">string</span> <span class="blue">$for</span>)</p>
+                    <p><a href="#showCommentForm"><strong><span class="black">showCommentForm</span></strong></a> (<span class="lilac">obj</span> <span class="blue">$module</span>, <span class="lilac">array</span> <span class="blue">$for</span>)</p>
                     <p class="description">Form to post comment.</p>
                 </td>
             </tr>
@@ -412,8 +412,8 @@
 </div>
         </div>
         <hr />
-            <div class="location">system/comments.class.php at line 143</div>
-        <code class="arguments" id="showCommentForm">public  string <strong>showCommentForm</strong> (<span class="lilac">obj</span> <span class="blue">$obj</span>, <span class="lilac">array</span> <span class="blue">$item</span>, <span class="lilac">string</span> <span class="blue">$action</span>, <span class="lilac">string</span> <span class="blue">$for</span>)</code>
+            <div class="location">system/comments.class.php at line 145</div>
+        <code class="arguments" id="showCommentForm">public  string <strong>showCommentForm</strong> (<span class="lilac">obj</span> <span class="blue">$module</span>, <span class="lilac">array</span> <span class="blue">$for</span>)</code>
         <div class="details">
                     <p class="description">Form to post comment.</p>
             <div class="finfo">
@@ -421,13 +421,13 @@
             <tr>
             <td class="hid left w_100">Parameters</td>
             <td class="hid right w_100 lilac">obj</td>
-                            <td class="hid blue w_100">$obj</td>
+                            <td class="hid blue w_100">$module</td>
                 <td class="hid">Current object</td>
                     </tr>
             <tr>
             <td class="hid left w_100">&nbsp</td>
             <td class="hid right w_100 lilac">array</td>
-                            <td class="hid blue w_100">$item</td>
+                            <td class="hid blue w_100">$for</td>
                 <td class="hid">Item to comment</td>
                     </tr>
             <tr>
@@ -439,7 +439,7 @@
 </div>
         </div>
         <hr />
-            <div class="location">system/comments.class.php at line 166</div>
+            <div class="location">system/comments.class.php at line 168</div>
         <code class="arguments" id="newComment">public  array <strong>newComment</strong> (<span class="lilac">integer</span> <span class="blue">$item</span>, <span class="lilac">string</span> <span class="blue">$text</span>)</code>
         <div class="details">
                     <p class="description">Saves new comment or reply.</p>
@@ -471,7 +471,7 @@
 </div>
         </div>
         <hr />
-            <div class="location">system/comments.class.php at line 205</div>
+            <div class="location">system/comments.class.php at line 208</div>
         <code class="arguments" id="saveComment">public  array <strong>saveComment</strong> (<span class="lilac">string</span> <span class="blue">$id</span>, <span class="lilac">array</span> <span class="blue">$item</span>)</code>
         <div class="details">
                     <p class="description">Saves comment.</p>
@@ -513,7 +513,7 @@
 </div>
         </div>
         <hr />
-            <div class="location">system/comments.class.php at line 239</div>
+            <div class="location">system/comments.class.php at line 246</div>
         <code class="arguments" id="removeComment">public  array <strong>removeComment</strong> (<span class="lilac">integer</span> <span class="blue">$id</span>)</code>
         <div class="details">
                     <p class="description">Removes comment.</p>

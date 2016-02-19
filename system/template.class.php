@@ -1,7 +1,7 @@
 <?php
 /**
  * @program   idxCMS: Flat Files Content Management System
- * @version   3.1
+ * @version   3.2
  * @author    David Casado Martínez <tokkara@gmail.com>
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011-2015 Victor Nabatov
@@ -187,7 +187,7 @@ class TEMPLATE {
         $css = preg_match_all("#\<link rel=\"stylesheet\" type=\"text/css\" href=\"(.*?)\" media=\"screen\" /\>#is", $code, $matches);
         if (!empty($matches[1])) {
             foreach($matches[1] as $key => $file) {
-                $code = str_replace($matches[0][$key], '<style type="text/css"><!--'.$this->css($file).'--></style>', $code);
+                $code = str_replace($matches[0][$key], '<style type="text/css"><!--'.$this->compressCSS($file).'--></style>', $code);
             }
         }
 		if (!eval('?>'.$code.'<?php return TRUE; ?>')) {
@@ -665,16 +665,16 @@ class TEMPLATE {
     /**
      * Generateы CSS3 properties with browser-specific prefixes.
      * The prefix list is not complete, it contains only the used properties in the CMS.
-     * 
+     *
      * @param  string $file css file to to work with
      * @return string       Parsed string
      */
-    private function css($file) {
+    private function setPrefixes($file) {
         $file    = str_replace('./', '/', $file);
         $content = file_get_contents($_SERVER['DOCUMENT_ROOT'].$file);
-        $content = preg_replace('/(\/\*).*?(\*\/)/s', '', $content);
-        preg_match_all('/_[a-zA-Z\-]+:[\s_|][a-zA-Z0-9\.\-].+?;/sm', $content, $keys);
-        preg_match_all('/[a-zA-Z\-]+:\s_[a-z].+?;/sm', $content, $values);
+        $content = preg_replace('#(\/\*).*?(\*\/)#s', '', $content);
+        preg_match_all('#_[a-zA-Z\-]+:[\s_|][a-zA-Z0-9\.\-].+?;#sm', $content, $keys);
+        preg_match_all('#[a-zA-Z\-]+:\s_[a-z].+?;#sm', $content, $values);
         $css = array_merge($keys[0], $values[0]);
 
         foreach ($css as $property) {
@@ -689,8 +689,26 @@ class TEMPLATE {
                 }
             }
         }
-
         return $content;
+    }
+
+    /**
+     * Generateы CSS3 properties with browser-specific prefixes.
+     * The prefix list is not complete, it contains only the used properties in the CMS.
+     *
+     * @param  string $file css file to to work with
+     * @return string       Parsed string
+     */
+    private function compressCSS($file) {
+        $css = $this->setPrefixes($file);
+        $css = str_replace(["\r\n", "\r", "\n", "\t"], '', $css);
+        $css = preg_replace('# {2,}#', '', $css);
+        $css = str_replace([" { "," {","{ "], '{', $css);
+        $css = str_replace([" }","} "," } "], '}', $css);
+        $css = str_replace(": ", ':', $css);
+        $css = str_replace("; ", ';', $css);
+        $css = str_replace(", ", ',', $css);
+        return $css;
     }
 
     /**

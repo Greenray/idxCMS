@@ -1,5 +1,5 @@
 <?php
-# idxCMS Flat Files Content Management System v3.1
+# idxCMS Flat Files Content Management System v3.2
 # Copyright (c) 2011 - 2015 Victor Nabatov
 # Additional skins definition
 

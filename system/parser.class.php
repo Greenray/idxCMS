@@ -34,7 +34,7 @@ class PARSER {
             "#\[email\][\s\n\r]*([a-z0-9&\-_.]+?@[\w\-]+\.([\w\-\.]+\.)?[\w]+)[\s\n\r]*\[/email\]#is"             => '<a href="mailto:\\1">\\1</a>',
             "#\[email=(\"|&quot;|)([a-z0-9&\-_.]+?@[\w\-]+\.([\w\-\.]+\.)?[\w]+)(\"|&quot;|)\](.*?)\[/email\]#is" => '<a href="mailto:\\2">\\5</a>',
             "#\[font=(\"|&quot;|)([\#\w]*)(\"|&quot;|)\](.*?)\[/font(.*?)\]#is" => '<span style="font-family:\\2;">\\4</span>',
-            "#\[h([0-9])\](.*?)\[/h([Войти0-9])\]#is" => '<h\\1>\\2</h\\3>',
+            "#\[h([0-9])\](.*?)\[/h([0-9])\]#is" => '<h\\1>\\2</h\\3>',
             "#\[hr\]#is"           => '<hr />',
             "#\[i\](.*?)\[/i\]#is" => '<i>\\1</i>',
             "#\[indent\](.*?)\[/indent\]#is" => '<blockquote>\\1</blockquote>',
@@ -260,7 +260,7 @@ class PARSER {
                             $internal = TEMP.$picture;
                         } else {
                             #
-                            # Uploaded image for saving of text
+                            # Uploaded image for saving in text
                             #
                             $zoom = $path.$picture;
                             rename(TEMP.$picture, $zoom);

@@ -31,22 +31,41 @@ class TEMPLATE {
 	/** @var array Array of the template options */
 	private $options;
 
-	/** @var string Template Code object */
-	private $sphp_code;
-
-    /* @var Brousers prefixes */
+    /* @var The prefixes of browsers */
     private $styles = [
-        'background'          => ['-webkit-', '-moz-', '-ms-', '-o-', ''],
-        'background-image'    => ['-webkit-', '-moz-', '-ms-', '-o-', ''],
-        '_border-radius'      => ['-webkit-', '-moz-', ''],
-        '_box-shadow'         => ['-webkit-', '-moz-', ''],
-        '_box-sizing'         => ['-webkit-', '-moz-', '-ms-', ''],
-        '_perspective'        => ['-webkit-', '-moz-', ''],
-        '_perspective-origin' => ['-webkit-', '-moz-', ''],
-        '_transform'          => ['-webkit-', '-moz-', '-ms-', '-o-', ''],
-        '_transform-origin'   => ['-webkit-', '-moz-', '-ms-', '-o-', ''],
-        'transform-style'     => ['-webkit-', '-moz-', '-ms-', '-o-', ''],
-        '_transition'         => ['-webkit-', '-moz-', '-ms-', '-o-', ''],
+        'background-origin'   => ['-webkit-', '-moz-', '-o-', ''],
+        'background-size'     => ['-webkit-', '-moz-', '-o-', ''],
+
+        'border-radius'       => ['-webkit-', '-moz-', ''],
+
+        'border-top-left-radius'     => ['-webkit-', '-moz-', ''],
+        'border-top-right-radius'    => ['-webkit-', '-moz-', ''],
+        'border-bottom-right-radius' => ['-webkit-', '-moz-', ''],
+        'border-bottom-left-radius'  => ['-webkit-', '-moz-', ''],
+
+        'border-image'        => ['-webkit-', '-moz-', ''],
+        'border-image-outset' => ['-webkit-', '-moz-', ''],
+        'border-image-repeat' => ['-webkit-', '-moz-', ''],
+        'border-image-source' => ['-webkit-', '-moz-', ''],
+        'border-image-width'  => ['-webkit-', '-moz-', ''],
+
+        'box-shadow'          => ['-webkit-', '-moz-', ''],
+
+        'box-sizing'          => ['-webkit-', '-moz-', ''],
+
+        'perspective'         => ['-webkit-', '-moz-', ''],
+        'perspective-origin'  => ['-webkit-', '-moz-', ''],
+
+        'transform'           => ['-webkit-', '-moz-', '-ms-', ''],
+        'transform-origin'    => ['-webkit-', '-moz-', '-ms-', ''],
+        'transform-style'     => ['-webkit-', '-moz-', ''],
+
+        'transition'          => ['-webkit-', '-moz-', '-o-', ''],
+        'transition-delay'    => ['-webkit-', '-moz-', '-o-', ''],
+        'transition-duration' => ['-webkit-', '-moz-', '-o-', ''],
+        'transition-property' => ['-webkit-', '-moz-', '-o-', ''],
+
+        'transition-timing-function' => ['-webkit-', '-moz-', '-o-', ''],
     ];
 
 	/** @var array Array of the template variables */
@@ -663,37 +682,47 @@ class TEMPLATE {
     }
 
     /**
-     * Generateы CSS3 properties with browser-specific prefixes.
+     * Generates CSS3 properties with browser-specific prefixes.
      * The prefix list is not complete, it contains only the used properties in the CMS.
+     * So it can easily be extended.
      *
      * @param  string $file css file to to work with
      * @return string       Parsed string
      */
     private function setPrefixes($file) {
-        $file    = str_replace('./', '/', $file);
-        $content = file_get_contents($_SERVER['DOCUMENT_ROOT'].$file);
-        $content = preg_replace('#(\/\*).*?(\*\/)#s', '', $content);
-        preg_match_all('#_[a-zA-Z\-]+:[\s_|][a-zA-Z0-9\.\-].+?;#sm', $content, $keys);
-        preg_match_all('#[a-zA-Z\-]+:\s_[a-z].+?;#sm', $content, $values);
-        $css = array_merge($keys[0], $values[0]);
+        $file = str_replace('./', '/', $file);
+        $css  = file_get_contents($_SERVER['DOCUMENT_ROOT'].$file);
+        $css  = preg_replace('#(\/\*).*?(\*\/)#s', '', $css);
+        $values = [];
+        foreach ($this->styles as $property => $styles) {
+            preg_match_all('#[^-]'.$property.'#s', $css, $result);
+            if (!empty($result[0])) {
+                $tmp = array_unique($result[0]);
+                    $values[] = $tmp;
+            }
 
-        foreach ($css as $property) {
-            foreach ($this->styles as $style => $prefixes) {
-                $needle = explode(':', $property);
-                if ($style === $needle[0]) {
-                    $result = '';
-                    foreach ($prefixes as $match) {
-                        $result .= str_replace('_', $match, $property);
+        }
+        foreach ($values as $key => $value) {
+            $value = trim($value[0]);
+            preg_match_all('#'.$value.':[a-zA-Z0-9\.\-\#|\d\s]+?;|[a-zA-Z\-]+:\s_[a-z].+?;#s', $css, $keys);
+            $control[] = $keys[0];
+            foreach ($keys[0] as $property) {
+                foreach ($this->styles as $style => $prefixes) {
+                    if ($style === $value) {
+                        $result = '';
+                        foreach ($prefixes as $match) {
+                            $result .= $match.$property;
+                        }
+                        $css = preg_replace('/[^-]'.$property.'/', $result, $css);
                     }
-                    $content = str_replace($property, $result, $content);
                 }
             }
         }
-        return $content;
+        return $css;
     }
 
     /**
-     * Generateы CSS3 properties with browser-specific prefixes.
+     * Generates CSS3 properties with browser-specific prefixes.
      * The prefix list is not complete, it contains only the used properties in the CMS.
      *
      * @param  string $file css file to to work with

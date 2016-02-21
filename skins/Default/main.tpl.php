@@ -91,7 +91,7 @@ die();?>
         <a href="http://ru.wikipedia.org/wiki/NoSQL" class="valid-icon valid-icon-db"></a>
         <a href="http://validator.w3.org/check?uri=referer" class="valid-icon valid-icon-xhtml"></a>
         <a href="http://jigsaw.w3.org/css-validator/check/referer" class="valid-icon valid-icon-css"></a>
-        <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" class="valid-icon valid-icon-license"></a>
+        <a href="http://creativecommons.org/licenses/by-sa/4.0/" class="valid-icon valid-icon-license"></a>
     </div>
     <div class="copyright center">[show=copyright]</div>
 </div>

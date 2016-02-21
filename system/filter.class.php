@@ -143,7 +143,7 @@ final class FILTER {
     public function ban() {
         $bans = file_exists(CONTENT.'bans') ? file_get_contents(CONTENT.'bans') : '';
         if (strpos($bans, self::$REQUEST['host']) === FALSE) {
-            return file_put_contents(CONTENT.'bans', $bans.self::$REQUEST['host'].LF);
+            return file_put_contents(CONTENT.'bans', $bans.self::$REQUEST['host'].LF, LOCK_EX);
         }
     }
 

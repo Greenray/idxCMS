@@ -113,7 +113,8 @@ if (!empty($REQUEST['login'])) {
                             1 => empty($REQUEST['rights']) ? []    : $REQUEST['rights'],
                             2 => empty($REQUEST['root'])   ? FALSE : $REQUEST['root'],
                             3 => empty($REQUEST['access']) ? 1     : (int) $REQUEST['access']
-                        ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+                        ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                        LOCK_EX
                     );
                     $TEMPLATE = new TEMPLATE(TEMPLATES.'login.tpl');
                     $TEMPLATE->set('locale', SYSTEM::get('locale'));

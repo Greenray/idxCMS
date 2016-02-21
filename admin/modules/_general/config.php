@@ -77,7 +77,7 @@ if (!empty($REQUEST['save'])) {
     else ShowError('Cannot save file'.' config.ini');
 
     if (!empty($REQUEST['welcome_msg'])) {
-        if (!file_put_contents(CONTENT.'intro', CMS::call('PARSER')->parseText($REQUEST['welcome_msg']))) {
+        if (!file_put_contents(CONTENT.'intro', CMS::call('PARSER')->parseText($REQUEST['welcome_msg']), LOCK_EX)) {
             ShowError('Cannot save file'.' intro');
         }
     }

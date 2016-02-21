@@ -11,7 +11,7 @@ if (!empty($REQUEST['save'])) {
     $i = 1;
     foreach ($REQUEST['text'] as $banner) {
         if (!empty($banner)) {
-            if (!file_put_contents(BANNERS.$i, $banner)) {
+            if (!file_put_contents(BANNERS.$i, $banner, LOCK_EX)) {
                 ShowError('Cannot save file'.' '.BANNERS.$i);
             }
             ++$i;

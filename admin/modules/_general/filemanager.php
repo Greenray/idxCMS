@@ -140,8 +140,8 @@ if (!empty($REQUEST['save'])) {
     if (!empty($REQUEST['edit'])) {
         $path_parts = pathinfo($path.$REQUEST['edit']);
         if (empty($path_parts['extension']))
-             if (!CheckSerialized($path.$file))                file_put_contents($path.$REQUEST['edit'], $REQUEST['content']);
-        else if (in_array($path_parts['extension'], $allowed)) file_put_contents($path.$REQUEST['edit'], $REQUEST['content']);
+             if (!CheckSerialized($path.$file))                file_put_contents($path.$REQUEST['edit'], $REQUEST['content'], LOCK_EX);
+        else if (in_array($path_parts['extension'], $allowed)) file_put_contents($path.$REQUEST['edit'], $REQUEST['content'], LOCK_EX);
         unset($REQUEST['edit']);
 
     } elseif (!empty($REQUEST['rights'])) {

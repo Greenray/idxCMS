@@ -204,14 +204,22 @@ if (CMS::call('STATISTICS')->detect($agent, 'spiders')) {
             }
         }
     }
-    $stats['update'] = $time;   # Set the time of the last ststistic data update
+    #
+    # Set the time of the last ststistic data update
+    #
+    $stats['update'] = $time;
 
     file_put_contents(CONTENT.'stats', json_encode($stats, JSON_UNESCAPED_UNICODE), LOCK_EX);
-
-    $keyword = CMS::call('STATISTICS')->extractKeyword($referer);  # Keyword from $_SERVER['HTTP_REFERER']
+    #
+    # Keyword from $_SERVER['HTTP_REFERER']
+    #
+    $keyword = CMS::call('STATISTICS')->extractKeyword($referer);
     if (!empty($keyword)) {
         $file = (file_exists(CONTENT.'keywords')) ? file_get_contents(CONTENT.'keywords') : '';
-        file_put_contents(CONTENT.'keywords', $file.$keyword."|".$page.LF, LOCK_EX);  # Save bot|keyword|page
+        #
+        # Save bot|keyword|page
+        #
+        file_put_contents(CONTENT.'keywords', $file.$keyword."|".$page.LF, LOCK_EX);
     }
 }
 

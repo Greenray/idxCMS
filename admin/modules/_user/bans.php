@@ -14,9 +14,9 @@ if (!empty($REQUEST['ban'])) {
     }
     if (!empty($bans)) {
         natsort($bans);
-        file_put_contents(CONTENT.'bans', implode(LF, $bans).LF);
+        file_put_contents(CONTENT.'bans', implode(LF, $bans).LF, LOCK_EX);
     } else {
-        file_put_contents(CONTENT.'bans', '');
+        file_put_contents(CONTENT.'bans', '', LOCK_EX);
     }
 }
 

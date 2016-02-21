@@ -6,7 +6,7 @@
 if (!defined('idxADMIN') || !USER::$root) die();
 
 if (!empty($REQUEST['clean'])) {
-    file_put_contents(CONTENT.'searchwords', '');
+    file_put_contents(CONTENT.'searchwords', '', LOCK_EX);
     ShowMessage('Done');
 } else {
     $keywords = file(CONTENT.'searchwords', FILE_IGNORE_NEW_LINES);

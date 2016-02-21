@@ -193,22 +193,24 @@ class TEMPLATE {
 
             $code = empty($this->errors) ? preg_replace('#\[^;]?>([\s]*)<\?php#', '$1', implode("\n", $php_lines)) :
 					'<?php $this->_error(E_USER_ERROR,\''.$this->errors[0].'\',FALSE,'.$this->line.'); ?>';
-		}
 
-        $code = preg_replace_callback("#\{([\-\w]+)\}#is",  [&$this, 'value'],     $code);
-        $code = preg_replace_callback("#\[__(.*?)\]#is",    [&$this, 'translate'], $code);
-        $code = preg_replace_callback("#__(.*?)__#is",      [&$this, 'translate'], $code);
-        $code = preg_replace_callback("#\[show=(.*?)\]#is", [&$this, 'show'],      $code);
+            $code = preg_replace_callback("#\{([\-\w]+)\}#is",  [&$this, 'value'],     $code);
+            $code = preg_replace_callback("#\[__(.*?)\]#is",    [&$this, 'translate'], $code);
+            $code = preg_replace_callback("#__(.*?)__#is",      [&$this, 'translate'], $code);
+            $code = preg_replace_callback("#\[show=(.*?)\]#is", [&$this, 'show'],      $code);
+
+            $css = preg_match_all("#\<link rel=\"stylesheet\" type=\"text/css\" href=\"(.*?)\" media=\"screen\" /\>#is", $code, $matches);
+            if (!empty($matches[1])) {
+                foreach($matches[1] as $key => $file) {
+                    $code = str_replace($matches[0][$key], '<style type="text/css"><!--'.$this->compressCSS($file).'--></style>', $code);
+                }
+            }
+		}
         #
 		# Execute php code
         #
         ob_start();
-        $css = preg_match_all("#\<link rel=\"stylesheet\" type=\"text/css\" href=\"(.*?)\" media=\"screen\" /\>#is", $code, $matches);
-        if (!empty($matches[1])) {
-            foreach($matches[1] as $key => $file) {
-                $code = str_replace($matches[0][$key], '<style type="text/css"><!--'.$this->compressCSS($file).'--></style>', $code);
-            }
-        }
+
 		if (!eval('?>'.$code.'<?php return TRUE; ?>')) {
 			$err_msg = ob_get_clean();
 			$this->getEvalError($err_msg, $err_line);
@@ -682,65 +684,6 @@ class TEMPLATE {
     }
 
     /**
-     * Generates CSS3 properties with browser-specific prefixes.
-     * The prefix list is not complete, it contains only the used properties in the CMS.
-     * So it can easily be extended.
-     *
-     * @param  string $file css file to to work with
-     * @return string       Parsed string
-     */
-    private function setPrefixes($file) {
-        $file = str_replace('./', '/', $file);
-        $css  = file_get_contents($_SERVER['DOCUMENT_ROOT'].$file);
-        $css  = preg_replace('#(\/\*).*?(\*\/)#s', '', $css);
-        $values = [];
-        foreach ($this->styles as $property => $styles) {
-            preg_match_all('#[^-]'.$property.'#s', $css, $result);
-            if (!empty($result[0])) {
-                $tmp = array_unique($result[0]);
-                    $values[] = $tmp;
-            }
-
-        }
-        foreach ($values as $key => $value) {
-            $value = trim($value[0]);
-            preg_match_all('#'.$value.':[a-zA-Z0-9\.\-\#|\d\s]+?;|[a-zA-Z\-]+:\s_[a-z].+?;#s', $css, $keys);
-            $control[] = $keys[0];
-            foreach ($keys[0] as $property) {
-                foreach ($this->styles as $style => $prefixes) {
-                    if ($style === $value) {
-                        $result = '';
-                        foreach ($prefixes as $match) {
-                            $result .= $match.$property;
-                        }
-                        $css = preg_replace('/[^-]'.$property.'/', $result, $css);
-                    }
-                }
-            }
-        }
-        return $css;
-    }
-
-    /**
-     * Generates CSS3 properties with browser-specific prefixes.
-     * The prefix list is not complete, it contains only the used properties in the CMS.
-     *
-     * @param  string $file css file to to work with
-     * @return string       Parsed string
-     */
-    private function compressCSS($file) {
-        $css = $this->setPrefixes($file);
-        $css = str_replace(["\r\n", "\r", "\n", "\t"], '', $css);
-        $css = preg_replace('# {2,}#', '', $css);
-        $css = str_replace([" { "," {","{ "], '{', $css);
-        $css = str_replace([" }","} "," } "], '}', $css);
-        $css = str_replace(": ", ':', $css);
-        $css = str_replace("; ", ';', $css);
-        $css = str_replace(", ", ',', $css);
-        return $css;
-    }
-
-    /**
      * Shows the content.
      * <pre>
      * The template is:
@@ -1029,6 +972,12 @@ class TEMPLATE {
 	 */
 	protected function getFromCache($file, &$code) {
 		if ($this->options['allow_cache'])
+            $valid = FALSE;
+            if (file_exists(CACHE_STORE.$file.'.cache.php')) {
+                include $file;
+                return $valid;
+            }
+
 			return $this->getDataFromCache(str_replace(['/', '.'], ['_', ''], $file), $code);
 
 		return FALSE;
@@ -1038,9 +987,8 @@ class TEMPLATE {
 	 * Gets a data from the cache.
      *
 	 * @param  string $data_name The name of the data that you want to get
-	 * @param  mixed  $data      Output parameter with the data that you want
+	 * @param  mixed  $data      Output parameter with the data
 	 * @return boolean TRUE if the data is extracted. FALSE if the data not exists or there is a error
-	 *
 	 */
 	public function getDataFromCache($data_name, &$data) {
 		$is_valid = FALSE;
@@ -1070,43 +1018,90 @@ class TEMPLATE {
     /**
 	 * Stores a template in the cache.
      *
-	 * @param string          $data_name Name of the cache file
-	 * @param mixed           $data      Data to store in the cache
-	 * @param boolean|integer $expired   Time to live in seconds that data store in the cache. If is FALSE the data not expire
+	 * @param string          $file    Name of the cache file
+	 * @param mixed           $data    Data to store in the cache
+	 * @param boolean|integer $expired Time to live in seconds that data store in the cache. If is FALSE the data not expire
 	 */
-	public function storeInCache($data_name, $data, $expired = FALSE) {
-		$data      = var_export($data, TRUE);
-		$data_file = '';
+	public function storeInCache($file, $data, $expired = FALSE) {
+		$data = var_export($data, TRUE);
 		if ($expired !== FALSE) {
-			$time        = time() + $expired;
-			$is_valid    = 'time()<='.$time;
-			$expired_msg = 'Will expire on '.gmdate(DATE_RFC822, $time).'.';
-			$data        = '$is_valid?'.$data.': NULL';
+			$time    = time() + $expired;
+			$valid   = 'time()<='.$time;
+			$message = 'Will expire on '.gmdate(DATE_RFC822, $time).'.';
+			$data    = '$valid?'.$data.':NULL';
 		} else {
-			$is_valid    = 'TRUE';
-			$expired_msg = 'Not expire.';
+			$valid   = 'TRUE';
+			$message = 'Not expire.';
 		}
 
 		$data_file = '<?php'.LF.
 					 '/*'.LF.
-					 ' * Data name: '.$data_name.LF.
-					 ' * Expire: '.$expired_msg.LF.
+					 ' * Data name: '.$file.LF.
+					 ' * Expire: '.$message.LF.
 					 ' */'.LF.
-					 '$is_valid = '.$is_valid.';'.LF.
+					 '$valid = '.$valid.';'.LF.
 					 '$data = '.$data.';'.LF.
 					 '?>';
 
-		$file = CACHE_STORE.$data_name.'.cache.php';
-		$fp   = @fopen($file, "w");
-		$file_saved = FALSE;
-		if ($fp) {
-			@flock($fp, LOCK_EX);
-			$file_saved = @fwrite($fp, $data_file);
-			@flock($fp, LOCK_UN);
-			@fclose($fp);
-		}
-
-		if (!$file_saved) trigger_error('Cannot create the file '.$file.'.', E_USER_ERROR);
+        file_put_contents(CACHE_STORE.$file.'.cache.php', $file, LOCK_EX);
 	}
 
+    /**
+     * Generates CSS3 properties with browser-specific prefixes.
+     * The prefix list is not complete, it contains only the used properties in the CMS.
+     *
+     * @param  string $file css file to to work with
+     * @return string       Parsed string
+     */
+    private function compressCSS($file) {
+        $css = $this->setPrefixes($file);
+        $css = str_replace(["\r\n", "\r", "\n", "\t"], '', $css);
+        $css = preg_replace('# {2,}#', '', $css);
+        $css = str_replace([" { "," {","{ "], '{', $css);
+        $css = str_replace([" }","} "," } "], '}', $css);
+        $css = str_replace(": ", ':', $css);
+        $css = str_replace("; ", ';', $css);
+        $css = str_replace(", ", ',', $css);
+        return $css;
+    }
+
+    /**
+     * Generates CSS3 properties with browser-specific prefixes.
+     * The prefix list is not complete, it contains only the used properties in the CMS.
+     * So it can easily be extended.
+     *
+     * @param  string $file css file to to work with
+     * @return string       Parsed string
+     */
+    private function setPrefixes($file) {
+        $file = str_replace('./', '/', $file);
+        $css  = file_get_contents($_SERVER['DOCUMENT_ROOT'].$file);
+        $css  = preg_replace('#(\/\*).*?(\*\/)#s', '', $css);
+        $values = [];
+        foreach ($this->styles as $property => $styles) {
+            preg_match_all('#[^-]'.$property.'#s', $css, $result);
+            if (!empty($result[0])) {
+                $tmp = array_unique($result[0]);
+                    $values[] = $tmp;
+            }
+
+        }
+        foreach ($values as $key => $value) {
+            $value = trim($value[0]);
+            preg_match_all('#'.$value.':[a-zA-Z0-9\.\-\#|\d\s]+?;|[a-zA-Z\-]+:\s_[a-z].+?;#s', $css, $keys);
+            $control[] = $keys[0];
+            foreach ($keys[0] as $property) {
+                foreach ($this->styles as $style => $prefixes) {
+                    if ($style === $value) {
+                        $result = '';
+                        foreach ($prefixes as $match) {
+                            $result .= $match.$property;
+                        }
+                        $css = preg_replace('/[^-]'.$property.'/', $result, $css);
+                    }
+                }
+            }
+        }
+        return $css;
+    }
 }

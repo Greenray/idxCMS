@@ -89,7 +89,7 @@ class TEMPLATE {
             'compact'     => FALSE,
 			'debug'       => FALSE,
             'allow_cache' => FALSE,
-            'expired'     => 7200,
+            'expired'     => 600,
 			'error_func'  => ''
 		];
 
@@ -129,7 +129,8 @@ class TEMPLATE {
             #
         } else {
             $this->code = $this->file;
-            $this->file = '';
+            $this->file = $_SESSION['file'];
+            ++$_SESSION['file'];
         }
 	}
 
@@ -196,7 +197,6 @@ class TEMPLATE {
 					'<?php $this->_error(E_USER_ERROR,\''.$this->errors[0].'\',FALSE,'.$this->line.'); ?>';
 
             $code = preg_replace_callback("#\{([\-\w]+)\}#is",  [&$this, 'value'],     $code);
-            $code = preg_replace_callback("#\[__(.*?)\]#is",    [&$this, 'translate'], $code);
             $code = preg_replace_callback("#__(.*?)__#is",      [&$this, 'translate'], $code);
             $code = preg_replace_callback("#\[show=(.*?)\]#is", [&$this, 'show'],      $code);
 
@@ -993,7 +993,7 @@ class TEMPLATE {
                 $data = str_replace(["\n", "\r"], '', $data);
             }
             $file = md5($file);
-            file_put_contents(CACHE_STORE.$file, var_export($data, TRUE), LOCK_EX);
+            file_put_contents(CACHE_STORE.$file, $data, LOCK_EX);
         }
 	}
 

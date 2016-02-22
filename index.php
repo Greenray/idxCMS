@@ -153,6 +153,7 @@ include_once SYS.'image.class.php';
 include_once SYS.'template.class.php';
 
 session_start();
+$_SESSION['file'] = 0;
 
 /** Website localization */
 global $LANG;

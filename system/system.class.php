@@ -129,14 +129,12 @@ class SYSTEM {
             $skin = FILTER::get('REQUEST', 'skin');
             if (!empty($skin)) {
                 self::$skin = $skin;
-
             } else {
                 if (!empty($COOKIE[$cookie_skin])) {
                     self::$skin = $COOKIE[$cookie_skin];
                 }
             }
         }
-
         setcookie($cookie_skin, self::$skin, $cookie);
         if (is_dir(SKINS.self::$skin)) {
             /** User defined skin */
@@ -159,7 +157,6 @@ class SYSTEM {
         $menu['index']['desc']   = '';
         $menu['index']['class']  = 'index';
         $menu['index']['width']  = mb_strlen($menu['index']['name'], 'UTF-8') * 7 * 2;
-
         foreach (self::$modules as $module => $data) {
             if (in_array($module, self::$menu) && array_key_exists($module, $enabled)) {
                 $obj = strtoupper($module);
@@ -169,12 +166,10 @@ class SYSTEM {
                 $point[$module]['name']   = SYSTEM::$modules[$module]['title'];
                 $point[$module]['desc']   = '';
                 $point[$module]['class']  = $module;
-
                 if (class_exists($obj)) {
                     $point[$module]['sections'] = CMS::call($obj)->getSections();
                     unset($point[$module]['sections']['drafts']);
                     $point[$module]['width'] = mb_strlen($point[$module]['name'], 'UTF-8') * 7 * 2;
-
                     foreach ($point[$module]['sections'] as $id => $section) {
                         $point[$module]['sections'][$id]['desc'] = CMS::call('PARSER')->parseText($section['desc']);
                         if (!empty($section['categories'])) {
@@ -184,16 +179,13 @@ class SYSTEM {
                         }
                     }
                 }
-
                 $menu = array_merge($menu, $point);
                 if (!empty($point[$module]['name'])) {
                     $menu[$module]['width'] = mb_strlen($menu[$module]['name'], 'UTF-8') * 7 * 2;
-
                     if (!empty($point[$module]['sections'])) {
                         foreach($point[$module]['sections'] as $id => $section) {
                             $width = mb_strlen($section['title'], 'UTF-8') * 7 + 55;
                             $menu[$module]['sections'][$id]['width'] = $width;
-
                             if (!empty($section['categories'])) {
                                 foreach($section['categories'] as $key => $category) {
                                     $width = mb_strlen($category['title'], 'UTF-8') * 7 + 55;
@@ -218,13 +210,11 @@ class SYSTEM {
         $data   = json_decode(file_get_contents(CONTENT.'menu'), TRUE);
         $access = USER::getUser('access');
         $output = [];
-
         foreach($data as $module => $point) {
             if (!empty($point['sections'])) {
                 foreach ($point['sections'] as $id => $section) {
                     if ($section['access'] > $access) {
                         unset($point['sections'][$id]);
-
                     } else {
                         if (!empty($section['categories'])) {
                             foreach ($section['categories'] as $key => $category) {
@@ -263,7 +253,6 @@ class SYSTEM {
         if (empty($enabled) || $ignore_disabled) {
             $enabled = array_flip(GetFilesList(MODULES));
         }
-
         $included = [];
         foreach ($enabled as $module => $NULL) {
             $mod = explode('.', $module, 2);
@@ -406,9 +395,7 @@ class SYSTEM {
     public static function showWindow($title, $content, $template) {
         if (($title === '__NOWINDOW__') || ($template === 'empty')) {
             return $content;
-
         } else {
-
             $TEMPLATE = new TEMPLATE(SYSTEM::$skins[$template]);
             $TEMPLATE->set(
                 [

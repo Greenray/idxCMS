@@ -17,16 +17,16 @@ class TEMPLATE {
     private $code;
 
     /** @var array Errors in the template code */
-	private $errors;
+	private $errors = [];
 
 	/** @var string Name of the template file that is executing */
-	private $file;
+	private $file = '';
 
 	/** @var integer Line of the template content */
-	private $line;
+	private $line = 0;
 
 	/** @var array Array of the template modifiers */
-	private $modifiers;
+	private $modifiers = [];
 
 	/** @var array Array of the template options */
 	private $options;
@@ -67,14 +67,17 @@ class TEMPLATE {
 
         'transition-timing-function' => ['-webkit-', '-moz-', '-o-', ''],
 
-        'linear-gradient' => ['-webkit-', '-moz-', '-o-', '']
+        'linear-gradient' => ['-webkit-', '-moz-', '-o-', ''],
+        'radial-gradient' => ['-webkit-', '-moz-', '-o-', ''],
+        'repeating-linear-gradient' => ['-webkit-', '-moz-', '-o-', ''],
+        'repeating-radial-gradient' => ['-webkit-', '-moz-', '-o-', '']
     ];
 
 	/** @var array Array of the template variables */
-	private $vars;
+	private $vars = [];
 
 	/** @var array Array of the error and warning messages */
-	private $warnings;
+	private $warnings = [];
 
 	/**
 	 * Class constructor.
@@ -82,15 +85,11 @@ class TEMPLATE {
 	 * @param array $options Vector with the template parser options
 	 */
 	public function __construct($template, $options = []) {
-        $this->vars = $this->modifiers = $this->warnings = [];
-		$this->file = '';
-		$this->line = 0;
-        $this->errors    = [];
 		$this->options   = [
             'compact'     => FALSE,
 			'debug'       => FALSE,
             'allow_cache' => FALSE,
-            'expired'     => FALSE,
+            'expired'     => 7200,
 			'error_func'  => ''
 		];
 
@@ -178,8 +177,8 @@ class TEMPLATE {
         #
 		# Get code stored in cache file
         #
-		$code_stored = $this->getFromCache($this->file, $code);
-		if (!$code_stored) {
+		$page = $this->getFromCache($this->file);
+		if (!$page) {
             #
 			# Extract and parse cached code
             #
@@ -207,7 +206,7 @@ class TEMPLATE {
                     $code = str_replace($matches[0][$key], '<style type="text/css"><!--'.$this->compressCSS($file).'--></style>', $code);
                 }
             }
-		}
+
         #
 		# Execute php code
         #
@@ -224,12 +223,12 @@ class TEMPLATE {
         #
 		# Store the data in the cache
 		#
-        if (!$code_stored) $this->toCache($this->file, $code);
-
+        $this->toCache($this->file, $result);
 		$this->line = $old_line;
 		$this->file = $old_file;
 
         return $result;
+        } else return $page;
 	}
 
     /**
@@ -425,7 +424,7 @@ class TEMPLATE {
 
 		$error_format = '$this->_error(E_USER_NOTICE, \'Undefined $%1$s variable\')';
 		$var_format   =	(($function_name == 'isset') || ($function_name == 'empty')) ?
-		                  $function_name.'(%2$s)' : '(isset(%2$s)?%3$s:'.$error_format.')';
+		                  $function_name.'(%2$s)' : '(isset(%2$s)?%3$s: '.$error_format.')';
         #
 		# Simple variable
         #
@@ -788,7 +787,6 @@ class TEMPLATE {
 
             case 'copyright':
                 return IDX_POWERED.'<br />'.IDX_COPYRIGHT;
-                break;
 
             case 'error':
                 $error = '';
@@ -968,18 +966,15 @@ class TEMPLATE {
     /**
 	 * Gets a data from the cache.
      *
-	 * @param  string $file Page name
-	 * @param  mixed  $data Page data
-	 * @return mixed        Page from cache
+	 * @param  string $file  Page name
+     * @return mixed         Page from cache
 	 */
-	public function getFromCache($file, $data) {
+	public function getFromCache($file) {
         if ($this->options['allow_cache']) {
-            $valid = FALSE;
-            $file  = md5(str_replace(['/', '.'], ['_', ''], CACHE_STORE.$file));
-            if (file_exists($file)) {
-                if ((filemtime($file) + $this->options['expired']) > time()) {
-                    $data = file_get_contents($file);
-                    return $data;
+            $file  = md5($file);
+            if (file_exists(CACHE_STORE.$file)) {
+                if ((filemtime(CACHE_STORE.$file) + $this->options['expired']) > time()) {
+                    return file_get_contents(CACHE_STORE.$file);
                 }
             }
         }
@@ -997,27 +992,8 @@ class TEMPLATE {
             if ($this->options['compact']) {
                 $data = str_replace(["\n", "\r"], '', $data);
             }
-            $data = var_export($data, TRUE);
-            if ($this->options['expired'] !== FALSE) {
-                $time    = time() + $this->options['expired'];
-                $valid   = 'time()<='.$time;
-                $message = 'Will expire on '.gmdate(DATE_RFC822, $time).'.';
-                $data    = '$valid?'.$data.':NULL';
-            } else {
-                $valid   = 'TRUE';
-                $message = 'Not expire.';
-            }
-            $file  = str_replace(['/', '.'], ['_', ''], $file);
-            $cache = '<?php'.LF.
-                     '/*'.LF.
-                     ' * Data name: '.$file.LF.
-                     ' * Expire: '.$message.LF.
-                     ' */'.LF.
-                     '$valid = '.$valid.';'.LF.
-                     '$data = '.$data.';'.LF.
-                     '?>';
             $file = md5($file);
-            file_put_contents(CACHE_STORE.$file, $cache, LOCK_EX);
+            file_put_contents(CACHE_STORE.$file, var_export($data, TRUE), LOCK_EX);
         }
 	}
 
@@ -1030,13 +1006,13 @@ class TEMPLATE {
      */
     private function compressCSS($file) {
         $css = $this->setPrefixes($file);
-        $css = str_replace(["\r\n", "\r", "\n", "\t"], '', $css);
+/*        $css = str_replace(["\r\n", "\r", "\n", "\t"], '', $css);
         $css = preg_replace('# {2,}#', '', $css);
         $css = str_replace([" { "," {","{ "], '{', $css);
         $css = str_replace([" }","} "," } "], '}', $css);
         $css = str_replace(": ", ':', $css);
         $css = str_replace("; ", ';', $css);
-        $css = str_replace(", ", ',', $css);
+        $css = str_replace(", ", ',', $css);*/
         return $css;
     }
 
@@ -1054,7 +1030,7 @@ class TEMPLATE {
         $css  = preg_replace('#(\/\*).*?(\*\/)#s', '', $css);
         $values = [];
         foreach ($this->styles as $property => $styles) {
-            preg_match_all('#[^-]'.$property.'#s', $css, $result);
+            preg_match_all('#[^-\{]'.$property.'#s', $css, $result);
             if (!empty($result[0])) {
                 $tmp = array_unique($result[0]);
                     $values[] = $tmp;
@@ -1063,16 +1039,26 @@ class TEMPLATE {
         }
         foreach ($values as $key => $value) {
             $value = trim($value[0]);
-            preg_match_all('#'.$value.':[a-zA-Z0-9\.\-\#|\d\s]+?;|[a-zA-Z\-]+:\s_[a-z].+?;#s', $css, $keys);
-var_dump($keys[0]);
+            preg_match_all('#'.$value.':[a-zA-Z0-9\.\-\#|\d\s]+?;|[a-zA-Z\-]+: '.$value.'[\S+].+?;#s', $css, $keys);
             foreach ($keys[0] as $property) {
                 foreach ($this->styles as $style => $prefixes) {
                     if ($style === $value) {
                         $result = '';
                         foreach ($prefixes as $match) {
-                            $result .= $match.$property;
+                            $pos = strpos($property, $value);
+                            if ($pos === 0) {
+                                $result .= $match.$property;
+                            } else {
+                                $parts = explode(':', $property);
+                                $parts[0] = $parts[0].':';
+                                $parts[1] = trim($parts[1]);
+                                $parts[1] = $match.$parts[1];
+                                $result  .= implode($parts);
+                            }
                         }
-                        $css = preg_replace('/[^-]'.$property.'/', $result, $css);
+                        if (isset($parts)) {
+                             $css = str_replace($property, $result, $css);
+                        }else $css = preg_replace('/[^-]'.$property.'/', $result, $css);
                     }
                 }
             }

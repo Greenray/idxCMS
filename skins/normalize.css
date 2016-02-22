@@ -116,7 +116,7 @@ svg:not(:root) { overflow: hidden; }
 figure { margin: 1em 40px; }
 
 /* Address differences between Firefox and other browsers */
-hr { _box-sizing: content-box; height: 0; }
+hr { box-sizing: content-box; height: 0; }
 
 /* Contain overflow in all browsers */
 pre { overflow: auto; }
@@ -187,7 +187,7 @@ input { line-height: normal; }
  */
 input[type="checkbox"],
 input[type="radio"] {
-    _box-sizing: border-box;
+    box-sizing: border-box;
     padding: 0;
 }
 
@@ -205,7 +205,7 @@ input[type="number"]::-webkit-outer-spin-button { height: auto; }
  */
 input[type="search"] {
     -webkit-appearance: textfield; /* 1 */
-    _box-sizing: content-box;
+    box-sizing: content-box;
 }
 
 /**

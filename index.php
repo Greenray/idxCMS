@@ -181,14 +181,14 @@ CMS::call('SYSTEM')->initModules();
 if (!empty($REQUEST['login'])) {
     CMS::call('USER')->logInUser();
 }
-
 if (!empty($REQUEST['logout'])) {
     CMS::call('USER')->logOutUser();
     session_destroy();
     Redirect('index');
 }
-
 $MODULE = empty($REQUEST['module']) ? 'index' : basename($REQUEST['module']);
+/** Requested module */
+define('CURRENT_MODULE', $MODULE);
 
 switch($MODULE) {
     #
@@ -380,8 +380,6 @@ switch($MODULE) {
                 $output['slogan'] = $aphorisms[array_rand($aphorisms, 1)];
             }
         }
-        /** Requested module */
-        define('CURRENT_MODULE', $MODULE);
         #
         # The page is generated, it is possible to show it
         #

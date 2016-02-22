@@ -9,7 +9,7 @@
  * @license   Creative Commons Attribution-ShareAlike 4.0 International
  * @file      system/modules/posts/module.php
  * @package   Posts
- * @overview  Articles and news which cfn be posted by registered users.
+ * @overview  Articles and news which can be posted by registered users.
  *            The structure of the posts database:
  * <pre>
  * Sections index:
@@ -62,7 +62,7 @@
 
 if (!defined('idxCMS')) die();
 
-/** Data storage for articles and news */
+/** Data storage for publications */
  define('POSTS', CONTENT.'posts'.DS);
 
 require SYS.'posts.class.php';
@@ -72,7 +72,6 @@ SYSTEM::registerModule('posts',          'Posts',               'main', 'system'
 SYSTEM::registerModule('posts.post',     'Posting form',        'main', 'system');
 SYSTEM::registerModule('posts.calendar', 'Posts calendar',      'box',  'system');
 SYSTEM::registerModule('posts.last',     'Last posts',          'box');
-SYSTEM::registerModule('posts.news',     'Last news',           'box');
 SYSTEM::registerModule('posts.print',    'Version for printer', 'plugin');
 
 SYSTEM::registerSearch('posts');

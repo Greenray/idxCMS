@@ -1006,13 +1006,13 @@ class TEMPLATE {
      */
     private function compressCSS($file) {
         $css = $this->setPrefixes($file);
-/*        $css = str_replace(["\r\n", "\r", "\n", "\t"], '', $css);
+        $css = str_replace(["\r\n", "\r", "\n", "\t"], '', $css);
         $css = preg_replace('# {2,}#', '', $css);
         $css = str_replace([" { "," {","{ "], '{', $css);
         $css = str_replace([" }","} "," } "], '}', $css);
         $css = str_replace(": ", ':', $css);
         $css = str_replace("; ", ';', $css);
-        $css = str_replace(", ", ',', $css);*/
+        $css = str_replace(", ", ',', $css);
         return $css;
     }
 

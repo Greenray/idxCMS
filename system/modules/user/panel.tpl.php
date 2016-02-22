@@ -66,7 +66,7 @@ die();?>
     </script>
     <div class="login-panel">
         <ul>
-            <li><a href="#" class="icon icon-login" onclick="document.getElementById('login').style.display = ShowHide(document.getElementById('login').style.display)">[__Log in]</a></li>
+            <li><a href="#" class="icon icon-login" onclick="document.getElementById('login').style.display = ShowHide(document.getElementById('login').style.display)">__Log in</a></li>
             <li id="login" style="display:none;">
                 <form id="login-form" name="login" method="post"  onsubmit="return checkLoginForm(this);">
                     <table>
@@ -82,7 +82,7 @@ die();?>
                     <p class="center"><input type="submit" name="login" value="__Log in__" /></p>
                 </form>
             </li>
-            <li><a href="#" class="icon icon-password-request" onclick="document.getElementById('password_request').style.display = ShowHide(document.getElementById('password_request').style.display)">[__Password recovery]</a></li>
+            <li><a href="#" class="icon icon-password-request" onclick="document.getElementById('password_request').style.display = ShowHide(document.getElementById('password_request').style.display)">__Password recovery</a></li>
             <li id="password_request" style="display:none;">
                 <form id="password_request-form" name="password_request" method="post"  onsubmit="return checkPasswordRecoveryForm(this);">
                     <table>

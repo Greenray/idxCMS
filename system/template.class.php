@@ -66,6 +66,8 @@ class TEMPLATE {
         'transition-property' => ['-webkit-', '-moz-', '-o-', ''],
 
         'transition-timing-function' => ['-webkit-', '-moz-', '-o-', ''],
+
+        'linear-gradient' => ['-webkit-', '-moz-', '-o-', '']
     ];
 
 	/** @var array Array of the template variables */
@@ -964,86 +966,59 @@ class TEMPLATE {
 	}
 
     /**
-	 * Gets the php code of a cache handler.
-     *
-	 * @param  string $file Simphple file name. You use the name how id for the cache handler
-	 * @param  string $code Out parameter. PHP code stored in the cache
-	 * @return boolean TRUE if the file name is correct. FALSE if not
-	 */
-	protected function getFromCache($file, &$code) {
-		if ($this->options['allow_cache'])
-            $valid = FALSE;
-            if (file_exists(CACHE_STORE.$file.'.cache.php')) {
-                include $file;
-                return $valid;
-            }
-
-			return $this->getDataFromCache(str_replace(['/', '.'], ['_', ''], $file), $code);
-
-		return FALSE;
-	}
-
-    /**
 	 * Gets a data from the cache.
      *
-	 * @param  string $data_name The name of the data that you want to get
-	 * @param  mixed  $data      Output parameter with the data
-	 * @return boolean TRUE if the data is extracted. FALSE if the data not exists or there is a error
+	 * @param  string $file Page name
+	 * @param  mixed  $data Page data
+	 * @return mixed        Page from cache
 	 */
-	public function getDataFromCache($data_name, &$data) {
-		$is_valid = FALSE;
-		$file     = CACHE_STORE.$data_name.'.cache.php';
-		if (file_exists($file)) {
-			include $file;
-			return $is_valid;
-		}
-		return FALSE;
-	}
-
-    /**
-	 * Puts the php code in a cache.
-     *
-	 * @param string  $file Template file name as id for the cache handler
-	 * @param unknown $code Code to store in the cache
-	 */
-	protected function toCache($file, $code) {
-		if ($this->options['allow_cache']) {
-			if ($this->options['compact']) {
-				$code = str_replace(["\n", "\r"], '', $code);
+	public function getFromCache($file, $data) {
+        if ($this->options['allow_cache']) {
+            $valid = FALSE;
+            $file  = md5(str_replace(['/', '.'], ['_', ''], CACHE_STORE.$file));
+            if (file_exists($file)) {
+                if ((filemtime($file) + $this->options['expired']) > time()) {
+                    $data = file_get_contents($file);
+                    return $data;
+                }
             }
-			$this->storeInCache(str_replace(['/', '.'], ['_', ''], $file), $code, $this->options['expired']);
-		}
+        }
+        return FALSE;
 	}
 
     /**
-	 * Stores a template in the cache.
+	 * Places the compiled data into cache.
      *
-	 * @param string          $file    Name of the cache file
-	 * @param mixed           $data    Data to store in the cache
-	 * @param boolean|integer $expired Time to live in seconds that data store in the cache. If is FALSE the data not expire
+	 * @param string $file Page name
+	 * @param string $data Page to store in the cache
 	 */
-	public function storeInCache($file, $data, $expired = FALSE) {
-		$data = var_export($data, TRUE);
-		if ($expired !== FALSE) {
-			$time    = time() + $expired;
-			$valid   = 'time()<='.$time;
-			$message = 'Will expire on '.gmdate(DATE_RFC822, $time).'.';
-			$data    = '$valid?'.$data.':NULL';
-		} else {
-			$valid   = 'TRUE';
-			$message = 'Not expire.';
-		}
-
-		$data_file = '<?php'.LF.
-					 '/*'.LF.
-					 ' * Data name: '.$file.LF.
-					 ' * Expire: '.$message.LF.
-					 ' */'.LF.
-					 '$valid = '.$valid.';'.LF.
-					 '$data = '.$data.';'.LF.
-					 '?>';
-
-        file_put_contents(CACHE_STORE.$file.'.cache.php', $file, LOCK_EX);
+	public function toCache($file, $data) {
+        if ($this->options['allow_cache']) {
+            if ($this->options['compact']) {
+                $data = str_replace(["\n", "\r"], '', $data);
+            }
+            $data = var_export($data, TRUE);
+            if ($this->options['expired'] !== FALSE) {
+                $time    = time() + $this->options['expired'];
+                $valid   = 'time()<='.$time;
+                $message = 'Will expire on '.gmdate(DATE_RFC822, $time).'.';
+                $data    = '$valid?'.$data.':NULL';
+            } else {
+                $valid   = 'TRUE';
+                $message = 'Not expire.';
+            }
+            $file  = str_replace(['/', '.'], ['_', ''], $file);
+            $cache = '<?php'.LF.
+                     '/*'.LF.
+                     ' * Data name: '.$file.LF.
+                     ' * Expire: '.$message.LF.
+                     ' */'.LF.
+                     '$valid = '.$valid.';'.LF.
+                     '$data = '.$data.';'.LF.
+                     '?>';
+            $file = md5($file);
+            file_put_contents(CACHE_STORE.$file, $cache, LOCK_EX);
+        }
 	}
 
     /**
@@ -1089,7 +1064,7 @@ class TEMPLATE {
         foreach ($values as $key => $value) {
             $value = trim($value[0]);
             preg_match_all('#'.$value.':[a-zA-Z0-9\.\-\#|\d\s]+?;|[a-zA-Z\-]+:\s_[a-z].+?;#s', $css, $keys);
-            $control[] = $keys[0];
+var_dump($keys[0]);
             foreach ($keys[0] as $property) {
                 foreach ($this->styles as $style => $prefixes) {
                     if ($style === $value) {

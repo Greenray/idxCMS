@@ -22,10 +22,10 @@ die();?>
             text-transform: uppercase }
         input[type="submit"] {
             background: gray;
-            background-image: -webkit-linear-gradient(to bottom, #909090 1%, #3d3d3d 50%, #404040 99%);
-            background-image: -moz-linear-gradient(to bottom, #909090 1%, #3d3d3d 50%, #404040 99%);
-            background-image: -o-linear-gradient(to bottom, #909090 1%, #3d3d3d 50%, #404040 99%);
-            background-image: linear-gradient(to bottom, #909090 1%, #3d3d3d 50%, #404040 99%);
+            background: -webkit-linear-gradient(to bottom, #909090 1%, #3d3d3d 50%, #404040 99%);
+            background: -moz-linear-gradient(to bottom, #909090 1%, #3d3d3d 50%, #404040 99%);
+            background: -o-linear-gradient(to bottom, #909090 1%, #3d3d3d 50%, #404040 99%);
+            background: linear-gradient(to bottom, #909090 1%, #3d3d3d 50%, #404040 99%);
             border: 1px solid #838383;
             border: 1px solid white;
             -webkit-border-radius: 6px;
@@ -46,13 +46,15 @@ die();?>
         input[type="submit"]:hover { color: red }
         .login {
             background: white;
-            background-image: -webkit-linear-gradient(to bottom, white 1%, #999 99%);
-            background-image: -moz-linear-gradient(to bottom, white 1%, #999 99%);
-            background-image: -o-linear-gradient(to bottom, white 1%, #999 99%);
-            background-image: linear-gradient(to bottom, white 1%, #999 99%);
+            background: -webkit-linear-gradient(to bottom, white 1%, #777 99%);
+            background: -moz-linear-gradient(to bottom, white 1%, #777 99%);
+            background: -o-linear-gradient(to bottom, white 1%, #777 99%);
+            background: linear-gradient(to bottom, white 1%, #777 99%);
             -webkit-border-radius: 10px;
             -moz-border-radius: 10px;
             border-radius: 10px;
+            -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);
+            -moz-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);
             box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);
             margin: 50px auto;
             padding: 5px;
@@ -68,7 +70,7 @@ die();?>
             text-shadow: -1px 1px 1px rgba(0, 0, 0, 0.8);
             text-transform: uppercase }
         .login h1 .log-in { color: white; display: inline-block; text-transform: uppercase }
-        .login .float { float: left; padding: 5px }
+        .login .float { padding: 5px }
         .login .float:first-of-type,
         .login .float:last-of-type { padding-left: 5px }
         .login .close {
@@ -82,15 +84,17 @@ die();?>
         .login input[type="password"] {
             background: #fdffbf;
             border: 1px solid #747270;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
             border-radius: 5px;
-            display: block;
-            margin-bottom: 5px;
             padding: 5px;
-            transition: all 0.5s ease-out;}
+            -webkit-transition: all 0.5s ease-out;
+            -moz-transition: all 0.5s ease-out;
+            -o-transition: all 0.5s ease-out;
+            transition: all 0.5s ease-out; }
         .login input[type="text"]:focus,
         .login input[type="password"]:focus { border-color: #ff0000; outline: none }
         .login label {
-            cursor: pointer;
             display: block;
             font-size: 11px;
             font-weight: bold;
@@ -104,6 +108,7 @@ die();?>
             font-weight: 400;
             margin-bottom: 10px;
             text-transform: capitalize }
+        .login .navigation { margin: 10px 0 20px 0 }
     </style>
     <script type="text/javascript" src="{TOOLS}message{DS}message.js"></script>
     <script type="text/javascript">

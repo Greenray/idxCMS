@@ -29,6 +29,7 @@ $LANG['def']['Browsers'] = 'Браузеры';
 $LANG['def']['Build monthly log archives (except current month)'] = 'Архивировать ежедневные логи (кроме текущего месяца)';
 $LANG['def']['CAPTCHA code length'] = 'Длина кода CAPTCHA';
 $LANG['def']['CAPTCHA system'] = 'Система CAPTCHA';
+$LANG['def']['Cache'] = 'Кэшировать';
 $LANG['def']['Center column, lower than main module'] = 'Центральная колонка, ниже главного модуля';
 $LANG['def']['Center column, upper than main module'] = 'Центральная колонка, выше главного модуля';
 $LANG['def']['Choose color'] = 'Выбирите цвет';

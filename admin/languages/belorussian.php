@@ -28,6 +28,7 @@ $LANG['def']['Border color'] = 'Колер рамкі';
 $LANG['def']['Build monthly log archives (except current month)'] = 'архіў штодзённыя логі (акрамя бягучага месяца)';
 $LANG['def']['CAPTCHA code length'] = 'Даўжыня кода CAPTCHA';
 $LANG['def']['CAPTCHA system'] = 'Сістэма CAPTCHA';
+$LANG['def']['Cache'] = 'Кэшаваць';
 $LANG['def']['Center column, lower than main module'] = 'Цэнтральная калонка, ніжэй галоўнага модуля';
 $LANG['def']['Center column, upper than main module'] = 'Цэнтральная калонка, вышэй галоўнага модуля';
 $LANG['def']['Choose color'] = 'Выбіраючы колер';

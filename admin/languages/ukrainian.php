@@ -28,6 +28,7 @@ $LANG['def']['Browsers'] = 'Браузери';
 $LANG['def']['Build monthly log archives (except current month)'] = 'Архівувати щоденні логи (крім поточного місяця)';
 $LANG['def']['CAPTCHA code length'] = 'Довжина коду CAPTCHA';
 $LANG['def']['CAPTCHA system'] = 'Система CAPTCHA';
+$LANG['def']['Cache'] = 'Кешувати';
 $LANG['def']['Center column, lower than main module'] = 'Центральна колонка, нижче головного модуля';
 $LANG['def']['Center column, upper than main module'] = 'Центральна колонка, вище головного модуля';
 $LANG['def']['Clean'] = 'Очистити';

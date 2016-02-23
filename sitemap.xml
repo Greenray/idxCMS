@@ -2,23 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
 		<loc>http://idxcms/?module=index</loc>
-		<lastmod>2016-02-05</lastmod>
+		<lastmod>2016-02-22</lastmod>
 		<changefreq>weekly</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>http://idxcms/?module=posts</loc>
-		<lastmod>2016-02-05</lastmod>
+		<lastmod>2016-02-22</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>http://idxcms/?module=posts&amp;section=news</loc>
-		<lastmod>2016-02-05</lastmod>
+		<lastmod>2016-02-22</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>http://idxcms/?module=posts&amp;section=news&amp;category=1</loc>
-		<lastmod>2016-02-05</lastmod>
+		<lastmod>2016-02-22</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
@@ -27,12 +27,12 @@
 	</url>
 	<url>
 		<loc>http://idxcms/?module=posts&amp;section=articles</loc>
-		<lastmod>2016-02-05</lastmod>
+		<lastmod>2016-02-22</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>http://idxcms/?module=posts&amp;section=articles&amp;category=1</loc>
-		<lastmod>2016-02-05</lastmod>
+		<lastmod>2016-02-22</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
@@ -41,22 +41,22 @@
 	</url>
 	<url>
 		<loc>http://idxcms/?module=catalogs</loc>
-		<lastmod>2016-02-05</lastmod>
+		<lastmod>2016-02-22</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>http://idxcms/?module=catalogs&amp;section=files</loc>
-		<lastmod>2016-02-05</lastmod>
+		<lastmod>2016-02-22</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>http://idxcms/?module=catalogs&amp;section=links</loc>
-		<lastmod>2016-02-05</lastmod>
+		<lastmod>2016-02-22</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>http://idxcms/?module=catalogs&amp;section=links&amp;category=1</loc>
-		<lastmod>2016-02-05</lastmod>
+		<lastmod>2016-02-22</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
@@ -65,17 +65,17 @@
 	</url>
 	<url>
 		<loc>http://idxcms/?module=forum</loc>
-		<lastmod>2016-02-05</lastmod>
+		<lastmod>2016-02-22</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>http://idxcms/?module=forum&amp;section=Linux</loc>
-		<lastmod>2016-02-05</lastmod>
+		<lastmod>2016-02-22</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>http://idxcms/?module=forum&amp;section=Linux&amp;category=1</loc>
-		<lastmod>2016-02-05</lastmod>
+		<lastmod>2016-02-22</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
@@ -84,22 +84,22 @@
 	</url>
 	<url>
 		<loc>http://idxcms/?module=forum&amp;section=Windows</loc>
-		<lastmod>2016-02-05</lastmod>
+		<lastmod>2016-02-22</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>http://idxcms/?module=gallery</loc>
-		<lastmod>2016-02-05</lastmod>
+		<lastmod>2016-02-22</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>http://idxcms/?module=gallery&amp;section=test</loc>
-		<lastmod>2016-02-05</lastmod>
+		<lastmod>2016-02-22</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>http://idxcms/?module=gallery&amp;section=test&amp;category=1</loc>
-		<lastmod>2016-02-05</lastmod>
+		<lastmod>2016-02-22</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
@@ -116,12 +116,12 @@
 	</url>
 	<url>
 		<loc>http://idxcms/?module=gallery&amp;section=example</loc>
-		<lastmod>2016-02-05</lastmod>
+		<lastmod>2016-02-22</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>http://idxcms/?module=gallery&amp;section=example&amp;category=1</loc>
-		<lastmod>2016-02-05</lastmod>
+		<lastmod>2016-02-22</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>

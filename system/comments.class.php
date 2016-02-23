@@ -108,7 +108,7 @@ class COMMENTS extends ITEMS {
     public function showComments($item, $page, $perpage, $path) {
         $comments = $this->getComments($item['id']);
         if (!empty($comments)) {
-            $TEMPLATE    = new TEMPLATE($path.'comment.tpl');
+            $TEMPLATE = new TEMPLATE($path.'comment.tpl');
             $count  = sizeof($comments);
             $ids    = array_keys($comments);
             $output = '';

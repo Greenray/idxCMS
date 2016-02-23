@@ -24,7 +24,7 @@ $sections = CMS::call('POSTS')->getSections();
 unset($sections['drafts']);
 
 if (!empty($sections)) {
-    $TEMPLATE    = new TEMPLATE(__DIR__.DS.'index.tpl');
+    $TEMPLATE = new TEMPLATE(__DIR__.DS.'index.tpl');
     $tab    = 0;
     $output = '';
 

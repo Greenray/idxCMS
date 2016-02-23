@@ -116,6 +116,7 @@ $LANG['def']['Delete'] = 'Удалить';
 $LANG['def']['Description'] = 'Описание';
 $LANG['def']['Edit'] = 'Редактировать';
 $LANG['def']['Enter the text'] = 'Введите текст';
+$LANG['def']['Enter your login'] = 'Введите свой логин';
 $LANG['def']['Error'] = 'Ошибка';
 $LANG['def']['File'] = 'Файл';
 $LANG['def']['Font'] = 'Шрифт';

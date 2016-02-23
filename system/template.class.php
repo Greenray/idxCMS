@@ -36,18 +36,17 @@ class TEMPLATE {
         'background-origin'   => ['-webkit-', '-moz-', '-o-', ''],
         'background-size'     => ['-webkit-', '-moz-', '-o-', ''],
 
-        'border-radius'       => ['-webkit-', '-moz-', ''],
-
+        'border-radius'              => ['-webkit-', '-moz-', ''],
         'border-top-left-radius'     => ['-webkit-', '-moz-', ''],
         'border-top-right-radius'    => ['-webkit-', '-moz-', ''],
         'border-bottom-right-radius' => ['-webkit-', '-moz-', ''],
         'border-bottom-left-radius'  => ['-webkit-', '-moz-', ''],
 
-        'border-image'        => ['-webkit-', '-moz-', ''],
-        'border-image-outset' => ['-webkit-', '-moz-', ''],
-        'border-image-repeat' => ['-webkit-', '-moz-', ''],
-        'border-image-source' => ['-webkit-', '-moz-', ''],
-        'border-image-width'  => ['-webkit-', '-moz-', ''],
+        'border-image'        => ['-webkit-', '-moz-', '-o-', ''],
+        'border-image-outset' => ['-webkit-', '-moz-', '-o-', ''],
+        'border-image-repeat' => ['-webkit-', '-moz-', '-o-', ''],
+        'border-image-source' => ['-webkit-', '-moz-', '-o-', ''],
+        'border-image-width'  => ['-webkit-', '-moz-', '-o-', ''],
 
         'box-shadow'          => ['-webkit-', '-moz-', ''],
 
@@ -56,8 +55,8 @@ class TEMPLATE {
         'perspective'         => ['-webkit-', '-moz-', ''],
         'perspective-origin'  => ['-webkit-', '-moz-', ''],
 
-        'transform'           => ['-webkit-', '-moz-', '-ms-', ''],
-        'transform-origin'    => ['-webkit-', '-moz-', '-ms-', ''],
+        'transform'           => ['-webkit-', '-moz-', '-ms-', '-o-', ''],
+        'transform-origin'    => ['-webkit-', '-moz-', '-ms-', '-o-', ''],
         'transform-style'     => ['-webkit-', '-moz-', ''],
 
         'transition'          => ['-webkit-', '-moz-', '-o-', ''],

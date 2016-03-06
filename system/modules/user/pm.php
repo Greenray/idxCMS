@@ -84,7 +84,7 @@ if (!USER::$logged_in) {
             if (!empty($messages)) {
                 if (!empty($REQUEST['reply'])) {
                     $user = USER::getUserData($REQUEST['reply']);
-                    $TEMPLATE  = new TEMPLATE(__DIR__.DS.'comment-post.tpl');
+                    $TEMPLATE = new TEMPLATE(__DIR__.DS.'comment-post.tpl');
                     $TEMPLATE->set('action',         '');
                     $TEMPLATE->set('nick',           $user['nick']);
                     $TEMPLATE->set('text',           empty($REQUEST['text']) ? '[quote]'.$messages[$REQUEST['re']]['text'].'[/quote]' : $REQUEST['text']);

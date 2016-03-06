@@ -180,7 +180,7 @@ class TEMPLATE {
 		$page = $this->getFromCache($this->file);
 		if (!$page) {
             #
-			# Extract and parse cached code
+			# Extract and parse template
             #
             $this->line = 0;
             $php_lines  = [];
@@ -205,28 +205,27 @@ class TEMPLATE {
                     $code = str_replace($matches[0][$key], '<style type="text/css"><!--'.$this->compressCSS($file).'--></style>', $code);
                 }
             }
+            #
+            # Execute php code
+            #
+            ob_start();
 
-        #
-		# Execute php code
-        #
-        ob_start();
+            if (!eval('?>'.$code.'<?php return TRUE; ?>')) {
+                $err_msg = ob_get_clean();
+                $this->getEvalError($err_msg, $err_line);
+                $err_msg = str_replace("';'", "':]'", $err_msg);
+                $this->_error(E_USER_ERROR, $err_msg, $this->file, $err_line);
+            }
+            $result = ob_get_contents();
+            ob_end_clean();
+            #
+            # Store the data in the cache
+            #
+            $this->toCache($this->file, $result);
+            $this->line = $old_line;
+            $this->file = $old_file;
 
-		if (!eval('?>'.$code.'<?php return TRUE; ?>')) {
-			$err_msg = ob_get_clean();
-			$this->getEvalError($err_msg, $err_line);
-			$err_msg = str_replace("';'", "':]'", $err_msg);
-			$this->_error(E_USER_ERROR, $err_msg, $this->file, $err_line);
-		}
-        $result = ob_get_contents();
-		ob_end_clean();
-        #
-		# Store the data in the cache
-		#
-        $this->toCache($this->file, $result);
-		$this->line = $old_line;
-		$this->file = $old_file;
-
-        return $result;
+            return $result;
         } else return $page;
 	}
 
@@ -998,20 +997,33 @@ class TEMPLATE {
 
     /**
      * Generates CSS3 properties with browser-specific prefixes.
-     * The prefix list is not complete, it contains only the used properties in the CMS.
+     * The list of prefixes is not yet complete.
+     * Then we remove unneeded characters, see comments.
      *
      * @param  string $file css file to to work with
      * @return string       Parsed string
      */
     private function compressCSS($file) {
-        $css = $this->setPrefixes($file);
+        #
+        # Processing directives @font-face and @import
+        #
+        $css = $this->import($file);
+        #
+        # Set the prefixes of browsers
+        #
+        $css = $this->setPrefixes($css);
+        #
+        # Remove newline characters and tabs
+        #
         $css = str_replace(["\r\n", "\r", "\n", "\t"], '', $css);
+        #
+        # Remove two or more consecutive spaces
+        #
         $css = preg_replace('# {2,}#', '', $css);
-        $css = str_replace([" { "," {","{ "], '{', $css);
-        $css = str_replace([" }","} "," } "], '}', $css);
-        $css = str_replace(": ", ':', $css);
-        $css = str_replace("; ", ';', $css);
-        $css = str_replace(", ", ',', $css);
+        #
+        # Remove the spaces, if a curly bracket, colon, semicolon or comma is placed before or after them
+        #
+		$css = preg_replace('#\s*([\{:;,])\s*#', '$1', $css);
         return $css;
     }
 
@@ -1026,18 +1038,24 @@ class TEMPLATE {
     private function setPrefixes($file) {
         $file = str_replace('./', '/', $file);
         $css  = file_get_contents($_SERVER['DOCUMENT_ROOT'].$file);
-        $css  = preg_replace('#(\/\*).*?(\*\/)#s', '', $css);
+        #
+        # Remove comments
+        #
+        $css = preg_replace('#(\/\*).*?(\*\/)#s', '', $css);
+        $css = str_replace([' 0px', ' 0em', ' 0%', ' 0ex', ' 0cm', ' 0mm', ' 0in', ' 0pt', ' 0pc'], '0', $css);
+        $css = str_replace([':0px', ':0em', ':0%', ':0ex', ':0cm', ':0mm', ':0in', ':0pt', ':0pc'], ':0', $css);
         $values = [];
         foreach ($this->styles as $property => $styles) {
             preg_match_all('#[^-\{]'.$property.'#s', $css, $result);
             if (!empty($result[0])) {
-                $tmp = array_unique($result[0]);
-                    $values[] = $tmp;
+                $values[] = array_unique($result[0]);
             }
-
         }
-        foreach ($values as $key => $value) {
+        foreach ($values as $value) {
             $value = trim($value[0]);
+            #
+            # Search properties from $this->styles list
+            #
             preg_match_all('#'.$value.':[a-zA-Z0-9\.\-\#|\d\s]+?;|[a-zA-Z\-]+: '.$value.'[\S+].+?;#s', $css, $keys);
             foreach ($keys[0] as $property) {
                 foreach ($this->styles as $style => $prefixes) {
@@ -1056,12 +1074,35 @@ class TEMPLATE {
                             }
                         }
                         if (isset($parts)) {
-                             $css = str_replace($property, $result, $css);
-                        }else $css = preg_replace('/[^-]'.$property.'/', $result, $css);
+                               $css = str_replace($property, $result, $css);
+                               #
+                               # Exclude properties like "left-margin", "font-face", etc.
+                               #
+                        } else $css = preg_replace('/[^-]'.$property.'/', $result, $css);
                     }
                 }
             }
         }
         return $css;
+    }
+
+    /**
+     * Handles directives "@font-face" and "@import".
+     *
+     * @param  string $file CSS file before processing
+     * @return string       CSS file after processing
+     */
+    private function import($file) {
+        preg_match_all('/\@font\-face[^\}]*\}/', $file, $match);
+        if (!empty($match[0])) {
+            $css = preg_replace('/\@font\-face[^\}]*\}/', '', $file);
+            $css = implode(LF, $match[0]).LF.$css;
+        }
+        preg_match_all('/\@import[^\;]*\;/', $file, $match);
+        if (!empty($match[0])) {
+            $css = preg_replace('/\@import[^\;]*\;/', '', $file);
+            $css = implode(LF, $match[0]).LF.$css;
+        }
+        return !empty($css) ? $css : $file;
     }
 }

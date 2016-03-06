@@ -50,6 +50,12 @@ if (!empty($REQUEST['save'])) {
     CMS::call('CONFIG')->setSection('search', $config);
 
     $config = [];
+    $config['page_cache'] = empty($REQUEST['page_cache']) ? ''  : $REQUEST['page_cache'];
+    $config['css_cache']  = empty($REQUEST['css_cache'])  ? ''  : $REQUEST['css_cache'];
+    $config['expired']    = empty($REQUEST['expired'])    ? 600 : $REQUEST['expired'];
+    CMS::call('CONFIG')->setSection('cache', $config);
+
+    $config = [];
     $config['width']          = empty($REQUEST['width'])          ? 290        : $REQUEST['width'];
     $config['height']         = empty($REQUEST['height'])         ? 24         : $REQUEST['height'];
     $config['bgcolor']        = empty($REQUEST['bgcolor'])        ? '0x66ff66' : strtr($REQUEST['bgcolor'],        ['#' => '0x']);
@@ -72,6 +78,7 @@ if (!empty($REQUEST['save'])) {
     $config['width']  = empty($REQUEST['width'])  ? 435 : $REQUEST['width'];
     $config['height'] = empty($REQUEST['height']) ? 350 : $REQUEST['height'];
     CMS::call('CONFIG')->setSection('video', $config);
+    
     if (CMS::call('CONFIG')->save())
          ShowMessage('Configuration has been saved');
     else ShowError('Cannot save file'.' config.ini');
@@ -87,6 +94,7 @@ if (!empty($REQUEST['save'])) {
 #
 $current  = CONFIG::getSection('main');
 $current += CONFIG::getSection('search');
+$current += CONFIG::getSection('cache');
 $current += CONFIG::getSection('audio');
 $current += CONFIG::getSection('video');
 

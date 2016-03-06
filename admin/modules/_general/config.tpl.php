@@ -178,6 +178,19 @@ die();?>
                 <td>__Allow guests to use search__</td>
                 <td colspan="2"><input type="checkbox" name="allow_guest" value="1" <!-- IF !empty($allow_guest) -->checked<!-- ENDIF --> /></td>
             </tr>
+            <th colspan="3">__Cache__</th>
+            <tr class="light">
+                <td>__Cache for pages__</td>
+                <td colspan="2"><input type="checkbox" name="page_cache" value="1" <!-- IF !empty($page_cache) -->checked<!-- ENDIF --> /></td>
+            </tr>
+            <tr class="light">
+                <td>__Cache for CSS__</td>
+                <td colspan="2"><input type="checkbox" name="css_cache" value="1" <!-- IF !empty($css_cache) -->checked<!-- ENDIF --> /></td>
+            </tr>
+            <tr class="light">
+                <td>__Expiration of the cache__</td>
+                <td colspan="2"><input type="text" name="expired" value="$expired" size="5" />  __seconds__</td>
+            </tr>
             <th colspan="3">__Audio player__</th>
             <tr class="light">
                 <td>__Player width__</td>

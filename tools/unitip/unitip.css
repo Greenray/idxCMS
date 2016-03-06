@@ -11,9 +11,9 @@
 #unitipmid,
 #unitipcap {
     display: block;
-    left: 0px;
+    left: 0;
     position: relative;
-    top: 0px;
+    top: 0;
     width: 145px; }
 #unitippoint {
     background: url(tools/unitip/TipPoint.png) no-repeat;

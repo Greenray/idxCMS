@@ -12,10 +12,13 @@
 /** Templates parser. */
 class CSS {
 
-    /** @var string Name of the css file that is executing */
-	private $file = '';
+    /** @var boolean TRUE if cache is allowed */
+    private $cache;
 
-    /* @var The prefixes of browsers */
+    /** @var string CSS file that is executing */
+	private $css = '';
+
+    /* @var array The prefixes of browsers */
     private $styles = [
         'background-origin'   => ['-webkit-', '-moz-', '-o-', ''],
         'background-size'     => ['-webkit-', '-moz-', '-o-', ''],
@@ -57,34 +60,25 @@ class CSS {
     ];
 
 	/**
-	 * Class constructor.
+     * Class constructor.
      *
-	 * @param array $options Vector with the template parser options
-	 */
-	public function __construct($file) {
-		$this->file = str_replace('./', '/', $file);
-        $this->file = file_get_contents($_SERVER['DOCUMENT_ROOT'].$this->file);
-        #
-        # Processing directives @font-face and @import
-        #
-        $this->import();
-        #
-        # Set the prefixes of browsers
-        #
-        $this->setPrefixes();
-	}
+     * @param boolean Is cache allowed?
+     */
+	public function __construct($cache) {
+        $this->cache = $cache;
+    }
 
     /** Handles directives "@font-face" and "@import". */
     private function import() {
-        preg_match_all('/\@font\-face[^\}]*\}/', $this->file, $match);
+        preg_match_all('/\@font\-face[^\}]*\}/', $this->css, $match);
         if (!empty($match[0])) {
-            $this->file = preg_replace('/\@font\-face[^\}]*\}/', '', $this->file);
-            $this->file = implode(LF, $match[0]).LF.$this->file;
+            $this->css = preg_replace('/\@font\-face[^\}]*\}/', '', $this->css);
+            $this->css = implode(LF, $match[0]).LF.$this->css;
         }
-        preg_match_all('/\@import[^\;]*\;/', $this->file, $match);
+        preg_match_all('/\@import[^\;]*\;/', $this->css, $match);
         if (!empty($match[0])) {
-            $this->file = preg_replace('/\@import[^\;]*\;/', '', $this->file);
-            $this->file = implode(LF, $match[0]).LF.$this->file;
+            $this->css = preg_replace('/\@import[^\;]*\;/', '', $this->css);
+            $this->css = implode(LF, $match[0]).LF.$this->css;
         }
     }
 
@@ -97,10 +91,10 @@ class CSS {
         #
         # Remove comments
         #
-        $this->file = preg_replace('#(\/\*).*?(\*\/)#s', '', $this->file);
+        $this->css = preg_replace('#(\/\*).*?(\*\/)#s', '', $this->css);
         $values = [];
         foreach ($this->styles as $property => $styles) {
-            preg_match_all('#[^-\{]'.$property.'#s', $this->file, $result);
+            preg_match_all('#[^-\{]'.$property.'#s', $this->css, $result);
             if (!empty($result[0])) {
                 $values[] = array_unique($result[0]);
             }
@@ -110,7 +104,7 @@ class CSS {
             #
             # Search properties from $this->styles list
             #
-            preg_match_all('#'.$value.':[a-zA-Z0-9\.\-\#|\d\s]+?;|[a-zA-Z\-]+: '.$value.'[\S+].+?;#s', $this->file, $keys);
+            preg_match_all('#'.$value.':[a-zA-Z0-9\.\-\#|\d\s]+?;|[a-zA-Z\-]+: '.$value.'[\S+].+?;#s', $this->css, $keys);
             foreach ($keys[0] as $property) {
                 foreach ($this->styles as $style => $prefixes) {
                     if ($style === $value) {
@@ -128,11 +122,11 @@ class CSS {
                             }
                         }
                         if (isset($parts)) {
-                               $this->file = str_replace($property, $result, $this->file);
+                               $this->css = str_replace($property, $result, $this->css);
                                #
                                # Exclude properties like "left-margin", "font-face", etc.
                                #
-                        } else $this->file = preg_replace('/[^-]'.$property.'/', $result, $this->file);
+                        } else $this->css = preg_replace('/[^-]'.$property.'/', $result, $this->css);
                     }
                 }
             }
@@ -144,22 +138,53 @@ class CSS {
      * The list of prefixes is not yet complete.
      * Then we remove unneeded characters, see comments.
      *
-     * @return string Compressed CSS
+     * @param  string $file CSS file
+     * @return string       Compressed CSS
      */
-    public function compress() {
-        #
-        # Remove newline characters and tabs
-        #
-        $this->file = str_replace(["\r\n", "\r", "\n", "\t"], '', $this->file);
-        #
-        # Remove two or more consecutive spaces
-        #
-        $this->file = preg_replace('# {2,}#', '', $this->file);
-        $this->file = str_replace([' 0px', ' 0em', ' 0%', ' 0ex', ' 0cm', ' 0mm', ' 0in', ' 0pt', ' 0pc'], '0', $this->file);
-        $this->file = str_replace([':0px', ':0em', ':0%', ':0ex', ':0cm', ':0mm', ':0in', ':0pt', ':0pc'], ':0', $this->file);
-        #
-        # Remove the spaces, if a curly bracket, colon, semicolon or comma is placed before or after them
-        #
-		return preg_replace('#\s*([\{:;,])\s*#', '$1', $this->file);
+    public function compress($file) {
+        $file = str_replace('./', '/', $file);
+        $css = basename($file);
+        if ($this->cache === TRUE) {
+            $this->css = $this->getFromCache($css);
+        } else {
+            $this->css = file_get_contents($_SERVER['DOCUMENT_ROOT'].$file);
+            #
+            # Processing directives @font-face and @import
+            #
+            $this->import();
+            #
+            # Set the prefixes of browsers
+            #
+            $this->setPrefixes();
+            #
+            # Remove newline characters and tabs
+            #
+            $this->css = str_replace(["\r\n", "\r", "\n", "\t"], '', $this->css);
+            #
+            # Remove two or more consecutive spaces
+            #
+            $this->css = preg_replace('# {2,}#', '', $this->css);
+            $this->css = str_replace([' 0px', ' 0em', ' 0%', ' 0ex', ' 0cm', ' 0mm', ' 0in', ' 0pt', ' 0pc'], '0', $this->css);
+            $this->css = str_replace([':0px', ':0em', ':0%', ':0ex', ':0cm', ':0mm', ':0in', ':0pt', ':0pc'], ':0', $this->css);
+            #
+            # Remove the spaces, if a curly bracket, colon, semicolon or comma is placed before or after them
+            #
+            $this->css = preg_replace('#\s*([\{:;,])\s*#', '$1', $this->css);
+            #
+            # Place the compiled data into cache
+            #
+            file_put_contents(CACHE.$css, $this->css, LOCK_EX);
+        }
+        return $this->css;
     }
+
+    /**
+	 * Gets a compiled file from the cache.
+     *
+     * @param  string $file CSS file
+     * @return mixed        Data from cache or FALSE
+	 */
+	private function getFromCache($file) {
+        return (file_exists(CACHE.$file)) ? file_get_contents(CACHE.$file) : FALSE;
+	}
 }

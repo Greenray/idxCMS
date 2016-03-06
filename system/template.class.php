@@ -44,11 +44,12 @@ class TEMPLATE {
 	 */
 	public function __construct($template, $options = []) {
 		$this->options   = [
-            'compact'     => FALSE,
-			'debug'       => FALSE,
-            'allow_cache' => FALSE,
-            'expired'     => 600,
-			'error_func'  => ''
+            'compact'    => FALSE,
+			'debug'      => FALSE,
+            'page_cache' => FALSE,
+            'css_cache'  => TRUE,
+            'expired'    => 600,
+			'error_func' => ''
 		];
 
         $this->options = array_replace($this->options, $options);
@@ -158,12 +159,10 @@ class TEMPLATE {
             $code = preg_replace_callback("#__(.*?)__#is",      [&$this, 'translate'], $code);
             $code = preg_replace_callback("#\[show=(.*?)\]#is", [&$this, 'show'],      $code);
 
-            $css = preg_match_all("#\<link rel=\"stylesheet\" type=\"text/css\" href=\"(.*?)\" media=\"screen\" /\>#is", $code, $matches);
-            if (!empty($matches[1])) {
-                foreach($matches[1] as $key => $file) {
-                    $CSS = new CSS($file);
-                    $code = str_replace($matches[0][$key], '<style type="text/css"><!--'.$CSS->compress().'--></style>', $code);
-                }
+            preg_match_all("#\<link rel=\"stylesheet\" type=\"text/css\" href=\"(.*?)\" media=\"screen\" /\>#is", $code, $matches);
+            foreach($matches[1] as $key => $file) {
+                $CSS = new CSS($this->options['css_cache']);
+                $code = str_replace($matches[0][$key], '<style type="text/css"><!--'.$CSS->compress($file).'--></style>', $code);
             }
             #
             # Execute php code
@@ -928,11 +927,11 @@ class TEMPLATE {
      * @return mixed         Page from cache
 	 */
 	public function getFromCache($file) {
-        if ($this->options['allow_cache']) {
+        if ($this->options['page_cache']) {
             $file  = md5($file);
-            if (file_exists(CACHE_STORE.$file)) {
-                if ((filemtime(CACHE_STORE.$file) + $this->options['expired']) > time()) {
-                    return file_get_contents(CACHE_STORE.$file);
+            if (file_exists(CACHE.$file)) {
+                if ((filemtime(CACHE.$file) + $this->options['expired']) > time()) {
+                    return file_get_contents(CACHE.$file);
                 }
             }
         }
@@ -946,12 +945,12 @@ class TEMPLATE {
 	 * @param string $data Page to store in the cache
 	 */
 	public function toCache($file, $data) {
-        if ($this->options['allow_cache']) {
+        if ($this->options['page_cache']) {
             if ($this->options['compact']) {
-                $data = str_replace(["\n", "\r"], '', $data);
+                $data = str_replace(["\r\n", "\r", "\n"], '', $data);
             }
             $file = md5($file);
-            file_put_contents(CACHE_STORE.$file, $data, LOCK_EX);
+            file_put_contents(CACHE.$file, $data, LOCK_EX);
         }
 	}
 }

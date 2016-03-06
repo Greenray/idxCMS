@@ -68,7 +68,7 @@ define('IMAGES',  SKINS.'images'.DS);
 /** Path to smiles */
 define('SMILES',  IMAGES.'smiles'.DS);
 /** Path to cache */
-define('CACHE_STORE', CONTENT.'temp'.DS);
+define('CACHE',   CONTENT.'temp'.DS);
 #
 # Elements of the query website page
 #

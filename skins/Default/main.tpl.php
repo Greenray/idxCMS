@@ -18,7 +18,7 @@ die();?>
     [show=meta]
     <title>[show=title]</title>
     <link rel="stylesheet" type="text/css" href="{SKINS}normalize.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="{CURRENT_SKIN}style.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="{CURRENT_SKIN}default.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="{TOOLS}message{DS}message.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="{TOOLS}colorbox{DS}jquery.colorbox.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="{TOOLS}unitip{DS}unitip.css" media="screen" />

@@ -1,8 +1,8 @@
 /* Modal windows - message.css */
 .dhtmlx_modal_box {
     background: #fff;
-	background: linear-gradient(180deg, white 0%, #d0d0d0 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#d0d0d0',GradientType=0 );
+	background: linear-gradient(180deg, #fff 0%, #d0d0d0 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#d0d0d0', GradientType=0);
     border: 1px solid #bbb;
     border-radius: 6px;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);
@@ -12,33 +12,43 @@
 	position: fixed;
     text-align: center;
     width: 300px;
-    z-index: 20000; }
+    z-index: 20000;
+}
+
 .dhtmlx_modal_box img {
     float: left;
-    margin-right: 20px; }
+    margin-right: 20px;
+}
+
 .dhtmlx_message_area {
     position: fixed;
     right: 5px;
     width: 250px;
-    z-index: 1000; }
+    z-index: 1000;
+}
+
 .dhtmlx_popup_text {
     border-radius: 6px;
     color: #000;
     font-size: 14px;
-    margin: 15px 15px 5px 15px;
+    margin: 15px 15px 5px;
     min-height: 30px;
-    overflow: hidden; }
+    overflow: hidden;
+}
+
 .dhtmlx_popup_title {
     background:	red;
     color: #fff;
     font-size: 20px;
     height: 40px;
     line-height: 40px;
-    text-shadow: 1px 1px #000; }
+    text-shadow: 1px 1px #000;
+}
+
 .dhtmlx-alert-error
 .dhtmlx_popup_title,
 .dhtmlx-confirm-error
-.dhtmlx_popup_title {	background:	red; }
+.dhtmlx_popup_title { background: red; }
 .dhtmlx-alert-error,
 .dhtmlx-confirm-error {	border: 1px solid red; }
 .dhtmlx-error {
@@ -48,11 +58,15 @@
     box-shadow: 0 0 10px #000;
 	color: #000;
 	font-size: 14px;
-	padding: 0; }
+	padding: 0;
+}
+
 .dhtmlx-error div {
     background: #d81b1b;
     border: 1px solid #940000;
-    color: #fff; }
+    color: #fff;
+}
+
 .dhtmlx-info {
 	background: #fff;
 	border: 1px solid #bbb;
@@ -68,7 +82,9 @@
 	min-width: 120px;
     padding: 4px 4px 4px 20px;
 	transition: all .5s ease;
-	z-index: 10000; }
+	z-index: 10000;
+}
+
 .dhtmlx-info .hidden {
 	border-width: 0;
 	height: 0;
@@ -77,15 +93,21 @@
 	min-height: 0;
 	overflow: hidden;
 	padding-bottom: 0;
-	padding-top: 0; }
+	padding-top: 0;
+}
+
 .dhtmlx-info div {
 	background: #fff;
 	border: 1px solid #b8b8b8;
 	border-radius: 3px;
-	padding: 5px 10px 5px 10px; }
+	padding: 5px 10px;
+}
+
 .dhtmlx-info img {
     float: left;
-    margin-right: 20px; }
+    margin-right: 20px;
+}
+
 div.dhx_modal_cover {
 	background: #000;
 	border: none;
@@ -96,7 +118,9 @@ div.dhx_modal_cover {
 	position: fixed;
 	top: 0;
 	width: 100%;
-	z-index: 19999; }
+	z-index: 19999;
+}
+
 .dhtmlx_button {
     border: 1px solid #838383;
     border-radius: 6px;
@@ -104,25 +128,31 @@ div.dhx_modal_cover {
     color: #fff;
     cursor: pointer;
     display: inline-block;
-    margin: 0 5px; }
+    margin: 0 5px;
+}
+
 .dhtmlx_button input {
     background:	#3d3d3d;
 	background: linear-gradient(180deg, #707070 0%, #3d3d3d 70%, #4c4c4c 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#707070', endColorstr='#4c4c4c',GradientType=0 );
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#707070', endColorstr='#4c4c4c', GradientType=0);
     border: 1px solid #fff;
     border-radius: 6px;
 	box-sizing: content-box;
     color: #fff;
     line-height: 20px;
-    vertical-align: top; }
+    vertical-align: top;
+}
+
 .dhtmlx_button input:focus,
 .dhtmlx_button input:active {
 	background:	#3d3d3d;
 	background: linear-gradient(180deg, #707070 0%, #4c4c4c 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#707070', endColorstr='#4c4c4c',GradientType=0 );}
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#707070', endColorstr='#4c4c4c', GradientType=0);
+}
+
 .dhtmlx_popup_button {
-    background: linear-gradient(0deg, rgb(0,0,0) 0%, rgb(136,136,136) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#888888',GradientType=0 );
+    background: linear-gradient(0deg, rgb(0, 0, 0) 0%, rgb(136, 136, 136) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#888888', GradientType=0);
     border: 1px solid #838383;
     border: 1px solid #fff;
     border-radius: 6px;
@@ -134,11 +164,16 @@ div.dhx_modal_cover {
 	line-height: 20px;
     margin: 0 5px;
     min-width: 120px;
-	vertical-align: top; }
+	vertical-align: top;
+}
+
 .dhtmlx_popup_button:active {
-    background: linear-gradient(180deg, rgb(136,136,136) 0%, rgb(0,0,0) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#888888', endColorstr='#000000',GradientType=0 );}
-.dhtmlx_popup_button:focus { color: #ff0000; }
+    background: linear-gradient(180deg, rgb(136, 136, 136) 0%, rgb(0, 0, 0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#888888', endColorstr='#000000', GradientType=0);
+}
+
+.dhtmlx_popup_button:focus { color: red; }
 .dhtmlx_popup_controls {
     border-radius: 6px;
-    padding: 5px 5px 15px; }
+    padding: 5px 5px 15px;
+}

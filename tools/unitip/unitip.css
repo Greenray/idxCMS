@@ -6,7 +6,9 @@
 	position: absolute;
     text-align: center;
 	top: -1000px;
-	z-index: 1000; }
+	z-index: 1000;
+}
+
 #unitippoint,
 #unitipmid,
 #unitipcap {
@@ -14,17 +16,24 @@
     left: 0;
     position: relative;
     top: 0;
-    width: 145px; }
+    width: 145px;
+}
+
 #unitippoint {
     background: url(tools/unitip/TipPoint.png) no-repeat;
     height: 19px;
-    overflow: hidden; }
+    overflow: hidden;
+}
+
 #unitipmid {
     background: url(tools/unitip/TipMid.png) repeat;
     height: auto;
     padding: 5px 15px;
-    width: 115px; }
+    width: 115px;
+}
+
 #unitipcap {
     background: url(tools/unitip/TipCap.png) no-repeat;
     height: 7px;
-    overflow: hidden; }
+    overflow: hidden;
+}

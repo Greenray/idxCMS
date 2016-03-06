@@ -12,9 +12,6 @@
 /** Templates parser. */
 class CSS {
 
-    /** @var boolean TRUE if cache is allowed */
-    private $cache;
-
     /** @var string CSS file that is executing */
 	private $css = '';
 
@@ -64,8 +61,8 @@ class CSS {
      *
      * @param boolean Is cache allowed?
      */
-	public function __construct($cache) {
-        $this->cache = $cache;
+	public function __construct() {
+        $this->css = '';
     }
 
     /** Handles directives "@font-face" and "@import". */
@@ -94,7 +91,7 @@ class CSS {
         $this->css = preg_replace('#(\/\*).*?(\*\/)#s', '', $this->css);
         $values = [];
         foreach ($this->styles as $property => $styles) {
-            preg_match_all('#[^-\{]'.$property.'#s', $this->css, $result);
+            preg_match_all('/[^-\{]'.$property.'/s', $this->css, $result);
             if (!empty($result[0])) {
                 $values[] = array_unique($result[0]);
             }
@@ -112,7 +109,10 @@ class CSS {
                         foreach ($prefixes as $match) {
                             $pos = strpos($property, $value);
                             if ($pos === 0) {
-                                $result .= $match.$property;
+                                $parts = explode(':', $property);
+                                $parts[1] = ': '.$parts[1];
+                                $parts[0] = $match.$parts[0];
+                                $result  .= implode($parts);
                             } else {
                                 $parts = explode(':', $property);
                                 $parts[0] = $parts[0].':';
@@ -121,12 +121,7 @@ class CSS {
                                 $result  .= implode($parts);
                             }
                         }
-                        if (isset($parts)) {
-                               $this->css = str_replace($property, $result, $this->css);
-                               #
-                               # Exclude properties like "left-margin", "font-face", etc.
-                               #
-                        } else $this->css = preg_replace('/[^-]'.$property.'/', $result, $this->css);
+                        $this->css = str_replace($property, $result, $this->css);
                     }
                 }
             }
@@ -141,12 +136,13 @@ class CSS {
      * @param  string $file CSS file
      * @return string       Compressed CSS
      */
-    public function compress($file) {
+    public function compress($file, $cache) {
         $file = str_replace('./', '/', $file);
         $css = basename($file);
-        if ($this->cache === TRUE) {
+        if ($cache === TRUE) {
             $this->css = $this->getFromCache($css);
-        } else {
+        }
+        if (empty($this->css)) {
             $this->css = file_get_contents($_SERVER['DOCUMENT_ROOT'].$file);
             #
             # Processing directives @font-face and @import
@@ -164,8 +160,8 @@ class CSS {
             # Remove two or more consecutive spaces
             #
             $this->css = preg_replace('# {2,}#', '', $this->css);
-            $this->css = str_replace([' 0px', ' 0em', ' 0%', ' 0ex', ' 0cm', ' 0mm', ' 0in', ' 0pt', ' 0pc'], '0', $this->css);
-            $this->css = str_replace([':0px', ':0em', ':0%', ':0ex', ':0cm', ':0mm', ':0in', ':0pt', ':0pc'], ':0', $this->css);
+            $this->css = str_replace([' 0px', ' 0em', ' 0ex', ' 0cm', ' 0mm', ' 0in', ' 0pt', ' 0pc'], '0', $this->css);
+            $this->css = str_replace([':0px', ':0em', ':0ex', ':0cm', ':0mm', ':0in', ':0pt', ':0pc'], ':0', $this->css);
             #
             # Remove the spaces, if a curly bracket, colon, semicolon or comma is placed before or after them
             #

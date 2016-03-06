@@ -14,7 +14,7 @@ if (!defined('idxADMIN')) die();?>
     <meta name="generator" content="idxCMS">
     <title>__Administration__</title>
     <link rel="stylesheet" type="text/css" href="{SKINS}normalize.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="{ADMIN}skins/Default/style.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="{ADMIN}skins{DS}Default{DS}admin.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="{TOOLS}message{DS}message.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="{TOOLS}redips{DS}redips.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="{TOOLS}unitip{DS}unitip.css" media="screen" />

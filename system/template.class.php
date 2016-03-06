@@ -46,9 +46,9 @@ class TEMPLATE {
 		$this->options   = [
             'compact'    => FALSE,
 			'debug'      => FALSE,
-            'page_cache' => FALSE,
-            'css_cache'  => TRUE,
-            'expired'    => 600,
+            'page_cache' => CONFIG::getValue('cache', 'page_cache'),
+            'css_cache'  => CONFIG::getValue('cache', 'css_cache'),
+            'expired'    => CONFIG::getValue('cache', 'expired'),
 			'error_func' => ''
 		];
 
@@ -161,8 +161,8 @@ class TEMPLATE {
 
             preg_match_all("#\<link rel=\"stylesheet\" type=\"text/css\" href=\"(.*?)\" media=\"screen\" /\>#is", $code, $matches);
             foreach($matches[1] as $key => $file) {
-                $CSS = new CSS($this->options['css_cache']);
-                $code = str_replace($matches[0][$key], '<style type="text/css"><!--'.$CSS->compress($file).'--></style>', $code);
+                $CSS  = new CSS();
+                $code = str_replace($matches[0][$key], '<style type="text/css"><!--'.$CSS->compress($file, $this->options['css_cache']).'--></style>', $code);
             }
             #
             # Execute php code

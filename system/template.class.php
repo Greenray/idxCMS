@@ -6,7 +6,7 @@
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011-2015 Victor Nabatov
  * @license   Creative Commons Attribution-ShareAlike 4.0 International
- * @file      classes/template.php
+ * @file      classes/template.class.php
  * @package   Template
  */
 
@@ -30,47 +30,6 @@ class TEMPLATE {
 
 	/** @var array Array of the template options */
 	private $options;
-
-    /* @var The prefixes of browsers */
-    private $styles = [
-        'background-origin'   => ['-webkit-', '-moz-', '-o-', ''],
-        'background-size'     => ['-webkit-', '-moz-', '-o-', ''],
-
-        'border-radius'              => ['-webkit-', '-moz-', ''],
-        'border-top-left-radius'     => ['-webkit-', '-moz-', ''],
-        'border-top-right-radius'    => ['-webkit-', '-moz-', ''],
-        'border-bottom-right-radius' => ['-webkit-', '-moz-', ''],
-        'border-bottom-left-radius'  => ['-webkit-', '-moz-', ''],
-
-        'border-image'        => ['-webkit-', '-moz-', '-o-', ''],
-        'border-image-outset' => ['-webkit-', '-moz-', '-o-', ''],
-        'border-image-repeat' => ['-webkit-', '-moz-', '-o-', ''],
-        'border-image-source' => ['-webkit-', '-moz-', '-o-', ''],
-        'border-image-width'  => ['-webkit-', '-moz-', '-o-', ''],
-
-        'box-shadow'          => ['-webkit-', '-moz-', ''],
-
-        'box-sizing'          => ['-webkit-', '-moz-', ''],
-
-        'perspective'         => ['-webkit-', '-moz-', ''],
-        'perspective-origin'  => ['-webkit-', '-moz-', ''],
-
-        'transform'           => ['-webkit-', '-moz-', '-ms-', '-o-', ''],
-        'transform-origin'    => ['-webkit-', '-moz-', '-ms-', '-o-', ''],
-        'transform-style'     => ['-webkit-', '-moz-', ''],
-
-        'transition'          => ['-webkit-', '-moz-', '-o-', ''],
-        'transition-delay'    => ['-webkit-', '-moz-', '-o-', ''],
-        'transition-duration' => ['-webkit-', '-moz-', '-o-', ''],
-        'transition-property' => ['-webkit-', '-moz-', '-o-', ''],
-
-        'transition-timing-function' => ['-webkit-', '-moz-', '-o-', ''],
-
-        'linear-gradient' => ['-webkit-', '-moz-', '-o-', ''],
-        'radial-gradient' => ['-webkit-', '-moz-', '-o-', ''],
-        'repeating-linear-gradient' => ['-webkit-', '-moz-', '-o-', ''],
-        'repeating-radial-gradient' => ['-webkit-', '-moz-', '-o-', '']
-    ];
 
 	/** @var array Array of the template variables */
 	private $vars = [];
@@ -202,7 +161,8 @@ class TEMPLATE {
             $css = preg_match_all("#\<link rel=\"stylesheet\" type=\"text/css\" href=\"(.*?)\" media=\"screen\" /\>#is", $code, $matches);
             if (!empty($matches[1])) {
                 foreach($matches[1] as $key => $file) {
-                    $code = str_replace($matches[0][$key], '<style type="text/css"><!--'.$this->compressCSS($file).'--></style>', $code);
+                    $CSS = new CSS($file);
+                    $code = str_replace($matches[0][$key], '<style type="text/css"><!--'.$CSS->compress().'--></style>', $code);
                 }
             }
             #
@@ -994,115 +954,4 @@ class TEMPLATE {
             file_put_contents(CACHE_STORE.$file, $data, LOCK_EX);
         }
 	}
-
-    /**
-     * Generates CSS3 properties with browser-specific prefixes.
-     * The list of prefixes is not yet complete.
-     * Then we remove unneeded characters, see comments.
-     *
-     * @param  string $file css file to to work with
-     * @return string       Parsed string
-     */
-    private function compressCSS($file) {
-        #
-        # Processing directives @font-face and @import
-        #
-        $css = $this->import($file);
-        #
-        # Set the prefixes of browsers
-        #
-        $css = $this->setPrefixes($css);
-        #
-        # Remove newline characters and tabs
-        #
-        $css = str_replace(["\r\n", "\r", "\n", "\t"], '', $css);
-        #
-        # Remove two or more consecutive spaces
-        #
-        $css = preg_replace('# {2,}#', '', $css);
-        #
-        # Remove the spaces, if a curly bracket, colon, semicolon or comma is placed before or after them
-        #
-		$css = preg_replace('#\s*([\{:;,])\s*#', '$1', $css);
-        return $css;
-    }
-
-    /**
-     * Generates CSS3 properties with browser-specific prefixes.
-     * The prefix list is not complete, it contains only the used properties in the CMS.
-     * So it can easily be extended.
-     *
-     * @param  string $file css file to to work with
-     * @return string       Parsed string
-     */
-    private function setPrefixes($file) {
-        $file = str_replace('./', '/', $file);
-        $css  = file_get_contents($_SERVER['DOCUMENT_ROOT'].$file);
-        #
-        # Remove comments
-        #
-        $css = preg_replace('#(\/\*).*?(\*\/)#s', '', $css);
-        $css = str_replace([' 0px', ' 0em', ' 0%', ' 0ex', ' 0cm', ' 0mm', ' 0in', ' 0pt', ' 0pc'], '0', $css);
-        $css = str_replace([':0px', ':0em', ':0%', ':0ex', ':0cm', ':0mm', ':0in', ':0pt', ':0pc'], ':0', $css);
-        $values = [];
-        foreach ($this->styles as $property => $styles) {
-            preg_match_all('#[^-\{]'.$property.'#s', $css, $result);
-            if (!empty($result[0])) {
-                $values[] = array_unique($result[0]);
-            }
-        }
-        foreach ($values as $value) {
-            $value = trim($value[0]);
-            #
-            # Search properties from $this->styles list
-            #
-            preg_match_all('#'.$value.':[a-zA-Z0-9\.\-\#|\d\s]+?;|[a-zA-Z\-]+: '.$value.'[\S+].+?;#s', $css, $keys);
-            foreach ($keys[0] as $property) {
-                foreach ($this->styles as $style => $prefixes) {
-                    if ($style === $value) {
-                        $result = '';
-                        foreach ($prefixes as $match) {
-                            $pos = strpos($property, $value);
-                            if ($pos === 0) {
-                                $result .= $match.$property;
-                            } else {
-                                $parts = explode(':', $property);
-                                $parts[0] = $parts[0].':';
-                                $parts[1] = trim($parts[1]);
-                                $parts[1] = $match.$parts[1];
-                                $result  .= implode($parts);
-                            }
-                        }
-                        if (isset($parts)) {
-                               $css = str_replace($property, $result, $css);
-                               #
-                               # Exclude properties like "left-margin", "font-face", etc.
-                               #
-                        } else $css = preg_replace('/[^-]'.$property.'/', $result, $css);
-                    }
-                }
-            }
-        }
-        return $css;
-    }
-
-    /**
-     * Handles directives "@font-face" and "@import".
-     *
-     * @param  string $file CSS file before processing
-     * @return string       CSS file after processing
-     */
-    private function import($file) {
-        preg_match_all('/\@font\-face[^\}]*\}/', $file, $match);
-        if (!empty($match[0])) {
-            $css = preg_replace('/\@font\-face[^\}]*\}/', '', $file);
-            $css = implode(LF, $match[0]).LF.$css;
-        }
-        preg_match_all('/\@import[^\;]*\;/', $file, $match);
-        if (!empty($match[0])) {
-            $css = preg_replace('/\@import[^\;]*\;/', '', $file);
-            $css = implode(LF, $match[0]).LF.$css;
-        }
-        return !empty($css) ? $css : $file;
-    }
 }

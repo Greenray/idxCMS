@@ -134,12 +134,12 @@ set_error_handler("idxErrorHandler", E_ALL & ~E_DEPRECATED);
 # Loading system libraries
 #
 include_once SYS.'cms.class.php';
+include_once SYS.'functions.php';
 include_once SYS.'filter.class.php';
 include_once SYS.'log.class.php';
 include_once SYS.'config.class.php';
-include_once SYS.'system.class.php';
 include_once SYS.'user.class.php';
-include_once SYS.'functions.php';
+include_once SYS.'system.class.php';
 include_once SYS.'dbase.class.php';
 include_once SYS.'sections.class.php';
 include_once SYS.'categories.class.php';
@@ -151,6 +151,7 @@ include_once SYS.'highlighter.class.php';
 include_once SYS.'uploader.class.php';
 include_once SYS.'image.class.php';
 include_once SYS.'template.class.php';
+include_once SYS.'css.class.php';
 
 session_start();
 $_SESSION['file'] = 0;

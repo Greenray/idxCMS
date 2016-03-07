@@ -3,7 +3,7 @@
  * Registers objects and provides access to their methods.
  *
  * @program   idxCMS: Flat Files Content Management System
- * @version   3.3
+ * @version   4.0
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @Copyright (c) 2011-2016 Victor Nabatov
  * @license   Creative Commons Attribution-ShareAlike 4.0 International

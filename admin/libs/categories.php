@@ -1,5 +1,5 @@
 <?php
-# idxCMS Flat Files Content Management Sysytem v3.3
+# idxCMS Flat Files Content Management Sysytem v4.0
 # Copyright (c) 2011-2016 Victor Nabatov greenray.spb@gmail.com
 # Administration: Categories management.
 

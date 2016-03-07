@@ -3,7 +3,7 @@
  * Templates parser.
  *
  * @program   idxCMS: Flat Files Content Management System
- * @version   3.3
+ * @version   4.0
  * @author    David Casado Martínez <tokkara@gmail.com>
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011-2016 Victor Nabatov

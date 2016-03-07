@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Глобальные элементы (idxCMS: Flat Files Content Management Sysytem ver. 3.2)</title>
+    <title>Глобальные элементы (idxCMS: Flat Files Content Management Sysytem ver. 3.3)</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="generator" content="phpAPI 5.0 (https://github.com/Greenray/phpAPI/)">
     <link href="../style.css" type="text/css" rel="stylesheet" />
@@ -10,7 +10,7 @@
     <div class="page">
         <div class="header center">
             <div class="content">
-                idxCMS: Flat Files Content Management Sysytem ver. 3.2                <div class="logo_desc">Интерфейс прикладного программирования</div>
+                idxCMS: Flat Files Content Management Sysytem ver. 3.3                <div class="logo_desc">Интерфейс прикладного программирования</div>
             </div>
         </div>
         <div class="panel">
@@ -81,7 +81,7 @@
     <ul>
             <li><a href="../core/package-globals.html#ADMIN" title="Core">ADMIN</a></li>
             <li><a href="../core/package-globals.html#ADMINLIBS" title="Core">ADMINLIBS</a></li>
-            <li><a href="../core/package-globals.html#CACHE_STORE" title="Core">CACHE_STORE</a></li>
+            <li><a href="../core/package-globals.html#CACHE" title="Core">CACHE</a></li>
             <li><a href="../core/package-globals.html#CATEGORY" title="Core">CATEGORY</a></li>
             <li><a href="../core/package-globals.html#COMMENT" title="Core">COMMENT</a></li>
             <li><a href="../core/package-globals.html#CONTENT" title="Core">CONTENT</a></li>
@@ -152,7 +152,7 @@
                         <tr>
                 <td class="type w_200">public final  string</td>
                 <td class="description">
-                    <pre><a href="#CACHE_STORE"><span class="lilac">CACHE_STORE</span></a> = CONTENT.<span class="red">'temp'</span>.DS</pre>
+                    <pre><a href="#CACHE"><span class="lilac">CACHE</span></a> = CONTENT.<span class="red">'temp'</span>.DS</pre>
                     <p class="description">Path to cache</p>
                 </td>
             </tr>
@@ -201,7 +201,7 @@
                         <tr>
                 <td class="type w_200">public final  string</td>
                 <td class="description">
-                    <pre><a href="#IDX_COPYRIGHT"><span class="lilac">IDX_COPYRIGHT</span></a> = <span class="red">'&copy; 2016 Greenray'</span></pre>
+                    <pre><a href="#IDX_COPYRIGHT"><span class="lilac">IDX_COPYRIGHT</span></a> = <span class="red">'&copy; 2011-2016 Greenray'</span></pre>
                     <p class="description">Copyright</p>
                 </td>
             </tr>
@@ -215,7 +215,7 @@
                         <tr>
                 <td class="type w_200">public final  string</td>
                 <td class="description">
-                    <pre><a href="#IDX_VERSION"><span class="lilac">IDX_VERSION</span></a> = <span class="red">'3.2'</span></pre>
+                    <pre><a href="#IDX_VERSION"><span class="lilac">IDX_VERSION</span></a> = <span class="red">'3.3'</span></pre>
                     <p class="description">Version of the system</p>
                 </td>
             </tr>
@@ -347,16 +347,16 @@
             </tr>
                 </table>
     <h2 id="details_globals">Глобальные элементы: детали</h2>
-            <div class="location">index.php at line 228</div>
+            <div class="location">index.php at line 230</div>
         <code id="ADMIN" class="arguments"><pre>public final  string <strong>ADMIN</strong> = ROOT.<span class="red">'admin'</span>.DS</pre></code>
         <div class="details">Root directory for administrative part of CMS</div>
         <hr />
-            <div class="location">index.php at line 230</div>
+            <div class="location">index.php at line 232</div>
         <code id="ADMINLIBS" class="arguments"><pre>public final  string <strong>ADMINLIBS</strong> = ADMIN.<span class="red">'libs'</span>.DS</pre></code>
         <div class="details">Libruaries for administration panel</div>
         <hr />
             <div class="location">index.php at line 71</div>
-        <code id="CACHE_STORE" class="arguments"><pre>public final  string <strong>CACHE_STORE</strong> = CONTENT.<span class="red">'temp'</span>.DS</pre></code>
+        <code id="CACHE" class="arguments"><pre>public final  string <strong>CACHE</strong> = CONTENT.<span class="red">'temp'</span>.DS</pre></code>
         <div class="details">Path to cache</div>
         <hr />
             <div class="location">index.php at line 80</div>
@@ -371,11 +371,11 @@
         <code id="CONTENT" class="arguments"><pre>public final  string <strong>CONTENT</strong> = ROOT.<span class="red">'content'</span>.DS</pre></code>
         <div class="details">Path to CMS content</div>
         <hr />
-            <div class="location">index.php at line 384</div>
+            <div class="location">index.php at line 193</div>
         <code id="CURRENT_MODULE" class="arguments"><pre>public final  string <strong>CURRENT_MODULE</strong> = $MODULE</pre></code>
         <div class="details">Requested module</div>
         <hr />
-            <div class="location">system/system.class.php at line 143</div>
+            <div class="location">system/system.class.php at line 141</div>
         <code id="CURRENT_SKIN" class="arguments"><pre>public final  string <strong>CURRENT_SKIN</strong> = SKINS.self::$skin.DS</pre></code>
         <div class="details">User defined skin</div>
         <hr />
@@ -384,7 +384,7 @@
         <div class="details">Alias for DIRECTORY_SEPARATOR</div>
         <hr />
             <div class="location">index.php at line 93</div>
-        <code id="IDX_COPYRIGHT" class="arguments"><pre>public final  string <strong>IDX_COPYRIGHT</strong> = <span class="red">'&copy; 2016 Greenray'</span></pre></code>
+        <code id="IDX_COPYRIGHT" class="arguments"><pre>public final  string <strong>IDX_COPYRIGHT</strong> = <span class="red">'&copy; 2011-2016 Greenray'</span></pre></code>
         <div class="details">Copyright</div>
         <hr />
             <div class="location">index.php at line 95</div>
@@ -392,7 +392,7 @@
         <div class="details">Message about system generator</div>
         <hr />
             <div class="location">index.php at line 91</div>
-        <code id="IDX_VERSION" class="arguments"><pre>public final  string <strong>IDX_VERSION</strong> = <span class="red">'3.2'</span></pre></code>
+        <code id="IDX_VERSION" class="arguments"><pre>public final  string <strong>IDX_VERSION</strong> = <span class="red">'3.3'</span></pre></code>
         <div class="details">Version of the system</div>
         <hr />
             <div class="location">index.php at line 67</div>
@@ -447,7 +447,7 @@
         <code id="TEMP" class="arguments"><pre>public final  string <strong>TEMP</strong> = CONTENT.<span class="red">'temp'</span>.DS</pre></code>
         <div class="details">Temporary directory</div>
         <hr />
-            <div class="location">index.php at line 232</div>
+            <div class="location">index.php at line 234</div>
         <code id="TEMPLATES" class="arguments"><pre>public final  string <strong>TEMPLATES</strong> = ADMIN.<span class="red">'templates'</span>.DS</pre></code>
         <div class="details">Templates for administration panel</div>
         <hr />
@@ -459,7 +459,7 @@
         <code id="USERS" class="arguments"><pre>public final  string <strong>USERS</strong> = CONTENT.<span class="red">'users'</span>.DS</pre></code>
         <div class="details">Path to users profiles</div>
         <hr />
-            <div class="location">index.php at line 242</div>
+            <div class="location">index.php at line 244</div>
         <code id="idxADMIN" class="arguments"><pre>public final  string <strong>idxADMIN</strong> = TRUE</pre></code>
         <div class="details">Prevent direct access to php files</div>
         <hr />

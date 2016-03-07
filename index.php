@@ -3,9 +3,9 @@
  * The core of the content management system.
  *
  * @program   idxCMS: Flat Files Content Management System
- * @version   3.2
+ * @version   3.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @Copyright (c) 2016 Victor Nabatov greenray.spb@gmail.com
+ * @copyright (c) 2011-2016 Victor Nabatov
  * @license   Creative Commons Attribution-ShareAlike 4.0 International
  * @package   Core
  * @overview  The core of the system.
@@ -88,9 +88,9 @@ define('PAGE',     '&amp;page=');
 # idxCMS version
 #
 /** Version of the system */
-define('IDX_VERSION', '3.2');
+define('IDX_VERSION', '3.3');
 /** Copyright */
-define('IDX_COPYRIGHT', '&copy; 2016 Greenray');
+define('IDX_COPYRIGHT', '&copy; 2011-2016 Greenray');
 /** Message about system generator */
 define('IDX_POWERED', 'Powered by idxCMS v'.IDX_VERSION);
 

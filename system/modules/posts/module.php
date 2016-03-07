@@ -3,9 +3,9 @@
  * Module POSTS: articles and news.
  *
  * @program   idxCMS: F lat Files Content Management System
- * @version   3.2
+ * @version   3.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @Copyright (c) 2016 Victor Nabatov greenray.spb@gmail.com
+ * @copyright (c) 2011-2016 Victor Nabatov
  * @license   Creative Commons Attribution-ShareAlike 4.0 International
  * @file      system/modules/posts/module.php
  * @package   Posts

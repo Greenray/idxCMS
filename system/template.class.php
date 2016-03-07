@@ -1,16 +1,24 @@
 <?php
 /**
+ * Templates parser.
+ *
  * @program   idxCMS: Flat Files Content Management System
- * @version   3.2
+ * @version   3.3
  * @author    David Casado Martínez <tokkara@gmail.com>
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011-2015 Victor Nabatov
+ * @copyright (c) 2011-2016 Victor Nabatov
  * @license   Creative Commons Attribution-ShareAlike 4.0 International
  * @file      classes/template.class.php
  * @package   Template
+ * @overview  Completely separated from php code.
+ *            Handles special tags and replaces them with commands of the php interpreter.
+ *            It is able recursively execute functions and directives:
+ *            FOREACH, IF, ELSE, ELSEIF, SWITCH, CASE, BREAK, DEFAULT, INCLUDE, CONTINUE,
+ *            ISSET, EMPTY, EXIT,
+ *            to use constants and variables.
+ *            There is a possibility of caching the result.
  */
 
-/** idxCMS templates parser. */
 class TEMPLATE {
 
     /** @var string Template content */

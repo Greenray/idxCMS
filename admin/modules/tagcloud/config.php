@@ -3,11 +3,11 @@
  * Tagcloud.
  *
  * @program   idxCMS: Flat Files Content Management System
- * @file      admin/modules/tagcloud/config.php
- * @version   3.2
+ * @version   3.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @Copyright (c) 2016 Victor Nabatov greenray.spb@gmail.com
+ * @copyright (c) 2011-2016 Victor Nabatov
  * @license   Creative Commons Attribution-ShareAlike 4.0 International
+ * @file      admin/modules/tagcloud/config.php
  * @package   Tagcloud
  * @overview  Website Tagcloud.
  *            A visual representation of the keywords on your website.

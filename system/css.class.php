@@ -1,15 +1,19 @@
 <?php
 /**
+ * CSS parser and optimizer.
+ *
  * @program   idxCMS: Flat Files Content Management System
- * @version   3.2
+ * @version   3.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @copyright (c) 2011-2015 Victor Nabatov
+ * @copyright (c) 2011-2016 Victor Nabatov
  * @license   Creative Commons Attribution-ShareAlike 4.0 International
  * @file      classes/css.class.php
  * @package   Template
+ * @overview  Parses css code, automatically inserts prefixes of browsers and compresses the code.
+ *            There is a possibility of caching the result.
  */
 
-/** Templates parser. */
+/** CSS parser and optimizer. */
 class CSS {
 
     /** @var string CSS file that is executing */

@@ -3,7 +3,7 @@
  * Processing comments.
  *
  * @program   idxCMS: Flat Files Content Management System
- * @version   3.2
+ * @version   3.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011-2016 Victor Nabatov
  * @license   CCreative Commons Attribution-ShareAlike 4.0 International

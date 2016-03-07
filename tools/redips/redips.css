@@ -2,27 +2,33 @@
 #redips-nodrag,
 #redips-drag {
     overflow: hidden;
-    position: relative; }
-    #redips-clone {
-        border: 1px solid red;
-        height: 1px; }
-    div#redips-drag table {	background: #ddd; }
-    div#redips-nodrag table tr, div#redips-drag table tr { height: 35px; }
-    div#redips-nodrag th, div#redips-drag th { border: 1px solid #758596; }
-    div#redips-nodrag td, div#redips-drag td { border: 1px solid #a1a5a9; }
-    .redips-nodrag,
-    .redips-drag {
-        border: 0;
-        margin: auto; }
-    .redips-mark {
-        font-weight: bold;
-        text-align: center; }
-    .redips-row {
-        height: 20px;
-        width: 20px; }
-    .redips-rowhandler { width: 25px; }
-    .redips-rowhandler img { margin: 0 auto; }
-    .site-page {
-        background: #ddd;
-        margin: 10px 0 0;
-        text-align: center; }
+    position: relative;
+}
+#redips-clone {
+    border: 1px solid red;
+    height: 1px;
+}
+div#redips-drag table {	background: #ddd; }
+div#redips-nodrag table tr, div#redips-drag table tr { height: 35px; }
+div#redips-nodrag th, div#redips-drag th { border: 1px solid #758596; }
+div#redips-nodrag td, div#redips-drag td { border: 1px solid #a1a5a9; }
+.redips-nodrag,
+.redips-drag {
+    border: 0;
+    margin: auto;
+}
+.redips-mark {
+    font-weight: bold;
+    text-align: center;
+}
+.redips-row {
+    height: 20px;
+    width: 20px;
+}
+.redips-rowhandler { width: 25px; }
+.redips-rowhandler img { margin: 0 auto; }
+.site-page {
+    background: #ddd;
+    margin: 10px 0 0;
+    text-align: center;
+}

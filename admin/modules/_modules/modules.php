@@ -1,6 +1,6 @@
 <?php
-# idxCMS Flat Files Content Management System v3.2
-# Copyright (c) 2016 Victor Nabatov greenray.spb@gmail.com
+# idxCMS Flat Files Content Management System v3.3
+# Copyright (c) 2011-2016 Victor Nabatov greenray.spb@gmail.com
 # Administration: Modules management.
 
 if (!defined('idxADMIN') || !USER::$root) die();
@@ -38,7 +38,15 @@ if (!empty($REQUEST['enable'])) {
         }
         CMS::call('CONFIG')->save();
         Sitemap();
-
+    } catch (Exception $error) {
+        ShowError($error->getMessage());
+    }
+}
+if (!empty($REQUEST['cache'])) {
+    try {
+        CMS::call('CONFIG')->setSection('cache', $REQUEST['cache']);
+        CMS::call('CONFIG')->save();
+        Sitemap();
     } catch (Exception $error) {
         ShowError($error->getMessage());
     }

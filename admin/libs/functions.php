@@ -3,9 +3,9 @@
  * Functions for administration of the system.
  *
  * @program   idxCMS: Flat Files Content Management System
- * @version   3.2
+ * @version   3.3
  * @author    Victor Nabatov <greenray.spb@gmail.com>
- * @Copyright (c) 2016 Victor Nabatov greenray.spb@gmail.com
+ * @Copyright (c) 2011-2016 Victor Nabatov
  * @license   Creative Commons Attribution-ShareAlike 4.0 International
  * @file      admin/libs/functions.php
  * @package   Administration

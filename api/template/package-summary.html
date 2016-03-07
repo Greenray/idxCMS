@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Template (idxCMS: Flat Files Content Management Sysytem ver. 3.2)</title>
+    <title>Template (idxCMS: Flat Files Content Management Sysytem ver. 3.3)</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="generator" content="phpAPI 5.0 (https://github.com/Greenray/phpAPI/)">
     <link href="../style.css" type="text/css" rel="stylesheet" />
@@ -10,7 +10,7 @@
     <div class="page">
         <div class="header center">
             <div class="content">
-                idxCMS: Flat Files Content Management Sysytem ver. 3.2                <div class="logo_desc">Интерфейс прикладного программирования</div>
+                idxCMS: Flat Files Content Management Sysytem ver. 3.3                <div class="logo_desc">Интерфейс прикладного программирования</div>
             </div>
         </div>
         <div class="panel">
@@ -37,6 +37,7 @@
 <h1>Пространство имен Template</h1>
     <h2>Классы</h2>
     <ul>
+            <li><a href="../template/css.html" title="Template \ CSS">CSS</a></li>
             <li><a href="../template/template.html" title="Template \ TEMPLATE">TEMPLATE</a></li>
         </ul>
             </div>
@@ -56,15 +57,22 @@
     </div>
 </nav>
                 <h1>Пространство имен Template</h1>
-    <div class="comment">Описания нет</div>
+    <div class="comment">Completely separated from php code</div>
+            <dl><dt>Смотри:</dt><dd><b><a href="#overview_description">Описание</a></b></dd></dl>
         <br />
     <table class="title">
         <tr><th colspan="2" class="title">Классы: общий обзор</th></tr>
                     <tr>
+                <td class="name"><a href="../template/css.html">CSS</a></td>
+                <td class="description">CSS parser and optimizer.</td>
+            </tr>
+                    <tr>
                 <td class="name"><a href="../template/template.html">TEMPLATE</a></td>
-                <td class="description">idxCMS templates parser.</td>
+                <td class="description">Templates parser.</td>
             </tr>
             </table>
+    <h1>Пространство имен Template: Описание</h1>
+    <div class="comment" id="overview_description">Completely separated from php code.<br /> Handles special tags and replaces them with commands of the php interpreter.<br /> It is able recursively execute functions and directives:<br /> FOREACH, IF, ELSE, ELSEIF, SWITCH, CASE, BREAK, DEFAULT, INCLUDE, CONTINUE,<br /> ISSET, EMPTY, EXIT,<br /> to use constants and variables.<br /> There is a possibility of caching the result.</div>
                 <nav class="menu_main center"><div class="menu">
             <ul>
                     <li><a href="../index.html">Overview</a></li>

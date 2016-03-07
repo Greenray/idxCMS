@@ -1,6 +1,6 @@
 <?php
-# idxCMS Flat Files Content Management System v3.2
-# Copyright (c) 2016 Victor Nabatov greenray.spb@gmail.com
+# idxCMS Flat Files Content Management System v3.3
+# Copyright (c) 2011-2016 Victor Nabatov greenray.spb@gmail.com
 # Administration: Files, links, music or video template.
 
 die();?>

@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>API for class SYSTEM (idxCMS: Flat Files Content Management Sysytem ver. 3.2)</title>
+    <title>API for class SYSTEM (idxCMS: Flat Files Content Management Sysytem ver. 3.3)</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="generator" content="phpAPI 5.0 (https://github.com/Greenray/phpAPI/)">
     <link href="../style.css" type="text/css" rel="stylesheet" />
@@ -10,7 +10,7 @@
     <div class="page">
         <div class="header center">
             <div class="content">
-                idxCMS: Flat Files Content Management Sysytem ver. 3.2                <div class="logo_desc">Интерфейс прикладного программирования</div>
+                idxCMS: Flat Files Content Management Sysytem ver. 3.3                <div class="logo_desc">Интерфейс прикладного программирования</div>
             </div>
         </div>
         <div class="panel">
@@ -81,7 +81,7 @@
     <ul>
             <li><a href="../core/package-globals.html#ADMIN" title="Core">ADMIN</a></li>
             <li><a href="../core/package-globals.html#ADMINLIBS" title="Core">ADMINLIBS</a></li>
-            <li><a href="../core/package-globals.html#CACHE_STORE" title="Core">CACHE_STORE</a></li>
+            <li><a href="../core/package-globals.html#CACHE" title="Core">CACHE</a></li>
             <li><a href="../core/package-globals.html#CATEGORY" title="Core">CATEGORY</a></li>
             <li><a href="../core/package-globals.html#COMMENT" title="Core">COMMENT</a></li>
             <li><a href="../core/package-globals.html#CONTENT" title="Core">CONTENT</a></li>
@@ -150,7 +150,7 @@
             <tr>
             <td class="hid left w_100">Version</td>
             <td class="hid right w_100 lilac">&nbsp;</td>
-                            <td class="hid" colspan="2">3.2</td>
+                            <td class="hid" colspan="2">3.3</td>
                     </tr>
             <tr>
             <td class="hid left w_100">Author</td>
@@ -160,7 +160,7 @@
             <tr>
             <td class="hid left w_100">Copyright</td>
             <td class="hid right w_100 lilac">&nbsp;</td>
-                            <td class="hid" colspan="2">(c) 2016 Victor Nabatov greenray.spb@gmail.com</td>
+                            <td class="hid" colspan="2">(c) 2011-2016 Victor Nabatov</td>
                     </tr>
             <tr>
             <td class="hid left w_100">License</td>
@@ -498,7 +498,7 @@
 </div>
     </div>
     <h2 id="details_methods">Методы: детали</h2>
-            <div class="location">system/system.class.php at line 153</div>
+            <div class="location">system/system.class.php at line 151</div>
         <code class="arguments" id="createMainMenu">public  boolean <strong>createMainMenu</strong> ()</code>
         <div class="details">
                     <p class="description">Creates main menu for website.<br /> The menu will be created only for registered and enabled modules.</p>
@@ -513,7 +513,7 @@
 </div>
         </div>
         <hr />
-            <div class="location">system/system.class.php at line 217</div>
+            <div class="location">system/system.class.php at line 209</div>
         <code class="arguments" id="getMainMenu">public  array <strong>getMainMenu</strong> ()</code>
         <div class="details">
                     <p class="description">Returns data for main menu or sitemap.<br /> Only registered and enabled modules will be used.</p>
@@ -528,7 +528,7 @@
 </div>
         </div>
         <hr />
-            <div class="location">system/system.class.php at line 250</div>
+            <div class="location">system/system.class.php at line 240</div>
         <code class="arguments" id="get">public static  string <strong>get</strong> (<span class="lilac">string</span> <span class="blue">$param</span>)</code>
         <div class="details">
                     <p class="description">Gets system parameter.</p>
@@ -549,7 +549,7 @@
 </div>
         </div>
         <hr />
-            <div class="location">system/system.class.php at line 260</div>
+            <div class="location">system/system.class.php at line 250</div>
         <code class="arguments" id="initModules">public  void <strong>initModules</strong> (<span class="lilac">boolean</span> <span class="blue">$ignore_disabled</span>)</code>
         <div class="details">
                     include_once MODULES.$mod[0].DS.<span class="red">'module.php'</span><br />                    <p class="description">Modules initialization.</p>
@@ -570,7 +570,7 @@
 </div>
         </div>
         <hr />
-            <div class="location">system/system.class.php at line 286</div>
+            <div class="location">system/system.class.php at line 275</div>
         <code class="arguments" id="registerFeed">public static  void <strong>registerFeed</strong> (<span class="lilac">string</span> <span class="blue">$section</span>, <span class="lilac">string</span> <span class="blue">$title</span>, <span class="lilac">string</span> <span class="blue">$desc</span>, <span class="lilac">string</span> <span class="blue">$module</span>)</code>
         <div class="details">
                     <p class="description">Registers RSS feed for module.<br /> RSS feed ID is looks like "module@section".</p>
@@ -604,7 +604,7 @@
 </div>
         </div>
         <hr />
-            <div class="location">system/system.class.php at line 295</div>
+            <div class="location">system/system.class.php at line 284</div>
         <code class="arguments" id="registerMainMenu">public static  void <strong>registerMainMenu</strong> (<span class="lilac">string</span> <span class="blue">$module</span>)</code>
         <div class="details">
                     <p class="description">Registers module for menu link.</p>
@@ -620,7 +620,7 @@
 </div>
         </div>
         <hr />
-            <div class="location">system/system.class.php at line 312</div>
+            <div class="location">system/system.class.php at line 301</div>
         <code class="arguments" id="registerModule">public static  void <strong>registerModule</strong> (<span class="lilac">string</span> <span class="blue">$module</span>, <span class="lilac">string</span> <span class="blue">$title</span>, <span class="lilac">string</span> <span class="blue">$type</span>, <span class="lilac">string</span> <span class="blue">$system</span>)</code>
         <div class="details">
                     <p class="description">Registers module.<br /> Used for classify modules by type. There are three types:<ul><li>system (cannot be excluded);</li><li>main (for full pages);</li><li>box (for panels or boxes);</li></ul>- plugin (cannot be showed on any page).</p>
@@ -653,7 +653,7 @@
 </div>
         </div>
         <hr />
-            <div class="location">system/system.class.php at line 323</div>
+            <div class="location">system/system.class.php at line 312</div>
         <code class="arguments" id="registerSearch">public static  void <strong>registerSearch</strong> (<span class="lilac">string</span> <span class="blue">$module</span>)</code>
         <div class="details">
                     <p class="description">Registers module for search requests.</p>
@@ -669,7 +669,7 @@
 </div>
         </div>
         <hr />
-            <div class="location">system/system.class.php at line 332</div>
+            <div class="location">system/system.class.php at line 321</div>
         <code class="arguments" id="registerSiteMap">public static  void <strong>registerSiteMap</strong> (<span class="lilac">string</span> <span class="blue">$module</span>)</code>
         <div class="details">
                     <p class="description">Registers module for use in sitemap.</p>
@@ -685,7 +685,7 @@
 </div>
         </div>
         <hr />
-            <div class="location">system/system.class.php at line 342</div>
+            <div class="location">system/system.class.php at line 331</div>
         <code class="arguments" id="registerSkin">public static  void <strong>registerSkin</strong> (<span class="lilac">string</span> <span class="blue">$name</span>, <span class="lilac">string</span> <span class="blue">$skin</span>)</code>
         <div class="details">
                     <p class="description">Registers module for menu link.</p>
@@ -707,7 +707,7 @@
 </div>
         </div>
         <hr />
-            <div class="location">system/system.class.php at line 352</div>
+            <div class="location">system/system.class.php at line 341</div>
         <code class="arguments" id="set">public static  void <strong>set</strong> (<span class="lilac">string</span> <span class="blue">$param</span>, <span class="lilac">string</span> <span class="blue">$value</span>)</code>
         <div class="details">
                     <p class="description">Sets system parameter.</p>
@@ -729,7 +729,7 @@
 </div>
         </div>
         <hr />
-            <div class="location">system/system.class.php at line 361</div>
+            <div class="location">system/system.class.php at line 350</div>
         <code class="arguments" id="setCurrentPoint">public static  void <strong>setCurrentPoint</strong> (<span class="lilac">type</span> <span class="blue">$point</span>)</code>
         <div class="details">
                     <p class="description">Sets the point for output.</p>
@@ -745,7 +745,7 @@
 </div>
         </div>
         <hr />
-            <div class="location">system/system.class.php at line 372</div>
+            <div class="location">system/system.class.php at line 361</div>
         <code class="arguments" id="setPageKeywords">public static  void <strong>setPageKeywords</strong> (<span class="lilac">string</span> <span class="blue">$keywords</span>)</code>
         <div class="details">
                     <p class="description">Sets keywords for requested website page.<br /> This description will be used in meta tag.<br /> If some words has been set in website configuration (global keywords) the $keywords will be added to them.</p>
@@ -761,7 +761,7 @@
 </div>
         </div>
         <hr />
-            <div class="location">system/system.class.php at line 382</div>
+            <div class="location">system/system.class.php at line 371</div>
         <code class="arguments" id="setPageDescription">public static  void <strong>setPageDescription</strong> (<span class="lilac">string</span> <span class="blue">$desc</span>)</code>
         <div class="details">
                     <p class="description">Sets description for requested website page.<br /> This description will be used in meta tag.</p>
@@ -777,7 +777,7 @@
 </div>
         </div>
         <hr />
-            <div class="location">system/system.class.php at line 392</div>
+            <div class="location">system/system.class.php at line 381</div>
         <code class="arguments" id="defineWindow">public static  void <strong>defineWindow</strong> (<span class="lilac">string</span> <span class="blue">$title</span>, <span class="lilac">string</span> <span class="blue">$content</span>)</code>
         <div class="details">
                     <p class="description">Prepare data for output.</p>
@@ -799,7 +799,7 @@
 </div>
         </div>
         <hr />
-            <div class="location">system/system.class.php at line 406</div>
+            <div class="location">system/system.class.php at line 395</div>
         <code class="arguments" id="showWindow">public static  string <strong>showWindow</strong> (<span class="lilac">string</span> <span class="blue">$title</span>, <span class="lilac">string</span> <span class="blue">$content</span>, <span class="lilac">string</span> <span class="blue">$template</span>)</code>
         <div class="details">
                     <p class="description">Shows window.</p>
@@ -832,7 +832,7 @@
 </div>
         </div>
         <hr />
-            <div class="location">system/system.class.php at line 430</div>
+            <div class="location">system/system.class.php at line 417</div>
         <code class="arguments" id="showMessage">public static  void <strong>showMessage</strong> (<span class="lilac">string</span> <span class="blue">$message</span>, <span class="lilac">string</span> <span class="blue">$url</span>)</code>
         <div class="details">
                     <p class="description">Shows message.</p>
@@ -854,7 +854,7 @@
 </div>
         </div>
         <hr />
-            <div class="location">system/system.class.php at line 443</div>
+            <div class="location">system/system.class.php at line 430</div>
         <code class="arguments" id="showError">public static  void <strong>showError</strong> (<span class="lilac">string</span> <span class="blue">$message</span>, <span class="lilac">string</span> <span class="blue">$url</span>)</code>
         <div class="details">
                     <p class="description">Shows error.</p>

@@ -41,7 +41,7 @@ die();?>
             <!-- ENDIF -->
                     <select name="new_category">
                     <!-- FOREACH category = $categories -->
-                        <option value="$category.id" <!-- IF !empty($category.selected) -->selected="selected"<!-- ENDIF -->>$category.title</option>
+                        <option value="$category.id" <!-- IF !empty($category.selected) -->selected<!-- ENDIF -->>$category.title</option>
                     <!-- ENDFOREACH -->
                     </select>
                 </td>

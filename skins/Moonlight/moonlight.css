@@ -12,6 +12,7 @@ body {
     vertical-align: baseline;
     width: 100%;
 }
+
 a,
 a:focus,
 a:visited {
@@ -23,6 +24,7 @@ a img   {
     margin: 5px;
     vertical-align: middle;
 }
+
 b,
 strong     { font-weight: bold }
 blockquote {
@@ -62,16 +64,17 @@ img {
     vertical-align: middle;
     -ms-interpolation-mode: bicubic;
 }
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
 button[disabled],
 input[disabled] {
     background: #343536;
     border-color: #585858;
     cursor: not-allowed;
-}
-button::-moz-focus-inner,
-input::-moz-focus-inner {
-    border: 0;
-    padding: 0;
 }
 button img     { vertical-align: middle }
 button .submit {
@@ -161,6 +164,7 @@ pre {
     white-space: pre-wrap;
     word-wrap: break-word;
 }
+
 q       { quotes: none }
 q:before,
 q:after {
@@ -168,8 +172,11 @@ q:after {
     content: none;
 }
 
-select {
+select {display:inline-block;
+    border: 2px solid transparent;
+    border-radius: 4px;
     color: #000;
+    margin: 1px 0;
     padding: 2px;
     width: 160px;
 }

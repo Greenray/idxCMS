@@ -292,4 +292,11 @@ ol,
 ul { list-style: none; }
 
 q:before,
-q:after { content: ''; }
+q:after {
+    content: '';
+    content: none;
+}
+
+input, select {
+    vertical-align: middle;
+}

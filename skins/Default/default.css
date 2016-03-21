@@ -50,6 +50,8 @@ h1 {
 h2 { font-size: 16px; }
 h3 { font-size: 14px; }
 
+button,
+input,
 button::-moz-focus-inner,
 input::-moz-focus-inner {
     border: 0;
@@ -68,6 +70,7 @@ button[type="submit"],
 input[type="button"],
 input[type="reset"],
 input[type="submit"] {
+    line-height: 20px;
     min-width: 110px;
     padding: 2px 0;
 }
@@ -130,6 +133,8 @@ pre    {
 }
 
 select {
+    border: 2px solid transparent;
+    margin: 1px 0;
     padding: 2px 5px;
     width: 160px;
 }

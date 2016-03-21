@@ -31,12 +31,12 @@ die();?>
             <form name="calendar" class="center" method="post" >
                 <select name="cal-month">
                 <!-- FOREACH month = $months -->
-                    <option value="$month.num" <!-- IF !empty($month.selected) -->selected="selected"<!-- ENDIF -->>$month.name</option>
+                    <option value="$month.num" <!-- IF !empty($month.selected) -->selected<!-- ENDIF -->>$month.name</option>
                 <!-- ENDFOREACH -->
                 </select>
                 <select name="cal-year">
                 <!-- FOREACH year = $years -->
-                    <option value="$year.year" <!-- IF !empty($year.selected) -->selected="selected"<!-- ENDIF -->>$year.year</option>
+                    <option value="$year.year" <!-- IF !empty($year.selected) -->selected<!-- ENDIF -->>$year.year</option>
                 <!-- ENDFOREACH -->
                 </select>
                 <input type="submit" value="OK" />

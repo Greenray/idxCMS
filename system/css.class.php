@@ -21,8 +21,9 @@ class CSS {
 
     /* @var array The prefixes of browsers */
     private $styles = [
-        'background-origin'   => ['-webkit-', '-moz-', '-o-', ''],
-        'background-size'     => ['-webkit-', '-moz-', '-o-', ''],
+        'background-clip'   => ['-webkit-', '-moz-', '-o-', ''],
+        'background-origin' => ['-webkit-', '-moz-', '-o-', ''],
+        'background-size'   => ['-webkit-', '-moz-', '-o-', ''],
 
         'border-radius'              => ['-webkit-', '-moz-', ''],
         'border-top-left-radius'     => ['-webkit-', '-moz-', ''],
@@ -36,16 +37,31 @@ class CSS {
         'border-image-source' => ['-webkit-', '-moz-', '-o-', ''],
         'border-image-width'  => ['-webkit-', '-moz-', '-o-', ''],
 
-        'box-shadow'          => ['-webkit-', '-moz-', ''],
+        'box-align'         => ['-webkit-', '-moz-', '-ms-', ''],
+        'box-direction'     => ['-webkit-', '-moz-', '-ms-', ''],
+        'box-flex'          => ['-webkit-', '-moz-', '-ms-', ''],
+        'box-flex-group'    => ['-webkit-', '-moz-', ''],
+        'box-lines'         => ['-webkit-', '-moz-', '-ms-', ''],
+        'box-ordinal-group' => ['-webkit-', '-moz-', '-ms-', ''],
+        'box-orient'        => ['-webkit-', '-moz-', '-ms-', ''],
+        'box-pack'          => ['-webkit-', '-moz-', '-ms-', ''],
+        'box-shadow'        => ['-webkit-', '-moz-', ''],
+        'box-sizing'        => ['-webkit-', '-moz-', ''],
 
-        'box-sizing'          => ['-webkit-', '-moz-', ''],
+        'user-select' => ['-webkit-', '-moz-', ''],
+        'user-select' => ['-webkit-', '-moz-', ''],
 
-        'perspective'         => ['-webkit-', '-moz-', ''],
-        'perspective-origin'  => ['-webkit-', '-moz-', ''],
+        'margin-start' => ['-webkit-', '-moz-', ''],
+        'margin-end'   => ['-webkit-', '-moz-', ''],
 
-        'transform'           => ['-webkit-', '-moz-', '-ms-', '-o-', ''],
-        'transform-origin'    => ['-webkit-', '-moz-', '-ms-', '-o-', ''],
-        'transform-style'     => ['-webkit-', '-moz-', ''],
+        'padding-start' => ['-webkit-', '-moz-', ''],
+        'padding-end'   => ['-webkit-', '-moz-', ''],
+
+        'text-overflow' => ['-ms-', '-o-', ''],
+
+        'transform'        => ['-webkit-', '-moz-', '-ms-', '-o-', ''],
+        'transform-origin' => ['-webkit-', '-moz-', '-ms-', '-o-', ''],
+        'transform-style'  => ['-webkit-', '-moz-', ''],
 
         'transition'          => ['-webkit-', '-moz-', '-o-', ''],
         'transition-delay'    => ['-webkit-', '-moz-', '-o-', ''],
@@ -57,7 +73,10 @@ class CSS {
         'linear-gradient' => ['-webkit-', '-moz-', '-o-', ''],
         'radial-gradient' => ['-webkit-', '-moz-', '-o-', ''],
         'repeating-linear-gradient' => ['-webkit-', '-moz-', '-o-', ''],
-        'repeating-radial-gradient' => ['-webkit-', '-moz-', '-o-', '']
+        'repeating-radial-gradient' => ['-webkit-', '-moz-', '-o-', ''],
+
+        'user-select' => ['-webkit-', '-moz-', ''],
+        'user-modify' => ['-webkit-', '-moz-', '']
     ];
 
 	/**
@@ -71,15 +90,11 @@ class CSS {
 
     /** Handles directives "@font-face" and "@import". */
     private function import() {
-        preg_match_all('/\@font\-face[^\}]*\}/', $this->css, $match);
+        preg_match_all('/\@import url\(([\w\'\"\/.]*)\);/', $this->css, $match);
         if (!empty($match[0])) {
-            $this->css = preg_replace('/\@font\-face[^\}]*\}/', '', $this->css);
-            $this->css = implode(LF, $match[0]).LF.$this->css;
-        }
-        preg_match_all('/\@import[^\;]*\;/', $this->css, $match);
-        if (!empty($match[0])) {
-            $this->css = preg_replace('/\@import[^\;]*\;/', '', $this->css);
-            $this->css = implode(LF, $match[0]).LF.$this->css;
+            $this->css = str_replace($match[0][0], '', $this->css);
+            $file      = str_replace('\"', '', $match[1][0]);
+            $this->css = file_get_contents($_SERVER['DOCUMENT_ROOT'].DS.$file).LF.$this->css;
         }
     }
 
@@ -142,8 +157,8 @@ class CSS {
      */
     public function compress($file, $cache) {
         $file = str_replace('./', '/', $file);
-        $css = basename($file);
-        if ($cache === TRUE) {
+        $css  = basename($file);
+        if (!empty($cache)) {
             $this->css = $this->getFromCache($css);
         }
         if (empty($this->css)) {
@@ -164,7 +179,8 @@ class CSS {
             # Remove two or more consecutive spaces
             #
             $this->css = preg_replace('# {2,}#', '', $this->css);
-            $this->css = str_replace([' 0px', ' 0em', ' 0ex', ' 0cm', ' 0mm', ' 0in', ' 0pt', ' 0pc'], '0', $this->css);
+
+            $this->css = str_replace([' 0px', ' 0em', ' 0ex', ' 0cm', ' 0mm', ' 0in', ' 0pt', ' 0pc'],  '0', $this->css);
             $this->css = str_replace([':0px', ':0em', ':0ex', ':0cm', ':0mm', ':0in', ':0pt', ':0pc'], ':0', $this->css);
             #
             # Remove the spaces, if a curly bracket, colon, semicolon or comma is placed before or after them
@@ -173,7 +189,7 @@ class CSS {
             #
             # Place the compiled data into cache
             #
-            file_put_contents(CACHE.$css, $this->css, LOCK_EX);
+            if (!empty($cache)) file_put_contents(CACHE.$css, $this->css, LOCK_EX);
         }
         return $this->css;
     }

@@ -1,4 +1,7 @@
-/* Default skin - style.css */
+/* Styles for skin Default */
+
+/* Styles for elements
+==============================================================================*/
 body {
     color: #000;
     font: 12px/18px Arial, Helvetica, Verdana, sans-serif;
@@ -15,7 +18,7 @@ a:visited {
 
 a:active,
 a:hover { color: red; }
-a img {
+a img   {
     margin: 5px;
     vertical-align: middle;
 }
@@ -39,7 +42,7 @@ blockquote p { display: inline; }
 
 h1,
 h2,
-h3 { font-weight: 700; }
+h3 { font-weight: bold; }
 h1 {
     font-size: 18px;
     margin: 15px 0 0;
@@ -111,8 +114,8 @@ img {
 }
 
 option { padding: 0 5px; }
-p { margin: 10px 0; }
-pre {
+p      { margin: 10px 0; }
+pre    {
     background: #fafafa;
     border: 1px solid #aab4be;
     border-left: 20px solid #b4b4b4;
@@ -131,6 +134,7 @@ select {
     width: 160px;
 }
 select:focus { outline: 1px solid red; }
+
 textarea {
     background: #ffffcc;
     border: 1px solid #a4a4a4;
@@ -140,10 +144,15 @@ textarea {
 }
 textarea:focus { border: 1px solid red; }
 
+/* Styles for main.tpl
+==============================================================================*/
 #wrapper {
     height: auto !important;
     overflow: hidden;
 }
+
+/* Header
+==============================================================================*/
 .header {
     background: #297377 url(skins/images/shadow.png) 0 0 repeat-x;
     display: inline-block;
@@ -151,10 +160,10 @@ textarea:focus { border: 1px solid red; }
     width: 100%;
 }
 
-.toolbar { margin: 0 20px; }
-.toolbar a { color: #fff; }
+.toolbar         { margin: 0 20px; }
+.toolbar a       { color: #fff; }
 .toolbar a:hover { color: red; }
-.toolbar li {
+.toolbar li      {
     border-left: 1px solid #fff;
     display: inline;
     margin-left: 8px;
@@ -173,7 +182,7 @@ textarea:focus { border: 1px solid red; }
     color: #ccc;
     display: inline-block;
     font-size: 48px;
-    font-weight: 700;
+    font-weight: bold;
     height: 50px;
     text-shadow: 4px 4px 2px #000;
     width: 80px;
@@ -190,8 +199,8 @@ textarea:focus { border: 1px solid red; }
 }
 
 .main-menu { background: #1a4b4e; }
-.menu { display: inline-block; }
-.menu ul {
+.menu      { display: inline-block; }
+.menu ul   {
     background: #1f2024;
     border-radius: 0 0 5px 5px;
     left: 0;
@@ -222,7 +231,7 @@ textarea:focus { border: 1px solid red; }
     border-right: 1px solid #000;
     color: #fff;
     display: block;
-    font-weight: 700;
+    font-weight: bold;
     font-size: 14px;
     line-height: 28px;
     margin: 6px 0;
@@ -231,15 +240,17 @@ textarea:focus { border: 1px solid red; }
     transition: color .2s ease-in-out;
 }
 .menu li:first-child a { border-left: 0; }
-.menu li:last-child a { border-right: 0; }
-.menu li:hover > a { color: #8fde62; }
-.menu li:hover > ul { opacity: 1; }
+.menu li:last-child a  { border-right: 0; }
+.menu li:hover > a     { color: #8fde62; }
+.menu li:hover > ul    { opacity: 1; }
 .menu li:hover > ul li {
     height: 36px;
     overflow: visible;
     padding: 0;
 }
 
+/* Styles for page layout
+==============================================================================*/
 #layout-root {
     position: relative;
     height: auto !important;
@@ -258,10 +269,10 @@ textarea:focus { border: 1px solid red; }
     position: relative;
     width: 230px;
 }
-#layout-left { float: left; }
-#layout-right { float: right; }
+#layout-left        { float: left; }
+#layout-right       { float: right; }
 #layout-left li,
-#layout-right li { margin-left: 5px; }
+#layout-right li    { margin-left: 5px; }
 #layout-left:after,
 #layout-right:after {
     clear: both;
@@ -272,9 +283,8 @@ textarea:focus { border: 1px solid red; }
     visibility: hidden;
 }
 
-.main .title { margin: 20px 0 10px; }
-.main .content { padding: 10px; }
-
+/* Boxes
+==============================================================================*/
 .boxes {
     height: auto !important;
     margin: 30px auto;
@@ -290,6 +300,8 @@ textarea:focus { border: 1px solid red; }
 }
 .boxes .middlebox { width: 334px; }
 
+/* Footer
+==============================================================================*/
 .footer {
     background: #000;
     color: #fff;
@@ -301,8 +313,31 @@ textarea:focus { border: 1px solid red; }
     background: transparent;
     margin: 0 30px 0 0;
 }
+.copyright,
+.valid {
+    margin: 10px 0;
+    width: 25%;
+}
+.valid             { float: right; }
+.valid-icon        { white-space: nowrap; }
+.valid-icon:before {
+    background: url(skins/images/logos.jpg) no-repeat 80px 15px;
+    content: '';
+    display: inline;
+    display: inline-block;
+    height: 15px;
+    width: 80px;
+}
+.valid-icon-cms:before     { background-position: 0 0; }
+.valid-icon-css:before     { background-position: 0 -30px; }
+.valid-icon-xhtml:before   { background-position: 0 -45px; }
+.valid-icon-php:before     { background-position: 0 -60px; }
+.valid-icon-db:before      { background-position: 0 -75px; }
+.valid-icon-license:before { background-position: 0 -90px; }
 
-.box { padding: 10px; }
+/* Box
+==============================================================================*/
+.box        { padding: 10px; }
 .box .title {
     background: #297377;
     color: #fff;
@@ -311,235 +346,10 @@ textarea:focus { border: 1px solid red; }
     text-transform: uppercase;
 }
 .box .content { padding: 10px 0; }
+.counter td   { height: 20px; }
 
-#bad,
-#good {
-    padding: 5px 10px;
-    text-align: right;
-}
-#bad { color: red; }
-#good { color: green; }
-
-.bbbutton {
-    height: 26px;
-    margin: 0 -2px;
-    padding: 0;
-    width: 26px;
-}
-.bbcodes { margin: 10px 20px; }
-.bbcodes .smiles { margin: 0 0 5px; }
-.bbcodes .link_text {
-    margin: 4px 20px;
-    text-align: right;
-}
-.bbcodes .link_text input[type='text'] { margin: 2px 20px; }
-.bbselect { margin: 1px 0 4px; }
-.bbtools {
-    background: #bfcfdf;
-    margin: 10px 0 0;
-    padding: 10px 0 0;
-}
-
-.black { color: #000; }
-.block { display: block; }
-
-.calendar { width: 100%; }
-.calendar th {
-    background: #1a4b4e;
-    color: #fff;
-    padding: 2px;
-}
-.calendar td {
-    padding: 2px;
-    text-align: center;
-}
-.calendar form input { margin: 5px 0 0; }
-
-.category {
-    margin: 0 0 0 50px;
-    padding: 4px 0 0 0;
-}
-.center { text-align: center; }
-
-.chat,
-.chat-post { margin: 10px 0; }
-.chat input[type="submit"],
-.chat input[type="reset"],
-.chat-post input[type="submit"],
-.chat-post input[type="reset"] {
-    min-width: 70px;
-    width: 70px;
-}
-
-.clear {
-    clear: both;
-    content: ".";
-    display: block;
-    height: 0;
-}
-
-.codehtml,
-.codephp,
-.codetext {
-    background: #ffc;
-    color: #000;
-    border: 1px solid #6da4da;
-    font: normal 12px monospace, "Courier New", Courier;
-    margin: 5px 0;
-    padding: 5px;
-    overflow: auto;
-    white-space: nowrap;
-}
-
-.comment { overflow: hidden; }
-.comment img { float: left; }
-.comment .author {
-    float: left;
-    margin: 10px 0;
-    width: 120px;
-}
-.comment .author .avatar img { margin: 0 25px 10px; }
-.comment .content { overflow: hidden; }
-.comment .date {
-    color: #fff;
-    font-size: 10px;
-}
-.comment .head {
-    background: #215F62;
-    padding: 0 5px;
-}
-.comment .info { line-height: 18px; }
-.comment .info .profile a { margin: 0 3px; }
-.comment .profile { float: right; }
-.comment .text { margin: 10px 10px 10px 130px; }
-.comment .text img { margin: 0 10px; }
-.comment_edit,
-.comment_post {
-    margin: 30px 10px 0;
-    overflow: hidden;
-}
-
-.copyright {
-    margin: 10px 0;
-    width: 25%;
-}
-.counter td { height: 20px; }
-.dark { background: #88c3b0; }
-
-.error,
-.message {
-    background: #fff;
-    background: linear-gradient(180deg, #fff 1%, #999 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#999999', GradientType=0);
-    border-radius: 10px;
-    box-shadow: 5px 5px 5px #000;
-    filter: progid:DXImageTransform.Microsoft.dropshadow(offX=5, offY=5, color=#000000);
-    filter: progid:DXImageTransform.Microsoft.shadow(direction=120, color=#000000, strength=10);
-    font-weight: 700;
-    min-width: 300px;
-    position: relative;
-    width: 300px;
-}
-.error p,
-.message p { padding: 10px; }
-.error .title,
-.message .title {
-    font-size: 15px;
-    font-weight: 700;
-    margin: 10px;
-    padding: 8px 0;
-    text-shadow: -1px 1px 1px #000;
-    text-transform: uppercase;
-}
-.error .title {
-    background: red;
-    color: yellow;
-}
-.message .title {
-    background: #297377;
-    color: #fff;
-}
-
-.gallery { margin: 0 auto; }
-.gallery img { margin: 5px 0 0 5px; }
-.gallery .item {
-    box-sizing: content-box;
-    float: left;
-    margin: 10px 12px;
-    padding: 10px;
-    overflow: hidden;
-    width: 210px;
-}
-.gallery .info { padding: 0 0 0 15px; }
-.gallery .title { text-transform: none; }
-
-.green { color: green; }
-.help {
-    color: red;
-    font-style: italic;
-    font-size: 11px;
-    margin: 0 10px 0 0;
-    padding: 5px 0;
-    text-align: right;
-}
-.info {
-    font-size: 10px;
-    padding: 10px 0;
-}
-.justify { text-align: justify; }
-
-.last-items { margin: 0 0 0 5px; }
-.last-items li { margin: 0 0 10px 10px; }
-
-.left { text-align: left; }
-.light { background: #dee3e7; }
-.login-panel { margin: 10px 0; }
-.negative {
-    color: red;
-    font-weight: 700;
-}
-#no { color: red; }
-.nomargin {
-    margin: 0;
-    height: 150px;
-    width: 200px;
-}
-.none { display: none; }
-
-#pagination {
-    float: right;
-    height: 20px;
-    line-height: 20px;
-    padding: 10px;
-}
-#pagination li {
-    list-style: none;
-    margin: 0;
-}
-#pagination a {
-    margin-right: 2px;
-    padding: 0 6px;
-}
-#pagination .pages {
-    display: block;
-    float: left;
-    padding: 0 6px;
-}
-#pagination .next a,
-#pagination .previous a { font-weight: 700; }
-#pagination .active {
-    background: #fff;
-    color: red;
-    float: left;
-    font-weight: 700;
-    padding: 0 6px;
-}
-#pagination a:link,
-#pagination a:visited {
-    display: block;
-    float: left;
-}
-
+/* Panel
+==============================================================================*/
 .panel {
     background: #88c3b0;
     background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(136, 195, 176, 1) 100%);
@@ -552,146 +362,72 @@ textarea:focus { border: 1px solid red; }
     margin: 10px;
     padding: 10px;
 }
-
-#pass_rating { margin: 0 28px 0 0; }
-.pass_img#progresbar-2-0,
-.pass_img#passbar-0,
-.pass_img#progresbar-2-10,
-.pass_img#passbar-10,
-.pass_img#progresbar-2-20,
-.pass_img#passbar-20,
-.pass_img#progresbar-2-30,
-.pass_img#passbar-30,
-.pass_img#progresbar-2-40,
-.pass_img#passbar-40,
-.pass_img#progresbar-2-50,
-.pass_img#passbar-50,
-.pass_img#progresbar-2-60,
-.pass_img#passbar-60,
-.pass_img#progresbar-2-70,
-.pass_img#passbar-70,
-.pass_img#progresbar-2-80,
-.pass_img#passbar-80,
-.pass_img#progresbar-2-90,
-.pass_img#passbar-90,
-.pass_img#progresbar-2-100,
-.pass_img#passbar-100 {
-    float: right;
-    height: 7px;
-    margin: 6px 60px 0 0 !important;
-    width: 138px;
-}
-.pass_img#progresbar-2-0,
-.pass_img#passbar-0 { background: transparent url(skins/images/password/pass_0.gif) no-repeat; }
-.pass_img#progresbar-2-10,
-.pass_img#passbar-10 { background: transparent url(skins/images/password/pass_10.gif) no-repeat; }
-.pass_img#progresbar-2-20,
-.pass_img#passbar-20 { background: transparent url(skins/images/password/pass_20.gif) no-repeat; }
-.pass_img#progresbar-2-30,
-.pass_img#passbar-30 { background: transparent url(skins/images/password/pass_30.gif) no-repeat; }
-.pass_img#progresbar-2-40,
-.pass_img#passbar-40 { background: transparent url(skins/images/password/pass_40.gif) no-repeat; }
-.pass_img#progresbar-2-50,
-.pass_img#passbar-50 { background: transparent url(skins/images/password/pass_50.gif) no-repeat; }
-.pass_img#progresbar-2-60,
-.pass_img#passbar-60 { background: transparent url(skins/images/password/pass_60.gif) no-repeat; }
-.pass_img#progresbar-2-70,
-.pass_img#passbar-70 { background: transparent url(skins/images/password/pass_70.gif) no-repeat; }
-.pass_img#progresbar-2-80,
-.pass_img#passbar-80 { background: transparent url(skins/images/password/pass_80.gif) no-repeat; }
-.pass_img#progresbar-2-90,
-.pass_img#passbar-90 { background: transparent url(skins/images/password/pass_90.gif) no-repeat; }
-.pass_img#progresbar-2-100,
-.pass_img#passbar-100 { background: transparent url(skins/images/password/pass_100.gif) no-repeat; }
-.pass_title {
-    margin: 0;
-    padding: 5px 5px 0 100px;
-}
-
-.poll { margin: 0 0 10px; }
-.poll table { margin: 3px 0; }
-
-.positive {
-    color: green;
-    font-weight: 700;
-}
-
-.post {
+.login-panel { margin: 10px 0; }
+.user-panel  {
     margin: 10px;
-    padding: 10px;
-    overflow: hidden;
+    padding: 0 10px;
 }
-.post .actions {
-    float: right;
+
+/* Win
+==============================================================================*/
+.win        { margin: 20px 5px; }
+.win .title { margin: 10px 0; }
+.win .info  { font-size: 10px; }
+
+/* Common styles
+==============================================================================*/
+#bad,
+#good {
+    padding: 5px 10px;
+    text-align: right;
+}
+#bad    { color: red; }
+#good   { color: green; }
+.black  { color: #000; }
+.block  { display: block; }
+.center { text-align: center; }
+.clear  {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+}
+
+.dark  { background: #88c3b0; }
+.green { color: green; }
+.help  {
+    color: red;
+    font-style: italic;
+    font-size: 11px;
+    margin: 0 10px 0 0;
+    padding: 5px 0;
+    text-align: right;
+}
+.info {
+    font-size: 10px;
+    padding: 10px 0;
+}
+.justify       { text-align: justify; }
+.last-items    { margin: 0 0 0 5px; }
+.last-items li { margin: 0 0 10px 10px; }
+.left          { text-align: left; }
+.light         { background: #dee3e7; }
+.main .title   { margin: 20px 0 10px; }
+.main .content { padding: 10px; }
+.nomargin {
     margin: 0;
-}
-.post .admin {
-    margin: 0 20px 0;
-    float: right;
-    line-height: 18px;
-}
-.post .admin a { margin: 0 2px; }
-.post .author {
-    margin: 0 0 0 10px;
-    line-height: 18px;
+    height: 150px;
     width: 200px;
 }
-.post .info {
-    clear: both;
-    margin: 10px 0 0;
-}
-
-.profile th,
-.profile td {
-    height: 25px;
-    padding: 0 10px;
-    vertical-align: middle;
-}
-
-.quotetitle {
-    background: #aabbcc;
-    border: 1px solid #a9b8c2;
-    color: #000;
-    font-size: 8pt;
-    font-style: italic;
-    margin: 5px 0 0;
-    padding: 2px;
-}
-.quotetext {
-    background: #fafafa;
-    border: 1px solid #a9b8c2;
-    color: #555;
-    font: italic 9pt monospace, "Courier New", Courier;
-    margin: 0 0 5px;
-    padding: 5px;
-    overflow: auto;
-}
-
-.red { color: red; }
-.random-image { margin: 5px 0; }
-
-.rate {
-    float: right;
-    margin: 30px 20px 20px;
-}
-.rate button { border: 0; }
-.rate button.minus { background: url(skins/images/down.gif) no-repeat; }
-.rate button.plus { background: url(skins/images/up.gif) no-repeat; }
-
-#registration_content {
-    margin: 15px auto;
-    text-align: center;
-    width: 635px;
-}
-#registration_form { overflow: hidden; }
-
+.none     { display: none; }
+.red      { color: red; }
 .required {
     background: #fff888;
     color: red;
 }
 .right { text-align: right; }
 
-.section { margin: 20px; }
+.section   { margin: 20px; }
 .section a {
     display: block;
     margin: 0;
@@ -702,7 +438,7 @@ textarea:focus { border: 1px solid red; }
 }
 .section a.level1 span.title,
 .section a.level2 span.title {
-    font-weight: 700;
+    font-weight: bold;
     font-size: 10pt;
     line-height: 20px;
     margin: 0;
@@ -721,16 +457,16 @@ textarea:focus { border: 1px solid red; }
 }
 .section span.bg {
     font-size: 1.4em;
-    font-weight: 700;
+    font-weight: bold;
     text-align: center;
 }
-.section span.level1 { text-align: left; }
+.section span.level1       { text-align: left; }
 .section li a.level1:hover {
     background: #e8e8ea;
     color: red;
 }
 .section span.level1 span.title {
-    font-weight: 700;
+    font-weight: bold;
     font-size: 10pt;
     line-height: 20px;
     padding: 0 5px;
@@ -764,9 +500,9 @@ textarea:focus { border: 1px solid red; }
 }
 .section li a.level1:hover span.title,
 .section li a.level2:hover span.subtitle,
-.section li a.level3:hover span.title { color: blue; }
+.section li a.level3:hover span.title    { color: blue; }
 .section li a.level3:hover span.subtitle { color: red; }
-.section li.level1 .title { margin: 15px 0 0; }
+.section li.level1 .title   { margin: 15px 0 0; }
 .section li.level2 a.level2 { padding: 0 5px; }
 .section li.level2 a.level2:hover,
 .section li.level3 a.level3:hover {
@@ -777,144 +513,8 @@ textarea:focus { border: 1px solid red; }
 .section li.level3 a.level3,
 .section li.level3 a.level3 span.title { margin: 20px 0 0; }
 
-.simple-menu {
-    background: #297377;
-    padding: 10px;
-}
-.simple-menu a { color: #fff; }
-.simple-menu li {
-    border-left: 1px solid #000;
-    margin-left: 8px;
-    padding-left: 12px;
-    display: inline;
-}
-.simple-menu li:last-child {
-    border-right: 1px solid #000;
-    margin-right: 8px;
-    padding-right: 12px;
-}
-
-.special { color: red; }
-
-.spoiler { margin: 10px 0 0; }
-.spoiler:hover { cursor: pointer; }
-
-.star,
-.star ul.star,
-.star div.rates,
-.star div.user,
-.star div.voted,
-.star div.sep { float: right; }
-.star {
-    height: 20px;
-    margin: 0 10px 0 0;
-}
-.star ul.star {
-    background: url(skins/images/stars.png) repeat-x;
-    cursor: pointer;
-    height: 22px;
-    margin: 0 50px 0 0;
-    padding: 0;
-    width: 85px;
-}
-.star li {
-    display: block;
-    float: right;
-    height: 20px;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    text-decoration: none;
-    text-indent: -9000px;
-    width: 85px;
-    z-index: 1;
-}
-.star li.curr {
-    background: url(skins/images/stars.png) left 25px;
-    font-size: 1px;
-}
-.star div.rates { margin: -16px 0 0 5px; }
-.star div.sep { margin: 0 3px; }
-.star-rate {
-    margin: -20px 0 10px;
-    padding: 0 0 20px;
-}
-
-.step { float: left; }
-#steps { overflow: hidden; }
-#steps form { padding: 0; }
-#steps form fieldset {
-    border: 0;
-    padding: 0;
-}
-#steps form legend {
-    background: #297377;
-    color: #fff;
-    font-size: 18px;
-    font-weight: 700;
-    margin: 10px 0;
-    width: 635px;
-}
-#steps form p {
-    clear: both;
-    float: left;
-    margin: 0 0 10px 120px;
-    padding: 3px 0;
-    width: 420px;
-}
-#steps form p label {
-    color: #000;
-    float: left;
-    font-weight: 700;
-    line-height: 20px;
-    text-align: right;
-    width: 150px;
-}
-#steps form p.msg {
-    background: none;
-    border: 0;
-    border-radius: 0;
-    box-shadow: none;
-}
-#steps form p.submit {
-    background: none;
-    box-shadow: none;
-    border: 0;
-}
-#steps form input:not ([type=radio]),
-#steps form textarea,
-#steps form select {
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    outline: 0;
-    padding: 5px;
-    width: 200px;
-}
-#steps form input:focus {
-    background: #fff;
-    border: 1px solid red;
-}
-
-.tab_content { margin: 20px 0 0; }
-.tab_content img {
-    float: left;
-    margin: 0 10px;
-}
-.tab_content .author { width: 30%; }
-.tab_content .date {
-    float: right;
-    font-style: italic;
-    margin: 6px 50px 0 0;
-}
-.tab_content .info { clear: both; }
-.tab_content .more {
-    float: right;
-    margin: 0 2px;
-}
-.tab_content .section { margin: 0 0 0 50px; }
-.tab_content .section a { display: inline; }
-
-table#std { margin: 0 0 10px; }
+.special     { color: red; }
+table#std    { margin: 0 0 10px; }
 table#std tr { height: 25px; }
 table#std td {
     border: 2px groove #fff;
@@ -960,12 +560,99 @@ td.date {
 
 .text img { float: left; }
 
+:-moz-placeholder,
+::-webkit-input-placeholder { color: #7e7e7e; }
+
+/* Articles
+==============================================================================*/
+.post {
+    margin: 10px;
+    padding: 10px;
+    overflow: hidden;
+}
+.post .actions {
+    float: right;
+    margin: 0;
+}
+.post .admin {
+    margin: 0 20px 0;
+    float: right;
+    line-height: 18px;
+}
+.post .admin a { margin: 0 2px; }
+.post .author  {
+    margin: 0 0 0 10px;
+    line-height: 18px;
+    width: 200px;
+}
+.post .info {
+    clear: both;
+    margin: 10px 0 0;
+}
+
+.profile th,
+.profile td {
+    height: 25px;
+    padding: 0 10px;
+    vertical-align: middle;
+}
+
+.calendar    { width: 100%; }
+.calendar th {
+    background: #1a4b4e;
+    color: #fff;
+    padding: 2px;
+}
+.calendar td {
+    padding: 2px;
+    text-align: center;
+}
+.calendar form input { margin: 5px 0 0; }
+
+.category {
+    margin: 0 0 0 50px;
+    padding: 4px 0 0 0;
+}
+
+.tab_content     { margin: 20px 0 0; }
+.tab_content img {
+    float: left;
+    margin: 0 10px;
+}
+.tab_content .author { width: 30%; }
+.tab_content .date   {
+    float: right;
+    font-style: italic;
+    margin: 6px 50px 0 0;
+}
+.tab_content .info { clear: both; }
+.tab_content .more {
+    float: right;
+    margin: 0 2px;
+}
+.tab_content .section   { margin: 0 0 0 50px; }
+.tab_content .section a { display: inline; }
+
+/* Chat
+==============================================================================*/
+.chat,
+.chat-post { margin: 10px 0; }
+.chat input[type="submit"],
+.chat input[type="reset"],
+.chat-post input[type="submit"],
+.chat-post input[type="reset"] {
+    min-width: 70px;
+    width: 70px;
+}
+
+/* Forum
+==============================================================================*/
 .topic {
     margin: 10px;
     overflow: hidden;
 }
 .topic .content { overflow: hidden; }
-.topic .author {
+.topic .author  {
     float: left;
     margin: 10px 0;
     width: 120px;
@@ -976,43 +663,394 @@ td.date {
     padding: 0 10px 0 0;
 }
 .topic .profile { float: right; }
-.topic .info span.profile { padding: 5px; }
+.topic .info span.profile   { padding: 5px; }
 .topic .info span.profile a { margin: 0 5px; }
 .topic .text { margin: 10px 10px 10px 130px; }
 
-.user-panel {
-    margin: 10px;
-    padding: 0 10px;
+/* Gallery
+==============================================================================*/
+.gallery       { margin: 0 auto; }
+.gallery img   { margin: 5px 0 0 5px; }
+.gallery .item {
+    box-sizing: content-box;
+    float: left;
+    margin: 10px 12px;
+    padding: 10px;
+    overflow: hidden;
+    width: 210px;
 }
+.gallery .info  { padding: 0 0 0 15px; }
+.gallery .title { text-transform: none; }
 
-.valid {
-    float: right;
+.random-image   { margin: 5px 0; }
+
+/* Polls
+==============================================================================*/
+.poll       { margin: 0 0 10px; }
+.poll table { margin: 3px 0; }
+
+/* Comments
+==============================================================================*/
+.comment         { overflow: hidden; }
+.comment img     { float: left; }
+.comment .author {
+    float: left;
     margin: 10px 0;
-    width: 25%;
+    width: 120px;
 }
-.valid-icon { white-space: nowrap; }
-.valid-icon:before {
-    background: url(skins/images/logos.jpg) no-repeat 80px 15px;
-    content: '';
-    display: inline;
-    display: inline-block;
-    height: 15px;
-    width: 80px;
+.comment .author .avatar img { margin: 0 25px 10px; }
+.comment .content { overflow: hidden; }
+.comment .date    {
+    color: #fff;
+    font-size: 10px;
 }
-.valid-icon-cms:before { background-position: 0 0; }
-.valid-icon-xhtml:before { background-position: 0 -45px; }
-.valid-icon-css:before { background-position: 0 -30px; }
-.valid-icon-php:before { background-position: 0 -60px; }
-.valid-icon-db:before { background-position: 0 -75px; }
-.valid-icon-license:before { background-position: 0 -90px; }
+.comment .head {
+    background: #215F62;
+    padding: 0 5px;
+}
+.comment .info            { line-height: 18px; }
+.comment .info .profile a { margin: 0 3px; }
+.comment .profile  { float: right; }
+.comment .text     { margin: 10px 10px 10px 130px; }
+.comment .text img { margin: 0 10px; }
+.comment_edit,
+.comment_post {
+    margin: 30px 10px 0;
+    overflow: hidden;
+}
 
-.win { margin: 20px 5px; }
-.win .title { margin: 10px 0; }
-.win .info { font-size: 10px; }
+/* Styles for bbCodes
+==============================================================================*/
+.bbbutton {
+    height: 26px;
+    margin: 0 -2px;
+    padding: 0;
+    width: 26px;
+}
+.bbcodes { margin: 10px 20px; }
+.bbcodes .smiles    { margin: 0 0 5px; }
+.bbcodes .link_text {
+    margin: 4px 20px;
+    text-align: right;
+}
+.bbcodes .link_text input[type='text'] { margin: 2px 20px; }
+.bbselect { margin: 1px 0 4px; }
+.bbtools  {
+    background: #bfcfdf;
+    margin: 10px 0 0;
+    padding: 10px 0 0;
+}
 
+.codehtml,
+.codephp,
+.codetext {
+    background: #ffc;
+    color: #000;
+    border: 1px solid #6da4da;
+    font: normal 12px monospace, "Courier New", Courier;
+    margin: 5px 0;
+    padding: 5px;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+.quotetitle {
+    background: #aabbcc;
+    border: 1px solid #a9b8c2;
+    color: #000;
+    font-size: 8pt;
+    font-style: italic;
+    margin: 5px 0 0;
+    padding: 2px;
+}
+.quotetext {
+    background: #fafafa;
+    border: 1px solid #a9b8c2;
+    color: #555;
+    font: italic 9pt monospace, "Courier New", Courier;
+    margin: 0 0 5px;
+    padding: 5px;
+    overflow: auto;
+}
+.spoiler       { margin: 10px 0 0; }
+.spoiler:hover { cursor: pointer; }
+
+/* Popup windows of errors and other messages
+==============================================================================*/
+.error,
+.message {
+    background: #fff;
+    background: linear-gradient(180deg, #fff 1%, #999 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#999999', GradientType=0);
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px #000;
+    filter: progid:DXImageTransform.Microsoft.dropshadow(offX=5, offY=5, color=#000000);
+    filter: progid:DXImageTransform.Microsoft.shadow(direction=120, color=#000000, strength=10);
+    font-weight: bold;
+    min-width: 300px;
+    position: relative;
+    width: 300px;
+}
+.error p,
+.message p      { padding: 10px; }
+.error .title,
+.message .title {
+    font-size: 15px;
+    font-weight: bold;
+    margin: 10px;
+    padding: 8px 0;
+    text-shadow: -1px 1px 1px #000;
+    text-transform: uppercase;
+}
+.error .title {
+    background: red;
+    color: yellow;
+}
+.message .title {
+    background: #297377;
+    color: #fff;
+}
+
+/* Pagination
+==============================================================================*/
+#pagination {
+    float: right;
+    height: 20px;
+    line-height: 20px;
+    padding: 10px;
+}
+#pagination li {
+    list-style: none;
+    margin: 0;
+}
+#pagination a {
+    margin-right: 2px;
+    padding: 0 6px;
+}
+#pagination .pages {
+    display: block;
+    float: left;
+    padding: 0 6px;
+}
+#pagination .next a,
+#pagination .previous a { font-weight: bold; }
+#pagination .active     {
+    background: #fff;
+    color: red;
+    float: left;
+    font-weight: bold;
+    padding: 0 6px;
+}
+#pagination a:link,
+#pagination a:visited {
+    display: block;
+    float: left;
+}
+
+/* Password strength
+==============================================================================*/
+#pass_rating { margin: 0 28px 0 0; }
+.pass_img#progresbar-2-0,
+.pass_img#passbar-0,
+.pass_img#progresbar-2-10,
+.pass_img#passbar-10,
+.pass_img#progresbar-2-20,
+.pass_img#passbar-20,
+.pass_img#progresbar-2-30,
+.pass_img#passbar-30,
+.pass_img#progresbar-2-40,
+.pass_img#passbar-40,
+.pass_img#progresbar-2-50,
+.pass_img#passbar-50,
+.pass_img#progresbar-2-60,
+.pass_img#passbar-60,
+.pass_img#progresbar-2-70,
+.pass_img#passbar-70,
+.pass_img#progresbar-2-80,
+.pass_img#passbar-80,
+.pass_img#progresbar-2-90,
+.pass_img#passbar-90,
+.pass_img#progresbar-2-100,
+.pass_img#passbar-100 {
+    float: right;
+    height: 7px;
+    margin: 6px 60px 0 0 !important;
+    width: 138px;
+}
+.pass_img#progresbar-2-0,
+.pass_img#passbar-0  { background: transparent url(skins/images/password/pass_0.gif) no-repeat; }
+.pass_img#progresbar-2-10,
+.pass_img#passbar-10 { background: transparent url(skins/images/password/pass_10.gif) no-repeat; }
+.pass_img#progresbar-2-20,
+.pass_img#passbar-20 { background: transparent url(skins/images/password/pass_20.gif) no-repeat; }
+.pass_img#progresbar-2-30,
+.pass_img#passbar-30 { background: transparent url(skins/images/password/pass_30.gif) no-repeat; }
+.pass_img#progresbar-2-40,
+.pass_img#passbar-40 { background: transparent url(skins/images/password/pass_40.gif) no-repeat; }
+.pass_img#progresbar-2-50,
+.pass_img#passbar-50 { background: transparent url(skins/images/password/pass_50.gif) no-repeat; }
+.pass_img#progresbar-2-60,
+.pass_img#passbar-60 { background: transparent url(skins/images/password/pass_60.gif) no-repeat; }
+.pass_img#progresbar-2-70,
+.pass_img#passbar-70 { background: transparent url(skins/images/password/pass_70.gif) no-repeat; }
+.pass_img#progresbar-2-80,
+.pass_img#passbar-80 { background: transparent url(skins/images/password/pass_80.gif) no-repeat; }
+.pass_img#progresbar-2-90,
+.pass_img#passbar-90 { background: transparent url(skins/images/password/pass_90.gif) no-repeat; }
+.pass_img#progresbar-2-100,
+.pass_img#passbar-100 { background: transparent url(skins/images/password/pass_100.gif) no-repeat; }
+.pass_title {
+    margin: 0;
+    padding: 5px 5px 0 100px;
+}
+#no  { color: red; }
 #yes { color: green; }
 
-#banner { padding: 10px 0; }
+/* Rates for publications and comments
+==============================================================================*/
+.negative {
+    color: red;
+    font-weight: bold;
+}
+.positive {
+    color: green;
+    font-weight: bold;
+}
+.rate {
+    float: right;
+    margin: 30px 20px 20px;
+}
+.rate button       { border: 0; }
+.rate button.minus { background: url(skins/images/down.gif) no-repeat; }
+.rate button.plus  { background: url(skins/images/up.gif) no-repeat; }
+
+.star,
+.star ul.star,
+.star div.rates,
+.star div.user,
+.star div.voted,
+.star div.sep { float: right; }
+.star {
+    height: 20px;
+    margin: 0 10px 0 0;
+}
+.star ul.star {
+    background: url(skins/images/stars.png) repeat-x;
+    cursor: pointer;
+    height: 22px;
+    margin: 0 50px 0 0;
+    padding: 0;
+    width: 85px;
+}
+.star li {
+    display: block;
+    float: right;
+    height: 20px;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    text-decoration: none;
+    text-indent: -9000px;
+    width: 85px;
+    z-index: 1;
+}
+.star li.curr {
+    background: url(skins/images/stars.png) left 25px;
+    font-size: 1px;
+}
+.star div.rates { margin: -16px 0 0 5px; }
+.star div.sep   { margin: 0 3px; }
+.star-rate {
+    margin: -20px 0 10px;
+    padding: 0 0 20px;
+}
+
+/* Registration form
+==============================================================================*/
+#registration_content {
+    margin: 15px auto;
+    text-align: center;
+    width: 635px;
+}
+#registration_form { overflow: hidden; }
+
+.step  { float: left; }
+#steps { overflow: hidden; }
+#steps form { padding: 0; }
+#steps form fieldset {
+    border: 0;
+    padding: 0;
+}
+#steps form legend {
+    background: #297377;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+    width: 635px;
+}
+#steps form p {
+    clear: both;
+    float: left;
+    margin: 0 0 10px 120px;
+    padding: 3px 0;
+    width: 420px;
+}
+#steps form p label {
+    color: #000;
+    float: left;
+    font-weight: bold;
+    line-height: 20px;
+    text-align: right;
+    width: 150px;
+}
+#steps form p.msg {
+    background: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+#steps form p.submit {
+    background: none;
+    box-shadow: none;
+    border: 0;
+}
+#steps form input:not ([type=radio]),
+#steps form textarea,
+#steps form select {
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    outline: 0;
+    padding: 5px;
+    width: 200px;
+}
+#steps form input:focus {
+    background: #fff;
+    border: 1px solid red;
+}
+
+/* Simple menu
+==============================================================================*/
+.simple-menu {
+    background: #297377;
+    padding: 10px;
+}
+.simple-menu a  { color: #fff; }
+.simple-menu li {
+    border-left: 1px solid #000;
+    margin-left: 8px;
+    padding-left: 12px;
+    display: inline;
+}
+.simple-menu li:last-child {
+    border-right: 1px solid #000;
+    margin-right: 8px;
+    padding-right: 12px;
+}
+
+/* Styles for banners
+==============================================================================*/
+#banner    { padding: 10px 0; }
 #banner ul { padding: 0; }
 #banner li {
     padding: 10px 0;
@@ -1054,20 +1092,21 @@ ol.horinaja_pagination li a {
     height: 30px;
     display: block;
     float: left;
-    font-weight: 700;
+    font-weight: bold;
     text-align: center;
     padding: 10px 0 0 0;
 }
 
+/* Styles for aforisms flipping
+==============================================================================*/
 #flipbox {
     color: #000;
     padding: 5px;
     min-height: 50px;
 }
 
-:-moz-placeholder,
-::-webkit-input-placeholder { color: #7e7e7e; }
-
+/* Icons for buttons and links
+==============================================================================*/
 .icon {
     background: transparent;
     white-space: nowrap;
@@ -1084,30 +1123,30 @@ ol.horinaja_pagination li a {
     display: inline;
     display: inline-block;
 }
-.icon-admin:before { background-position: 0 -16px; }
-.icon-arrow-left:before { background-position: 0 -448px; }
-.icon-arrow-right:before { background-position: 0 -464px; }
-.icon-catalogs:before { background-position: 0 -160px; }
-.icon-close:before { background-position: 0 -144px; }
-.icon-delete:before { background-position: 0 -384px; }
-.icon-down:before { background-position: 0 -336px; }
-.icon-edit:before { background-position: 0 -288px; }
-.icon-flag:before { background-position: 0 -368px; }
-.icon-forum:before { background-position: 0 -112px; }
-.icon-gallery:before { background-position: 0 -128px; }
-.icon-guestbook:before { background-position: 0 -96px; }
 .icon-index:before { background-position: 0 0; }
-.icon-login:before { background-position: 0 -416px; }
-.icon-messages:before { background-position: 0 -352px; }
-.icon-open:before { background-position: 0 -176px }
+.icon-admin:before { background-position: 0 -16px; }
+.icon-registration:before     { background-position: 0 -32px; }
 .icon-password-request:before { background-position: 0 -48px; }
-.icon-pinned:before { background-position: 0 -272px; }
-.icon-pm:before { background-position: 0 -224px; }
-.icon-post:before { background-position: 0 -64px; }
+.icon-post:before  { background-position: 0 -64px; }
 .icon-posts:before { background-position: 0 -80px; }
-.icon-printer:before { background-position: 0 -256px; }
-.icon-profile:before { background-position: 0 -240px; }
-.icon-registration:before { background-position: 0 -32px; }
-.icon-rss:before { background-position: 0 -432px; }
-.icon-sitemap:before { background-position: 0 -208px; }
-.icon-up:before { background-position: 0 -320px; }
+.icon-guestbook:before { background-position: 0 -96px; }
+.icon-forum:before     { background-position: 0 -112px; }
+.icon-gallery:before   { background-position: 0 -128px; }
+.icon-close:before     { background-position: 0 -144px; }
+.icon-catalogs:before  { background-position: 0 -160px; }
+.icon-open:before      { background-position: 0 -176px }
+.icon-sitemap:before   { background-position: 0 -208px; }
+.icon-pm:before        { background-position: 0 -224px; }
+.icon-profile:before   { background-position: 0 -240px; }
+.icon-printer:before   { background-position: 0 -256px; }
+.icon-pinned:before    { background-position: 0 -272px; }
+.icon-edit:before { background-position: 0 -288px; }
+.icon-up:before   { background-position: 0 -320px; }
+.icon-down:before { background-position: 0 -336px; }
+.icon-messages:before { background-position: 0 -352px; }
+.icon-flag:before     { background-position: 0 -368px; }
+.icon-delete:before   { background-position: 0 -384px; }
+.icon-login:before    { background-position: 0 -416px; }
+.icon-rss:before      { background-position: 0 -432px; }
+.icon-arrow-left:before  { background-position: 0 -448px; }
+.icon-arrow-right:before { background-position: 0 -464px; }

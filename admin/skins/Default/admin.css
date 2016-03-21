@@ -1,4 +1,7 @@
-/* Styles for admin panel - style.css */
+/* Styles for admin panel */
+
+/* Styles for elements
+==============================================================================*/
 body {
     background: #006699;
     font: normal 12px arial, helvetica, verdana, sans-serif;
@@ -14,19 +17,19 @@ a:visited {
     outline: none;
     text-decoration: none;
 }
-a:hover   {
+a:hover {
     color: red;
     outline: none;
     text-decoration: underline;
 }
-a:active  { outline: none; }
-a img {
+a:active { outline: none; }
+a img    {
     border: 0;
     vertical-align: middle;
 }
 
-article { margin-bottom: 20px; }
-article p { padding: 10px; }
+article    { margin-bottom: 20px; }
+article p  { padding: 10px; }
 blockquote {
     font-style: italic;
     margin: 1em 40px;
@@ -35,12 +38,12 @@ blockquote {
 button {
     color: #000;
     vertical-align: middle; }
-button img { vertical-align: middle; }
+button img   { vertical-align: middle; }
 button:hover { color: red; }
 
 code { font: normal 11px monospace, 'courier new'; }
-dl { margin: 1em 0; }
-dd { margin: 0 0 0 40px; }
+dl   { margin: 1em 0; }
+dd   { margin: 0 0 0 40px; }
 fieldset {
     background: #d1d7dc;
     margin: 0 0 10px;
@@ -130,6 +133,7 @@ pre {
     white-space: pre-wrap;
     word-wrap: break-word;
 }
+
 select {
     font-size: 12px;
     margin: 3px 0 0;
@@ -137,8 +141,9 @@ select {
     width: 160px;
 }
 select:focus { outline: 1px solid red; }
+
 option { padding: 0 5px; }
-small { font-size: 80%; }
+small  { font-size: 80%; }
 sub,
 sup {
     font-size: 75%;
@@ -148,6 +153,7 @@ sup {
 }
 sub { bottom: -0.25em }
 sup { top: -0.5em; }
+
 textarea {
     background: #ffffcc;
     border: 1px solid #a4a4a4;
@@ -160,11 +166,14 @@ textarea {
     width: 90%;
 }
 textarea:focus { border: 1px solid red; }
+
 ul {
     margin: 1em 0;
     padding: 0 0 0 10px;
 }
 
+/* Styles for page
+==============================================================================*/
 #page {
 	background: #fff;
 	margin: auto;
@@ -172,6 +181,9 @@ ul {
 	height: auto !important;
     overflow: hidden;
 }
+
+/* Header
+==============================================================================*/
 header {
     background: #006699;
     padding: 0 0 10px 0;
@@ -213,6 +225,9 @@ nav ul {
     font-weight: bold;
 }
 nav ul li { font-weight: normal; }
+
+/* Menu
+==============================================================================*/
 #menu {
     list-style-type: none;
     padding: 0;
@@ -231,8 +246,8 @@ nav ul li { font-weight: normal; }
     float: left;
     border-top: 1px solid #fff;
 }
-#menu li.sub { background: #006699 url(../../../skins/images/arrow.gif) no-repeat top right; }
-#menu li.sub.click { font-weight: bold; }
+#menu li.sub               { background: #006699 url(../../../skins/images/arrow.gif) no-repeat top right; }
+#menu li.sub.click         { font-weight: bold; }
 #menu li.sub.click ul li a {
     color: #000;
     text-shadow: none;
@@ -284,7 +299,7 @@ nav ul li { font-weight: normal; }
     background: red;
     color: #fff;
 }
-#menu li.click ul li.hover ul li { background: #356fcc; }
+#menu li.click ul li.hover ul li             { background: #356fcc; }
 #menu li.click ul li.hover ul li.hover ul li {
     background: #780;
     z-index: 2;
@@ -295,6 +310,9 @@ nav ul li { font-weight: normal; }
     z-index: 2;
 }
 #menu li.click ul li.hover ul li.hover a { color: #000; }
+
+/* Footer
+==============================================================================*/
 footer {
     background: #069;
     clear: both;
@@ -303,6 +321,9 @@ footer {
 	padding: 10px 0;
     text-align: center;
 }
+
+/* Common styles
+==============================================================================*/
 .admin_mess {
     background: #ffc;
     color: red;
@@ -312,30 +333,6 @@ footer {
     border: 1px solid #000;
     width: 208px;
 }
-.bbcodes  {
-    margin: 10px;
-    text-align: center;
-}
-.bbselect { margin: 1px 0 4px; }
-.bbbutton {
-    margin: 0;
-    padding: 2px;
-}
-.bbtools  {
-    border: 1px solid #777;
-    border-radius: .4em;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .8);
-    filter: progid:DXImageTransform.Microsoft.dropshadow(offX=0, offY=0, color=#000000);
-    filter: progid:DXImageTransform.Microsoft.shadow(direction=120, color=#000000, strength=10);
-    color: #000;
-    margin: 10px 0 0;
-    padding: 10px 0 0;
-}
-.bbcodes .link_text {
-    margin: 4px 20px;
-    text-align: center;
-}
-.bbcodes .link_text input[type='text'] { margin: 2px 20px; }
 .block { display: block; }
 #bgcolorbtn,
 #hicolorbtn {
@@ -362,7 +359,7 @@ footer {
     text-align: left;
 }
 .category { padding: 0 13px; }
-.center { text-align: center; }
+.center   { text-align: center; }
 #colorbtn,
 #colorselector {
     display: none;
@@ -392,7 +389,162 @@ footer {
     background: #d2d2d2;
     height: 25px;
 }
+.header {
+    background: #d1d7dc;
+    text-align: center;
+    font-size: 10pt;
+    font-weight: bold;
+}
+.help {
+    color: red;
+    font-size: 10px;
+    font-style: italic;
+    padding: 0 30px 0 10px;
+    text-align: left;
+}
+.label  {
+    padding: 0 10px;
+    width: 150px;
+}
+.left  { text-align: left; }
+.light {
+    background: #efefef;
+    height: 25px;
+}
+.module {
+    background: #069;
+    color: yellow;
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    text-shadow: 1px 1px 1px #000;
+}
+.none     { display: none; }
+#posts    { margin: 10px 10px 10px 260px;}
+.required {
+    background: #fff888;
+    color: red;
+}
+.right { text-align: right; }
+.row1  { background: #efefef; }
+.row2  { background: #d2d2d2; }
+.row3  {
+    background: #d1d7dc;
+    padding: 1px 5px;
+}
+#shdesc {
+    display: none;
+    width: 100%;
+}
+.std {
+    background: #ddd;
+    border: 2px groove #fff;
+    border-collapse: separate;
+    border-spacing: 2px;
+    width: 100%;
+}
+.std tr  { height: 25px; }
+table th { font-weight: bold; }
+table.bg { background: #acbbc6; }
+table.message {
+    border: 1px solid #000;
+    margin: 10px auto;
+    width: 500px;
+}
+th+td { border-left: 1px solid #808385; }
+th    {
+    background: #006699;
+    color: #fff;
+    font-weight: bold;
+    height: 25px;
+    text-align: center;
+    text-shadow: 1px 1px 1px #000;
+}
+th a:link,
+th a:visited { color: #fff; }
+th a:active  { color: #0000ff; }
+th a:hover   {
+    color: red;
+    text-decoration: underline }
+td { padding: 0 10px;
+}
+td.actions button {
+    border: 0;
+    padding: 0;
+    margin: 0 3px;
+}
+td.actions a img {
+    margin: 0 5px;
+    vertical-align: bottom;
+}
+td.stat {
+    color: #000;
+    font-weight: normal;
+    text-shadow: none;
+}
+th.id,
+td.id {
+    width: 20px;
+    padding: 0 5px;
+}
+th.pic,
+td.pic {
+    width: 45px;
+    padding: 0 5px;
+}
+th.items,
+td.items {
+    width: 85px;
+    padding: 0 5px;
+}
+th.title,
+td.title  { width: 20%; }
+th.access,
+td.access {
+    width: 49px;
+    padding: 0 5px;
+}
+th.actions,
+td.actions { width: 90px; }
+th.author,
+td.author  { width: 80px; }
+th.date,
+td.date {
+    width: 140px;
+    padding: 0 5px;
+}
+td.label { width: 250px; }
 
+/* Styles for bbCodes
+==============================================================================*/
+.bbcodes  {
+    margin: 10px;
+    text-align: center;
+}
+.bbselect { margin: 1px 0 4px; }
+.bbbutton {
+    margin: 0;
+    padding: 2px;
+}
+.bbtools  {
+    border: 1px solid #777;
+    border-radius: .4em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .8);
+    filter: progid:DXImageTransform.Microsoft.dropshadow(offX=0, offY=0, color=#000000);
+    filter: progid:DXImageTransform.Microsoft.shadow(direction=120, color=#000000, strength=10);
+    color: #000;
+    margin: 10px 0 0;
+    padding: 10px 0 0;
+}
+.bbcodes .link_text {
+    margin: 4px 20px;
+    text-align: center;
+}
+.bbcodes .link_text input[type='text'] { margin: 2px 20px; }
+
+/* Popup windows of errors and other messages
+==============================================================================*/
 .error,
 .message {
     background: #fff;
@@ -428,38 +580,9 @@ footer {
     background: #6e7b8b;
     color: #fff;
 }
-.header {
-    background: #d1d7dc;
-    text-align: center;
-    font-size: 10pt;
-    font-weight: bold;
-}
-.help {
-    color: red;
-    font-size: 10px;
-    font-style: italic;
-    padding: 0 30px 0 10px;
-    text-align: left;
-}
-.label  {
-    padding: 0 10px;
-    width: 150px;
-}
-.left { text-align: left; }
-.light  {
-    background: #efefef;
-    height: 25px;
-}
-.module {
-    background: #069;
-    color: yellow;
-    font-size: 1.5em;
-    font-weight: bold;
-    padding: 10px;
-    text-align: center;
-    text-shadow: 1px 1px 1px #000;
-}
-.none { display: none; }
+
+/* Pagination
+==============================================================================*/
 #pagination {
 	float: right;
 	height: 20px;
@@ -487,7 +610,7 @@ footer {
 }
 #pagination .next a,
 #pagination .previous a { font-weight: bold; }
-#pagination .active {
+#pagination .active     {
     font-weight: bold;
     padding: 0 6px;
     float: left;
@@ -495,101 +618,8 @@ footer {
     background: #fff;
 }
 
-#posts { margin: 10px 10px 10px 260px;}
-.required {
-    background: #fff888;
-    color: red;
-}
-.right { text-align: right; }
-.row1 { background: #efefef; }
-.row2 { background: #d2d2d2; }
-.row3 {
-    background: #d1d7dc;
-    padding: 1px 5px;
-}
-#shdesc {
-    display: none;
-    width: 100%;
-}
-.std {
-    background: #ddd;
-    border: 2px groove #fff;
-    border-collapse: separate;
-    border-spacing: 2px;
-    width: 100%;
-}
-.std tr { height: 25px; }
-table th { font-weight: bold; }
-table.bg { background: #acbbc6; }
-table.message {
-    border: 1px solid #000;
-    margin: 10px auto;
-    width: 500px;
-}
-th+td { border-left: 1px solid #808385; }
-th {
-    background: #006699;
-    color: #fff;
-    font-weight: bold;
-    height: 25px;
-    text-align: center;
-    text-shadow: 1px 1px 1px #000;
-}
-th a:link,
-th a:visited { color: #fff; }
-th a:active  { color: #0000ff; }
-th a:hover {
-    color: red;
-    text-decoration: underline }
-td { padding: 0 10px;
-}
-td.actions button {
-    border: 0;
-    padding: 0;
-    margin: 0 3px;
-}
-td.actions a img {
-    margin: 0 5px;
-    vertical-align: bottom;
-}
-td.stat {
-    color: #000;
-    font-weight: normal;
-    text-shadow: none;
-}
-th.id,
-td.id {
-    width: 20px;
-    padding: 0 5px;
-}
-th.pic,
-td.pic {
-    width: 45px;
-    padding: 0 5px;
-}
-th.items,
-td.items {
-    width: 85px;
-    padding: 0 5px;
-}
-th.title,
-td.title { width: 20%; }
-th.access,
-td.access {
-    width: 49px;
-    padding: 0 5px;
-}
-th.actions,
-td.actions { width: 90px; }
-th.author,
-td.author { width: 80px; }
-th.date,
-td.date {
-    width: 140px;
-    padding: 0 5px;
-}
-td.label { width: 250px;
-}
+/* Icons for buttons and links
+==============================================================================*/
 .icon {
     background: transparent;
     white-space: nowrap;
@@ -609,13 +639,13 @@ td.label { width: 250px;
     display: inline;
     display: inline-block;
 }
-.icon-catalogs:before { background-position: 0 -160px; }
-.icon-close:before { background-position: 0 -144px; }
-.icon-delete:before { background-position: 0 -384px; }
-.icon-edit:before { background-position: 0 -288px; }
-.icon-forum:before { background-position: 0 -112px; }
-.icon-gallery:before { background-position: 0 -128px; }
+.icon-index:before     { background-position: 0 0; }
+.icon-posts:before     { background-position: 0 -80px; }
 .icon-guestbook:before { background-position: 0 -96px; }
-.icon-index:before { background-position: 0 0; }
-.icon-move:before { background-position: 0 -400px; }
-.icon-posts:before { background-position: 0 -80px; }
+.icon-forum:before     { background-position: 0 -112px; }
+.icon-gallery:before   { background-position: 0 -128px; }
+.icon-close:before     { background-position: 0 -144px; }
+.icon-catalogs:before  { background-position: 0 -160px; }
+.icon-edit:before      { background-position: 0 -288px; }
+.icon-delete:before    { background-position: 0 -384px; }
+.icon-move:before      { background-position: 0 -400px; }

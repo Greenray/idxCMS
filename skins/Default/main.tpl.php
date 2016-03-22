@@ -1,5 +1,5 @@
 <?php
-# idxCMS Flat Files Content Management System v4.0
+# idxCMS Flat Files Content Management System v4.1
 # Copyright (c) 2011-2016 Victor Nabatov greenray.spb@gmail.com
 # Skin DEFAULT: Main template
 
@@ -91,7 +91,7 @@ die();?>
         <a href="http://ru.wikipedia.org/wiki/NoSQL" class="valid-icon valid-icon-db"></a>
         <a href="http://validator.w3.org/check?uri=referer" class="valid-icon valid-icon-xhtml"></a>
         <a href="http://jigsaw.w3.org/css-validator/check/referer" class="valid-icon valid-icon-css"></a>
-        <a href="http://creativecommons.org/licenses/by-sa/4.0/" class="valid-icon valid-icon-license"></a>
+        <a href="http://creativecommons.org/licenses/by-sa/4.1/" class="valid-icon valid-icon-license"></a>
     </div>
     <div class="copyright center">[show=copyright]</div>
 </div>

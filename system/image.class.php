@@ -4,10 +4,10 @@
  * After uploading it generates thumbnail or icon.
  *
  * @program   idxCMS: Flat Files Content Management System
- * @version   4.0
+ * @version   4.1
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011-2016 Victor Nabatov
- * @license   Creative Commons Attribution-ShareAlike 4.0 International
+ * @license   Creative Commons Attribution-ShareAlike 4.1 International
  * @file      system/image.class.php
  * @package   Core
  */

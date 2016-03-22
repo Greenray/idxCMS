@@ -3,10 +3,10 @@
  * Module POSTS: articles and news.
  *
  * @program   idxCMS: F lat Files Content Management System
- * @version   4.0
+ * @version   4.1
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011-2016 Victor Nabatov
- * @license   Creative Commons Attribution-ShareAlike 4.0 International
+ * @license   Creative Commons Attribution-ShareAlike 4.1 International
  * @file      system/modules/posts/module.php
  * @package   Posts
  * @overview  Articles and news which can be posted by registered users.

@@ -3,11 +3,11 @@
  * Templates parser.
  *
  * @program   idxCMS: Flat Files Content Management System
- * @version   4.0
+ * @version   4.1
  * @author    David Casado Martínez <tokkara@gmail.com>
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011-2016 Victor Nabatov
- * @license   Creative Commons Attribution-ShareAlike 4.0 International
+ * @license   Creative Commons Attribution-ShareAlike 4.1 International
  * @file      classes/template.class.php
  * @package   Template
  * @overview  Completely separated from php code.
@@ -121,14 +121,12 @@ class TEMPLATE {
 	public function parse() {
 		$this->warnings = [];
         set_error_handler([$this, 'templateErrorHandler']);
-
-		ob_start();
 		$result = $this->start();
-
-		if ($this->options['debug'] && !empty($this->warnings))
-			 echo implode('', $this->warnings).ob_get_clean();
-		else ob_end_flush();
-
+		if ($this->options['debug'] && !empty($this->warnings)) {
+            ob_start();
+			echo implode('', $this->warnings).ob_get_clean();
+		    ob_end_flush();
+        }
         restore_error_handler();
         return $result;
 	}
@@ -176,7 +174,6 @@ class TEMPLATE {
             # Execute php code
             #
             ob_start();
-
             if (!eval('?>'.$code.'<?php return TRUE; ?>')) {
                 $err_msg = ob_get_clean();
                 $this->getEvalError($err_msg, $err_line);

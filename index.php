@@ -3,10 +3,10 @@
  * The core of the content management system.
  *
  * @program   idxCMS: Flat Files Content Management System
- * @version   4.0
+ * @version   4.1
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011-2016 Victor Nabatov
- * @license   Creative Commons Attribution-ShareAlike 4.0 International
+ * @license   Creative Commons Attribution-ShareAlike 4.1 International
  * @package   Core
  * @overview  The core of the system.
  *
@@ -15,6 +15,8 @@
  *            MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
+$starttime = explode(' ', microtime());
+$starttime = $starttime[1] + $starttime[0];
 ini_set('phar.readonly', 0);            # Allow phar to work with phars
 ini_set('display_errors', 1);           # Allow to log php errors
 ini_set('default_charset', 'UTF-8');    # PHP >= 5.6.0, empty for PHP < 5.6.0
@@ -88,7 +90,7 @@ define('PAGE',     '&amp;page=');
 # idxCMS version
 #
 /** Version of the system */
-define('IDX_VERSION', '4.0');
+define('IDX_VERSION', '4.1');
 /** Copyright */
 define('IDX_COPYRIGHT', '&copy; 2011-2016 Greenray');
 /** Message about system generator */
@@ -388,6 +390,9 @@ switch($MODULE) {
         $TEMPLATE = new TEMPLATE(CURRENT_SKIN.'main.tpl');
         $TEMPLATE->set($output);
         echo $TEMPLATE->parse();
+        $mtime = explode(' ', microtime());
+  $totaltime = $mtime[0] + $mtime[1] - $starttime;
+  echo (round($totaltime,2));
         break;
 }
 

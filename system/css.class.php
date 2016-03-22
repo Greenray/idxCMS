@@ -3,10 +3,10 @@
  * CSS parser and optimizer.
  *
  * @program   idxCMS: Flat Files Content Management System
- * @version   4.0
+ * @version   4.1
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011-2016 Victor Nabatov
- * @license   Creative Commons Attribution-ShareAlike 4.0 International
+ * @license   Creative Commons Attribution-ShareAlike 4.1 International
  * @file      classes/css.class.php
  * @package   Template
  * @overview  Parses css code, automatically inserts prefixes of browsers and compresses the code.
@@ -88,7 +88,7 @@ class CSS {
         $this->css = '';
     }
 
-    /** Handles directives "@font-face" and "@import". */
+    /** Handles directive "@import". */
     private function import() {
         preg_match_all('/\@import url\(([\w\'\"\/.]*)\);/', $this->css, $match);
         if (!empty($match[0])) {

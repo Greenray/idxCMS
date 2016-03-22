@@ -8,7 +8,7 @@ if (!defined('idxCMS')) die();
 $just_reg = FALSE;
 
 if (!empty($REQUEST['save'])) {
-    if (!USER::$logged_in)
+    if (!USER::$logged_in) {
         if (!empty($REQUEST['act'])) {
             if ($REQUEST['act'] === 'register') {
                 #

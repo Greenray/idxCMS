@@ -19,7 +19,7 @@ jQuery.fn.extend({
 	}
 });
 
-jQuery.event.special
+jQuery.event.special;
 
 jQuery.extend({
 	timer: {
@@ -124,9 +124,9 @@ $.fn.Horinaja = function(settings) {
     var options = $.extend(options, settings);
     return this.each(function() {
 		var capture = options.capture;
-		var px = $('#' + capture + ' > ul > li').width();
-        var delai = (options.delai) * 1000;
-        var duree = (options.duree) * 1000;
+		var px      = $('#' + capture + ' > ul > li').width();
+        var delai   = (options.delai) * 1000;
+        var duree   = (options.duree) * 1000;
         var pagination = options.pagination;
 		var nCell = $('#' + capture + ' > ul > li').length;
 		var po = 0;

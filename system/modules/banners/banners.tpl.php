@@ -6,7 +6,7 @@
 die();?>
 
 <script type="text/javascript" src="{MODULES}banners{DS}jquery.mousewheel.min.js"></script>
-<script type="text/javascript" src="{MODULES}banners{DS}jquery.horinaja.js"></script>
+<script type="text/javascript" src="{MODULES}banners{DS}jquery.horinaja.min.js"></script>
 <div id="banner" class="horinaja">
     <ul>
     <!-- FOREACH banner = $banners -->

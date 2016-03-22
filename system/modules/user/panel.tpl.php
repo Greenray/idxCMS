@@ -27,8 +27,8 @@ die();?>
 <!-- ELSE -->
     <script type="text/javascript">
         function checkLoginForm(form) {
-            var username = form.user.value;
-            var password = form.password.value;
+            var username  = form.user.value;
+            var password  = form.password.value;
             var nameRegex = /^[a-zA-Z0-9_]+(([\_][a-zA-Z0-9])?[a-zA-Z0-9_]*)*$/;
             if  (username === '') {
                 ShowAlert('__Enter your login__');

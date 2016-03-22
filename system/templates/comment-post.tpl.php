@@ -9,7 +9,7 @@ die();?>
 <script type="text/javascript">
     function checkForm(form) {
         if (form.text.value === '') {
-            ShowAlert('__Enter a code__');
+            ShowAlert('__Enter the text__');
             return false;
         }
         <!-- IF !empty($captcha) -->

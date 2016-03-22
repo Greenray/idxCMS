@@ -5,7 +5,7 @@
 
 die();?>
 
-<script type="text/javascript" src="[$path:]swfobject.js"></script>
+<script type="text/javascript" src="[$path:]swfobject.min.js"></script>
 <div id="flashcontent" class="center">$tags_txt</div>
 <script type="text/javascript">
     var so = new SWFObject("[$path:]tagcloud.swf", "tagcloud", "$width", "$height", "7", "$bgcolor");

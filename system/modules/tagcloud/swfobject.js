@@ -7,8 +7,8 @@
  * **SWFObject is the SWF embed script formarly known as FlashObject. The name was changed for legal reasons.
  */
 
-if (typeof deconcept == "undefined") {var deconcept = new Object();}
-if (typeof deconcept.util == "undefined") {deconcept.util = new Object();}
+if (typeof deconcept               == "undefined") {var deconcept = new Object();}
+if (typeof deconcept.util          == "undefined") {deconcept.util = new Object();}
 if (typeof deconcept.SWFObjectUtil == "undefined") {deconcept.SWFObjectUtil = new Object();}
 deconcept.SWFObject = function(_1, id, w, h, _5, c, _7, _8, _9, _a, _b) {
     if (!document.createElement || !document.getElementById) {return;}
@@ -24,7 +24,7 @@ deconcept.SWFObject = function(_1, id, w, h, _5, c, _7, _8, _9, _a, _b) {
     if (_5) {this.setAttribute("version", new deconcept.PlayerVersion(_5.toString().split(".")));}
     this.installedVer=deconcept.SWFObjectUtil.getPlayerVersion(this.getAttribute("version"), _7);
     if (c) {this.addParam("bgcolor", c);}
-    var q =_8?_8 : "high";
+    var q = _8 ? _8 : "high";
     this.addParam("quality", q);
     this.setAttribute("useExpressInstall", _7);
     this.setAttribute("doExpressInstall", false);
@@ -34,13 +34,13 @@ deconcept.SWFObject = function(_1, id, w, h, _5, c, _7, _8, _9, _a, _b) {
     if (_a) {this.setAttribute("redirectUrl", _a);}
 };
 deconcept.SWFObject.prototype = {
-    setAttribute : function(_e, _f) {this.attributes[_e] = _f;},
+    setAttribute : function(_e, _f)   {this.attributes[_e] = _f;},
     getAttribute : function(_10) {return this.attributes[_10];},
-    addParam : function(_11, _12) {this.params[_11] = _12;},
-    getParams : function() {return this.params;},
-    addVariable : function(_13, _14) {this.variables[_13] = _14;},
-    getVariable : function(_15) {return this.variables[_15];},
-    getVariables : function() {return this.variables;},
+    addParam     : function(_11, _12) {this.params[_11] = _12;},
+    getParams    : function()    {return this.params;},
+    addVariable  : function(_13, _14) {this.variables[_13] = _14;},
+    getVariable  : function(_15) {return this.variables[_15];},
+    getVariables : function()    {return this.variables;},
     getVariablePairs : function() {
         var _16 = new Array();
         var key;
@@ -54,7 +54,7 @@ deconcept.SWFObject.prototype = {
         var _19 = "";
         if (navigator.plugins && navigator.mimeTypes && navigator.mimeTypes.length) {
             if (this.getAttribute("doExpressInstall")) {this.addVariable("MMplayerType", "PlugIn");}
-            _19 = "<embed type=\"application/x-shockwave-flash\" src=\"" + this.getAttribute("swf") + "\" width=\"" + this.getAttribute("width") + "\" height=\"" + this.getAttribute("height") + "\"";
+            _19  = "<embed type=\"application/x-shockwave-flash\" src=\"" + this.getAttribute("swf") + "\" width=\"" + this.getAttribute("width") + "\" height=\"" + this.getAttribute("height") + "\"";
             _19 += " id=\"" + this.getAttribute("id") + "\" name=\"" + this.getAttribute("id") + "\" ";
             var _1a = this.getParams();
             for (var key in _1a) {_19 += [key] + "=\"" + _1a[key] + "\" ";}
@@ -63,7 +63,7 @@ deconcept.SWFObject.prototype = {
             _19 += "/>";
         } else {
             if (this.getAttribute("doExpressInstall")) {this.addVariable("MMplayerType", "ActiveX");}
-            _19 = "<object id=\"" + this.getAttribute("id") + "\" classid=\"clsid:D27CDB6E-AE6D-11cf-96B8-444553540000\" width=\"" + this.getAttribute("width") + "\" height=\"" + this.getAttribute("height") + "\">";
+            _19  = "<object id=\"" + this.getAttribute("id") + "\" classid=\"clsid:D27CDB6E-AE6D-11cf-96B8-444553540000\" width=\"" + this.getAttribute("width") + "\" height=\"" + this.getAttribute("height") + "\">";
             _19 += "<param name=\"movie\" value=\"" + this.getAttribute("swf") + "\" />";
             var _1d = this.getParams();
             for (var key in _1d) {_19 += "<param name=\"" + key + "\" value=\"" + _1d[key] + "\" />";}
@@ -131,7 +131,7 @@ deconcept.PlayerVersion.prototype.versionIsValid = function(fv) {
     if (this.major > fv.major) {return true;}
     if (this.minor < fv.minor) {return false;}
     if (this.minor > fv.minor) {return true;}
-    if (this.rev < fv.rev) {return false;}
+    if (this.rev   < fv.rev)   {return false;}
     return true;
 };
 deconcept.util = {
@@ -154,5 +154,5 @@ if (Array.prototype.push === null) {
     };
 }
 var getQueryParamValue = deconcept.util.getRequestParameter;
-var FlashObject = deconcept.SWFObject; // for backwards compatibility
-var SWFObject = deconcept.SWFObject;
+var FlashObject        = deconcept.SWFObject; // for backwards compatibility
+var SWFObject          = deconcept.SWFObject;

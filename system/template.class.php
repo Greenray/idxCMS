@@ -7,7 +7,7 @@
  * @author    David Casado Martínez <tokkara@gmail.com>
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011-2016 Victor Nabatov
- * @license   Creative Commons Attribution-ShareAlike 4.1 International
+ * @license   Creative Commons Attribution-ShareAlike 4.0 International
  * @file      classes/template.class.php
  * @package   Template
  * @overview  Completely separated from php code.
@@ -56,6 +56,7 @@ class TEMPLATE {
 			'debug'      => FALSE,
             'page_cache' => CONFIG::getValue('cache', 'page_cache'),
             'css_cache'  => CONFIG::getValue('cache', 'css_cache'),
+            'css_gzip'   => CONFIG::getValue('cache', 'css_gzip'),
             'expired'    => CONFIG::getValue('cache', 'expired'),
 			'error_func' => ''
 		];
@@ -159,7 +160,7 @@ class TEMPLATE {
             } while($this->line < $count && empty($this->errors));
 
             $code = empty($this->errors) ? preg_replace('#\[^;]?>([\s]*)<\?php#', '$1', implode("\n", $php_lines)) :
-					'<?php $this->_error(E_USER_ERROR,\''.$this->errors[0].'\',FALSE,'.$this->line.'); ?>';
+                '<?php $this->_error(E_USER_ERROR,\''.$this->errors[0].'\',FALSE,'.$this->line.'); ?>';
 
             $code = preg_replace_callback("#\{([\-\w]+)\}#is",  [&$this, 'value'],     $code);
             $code = preg_replace_callback("#__(.*?)__#is",      [&$this, 'translate'], $code);
@@ -167,8 +168,8 @@ class TEMPLATE {
 
             preg_match_all("#\<link rel=\"stylesheet\" type=\"text/css\" href=\"(.*?)\" media=\"screen\" /\>#is", $code, $matches);
             foreach($matches[1] as $key => $file) {
-                $CSS  = new CSS();
-                $code = str_replace($matches[0][$key], '<style type="text/css">'.$CSS->compress($file, $this->options['css_cache']).'</style>', $code);
+                $CSS  = new CSS($this->options['css_cache']);
+                $code = str_replace($matches[0][$key], '<style type="text/css">'.$CSS->compress($file).'</style>', $code);
             }
             #
             # Execute php code

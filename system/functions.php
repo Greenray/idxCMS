@@ -4,7 +4,7 @@
  * @version   4.1
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011-2016 Victor Nabatov
- * @license   Creative Commons Attribution-ShareAlike 4.1 International
+ * @license   Creative Commons Attribution-ShareAlike 4.0 International
  * @file      system/functions.php
  * @package   Core
  */
@@ -114,7 +114,7 @@ function gzfile_put_contents($file, $text, $mode = 'w+') {
     if (($fp = @fopen($file.'.lock', 'w+')) === FALSE) {
         return FALSE;
     }
-    fwrite($fp, 'lock');
+    fwrite($fp, '.lock');
     fclose($fp);
     if (($fp = gzopen($file, $mode)) === FALSE) {
         return FALSE;
@@ -377,13 +377,13 @@ function SelectTimeZone($name, $points, $default) {
 /**
  * Shows captcha.
  * There are three different options:
- * - original: black an white;
+ * - original: black in white;
  * - color: with colored background;
  * - random selection.
  * The length of the captcha code also varies randomly from five to eight letters and numbers.
  * Captcha is displayed only for unregistered users.
  *
- * @param  string $param Type of captha
+ * @param  string $param Type of captcha
  * @return string        Captcha image and input field for captcha code
  */
 function ShowCaptcha($param = '') {

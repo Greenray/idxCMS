@@ -6,36 +6,58 @@
  * @version   4.1
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011-2016 Victor Nabatov
- * @license   Creative Commons Attribution-ShareAlike 4.1 International
+ * @license   Creative Commons Attribution-ShareAlike 4.0 International
  * @file      classes/css.class.php
  * @package   Template
- * @overview  Parses css code, automatically inserts prefixes of browsers and compresses the code.
+ * @overview  Reads css code, automatically inserts browser-specific prefixes and compresses
+ *            the code with removing comments, two or more consecutive spaces,
+ *            newline characters and tabs, spaces, if a curly bracket, colon,
+ *            semicolon or comma is placed before or after them.
  *            There is a possibility of caching the result.
+ *            It is important to set the correct installation of access rights to the cache directory.
  */
 
 /** CSS parser and optimizer. */
 class CSS {
+
+    /** @var boolean TRUE if caching is allowed */
+	private $cache = TRUE;
 
     /** @var string CSS file that is executing */
 	private $css = '';
 
     /* @var array The prefixes of browsers */
     private $styles = [
+        'align-content' => ['-webkit-', ''],
+        'align-items'   => ['-webkit-', ''],
+        'align-self'    => ['-webkit-', ''],
+
+        'animation'                 => ['-webkit-', '-moz-', '-o-', ''],
+        'animation-delay'           => ['-webkit-', '-moz-', '-o-', ''],
+        'animation-direction'       => ['-webkit-', '-moz-', '-o-', ''],
+        'animation-duration'        => ['-webkit-', '-moz-', '-o-', ''],
+        'animation-fill-mode'       => ['-webkit-', '-moz-', '-o-', ''],
+        'animation-iteration-count' => ['-webkit-', '-moz-', '-o-', ''],
+        'animation-name'            => ['-webkit-', '-moz-', '-o-', ''],
+        'animation-play-state'      => ['-webkit-', '-moz-', '-o-', ''],
+        'animation-timing-function' => ['-webkit-', '-moz-', '-o-', ''],
+
+        'backface-visibility' => ['-webkit-', '-moz-', '-ms-', ''],
+
         'background-clip'   => ['-webkit-', '-moz-', '-o-', ''],
         'background-origin' => ['-webkit-', '-moz-', '-o-', ''],
         'background-size'   => ['-webkit-', '-moz-', '-o-', ''],
 
+        'border-image'               => ['-webkit-', '-moz-', '-o-', ''],
+        'border-image-outset'        => ['-webkit-', '-moz-', '-o-', ''],
+        'border-image-repeat'        => ['-webkit-', '-moz-', '-o-', ''],
+        'border-image-source'        => ['-webkit-', '-moz-', '-o-', ''],
+        'border-image-width'         => ['-webkit-', '-moz-', '-o-', ''],
         'border-radius'              => ['-webkit-', '-moz-', ''],
         'border-top-left-radius'     => ['-webkit-', '-moz-', ''],
         'border-top-right-radius'    => ['-webkit-', '-moz-', ''],
         'border-bottom-right-radius' => ['-webkit-', '-moz-', ''],
         'border-bottom-left-radius'  => ['-webkit-', '-moz-', ''],
-
-        'border-image'        => ['-webkit-', '-moz-', '-o-', ''],
-        'border-image-outset' => ['-webkit-', '-moz-', '-o-', ''],
-        'border-image-repeat' => ['-webkit-', '-moz-', '-o-', ''],
-        'border-image-source' => ['-webkit-', '-moz-', '-o-', ''],
-        'border-image-width'  => ['-webkit-', '-moz-', '-o-', ''],
 
         'box-align'         => ['-webkit-', '-moz-', '-ms-', ''],
         'box-direction'     => ['-webkit-', '-moz-', '-ms-', ''],
@@ -48,14 +70,46 @@ class CSS {
         'box-shadow'        => ['-webkit-', '-moz-', ''],
         'box-sizing'        => ['-webkit-', '-moz-', ''],
 
-        'user-select' => ['-webkit-', '-moz-', ''],
-        'user-select' => ['-webkit-', '-moz-', ''],
+        'column-count'        => ['-webkit-', '-moz-', ''],
+        'column-fill'         => ['-moz-', ''],
+        'column-gap'          => ['-webkit-', '-moz-', ''],
+        'column-rule'         => ['-webkit-', '-moz-', ''],
+        'column-rule-color'   => ['-webkit-', '-moz-', ''],
+        'column-rule-style'   => ['-webkit-', '-moz-', ''],
+        'column-rule-width'   => ['-webkit-', '-moz-', ''],
+        'column-span'         => ['-webkit-', ''],
+        'column-width'        => ['-webkit-', '-moz-', ''],
+        'columns'             => ['-webkit-', '-moz-', ''],
 
-        'margin-start' => ['-webkit-', '-moz-', ''],
-        'margin-end'   => ['-webkit-', '-moz-', ''],
+        'document'=> ['-moz-', ''],
 
-        'padding-start' => ['-webkit-', '-moz-', ''],
-        'padding-end'   => ['-webkit-', '-moz-', ''],
+        'filter' => ['-webkit-', ''],
+
+        'flex-basis'     => ['-webkit-', ''],
+        'flex-direction' => ['-webkit-', ''],
+
+        'fullscreen' => ['-webkit-', '-moz-', '-ms-', ''],
+
+        'hyphens' => ['-webkit-', '-moz-', '-ms-', ''],
+
+        'image-rendering' => ['-webkit-', '-moz-', '-o-', ''],
+
+        'keyframes' => ['-webkit-', '-moz-', '-o-', ''],
+
+        'object-fit' => ['-o-', ''],
+
+        'opacity' => ['-moz-', ''],
+
+        'orient' => ['-moz-', ''],
+
+        'perspective'        => ['-webkit-', '-moz-', ''],
+        'perspective-origin' => ['-webkit-', '-moz-', ''],
+
+        'placeholder' => ['-webkit-input-', '-moz-', '-ms-input-', ''],
+
+        'selection' => ['-moz-', ''],
+
+        'tab-size'  => ['-moz-', '-o-', ''],
 
         'text-overflow' => ['-ms-', '-o-', ''],
 
@@ -63,20 +117,24 @@ class CSS {
         'transform-origin' => ['-webkit-', '-moz-', '-ms-', '-o-', ''],
         'transform-style'  => ['-webkit-', '-moz-', ''],
 
-        'transition'          => ['-webkit-', '-moz-', '-o-', ''],
-        'transition-delay'    => ['-webkit-', '-moz-', '-o-', ''],
-        'transition-duration' => ['-webkit-', '-moz-', '-o-', ''],
-        'transition-property' => ['-webkit-', '-moz-', '-o-', ''],
-
+        'transition'                 => ['-webkit-', '-moz-', '-o-', ''],
+        'transition-delay'           => ['-webkit-', '-moz-', '-o-', ''],
+        'transition-duration'        => ['-webkit-', '-moz-', '-o-', ''],
+        'transition-property'        => ['-webkit-', '-moz-', '-o-', ''],
         'transition-timing-function' => ['-webkit-', '-moz-', '-o-', ''],
 
         'linear-gradient' => ['-webkit-', '-moz-', '-o-', ''],
         'radial-gradient' => ['-webkit-', '-moz-', '-o-', ''],
+
         'repeating-linear-gradient' => ['-webkit-', '-moz-', '-o-', ''],
         'repeating-radial-gradient' => ['-webkit-', '-moz-', '-o-', ''],
 
+        'user-modify' => ['-webkit-', '-moz-', ''],
         'user-select' => ['-webkit-', '-moz-', ''],
-        'user-modify' => ['-webkit-', '-moz-', '']
+
+        'viewport' => ['-ms-', ''],
+
+        'writing-mode' => ['-webkit-', '']
     ];
 
 	/**
@@ -84,25 +142,30 @@ class CSS {
      *
      * @param boolean Is cache allowed?
      */
-	public function __construct() {
-        $this->css = '';
-    }
-
-    /** Handles directive "@import". */
-    private function import() {
-        preg_match_all('/\@import url\(([\w\'\"\/.]*)\);/', $this->css, $match);
-        if (!empty($match[0])) {
-            $this->css = str_replace($match[0][0], '', $this->css);
-            $file      = str_replace('\"', '', $match[1][0]);
-            $this->css = file_get_contents($_SERVER['DOCUMENT_ROOT'].DS.$file).LF.$this->css;
-        }
+	public function __construct($cache = TRUE) {
+        $this->css   = '';
+        $this->cache = $cache;
     }
 
     /**
-     * Generates CSS3 properties with browser-specific prefixes.
-     * The prefix list is not complete, it contains only the used properties in the CMS.
-     * So it can easily be extended.
+     * Handles rule "@import".
+     *
+     * @param string $dir CSS file's directory
      */
+    private function import($dir) {
+        preg_match_all('/\@import url\(([\w\'\"\/.]*)\);/', $this->css, $match);
+        if (!empty($match[0])) {
+            $match[0] = array_reverse($match[0]);
+            $match[1] = array_reverse($match[1]);
+            foreach ($match[0] as $key => $import) {
+                $this->css = str_replace($match[0][$key], '', $this->css);
+                $file      = str_replace('"', '', $match[1][$key]);
+                $this->css = file_get_contents($dir.DS.$file).PHP_EOL.$this->css;
+            }
+        }
+    }
+
+    /** Generates CSS3 properties with browser-specific prefixes. */
     private function setPrefixes() {
         #
         # Remove comments
@@ -120,7 +183,7 @@ class CSS {
             #
             # Search properties from $this->styles list
             #
-            preg_match_all('#'.$value.':[a-zA-Z0-9\.\-\#|\d\s]+?;|[a-zA-Z\-]+: '.$value.'[\S+].+?;#s', $this->css, $keys);
+            preg_match_all('#'.$value.':[a-zA-Z0-9\.\-\#|\d\s]+?;|::'.$value.' |@'.$value.' |[a-zA-Z\-]+: '.$value.'[\S+].+?;#s', $this->css, $keys);
             foreach ($keys[0] as $property) {
                 foreach ($this->styles as $style => $prefixes) {
                     if ($style === $value) {
@@ -155,18 +218,19 @@ class CSS {
      * @param  string $file CSS file
      * @return string       Compressed CSS
      */
-    public function compress($file, $cache) {
+    public function compress($file) {
         $file = str_replace('./', '/', $file);
         $css  = basename($file);
-        if (!empty($cache)) {
+        if (!empty($this->cache)) {
             $this->css = $this->getFromCache($css);
         }
         if (empty($this->css)) {
+            $pathinfo = pathinfo($file);
             $this->css = file_get_contents($_SERVER['DOCUMENT_ROOT'].$file);
             #
             # Processing directives @font-face and @import
             #
-            $this->import();
+            $this->import($pathinfo['dirname']);
             #
             # Set the prefixes of browsers
             #
@@ -189,7 +253,9 @@ class CSS {
             #
             # Place the compiled data into cache
             #
-            if (!empty($cache)) file_put_contents(CACHE.$css, $this->css, LOCK_EX);
+            if (!empty($this->cache)) {
+                file_put_contents(CACHE.$css, $this->css, LOCK_EX);
+            }
         }
         return $this->css;
     }
@@ -201,6 +267,6 @@ class CSS {
      * @return mixed        Data from cache or FALSE
 	 */
 	private function getFromCache($file) {
-        return (file_exists(CACHE.$file)) ? file_get_contents(CACHE.$file) : FALSE;
-	}
+            return file_exists(CACHE.$file) ? file_get_contents(CACHE.$file) : FALSE;
+    }
 }

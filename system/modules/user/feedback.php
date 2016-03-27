@@ -3,13 +3,16 @@
 # Copyright (c) 2011-2016 Victor Nabatov greenray.spb@gmail.com
 # Module USER: Feedback
 
-if (!defined('idxCMS')) die();
+$message = $_GET['message'];
 
-$message = FILTER::get('REQUEST', 'message');
-
+$CAPTCHA = new CAPTCHA();
+#
+# Here the desired filtering, but now we have another problem.
+# Filter, you know how.
+#
 if (!empty($message)) {
     try {
-        CheckCaptcha();
+        $CAPTCHA = checkCaptcha();
         $FEEDBACK = new MESSAGE(CONTENT, 'feedback');
         $FEEDBACK->sendFeedback(
             $message,

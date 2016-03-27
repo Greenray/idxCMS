@@ -6,7 +6,7 @@
  * @version   4.1
  * @author    Victor Nabatov <greenray.spb@gmail.com>
  * @copyright (c) 2011-2016 Victor Nabatov
- * @license   CCreative Commons Attribution-ShareAlike 4.1 International
+ * @license   CCreative Commons Attribution-ShareAlike 4.0 International
  * @file      system/comments.class.php
  * @package   Core
  */

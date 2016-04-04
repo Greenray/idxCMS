@@ -15,8 +15,6 @@
  *            MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
-$starttime = explode(' ', microtime());
-$starttime = $starttime[1] + $starttime[0];
 ini_set('phar.readonly', 0);            # Allow phar to work with phars
 ini_set('display_errors', 1);           # Allow to log php errors
 ini_set('default_charset', 'UTF-8');    # PHP >= 5.6.0, empty for PHP < 5.6.0
@@ -390,9 +388,6 @@ switch($MODULE) {
         $TEMPLATE = new TEMPLATE(CURRENT_SKIN.'main.tpl');
         $TEMPLATE->set($output);
         echo $TEMPLATE->parse();
-        $mtime = explode(' ', microtime());
-  $totaltime = $mtime[0] + $mtime[1] - $starttime;
-  echo (round($totaltime,2));
         break;
 }
 

@@ -17,16 +17,15 @@
  *            It is important to set the correct installation of access rights to the cache directory.
  */
 
-/** CSS parser and optimizer. */
 class CSS {
 
     /** @var boolean TRUE if caching is allowed */
 	private $cache = TRUE;
 
-    /** @var string CSS file that is executing */
+    /** @var string CSS code that is executing */
 	private $css = '';
 
-    /* @var array The prefixes of browsers */
+    /* @var array The browser-specific prefixes */
     private $styles = [
         'align-content' => ['-webkit-', ''],
         'align-items'   => ['-webkit-', ''],
@@ -53,11 +52,15 @@ class CSS {
         'border-image-repeat'        => ['-webkit-', '-moz-', '-o-', ''],
         'border-image-source'        => ['-webkit-', '-moz-', '-o-', ''],
         'border-image-width'         => ['-webkit-', '-moz-', '-o-', ''],
-        'border-radius'              => ['-webkit-', '-moz-', ''],
-        'border-top-left-radius'     => ['-webkit-', '-moz-', ''],
-        'border-top-right-radius'    => ['-webkit-', '-moz-', ''],
-        'border-bottom-right-radius' => ['-webkit-', '-moz-', ''],
-        'border-bottom-left-radius'  => ['-webkit-', '-moz-', ''],
+        'border-radius'              => ['-webkit-', '-khtml-', '-moz-', ''],
+        'border-top-left-radius'     => ['-webkit-', '-khtml-', '-moz-', ''],
+        'border-top-right-radius'    => ['-webkit-', '-khtml-', '-moz-', ''],
+        'border-bottom-right-radius' => ['-webkit-', '-khtml-', '-moz-', ''],
+        'border-bottom-left-radius'  => ['-webkit-', '-khtml-', '-moz-', ''],
+        'border-radius-topleft'      => ['-webkit-', '-khtml-', '-moz-', ''],
+        'border-radius-topright'     => ['-webkit-', '-khtml-', '-moz-', ''],
+        'border-radius-bottomright'  => ['-webkit-', '-khtml-', '-moz-', ''],
+        'border-radius-bottomleft'   => ['-webkit-', '-khtml-', '-moz-', ''],
 
         'box-align'         => ['-webkit-', '-moz-', '-ms-', ''],
         'box-direction'     => ['-webkit-', '-moz-', '-ms-', ''],
@@ -98,7 +101,7 @@ class CSS {
 
         'object-fit' => ['-o-', ''],
 
-        'opacity' => ['-moz-', ''],
+        'opacity' => ['-khtml-', '-moz-', ''],
 
         'orient' => ['-moz-', ''],
 
@@ -140,7 +143,7 @@ class CSS {
 	/**
      * Class constructor.
      *
-     * @param boolean Is cache allowed?
+     * @param boolean $cache Is cache allowed?
      */
 	public function __construct($cache = TRUE) {
         $this->css   = '';
@@ -148,7 +151,78 @@ class CSS {
     }
 
     /**
-     * Handles rule "@import".
+     * Class main method.
+     *
+     * Handles directive "@import".
+     * Generates CSS3 properties with browser-specific prefixes.
+     * Replaces images references with base64_encoded data.
+     * Then removes unneeded characters, see comments.
+     *
+     * @param  string $file CSS file
+     * @return string       Compressed CSS
+     */
+    public function compress($file) {
+        $file = str_replace('./', '/', $file);
+        $css  = basename($file);
+        if (!empty($this->cache)) {
+            $this->css = $this->getFromCache($css);
+        }
+        if (empty($this->css)) {
+            $pathinfo = pathinfo($file);
+            $this->css = file_get_contents($_SERVER['DOCUMENT_ROOT'].$file);
+            #
+            # Processing rule @import
+            #
+            $this->import($pathinfo['dirname']);
+            $this->images();
+            #
+            # Set the prefixes of browsers
+            #
+            $this->setPrefixes();
+            #
+            # Remove two or more consecutive spaces
+            #
+            $this->css = preg_replace('# {2,}#', '', $this->css);
+            #
+            # Replace 0[type] values with 0
+            #
+            $this->css = preg_replace('/([^\\\\]\:|\s)0(?:em|ex|ch|rem|vw|vh|vm|vmin|cm|mm|in|px|pt|pc|%)/iS', '${1}0', $this->css);
+            #
+            # Replace 0 0; or 0 0 0; or 0 0 0 0; with 0
+            #
+            $this->css = preg_replace('/\:0(?: 0){1,3}(;|\}| \!)/', ':0$1', $this->css);
+            #
+            # Remove leading zeros from integer and float numbers preceded by : or a white-space
+            # -0.5 to -.5; 1.050 to 1.05
+            #
+            $this->css = preg_replace('/((?<!\\\\)\:|\s)(\-?)0+(\.?\d+)/S', '$1$2$3', $this->css);
+            #
+            # Optimize hex colors: #999999 to #999; #ffdd88 to #fd8;
+            #
+            $this->css = preg_replace('/([^=])#([a-f\\d])\\2([a-f\\d])\\3([a-f\\d])\\4([\\s;\\}])/i', '$1#$2$3$4$5', $this->css);
+            #
+            # Remove the spaces, if a curly bracket, colon, semicolon or comma is placed before or after them
+            #
+            $this->css = preg_replace('#\s*([\{:;,])\s*#', '$1', $this->css);
+            #
+            # Remove newline characters and tabs
+            #
+            $this->css = str_replace(["\r\n", "\r", "\n", "\t"], '', $this->css);
+            #
+            # Place the compiled data into cache
+            #
+            if (!empty($this->cache)) {
+                file_put_contents(CACHE.$css, $this->css, LOCK_EX);
+            }
+        }
+        return $this->css;
+    }
+
+    /**
+     * Handles the rule "@import".
+     * Recognizes the rules:
+     * @import url("dir/style.css");
+     * @import url(style.css);
      *
      * @param string $dir CSS file's directory
      */
@@ -159,8 +233,22 @@ class CSS {
             $match[1] = array_reverse($match[1]);
             foreach ($match[0] as $key => $import) {
                 $this->css = str_replace($match[0][$key], '', $this->css);
-                $file      = str_replace('"', '', $match[1][$key]);
+                $file      = str_replace(['"', '\''], '', $match[1][$key]);
                 $this->css = file_get_contents($dir.DS.$file).PHP_EOL.$this->css;
+            }
+        }
+    }
+
+    /** Replace images references with base64_encoded data. */
+    private function images() {
+        preg_match_all('/background:(.*?) url\(([\w\'\"\/.]*)\)(.*?);/', $this->css, $match);
+        if (!empty($match[2])) {
+            foreach ($match[2] as $key => $image) {
+                $file      = str_replace(['"', '\'', '../'], '', $match[2][$key]);
+                $filetype  = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+                $file      = file_get_contents($file);
+                $encoded   = str_replace($image, 'data:image/'.$filetype.';base64,'.base64_encode($file), $match[2][$key]);
+                $this->css = str_replace($image, $encoded, $this->css);
             }
         }
     }
@@ -211,62 +299,12 @@ class CSS {
     }
 
     /**
-     * Generates CSS3 properties with browser-specific prefixes.
-     * The list of prefixes is not yet complete.
-     * Then we remove unneeded characters, see comments.
-     *
-     * @param  string $file CSS file
-     * @return string       Compressed CSS
-     */
-    public function compress($file) {
-        $file = str_replace('./', '/', $file);
-        $css  = basename($file);
-        if (!empty($this->cache)) {
-            $this->css = $this->getFromCache($css);
-        }
-        if (empty($this->css)) {
-            $pathinfo = pathinfo($file);
-            $this->css = file_get_contents($_SERVER['DOCUMENT_ROOT'].$file);
-            #
-            # Processing directives @font-face and @import
-            #
-            $this->import($pathinfo['dirname']);
-            #
-            # Set the prefixes of browsers
-            #
-            $this->setPrefixes();
-            #
-            # Remove newline characters and tabs
-            #
-            $this->css = str_replace(["\r\n", "\r", "\n", "\t"], '', $this->css);
-            #
-            # Remove two or more consecutive spaces
-            #
-            $this->css = preg_replace('# {2,}#', '', $this->css);
-
-            $this->css = str_replace([' 0px', ' 0em', ' 0ex', ' 0cm', ' 0mm', ' 0in', ' 0pt', ' 0pc'],  '0', $this->css);
-            $this->css = str_replace([':0px', ':0em', ':0ex', ':0cm', ':0mm', ':0in', ':0pt', ':0pc'], ':0', $this->css);
-            #
-            # Remove the spaces, if a curly bracket, colon, semicolon or comma is placed before or after them
-            #
-            $this->css = preg_replace('#\s*([\{:;,])\s*#', '$1', $this->css);
-            #
-            # Place the compiled data into cache
-            #
-            if (!empty($this->cache)) {
-                file_put_contents(CACHE.$css, $this->css, LOCK_EX);
-            }
-        }
-        return $this->css;
-    }
-
-    /**
 	 * Gets a compiled file from the cache.
      *
      * @param  string $file CSS file
      * @return mixed        Data from cache or FALSE
 	 */
 	private function getFromCache($file) {
-            return file_exists(CACHE.$file) ? file_get_contents(CACHE.$file) : FALSE;
+        return file_exists(CACHE.$file) ? file_get_contents(CACHE.$file) : FALSE;
     }
 }

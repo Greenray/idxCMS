@@ -154,6 +154,8 @@ sup {
 sub { bottom: -0.25em }
 sup { top: -0.5em; }
 
+table { width: 100%; }
+
 textarea {
     background: #ffffcc;
     border: 1px solid #a4a4a4;

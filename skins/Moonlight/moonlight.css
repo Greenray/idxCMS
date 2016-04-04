@@ -150,6 +150,8 @@ legend {
     white-space: normal;
 }
 ol,
+ul { list-style: none; }
+ol,
 p   { margin: 10px 0 }
 pre {
     background: #fafafa;

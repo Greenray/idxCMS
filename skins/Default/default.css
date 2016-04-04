@@ -116,6 +116,13 @@ img {
     -ms-interpolation-mode: bicubic;
 }
 
+ol,
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
 option { padding: 0 5px; }
 p      { margin: 10px 0; }
 pre    {
@@ -140,6 +147,8 @@ select {
     width: 160px;
 }
 select:focus { outline: 1px solid red; }
+
+table { width: 100%; }
 
 textarea {
     background: #ffffcc;
@@ -927,8 +936,6 @@ td.date {
     margin: 30px 20px 20px;
 }
 .rate button       { border: 0; }
-.rate button.minus { background: url(skins/images/down.gif) no-repeat; }
-.rate button.plus  { background: url(skins/images/up.gif) no-repeat; }
 
 .star,
 .star ul.star,
@@ -1114,7 +1121,7 @@ ol.horinaja_pagination li a {
 /* Icons for buttons and links
 ==============================================================================*/
 .icon {
-    background: transparent;
+    background: transparent url("skins/images/icons.png") no-repeat 16px 16px;
     white-space: nowrap;
 }
 .icon:before {

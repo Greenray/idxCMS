@@ -43,7 +43,7 @@ class CSS {
 
         'backface-visibility' => ['-webkit-', '-moz-', '-ms-', ''],
 
-        'background-clip'   => ['-webkit-', '-moz-', '-o-', ''],
+        'background-clip'   => ['-moz-', ''],
         'background-origin' => ['-webkit-', '-moz-', '-o-', ''],
         'background-size'   => ['-webkit-', '-moz-', '-o-', ''],
 
@@ -72,6 +72,8 @@ class CSS {
         'box-pack'          => ['-webkit-', '-moz-', '-ms-', ''],
         'box-shadow'        => ['-webkit-', '-moz-', ''],
         'box-sizing'        => ['-webkit-', '-moz-', ''],
+
+        'calc' => ['-webkit', ''],
 
         'column-count'        => ['-webkit-', '-moz-', ''],
         'column-fill'         => ['-moz-', ''],
@@ -114,7 +116,11 @@ class CSS {
 
         'tab-size'  => ['-moz-', '-o-', ''],
 
-        'text-overflow' => ['-ms-', '-o-', ''],
+        'text-align-last'       => ['-moz-', ''],
+        'text-decoration-color' => ['-webkit-', '-moz-', ''],
+        'text-decoration-line'  => ['-moz-', ''],
+        'text-decoration-style' => ['-moz-', ''],
+        'text-overflow'         => ['-ms-', '-o-', ''],
 
         'transform'        => ['-webkit-', '-moz-', '-ms-', '-o-', ''],
         'transform-origin' => ['-webkit-', '-moz-', '-ms-', '-o-', ''],
@@ -133,7 +139,7 @@ class CSS {
         'repeating-radial-gradient' => ['-webkit-', '-moz-', '-o-', ''],
 
         'user-modify' => ['-webkit-', '-moz-', ''],
-        'user-select' => ['-webkit-', '-moz-', ''],
+        'user-select' => ['-webkit-', '-moz-', '-ms-', ''],
 
         'viewport' => ['-ms-', ''],
 

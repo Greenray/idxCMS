@@ -212,7 +212,7 @@ class CSS {
             #
             # Remove newline characters and tabs
             #
-//            $this->css = str_replace(["\r\n", "\r", "\n", "\t"], '', $this->css);
+            $this->css = str_replace(["\r\n", "\r", "\n", "\t"], '', $this->css);
             #
             # Place the compiled data into cache
             #
@@ -304,7 +304,7 @@ class CSS {
                                 $parts = explode(':', $property);
                                 $parts[1] = ': '.$parts[1];
                                 $parts[0] = $match.$parts[0];
-                                $result  .= implode(':', $parts);
+                                $result  .= implode($parts);
                             } else {
                                 $parts = explode(':', $property);
                                 $parts[0] = $parts[0].':';

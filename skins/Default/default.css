@@ -1121,7 +1121,7 @@ ol.horinaja_pagination li a {
 /* Icons for buttons and links
 ==============================================================================*/
 .icon {
-    background: transparent url("skins/images/icons.png") no-repeat 16px 16px;
+    background: transparent url(skins/images/icons.png) no-repeat 16px 16px;
     white-space: nowrap;
 }
 .icon:before {

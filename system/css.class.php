@@ -13,67 +13,66 @@
  *            the code with removing comments, two or more consecutive spaces,
  *            newline characters and tabs, spaces, if a curly bracket, colon,
  *            semicolon or comma is placed before or after them.
+ *            Replaces image references within CSS with base64_encoded data.
+ *            Replaces fonts (.woff, .woff2) references within CSS rule @font-face with base64_encoded data.
+ *            Optimizes the color settings (#00ff77 => #0f7) and property values (0px => 0, -0.5 => -.5).
+ *            Converts rgb(43, 92, 160), rgb(16.9%, 36.1%, 62.7%), hsl(214.9,57.6%,39.8%) to hex value (#2b5ca0).
  *            There is a possibility of caching the result.
  *            It is important to set the correct installation of access rights to the cache directory.
  */
 
 class CSS {
 
-    /** @var boolean TRUE if caching is allowed */
-	private $cache = TRUE;
+    /** @var array Configuration data */
+    private $config = [];
 
     /** @var string CSS code that is executing */
 	private $css = '';
 
     /* @var array The browser-specific prefixes */
     private $styles = [
-        'align-content' => ['-webkit-', ''],
-        'align-items'   => ['-webkit-', ''],
-        'align-self'    => ['-webkit-', ''],
+        'align-content' => ['-webkit-', '-ms-', ''],
+        'align-items'   => ['-webkit-', '-ms-', ''],
+        'align-self'    => ['-webkit-', '-ms-', ''],
 
-        'animation'                 => ['-webkit-', '-moz-', '-o-', ''],
-        'animation-delay'           => ['-webkit-', '-moz-', '-o-', ''],
-        'animation-direction'       => ['-webkit-', '-moz-', '-o-', ''],
-        'animation-duration'        => ['-webkit-', '-moz-', '-o-', ''],
-        'animation-fill-mode'       => ['-webkit-', '-moz-', '-o-', ''],
-        'animation-iteration-count' => ['-webkit-', '-moz-', '-o-', ''],
-        'animation-name'            => ['-webkit-', '-moz-', '-o-', ''],
-        'animation-play-state'      => ['-webkit-', '-moz-', '-o-', ''],
-        'animation-timing-function' => ['-webkit-', '-moz-', '-o-', ''],
+        'animation'                 => ['-webkit-', ''],
+        'animation-delay'           => ['-webkit-', ''],
+        'animation-direction'       => ['-webkit-', ''],
+        'animation-duration'        => ['-webkit-', ''],
+        'animation-fill-mode'       => ['-webkit-',''],
+        'animation-iteration-count' => ['-webkit-',''],
+        'animation-name'            => ['-webkit-', ''],
+        'animation-play-state'      => ['-webkit-', ''],
+        'animation-timing-function' => ['-webkit-', ''],
 
-        'backface-visibility' => ['-webkit-', '-moz-', '-ms-', ''],
+        'appearance' => ['-webkit-', '-moz-', ''],
 
-        'background-clip'   => ['-moz-', ''],
-        'background-origin' => ['-webkit-', '-moz-', '-o-', ''],
-        'background-size'   => ['-webkit-', '-moz-', '-o-', ''],
+        'backface-visibility' => ['-webkit-', ''],
 
-        'border-image'               => ['-webkit-', '-moz-', '-o-', ''],
-        'border-image-outset'        => ['-webkit-', '-moz-', '-o-', ''],
-        'border-image-repeat'        => ['-webkit-', '-moz-', '-o-', ''],
-        'border-image-source'        => ['-webkit-', '-moz-', '-o-', ''],
-        'border-image-width'         => ['-webkit-', '-moz-', '-o-', ''],
-        'border-radius'              => ['-webkit-', '-khtml-', '-moz-', ''],
-        'border-top-left-radius'     => ['-webkit-', '-khtml-', '-moz-', ''],
-        'border-top-right-radius'    => ['-webkit-', '-khtml-', '-moz-', ''],
-        'border-bottom-right-radius' => ['-webkit-', '-khtml-', '-moz-', ''],
-        'border-bottom-left-radius'  => ['-webkit-', '-khtml-', '-moz-', ''],
-        'border-radius-topleft'      => ['-webkit-', '-khtml-', '-moz-', ''],
-        'border-radius-topright'     => ['-webkit-', '-khtml-', '-moz-', ''],
-        'border-radius-bottomright'  => ['-webkit-', '-khtml-', '-moz-', ''],
-        'border-radius-bottomleft'   => ['-webkit-', '-khtml-', '-moz-', ''],
+        'border-end-color'           => ['-webkit-', '-moz-', ''],
+        'border-end-style'           => ['-webkit-', '-moz-', ''],
+        'border-end-width'           => ['-webkit-', '-moz-', ''],
+        'border-start-color'         => ['-webkit-', '-moz-', ''],
+        'border-start-style'         => ['-webkit-', '-moz-', ''],
+        'border-start-width'         => ['-webkit-', '-moz-', ''],
+        'border-image'               => ['-o-', ''],
+        'border-image-outset'        => ['-o-', ''],
+        'border-image-repeat'        => ['-o-', ''],
+        'border-image-source'        => ['-o-', ''],
+        'border-image-width'         => ['-o-', ''],
 
-        'box-align'         => ['-webkit-', '-moz-', '-ms-', ''],
-        'box-direction'     => ['-webkit-', '-moz-', '-ms-', ''],
-        'box-flex'          => ['-webkit-', '-moz-', '-ms-', ''],
-        'box-flex-group'    => ['-webkit-', '-moz-', ''],
-        'box-lines'         => ['-webkit-', '-moz-', '-ms-', ''],
-        'box-ordinal-group' => ['-webkit-', '-moz-', '-ms-', ''],
-        'box-orient'        => ['-webkit-', '-moz-', '-ms-', ''],
-        'box-pack'          => ['-webkit-', '-moz-', '-ms-', ''],
-        'box-shadow'        => ['-webkit-', '-moz-', ''],
-        'box-sizing'        => ['-webkit-', '-moz-', ''],
-
-        'calc' => ['-webkit', ''],
+        'box-align'            => ['-webkit-', '-moz-', '-ms-', ''],
+        'box-decoration-break' => ['-webkit-', ''],
+        'box-direction'        => ['-webkit-', '-moz-', '-ms-', ''],
+        'box-flex'             => ['-webkit-', '-moz-', '-ms-', ''],
+        'box-flex-group'       => ['-webkit-', ''],
+        'box-lines'            => ['-webkit-', '-ms-', ''],
+        'box-ordinal-group'    => ['-webkit-', '-moz-', '-ms-', ''],
+        'box-orient'           => ['-webkit-', '-moz-', '-ms-', ''],
+        'box-pack'             => ['-webkit-', '-moz-', '-ms-', ''],
+        'box-reflect'          => ['-webkit-', ''],
+        'box-shadow'           => ['-webkit-', ''],
+        'box-sizing'           => ['-webkit-', ''],
 
         'column-count'        => ['-webkit-', '-moz-', ''],
         'column-fill'         => ['-moz-', ''],
@@ -84,48 +83,86 @@ class CSS {
         'column-rule-width'   => ['-webkit-', '-moz-', ''],
         'column-span'         => ['-webkit-', ''],
         'column-width'        => ['-webkit-', '-moz-', ''],
-        'columns'             => ['-webkit-', '-moz-', ''],
+        'columns'             => ['-webkit-', '-ms-', ''],
 
         'filter' => ['-webkit-', ''],
 
-        'flex-basis'     => ['-webkit-', ''],
-        'flex-direction' => ['-webkit-', ''],
+        'flex-basis'     => ['-webkit-', '-ms-', ''],
+        'flex-direction' => ['-webkit-', '-ms-', ''],
+        'flex-flow'      => ['-webkit-', '-ms-', ''],
+        'flex-grow'      => ['-webkit-', '-ms-', ''],
+        'flex-shrink'    => ['-webkit-', '-ms-', ''],
+        'flex-wrap'      => ['-webkit-', '-ms-', ''],
+
+        'font-kerning'           => ['-webkit-', ''],
+        'font-variant-ligatures' => ['-webkit-', ''],
 
         'fullscreen' => ['-webkit-', '-moz-', '-ms-', ''],
 
-        'hyphens' => ['-webkit-', '-moz-', '-ms-', ''],
+        'grid'                  => ['-webkit-', ''],
+        'grid-area'             => ['-webkit-', ''],
+        'grid-column'           => ['-webkit-', ''],
+        'grid-auto-columns'     => ['-webkit-', ''],
+        'grid-auto-flow'        => ['-webkit-', ''],
+        'grid-auto-rows'        => ['-webkit-', ''],
+        'grid-column-end'       => ['-webkit-', ''],
+        'grid-column-start'     => ['-webkit-', ''],
+        'grid-row'              => ['-webkit-', ''],
+        'grid-row-end'          => ['-webkit-', ''],
+        'grid-row-start'        => ['-webkit-', ''],
+        'grid-template-areas'   => ['-webkit-', ''],
+        'grid-template-columns' => ['-webkit-', ''],
+        'grid-template-rows'    => ['-webkit-', ''],
 
-        'image-rendering' => ['-webkit-', '-moz-', '-o-', ''],
+        'hyphens' => ['-webkit-', '-ms-', ''],
+
+        'image-rendering' => ['-webkit-', '-moz-', '-ms-', '-o-', ''],
+
+        'mask-clip'      => ['-webkit-', ''],
+        'mask-composite' => ['-webkit-', ''],
+        'mask-image'     => ['-webkit-', ''],
+        'mask-origin'    => ['-webkit-', ''],
+        'mask-size'      => ['-webkit-', ''],
 
         'object-fit' => ['-o-', ''],
 
-        'opacity' => ['-khtml-', '-moz-', ''],
+        'opacity' => ['-khtml-', ''],
 
         'orient' => ['-moz-', ''],
 
-        'perspective'        => ['-webkit-', '-moz-', ''],
+        'perspective'        => ['-webkit-', ''],
         'perspective-origin' => ['-webkit-', '-moz-', ''],
 
-        'tab-size'  => ['-moz-', '-o-', ''],
+        'ruby-position' => ['-webkit-', ''],
 
-        'text-align-last'       => ['-moz-', ''],
-        'text-decoration-color' => ['-webkit-', '-moz-', ''],
-        'text-decoration-line'  => ['-moz-', ''],
-        'text-decoration-style' => ['-moz-', ''],
-        'text-overflow'         => ['-ms-', '-o-', ''],
+        'scroll-snap-coordinate'  => ['-webkit-', '-ms-', ''],
+        'scroll-snap-destination' => ['-webkit-', '-ms-', ''],
+        'scroll-snap-points-x'    => ['-webkit-', '-ms-', ''],
+        'scroll-snap-points-y'    => ['-webkit-', '-ms-', ''],
+        'shape-image-threshold'   => ['-webkit-', ''],
+        'scroll-snap-type'        => ['-webkit-', '-ms-', ''],
 
-        'transform'        => ['-webkit-', '-moz-', '-ms-', '-o-', ''],
-        'transform-origin' => ['-webkit-', '-moz-', '-ms-', '-o-', ''],
-        'transform-style'  => ['-webkit-', '-moz-', ''],
+        'tab-size'  => ['-moz-', ''],
 
-        'transition'                 => ['-webkit-', '-moz-', '-o-', ''],
-        'transition-delay'           => ['-webkit-', '-moz-', '-o-', ''],
-        'transition-duration'        => ['-webkit-', '-moz-', '-o-', ''],
-        'transition-property'        => ['-webkit-', '-moz-', '-o-', ''],
-        'transition-timing-function' => ['-webkit-', '-moz-', '-o-', ''],
+        'text-align-last'       => ['-webkit-', '-moz-', ''],
+        'text-decoration-color' => ['-webkit-', ''],
+        'text-decoration-line'  => ['-webkit-', ''],
+        'text-decoration-style' => ['-webkit-', ''],
+        'text-justify'          => ['-webkit-', ''],
+        'text-orientation'      => ['-epub-', ''],
 
-        'linear-gradient' => ['-webkit-', '-moz-', '-o-', ''],
-        'radial-gradient' => ['-webkit-', '-moz-', '-o-', ''],
+        'transform'        => ['-webkit-', '-ms-', ''],
+        'transform-origin' => ['-webkit-', '-ms-', ''],
+        'transform-style'  => ['-webkit-', ''],
+
+        'transition'                 => ['-webkit-', ''],
+        'transition-delay'           => ['-webkit-', ''],
+        'transition-duration'        => ['-webkit-', ''],
+        'transition-property'        => ['-webkit-', ''],
+        'transition-timing-function' => ['-webkit-', ''],
+
+        'linear-gradient' => ['-webkit-', ''],
+        'radial-gradient' => ['-webkit-', ''],
 
         'repeating-linear-gradient' => ['-webkit-', '-moz-', '-o-', ''],
         'repeating-radial-gradient' => ['-webkit-', '-moz-', '-o-', ''],
@@ -133,26 +170,20 @@ class CSS {
         'user-modify' => ['-webkit-', '-moz-', ''],
         'user-select' => ['-webkit-', '-moz-', '-ms-', ''],
 
-        'viewport' => ['-ms-', ''],
-
-        'writing-mode' => ['-webkit-', ''],
+        'writing-mode' => ['-webkit-', '-ms-', ''],
 
         'document'  => ['-moz-', ''],
         'keyframes' => ['-webkit-', '-moz-', '-o-', ''],
-        'viewport'  => ['-ms-', ''],
+        'viewport' => ['-ms-', '-o-', ''],
 
         'placeholder' => ['-webkit-input-', '-moz-', '-ms-input-', ''],
         'selection'   => ['-moz-', '']
     ];
 
-	/**
-     * Class constructor.
-     *
-     * @param boolean $cache Is cache allowed?
-     */
-	public function __construct($cache = TRUE) {
-        $this->css   = '';
-        $this->cache = $cache;
+	/** Class constructor. */
+	public function __construct() {
+        $this->css    = '';
+        $this->config = parse_ini_file(CONFIG);
     }
 
     /**
@@ -160,7 +191,9 @@ class CSS {
      *
      * Handles directive "@import".
      * Generates CSS3 properties with browser-specific prefixes.
-     * Replaces images references with base64_encoded data.
+     * Replaces images and fonts references with base64_encoded data.
+     * Optimizes the color settings (#00ff77 => #0f7) and property values (0px => 0, -0.5 => -.5).
+     * Converts rgb(43, 92, 160), rgb(16.9%, 36.1%, 62.7%), hsl(214.9,57.6%,39.8%) to hex value (#2b5ca0).
      * Then removes unneeded characters, see comments.
      *
      * @param  string $file CSS file
@@ -169,7 +202,7 @@ class CSS {
     public function compress($file) {
         $file = str_replace('./', '/', $file);
         $css  = basename($file);
-        if (!empty($this->cache)) {
+        if (!empty($this->config['cache_css'])) {
             $this->css = $this->getFromCache($css);
         }
         if (empty($this->css)) {
@@ -179,15 +212,18 @@ class CSS {
             # Processing rule @import
             #
             $this->import($pathinfo['dirname']);
-            $this->images();
+            if (!empty($this->config['cache_css'])) {
+                if (!empty($this->config['encode_colors'])) {
+                    $this->rgbToHex();
+                    $this->hslToHex();
+                }
+                if (!empty($this->config['encode_images'])) $this->images();
+                if (!empty($this->config['encode_fonts']))  $this->fonts();
+            }
             #
             # Set the prefixes of browsers
             #
             $this->setPrefixes();
-            #
-            # Remove two or more consecutive spaces
-            #
-            $this->css = preg_replace('# {2,}#', '', $this->css);
             #
             # Replace 0[type] values with 0
             #
@@ -214,9 +250,17 @@ class CSS {
             #
             $this->css = str_replace(["\r\n", "\r", "\n", "\t"], '', $this->css);
             #
+            # Remove last semicolon
+            #
+            $this->css = preg_replace('#\s*(\;\s*\})#', '}', $this->css);
+            #
+            # Remove two or more consecutive spaces
+            #
+            $this->css = preg_replace('# {2,}#', '', $this->css);
+            #
             # Place the compiled data into cache
             #
-            if (!empty($this->cache)) {
+            if (!empty($this->config['cache_css'])) {
                 file_put_contents(CACHE.$css, $this->css, LOCK_EX);
             }
         }
@@ -227,34 +271,130 @@ class CSS {
      * Handles the rule "@import".
      * Recognizes the rules:
      * @import url("dir/style.css");
+     * @import url('dir/style.css');
      * @import url(style.css);
      *
      * @param string $dir CSS file's directory
      */
     private function import($dir) {
-        preg_match_all('/\@import url\(([\w\'\"\/.]*)\);/', $this->css, $match);
+        preg_match_all('#\@import url\(([\w\'\"\/.]*)\);#', $this->css, $match);
         if (!empty($match[0])) {
+            #
+            # For correct operation the condition the order of include files is very important.
+            # And it depends on the sequence of @import directives.
+            #
             $match[0] = array_reverse($match[0]);
             $match[1] = array_reverse($match[1]);
             foreach ($match[0] as $key => $import) {
                 $this->css = str_replace($match[0][$key], '', $this->css);
                 $file      = str_replace(['"', '\''], '', $match[1][$key]);
-                $this->css = file_get_contents($dir.DS.$file).PHP_EOL.$this->css;
+                $this->css = file_get_contents($dir.DS.$file).LF.$this->css;
             }
         }
     }
 
+    /** Converts rgb(43, 92, 160) or rgb(16.9%, 36.1%, 62.7%) to hex value (#2b5ca0). */
+    protected function rgbToHex() {
+        preg_match_all('#rgb\s*\(\s*([0-9%,\.\s]+)\s*\)#s', $this->css, $match);
+        if (!empty($match[1])) {
+            foreach ($match[1] as $key => $value) {
+                $rgbcolors = explode(',', $value);
+                $hexcolor = '#';
+                for ($i = 0; $i < 3; $i++) {
+                    #
+                    # Обработка значений в процентах
+                    #
+                    if (strpos($rgbcolors[$i], '%') !== FALSE) {
+                        $rgbcolors[$i] = substr($rgbcolors[$i], 0, -1);
+                        $rgbcolors[$i] = (int) (256 * ($rgbcolors[$i] / 100));
+                        $hexcolor .= str_pad(dechex($rgbcolors[$i]),  2, '0', STR_PAD_LEFT);
+					} else {
+                        #
+                        # Process values in integers
+                        #
+                        $color = round($rgbcolors[$i]);
+                        if ($color < 16) {
+                            $hexcolor .= '0';
+                        }
+                        $hexcolor .= dechex($color);
+                    }
+                }
+                $this->css = str_replace($match[0][$key], $hexcolor, $this->css);
+            }
+        }
+    }
+
+    /** Converts hsl(214.9,57.6%,39.8%) to hex value (#2b5ca0). */
+    private function hslToHex() {
+        preg_match_all('#hsl\s*\(\s*([0-9%,\.\s]+)\s*\)#s', $this->css, $match);
+        foreach ($match[1] as $key => $hls) {
+            $values = explode(',', str_replace('%', '', $hls));
+            $h = floatval($values[0]);
+            $s = floatval($values[1]);
+            $l = floatval($values[2]);
+            $h = ((($h % 360) + 360) % 360) / 360;
+            $s = min(max($s, 0), 100) / 100;
+            $l = min(max($l, 0), 100) / 100;
+            if ($s === 0) {
+                $red = $green = $blue = intval(floor(floatval(255 * $l) + 0.5), 10);
+             } else {
+                $v2 = $l < 0.5 ? $l * (1 + $s) : ($l + $s) - ($s * $l);
+                $v1 = 2 * $l - $v2;
+                $red   = intval(floor(floatval(255 * $this->toRgb($v1, $v2, $h + (1/3))) + 0.5), 10);
+                $green = intval(floor(floatval(255 * $this->toRgb($v1, $v2, $h)) + 0.5), 10);
+                $blue  = intval(floor(floatval(255 * $this->toRgb($v1, $v2, $h - (1/3))) + 0.5), 10);
+            }
+            $hexcolor = '#'.str_pad(dechex(round($red)), 2, '0', STR_PAD_LEFT).str_pad(dechex(round($green)), 2, '0', STR_PAD_LEFT).str_pad(dechex(round($blue)), 2, '0', STR_PAD_LEFT);
+            $this->css = str_replace($match[0][$key], $hexcolor, $this->css);
+        }
+    }
+
+    /**
+     * Helper function to convert hsl to rgb.
+     *
+     * @param  integer $v1  Helper value
+     * @param  integer $v2  Helper value
+     * @param  integer $hue Value of hue
+     * @return integer      The result
+     */
+    private function toRgb($v1, $v2, $hue) {
+        $hue = $hue < 0 ? $hue + 1 : ($hue > 1 ? $hue - 1 : $hue);
+        if ($hue * 6 < 1) return $v1 + ($v2 - $v1) * 6 * $hue;
+        if ($hue * 2 < 1) return $v2;
+        if ($hue * 3 < 2) return $v1 + ($v2 - $v1) * ((2/3) - $hue) * 6;
+        return $v1;
+    }
+
     /** Replace images references with base64_encoded data. */
     private function images() {
-        preg_match_all('/background:(.*?) url\(([\w\'\"\/\.\-]*)\)(.*?);/', $this->css, $match);
-        if (!empty($match[2])) {
-            foreach ($match[2] as $key => $image) {
-                $file      = str_replace(['"', '\'', '../'], '', $match[2][$key]);
-                $filetype  = strtolower(pathinfo($file, PATHINFO_EXTENSION));
-                $file      = file_get_contents($file);
-                $encoded   = str_replace($image, 'data:image/'.$filetype.';base64,'.base64_encode($file), $match[2][$key]);
-                $this->css = str_replace($image, $encoded, $this->css);
-            }
+        preg_match_all('#background[\:|\-image\:]+[\s\w]*url\(([\w\'\"\/\.\-]+)\)#', $this->css, $match);
+        if (!empty($match[1])) {
+            $this->encode($match[1], 'image');
+        }
+    }
+
+    /** Replace fonts .woff and .woff2 references with base64_encoded data. */
+    private function fonts() {
+        preg_match_all('#[src:|| |\t]*url\(([\w\/\.\-\']+(woff|woff2)+\')\)#', $this->css, $match);
+        if (!empty($match[1])) {
+            $this->encode($match[1], 'font');
+        }
+    }
+
+    /**
+     * Encodes image or font.
+     * @param array  $data Reference to image or font
+     * @param string $mode What to encode: image or font
+     */
+    private function encode($data, $mode) {
+        foreach ($data as $key => $value) {
+            $file = str_replace(['../', '\''], '', $value);
+            $type = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+            $file = file_get_contents($file);
+            if ($mode === 'image')
+                 $encoded = str_replace($value, 'data:image/'.$type.';base64,'.base64_encode($file), $value);
+            else $encoded = str_replace($value, 'data:application/font-'.$type.';charset=utf-8;base64,'.base64_encode($file), $value);
+            $this->css = str_replace($value, $encoded, $this->css);
         }
     }
 
@@ -264,9 +404,8 @@ class CSS {
         # Remove comments
         #
         $this->css = preg_replace('#(\/\*).*?(\*\/)#s', '', $this->css);
-        $styles = $this->styles;
         $values = [];
-        foreach ($styles as $property => $style) {
+        foreach ($this->styles as $property => $style) {
             preg_match('/[^-\{]'.$property.'/s', $this->css, $result);
             if (!empty($result)) {
                 $values[] = array_unique($result);

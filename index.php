@@ -90,7 +90,7 @@ define('PAGE',     '&amp;page=');
 /** Version of the system */
 define('IDX_VERSION', '4.1');
 /** Copyright */
-define('IDX_COPYRIGHT', '&copy; 2011-2016 Greenray');
+define('IDX_COPYRIGHT', '&copy; 2011-'.date("Y").' Greenray');
 /** Message about system generator */
 define('IDX_POWERED', 'Powered by idxCMS v'.IDX_VERSION);
 

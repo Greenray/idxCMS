@@ -23,8 +23,7 @@ if (!empty($messages)) {
         $output['messages'][$id] = $message;
         $output['messages'][$id]['id']   = $id;
         $output['messages'][$id]['time'] = '['.FormatTime('d F Y H:i:s', $message['time']).'] ';
-        $mail = $REQUEST['mail'];
-        $output['messages'][$id]['info'] = __('Message by').' '.CreateUserLink($message['author'], $message['nick']).' ('.$mail.')';
+        $output['messages'][$id]['info'] = __('Message by').' '.CreateUserLink($message['author'], $message['nick']).' ('.$message['email'].')';
     }
     $TEMPLATE = new TEMPLATE(__DIR__.DS.'feedback.tpl');
     $TEMPLATE->set($output);

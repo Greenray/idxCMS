@@ -129,17 +129,17 @@ class MESSAGE extends DBASE {
      * @throws Exception "Invalid email"
      * @return type
      */
-    public function sendFeedback($text, $email = '') {
+    public function sendFeedback($text, $email = '', $name = '') {
         $text = self::checkText($text);
         $message = [];
         $message['author'] = USER::getUser('user');
-        $message['nick']   = USER::getUser('nick');
+        $message['nick']   = empty($name) ? USER::getUser('nick') : $name;
         if (empty($email)) {
-            $message['mail'] = '';
+            $message['email'] = '';
         } else {
             if (!CMS::call('FILTER')->validEmail($email))
                  throw new Exception('Invalid email');
-            else $message['mail'] = $email;
+            else $message['email'] = $email;
         }
         $message['text'] = $text;
         $message['time'] = time();
@@ -200,12 +200,12 @@ class MESSAGE extends DBASE {
         }
         $message['nick'] = USER::getUser('nick');
         if (empty($email)) {
-            $message['mail'] = '';
+            $message['email'] = '';
         } else {
             if (!CMS::call('FILTER')->validEmail($email)) {
                 throw new Exception('Invalid email');
             } else {
-                $message['mail'] = $email;
+                $message['email'] = $email;
             }
         }
         $message['text'] = $text;

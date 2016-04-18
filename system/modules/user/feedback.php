@@ -3,21 +3,22 @@
 # Copyright (c) 2011-2016 Victor Nabatov greenray.spb@gmail.com
 # Module USER: Feedback
 
-$message = $_GET['message'];
+if (!defined('idxCMS')) die();
 
-$CAPTCHA = new CAPTCHA();
+$message = FILTER::get('REQUEST', 'text');
+var_dump($REQUEST);
 #
 # Here the desired filtering, but now we have another problem.
 # Filter, you know how.
 #
 if (!empty($message)) {
     try {
-        $CAPTCHA = checkCaptcha();
+        CheckCaptcha();
         $FEEDBACK = new MESSAGE(CONTENT, 'feedback');
         $FEEDBACK->sendFeedback(
             $message,
-            '',
-            empty($REQUEST['email']) ? USER::getUser('email') : $REQUEST['email']
+            empty($REQUEST['email']) ? USER::getUser('email') : $REQUEST['email'],
+            empty($REQUEST['name'])  ? USER::getUser('name')  : $REQUEST['name']
         );
         SYSTEM::defineWindow('', __('Message sent'));
 
@@ -75,14 +76,14 @@ if (!empty($message)) {
     }
 }
 
-$TEMPLATE = new TEMPLATE(__DIR__.DS.'comment-post.tpl');
+$TEMPLATE = new TEMPLATE(__DIR__.DS.'feedback.tpl');
 
 if (!USER::$logged_in) {
     $TEMPLATE->set('email',   empty($REQUEST['email']) ? __('Enter your e-mail') : $REQUEST['email']);
     $TEMPLATE->set('captcha', ShowCaptcha());
 }
 
-$TEMPLATE->set('text', $message);
+$TEMPLATE->set('message', $message);
 $TEMPLATE->set('message_length', USER::$root ? NULL : CONFIG::getValue('feedback', 'message_length'));
 $TEMPLATE->set('bbcodes', CMS::call('PARSER')->showBbcodesPanel('feedback.text'));
 

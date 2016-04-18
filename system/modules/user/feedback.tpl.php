@@ -31,14 +31,18 @@ die();?>
 <div class="comment_post center">
     <div><h2>__Private message to Administrator__</h2></div>
     $bbcodes
-    <form id="feedback" name="feedback" method="post" action="$action" onsubmit="return checkForm(this);">
+    <form id="feedback" name="feedback" method="post" action="" onsubmit="return checkForm(this);">
         <!-- IF !empty($email) -->
             <p>
+                <label>__Name__</label>
+                <input type="text" id="name" name="name" size="30" value="$name" placeholder="__Enter your name__" />
+            </p>
+            <p>
                 <label>__Email__</label>
-                <input type="email" id="email" name="email" size="30" value="$email" class="required" />
+                <input type="email" id="email" name="email" size="30" value="$email" placeholder="__Enter your e-mail__" class="required" />
             </p>
         <!-- ENDIF -->
-        <textarea id="text" name="text" cols="20" rows="7">$message</textarea>
+        <textarea id="text" name="text" cols="20" rows="5">$message</textarea>
         <!-- IF !empty($message_length) -->
         <div>__Max message length__ [<script type="text/javascript">displayLimit("document.feedback.text", "", '$message_length')</script>] __symbols__</div>
         <!-- ENDIF -->
@@ -46,7 +50,6 @@ die();?>
             <p class="center">$captcha</p>
         <!-- ENDIF -->
         <p class="center">
-        <!-- IF !empty($captcha) -->$captcha<!-- ENDIF -->
             <button type="submit">__Submit__</button>
             <button type="reset">__Reset__</button>
         </p>

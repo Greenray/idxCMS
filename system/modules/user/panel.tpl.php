@@ -68,15 +68,15 @@ die();?>
         <ul>
             <li><a href="#" class="icon icon-login" onclick="document.getElementById('login').style.display = ShowHide(document.getElementById('login').style.display)">__Log in__</a></li>
             <li id="login" style="display:none;">
-                <form id="login-form" name="login" method="post"  onsubmit="return checkLoginForm(this);">
+                <form id="login-form" name="login" method="post" onsubmit="return checkLoginForm(this);">
                     <table>
                         <tr>
                             <td>__Username__:</td>
-                            <td><input type="text" id="user" name="user" size="15" /></td>
+                            <td><input id="user" name="user" type="text" size="15" /></td>
                         </tr>
                         <tr>
                             <td>__Password__:</td>
-                            <td><input type="password" id="password" name="password" size="15"/></td>
+                            <td><input id="password" name="password" type="password" size="15"/></td>
                         </tr>
                     </table>
                     <p class="center"><input type="submit" name="login" value="__Log in__" /></p>

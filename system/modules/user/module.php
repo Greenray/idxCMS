@@ -26,7 +26,7 @@ require SYS.'message.class.php';
  */
 function CreateUserLink($user, $nick) {
     if ($user === 'guest') {
-        return __('Guest');
+        return $nick;
     }
     return '<a href="'.MODULE.'user&amp;user='.$user.'">'.$nick.'</a>';
 }

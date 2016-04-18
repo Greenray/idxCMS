@@ -23,7 +23,7 @@ class USER {
 
     /** @var array Disallowed names for registration */
     private static $disallowed_names = [
-        'admin', 'administrator', 'false', 'guest', 'idxcms', 'moderator', 'noavatar', 'null', 'root',
+        'administrator', 'false', 'guest', 'idxcms', 'moderator', 'noavatar', 'null', 'root',
         'superuser', 'supervisor', 'sponsor', 'system', 'test', 'true', 'unknown', 'user'
     ];
 
@@ -332,6 +332,8 @@ class USER {
             return CMS::call('LOG')->logPut('Note', self::$user['user'], 'Attempted to log in as '.$user);
         }
         $userdata = [];
+$f = $this->checkUser($user, FILTER::get('REQUEST', 'password'), FALSE, $userdata);
+var_dump($f);
         if ($this->checkUser($user, FILTER::get('REQUEST', 'password'), FALSE, $userdata)) {
             $_SESSION['user'] = $user;
             $_SESSION['pass'] = $userdata['password'];

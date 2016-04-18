@@ -22,6 +22,7 @@ if (!empty($messages)) {
     foreach ($messages as $id => $message) {
         $output['messages'][$id] = $message;
         $output['messages'][$id]['id']   = $id;
+        $output['messages'][$id]['text']   = CMS::call('PARSER')->parseText($message['text']);
         $output['messages'][$id]['time'] = '['.FormatTime('d F Y H:i:s', $message['time']).'] ';
         $output['messages'][$id]['info'] = __('Message by').' '.CreateUserLink($message['author'], $message['nick']).' ('.$message['email'].')';
     }

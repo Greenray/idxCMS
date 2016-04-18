@@ -6,7 +6,6 @@
 if (!defined('idxCMS')) die();
 
 $message = FILTER::get('REQUEST', 'text');
-var_dump($REQUEST);
 #
 # Here the desired filtering, but now we have another problem.
 # Filter, you know how.
@@ -40,7 +39,7 @@ if (!empty($message)) {
                     $REQUEST['subject'],
                     $REQUEST['letter']
                 );
-                SYSTEM::defineWindow('', __('Message sent'));
+                SYSTEM::showMessage('', __('Message sent'));
 
             } else SYSTEM::showError('Text is empty');
 
@@ -79,10 +78,10 @@ if (!empty($message)) {
 $TEMPLATE = new TEMPLATE(__DIR__.DS.'feedback.tpl');
 
 if (!USER::$logged_in) {
-    $TEMPLATE->set('email',   empty($REQUEST['email']) ? __('Enter your e-mail') : $REQUEST['email']);
+    $TEMPLATE->set('email',   empty($REQUEST['email']) ? '' : $REQUEST['email']);
     $TEMPLATE->set('captcha', ShowCaptcha());
 }
-
+$TEMPLATE->set('logged_in', USER::$logged_in);
 $TEMPLATE->set('message', $message);
 $TEMPLATE->set('message_length', USER::$root ? NULL : CONFIG::getValue('feedback', 'message_length'));
 $TEMPLATE->set('bbcodes', CMS::call('PARSER')->showBbcodesPanel('feedback.text'));

@@ -32,7 +32,7 @@ die();?>
     <div><h2>__Private message to Administrator__</h2></div>
     $bbcodes
     <form id="feedback" name="feedback" method="post" action="" onsubmit="return checkForm(this);">
-        <!-- IF !empty($email) -->
+        <!-- IF empty($logged_in) -->
             <p>
                 <label>__Name__</label>
                 <input type="text" id="name" name="name" size="30" value="$name" placeholder="__Enter your name__" />
